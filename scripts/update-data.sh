@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 # Mayhem Oracle — per-patch data refresh
-# Runs every scraper in dependency order. Stops on first failure.
+#
+# Lane failure policy
+# -------------------
+# Lanes marked `required` produce the catalog that must stay internally
+# coherent (augments, champions, items, pool rules, public export). If one of
+# them fails, nothing publishes — a half-built catalog is worse than an old one.
+#
+# Lanes marked `optional` are on a different clock or are pure enrichment. Their
+# failure degrades the run but must never discard the other lanes' work. This is
+# the failure-coupling fix: before it, one CDragon 404 in an optional lane threw
+# away every successful acquisition, which stopped publishing for 59 days
+# (2026-07-12 → 2026-09-10).
+#
+# Every lane still promotes atomically; isolation is between lanes, never inside
+# one.
 #
 # Usage:
 #   ./scripts/update-data.sh
@@ -19,6 +33,77 @@ AUGMENT_SNAPSHOT=$(mktemp -t mayhem-augment-snapshot.XXXXXX)
 trap 'rm -f "$AUGMENT_SNAPSHOT"' EXIT
 
 step() { printf "\n\033[1;36m▶ %s\033[0m\n" "$1"; }
+
+DEGRADED_LANES=()
+
+# run_lane <lane-name> <required|optional> <command...>
+run_lane() {
+  local lane="$1" policy="$2"; shift 2
+  local code=0
+  # `|| code=$?` keeps errexit from aborting here AND preserves the real exit
+  # status (a bare `if cmd; then ... fi` resets $? to 0 once the block ends).
+  "$@" || code=$?
+  if [ "$code" -eq 0 ]; then
+    return 0
+  fi
+  if [ "$policy" = "required" ]; then
+    printf "\n\033[1;31m✗ required lane '%s' failed (exit %d); refusing to publish an incoherent catalog.\033[0m\n" \
+      "$lane" "$code" >&2
+    exit "$code"
+  fi
+  printf "\n\033[1;33m⚠ optional lane '%s' failed (exit %d); continuing with its previous data.\033[0m\n" \
+    "$lane" "$code" >&2
+  DEGRADED_LANES+=("$lane")
+  return 0
+}
+
+write_pipeline_status() {
+  local overall="$1"
+  DEGRADED_LIST="$(IFS=,; echo "${DEGRADED_LANES[*]:-}")" \
+  PIPELINE_OVERALL="$overall" \
+  python3 - <<'PY'
+import json, os
+from datetime import datetime, timezone
+from pathlib import Path
+
+data_dir = Path(os.environ["MAYHEM_DATA_DIR"])
+degraded = [lane for lane in os.environ.get("DEGRADED_LIST", "").split(",") if lane]
+
+
+def read(name):
+    path = data_dir / name
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+status = {
+    "schema_version": 1,
+    "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+    "overall": os.environ["PIPELINE_OVERALL"],
+    "degraded_lanes": degraded,
+    # The two clocks, recorded separately and never reconciled into one number.
+    "structural": {
+        "patch": read("patch-metadata.json").get("patch"),
+        "source": "riot_patch_notes",
+    },
+    "statistics": {
+        "patch": read("meta.json").get("patch"),
+        "observed_at": read("meta.json").get("scraped_at"),
+        "source": read("meta.json").get("source"),
+    },
+}
+(data_dir / "pipeline-status.json").write_text(
+    json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+)
+print(
+    f"  structural={status['structural']['patch']} "
+    f"statistics={status['statistics']['patch']} "
+    f"overall={status['overall']} degraded={degraded or 'none'}"
+)
+PY
+}
 
 step "1/19  snapshot augment classifications"
 AUGMENT_SNAPSHOT="$AUGMENT_SNAPSHOT" python3 - <<'PY'
@@ -55,7 +140,9 @@ step "5/19  Tencent 26.12 official notes  →  augment-tencent-feed"
 python3 scripts/build_tencent_feed.py
 
 step "6/19  arammayhem.com  →  internal champions/augment win-rate feed/combos/meta"
-python3 scripts/scrape_arammayhem.py
+# Statistics run on their own clock; a stats-provider outage must not block
+# publishing current structural truth.
+run_lane statistics optional python3 scripts/scrape_arammayhem.py
 
 step "7/19  Data Dragon  →  active champion identities + base stats"
 python3 scripts/scrape_base_stats.py
@@ -64,25 +151,27 @@ step "8/19  CommunityDragon  →  internal abilities/items"
 python3 scripts/scrape_community_dragon.py
 
 step "9/19  CommunityDragon ability stats  →  internal abilities.json (enrich)"
-npx --yes tsx scripts/scrape_ability_stats.ts
+run_lane ability-stats-enrich optional npx --yes tsx scripts/scrape_ability_stats.ts
 
 step "10/19 LoL Wiki item passives  →  internal items.json (enrich)"
-python3 scripts/enrich_wiki.py
+run_lane item-passive-enrich optional python3 scripts/enrich_wiki.py
 
 step "10b/19 Data Dragon  →  localized champion, ability & item names (enrich)"
-python3 scripts/enrich_locale_names.py
+run_lane locale-name-enrich optional python3 scripts/enrich_locale_names.py
 
 step "11/19 Riot prose  →  patch title/date/canonical metadata only"
-python3 scripts/scrape_patch_notes.py
+# Structural patch authority: labels the catalog. Required.
+run_lane riot-patch-metadata required python3 scripts/scrape_patch_notes.py
 
 # CommunityDragon is the structural source of truth for all three entities.
 # Each lane promotes only after its full branch transaction validates; PBE never
 # falls back to latest and latest is never relabeled as preview.
 step "12/19 CommunityDragon latest  →  live snapshots + patch/hotfix events"
-python3 scripts/cdragon_patch_pipeline.py --branch latest
+run_lane cdragon-live required python3 scripts/cdragon_patch_pipeline.py --branch latest
 
 step "13/19 CommunityDragon pbe  →  preview snapshots + lifecycle reconciliation"
-python3 scripts/cdragon_patch_pipeline.py --branch pbe
+# Preview is advisory; a PBE outage must never block the live catalog.
+run_lane pbe-preview optional python3 scripts/cdragon_patch_pipeline.py --branch pbe
 
 step "14/19 patch-note removed augment tombstones  →  augment resolver input"
 python3 scripts/apply_removed_augment_tombstones.py
@@ -181,16 +270,31 @@ python3 scripts/generate_pool_rules.py
 step "17c/19 generate current internal combos  →  combos.json"
 npx --yes tsx scripts/generate_internal_combos.ts
 
+step "18/19 record lane + clock status"
+# Written BEFORE the export so the public projection can carry it, and so a
+# degraded run is externally observable instead of silently serving old data.
+if [ ${#DEGRADED_LANES[@]} -eq 0 ]; then
+  write_pipeline_status ok
+else
+  write_pipeline_status degraded
+fi
+
 step "19/19 export bounded public catalogs + patch/PBE presentation projections"
 python3 scripts/export_public_catalog.py
 
 step "20/20 Data Dragon  →  active champion roster coverage gate"
 python3 scripts/check_roster_coverage.py
 
+STRUCTURAL_PATCH=$(python3 -c "import json; print(json.load(open('$DATA_DIR/patch-metadata.json')).get('patch') or 'unknown')" 2>/dev/null || echo unknown)
 NEW_PATCH=$(python3 -c "import json; print(json.load(open('$META'))['patch'])")
 
 # Clear Next.js cache — large data rewrites corrupt HMR state if the dev server was running.
 rm -rf .next
 
-printf "\n\033[1;32m✓ Data refresh complete: %s → %s\033[0m\n" "$OLD_PATCH" "$NEW_PATCH"
+printf "\n\033[1;32m✓ Data refresh complete\033[0m\n"
+printf "  STRUCTURAL: %s (Riot patch notes)\n" "$STRUCTURAL_PATCH"
+printf "  STATISTICS: %s (%s → %s)\n" "$NEW_PATCH" "$OLD_PATCH" "$NEW_PATCH"
+if [ ${#DEGRADED_LANES[@]} -gt 0 ]; then
+  printf "\033[1;33m  DEGRADED lanes: %s\033[0m\n" "${DEGRADED_LANES[*]}"
+fi
 printf "  Next: review 'git diff data/internal public/data/', run 'npm run build', commit.\n"

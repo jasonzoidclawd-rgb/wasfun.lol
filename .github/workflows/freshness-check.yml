@@ -38,7 +38,10 @@ jobs:
           gh label create data-staleness --color D93F0B --description "Automated data freshness drift" 2>/dev/null || true
           existing=$(gh issue list --label data-staleness --state open --limit 1 --json number --jq '.[0].number')
 
-          if [ "$status" = "fresh" ]; then
+          # `statistics_behind` is the expected steady state for this mode:
+          # our statistics provider lags the live game by a patch. Only
+          # structural drift is actionable.
+          if [ "$status" = "fresh" ] || [ "$status" = "statistics_behind" ]; then
             if [ -n "$existing" ]; then
               gh issue close "$existing" --comment "Freshness check recovered: published=$published upstream=$upstream. Run: $RUN_URL"
             fi
@@ -49,8 +52,8 @@ jobs:
             title="Data freshness check is unknown: upstream $upstream, published $published"
             body="UNKNOWN: upstream=$upstream published=$published. Freshness check could not determine patch freshness. Run: $RUN_URL"
           else
-            title="Published data is stale: upstream $upstream, published $published"
-            body="STALE: upstream=$upstream published=$published. Freshness check run: $RUN_URL"
+            title="Structural data is stale: upstream $upstream, published $published"
+            body="STRUCTURAL_STALE: upstream=$upstream published=$published. Freshness check run: $RUN_URL"
           fi
 
           if [ -n "$existing" ]; then
@@ -62,7 +65,7 @@ jobs:
               --body "$body"
           fi
 
-          if [ "$status" = "stale" ]; then
+          if [ "$status" = "structural_stale" ]; then
             gh workflow run "Update Data" || true
           fi
 
