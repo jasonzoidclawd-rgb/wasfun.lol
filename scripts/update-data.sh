@@ -24,13 +24,16 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-DATA_DIR=data/internal
+# Overridable so an isolated run can be pointed at a scratch directory; the
+# public projection is only written for the canonical directory.
+DATA_DIR="${MAYHEM_DATA_DIR:-data/internal}"
 export MAYHEM_DATA_DIR="$DATA_DIR"
+export MAYHEM_PUBLISH_STATUS=$([ "$DATA_DIR" = "data/internal" ] && echo 1 || echo 0)
 META=$DATA_DIR/meta.json
 mkdir -p "$DATA_DIR"
 OLD_PATCH=$(python3 -c "import json; print(json.load(open('$META'))['patch'])" 2>/dev/null || echo "unknown")
 AUGMENT_SNAPSHOT=$(mktemp -t mayhem-augment-snapshot.XXXXXX)
-trap 'rm -f "$AUGMENT_SNAPSHOT"' EXIT
+PIPELINE_COMPLETED=0
 
 step() { printf "\n\033[1;36m▶ %s\033[0m\n" "$1"; }
 
@@ -57,10 +60,14 @@ run_lane() {
   return 0
 }
 
+# Writes to the internal dir AND to public/data when it exists, so the
+# externally consumed status is the one produced by the FINAL write rather than
+# a snapshot taken before the remaining required gates had run.
 write_pipeline_status() {
-  local overall="$1"
+  local overall="$1" detail="${2:-}"
   DEGRADED_LIST="$(IFS=,; echo "${DEGRADED_LANES[*]:-}")" \
   PIPELINE_OVERALL="$overall" \
+  PIPELINE_DETAIL="$detail" \
   python3 - <<'PY'
 import json, os
 from datetime import datetime, timezone
@@ -94,9 +101,19 @@ status = {
         "source": read("meta.json").get("source"),
     },
 }
-(data_dir / "pipeline-status.json").write_text(
-    json.dumps(status, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-)
+detail = os.environ.get("PIPELINE_DETAIL", "")
+if detail:
+    status["detail"] = detail
+
+payload = json.dumps(status, ensure_ascii=False, indent=2) + "\n"
+(data_dir / "pipeline-status.json").write_text(payload, encoding="utf-8")
+
+# Publish the same status directly. The export step runs before the final
+# required gates, so copying this file through the export would freeze an
+# optimistic "ok" that later failures could not correct.
+public_dir = Path("public/data")
+if os.environ.get("MAYHEM_PUBLISH_STATUS") == "1" and public_dir.is_dir():
+    (public_dir / "pipeline-status.json").write_text(payload, encoding="utf-8")
 print(
     f"  structural={status['structural']['patch']} "
     f"statistics={status['statistics']['patch']} "
@@ -104,6 +121,22 @@ print(
 )
 PY
 }
+
+# Any exit before the final gate — a required lane, the export, the roster
+# gate, or a kill — must leave a status that says so. Previously the status was
+# written mid-run, so an "ok" artifact survived later required failures.
+on_pipeline_exit() {
+  local code=$1
+  rm -f "$AUGMENT_SNAPSHOT"
+  if [ "$PIPELINE_COMPLETED" -ne 1 ]; then
+    write_pipeline_status failed "exited with code ${code} before completing required gates" || true
+  fi
+}
+trap 'on_pipeline_exit $?' EXIT
+
+# Mark the run in-flight immediately: a consumer reading during the run must
+# never see a stale "ok" from the previous run.
+write_pipeline_status running
 
 step "1/19  snapshot augment classifications"
 AUGMENT_SNAPSHOT="$AUGMENT_SNAPSHOT" python3 - <<'PY'
@@ -270,20 +303,20 @@ python3 scripts/generate_pool_rules.py
 step "17c/19 generate current internal combos  →  combos.json"
 npx --yes tsx scripts/generate_internal_combos.ts
 
-step "18/19 record lane + clock status"
-# Written BEFORE the export so the public projection can carry it, and so a
-# degraded run is externally observable instead of silently serving old data.
-if [ ${#DEGRADED_LANES[@]} -eq 0 ]; then
-  write_pipeline_status ok
-else
-  write_pipeline_status degraded
-fi
-
 step "19/19 export bounded public catalogs + patch/PBE presentation projections"
 python3 scripts/export_public_catalog.py
 
 step "20/20 Data Dragon  →  active champion roster coverage gate"
 python3 scripts/check_roster_coverage.py
+
+step "21/21 finalize lane + clock status"
+# Last write wins, and it happens only after every required gate has passed.
+PIPELINE_COMPLETED=1
+if [ ${#DEGRADED_LANES[@]} -eq 0 ]; then
+  write_pipeline_status ok
+else
+  write_pipeline_status degraded
+fi
 
 STRUCTURAL_PATCH=$(python3 -c "import json; print(json.load(open('$DATA_DIR/patch-metadata.json')).get('patch') or 'unknown')" 2>/dev/null || echo unknown)
 NEW_PATCH=$(python3 -c "import json; print(json.load(open('$META'))['patch'])")

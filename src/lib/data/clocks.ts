@@ -57,7 +57,11 @@ export async function readPatchClocks(): Promise<PatchClocks> {
       asPatch(status?.statistics?.observed_at) ?? asPatch(meta.scraped_at),
     aligned: Boolean(structuralPatch && statisticsPatch && structuralPatch === statisticsPatch),
     structuralUnproven: structuralPatch === null,
-    degraded: status?.overall === "degraded" || degradedLanes.length > 0 || status === null,
+    // Anything that is not an explicit "ok" is degraded: "running" means a
+    // refresh is mid-flight, "failed" means it aborted before its required
+    // gates, and a missing file means we cannot prove anything at all.
+    degraded:
+      status === null || status.overall !== "ok" || degradedLanes.length > 0,
     degradedLanes,
   };
 }
