@@ -155,10 +155,16 @@ export default async function ChampionPage({
     };
   };
 
-  const championStatisticsAvailable =
-    typeof activeChamp.win_rate === "number" &&
-    typeof activeChamp.pick_rate === "number";
-  const champWr = championStatisticsAvailable ? activeChamp.win_rate : null;
+  // Statistical fields are independently available. They used to be ANDed into
+  // one `championStatisticsAvailable` gate, so when the source stopped
+  // publishing champion pick rate every page claimed to have no statistics at
+  // all — while still holding a win rate, tier and rank — and the Oracle
+  // ranking silently emptied. A field we do not have must never suppress a
+  // field we do.
+  const hasWinRate = typeof activeChamp.win_rate === "number";
+  const hasPickRate = typeof activeChamp.pick_rate === "number";
+  const hasAnyStatistic = hasWinRate || hasPickRate || champ.tier != null || champ.rank != null;
+  const champWr = hasWinRate ? activeChamp.win_rate : null;
   const abilityProfile: AbilityProfile | undefined = abilities[slug];
 
   // Build combo lookup for this champion: augment-slug → tier
@@ -181,7 +187,9 @@ export default async function ChampionPage({
     : null;
   const poolAugments = pool ? [...pool.silver, ...pool.gold, ...pool.prismatic] : [];
 
-  const scoredAugments = championStatisticsAvailable && champWr !== null
+  // Oracle scoring consumes champion WIN RATE only (`computeOracleScore` has no
+  // pick-rate input), so a missing pick rate must not empty the ranking.
+  const scoredAugments = champWr !== null
     ? poolAugments
       .map((aug) => {
         const comboTier = comboBySlug.get(aug.slug);
@@ -470,16 +478,24 @@ export default async function ChampionPage({
             )}
           </div>
           <div className="flex items-center gap-3 mt-1 text-sm text-[var(--color-text-secondary)]">
-            {championStatisticsAvailable ? (
-              <>
-                <span className="font-bold text-[var(--color-wr-high)]">
-                  {activeChamp.win_rate!.toFixed(1)}% {t("winRateAbbr")}
-                </span>
-                <span className="text-xs">
-                  {activeChamp.pick_rate!.toFixed(1)}% {t("pickRateAbbr")}
-                </span>
-              </>
-            ) : (
+            {hasWinRate && (
+              <span className="font-bold text-[var(--color-wr-high)]">
+                {activeChamp.win_rate!.toFixed(1)}% {t("winRateAbbr")}
+              </span>
+            )}
+            {hasPickRate && (
+              <span className="text-xs">
+                {activeChamp.pick_rate!.toFixed(1)}% {t("pickRateAbbr")}
+              </span>
+            )}
+            {/* Name the one missing field, but only when something else is
+                known — otherwise the "no statistics" line below says it. */}
+            {!hasPickRate && hasAnyStatistic && (
+              <span className="text-xs text-[var(--color-text-muted)]">
+                {t("pickRateUnavailable")}
+              </span>
+            )}
+            {!hasAnyStatistic && (
               <span className="font-medium text-amber-300">
                 {t("statisticsUnavailable")}
               </span>

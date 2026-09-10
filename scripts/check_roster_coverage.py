@@ -169,13 +169,22 @@ def build_roster_report(
     missing_ids = sorted(authority_ids - published_ids, key=int)
     authority_count = len(authority_ids)
     identified_published = len(authority_ids & published_ids)
-    statistical_rows = {
-        entry["id"]
-        for entry in published
-        if entry.get("id") in authority_ids
-        and isinstance(entry.get("win_rate"), (int, float))
-        and isinstance(entry.get("pick_rate"), (int, float))
-    }
+    # Coverage is measured per field. A single combined ratio ANDed win rate
+    # with pick rate, so when the source stopped publishing pick rate the metric
+    # read 0.0 and implied that no statistics existed at all — while win rate
+    # was present for nearly every champion.
+    def _covered(field: str) -> set:
+        return {
+            entry["id"]
+            for entry in published
+            if entry.get("id") in authority_ids
+            and isinstance(entry.get(field), (int, float))
+        }
+
+    win_rate_rows = _covered("win_rate")
+    pick_rate_rows = _covered("pick_rate")
+    # Retained for back-compat: rows carrying the full statistical record.
+    statistical_rows = win_rate_rows & pick_rate_rows
 
     report: Dict[str, Any] = {
         "ddragon_version": ddragon_payload.get("version")
@@ -193,7 +202,15 @@ def build_roster_report(
         "duplicate_upstream_ids": duplicate_values(authority, "id"),
         "duplicate_published_ids": duplicate_values(published, "id"),
         "alias_collisions": alias_collisions(published),
-        "statistical_coverage_ratio": round(
+        "win_rate_coverage_ratio": round(
+            len(win_rate_rows) / authority_count if authority_count else 0.0, 6
+        ),
+        "pick_rate_coverage_ratio": round(
+            len(pick_rate_rows) / authority_count if authority_count else 0.0, 6
+        ),
+        # Both fields present. 0.0 here means "no champion has the complete
+        # record", NOT "no statistics exist" — read the per-field ratios.
+        "complete_statistical_coverage_ratio": round(
             len(statistical_rows) / authority_count if authority_count else 0.0,
             6,
         ),
@@ -270,7 +287,12 @@ def main() -> None:
         print(f"published_champion_count = {report['published_champion_count']}")
         print(f"roster_coverage_ratio = {report['roster_coverage_ratio']}")
         print(f"missing_active_champion_count = {report['missing_active_champion_count']}")
-        print(f"statistical_coverage_ratio = {report['statistical_coverage_ratio']}")
+        print(f"win_rate_coverage_ratio = {report['win_rate_coverage_ratio']}")
+        print(f"pick_rate_coverage_ratio = {report['pick_rate_coverage_ratio']}")
+        print(
+            "complete_statistical_coverage_ratio = "
+            f"{report['complete_statistical_coverage_ratio']}"
+        )
         print(
             "communitydragon_missing_authority_ids = "
             f"{report['communitydragon_missing_authority_ids']}"
