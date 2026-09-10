@@ -17,6 +17,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Union
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from cdragon_entity_adapters import (
@@ -49,6 +50,18 @@ from scrape_mayhem_augments_cdragon import (
 HEADERS = {"User-Agent": "MayhemOracle/1.0 (CDragon patch pipeline)"}
 LATEST_BASELINE_MAX_AGE_HOURS = 36
 FetchJson = Callable[[str], Union[dict[str, Any], list[Any]]]
+
+# Riot ships derived champion records (Jade_* variants, id 60001+) inside
+# champion-summary.json.  They carry a prime-champion back-reference and have no
+# `game/data/characters/<key>/<key>.bin.json`, so fetching their bin 404s.
+# Riot's own back-reference fields are the discriminator — not an id threshold,
+# which is a magic number that a future content drop can invalidate.
+DERIVED_VARIANT_MARKERS = ("relatedPrimeContentId", "relatedPrimeItemId")
+
+# A single missing character asset is a structured skip.  A systemic collapse
+# (CDragon partially published, path scheme changed) must still fail the lane
+# rather than silently promoting a gutted roster.
+CHAMPION_BIN_COVERAGE_FLOOR = 0.95
 
 
 def _read_json(path: Path) -> dict[str, Any] | None:
@@ -326,6 +339,20 @@ def _champion_bin_key(alias: str) -> str:
     return re.sub(r"[^a-z0-9]", "", alias.lower())
 
 
+def is_derived_champion_variant(detail: dict[str, Any]) -> bool:
+    """True when CDragon marks this record as derived from a prime champion.
+
+    Verified against CDragon `latest` on 2026-09-10: present on 63/63 `Jade_*`
+    rows and 0/173 playable champions.
+    """
+    return any(detail.get(marker) for marker in DERIVED_VARIANT_MARKERS)
+
+
+def _is_missing_asset(exc: BaseException) -> bool:
+    """A 404 is 'this asset does not exist', not 'the source is broken'."""
+    return isinstance(exc, HTTPError) and exc.code == 404
+
+
 def fetch_branch_entities(
     branch: str,
     *,
@@ -352,27 +379,74 @@ def fetch_branch_entities(
             continue
         champion_rows.append(row)
 
-    def fetch_champion(row: dict[str, Any]) -> tuple[str, dict[str, Any], dict[str, Any]]:
+    def fetch_champion(row: dict[str, Any]) -> tuple[str, dict[str, Any] | None, dict[str, Any] | None, str | None]:
+        """Return (id, detail, base_stats, skip_reason).
+
+        A skip_reason means "this row is legitimately not a playable champion,
+        or its optional asset is absent" — it never aborts the lane.  Malformed
+        payloads still raise, because those indicate a broken source.
+        """
         raw_id = row["id"]
         detail = fetch_json(f"{api}/champions/{raw_id}.json")
         if not isinstance(detail, dict):
             raise SnapshotValidationError(f"malformed champion detail for {raw_id}")
+        if is_derived_champion_variant(detail):
+            return str(raw_id), None, None, "derived_variant"
         alias = str(row.get("alias") or detail.get("alias") or "")
         if not alias:
             raise SnapshotValidationError(f"champion {raw_id} is missing alias for bin lookup")
         key = _champion_bin_key(alias)
-        bin_payload = fetch_json(f"{base}/game/data/characters/{key}/{key}.bin.json")
+        try:
+            bin_payload = fetch_json(f"{base}/game/data/characters/{key}/{key}.bin.json")
+        except Exception as exc:
+            if _is_missing_asset(exc):
+                return str(raw_id), detail, None, "missing_character_bin"
+            raise
         if not isinstance(bin_payload, dict):
             raise SnapshotValidationError(f"malformed champion bin for {raw_id}")
-        return str(raw_id), detail, extract_base_stats_from_bin(bin_payload)
+        return str(raw_id), detail, extract_base_stats_from_bin(bin_payload), None
 
     details: dict[str, dict[str, Any]] = {}
     base_stats: dict[str, dict[str, Any]] = {}
+    skipped: dict[str, list[str]] = {"derived_variant": [], "missing_character_bin": []}
     with ThreadPoolExecutor(max_workers=8) as pool:
         fetched = list(pool.map(fetch_champion, champion_rows))
-    for canonical_id, detail, stats in fetched:
-        details[canonical_id] = detail
-        base_stats[canonical_id] = stats
+    for canonical_id, detail, stats, skip_reason in fetched:
+        if skip_reason:
+            skipped[skip_reason].append(canonical_id)
+            if skip_reason == "derived_variant":
+                continue
+        if detail is not None:
+            details[canonical_id] = detail
+        if stats is not None:
+            base_stats[canonical_id] = stats
+
+    # Coverage gate: of the rows that ARE prime playable champions, nearly all
+    # must have yielded base stats.  One new champion missing its bin degrades;
+    # a path-scheme change or partial CDragon publish fails the lane.
+    prime_count = len(champion_rows) - len(skipped["derived_variant"])
+    if prime_count == 0:
+        raise SnapshotValidationError(
+            f"champion coverage collapse: 0 prime champions in {len(champion_rows)} source rows"
+        )
+    coverage = len(base_stats) / prime_count
+    if coverage < CHAMPION_BIN_COVERAGE_FLOOR:
+        raise SnapshotValidationError(
+            f"champion coverage collapse: base stats for {len(base_stats)}/{prime_count} "
+            f"prime champions ({coverage:.1%} < {CHAMPION_BIN_COVERAGE_FLOOR:.0%}); "
+            f"missing bins: {sorted(skipped['missing_character_bin'])[:10]}"
+        )
+    if skipped["derived_variant"] or skipped["missing_character_bin"]:
+        print(
+            f"[CDragon:{branch}] skipped {len(skipped['derived_variant'])} derived variants, "
+            f"{len(skipped['missing_character_bin'])} missing character bins; "
+            f"promoted {len(base_stats)}/{prime_count} prime champions",
+            file=sys.stderr,
+        )
+
+    # Only prime champions with a detail record reach normalization; derived
+    # variants must never enter the champion catalog.
+    playable_summary = [row for row in champion_rows if str(row.get("id")) in details]
 
     aliases = registry_token_aliases_from_table(load_augment_json(INTERNAL_DATA_DIR / "augment-identity-aliases.json") or {})
     augments = normalize_augment_entities(extract_augments(
@@ -382,7 +456,7 @@ def fetch_branch_entities(
         stringtable=stringtable if isinstance(stringtable, dict) else {},
         registry_token_aliases=aliases,
     ))
-    champions = normalize_champion_entities(summary, details, base_stats)
+    champions = normalize_champion_entities(playable_summary, details, base_stats)
     normalized_items = normalize_item_entities(items)
     return source_version, {
         "augment": augments,
@@ -396,8 +470,16 @@ def fetch_branch_entities(
 
 
 def _latest_patch_label(internal_dir: Path, source_version: str) -> str:
-    meta = _read_json(internal_dir / "meta.json") or {}
-    patch = meta.get("patch")
+    """Structural patch label for the live lane.
+
+    Riot's own patch-note feed (`patch-metadata.json`) is the structural
+    authority.  The statistics scrape (`meta.json`) tracks a *different clock* —
+    it reports whichever patch our statistics provider has finished aggregating,
+    which routinely lags the live game by a patch.  Labelling a CDragon snapshot
+    with it silently backdates current game mechanics to an older patch.
+    """
+    riot = _read_json(internal_dir / "patch-metadata.json") or {}
+    patch = riot.get("patch")
     return str(patch) if isinstance(patch, str) and patch else source_version
 
 

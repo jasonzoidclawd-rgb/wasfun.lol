@@ -8,8 +8,21 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from cdragon_patch_pipeline import build_branch_update, promote_branch, read_snapshot_lineage
-from cdragon_snapshot_diff import build_snapshot, snapshot_filename
+import re
+from urllib.error import HTTPError
+
+from cdragon_patch_pipeline import (
+    _latest_patch_label,
+    build_branch_update,
+    fetch_branch_entities,
+    promote_branch,
+    read_snapshot_lineage,
+)
+from cdragon_snapshot_diff import (
+    SnapshotValidationError,
+    build_snapshot,
+    snapshot_filename,
+)
 
 
 def entity(entity_id: str, slug: str, **fields: object) -> dict:
@@ -202,3 +215,133 @@ class CDragonPatchPipelineTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ── CDragon source-shape regression (2026-09 Jade_* variants) ────────────────
+# Riot began shipping derived champion records inside champion-summary.json.
+# They have no character bin, so the pre-fix pipeline 404'd and aborted the
+# whole lane, which stopped all publishing for 59 days.
+
+BIN_PAYLOAD = {
+    "Characters/Annie": {
+        "__type": "CharacterRecord",
+        "baseHPModifiable": {"baseValue": 570},
+        "baseDamageModifiable": {"baseValue": 57},
+        "baseArmorModifiable": {"baseValue": 24},
+    }
+}
+
+
+def _summary_row(champ_id, alias, name):
+    return {"id": champ_id, "name": name, "alias": alias, "roles": ["mage"]}
+
+
+def _detail(champ_id, alias, name, *, derived=False):
+    detail = {
+        "id": champ_id,
+        "name": name,
+        "alias": alias,
+        "title": "t",
+        "passive": {"name": "p"},
+        "spells": [],
+    }
+    if derived:
+        detail["relatedPrimeContentId"] = "prime-content-id"
+        detail["relatedPrimeItemId"] = 1
+    return detail
+
+
+def make_cdragon_fetcher(prime_count=40, variant_count=10, missing_bins=()):
+    """Fake CDragon exposing prime champions plus Jade_* derived variants."""
+    primes = [(i, f"Champ{i}", f"Champ {i}") for i in range(1, prime_count + 1)]
+    variants = [(60000 + i, f"Jade_Champ{i}", f"Champ {i}") for i in range(1, variant_count + 1)]
+    summary = [_summary_row(*p) for p in primes] + [_summary_row(*v) for v in variants]
+    details = {str(cid): _detail(cid, a, n) for cid, a, n in primes}
+    details.update({str(cid): _detail(cid, a, n, derived=True) for cid, a, n in variants})
+    requested: list[str] = []
+
+    def fetch(url: str):
+        requested.append(url)
+        if url.endswith("/content-metadata.json"):
+            return {"version": "16.18.8159717+branch.releases-16-18.content.release"}
+        if url.endswith("/cherry-augments.json"):
+            return {"augments": []}
+        if url.endswith("lol.stringtable.json"):
+            return {"entries": {}}
+        if url.endswith("/champion-summary.json"):
+            return summary
+        if url.endswith("/items.json"):
+            return []
+        match = re.search(r"/champions/(\d+)\.json$", url)
+        if match:
+            return details[match.group(1)]
+        match = re.search(r"/characters/([a-z0-9]+)/[a-z0-9]+\.bin\.json$", url)
+        if match:
+            if match.group(1) in missing_bins:
+                raise HTTPError(url, 404, "Not Found", {}, None)
+            return BIN_PAYLOAD
+        raise AssertionError(f"unexpected URL: {url}")
+
+    return fetch, requested
+
+
+class CDragonSourceShapeTests(unittest.TestCase):
+    def test_derived_jade_variants_never_abort_the_lane(self):
+        fetch, _ = make_cdragon_fetcher(prime_count=40, variant_count=10)
+        _version, entities, _sources = fetch_branch_entities("latest", fetch_json=fetch)
+        ids = {row["id"] for row in entities["champion"]}
+        self.assertEqual(len(entities["champion"]), 40)
+        self.assertFalse(
+            [i for i in ids if int(i) >= 60000],
+            "derived variants must never enter the champion catalog",
+        )
+
+    def test_derived_variants_do_not_trigger_bin_fetches(self):
+        fetch, requested = make_cdragon_fetcher(prime_count=5, variant_count=5)
+        fetch_branch_entities("latest", fetch_json=fetch)
+        variant_bins = [u for u in requested if "/characters/jade" in u]
+        self.assertEqual(variant_bins, [], "must not request bins for derived variants")
+
+    def test_one_missing_prime_bin_degrades_instead_of_failing(self):
+        # 1 of 40 missing = 97.5% coverage, above the floor.
+        fetch, _ = make_cdragon_fetcher(prime_count=40, missing_bins={"champ7"})
+        _version, entities, _sources = fetch_branch_entities("latest", fetch_json=fetch)
+        self.assertEqual(len(entities["champion"]), 40)
+
+    def test_systemic_bin_collapse_still_fails_the_lane(self):
+        # 20 of 40 missing = 50% coverage, far below the floor.
+        missing = {f"champ{i}" for i in range(1, 21)}
+        fetch, _ = make_cdragon_fetcher(prime_count=40, missing_bins=missing)
+        with self.assertRaises(SnapshotValidationError) as ctx:
+            fetch_branch_entities("latest", fetch_json=fetch)
+        self.assertIn("coverage collapse", str(ctx.exception))
+
+    def test_non_404_errors_still_abort(self):
+        fetch, _ = make_cdragon_fetcher(prime_count=5)
+
+        def failing(url: str):
+            if ".bin.json" in url:
+                raise HTTPError(url, 500, "Server Error", {}, None)
+            return fetch(url)
+
+        with self.assertRaises(HTTPError):
+            fetch_branch_entities("latest", fetch_json=failing)
+
+    def test_structural_label_comes_from_riot_not_statistics_source(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            internal = Path(tmp)
+            # statistics source lags a patch behind the live game
+            (internal / "meta.json").write_text(json.dumps({"patch": "26.17"}))
+            (internal / "patch-metadata.json").write_text(json.dumps({"patch": "26.18"}))
+            self.assertEqual(
+                _latest_patch_label(internal, "16.18.8159717"),
+                "26.18",
+                "structural snapshots must carry Riot's patch, not the stats provider's",
+            )
+
+    def test_structural_label_falls_back_to_source_version(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(
+                _latest_patch_label(Path(tmp), "16.18.8159717"),
+                "16.18.8159717",
+            )
