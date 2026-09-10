@@ -52,7 +52,7 @@ class DataFreshnessTests(unittest.TestCase):
         YEAR_OLD = "2025-09-10T22:00:00Z"
 
         cases = [
-            ("26.17", "26.17", "26.18", "26.18", FRESH, "aligned"),
+            ("26.17", "26.17", "26.18", "26.18", FRESH, "statistics_source_current"),
             ("26.16", "26.17", "26.18", "26.18", FRESH, "statistics_recently_behind"),
             ("26.16", "26.17", "26.18", "26.18", OUTAGE_59D, "statistics_stale"),
             ("26.13", "26.17", "26.18", "26.18", FRESH, "statistics_stale"),
@@ -113,7 +113,7 @@ class DataFreshnessTests(unittest.TestCase):
             with patch("sys.stdout", out):
                 main()
 
-        self.assertIn('"status": "aligned"', out.getvalue())
+        self.assertIn('"status": "statistics_source_current"', out.getvalue())
 
     def test_statistics_behind_within_policy_is_publishable(self):
         """The deadlock fix.
@@ -132,7 +132,7 @@ class DataFreshnessTests(unittest.TestCase):
         ]):
             with patch("sys.stdout", out):
                 main()  # must not raise
-        self.assertIn('"status": "aligned"', out.getvalue())
+        self.assertIn('"status": "statistics_source_current"', out.getvalue())
 
         out = StringIO()
         with patch("sys.argv", [
@@ -207,7 +207,7 @@ class DataFreshnessTests(unittest.TestCase):
                     main()
 
         payload = json.loads(out.getvalue())
-        self.assertEqual(payload["status"], "aligned")
+        self.assertEqual(payload["status"], "statistics_source_current")
         self.assertEqual(payload["published_patch"], "26.13")
         self.assertEqual(payload["upstream_patch"], "26.13")
         self.assertNotIn("Fetching", out.getvalue())
@@ -216,3 +216,61 @@ class DataFreshnessTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FreshnessSemanticsTests(unittest.TestCase):
+    """Two different relationships must not share a name.
+
+    The healthy status describes the STATISTICS SOURCE only. An earlier revision
+    called it "aligned", which reads as "the clocks agree" — while structural was
+    26.18 and statistics 26.17, and `clocks.ts` reported aligned=false on the
+    same data.
+    """
+
+    def _payload(self, **overrides):
+        args = {
+            "--published-patch": "26.17", "--upstream-patch": "26.17",
+            "--published-structural-patch": "26.18",
+            "--upstream-structural-patch": "26.18",
+            "--published-observed-at": "2026-09-10T22:00:00Z",
+            "--now": "2026-09-11T00:00:00Z",
+        }
+        args.update(overrides)
+        argv = ["check"]
+        for k, v in args.items():
+            argv += [k, v]
+        argv.append("--json")
+        out = StringIO()
+        with patch("sys.argv", argv), patch("sys.stdout", out):
+            try:
+                main()
+            except SystemExit:
+                pass
+        return json.loads(out.getvalue())
+
+    def test_healthy_status_names_the_statistics_source_not_the_clocks(self):
+        payload = self._payload()
+        self.assertEqual(payload["status"], "statistics_source_current")
+        rel = payload["relationships"]
+        self.assertTrue(rel["statisticsSourceCurrent"])
+        self.assertTrue(rel["structuralCurrent"])
+        # The clocks genuinely differ, and the payload says so.
+        self.assertFalse(rel["crossLaneAligned"])
+        self.assertTrue(rel["statisticsPredateStructural"])
+        self.assertEqual(rel["crossLanePatchDelta"], 1)
+
+    def test_cross_lane_aligned_only_when_patches_match(self):
+        rel = self._payload(**{"--published-structural-patch": "26.17",
+                               "--upstream-structural-patch": "26.17"})["relationships"]
+        self.assertTrue(rel["crossLaneAligned"])
+        self.assertFalse(rel["statisticsPredateStructural"])
+        self.assertEqual(rel["crossLanePatchDelta"], 0)
+
+    def test_future_timestamp_beyond_skew_is_not_fresh(self):
+        payload = self._payload(**{"--published-observed-at": "2026-09-11T05:00:00Z"})
+        self.assertEqual(payload["status"], "unknown")
+
+    def test_small_clock_skew_is_tolerated(self):
+        payload = self._payload(**{"--published-observed-at": "2026-09-11T00:01:00Z"})
+        self.assertEqual(payload["status"], "statistics_source_current")
+        self.assertEqual(payload["statistics"]["observation_age_hours"], 0.0)

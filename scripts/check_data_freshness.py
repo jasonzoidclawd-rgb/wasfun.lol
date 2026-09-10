@@ -44,9 +44,25 @@ STATISTICS_MAX_PATCH_LAG = 1
 # upstream outage — while still catching real decay in days rather than months.
 # The 2026-07-12 → 2026-09-10 outage was 59 days and must trip this immediately.
 STATISTICS_MAX_OBSERVATION_AGE_HOURS = 72
+#
+# A stamp slightly ahead of us is ordinary clock skew between the scraper host
+# and the checker; anything further means the timestamp cannot be trusted as an
+# age at all. An unclamped negative age previously read as "extremely fresh",
+# which would disable staleness detection indefinitely.
+STATISTICS_MAX_CLOCK_SKEW_HOURS = 1
 
 # Statuses that mean "publishable and healthy".
-HEALTHY_STATUSES = frozenset({"aligned", "statistics_recently_behind"})
+#
+# NOTE ON NAMING: these describe the STATISTICS SOURCE relationship only —
+# whether our published statistics match the newest statistics the provider has
+# aggregated. They deliberately say nothing about whether the statistics patch
+# equals the structural game patch; that is a separate relationship
+# (`crossLaneAligned`) reported alongside. An earlier revision called the
+# healthy case "aligned", which read as "the two clocks agree" while structural
+# was 26.18 and statistics 26.17.
+HEALTHY_STATUSES = frozenset(
+    {"statistics_source_current", "statistics_recently_behind"}
+)
 
 
 def patch_key(patch: str) -> tuple[int, int]:
@@ -133,7 +149,11 @@ def observation_age_hours(observed_at: str | None, now: datetime | None = None) 
     if stamp.tzinfo is None:
         stamp = stamp.replace(tzinfo=timezone.utc)
     reference = now or datetime.now(timezone.utc)
-    return (reference - stamp).total_seconds() / 3600.0
+    age = (reference - stamp).total_seconds() / 3600.0
+    if age < -STATISTICS_MAX_CLOCK_SKEW_HOURS:
+        # Materially in the future: not an age we can reason about.
+        return None
+    return max(age, 0.0)
 
 
 def overall_status(
@@ -167,7 +187,7 @@ def overall_status(
         if stats_patch_lag > STATISTICS_MAX_PATCH_LAG:
             return "statistics_stale"
         return "statistics_recently_behind"
-    return "aligned"
+    return "statistics_source_current"
 
 
 def load_published_observed_at(meta_path: Path) -> str | None:
@@ -258,9 +278,35 @@ def main() -> None:
         stats_age_hours=age_hours,
     )
 
+    # Both relationships, named so neither can be mistaken for the other.
+    cross_lane_aligned = bool(
+        published_structural
+        and published_statistics
+        and published_structural == published_statistics
+    )
+    statistics_predate_structural = bool(
+        published_structural
+        and published_statistics
+        and compare_patches(published_statistics, published_structural) < 0
+    )
+
     result = {
         "status": status,
         "healthy": status in HEALTHY_STATUSES,
+        "relationships": {
+            # our published stats == newest stats the provider has aggregated
+            "statisticsSourceCurrent": statistics_status == "fresh",
+            # our published catalog == Riot's newest published patch
+            "structuralCurrent": structural_status == "fresh",
+            # structural patch == statistics patch (expected false in normal use)
+            "crossLaneAligned": cross_lane_aligned,
+            "statisticsPredateStructural": statistics_predate_structural,
+            "crossLanePatchDelta": (
+                None
+                if not (published_structural and published_statistics)
+                else patch_lag(published_statistics, published_structural)
+            ),
+        },
         "policy": {
             "maxPatchLag": STATISTICS_MAX_PATCH_LAG,
             "maxObservationAgeHours": STATISTICS_MAX_OBSERVATION_AGE_HOURS,

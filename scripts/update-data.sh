@@ -85,11 +85,27 @@ def read(name):
         return {}
 
 
+# Carry-forward is a real loss of freshness even though the lane exits 0: base
+# stats that were not observed this run are still published under the new patch
+# label. It must not be reported as a fully current structural lane.
+champion_snapshot = read("cdragon-champion-latest.json")
+snapshot_degraded = champion_snapshot.get("degraded") or {}
+carried = snapshot_degraded.get("base_stats_retained") or []
+bootstrapped = snapshot_degraded.get("bootstrapped_without_base_stats") or []
+if carried and "cdragon-live" not in degraded:
+    degraded = [*degraded, "cdragon-live"]
+
 status = {
     "schema_version": 1,
     "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     "overall": os.environ["PIPELINE_OVERALL"],
     "degraded_lanes": degraded,
+    "structural_lane": {
+        "status": "degraded" if carried else "ok",
+        "carriedForward": len(carried),
+        "missingCurrentObservation": carried,
+        "bootstrappedWithoutBaseStats": bootstrapped,
+    },
     # The two clocks, recorded separately and never reconciled into one number.
     "structural": {
         "patch": read("patch-metadata.json").get("patch"),
@@ -104,6 +120,11 @@ status = {
 detail = os.environ.get("PIPELINE_DETAIL", "")
 if detail:
     status["detail"] = detail
+
+# The shell chose ok/degraded from lane exit codes alone; carry-forward is only
+# visible here, so it downgrades the verdict rather than being lost.
+if status["overall"] == "ok" and degraded:
+    status["overall"] = "degraded"
 
 payload = json.dumps(status, ensure_ascii=False, indent=2) + "\n"
 (data_dir / "pipeline-status.json").write_text(payload, encoding="utf-8")
