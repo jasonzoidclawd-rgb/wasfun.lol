@@ -250,14 +250,21 @@ def main():
         "item_exclusions": existing_rules.get("item_exclusions", []),
         "mutually_exclusive": existing_rules.get("mutually_exclusive", []),
         "ally_exclusions": existing_rules.get("ally_exclusions", []),
-        "disabled": existing_rules.get("disabled", []),
+        # `disabled` is NOT carried forward. It used to be seeded from its own
+        # previous output and then unioned with the availability resolver, which
+        # made it monotonic: an augment could enter the list but never leave it.
+        # Riot re-enabled Clown College in 26.18 and the resolver correctly moved
+        # it to `confirmed_live`, yet the carried-forward list still called it
+        # disabled — two authorities for one current-state fact.
+        # It is now derived, every run, from the availability resolver alone.
+        "disabled": [],
         "lifecycle": lifecycle_from_events(event_raw.get("events", [])),
     }
 
     # 26.12+: resolved availability is the offerability source. The legacy
     # lifecycle map remains as a compatibility fallback for older consumers, but
     # the availability map carries the exact non-offerable reason.
-    disabled = set(rules["disabled"])
+    disabled: set[str] = set()
     offerable: dict[str, str] = {}
     non_offerable: dict[str, str] = {}
     for aug in augments:
@@ -280,6 +287,21 @@ def main():
         elif lifecycle == "added":
             rules["lifecycle"]["added"].setdefault(slug, current_patch)
     rules["disabled"] = sorted(disabled)
+
+    # Single-authority invariant: the disabled list IS the set of augments the
+    # resolver marked disabled. Assert it here so a future second derivation
+    # path fails generation instead of silently diverging downstream.
+    resolver_disabled = {
+        aug["slug"]
+        for aug in augments
+        if ((aug.get("availability") or {}).get("status") or "").strip() == "disabled"
+    }
+    if set(rules["disabled"]) != resolver_disabled:
+        raise SystemExit(
+            "pool-rules.disabled diverged from availability resolver: "
+            f"only_in_rules={sorted(set(rules['disabled']) - resolver_disabled)} "
+            f"only_in_resolver={sorted(resolver_disabled - set(rules['disabled']))}"
+        )
     rules["lifecycle"]["added"] = dict(sorted(rules["lifecycle"]["added"].items()))
     rules["lifecycle"]["removed"] = dict(sorted(rules["lifecycle"]["removed"].items()))
     availability = {
