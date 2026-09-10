@@ -296,13 +296,12 @@
     "detailBack": "所有增幅",
     "detailStrongOn": "强力英雄组合",
     "detailKitSynergy": "套件协同",
-    "detailRemovedIn": "已于 {patch} 版本移除",
     "patchSummaryTitle": "版本摘要",
     "patchSummaryBody": "本页的 {name} 强化内容反映 {patch} 版本的 ARAM 大乱斗公开数据。",
-    "patchSummaryRemoved": "{name} 已于 {patch} 版本标记为移除。",
+    "patchSummaryRemoved": "{name} 已从当前的增幅池移除。",
     "sortRarity": "排序：稀有度",
     "subtitleNoPatch": "{count} 个可用增幅",
-    "population": "{live} 可用 · {disabled} 停用 · {historical} 历史",
+    "population": "{live} 可用 · {disabled} 停用 · {removed} 已移除 · {unverified} 未验证 · {candidate} 候选",
     "statusColumn": "状态",
     "patchUnknown": "未知",
     "availability_confirmed_live": "可用",
@@ -311,7 +310,12 @@
     "availability_unverified_legacy": "未验证（旧版）",
     "availability_candidate_registry_present": "候选",
     "availability_conflict": "来源冲突",
-    "availability_unknown": "未知"
+    "availability_unknown": "未知",
+    "patchSummaryDisabled": "{name} 目前已停用，本版本不会出现。",
+    "patchSummaryUnverified": "{name} 是无法用当前游戏数据验证的历史条目。",
+    "patchSummaryCandidate": "{name} 存在于游戏注册表中，但不会被提供。",
+    "patchSummaryAddedIn": "{name} 于 {patch} 版本加入。",
+    "patchSummaryRemovedIn": "{name} 于 {patch} 版本移除。"
   },
   "items": {
     "title": "ARAM 大乱斗装备",
@@ -421,8 +425,8 @@
     "summaryRemoved": "移除",
     "summaryHotfixes": "即时修正",
     "modelImpact": "{count} 个模型引用",
-    "removedTitle": "已移除 / 非当前强化符文",
-    "removedSubtitle": "{count} 个强化符文保留作历史记录，但不会进入当前池。",
+    "removedTitle": "当前不会提供的增幅",
+    "removedSubtitle": "{count} 个增幅仍被追踪，但不会出现在当前的增幅池。",
     "removedName": "强化符文",
     "removedRarity": "稀有度",
     "removedVersion": "版本",
@@ -466,7 +470,16 @@
         "gold": "黄金",
         "prismatic": "棱彩"
       }
-    }
+    },
+    "removedStatus": "状态",
+    "removedVersionUnknown": "未知",
+    "availability_confirmed_live": "可用",
+    "availability_disabled": "本版本停用",
+    "availability_removed": "已移除",
+    "availability_unverified_legacy": "未验证（旧版）",
+    "availability_candidate_registry_present": "候选",
+    "availability_conflict": "来源冲突",
+    "availability_unknown": "未知"
   },
   "common": {
     "search": "搜索英雄...",

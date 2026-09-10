@@ -508,9 +508,9 @@ function NotOfferedAugmentsTable({
                   {t(`availability_${augment.availability?.status ?? "unknown"}` as never)}
                 </td>
                 <td className="px-3 py-2 text-red-300/85">
-                  {/* First patch at which we OBSERVED this state — not a claim
-                      about when Riot changed it. Unknown stays unknown. */}
-                  {augment.flags?.lifecycle_observed_patch ?? t("patchUnknown")}
+                  {/* Only an observed CDragon transition carries a date;
+                      most non-offerable entities never had one. */}
+                  {augment.flags?.lifecycle_patch ?? t("patchUnknown")}
                 </td>
               </tr>
             ))}

@@ -296,13 +296,12 @@
     "detailBack": "すべてのオーグメント",
     "detailStrongOn": "相性の良いチャンピオン",
     "detailKitSynergy": "キットシナジー",
-    "detailRemovedIn": "パッチ {patch} で削除",
     "patchSummaryTitle": "パッチ概要",
     "patchSummaryBody": "この {name} のオーグメントページは、パッチ {patch} の ARAMメイヘム公開データに基づいています。",
-    "patchSummaryRemoved": "{name} はパッチ {patch} で削除済みとしてマークされています。",
+    "patchSummaryRemoved": "{name} は現在のプールから削除されました。",
     "sortRarity": "並び替え：レアリティ",
     "subtitleNoPatch": "{count} 個の使用可能オーグメント",
-    "population": "{live} 使用可能 · {disabled} 無効 · {historical} 履歴",
+    "population": "{live} 使用可能 · {disabled} 無効 · {removed} 削除済み · {unverified} 未検証 · {candidate} 候補",
     "statusColumn": "状態",
     "patchUnknown": "不明",
     "availability_confirmed_live": "使用可能",
@@ -311,7 +310,12 @@
     "availability_unverified_legacy": "未検証（旧）",
     "availability_candidate_registry_present": "候補",
     "availability_conflict": "ソース不一致",
-    "availability_unknown": "不明"
+    "availability_unknown": "不明",
+    "patchSummaryDisabled": "{name} は現在無効で、このパッチでは提供されません。",
+    "patchSummaryUnverified": "{name} は現在のゲームデータで検証できなかった過去のエントリです。",
+    "patchSummaryCandidate": "{name} はゲームレジストリに存在しますが提供されません。",
+    "patchSummaryAddedIn": "{name} はパッチ {patch} で追加されました。",
+    "patchSummaryRemovedIn": "{name} はパッチ {patch} で削除されました。"
   },
   "items": {
     "title": "ARAMメイヘム アイテム",
@@ -421,8 +425,8 @@
     "summaryRemoved": "削除",
     "summaryHotfixes": "ホットフィックス",
     "modelImpact": "{count} 件のモデル参照",
-    "removedTitle": "削除済み / 現在対象外のオーグメント",
-    "removedSubtitle": "{count} 個のオーグメントは履歴用に保持され、現在のプールからは非表示です。",
+    "removedTitle": "現在提供されていないオーグメント",
+    "removedSubtitle": "{count} 件のオーグメントは追跡中ですが、現在のプールでは提供されません。",
     "removedName": "オーグメント",
     "removedRarity": "レアリティ",
     "removedVersion": "バージョン",
@@ -466,7 +470,16 @@
         "gold": "ゴールド",
         "prismatic": "プリズム"
       }
-    }
+    },
+    "removedStatus": "状態",
+    "removedVersionUnknown": "不明",
+    "availability_confirmed_live": "使用可能",
+    "availability_disabled": "このパッチで無効",
+    "availability_removed": "削除済み",
+    "availability_unverified_legacy": "未検証（旧）",
+    "availability_candidate_registry_present": "候補",
+    "availability_conflict": "ソース不一致",
+    "availability_unknown": "不明"
   },
   "common": {
     "search": "チャンピオンを検索...",

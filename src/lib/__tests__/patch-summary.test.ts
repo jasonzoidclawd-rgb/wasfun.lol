@@ -23,13 +23,25 @@ const forbiddenSummaryTerms = [
 ];
 
 /** Mirrors the English `augments.patchSummary*` message templates. */
+const AVAILABILITY_COPY: Record<string, (name: string) => string> = {
+  disabled: (name) => `${name} is currently disabled and is not offered this patch.`,
+  removed: (name) => `${name} has been removed from the current pool.`,
+  unverified_legacy: (name) =>
+    `${name} is a historical entry we could not verify against current game data.`,
+  candidate_registry_present: (name) =>
+    `${name} appears in the game registry but is not offered.`,
+};
+
 function englishCopy(name: string) {
   return {
     title: "Patch summary",
     body: ({ patch }: { patch: string }) =>
       `This augment page for ${name} reflects public Arena Mayhem data for patch ${patch}.`,
-    removed: ({ patch }: { patch: string }) =>
-      `${name} is marked removed in patch ${patch}.`,
+    availability: (status: string) => AVAILABILITY_COPY[status]?.(name),
+    dated: ({ patch, event }: { patch: string; event: string }) =>
+      event === "added"
+        ? `${name} was added in patch ${patch}.`
+        : `${name} was removed in patch ${patch}.`,
   };
 }
 
@@ -48,49 +60,71 @@ describe("public patch summary", () => {
     expect(buildPatchSummary({ patch: "  " }, englishCopy("Tank Engine"))).toBeNull();
   });
 
-  test("includes lifecycle wording only when public lifecycle flags are passed", () => {
-    const active = buildPatchSummary({ patch: "26.13" }, englishCopy("Tank Engine"));
+  test("includes lifecycle wording only when an availability status is passed", () => {
+    const active = buildPatchSummary({ patch: "26.18" }, englishCopy("Tank Engine"));
     const removed = buildPatchSummary(
-      { patch: "26.13", lifecycleState: "removed", lifecyclePatch: "26.13" },
+      { patch: "26.18", availabilityStatus: "removed" },
       englishCopy("Warlock Juicebox"),
     );
 
-    expect(active?.lines.join(" ")).not.toContain("marked");
-    expect(removed?.lines).toContain("Warlock Juicebox is marked removed in patch 26.13.");
+    expect(active?.lines).toHaveLength(1);
+    expect(removed?.lines).toContain("Warlock Juicebox has been removed from the current pool.");
   });
 
-  test("does not render lifecycle wording for states outside the public allowlist", () => {
-    for (const lifecycleState of ["new", "disabled", "internal-only"]) {
+  test("does not render wording for statuses outside the public allowlist", () => {
+    for (const availabilityStatus of ["new", "internal-only", "conflict"]) {
       const summary = buildPatchSummary(
-        { patch: "26.13", lifecycleState, lifecyclePatch: "26.13" },
+        { patch: "26.18", availabilityStatus },
         englishCopy("Tank Engine"),
       );
 
-      expect(summary?.lines).toEqual([
-        "This augment page for Tank Engine reflects public Arena Mayhem data for patch 26.13.",
+      expect(summary?.lines, availabilityStatus).toEqual([
+        "This augment page for Tank Engine reflects public Arena Mayhem data for patch 26.18.",
       ]);
     }
   });
 
-  test("skips the lifecycle line when no removed copy is provided", () => {
+  test("each allowlisted status gets its own distinct sentence", () => {
+    const lines = new Set<string>();
+    for (const status of Object.keys(AVAILABILITY_COPY)) {
+      const summary = buildPatchSummary(
+        { patch: "26.18", availabilityStatus: status },
+        englishCopy("Tank Engine"),
+      );
+      const line = summary!.lines[1];
+      expect(line, status).toBeTruthy();
+      lines.add(line);
+    }
+    expect(lines.size).toBe(Object.keys(AVAILABILITY_COPY).length);
+  });
+
+  test("skips the lifecycle line when no availability copy is provided", () => {
     const { title, body } = englishCopy("Warlock Juicebox");
     const summary = buildPatchSummary(
-      { patch: "26.13", lifecycleState: "removed", lifecyclePatch: "26.13" },
+      { patch: "26.18", availabilityStatus: "removed" },
       { title, body },
     );
 
     expect(summary?.lines).toEqual([
-      "This augment page for Warlock Juicebox reflects public Arena Mayhem data for patch 26.13.",
+      "This augment page for Warlock Juicebox reflects public Arena Mayhem data for patch 26.18.",
     ]);
   });
 
-  test("falls back to the current patch when the lifecycle patch is missing", () => {
+  test("NEVER falls back to the page patch when the lifecycle date is missing", () => {
+    // Inverted deliberately. This previously asserted the fallback, which is
+    // what made 69 pages claim "marked removed in patch <statistics clock>"
+    // for augments that had no dated removal event — several of which were
+    // merely disabled.
     const summary = buildPatchSummary(
-      { patch: "26.13", lifecycleState: "removed" },
+      { patch: "26.18", availabilityStatus: "removed" },
       englishCopy("Warlock Juicebox"),
     );
 
-    expect(summary?.lines).toContain("Warlock Juicebox is marked removed in patch 26.13.");
+    expect(summary?.lines.join(" ")).not.toContain("was removed in patch");
+    expect(summary?.lines).toEqual([
+      "This augment page for Warlock Juicebox reflects public Arena Mayhem data for patch 26.18.",
+      "Warlock Juicebox has been removed from the current pool.",
+    ]);
   });
 
   test("does not invent changes when no public changes are provided", () => {
@@ -101,7 +135,12 @@ describe("public patch summary", () => {
 
   test("keeps private scoring, prompts, and session terms out of summary output", () => {
     const summary = buildPatchSummary(
-      { patch: "26.13", lifecycleState: "removed", lifecyclePatch: "26.13" },
+      {
+        patch: "26.18",
+        availabilityStatus: "removed",
+        lifecyclePatch: "26.18",
+        lifecycleEvent: "removed",
+      },
       englishCopy("Tank Engine"),
     );
     const serialized = JSON.stringify(summary).toLowerCase();
@@ -121,7 +160,10 @@ describe("public patch summary", () => {
     expect(source).toContain("const patchSummary = buildPatchSummary(");
     expect(source).toContain('t("patchSummaryTitle")');
     expect(source).toContain('t("patchSummaryBody", { name: augmentName, patch })');
-    expect(source).toContain('t("patchSummaryRemoved", { name: augmentName, patch })');
+    expect(source).toContain("availability: (status) =>");
+    expect(source).toContain("AVAILABILITY_SUMMARY_KEYS");
+    // The page must stamp the catalog with the structural clock.
+    expect(source).toContain("patch: clocks.structuralPatch");
     expect(source).toContain("{patchSummary && (");
     expect(source).toContain("patchSummary.lines.map");
   });
@@ -147,7 +189,16 @@ describe("public patch summary", () => {
         readFileSync(path.join(process.cwd(), `messages/${locale}.json`), "utf8"),
       ) as { augments: Record<string, string>; items: Record<string, string> };
 
-      for (const key of ["patchSummaryTitle", "patchSummaryBody", "patchSummaryRemoved"]) {
+      for (const key of [
+        "patchSummaryTitle",
+        "patchSummaryBody",
+        "patchSummaryDisabled",
+        "patchSummaryRemoved",
+        "patchSummaryUnverified",
+        "patchSummaryCandidate",
+        "patchSummaryAddedIn",
+        "patchSummaryRemovedIn",
+      ]) {
         expect(messages.augments[key], `${locale}.augments.${key}`).toBeTruthy();
       }
       for (const key of ["patchSummaryTitle", "patchSummaryBody"]) {
@@ -157,8 +208,21 @@ describe("public patch summary", () => {
         expect(messages[namespace].patchSummaryBody).toContain("{name}");
         expect(messages[namespace].patchSummaryBody).toContain("{patch}");
       }
-      expect(messages.augments.patchSummaryRemoved).toContain("{name}");
-      expect(messages.augments.patchSummaryRemoved).toContain("{patch}");
+      // State sentences describe a STATE and must not template a patch;
+      // only the dated sentences may carry one.
+      for (const key of [
+        "patchSummaryDisabled",
+        "patchSummaryRemoved",
+        "patchSummaryUnverified",
+        "patchSummaryCandidate",
+      ]) {
+        expect(messages.augments[key], `${locale}.${key}`).toContain("{name}");
+        expect(messages.augments[key], `${locale}.${key}`).not.toContain("{patch}");
+      }
+      for (const key of ["patchSummaryAddedIn", "patchSummaryRemovedIn"]) {
+        expect(messages.augments[key], `${locale}.${key}`).toContain("{name}");
+        expect(messages.augments[key], `${locale}.${key}`).toContain("{patch}");
+      }
     }
   });
 });

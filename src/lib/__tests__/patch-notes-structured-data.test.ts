@@ -57,10 +57,13 @@ const fixture: PatchNotesData = {
 
 describe("patch-notes structured data", () => {
   test("falls back to scrape time only when no publication date exists", () => {
-    const undated: PatchNotesData = {
+    // A patch note with no usable date at all: the runtime guards with
+    // validDate(), so the absent fields are modelled rather than typed away.
+    const { publishedAt: _p, released: _r, ...undatedPatch } = fixture.patches[0];
+    const undated = {
       ...fixture,
-      patches: [{ ...fixture.patches[0], publishedAt: undefined, released: undefined }],
-    };
+      patches: [undatedPatch],
+    } as unknown as PatchNotesData;
     expect(resolvePatchNotesLastModified(undated)?.toISOString()).toBe(
       "2026-06-23T18:00:00.000Z",
     );

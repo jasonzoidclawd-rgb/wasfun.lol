@@ -42,12 +42,10 @@ export interface ScoredAugment {
   flags?: {
     system_breaker?: boolean;
     lifecycle?: string;
+    /** Patch of an OBSERVED lifecycle transition. Absent when undated. */
     lifecycle_patch?: string;
-    /**
-     * Patch at which this lifecycle state was first OBSERVED — not a claim
-     * about when Riot changed it. Absent when unknown.
-     */
-    lifecycle_observed_patch?: string;
+    /** Which transition that patch refers to ("added" | "removed"). */
+    lifecycle_event?: string;
   };
 }
 

@@ -20,9 +20,11 @@ export interface RemovedPatchAugment {
   name_zh_CN?: string;
   name_ja?: string;
   name_ko?: string;
+  availability?: { status?: string };
   flags?: {
     lifecycle?: string;
     lifecycle_patch?: string;
+    lifecycle_event?: string;
   };
 }
 
@@ -254,6 +256,7 @@ async function RemovedAugmentsTable({
             <tr>
               <th className="px-5 py-3 font-medium">{t("removedName")}</th>
               <th className="px-5 py-3 font-medium">{t("removedRarity")}</th>
+              <th className="px-5 py-3 font-medium">{t("removedStatus")}</th>
               <th className="px-5 py-3 font-medium">{t("removedVersion")}</th>
             </tr>
           </thead>
@@ -271,8 +274,18 @@ async function RemovedAugmentsTable({
                 <td className="px-5 py-3 capitalize text-[var(--color-text-secondary)]">
                   {augment.rarity}
                 </td>
+                <td
+                  className={
+                    augment.availability?.status === "disabled"
+                      ? "px-5 py-3 text-amber-300/90"
+                      : "px-5 py-3 text-[var(--color-text-secondary)]"
+                  }
+                >
+                  {t(`availability_${augment.availability?.status ?? "unknown"}` as never)}
+                </td>
                 <td className="px-5 py-3 text-[var(--color-text-muted)]">
-                  {augment.flags?.lifecycle_patch ?? "—"}
+                  {/* Only an observed transition carries a date. */}
+                  {augment.flags?.lifecycle_patch ?? t("removedVersionUnknown")}
                 </td>
               </tr>
             ))}

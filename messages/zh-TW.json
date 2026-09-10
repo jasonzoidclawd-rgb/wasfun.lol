@@ -296,13 +296,12 @@
     "detailBack": "所有增幅",
     "detailStrongOn": "強力英雄組合",
     "detailKitSynergy": "套件協同",
-    "detailRemovedIn": "已於 {patch} 版本移除",
     "patchSummaryTitle": "版本摘要",
     "patchSummaryBody": "本頁的 {name} 增強內容反映 {patch} 版本的 ARAM 大亂鬥公開資料。",
-    "patchSummaryRemoved": "{name} 已於 {patch} 版本標記為移除。",
+    "patchSummaryRemoved": "{name} 已從目前的增幅池移除。",
     "sortRarity": "排序：稀有度",
     "subtitleNoPatch": "{count} 個可用增幅",
-    "population": "{live} 可用 · {disabled} 停用 · {historical} 歷史",
+    "population": "{live} 可用 · {disabled} 停用 · {removed} 已移除 · {unverified} 未驗證 · {candidate} 候選",
     "statusColumn": "狀態",
     "patchUnknown": "未知",
     "availability_confirmed_live": "可用",
@@ -311,7 +310,12 @@
     "availability_unverified_legacy": "未驗證（舊版）",
     "availability_candidate_registry_present": "候選",
     "availability_conflict": "來源衝突",
-    "availability_unknown": "未知"
+    "availability_unknown": "未知",
+    "patchSummaryDisabled": "{name} 目前已停用，本版本不會出現。",
+    "patchSummaryUnverified": "{name} 是無法以目前遊戲資料驗證的歷史項目。",
+    "patchSummaryCandidate": "{name} 存在於遊戲登錄檔中，但不會被提供。",
+    "patchSummaryAddedIn": "{name} 於 {patch} 版本加入。",
+    "patchSummaryRemovedIn": "{name} 於 {patch} 版本移除。"
   },
   "items": {
     "title": "ARAM 大亂鬥裝備",
@@ -421,8 +425,8 @@
     "summaryRemoved": "移除",
     "summaryHotfixes": "即時修正",
     "modelImpact": "{count} 個模型參照",
-    "removedTitle": "已移除 / 非當前增幅符文",
-    "removedSubtitle": "{count} 個增幅符文保留作歷史紀錄，但不會出現在當前池中。",
+    "removedTitle": "目前不會提供的增幅",
+    "removedSubtitle": "{count} 個增幅仍被追蹤，但不會出現在目前的增幅池。",
     "removedName": "增幅符文",
     "removedRarity": "稀有度",
     "removedVersion": "版本",
@@ -466,7 +470,16 @@
         "gold": "黃金",
         "prismatic": "稜彩"
       }
-    }
+    },
+    "removedStatus": "狀態",
+    "removedVersionUnknown": "未知",
+    "availability_confirmed_live": "可用",
+    "availability_disabled": "本版本停用",
+    "availability_removed": "已移除",
+    "availability_unverified_legacy": "未驗證（舊版）",
+    "availability_candidate_registry_present": "候選",
+    "availability_conflict": "來源衝突",
+    "availability_unknown": "未知"
   },
   "common": {
     "search": "搜尋英雄...",

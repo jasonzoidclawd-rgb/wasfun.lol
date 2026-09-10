@@ -377,13 +377,12 @@
     "detailBack": "All augments",
     "detailStrongOn": "Strong on champions",
     "detailKitSynergy": "Kit synergy",
-    "detailRemovedIn": "Removed in patch {patch}",
     "patchSummaryTitle": "Patch summary",
     "patchSummaryBody": "This augment page for {name} reflects public Arena Mayhem data for patch {patch}.",
-    "patchSummaryRemoved": "{name} is marked removed in patch {patch}.",
+    "patchSummaryRemoved": "{name} has been removed from the current pool.",
     "sortRarity": "Sort: Rarity",
     "subtitleNoPatch": "{count} live augments",
-    "population": "{live} live · {disabled} disabled · {historical} historical",
+    "population": "{live} live · {disabled} disabled · {removed} removed · {unverified} unverified · {candidate} candidate",
     "statusColumn": "Status",
     "patchUnknown": "Unknown",
     "availability_confirmed_live": "Live",
@@ -392,7 +391,12 @@
     "availability_unverified_legacy": "Unverified (legacy)",
     "availability_candidate_registry_present": "Candidate",
     "availability_conflict": "Conflicting sources",
-    "availability_unknown": "Unknown"
+    "availability_unknown": "Unknown",
+    "patchSummaryDisabled": "{name} is currently disabled and is not offered this patch.",
+    "patchSummaryUnverified": "{name} is a historical entry we could not verify against current game data.",
+    "patchSummaryCandidate": "{name} appears in the game registry but is not offered.",
+    "patchSummaryAddedIn": "{name} was added in patch {patch}.",
+    "patchSummaryRemovedIn": "{name} was removed in patch {patch}."
   },
   "items": {
     "title": "ARAM Mayhem Items",
@@ -502,8 +506,8 @@
     "summaryRemoved": "Removed",
     "summaryHotfixes": "Hotfixes",
     "modelImpact": "{count} model refs",
-    "removedTitle": "Removed / non-current augments",
-    "removedSubtitle": "{count} augments are retained for history but hidden from current pools.",
+    "removedTitle": "Augments not currently offered",
+    "removedSubtitle": "{count} augments are tracked but not offered in the current pool.",
     "removedName": "Augment",
     "removedRarity": "Rarity",
     "removedVersion": "Version",
@@ -547,7 +551,16 @@
         "gold": "Gold",
         "prismatic": "Prismatic"
       }
-    }
+    },
+    "removedStatus": "Status",
+    "removedVersionUnknown": "Unknown",
+    "availability_confirmed_live": "Live",
+    "availability_disabled": "Disabled this patch",
+    "availability_removed": "Removed",
+    "availability_unverified_legacy": "Unverified (legacy)",
+    "availability_candidate_registry_present": "Candidate",
+    "availability_conflict": "Conflicting sources",
+    "availability_unknown": "Unknown"
   },
   "common": {
     "search": "Search champions...",

@@ -276,16 +276,16 @@ def main():
             non_offerable[slug] = status
             if status == "disabled":
                 disabled.add(slug)
-            rules["lifecycle"]["removed"].setdefault(slug, current_patch)
         elif aug.get("name") == "???":
             non_offerable[slug] = "placeholder"
-            rules["lifecycle"]["removed"].setdefault(slug, current_patch)
 
-        lifecycle = (aug.get("flags") or {}).get("lifecycle")
-        if lifecycle == "removed":
-            rules["lifecycle"]["removed"].setdefault(slug, current_patch)
-        elif lifecycle == "added":
-            rules["lifecycle"]["added"].setdefault(slug, current_patch)
+        # `lifecycle.added` / `lifecycle.removed` carry DATES, so they may only
+        # be written by an observed CDragon transition (`lifecycle_from_events`).
+        # They used to be back-filled with the generation patch for every
+        # non-offerable augment, which stamped a specific, checkable, false
+        # claim ("removed in 26.13", then "removed in 26.18" a run later) onto
+        # entities that had simply always been absent. Being non-offerable is a
+        # STATE; when it started is a separate fact we usually do not know.
     rules["disabled"] = sorted(disabled)
 
     # Single-authority invariant: the disabled list IS the set of augments the

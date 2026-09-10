@@ -193,9 +193,18 @@ describe("data integrity", () => {
 
     expect(upgradeSword, "removed augment tombstone should exist for OCR/history").toBeTruthy();
     expect(upgradeSword?.flags.lifecycle).toBe("removed");
+    expect(upgradeSword?.availability?.status).toBe("removed");
     expect(upgradeSword?.name_zh_TW).toBe("升級：破曉綻放之劍");
     expect(upgradeMikaels?.name_zh_TW).not.toBe("升級：破曉綻放之劍");
-    expect(poolRules.lifecycle.removed["upgrade-sword-of-blossoming-dawn"]).toBe(poolRules.patch);
+    // No dated removal event exists for this tombstone, so it must carry no
+    // removal patch at all. This previously asserted the generation patch,
+    // which is how every non-offerable augment ended up stamped with whatever
+    // patch happened to be current when the pipeline last ran.
+    const removedDates = poolRules.lifecycle.removed as Record<string, string>;
+    expect(removedDates["upgrade-sword-of-blossoming-dawn"]).toBeUndefined();
+    expect(
+      (upgradeSword?.flags as Record<string, unknown> | undefined)?.lifecycle_patch,
+    ).toBeUndefined();
 
     for (const combo of combosData.combos) {
       expect(

@@ -100,15 +100,20 @@ def build_public_augments(internal_dir: Path, forbidden: set[str]) -> dict:
         if not slug:
             continue
         add_public_localized_augment_descriptions(augment)
-        patch = removed_patches.get(slug) or added_patches.get(slug)
-        if patch:
-            # `lifecycle_from_events` records the patch at which we FIRST
-            # OBSERVED this state, which is not the same claim as "Riot changed
-            # it in this patch" — the catalog bootstrap recorded every
-            # pre-existing removal at whatever patch was current that day. The
-            # field name has to carry that weaker meaning, because the UI was
-            # rendering it as a removal date.
-            augment.setdefault("flags", {})["lifecycle_observed_patch"] = patch
+        # A lifecycle patch is published ONLY when it comes from an observed
+        # CDragon transition (we saw the entity present, then absent, or the
+        # reverse). Entities that were already absent when tracking began have
+        # no such event and therefore get no date — absent, not guessed. The
+        # event kind travels with it so copy can say "added in" rather than
+        # inferring "removed in" from the entity's current state.
+        removed_patch = removed_patches.get(slug)
+        added_patch = added_patches.get(slug)
+        if removed_patch:
+            augment.setdefault("flags", {})["lifecycle_patch"] = removed_patch
+            augment["flags"]["lifecycle_event"] = "removed"
+        elif added_patch:
+            augment.setdefault("flags", {})["lifecycle_patch"] = added_patch
+            augment["flags"]["lifecycle_event"] = "added"
 
     return strip_keys(augments, forbidden)
 

@@ -9,6 +9,16 @@ import { localizedName } from "@/lib/i18n/localized-name";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 import { buildAugmentDetailJsonLd } from "@/lib/seo/augment-detail";
 import { buildPatchSummary } from "@/lib/seo/patch-summary";
+import { readPatchClocks } from "@/lib/data/clocks";
+
+// Each resolved availability status gets its own sentence. Collapsing them
+// onto "removed" is what made disabled augments read as deleted.
+const AVAILABILITY_SUMMARY_KEYS: Record<string, string> = {
+  disabled: "patchSummaryDisabled",
+  removed: "patchSummaryRemoved",
+  unverified_legacy: "patchSummaryUnverified",
+  candidate_registry_present: "patchSummaryCandidate",
+};
 import {
   readAugmentsFile,
   readChampionsFile,
@@ -36,9 +46,11 @@ interface AugmentRecord {
   name_zh_CN?: string;
   name_ja?: string;
   name_ko?: string;
+  availability?: { status?: string };
   flags?: {
     lifecycle?: string;
     lifecycle_patch?: string;
+    lifecycle_event?: string;
   };
 }
 
@@ -162,7 +174,6 @@ export default async function AugmentDetailPage({
         ? "badgeQuest"
         : null;
 
-  const isRemoved = augment.flags?.lifecycle === "removed";
 
   // "Strong on champions": reverse-lookup the public combo teaser, then resolve
   // each champion slug to a real champions.json record so we only link to pages
@@ -200,16 +211,30 @@ export default async function AugmentDetailPage({
     augmentsLabel: t("title"),
     rarityLabel: rarityLabel[augment.rarity],
   });
+  // The augment catalog describes CURRENT game rules, so it is stamped with
+  // the structural clock, not with whatever patch the statistics feed has
+  // finished aggregating.
+  const clocks = await readPatchClocks();
   const patchSummary = buildPatchSummary(
     {
-      patch: augmentsData.patch,
-      lifecycleState: augment.flags?.lifecycle,
+      patch: clocks.structuralPatch,
+      availabilityStatus: augment.availability?.status,
       lifecyclePatch: augment.flags?.lifecycle_patch,
+      lifecycleEvent: augment.flags?.lifecycle_event,
     },
     {
       title: t("patchSummaryTitle"),
       body: ({ patch }) => t("patchSummaryBody", { name: augmentName, patch }),
-      removed: ({ patch }) => t("patchSummaryRemoved", { name: augmentName, patch }),
+      availability: (status) =>
+        AVAILABILITY_SUMMARY_KEYS[status]
+          ? t(AVAILABILITY_SUMMARY_KEYS[status], { name: augmentName })
+          : undefined,
+      dated: ({ patch, event }) =>
+        event === "added"
+          ? t("patchSummaryAddedIn", { name: augmentName, patch })
+          : event === "removed"
+            ? t("patchSummaryRemovedIn", { name: augmentName, patch })
+            : undefined,
     },
   );
 
@@ -265,13 +290,14 @@ export default async function AugmentDetailPage({
                   {t(typeBadgeKey)}
                 </span>
               )}
-              {isRemoved && (
-                <span className="text-xs font-medium px-2 py-0.5 rounded border border-rose-400/30 bg-rose-400/10 text-rose-300">
-                  {augment.flags?.lifecycle_patch
-                    ? t("detailRemovedIn", { patch: augment.flags.lifecycle_patch })
-                    : t("badgeRemoved")}
-                </span>
-              )}
+              {augment.availability?.status &&
+                augment.availability.status !== "confirmed_live" && (
+                  <span className="text-xs font-medium px-2 py-0.5 rounded border border-rose-400/30 bg-rose-400/10 text-rose-300">
+                    {t(
+                      `availability_${augment.availability.status}` as never,
+                    )}
+                  </span>
+                )}
             </div>
 
             {augment.wikiDescription && (

@@ -61,7 +61,9 @@ export default async function AugmentsPage({
     normalizedAugments.filter((augment) => augment.availability?.status === status).length;
   const liveCount = byStatus("confirmed_live");
   const disabledCount = byStatus("disabled");
-  const historicalCount = normalizedAugments.length - liveCount - disabledCount;
+  const removedCount = byStatus("removed");
+  const unverifiedCount = byStatus("unverified_legacy");
+  const candidateCount = byStatus("candidate_registry_present");
 
   // The catalog describes the CURRENT game, so it is stamped with the
   // structural patch — never with whatever patch the statistics lag on.
@@ -77,10 +79,14 @@ export default async function AugmentsPage({
             : t("subtitleNoPatch", { count: liveCount })}
         </p>
         <p className="text-xs text-[var(--color-text-muted)] mt-1">
+          {/* Each number names its own resolved status. "Historical" bundled
+              unverified and candidate entities, neither of which is historical. */}
           {t("population", {
             live: liveCount,
             disabled: disabledCount,
-            historical: historicalCount,
+            removed: removedCount,
+            unverified: unverifiedCount,
+            candidate: candidateCount,
           })}
         </p>
         <DataFreshness />
