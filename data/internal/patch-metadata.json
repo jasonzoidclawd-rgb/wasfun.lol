@@ -1,65 +1,69 @@
 {
   "schema_version": 1,
   "source": "Riot Games prose metadata only",
-  "patch": "26.13",
-  "scraped_at": "2026-06-23T18:00:00.000Z",
+  "patch": "26.18",
+  "scraped_at": "2026-09-09T18:00:00.000Z",
   "patches": [
     {
-      "version": "26.13",
-      "articleTitle": "League of Legends Patch 26.13 Notes",
-      "publishedAt": "2026-06-23T18:00:00.000Z",
-      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-13-notes",
+      "version": "26.18",
+      "articleTitle": "League of Legends Patch 26.18 Notes",
+      "publishedAt": "2026-09-09T18:00:00.000Z",
+      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-18-notes",
+      "authors": [
+        "Riot wroadie",
+        "Riot Cashmiir",
+        "sternest"
+      ],
+      "intro": "The Beacon of Hope has officially been inducted into the Hall of Legends. Congratulations, Caps! This week's patch kicks off our event that honors the most decorated player in European League of Legends history. The Hall of Legends battle pass will take you on a journey through his storied career, and features new cosmetics plus brand new skins co-developed by Caps himself. We can't wait to celebrate such a humble, confident, and resilient competitor with you all. This patch also features changes to Summoner's Rift balance, with some targeted nerfs on overperforming pro supports like Nautilus and Bard, as well as some taps to Seraphine bot and Zeri. A round of buffs is in order for Viego, Zaahen, Master Yi, Ekko, and Kassadin. Finally, Cassiopeia has slithered her way into an adjustment to help reduce her pro skew. Classic will be having a big old Demacian reunion this week as Fiora, Galio, Poppy, Shyvana, and Xin Zhao join the fray in addition to a host of balance changes and the results of our first Council vote! For all you Mayhem heads out there, we're making sure that the Augment choices you receive make more sense for the champion you're playing, as we continue to improve the Augment pools. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
+    },
+    {
+      "version": "26.17",
+      "articleTitle": "League of Legends Patch 26.17 Notes",
+      "publishedAt": "2026-08-25T18:00:00.000Z",
+      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-17-notes",
+      "authors": [
+        "Riot wroadie",
+        "Riot Cashmiir",
+        "sternest"
+      ],
+      "intro": "In 26.17 we’ve got a small amount of relief for top lane with Nasus and Vayne nerfs, and some followup on last patch to a handful of champions and items. We’re buffing a variety of melee AD carries, like Irelia, Qiyana, Yasuo, and Yone, who’ve been forced to snowball-or-lose for a while instead of having a reliable endgame to scale towards. Xerath continues to overperform in the mid lane in particular, as do Nocturne and Graves in the jungle. Finally, Sundered Sky wasn’t hit quite as hard as we were looking for, and we’re also looking to give Stormrazor a place in some builds again. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
+    },
+    {
+      "version": "26.16",
+      "articleTitle": "League of Legends Patch 26.16 Notes",
+      "publishedAt": "2026-08-11T18:00:00.000Z",
+      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-16-notes",
+      "authors": [
+        "Riot wroadie",
+        "Riot Cashmiir",
+        "sternest",
+        "Riot Yina"
+      ],
+      "intro": "With this patch, we have a bunch of systems adjustments aimed at some of the strategies that have been emerging in bot lane, as well as opening up some space for itemization diversity in jungle. Recently we've been seeing increased support roaming really early into the game, to the point where they seem to be operating as a second jungler. While this may be interesting as a strategic option, we feel it is damaging to game integrity when it's the default approach and supports are no longer meaningfully participating in a lane, so we're making higher tradeoffs for this playstyle by tweaking role quest progress for supports and directly addressing specific champions like Camille who have moved into the support role leading this meta. Related, mages are picking up as a prominent class selection in bot lane in both pro and regular play. While they've been niche but powerful picks for a long time, both from your feedback and the stats, it's clear that it's time for some adjustments to equalize the power here a bit between mages and ADCs. Similar to the approach with supports above, they'll still be viable, just not clearly dominant. Additionally, we are tweaking the AD fighter itemization space and the jungle pets to encourage a more diverse meta beyond Sundered Sky users to include more AP and Tank junglers. We're excited to see what shakes out next! Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
+    },
+    {
+      "version": "26.15",
+      "articleTitle": "League of Legends Patch 26.15 Notes",
+      "publishedAt": "2026-07-28T18:00:00.000Z",
+      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-15-notes",
       "authors": [
         "Riot Cashmiir",
         "sternest",
         "Riot Yina"
       ],
-      "intro": "Our newest demon-huntin' baddie Locke is hitting the Rift this patch! You can check him out in between MSI matches—but you won't see him on that big stage yet. We've also got balance changes to a swathe of champions, from everyone's favorite “always chasin' charms, never savin' ADCs” support, to the Darkin who just won't die in my games. Ranked 5s will also be returning for a limited run starting on June 26. We decided to bump down start times to 8pm, to accommodate all us eepy lil guys who need to go night night by 10pm. So time to text the squad and get into queue. We also have last hit indicators coming to Ranked and Normal Draft queues! So now there's no excuse to miss those canons, pal. (You can also turn them off if you like a challenge.) Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
+      "intro": "Welcome to patch 26.15 and Season 3, where Bel’Veth, the Empress of the Void has some changes she’d like to introduce to you, starting with her patchwork update that leans into her evolution fantasy (permanent ult form, anyone?). After that, we’ve got some nerfs to some recent and longer overperforming champions in Locke, Naafiri, Riven, Sylas, and Morde, and then a handful of buffs to some large tanky champions (and Kai’Sa I guess), along with some item and rune adjustments. On the ranked front with the new Season, you can only cash in Aegis of Valor in games you win to remove mixed incentives, and we’re bringing back duoing to Master tier! Continue on for ARAM: Mayhem and Arena changes! Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
     },
     {
-      "version": "26.12",
-      "articleTitle": "League of Legends Patch 26.12 Notes",
-      "publishedAt": "2026-06-09T18:00:00.000Z",
-      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-12-notes",
+      "version": "26.14",
+      "articleTitle": "League of Legends Patch 26.14 Notes",
+      "publishedAt": "2026-07-14T18:00:00.000Z",
+      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-14-notes",
       "authors": [
         "Riot Cashmiir",
-        "sternest"
+        "sternest",
+        "Riot Yina"
       ],
-      "intro": "We've got some more changes to follow up the recent Season 2 & support meta with a nerf to AP Xin Zhao and buff to Yuumi, as well as preparation with an eye towards MSI on the patch after this one through creating opportunities for some diversity in champion picks in the tournament. While some of these changes are specifically pro-oriented (sorry, Varus), most of them should be pretty applicable across all levels of play, like Lee Sin and Nocturne being less menacing in the jungle. We'll be continuing this approach for one more patch before going back to business as usual. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
-    },
-    {
-      "version": "26.11",
-      "articleTitle": "League of Legends Patch 26.11 Notes",
-      "publishedAt": "2026-05-27T18:00:00.000Z",
-      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-11-notes",
-      "authors": [
-        "Riot Cashmiir",
-        "sternest"
-      ],
-      "intro": "It's tank time! In this patch, we've got a bit of a shake-up to the support roster. After seeing enchanters dominating for much of the year, and more recently mage supports pumping out oodles of damage with the recently re-added Deathfire Touch. We've also got some systemic adjustments to rebalance these archetypes and give melee supports some love. Additionally, we have some adjustments for top laners, with a Heartsteel buff and a nerf to Hexplate for ranged users to make them pay a larger cost for getting a bunch of health. For Season 2 followups, Xin Zhao is going to heal a little bit less, and Smolder is getting some base damage nerfs that make building like a bruiser a little bit weaker. Outside of that, we have some changes to some low-traffic client code, a slew of bugfixes, Arena updates, ARAM and ARAM: Mayhem bugfixes and adjustments, and more! Plus, we've got Eternal Aspects skins for Leona and Diana. And, finally, we hope you're hungry for some fine Italian dining. We've got mouthwatering skins for Sion, Illaoi, Irelia, and Vel'koz on today's menu. Mangia bene, gamers! Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
-    },
-    {
-      "version": "26.10",
-      "articleTitle": "League of Legends Patch 26.10 Notes",
-      "publishedAt": "2026-05-12T18:00:00.000Z",
-      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-10-notes",
-      "authors": [
-        "Riot Cashmiir",
-        "sternest"
-      ],
-      "intro": "We’ve got some followup for the recent Season 2 changes to bring some of the more overpowered content in line and give a bump to some things that haven’t seen the adoption that they probably should. Items and runes are still key here - we’ve got nerfs to Deathfire Touch, Gluttonous Greaves, and Voltaic Cyclosword, and some buffs to Stormraider’s Surge and the two new starting items introduced last patch. Lee Sin’s throwing off the weights with limiters removed on his shield and some other modernization changes, and Quinn is heading into the jungle. We’ve also got some behavior updates with termination votes for disrupted games, and improved detection models for text. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
-    },
-    {
-      "version": "26.9",
-      "articleTitle": "League of Legends Patch 26.9 Notes",
-      "publishedAt": "2026-04-28T18:00:00.000Z",
-      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-9-notes",
-      "authors": [
-        "Riot Riru",
-        "Riot Cashmiir",
-        "sternest"
-      ],
-      "intro": "It's time to hunt demons with Patch 26.9! In this patch we've got updates to champions, items, systems, and runes galore. Including bringing back some old favorites like Deathfire Touch and Stormraider's Surge, and giving you a lot of new options to experiment with like new starting items and a variety of alternate champion builds. For role quests, we've got some balance changes, tweaks to make progressing them more straightforward, and a small mid lane quest reward rework to better fit a scaling fantasy. Finally, we've given Shyvana some love to give more differentiation to AD and AP builds and paths to be a durable Dragon. Over in the Arena, we have a new update with events, new Augments, a new map, and more! We also have some adjustments and bugfixes for ARAM: Mayhem, WASD is coming to Ranked, and we have some demon-themed skins to kick off Season 2: Pandemonium! Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
+      "intro": "Hail the victorious three-peat champions, and welcome to Patch 26.14! This patch we have an array of changes to champs like locking down Locke, helping our favorite fish who's flopping a little in support, and hitting mute on the songstress in bot lane. Blue buff is getting a little bit of love, and we have some adjustments to a few items. Outside of Summoner's Rift, we've got some Mayhem and Arena adjustments for modes enjoyers, and Summoner's Rift Clash will be taking place this patch! So time to hit up the squad, give yourselves a punny name, and suddenly forget how to do even the most basic tasks in-game, if you're anything like my friend group. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !"
     }
   ]
 }

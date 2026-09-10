@@ -2,128 +2,72 @@
   "schema_version": 1,
   "branch": "pbe",
   "lane": "preview",
-  "status": "not_yet_confirmed",
-  "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-  "observed_at": "2026-07-13T19:16:25.768897Z",
+  "status": "fresh",
+  "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+  "observed_at": "2026-09-10T09:10:44.105491Z",
   "events": [
     {
-      "entity_type": "augment",
-      "canonical_id": "ARAM_Dropkick",
-      "slug": "dropkick",
+      "entity_type": "item",
+      "canonical_id": "773162",
+      "slug": "cloak-and-dagger",
       "names": {
-        "en": "Dropkick",
-        "ja": "ドロップキック",
-        "ko": "드롭킥",
-        "zh-CN": "飞身踢",
-        "zh-TW": "奪命飛踢"
+        "en": "Cloak and Dagger"
       },
       "branch": "pbe",
       "lane": "preview",
-      "change_kind": "text",
-      "fields_changed": [
-        "tooltip"
-      ],
-      "before": {
-        "tooltip": "Your Attacks execute enemy champions below <scaleHealth>@Calc_Execute_Threshold@ max Health</scaleHealth>, <healing>restoring @Calc_Heal@ Health</healing> and <status>Knocking Back</status> enemies.<br><br>Upon landing or colliding with an enemy or terrain, <status>Knocked Back</status> enemies will explode, dealing <magicDamage>@Calc_Damage@ magic damage</magicDamage> to nearby enemies.<br><br><rules>These explosions can chain.<br><br>Enemies Dropkicked: @f3.0@<br>Total Health Gained: @f2.0@<br>Damage Dealt: @f1.0@</rules>"
-      },
+      "change_kind": "added",
+      "fields_changed": [],
+      "before": {},
       "after": {
-        "tooltip": "Your Attacks and Abilities execute enemy champions below <scaleHealth>@Calc_Execute_Threshold@ max Health</scaleHealth>, <healing>restoring @Calc_Heal@ Health</healing> and <status>Knocking Back</status> the target.<br><br>Upon colliding with an enemy or terrain or reaching their terminus, <status>Knocked Back</status> enemies will explode dealing <magicDamage>@Calc_Damage@ magic damage</magicDamage> to nearby enemies.<br><br><rules>These explosions can chain.<br><br>Enemies Dropkicked: @f3.0@<br>Total Health Gained: @f2.0@<br>Damage Dealt: @f1.0@</rules>"
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed"
+        ],
+        "cost": 1330,
+        "description": "<mainText><stats><attention> 20%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
+      "detected_at": "2026-09-10T09:10:44.105491Z",
+      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
-      "known": true,
-      "href": "/augments/dropkick"
-    },
-    {
-      "entity_type": "augment",
-      "canonical_id": "ARAM_InfernalConduit",
-      "slug": "infernal-conduit",
-      "names": {
-        "en": "Infernal Conduit",
-        "ja": "獄炎路",
-        "ko": "지옥의 전도체",
-        "zh-CN": "炼狱导管",
-        "zh-TW": "煉獄使者"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "text",
-      "fields_changed": [
-        "tooltip"
-      ],
-      "before": {
-        "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemies.<br><br>Damage Dealt: @f2@"
-      },
-      "after": {
-        "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemy champions.<br><br>Damage Dealt: @f2@"
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/augments/infernal-conduit"
-    },
-    {
-      "entity_type": "champion",
-      "canonical_id": "42",
-      "slug": "corki",
-      "names": {
-        "en": "Corki"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "numeric",
-      "fields_changed": [
-        "base_stats.attackDamagePerLevel"
-      ],
-      "before": {
-        "base_stats.attackDamagePerLevel": 2.0
-      },
-      "after": {
-        "base_stats.attackDamagePerLevel": 2.5
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/champions/corki"
-    },
-    {
-      "entity_type": "champion",
-      "canonical_id": "804",
-      "slug": "yunara",
-      "names": {
-        "en": "Yunara"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "numeric",
-      "fields_changed": [
-        "base_stats.attackDamagePerLevel"
-      ],
-      "before": {
-        "base_stats.attackDamagePerLevel": 2.5
-      },
-      "after": {
-        "base_stats.attackDamagePerLevel": 3.0
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/champions/yunara"
+      "known": false
     },
     {
       "entity_type": "item",
-      "canonical_id": "3152",
-      "slug": "hextech-rocketbelt",
+      "canonical_id": "773161",
+      "slug": "moonflair-spellblade",
       "names": {
-        "en": "Hextech Rocketbelt"
+        "en": "Moonflair Spellblade"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "added",
+      "fields_changed": [],
+      "before": {},
+      "after": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "Armor",
+          "SpellDamage",
+          "Tenacity"
+        ],
+        "cost": 2600,
+        "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
+      },
+      "detected_at": "2026-09-10T09:10:44.105491Z",
+      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": false
+    },
+    {
+      "entity_type": "item",
+      "canonical_id": "773512",
+      "slug": "zz-rot-portal",
+      "names": {
+        "en": "Zz'Rot Portal"
       },
       "branch": "pbe",
       "lane": "preview",
@@ -132,173 +76,17 @@
         "description"
       ],
       "before": {
-        "description": "<mainText><stats><attention> 70</attention> Ability Power<br><attention> 300</attention> Health<br><attention> 20</attention> Ability Haste</stats><br><br> <active>Supersonic</active><br>Dash in target direction, unleashing missiles that deal <magicDamage>magic damage</magicDamage>.</mainText>"
+        "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Grants <speed>+30% bonus Move Speed</speed> that builds up over 2 seconds when near turrets or void gates. <jadeUnique>Active</jadeUnique>  150s<br>Spawns a gate at the target location for 150 seconds (Can't be placed near turrets). Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane. <br><br>After 4 seconds, a <keywordMajor>Voidspawn's</keywordMajor> health will rapidly decay to 0. The fourth <keywordMajor>Voidspawn</keywordMajor> and every <keywordMajor>Voidspawn</keywordMajor> thereafter will deal bonus damage equal to 50% of your resistances.</mainText>"
       },
       "after": {
-        "description": "<mainText><stats><attention> 60</attention> Ability Power<br><attention> 350</attention> Health<br><attention> 20</attention> Ability Haste</stats><br><br> <active>Supersonic</active><br>Dash in target direction, unleashing missiles that deal <magicDamage>magic damage</magicDamage>.</mainText>"
+        "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
       },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
+      "detected_at": "2026-09-10T09:10:44.105491Z",
+      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
-      "href": "/items/3152"
-    },
-    {
-      "entity_type": "item",
-      "canonical_id": "3168",
-      "slug": "immortal-path",
-      "names": {
-        "en": "Immortal Path"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "text",
-      "fields_changed": [
-        "description"
-      ],
-      "before": {
-        "description": "<mainText><stats><attention> 45</attention> Move Speed<br><attention> 4%</attention> Omnivamp</stats><br><br><passive>Slay</passive><br>Gain 0.6% Omnivamp on Champion takedown, stacking up to 10 times.<br><br><passive>Now and Forever</passive><br>While above half Health, deal 5% increased damage. <br><br>While below half Health, gain 15% increased healing, shielding, and regeneration.</mainText>"
-      },
-      "after": {
-        "description": "<mainText><stats><attention> 45</attention> Move Speed<br><attention> 4%</attention> Omnivamp</stats><br><br><passive>Slay</passive><br>Gain 0.6% Omnivamp on Champion takedown, stacking up to 10 times.<br><br><passive>Now and Forever</passive><br>While above half Health, deal 4% increased damage. <br><br>While below half Health, gain 12% increased healing, shielding, and regeneration.</mainText>"
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/items/3168"
-    },
-    {
-      "entity_type": "item",
-      "canonical_id": "226672",
-      "slug": "kraken-slayer",
-      "names": {
-        "en": "Kraken Slayer"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "text",
-      "fields_changed": [
-        "description"
-      ],
-      "before": {
-        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 35%</attention> Attack Speed<br><attention> 7%</attention> Move Speed</stats><br><br><passive>Bring It Down</passive><br>Every third Attack deals <physicalDamage>bonus physical damage</physicalDamage>  <OnHit>On-Hit</OnHit>, increased based on their missing Health.</mainText>"
-      },
-      "after": {
-        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 40%</attention> Attack Speed<br><attention> 7%</attention> Move Speed</stats><br><br><passive>Bring It Down</passive><br>Every third Attack deals <physicalDamage>bonus physical damage</physicalDamage>  <OnHit>On-Hit</OnHit>, increased based on their missing Health.</mainText>"
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/items/226672"
-    },
-    {
-      "entity_type": "item",
-      "canonical_id": "226675",
-      "slug": "navori-flickerblades",
-      "names": {
-        "en": "Navori Flickerblades"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "text",
-      "fields_changed": [
-        "description"
-      ],
-      "before": {
-        "description": "<mainText><stats><attention> 35%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance<br><attention> 4%</attention> Move Speed</stats><br><br><passive>Transcendence</passive><br>Your Attacks reduce your non-Ultimate Ability cooldowns by <attention>15%</attention> of their remaining cooldown.</mainText>"
-      },
-      "after": {
-        "description": "<mainText><stats><attention> 40%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance<br><attention> 4%</attention> Move Speed</stats><br><br><passive>Transcendence</passive><br>Your Attacks reduce your non-Ultimate Ability cooldowns by <attention>15%</attention> of their remaining cooldown.</mainText>"
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/items/226675"
-    },
-    {
-      "entity_type": "item",
-      "canonical_id": "223046",
-      "slug": "phantom-dancer",
-      "names": {
-        "en": "Phantom Dancer"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "text",
-      "fields_changed": [
-        "description"
-      ],
-      "before": {
-        "description": "<mainText><stats><attention> 60%</attention> Attack Speed<br><attention> 8%</attention> Move Speed<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Spectral Waltz</passive><br>Become <keyword>Ghosted</keyword>.</mainText>"
-      },
-      "after": {
-        "description": "<mainText><stats><attention> 65%</attention> Attack Speed<br><attention> 10%</attention> Move Speed<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Spectral Waltz</passive><br>Become <keyword>Ghosted</keyword>.</mainText>"
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/items/223046"
-    },
-    {
-      "entity_type": "item",
-      "canonical_id": "2525",
-      "slug": "protoplasm-harness",
-      "names": {
-        "en": "Protoplasm Harness"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "numeric",
-      "fields_changed": [
-        "cost"
-      ],
-      "before": {
-        "cost": 2500
-      },
-      "after": {
-        "cost": 2600
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/items/2525"
-    },
-    {
-      "entity_type": "item",
-      "canonical_id": "223094",
-      "slug": "rapid-firecannon",
-      "names": {
-        "en": "Rapid Firecannon"
-      },
-      "branch": "pbe",
-      "lane": "preview",
-      "change_kind": "text",
-      "fields_changed": [
-        "description"
-      ],
-      "before": {
-        "description": "<mainText><stats><attention> 30%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance<br><attention> 4%</attention> Move Speed</stats><br><br><passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.<br><br><passive>Sharpshooter</passive><br>Your <keyword>Energized Attack</keyword> applies <magicDamage>200 bonus magic damage</magicDamage>. In addition, Energized attacks gain up to 35% bonus Attack Range.<br></mainText>"
-      },
-      "after": {
-        "description": "<mainText><stats><attention> 35%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance<br><attention> 4%</attention> Move Speed</stats><br><br><passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.<br><br><passive>Sharpshooter</passive><br>Your <keyword>Energized Attack</keyword> applies <magicDamage>200 bonus magic damage</magicDamage>. In addition, Energized attacks gain up to 35% bonus Attack Range.<br></mainText>"
-      },
-      "detected_at": "2026-07-11T11:22:04.994004Z",
-      "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "landed": false,
-      "is_hotfix": false,
-      "known": true,
-      "href": "/items/223094"
+      "href": "/items/773512"
     }
   ]
 }

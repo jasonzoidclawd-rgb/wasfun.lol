@@ -1,6 +1,6 @@
 {
-  "patch": "26.13",
-  "scraped_at": "2026-07-12T22:39:33.668313+00:00",
+  "patch": "26.17",
+  "scraped_at": "2026-09-10T09:00:14.131975+00:00",
   "schemaVersion": "augment-truth-step5",
   "sources": {
     "definition": "data/internal/augment-base-catalog.json",
@@ -8,8 +8,16 @@
     "preserved": "data/internal/augments.json@pre-step5"
   },
   "counts": {
-    "augments": 268,
-    "winRateCoverage": 120
+    "augments": 278,
+    "availability": {
+      "confirmed_live": 209,
+      "candidate_registry_present": 1,
+      "disabled": 10,
+      "removed": 42,
+      "unverified_legacy": 16,
+      "conflict": 0
+    },
+    "winRateCoverage": 118
   },
   "augments": [
     {
@@ -34,6 +42,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "坦克引擎",
       "name_zh_TW": "坦克引擎",
       "name_ja": "タンクエンジン",
@@ -67,6 +78,9 @@
         "lifecycle": "active"
       },
       "type": "quest",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "钢化你心",
       "name_zh_TW": "心鋼起來",
       "name_ja": "覚悟を決めろ",
@@ -101,6 +115,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "重量级打击手",
       "name_zh_TW": "重型打手",
       "name_ja": "ヘビーヒッター",
@@ -135,16 +152,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "升级：无尽之刃",
       "name_zh_TW": "升級無盡之刃",
       "name_ja": "インフィニティ エッジ アップグレード",
       "name_ko": "무한의 대검 업그레이드",
-      "wikiDescription": "Upgrades Infinity Edge, empowering it to gain Sword of the Divine's Excoriate. Additionally, gain 500 and 25% critical strike chance. Excoriate: Gain a random amount of bonus critical strike damage that scales up to 50% of your critical strike chance, with the value of this amount changing every 0.25 seconds.",
+      "wikiDescription": "Upgrades Infinity Edge, empowering it to gain Sword of the Divine's Excoriate. Additionally, gain 500. Excoriate: Gain a random amount of bonus critical strike damage that scales up to 50% of your critical strike chance, with the value of this amount changing every 0.25 seconds.",
       "wikiRarity": "gold",
-      "description_zh_TW": "獲得@CritChance*100@%%i:scaleCrit%暴擊率和500金錢。 持有無盡之刃時，每次普攻可從%i:scaleCrit%暴擊率獲得隨機%i:scaleCritMult%暴擊傷害。",
-      "description_zh_CN": "获得@CritChance*100@% %i:scaleCrit%暴击几率和500金币。 装备无尽之刃后，可使你的%i:scaleCrit%暴击几率在每次攻击都会提供随机的%i:scaleCritMult%暴击伤害。",
-      "description_ja": "クリティカル率が@CritChance*100@% %i:scaleCrit%増加し、500ゴールドを獲得する。 「インフィニティ エッジ」を装備すると%i:scaleCrit%クリティカル率が通常攻撃ごとにランダムに%i:scaleCritMult%クリティカルダメージを与える。",
-      "description_ko": "@CritChance*100@%의 치명타 확률%i:scaleCrit% 및 500골드를 얻습니다. 무한의 대검을 보유하고 있으면 치명타 확률%i:scaleCrit%이 기본 공격 시 무작위로 치명타 피해량%i:scaleCritMult%을 부여합니다."
+      "description_zh_TW": "獲得500金錢。 持有無盡之刃時，你的暴擊會根據%i:scaleCrit%暴擊率造成隨機額外%i:scaleCritMult%暴擊傷害。",
+      "description_zh_CN": "获得500金币。 装备无尽之刃后，可使你的%i:scaleCrit%暴击几率在每次攻击都会提供随机的%i:scaleCritMult%暴击伤害。",
+      "description_ja": "500ゴールドを獲得する。 「インフィニティ エッジ」を装備すると%i:scaleCrit%クリティカル率が通常攻撃ごとにランダムに%i:scaleCritMult%クリティカルダメージを与える。",
+      "description_ko": "500골드를 얻습니다. 무한의 대검을 보유하고 있으면 치명타 확률%i:scaleCrit%이 기본 공격 시 무작위로 치명타 피해량%i:scaleCritMult%을 부여합니다."
     },
     {
       "augmentId": "ARAM_DrawYourSword",
@@ -170,6 +190,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "亮出你的剑",
       "name_zh_TW": "拔劍吧",
       "name_ja": "剣を構えよ",
@@ -203,6 +226,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "无限循环往复",
       "name_zh_TW": "無限循環",
       "name_ja": "無限再帰",
@@ -227,12 +253,15 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "heal_shield"
       ],
-      "wikiDescription": "Gain the required number of Omnivamp."
+      "wikiDescription": "Gain the required number of Omnivamp.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_Dropkick",
@@ -258,16 +287,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "飞身踢",
       "name_zh_TW": "奪命飛踢",
       "name_ja": "ドロップキック",
       "name_ko": "드롭킥",
-      "wikiDescription": "Your basic attacks and abilities execute enemy champions below 5% (+ 3.5% per 100 base AD) (+ 2% per 1000 bonus health) of their maximum health, which causes their corpse to be sent flying away in a line. Upon collision with an enemy champion or terrain, the target's corpse explodes to deal 150 – 500 (based on level) (+ 100% bonus armor) (+ 100% bonus magic resistance) magic damage to nearby enemies. Successful executions heal you for 100 – 300 (based on level) (+ 25% bonus health). The execution may also be triggered by the explosion and goes through shields.",
+      "wikiDescription": "Your basic attacks and abilities execute enemy champions below 4% (+ 5.5% per 100 base AD) (+ 1% per 1000 bonus health) of their maximum health, which causes their corpse to be sent flying away in a line. Upon collision with an enemy champion or terrain, the target's corpse explodes to deal 150 – 500 (based on level) (+ 100% bonus armor) (+ 100% bonus magic resistance) magic damage to nearby enemies. Successful executions heal you for 100 – 300 (based on level) (+ 25% bonus health). The execution may also be triggered by the explosion and ignores shields.",
       "wikiRarity": "prismatic",
-      "description_zh_TW": "普攻會處決低生命的敵方英雄、造成擊退並引發爆炸，同時回復自身生命。",
-      "description_zh_CN": "你的攻击会处决低生命值的敌方英雄，从而击退并引发一次爆炸，同时治疗你自身。",
-      "description_ja": "通常攻撃が体力の低い敵チャンピオンにとどめを刺す。また、その敵をノックバックして爆発を起こし、自身を回復する。",
-      "description_ko": "기본 공격 시 체력이 낮은 적 챔피언을 처형하고, 뒤로 밀어내 폭발시키며 자신의 체력을 회복합니다."
+      "description_zh_TW": "普攻和技能會處決低生命的敵方英雄、造成擊退並引發爆炸，同時回復自身生命。",
+      "description_zh_CN": "你的攻击和技能会处决低生命值的敌方英雄，从而击退并引发一次爆炸，同时治疗你自身。",
+      "description_ja": "通常攻撃とスキルが、体力の低い敵チャンピオンにとどめを刺す。また、その敵をノックバックして爆発を起こし、自身を回復する。",
+      "description_ko": "기본 공격 및 스킬이 체력이 낮은 적 챔피언을 처형하고, 뒤로 밀어내 폭발시키며 자신의 체력을 회복합니다."
     },
     {
       "augmentId": "ARAM_PhenomenalEvil",
@@ -291,6 +323,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "超凡邪恶",
       "name_zh_TW": "極度邪惡",
       "name_ja": "偉大なる悪",
@@ -325,6 +360,9 @@
         "lifecycle": "active"
       },
       "type": "quest",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "高压锅",
       "name_zh_TW": "壓力火鍋",
       "name_ja": "圧力鍋",
@@ -359,11 +397,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "艾卡西亚的陷落",
       "name_zh_TW": "伊卡西亞殞落",
       "name_ja": "イカシアの滅亡",
       "name_ko": "이케시아의 몰락",
-      "wikiDescription": "Gain Bami's Cinder. You can now purchase Hollow Radiance and Sunfire Aegis in spite of the item limit imposed by Immolate. Quest: Obtain Hollow Radiance and Sunfire Aegis. Reward: Upon completing your Quest, convert the items you obtained for the quest into Void Immolation. Void Immolation counts as 2 Burn effect sources. When gaining Bami's Cinder, you will lose an Ruby Crystal or a Glowing Mote in your inventory as it will get upgraded with no gold returned back to you.(bug)",
+      "wikiDescription": "Gain Bami's Cinder. You can now purchase Hollow Radiance and Sunfire Aegis in spite of the item limit imposed by Immolate. Quest: Obtain Hollow Radiance and Sunfire Aegis. Reward: Upon completing your Quest, convert the items you obtained for the quest into Void Immolation. While you have Void Immolation, you will be imposed with Immolate's item limit. When gaining Bami's Cinder, you will lose an Ruby Crystal or a Glowing Mote in your inventory as it will get upgraded with no gold returned back to you.(bug)",
       "wikiRarity": "prismatic",
       "description_zh_TW": "立即獲得一個巴米灰燼。 任務：持有日炎聖盾和虛偽光彩。 獎勵：這些道具能合成虛空獻祭。",
       "description_zh_CN": "即刻：获得1个【斑比的熔渣】。 任务：持有日炎圣盾和璀璨回响。 奖励：将这些装备合成为虚空献祭。",
@@ -392,6 +433,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "歌利亚巨人",
       "name_zh_TW": "巨人",
       "name_ja": "大巨人",
@@ -425,16 +469,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "炽燃利息",
       "name_zh_TW": "燃燒利息",
       "name_ja": "燃える利回り",
       "name_ko": "타오르는 이자",
-      "wikiDescription": "Gain 1 – 3 (based on level) (+ 0.75% of damage dealt) gold for each tick of damage dealt to enemy champions with persistent damage effects as well as damage over time from item effects.",
+      "wikiDescription": "Gain 1 – 3 (based on level) (+ 0.75% of damage dealt) gold for each tick of damage dealt to enemy champions with damage over time effects.",
       "wikiRarity": "gold",
-      "description_zh_TW": "對英雄造成燃燒或持續傷害時，獲得金錢。",
-      "description_zh_CN": "施加至英雄的灼烧和持续伤害会生成金币。",
-      "description_ja": "チャンピオンに炎上効果と継続ダメージを与えると、ゴールドを獲得する。",
-      "description_ko": "챔피언에게 적용된 화상 및 지속 피해 효과가 골드를 생성합니다."
+      "description_zh_TW": "對英雄造成的燃燒和持續傷害效果會產生金錢。",
+      "description_zh_CN": "英雄身上的灼烧和持续伤害会生成金币。",
+      "description_ja": "チャンピオンに「炎上」効果と継続ダメージを与えると ゴールドを獲得する。",
+      "description_ko": "챔피언에게 적용한 화상 및 지속 피해 효과가 골드를 생성합니다."
     },
     {
       "augmentId": "ARAM_MagicMissile",
@@ -459,6 +506,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "魔法飞弹",
       "name_zh_TW": "魔法導彈",
       "name_ja": "マジックミサイル",
@@ -493,6 +543,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "尤里卡",
       "name_zh_TW": "靈光一閃",
       "name_ja": "エウレカ",
@@ -527,6 +580,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "双刀流",
       "name_zh_TW": "雙刀流",
       "name_ja": "二刀流",
@@ -561,6 +617,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "炼狱导管",
       "name_zh_TW": "煉獄使者",
       "name_ja": "獄炎路",
@@ -594,6 +653,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "升级：献祭",
       "name_zh_TW": "升級獻祭",
       "name_ja": "猛火 アップグレード",
@@ -627,6 +689,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "渴血",
       "name_zh_TW": "飲血",
       "name_ja": "ゴアドリンク",
@@ -660,6 +725,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "灵巧",
       "name_zh_TW": "手腳麻利",
       "name_ja": "技巧",
@@ -694,6 +762,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "巨人杀手",
       "name_zh_TW": "巨人殺手",
       "name_ja": "ジャイアント スレイヤー",
@@ -727,6 +798,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "大力",
       "name_zh_TW": "蠻力重擊",
       "name_ja": "無骨なる力",
@@ -758,11 +832,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "质变：棱彩阶",
       "name_zh_TW": "質變：稜鏡",
       "name_ja": "変質: プリズム",
       "name_ko": "전환: 프리즘",
-      "wikiDescription": "Gain one random Prismatic augment, excluding the other two offerings in your current assortment.",
+      "wikiDescription": "Gain one random Prismatic-tier augment.",
       "wikiRarity": "gold",
       "description_zh_TW": "獲得一件隨機%i:Augment%稜鏡增幅裝置。",
       "description_zh_CN": "获得1个随机%i:Augment%棱彩阶强化符文。",
@@ -792,6 +869,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "虚幻武器",
       "name_zh_TW": "幻影武器",
       "name_ja": "エーテル武器",
@@ -825,6 +905,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "星界躯体",
       "name_zh_TW": "天界之身",
       "name_ja": "聖体",
@@ -858,6 +941,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "更万用的瞄准镜",
       "name_zh_TW": "超狙武器",
       "name_ja": "改造スコープ装着",
@@ -889,16 +975,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "叠角龙",
       "name_zh_TW": "堆層暴龍",
       "name_ja": "スタックサウルス・レックス",
       "name_ko": "다단 중첩",
-      "wikiDescription": "Increase the number of permanent stacks you gain from abilities, item effects, and augments by 100%.",
+      "wikiDescription": "Increase the number of permanent stacks you gain from abilities by 100%.",
       "wikiRarity": "silver",
-      "description_zh_TW": "永久獲得技能、增幅裝置或道具的堆層時，額外獲得@StackModifier*100@%堆層！",
-      "description_zh_CN": "在你获得一个技能、强化符文或装备的永久层数时，多获得@StackModifier*100@%！",
-      "description_ja": "恒久的なスキル、オーグメント、アイテムのスタックを獲得する際に、スタック獲得量が@StackModifier*100@%増加する！",
-      "description_ko": "스킬, 증강 또는 아이템 중첩을 영구적으로 획득할 때마다 @StackModifier*100@% 더 획득합니다!"
+      "description_zh_TW": "獲得技能的永久堆層時，額外獲得@StackModifier*100@%！",
+      "description_zh_CN": "在你获得一个技能的永久层数时，多获得@StackModifier*100@%！",
+      "description_ja": "恒久的なスキルのスタックを獲得する際に、獲得量が@StackModifier*100@%増加する！",
+      "description_ko": "스킬 중첩을 영구적으로 획득할 때마다 @StackModifier*100@% 더 획득합니다!"
     },
     {
       "augmentId": "Twinfire",
@@ -924,6 +1013,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "双生火焰",
       "name_zh_TW": "雙響炮",
       "name_ja": "ツインファイア",
@@ -957,6 +1049,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "灵魄炸弹",
       "name_zh_TW": "靈魂炸彈",
       "name_ja": "スピリットボム",
@@ -990,6 +1085,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "海洋龙魂",
       "name_zh_TW": "海洋之魂",
       "name_ja": "オーシャンソウル",
@@ -1024,6 +1122,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "物理转魔法",
       "name_zh_TW": "靈活轉換",
       "name_ja": "変力装置",
@@ -1059,6 +1160,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "回归基本功",
       "name_zh_TW": "基本功夫",
       "name_ja": "初志貫徹",
@@ -1093,6 +1197,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "风语者的祝福",
       "name_zh_TW": "風語者的祝福",
       "name_ja": "風詠みの祝福",
@@ -1124,11 +1231,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "掷骰狂人",
       "name_zh_TW": "豪氣賭客",
       "name_ja": "ギャンブラー",
       "name_ko": "도박꾼",
-      "wikiDescription": "Nearby enemies that die have a 7% chance to drop a Stat Anvil at the location of their death. You can pick up dropped anvils by moving over them. The obtained Stat Anvils will be consumed once the shop is enabled again (after your death).",
+      "wikiDescription": "Nearby enemies that die have a 1.5% chance to drop a Stat Anvil at the location of their death. You can pick up dropped anvils by moving over them. The obtained Stat Anvils will be consumed once the shop is enabled again (after your death).",
       "wikiRarity": "prismatic",
       "description_zh_TW": "鄰近敵軍在死亡時有機會掉落能力值鐵砧。",
       "description_zh_CN": "附近敌人在阵亡时有几率掉落【属性锻造器】。",
@@ -1158,6 +1268,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "喂呜喂呜",
       "name_zh_TW": "嗚咿嗚咿",
       "name_ja": "うぃ～！おりゃっ！",
@@ -1192,6 +1305,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "秘术冲拳",
       "name_zh_TW": "祕術拳擊",
       "name_ja": "神秘の鉄拳",
@@ -1223,9 +1339,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "ability",
+      "availability": {
+        "status": "unverified_legacy"
+      },
       "name_zh_CN": "Pursuit of Haste",
       "name_zh_TW": "Pursuit of Haste",
       "name_ja": "Pursuit of Haste",
@@ -1253,6 +1372,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "升级：收集者",
       "name_zh_TW": "升級收藏家",
       "name_ja": "コレクター アップグレード",
@@ -1260,7 +1382,7 @@
       "wikiDescription": "Upgrades The Collector, empowering Death to have its execution threshold increased by 0.5% each time you kill an enemy champion, capped at a threshold of 12.5% of the target's maximum health, and Taxes to generate a further 25 (total 50) from kills. Additionally, gain 250.",
       "wikiRarity": "silver",
       "description_zh_TW": "以蒐集者的被動效果處決敵軍時，會提升處決門檻並獲得額外金錢。 獲得250金錢。",
-      "description_zh_CN": "使用【收集者】的被动处决敌人时的处决阈值提升，并且提供额外金币。 获得250金币。",
+      "description_zh_CN": "在每次使用【收集者】的被动处决敌人时，会提升处决阈值，并且提供额外金币。 获得250金币。",
       "description_ja": "「コレクター」の自動効果で対象を倒すと、とどめを刺す体力境界値が増加し、追加でゴールドを付与する。 250ゴールドを獲得する。",
       "description_ko": "징수의 총 기본 지속 효과로 적을 처형하면 처형 기준치가 높아지며 추가 골드를 얻습니다. 250골드를 획득합니다."
     },
@@ -1286,6 +1408,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "暗影疾奔",
       "name_zh_TW": "飛影跑法",
       "name_ja": "影走り",
@@ -1319,6 +1444,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "冰寒",
       "name_zh_TW": "雪地踱步",
       "name_ja": "結氷",
@@ -1353,6 +1481,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "咏叹奏鸣",
       "name_zh_TW": "奏鳴曲",
       "name_ja": "ソナタ",
@@ -1388,6 +1519,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "扇巴掌",
       "name_zh_TW": "痛打一頓",
       "name_ja": "叩きまくれ",
@@ -1419,11 +1553,14 @@
         "lifecycle": "active"
       },
       "type": "quest",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "沃格勒特的巫师帽",
       "name_zh_TW": "烏莉特的法帽",
       "name_ja": "ウーグレット ウィッチキャップ",
       "name_ko": "우글렛의 마녀 모자",
-      "wikiDescription": "Gain a Needlessly Large Rod. Quest: Obtain Rabadon's Deathcap and Zhonya's Hourglass. Reward: Upon completing your Quest, convert the items you obtained for the quest into Wooglet's Witchcap.",
+      "wikiDescription": "Gain a Needlessly Large Rod. Quest: Obtain Rabadon's Deathcap and Zhonya's Hourglass. Reward: Upon completing your Quest, convert the items you obtained for the quest into Wooglet's Witchcap. Wooglet's Witchcap Stasis cooldown changed to 60 seconds.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "立刻獲得巨型魔棒。 條件：擁有死亡之帽和中婭沙漏。 獎勵：獲得烏莉特的法帽。",
       "description_zh_CN": "立刻：获得无用大棒。 需求：持有灭世者的死亡之帽和中娅沙漏。 奖励:获得沃格勒特的巫师帽。",
@@ -1452,6 +1589,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "巫师式思考",
       "name_zh_TW": "女巫思維",
       "name_ja": "魔法的思考",
@@ -1486,11 +1626,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "老练狙神",
       "name_zh_TW": "老練狙擊手",
       "name_ja": "腕利きスナイパー",
       "name_ko": "노련한 저격수",
-      "wikiDescription": "Hitting an enemy champion with a basic ability while located at least 700 units away from them at the time of the hit reduces its current cooldown by 80% of its total cooldown, modified to 65% for damage over time abilities.",
+      "wikiDescription": "Hitting an enemy champion with a basic ability while located at least 600 units away from them at the time of the hit reduces its current cooldown by 80% of its total cooldown, modified to 65% for damage over time abilities.",
       "wikiRarity": "gold",
       "description_zh_TW": "以非大絕技能狙擊敵軍時，可縮短冷卻時間@ReducedCooldownPercent*100@%(持續性技能為@PeriodicReductionAmount*100@%)。",
       "description_zh_CN": "用一个非终极技能狙击一个敌人时，返还该技能@ReducedCooldownPercent*100@%冷却时间(周期性技能返还@PeriodicReductionAmount*100@%)。",
@@ -1510,10 +1653,13 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [],
-      "wikiDescription": "Increase your Item and Augment damage by the required number of."
+      "wikiDescription": "Increase your Item and Augment damage by the required number of.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_FanTheHammer",
@@ -1539,6 +1685,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "连拨击锤",
       "name_zh_TW": "旋風鎚",
       "name_ja": "ぐるぐるハンマー",
@@ -1574,6 +1723,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "逃跑计划",
       "name_zh_TW": "逃跑計畫",
       "name_ja": "脱出プラン",
@@ -1608,6 +1760,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "由心及物",
       "name_zh_TW": "因心成體",
       "name_ja": "精神の体現",
@@ -1643,6 +1798,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "踢踏舞",
       "name_zh_TW": "輕舞飛揚",
       "name_ja": "タップダンサー",
@@ -1677,6 +1835,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "缩小引擎",
       "name_zh_TW": "縮小引擎",
       "name_ja": "縮小エンジン",
@@ -1711,11 +1872,14 @@
         "lifecycle": "active"
       },
       "type": "quest",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "牙仙子",
       "name_zh_TW": "牙仙",
       "name_ja": "歯の妖精",
       "name_ko": "이빨 요정",
-      "wikiDescription": "When you deal damage to an enemy champion equal to or more than 25% of their maximum health within 2.5 seconds, they drop a Tooth on the ground (4 second cooldown per target). You can pick up this Tooth by moving over it, granting you a Dental Records stack. For each stack, you gain 4 lethality and flat magic penetration.",
+      "wikiDescription": "When you deal damage to an enemy champion equal to or more than 25% of their maximum health within 2.5 seconds, they drop a Tooth on the ground (4 second cooldown per target). You can pick up this Tooth by moving over it, granting you a Dental Records stack. For each stack, you gain 3 lethality and flat magic penetration.",
       "wikiRarity": "gold",
       "description_zh_TW": "暴擊敵軍會掉落牙齒。撿起牙齒會永久獲得物理致命和魔法穿透。",
       "description_zh_CN": "爆裂敌人会掉落牙齿。拾取牙齿会提供给你永久的穿甲和法术穿透。",
@@ -1745,6 +1909,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "生机迸发",
       "name_zh_TW": "急遽成長",
       "name_ja": "成長期",
@@ -1779,6 +1946,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "魔法转物理",
       "name_zh_TW": "轉換惡作劇",
       "name_ja": "魔攻のいたずら",
@@ -1815,6 +1985,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "科学狂人",
       "name_zh_TW": "瘋狂科學家",
       "name_ja": "狂気の化学者",
@@ -1850,6 +2023,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "点亮他们！",
       "name_zh_TW": "亮起來！",
       "name_ja": "光で照らせ！",
@@ -1884,6 +2060,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "大法师",
       "name_zh_TW": "大法師",
       "name_ja": "魔帝",
@@ -1917,6 +2096,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "小小的额外帮助",
       "name_zh_TW": "小小助力",
       "name_ja": "ちょこっとヘルプ",
@@ -1951,6 +2133,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "急急小子",
       "name_zh_TW": "腳程加速",
       "name_ja": "大急ぎ",
@@ -1984,6 +2169,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "最万用的瞄准镜",
       "name_zh_TW": "頂狙武器",
       "name_ja": "超改造スコープ装着",
@@ -2015,6 +2203,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "捐赠",
       "name_zh_TW": "斗內",
       "name_ja": "寄付",
@@ -2047,9 +2238,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "ability",
+      "availability": {
+        "status": "unverified_legacy"
+      },
       "name_zh_CN": "Siphon",
       "name_zh_TW": "Siphon",
       "name_ja": "Siphon",
@@ -2080,6 +2274,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "狂徒豪气",
       "name_zh_TW": "俠盜恆毅",
       "name_ja": "無法者の気概",
@@ -2113,6 +2310,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "万用瞄准镜",
       "name_zh_TW": "射程強化改造",
       "name_ja": "スコープ装着",
@@ -2147,6 +2347,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "快中求稳",
       "name_zh_TW": "又快又穩",
       "name_ja": "迅速に安全に",
@@ -2177,16 +2380,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "吞噬灵魂",
       "name_zh_TW": "食魂者",
       "name_ja": "ソウルイーター",
       "name_ko": "영혼의 포식자",
-      "wikiDescription": "Immobilizing or grounding an enemy champion grants you 20 bonus health, stacking infinitely (5 second cooldown per cast instance).",
+      "wikiDescription": "Immobilizing or grounding an enemy champion grants you 20 bonus health, stacking infinitely (5 second cooldown per cast instance). If this is not your first augment, gain 300 bonus health.",
       "wikiRarity": "gold",
-      "description_zh_TW": "對敵方英雄造成硬控場後，賦予@HealthGainPerStack@最大生命。",
-      "description_zh_CN": "定身一个敌方英雄时会提供@HealthGainPerStack@最大生命值。",
-      "description_ja": "敵チャンピオンに移動不能効果を与えると、最大体力が@HealthGainPerStack@増加する。",
-      "description_ko": "적 챔피언을 이동 불가 상태로 만들면 최대 체력을 @HealthGainPerStack@ 얻습니다."
+      "description_zh_TW": "對敵方英雄造成硬控場後，獲得@HealthGainPerStack@最大生命。 若這是你拿的第二件增幅裝置，開始時有@StartingHPIfSecondAugmentTT@生命。",
+      "description_zh_CN": "定身一个敌方英雄时会提供@HealthGainPerStack@最大生命值。 如果是你的第二个强化符文，会自带@StartingHPIfSecondAugmentTT@生命值。",
+      "description_ja": "敵チャンピオンに移動不能効果を与えると、最大体力が@HealthGainPerStack@増加する。 2つ目のオーグメントとして入手した場合は、@StartingHPIfSecondAugmentTT@の体力で開始する。",
+      "description_ko": "적 챔피언을 이동 불가 상태로 만들면 최대 체력을 @HealthGainPerStack@ 얻습니다. 두 번째 증강일 경우 @StartingHPIfSecondAugmentTT@의 체력으로 시작합니다."
     },
     {
       "augmentId": "ARAM_Homeguard",
@@ -2210,6 +2416,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "家园卫士",
       "name_zh_TW": "溫泉加速",
       "name_ja": "ホームガード",
@@ -2244,6 +2453,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "神射法师",
       "name_zh_TW": "射手法師",
       "name_ja": "マークスメイジ",
@@ -2279,6 +2491,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "最终形态",
       "name_zh_TW": "最終型態",
       "name_ja": "最終形態",
@@ -2313,11 +2528,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "台风",
       "name_zh_TW": "颱風",
       "name_ja": "タイフーン",
       "name_ko": "태풍",
-      "wikiDescription": "Basic attacks launch a missile at a nearby enemy champion that deals 30% AD physical damage and applies on-hit effects.",
+      "wikiDescription": "Basic attacks launch a missile at a nearby enemy, prioritizing champions, that deals 30% AD physical damage and applies on-hit effects.",
       "wikiRarity": "silver",
       "description_zh_TW": "普攻會朝額外一名目標射出飛彈，造成較低傷害，並附加{{ Item_Keyword_OnHit }}。",
       "description_zh_CN": "你的攻击会对一个额外目标发射一个飞弹，从而造成削减过的伤害并施加{{ Item_Keyword_OnHit }}。",
@@ -2347,6 +2565,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "超强大脑",
       "name_zh_TW": "超強大腦",
       "name_ja": "頭脳派",
@@ -2381,11 +2602,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "升级：中娅",
       "name_zh_TW": "升級中婭沙漏",
       "name_ja": "ゾーニャ アップグレード",
       "name_ko": "존야 업그레이드",
-      "wikiDescription": "Upgrades Seeker's Armguard, Wooglet's Witchcap, and Zhonya's Hourglass, empowering Stasis to allow you to move during its active effect, during which time you also gain 50% bonus movement speed. Additionally, the cooldown of Zhonya's Hourglass' Stasis is reduced to 45 seconds.",
+      "wikiDescription": "Upgrades Seeker's Armguard, Wooglet's Witchcap, and Zhonya's Hourglass, empowering Stasis to cleanse you of all crowd control and allow you to move during its active effect, during which time you also gain 50% bonus movement speed. Additionally, the cooldown of Zhonya's Hourglass' Stasis is reduced to 45 seconds. The active cannot be used while affected by cast-inhibiting crowd control despite cleansing the user.",
       "wikiRarity": "silver",
       "description_zh_TW": "將中婭沙漏的冷卻時間縮短至@UpgradeCD@秒。你現在處於中婭沙漏、探索者護腕或烏莉特的法帽的凝滯狀態時可以移動且增加跑速。 獲得250金錢。",
       "description_zh_CN": "【中娅沙漏】的冷却时间降低至@UpgradeCD@秒。你现在可以在【中娅沙漏】、【探索者的护臂】或【沃格勒特的巫师帽】凝滞状态持续期间移动并获得移动速度。 获得250金币。",
@@ -2405,13 +2629,16 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "ability",
         "dot"
       ],
-      "wikiDescription": "Your chosen ability deals damage in an area around it."
+      "wikiDescription": "Your chosen ability deals damage in an area around it.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_Recursion",
@@ -2435,6 +2662,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "循环往复",
       "name_zh_TW": "循環利用",
       "name_ja": "再帰",
@@ -2466,9 +2696,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "quest",
+      "availability": {
+        "status": "unverified_legacy"
+      },
       "name_zh_CN": "From Downtown",
       "name_zh_TW": "From Downtown",
       "name_ja": "From Downtown",
@@ -2502,11 +2735,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "属性叠属性！",
       "name_zh_TW": "能力值堆起來！",
       "name_ja": "ステータス上のステータス！",
       "name_ko": "능력치 더하기 능력치!",
-      "wikiDescription": "Gain 3 Stat Anvils, with a higher chance of obtaining Gold and Prismatic tier anvils.",
+      "wikiDescription": "Gain 3 Stat Anvils, with a higher chance of obtaining Gold- and Prismatic-tier anvils.",
       "wikiRarity": "gold",
       "description_zh_TW": "獲得@AmountOfStatAnvils@塊%i:StatAnvil%能力值鐵砧！",
       "description_zh_CN": "获得@AmountOfStatAnvils@个%i:StatAnvil%【属性锻造器】！",
@@ -2535,11 +2771,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "空投熊",
       "name_zh_TW": "天降戰熊",
       "name_ja": "ドロップベア",
       "name_ko": "곰 투하",
-      "wikiDescription": "Upon death, you summon Tibbers who drops from above and lands onto the location of your death over 0.5 seconds. Upon landing, he deals 250 – 750 (based on level) (+ 100% AP) (+ 2 per 1 flat magic penetration) (+ 5 per 1% magic penetration) magic damage to nearby enemies and stuns them for 1.5 seconds. Tibbers then chases after and targets the enemy champion that killed you, attacking them once he is in range. Tibbers has all of your augments and lasts for up to 8 – 20 (based on level) seconds. He gains 80% – 100% (based on level) bonus attack speed and deals 25 – 150 (based on level) (+ 50% AP) magic damage every second to enemies within 350 units of him. His stats are: 1500 – 6000 (based on level) (+ 15% maximum health) (+ 150% AP) health (rapidly decays over his lifetime) 50 – 300 (based on level) (+ 75% AD) magic damage (basic attack damage) 1.00 attack speed 150 attack range 50 armor 50 magic resistance 200 – 300 (based on level) (+ 20% movement speed) movement speed",
+      "wikiDescription": "Upon death, you summon Tibbers who drops from above and lands onto the location of your death over 0.5 seconds. Upon landing, he deals 250 – 750 (based on level) (+ 100% AP) (+ 2 per 1 flat magic penetration) (+ 5 per 1% magic penetration) magic damage to nearby enemies and stuns them for 1.5 seconds. Tibbers then chases after and targets the enemy champion that killed you, attacking them once he is in range. Tibbers has all of your augments and lasts for up to 8 – 20 (based on level) seconds. He gains 80% – 100% (based on level) bonus attack speed and deals 25 – 150 (based on level) (+ 50% AP) magic damage every second to enemies within 350 units of him. His stats are: 1000 – 6500 (based on level) (+ 15% maximum health) (+ 150% AP) health (rapidly decays over his lifetime) 50 – 300 (based on level) (+ 75% AD) physical damage (basic attack damage) 1.00 attack speed 150 attack range 50 armor 50 magic resistance 200 – 300 (based on level) (+ 20% movement speed) movement speed If your killer is too far away or is dead, Tibbers will target the nearest and most wounded visible enemy champion instead, then the nearest other visible enemy unit in range. If the killer is an invalid target (such as due to being untargetable), Tibbers will stop in place and wait for them to become targetable again before chasing after them. If there are no nearby valid targets, Tibbers will stay in place until there is a target in aggro range.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "死亡時，一隻擁有你所有增幅裝置的巨型泰貝爾會從天而降，對鄰近敵軍造成傷害。",
       "description_zh_CN": "阵亡时，一个具有你所有强化符文的巨大提伯斯从天而降并伤害附近的敌人们。",
@@ -2569,6 +2808,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "纯粹主义者 - 术师",
       "name_zh_TW": "純粹 - 法師",
       "name_ja": "純粋なるキャスター",
@@ -2602,6 +2844,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "急救用具",
       "name_zh_TW": "急救箱",
       "name_ja": "救急セット",
@@ -2636,6 +2881,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "邦！",
       "name_zh_TW": "一棒入魂！",
       "name_ja": "ボカッ！",
@@ -2671,6 +2919,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "在为你的友军提供增益效果、<healing>治疗效果</healing>或<shield>护盾效果</shield>时，会对其附近的敌人们造成<trueDamage>@Damage@真实伤害</trueDamage>和持续2秒的@SlowAmount*-100@%<status>减速</status>。(@ProcCooldown@秒冷却时间)<br><br>已造成的伤害：@f2@",
       "name_zh_TW": "強化、<healing>治療</healing>、或<shield>賦予友軍護盾</shield>時，會對友軍周圍的敵軍造成<trueDamage>@Damage@真實傷害</trueDamage>，並<status>緩速@SlowAmount*-100@%</status>，持續2秒(冷卻時間@ProcCooldown@秒)。<br><br>傷害量：@f2@",
       "name_ja": "味方にバフ、<healing>体力回復効果</healing>、または<shield>シールド</shield>を付与すると、その周囲の敵に<trueDamage>@Damage@の確定ダメージ</trueDamage>を与え、2秒間@SlowAmount*-100@%の<status>スロウ効果</status>を付与する(クールダウン@ProcCooldown@秒)。<br><br>与えたダメージ量: @f2@",
@@ -2705,11 +2956,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "黎明使者的坚决",
       "name_zh_TW": "黎明使者之決意",
       "name_ja": "ドーンブリンガーの誓い",
       "name_ko": "빛의 인도자 결의",
-      "wikiDescription": "Upon dropping below 50% maximum health, you are healed for 30% maximum health over 3 seconds (45 second cooldown, reset upon death).",
+      "wikiDescription": "Upon dropping below 50% maximum health, you are healed for「 30% of your maximum health 」「 2.5% of your maximum health every 0.25 seconds 」over 3 seconds (45 second cooldown, reset upon death).",
       "wikiRarity": "gold",
       "description_zh_TW": "生命低於@HealthThreshold*100@%時，在3秒內回復@HealAmount*100@%最大生命。 每@Cooldown@秒或死亡時重置。",
       "description_zh_CN": "在跌到@HealthThreshold*100@%生命值以下时，在3秒里持续回复共@HealAmount*100@%最大生命值。 阵亡时或每@Cooldown@秒重置。",
@@ -2739,11 +2993,14 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "保持坚定",
       "name_zh_TW": "果斷",
       "name_ja": "固い決意",
       "name_ko": "확고한 의지로",
-      "wikiDescription": "Upgrades one of your champion's abilities, empowering the ability to grant you 4 / 8 / 12 (based on level) bonus armor or bonus magic resistance for a duration when it damages an enemy champion (5 second cooldown per target per cast instance). This effect can stack up to a number of times. The resistance type granted is based on the target's adaptive type: bonus armor for physical and bonus magic resistance for magic. If this is not your first augment, gain 20 bonus armor and bonus magic resistance.",
+      "wikiDescription": "Upgrades one of your champion's abilities, empowering the ability to grant you 1 / 2 / 3 (based on level) bonus armor or bonus magic resistance permanently when it damages an enemy champion, stacking infinitely (5 second cooldown per target per cast instance). The resistance type granted is based on the target's adaptive type: bonus armor for physical and bonus magic resistance for magic. If this is not your first augment, gain 20 bonus armor and bonus magic resistance.",
       "wikiRarity": "silver",
       "description_zh_TW": "{{Spellname}}對敵方英雄造成傷害時，增加@ARMR_Inc@物防和魔防。",
       "description_zh_CN": "当【{{SpellName}}】技能对敌方英雄造成伤害时，获得@ARMR_Inc@护甲和魔法抗性。",
@@ -2772,6 +3029,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "练腿日",
       "name_zh_TW": "腿部訓練日",
       "name_ja": "レッグデー",
@@ -2806,6 +3066,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "溢流",
       "name_zh_TW": "溢流",
       "name_ja": "オーバーフロー",
@@ -2840,6 +3103,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "侵蚀",
       "name_zh_TW": "侵蝕裝甲",
       "name_ja": "浸食",
@@ -2875,6 +3141,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "火狐",
       "name_zh_TW": "火狐",
       "name_ja": "ファイヤーフォックス",
@@ -2909,6 +3178,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "男爵之手",
       "name_zh_TW": "巴龍之爪",
       "name_ja": "バロンの牙",
@@ -2939,6 +3211,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "有始有终",
       "name_zh_TW": "自始至終",
       "name_ja": "徹頭徹尾",
@@ -2973,6 +3248,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "罪恶快感",
       "name_zh_TW": "狂躁！",
       "name_ja": "超エキサイティン！",
@@ -3007,11 +3285,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "升级：耀光",
       "name_zh_TW": "升級閃耀劍",
       "name_ja": "シーン アップグレード",
       "name_ko": "광휘의 검 업그레이드",
-      "wikiDescription": "Upgrades all Spellblade items, empowering the passive effect to deal additional bonus physical damage equal to 4% of the target's maximum health and heal you for 3.5% of your maximum health. Additionally, gain 250.",
+      "wikiDescription": "Upgrades all Spellblade items, empowering the passive effect to deal additional bonus physical damage equal to 4% of the target's maximum health and heal you for 3.5% of the target's maximum health. Additionally, gain 250.",
       "wikiRarity": "gold",
       "description_zh_TW": "魔法彎刀的效果會造成額外傷害，並依目標生命的一定比例治療你。此外，可獲得250金錢。",
       "description_zh_CN": "你的咒刃效果造成额外伤害并治疗你自身，治疗量相当于目标生命值的一定百分比。此外，获得250金币。",
@@ -3038,6 +3319,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "尊我为王",
       "name_zh_TW": "封我為王",
       "name_ja": "即位",
@@ -3068,16 +3352,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "旋转至胜",
       "name_zh_TW": "一轉就贏",
       "name_ja": "勝利への回転",
       "name_ko": "승리를 위한 회전",
-      "wikiDescription": "Your spinning abilities deal 30% increased damage and have their cooldown reduced equivalent to 30 ability haste. Eligible Abilities: Ahri's Fox-Fire and Spirit Rush, Amumu's Tantrum, Ambessa's Lacerate, Darius' Decimate, Draven's Spinning Axe, Stand Aside, and Whirling Death, Garen's Judgment, Hecarim's Rampage, Jax's Counter Strike, Katarina's Voracity and Death Lotus, Kayn's Reaping Slash, Lillia's Blooming Blows, Nocturne's Umbra Blades, Rammus' Powerball, Renekton's Cull the Meek, Riven's Broken Wings, Samira's Blade Whirl and Inferno Trigger, Sylas' Petricite Burst, Wukong's Cyclone, Tryndamere's Spinning Slash, Xin Zhao's Crescent Guard, Zed's Shadow Slash PENDING FOR TEST:: Akshan's Avengerang and Heroic Swing, Lillia's Watch Out! Eep! and Swirlseed, Poppy's Keeper's Verdict, etc.",
+      "wikiDescription": "Your spinning abilities deal 30% increased damage and have their cooldown reduced equivalent to 30 ability haste. The damage amplifier is increaesd to 50% for ultimate abilities. Eligible Abilities: Ahri's Fox-Fire and Spirit Rush, Amumu's Tantrum, Ambessa's Lacerate, Darius' Decimate, Draven's Spinning Axe, Stand Aside, and Whirling Death, Garen's Judgment, Hecarim's Rampage, Jax's Counter Strike, Katarina's Voracity and Death Lotus, Kayn's Reaping Slash, Lillia's Blooming Blows, Nocturne's Umbra Blades, Rammus' Powerball, Renekton's Cull the Meek and Slice and Dice, Rek'Sai's Queen's Wrath, Riven's Broken Wings, Samira's Blade Whirl and Inferno Trigger, Sylas' Petricite Burst, Wukong's Cyclone, Tryndamere's Spinning Slash, Xin Zhao's Crescent Guard, Zed's Shadow Slash PENDING FOR TEST:: Akshan's Avengerang and Heroic Swing, Lillia's Watch Out! Eep! and Swirlseed, Poppy's Keeper's Verdict, etc.",
       "wikiRarity": "silver",
-      "description_zh_TW": "旋轉技能增加@SpinHaste@技能加速，並額外造成@SpinDamageAmp*100@%傷害。",
-      "description_zh_CN": "你的旋转类技能获得@SpinHaste@技能急速并且多造成@SpinDamageAmp*100@%伤害。",
-      "description_ja": "回転するスキルが@SpinHaste@のスキルヘイストを獲得し、@SpinDamageAmp*100@%の追加ダメージを与える。",
-      "description_ko": "회전 스킬의 스킬 가속이 @SpinHaste@, 피해량이 @SpinDamageAmp*100@% 증가합니다."
+      "description_zh_TW": "旋轉技能增加%i:scaleAH%@SpinHaste@技能加速，並額外造成@SpinDamageAmp@傷害，大絕額外造成@SpinDamageAmp_Ult@傷害。",
+      "description_zh_CN": "你的旋转类技能获得%i:scaleAH%@SpinHaste@技能急速并且造成@SpinDamageAmp@额外伤害，对于终极技能，该额外伤害提升至@SpinDamageAmp_Ult@。",
+      "description_ja": "回転するスキルが%i:scaleAH%@SpinHaste@のスキルヘイストを獲得し、@SpinDamageAmp@の追加ダメージを与える。アルティメットスキルの追加ダメージは@SpinDamageAmp_Ult@に増加する。",
+      "description_ko": "회전 스킬의 %i:scaleAH% 스킬 가속이 @SpinHaste@, 피해량이 @SpinDamageAmp@ 증가합니다. 궁극기는 피해량이 @SpinDamageAmp_Ult@ 증가합니다."
     },
     {
       "augmentId": "BiggestSnowballEver",
@@ -3103,6 +3390,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "史上最大雪球",
       "name_zh_TW": "巨無霸雪球",
       "name_ja": "超特大の雪玉！",
@@ -3134,6 +3424,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "全能龙魂",
       "name_zh_TW": "全能之魂",
       "name_ja": "オムニソウル",
@@ -3167,6 +3460,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "全心为你",
       "name_zh_TW": "全部都給你",
       "name_ja": "キミのためさ",
@@ -3191,12 +3487,15 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "heal_shield"
       ],
-      "wikiDescription": "Gain a Shield for every second you spend Channeling."
+      "wikiDescription": "Gain a Shield for every second you spend Channeling.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_DontBlink",
@@ -3221,6 +3520,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "唯快不破",
       "name_zh_TW": "別眨眼",
       "name_ja": "瞬きより速く",
@@ -3255,6 +3557,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "过量延伸者",
       "name_zh_TW": "過度延伸",
       "name_ja": "深追いしすぎ",
@@ -3279,13 +3584,16 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "movement",
         "ability"
       ],
-      "wikiDescription": "Activating your chosen ability grants you Movement Speed for its duration."
+      "wikiDescription": "Activating your chosen ability grants you Movement Speed for its duration.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "slug": "trusty-weapon",
@@ -3300,12 +3608,15 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "ability"
       ],
-      "wikiDescription": "Striking enemy champions with your chosen ability forges a bond of Friendship. your chosen ability gains temporarily increased damage based on your level of Friendship."
+      "wikiDescription": "Striking enemy champions with your chosen ability forges a bond of Friendship. your chosen ability gains temporarily increased damage based on your level of Friendship.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_Minionmancer",
@@ -3329,6 +3640,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "仆从大师",
       "name_zh_TW": "士兵術師",
       "name_ja": "ミニオンマンサー",
@@ -3364,6 +3678,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "贪欲束缚",
       "name_zh_TW": "貪婪束縛",
       "name_ja": "貪欲な束縛",
@@ -3398,6 +3715,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "全凭身法",
       "name_zh_TW": "衝鋒",
       "name_ja": "疾走",
@@ -3429,6 +3749,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "质变：混沌",
       "name_zh_TW": "質變：大混亂",
       "name_ja": "変質: 混沌",
@@ -3465,6 +3788,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "吃过路兵",
       "name_zh_TW": "吃過路兵",
       "name_ja": "アンパッサン",
@@ -3499,6 +3825,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "面包和奶酪",
       "name_zh_TW": "土司和起司",
       "name_ja": "パンとチーズ",
@@ -3535,6 +3864,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "夺金",
       "name_zh_TW": "黃金撕裂",
       "name_ja": "ゴールドレンド",
@@ -3569,6 +3901,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "杀戮时间到了",
       "name_zh_TW": "殺戮時間",
       "name_ja": "殺戮の時",
@@ -3600,11 +3935,14 @@
         "lifecycle": "active"
       },
       "type": "quest",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "海牛阿福的勇士",
       "name_zh_TW": "阿福英雄",
       "name_ja": "アーフのチャンピオン",
       "name_ko": "우르프의 챔피언",
-      "wikiDescription": "Quest: Score 18 champion takedowns. Reward: Upon completing your Quest, you receive The Golden Spatula. If your inventory is full at the time of quest completion, the item will be granted as soon as a slot in the inventory is available.",
+      "wikiDescription": "Quest: Score 18 champion takedowns. Reward: Upon completing your Quest, you receive The Golden Spatula. If your inventory is full at the time of quest completion, the item will be granted as soon as a slot in the inventory is available. The Golden Spatula Attack damage changed to 90. Ability power changed to 110. Attack speed changed to 40%. Armor changed to 20. Magic resistance changed to 20. Movement speed changed to 10%. Critical strike chance changed to 15%. Health changed to 200. Base health regeneration changed to 50%. Mana changed to 200. Base mana regeneration changed to 100%. Life steal changed to 10%. Unique Passive - Doing Something: Burn radius changed to 400 units. Increased mana regeneration changed to 10%. Increased energy regeneration changed to 20%. Removed: No longer reduces the remaining cooldowns of your abilities by 0.2 seconds every 0.25 seconds.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "任務：參與擊殺@QuestRequirement@次。 獎勵：黃金鍋鏟。",
       "description_zh_CN": "任务：参与击杀@QuestRequirement@次。 奖励：金铲铲",
@@ -3633,6 +3971,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "尖端发明家",
       "name_zh_TW": "頂尖發明家",
       "name_ja": "至高の発明家",
@@ -3668,11 +4009,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "残忍",
       "name_zh_TW": "殘忍",
       "name_ja": "冷酷な一撃",
       "name_ko": "잔혹 행위",
-      "wikiDescription": "Immobilizing or grounding an enemy champion summons a comet above them that lands at their current location after 1 second, dealing 50 – 150 (based on level) (+ 40% AP) (+ 4% of your maximum health) magic damage to enemies within the area (6 second cooldown per target per cast instance).",
+      "wikiDescription": "Immobilizing or grounding an enemy champion summons a comet above them that lands at their current location after 1 second, dealing 50 – 150 (based on level) (+ 40% AP) (+ 4% of your maximum health) magic damage to enemies within a 300 radius (6 second cooldown per cast instance). For displacement effects, the comet will be summoned at the displacement's end location.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "硬控場或禁錮英雄時，召喚一顆於短暫延遲後墜落的彗星，對鄰近敵軍造成魔法傷害。",
       "description_zh_CN": "定身或缚地一个英雄时，召唤一颗会在短暂延迟后着陆的彗星，对附近的敌人们造成魔法伤害。",
@@ -3703,6 +4047,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "物法皆修",
       "name_zh_TW": "雙修大師",
       "name_ja": "文武両道",
@@ -3738,6 +4085,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "信念者的强化",
       "name_zh_TW": "因信得力",
       "name_ja": "信ずる者の加護",
@@ -3772,6 +4122,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "巨像的勇气",
       "name_zh_TW": "巨像之勇氣",
       "name_ja": "巨人の勇気",
@@ -3803,6 +4156,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "海克斯科技龙魂",
       "name_zh_TW": "海克斯科技龍魂",
       "name_ja": "ヘクステック ソウル",
@@ -3834,6 +4190,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "哎哟，我的硬币！",
       "name_zh_TW": "哎呀，我的金幣！",
       "name_ja": "あいたっ、私のコイン！",
@@ -3869,11 +4228,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "无尽大杀四方",
       "name_zh_TW": "無盡屠滅",
       "name_ja": "終わりなき殲滅",
       "name_ko": "끝없는 학살",
-      "wikiDescription": "Automatically cast an improved version of Darius' Decimate, winding up over 1.25 seconds to slash in a 460 radius around you. The slash deals 100 – 400 (based on level) (+ 60% AD) (+ 40% AP) physical damage to enemies within the area (8 second cooldown). Enemies within the 240 inner radius of the slash take「 50% damage. 」「 50 – 200 (based on level) (+ 30% AD) (+ 20% AP) physical damage. 」Additionally, for each enemy champion hit along the outer edge, you heal for 15% of your missing health and the cooldown of this effect is reduced by 10%, down to a minimum of 3 seconds.",
+      "wikiDescription": "While in combat, automatically cast an improved version of Darius' Decimate, winding up over 1.25 seconds to slash in a 460 radius around you. The slash deals 100 – 400 (based on level) (+ 60% AD) (+ 40% AP) physical damage to enemies within the area (8 second cooldown). Enemies within the 240 inner radius of the slash take「 50% damage. 」「 50 – 200 (based on level) (+ 30% AD) (+ 20% AP) physical damage. 」Additionally, for each enemy champion hit along the outer edge, you heal for 18% of your missing health and the cooldown of this effect is reduced by 10%, down to a minimum of 3 seconds.",
       "wikiRarity": "gold",
       "description_zh_TW": "戰鬥時，自動施放圓形斧擊，造成物理傷害。外圈的敵軍會受到額外傷害，並讓你回復生命。",
       "description_zh_CN": "在战斗状态下，自动施放一次环形斧头挥舞从而造成物理伤害。被斧刃命中的敌人们受到额外伤害并治疗你。",
@@ -3903,6 +4265,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "终极唤醒",
       "name_zh_TW": "大絕覺醒",
       "name_ja": "究極の目覚め",
@@ -3927,13 +4292,16 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "ability",
         "haste"
       ],
-      "wikiDescription": "Using another Ability resets the cooldown of your chosen ability."
+      "wikiDescription": "Using another Ability resets the cooldown of your chosen ability.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "slug": "adaptive-ward",
@@ -3948,13 +4316,16 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "tank",
         "ability"
       ],
-      "wikiDescription": "Striking an enemy champion with your chosen ability grants you the required number of Armor or Magic Resist based on their damage type for the required number of seconds. This effect can stack."
+      "wikiDescription": "Striking an enemy champion with your chosen ability grants you the required number of Armor or Magic Resist based on their damage type for the required number of seconds. This effect can stack.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_Stats",
@@ -3976,6 +4347,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "属性！",
       "name_zh_TW": "能力值！",
       "name_ja": "ステータス！",
@@ -4010,6 +4384,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "面包和黄油",
       "name_zh_TW": "土司和奶油",
       "name_ja": "パンとバター",
@@ -4045,6 +4422,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "不祥契约",
       "name_zh_TW": "不祥契約",
       "name_ja": "不穏な盟約",
@@ -4076,6 +4456,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "炼狱龙魂",
       "name_zh_TW": "煉獄惡靈",
       "name_ja": "インファーナルソウル",
@@ -4110,6 +4493,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "加固护盾",
       "name_zh_TW": "能力強化",
       "name_ja": "補強",
@@ -4141,11 +4527,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "属性叠属性叠属性！",
       "name_zh_TW": "能力值堆堆堆起來！",
       "name_ja": "ステータス上のステータス上のステータス！",
       "name_ko": "능력치 더하기 능력치 더하기 능력치!",
-      "wikiDescription": "Gain 4 Stat Anvils, with a higher chance of obtaining Gold and Prismatic tier anvils. Additionally, on the next round of augment selection, you gain an additional reroll per augment slot.",
+      "wikiDescription": "Gain 4 Stat Anvils, with a higher chance of obtaining Gold- and Prismatic-tier anvils. Additionally, on the next round of augment selection, you gain an additional reroll per augment slot.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "獲得@AmountOfStatAnvils@塊%i:StatAnvil%能力值鐵砧！",
       "description_zh_CN": "获得@AmountOfStatAnvils@个%i:StatAnvil%【属性锻造器】！",
@@ -4175,6 +4564,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "回力OK镖",
       "name_zh_TW": "棒棒回力鏢",
       "name_ja": "OKブーメラン",
@@ -4209,16 +4601,19 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "仁慈打击",
       "name_zh_TW": "慈悲之擊",
       "name_ja": "慈悲の一撃",
       "name_ko": "자비의 일격",
-      "wikiDescription": "Upgrades one of your champion's abilities, empowering the ability's cast to enhance your next basic attack within a duration. The enhanced attack has 300 bonus range, gains 75% bonus attack speed, and deals bonus magic damage equal to 3% (+ 2% per 10% heal and shield power) of the target's maximum health.",
+      "wikiDescription": "Upgrades one of your champion's abilities, empowering the ability's cast to enhance your next basic attack. The enhanced attack has 300 bonus range, gains 75% bonus attack speed, and deals bonus magic damage equal to 3% (+ 2% per 10% heal and shield power) of the target's maximum health. If the target is a turret, the damage is modified to 2.5% of the target's maximum health bonus magic damage.",
       "wikiRarity": "gold",
-      "description_zh_TW": "使用{{SpellName}}後，你的下幾次普攻將獲得攻擊距離和攻速，並造成額外最大生命的魔法傷害。",
-      "description_zh_CN": "在使用【{{SpellName}}】技能之后，你的下一次普攻获得攻击距离、攻击速度并造成额外最大生命值魔法伤害。",
-      "description_ja": "{{SpellName}}を使用すると、次の通常攻撃の射程と攻撃速度が増加し、最大体力に応じた魔法ダメージを追加で与える。",
-      "description_ko": "{{SpellName}} 사용 후 다음 기본 공격 시 공격 사거리와 공격 속도가 증가하고 추가로 최대 체력 비례 마법 피해를 입힙니다."
+      "description_zh_TW": "使用{{SpellName}}治療或給予護盾友軍後，你的下一次普攻將增加攻擊距離和攻速，並造成額外最大生命魔法傷害。",
+      "description_zh_CN": "在使用【{{SpellName}}】技能为你的友军提供治疗或护盾之后，你的下一次普攻获得攻击距离、攻击速度并造成额外最大生命值魔法伤害。",
+      "description_ja": "{{SpellName}}で味方に体力回復効果またはシールドを付与すると、次の通常攻撃の射程と攻撃速度が増加し、最大体力に応じた魔法ダメージを追加で与える。",
+      "description_ko": "{{SpellName}} 스킬로 아군의 체력을 회복시키거나 보호막을 부여하면 다음 기본 공격 시 공격 사거리와 공격 속도가 증가하고 추가로 최대 체력 비례 마법 피해를 입힙니다."
     },
     {
       "augmentId": "ARAM_CircleofDeath",
@@ -4243,6 +4638,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "死亡之环",
       "name_zh_TW": "死亡循環",
       "name_ja": "死者の集い",
@@ -4277,6 +4675,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "面包和果酱",
       "name_zh_TW": "土司和果醬",
       "name_ja": "パンとジャム",
@@ -4311,6 +4712,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "穿针引线",
       "name_zh_TW": "穿針引線",
       "name_ja": "貫通力",
@@ -4345,6 +4749,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "炽烈黎明",
       "name_zh_TW": "灼熱黎明",
       "name_ja": "灼熱の夜明け",
@@ -4379,11 +4786,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "鲨鱼诱饵",
       "name_zh_TW": "鯊魚誘餌",
       "name_ja": "サメのエサ",
       "name_ko": "상어 미끼",
-      "wikiDescription": "Upon taking fatal damage, you become a Shark Bait, causing you to enter a zombie state for 3.5 seconds, during which your movement speed is set to a static 400, you gain ghosting, and enemies within 400 units of you are slowed by 40%. At the end of the duration, a massive shark emerges from beneath you that lets out a powerful chomp (400 radius), dealing 80 – 300 (based on level) (+ 20% of target's missing health) magic damage to all enemies within the area and knocking them up for 1 second. While under the zombie state, you are able to move and become invulnerable, untargetable, and immune to crowd control, but you are also rendered unable to declare basic attacks, cast abilities, use summoner spells, and activate items.",
+      "wikiDescription": "Upon taking fatal damage, you become a Shark Bait, causing you to enter a zombie state for 3.5 seconds, during which your movement speed is set to a static 400, you gain ghosting, and enemies within 400 units of you are slowed by 40%. At the end of the duration, a massive shark emerges from beneath you that lets out a powerful chomp (400 radius), dealing 120 – 350 (based on level) (+ 30% of target's missing health) magic damage to all enemies within the area and knocking them up for 1 second. While under the zombie state, you are able to move and become invulnerable, untargetable, and immune to crowd control, but you are also rendered unable to declare basic attacks, cast abilities, use summoner spells, and activate items.",
       "wikiRarity": "gold",
       "description_zh_TW": "死亡後幾秒內，鯊魚會撕咬所有鄰近敵軍。你在死亡後可以透過移動瞄準鯊魚攻擊。",
       "description_zh_CN": "在阵亡之后的若干秒，一头鲨鱼会啃噬所有附近的敌人们。你可以在阵亡后进行移动，以给鲨鱼攻击进行定位。",
@@ -4414,6 +4824,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "神圣干预",
       "name_zh_TW": "聖光顯靈",
       "name_ja": "聖なる介入",
@@ -4449,6 +4862,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "战争交响乐",
       "name_zh_TW": "戰爭交響曲",
       "name_ja": "闘争交響曲",
@@ -4483,6 +4899,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "终极刷新",
       "name_zh_TW": "終極革新",
       "name_ja": "究極進化",
@@ -4517,6 +4936,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "火上浇油",
       "name_zh_TW": "煽風點火",
       "name_ja": "火付け役",
@@ -4551,6 +4973,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "终极不可阻挡",
       "name_zh_TW": "無敵大絕",
       "name_ja": "破竹のアルティメット",
@@ -4584,6 +5009,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "俯冲轰炸",
       "name_zh_TW": "自爆炸彈客",
       "name_ja": "急降下爆撃",
@@ -4615,6 +5043,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "山脉龙魂",
       "name_zh_TW": "裂地龍魂",
       "name_ja": "マウンテンソウル",
@@ -4649,6 +5080,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "精怪魔法",
       "name_zh_TW": "妖精魔法",
       "name_ja": "神秘の魔法",
@@ -4682,16 +5116,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "自然即是治愈",
       "name_zh_TW": "自然治療",
       "name_ja": "大自然が回復している",
       "name_ko": "자연의 회복",
-      "wikiDescription": "Heal yourself for 0.6% – 2.1% (based on level) of your maximum health for each second that you are within brush.",
+      "wikiDescription": "Upon entering a patch of brush, you are healed for「 40 – 300 (based on level) (+ 15% of your missing health) 」「 6.67 – 50 (based on level) (+ 2.5% of your missing health) every 0.25 seconds 」over 1.5 seconds (20 second cooldown per brush patch).",
       "wikiRarity": "gold",
-      "description_zh_TW": "站在草叢中時，每秒會回復@MaxHealthHealPerSecond@最大生命。",
-      "description_zh_CN": "站在草丛中时，每秒回复@MaxHealthHealPerSecond@最大生命值。",
-      "description_ja": "茂みの中では、毎秒、最大体力の@MaxHealthHealPerSecond@を回復する。",
-      "description_ko": "수풀에 서 있으면 매초 최대 체력의 @MaxHealthHealPerSecond@만큼 체력을 재생합니다."
+      "description_zh_TW": "進入草叢時，治療大量生命。",
+      "description_zh_CN": "进入草丛时回复大量生命值。",
+      "description_ja": "茂みに入ると体力を大幅に自動回復する。",
+      "description_ko": "수풀에 들어가면 대량의 체력을 회복합니다."
     },
     {
       "augmentId": "Poltergeist",
@@ -4716,6 +5153,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "吵闹鬼",
       "name_zh_TW": "搗蛋鬼",
       "name_ja": "ポルターガイスト",
@@ -4751,6 +5191,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "心灵净化",
       "name_zh_TW": "靈魂淨化",
       "name_ja": "精霊の浄化",
@@ -4784,6 +5227,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "不动如山",
       "name_zh_TW": "不可通行",
       "name_ja": "通行不可",
@@ -4791,7 +5237,7 @@
       "wikiDescription": "Gain the Aftershock and Glacial Augment keystone runes. Aftershock Cooldown reduced to 15 seconds from 20. Glacial Augment Cooldown reduced to 15 seconds from 25.",
       "wikiRarity": "gold",
       "description_zh_TW": "獲得裂地衝擊與冰川增幅關鍵符文。",
-      "description_zh_CN": "获余震和冰川增幅基石符文。",
+      "description_zh_CN": "获得余震和冰川增幅基石符文。",
       "description_ja": "キーストーンルーンの「アフターショック」と「グレイシャルオーグメント」を獲得する。",
       "description_ko": "여진과 빙결 강화 핵심 룬을 얻습니다."
     },
@@ -4817,16 +5263,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "夜狩",
       "name_zh_TW": "暗夜潛行",
       "name_ja": "ナイトストーク",
       "name_ko": "밤의 추적",
-      "wikiDescription": "Scoring a takedown against an enemy champion within 3 seconds of damaging them renders you invisible for 1.5 seconds. Attacking or casting abilites ends the stealth immediately.",
+      "wikiDescription": "Scoring a takedown against an enemy champion within 3 seconds of damaging them renders you invisible for 1.5 seconds, during which you also gain 40% bonus movement speed. Attacking or casting abilites ends the stealth immediately.",
       "wikiRarity": "gold",
-      "description_zh_TW": "對敵方英雄造成傷害後，在@TakedownWindow@秒內參與擊殺他們，會讓你進入隱形狀態。",
-      "description_zh_CN": "在对敌人造成伤害的@TakedownWindow@秒内参与击杀该敌人会使你进入隐身状态。",
-      "description_ja": "敵チャンピオンにダメージを与えてから@TakedownWindow@秒以内にその対象からキルまたはアシストを獲得すると、自身をインビジブル状態にする。",
-      "description_ko": "자신이 피해를 입힌 챔피언이 @TakedownWindow@초 안에 죽으면 투명 상태가 됩니다."
+      "description_zh_TW": "對敵方英雄造成傷害後，在@TakedownWindow@秒內參與擊殺他們，會增加跑速，並讓你進入隱形狀態。",
+      "description_zh_CN": "在对敌人造成伤害的@TakedownWindow@秒内参与击杀该敌人会为你提供移动速度并使你进入隐身状态。",
+      "description_ja": "敵チャンピオンにダメージを与えてから@TakedownWindow@秒以内にその対象からキルまたはアシストを獲得すると、移動速度が増加し、自身をインビジブル状態にする。",
+      "description_ko": "자신이 피해를 입힌 챔피언이 @TakedownWindow@초 안에 죽으면 이동 속도가 증가하고 투명 상태가 됩니다."
     },
     {
       "augmentId": "ARAM_BladeWaltz",
@@ -4853,6 +5302,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "利刃华尔兹",
       "name_zh_TW": "劍舞之心",
       "name_ja": "ブレードワルツ",
@@ -4890,6 +5342,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "注魔",
       "name_zh_TW": "強化攻擊",
       "name_ja": "パワーアップ",
@@ -4923,11 +5378,14 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "三重射击",
       "name_zh_TW": "三連射",
       "name_ja": "トリプルショット",
       "name_ko": "3연발",
-      "wikiDescription": "Upgrades one of your champion's abilities that is unit-targeted and fires a missile, empowering the ability to fire its missiles at two additional enemies in front of you. Subsequent hits from the same cast against the same enemy deal 30% damage.",
+      "wikiDescription": "Upgrades one of your champion's abilities that is unit-targeted and fires a missile, empowering the ability to fire its missiles at two additional enemies near the primary target. Subsequent hits from the same cast against the same enemy deal 30% damage.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "你的{{SpellName}}會額外鎖定你前方的2名敵軍。",
       "description_zh_CN": "你的【{{SpellName}}】技能会瞄准你前方2个额外的敌人。",
@@ -4957,6 +5415,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "蛋白粉奶昔",
       "name_zh_TW": "蛋白飲",
       "name_ja": "プロテインシェイク",
@@ -4992,11 +5453,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "濒死悟道",
       "name_zh_TW": "陰魂不散",
       "name_ja": "ヘルベント",
       "name_ko": "열의",
-      "wikiDescription": "Generate a stack of Revivemaxxing for each enemy champion you hit with basic attacks or abilities, lasting for 6 seconds, refreshing on subsequent hits, and stacking up to 10 times. At maximum stacks, you become Hellbent. Hellbent: Upon taking lethal damage, you enter resurrection for 4 seconds, during which you are invulnerable, untargetable, and unable to act. Afterwards, you revive with 35% – 75% (based on level) of your maximum health (120 second cooldown). Additionally, you become empowered for the next 15 seconds, granting you 15 – 120 (based on level) bonus Attack Damage or 25 – 200 (based on level) Ability Power (Adaptive), 20% – 40% (based on level) bonus movement speed while facing toward nearby enemy champions, and 15% – 30% (based on level) omnivamp for the duration.",
+      "wikiDescription": "Generate a stack of Revivemaxxing for each enemy champion you hit with basic attacks or abilities, lasting for 6 seconds, refreshing on subsequent hits, and stacking up to 10 times. At maximum stacks, you become Hellbent. Hellbent: Upon taking lethal damage, you enter resurrection for 4 seconds, during which you are invulnerable, untargetable, and unable to act. Afterwards, you revive with 35% – 75% (based on level) of your maximum health (90 second cooldown). Additionally, you become empowered for the next 15 seconds, granting you 15 – 120 (based on level) bonus Attack Damage or 25 – 200 (based on level) Ability Power (Adaptive), 20% – 40% (based on level) bonus movement speed while facing toward nearby enemy champions, and 15% – 30% (based on level) omnivamp for the duration.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "透過普攻或技能傷害敵方英雄會賦予層數。滿層後，死亡時會復活並獲得強化。",
       "description_zh_CN": "用攻击或技能伤害敌方英雄时会提供层数。在满层时，你在阵亡时会进行强化复活。",
@@ -5027,6 +5491,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "闪光弹",
       "name_zh_TW": "閃光彈",
       "name_ja": "フラッシュバン",
@@ -5062,6 +5529,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "至高天诺言",
       "name_zh_TW": "幻焰之誓",
       "name_ja": "荘厳の天球の約束",
@@ -5095,6 +5565,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "杀意翻涌",
       "name_zh_TW": "收頭好手",
       "name_ja": "キルを確認",
@@ -5119,13 +5592,16 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "dot",
         "cc"
       ],
-      "wikiDescription": "Taking damage from champions builds up a burst of needles that fly out of you, dealing damage and slowing nearby enemies."
+      "wikiDescription": "Taking damage from champions builds up a burst of needles that fly out of you, dealing damage and slowing nearby enemies.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_StuckInHereWithMe",
@@ -5151,16 +5627,19 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "和我一起困在这里",
       "name_zh_TW": "隨我同困",
       "name_ja": "一緒に閉じ込められた",
       "name_ko": "도망갈 수 없어",
       "wikiDescription": "Casting your ultimate ability grants you an aura for 2 seconds, growing in size over the duration to up to 500 units. After the duration, you taunt all enemies within the aura for 2 seconds and gain 50% damage reduction for the same duration (30 second cooldown). Additionally, gain 30 ultimate haste. Aura is activated once the ultimate's effect starts or has elapsed. On Katarina, this augment will activate at the start of Death Lotus' channel.",
       "wikiRarity": "prismatic",
-      "description_zh_TW": "施放大絕後，嘲諷鄰近敵軍並賦予自身傷害減免。",
-      "description_zh_CN": "使用你的终极技能时会嘲讽附近的敌人们并提供给你伤害减免。",
-      "description_ja": "アルティメットスキル使用後、周囲の敵をタウントし、ダメージ軽減率が増加する。",
-      "description_ko": "궁극기를 사용하면 주변 적을 도발하고 피해량 감소를 얻습니다."
+      "description_zh_TW": "施放大絕後，嘲諷鄰近敵軍並賦予自身傷害減免。 獲得@UltimateHaste@大絕技能加速。",
+      "description_zh_CN": "使用你的终极技能时会嘲讽附近的敌人们并提供给你伤害减免。 获得@UltimateHaste@终极技能急速。",
+      "description_ja": "アルティメットスキル使用後、周囲の敵をタウントし、ダメージ軽減率が増加する。 アルティメットスキルヘイストが@UltimateHaste@増加する。",
+      "description_ko": "궁극기를 사용하면 주변 적을 도발하고 피해량 감소를 얻습니다. 궁극기 스킬 가속이 @UltimateHaste@ 증가합니다."
     },
     {
       "augmentId": "Ability_SelfAOE_DoubleCast",
@@ -5184,6 +5663,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "回响施放",
       "name_zh_TW": "共鳴施放",
       "name_ja": "エコー キャスト",
@@ -5217,6 +5699,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "咒语裂变",
       "name_zh_TW": "法術迸裂",
       "name_ja": "スペルスプリット",
@@ -5251,11 +5736,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "鲨鱼暴风",
       "name_zh_TW": "鯊魚風暴",
       "name_ja": "シャークテンペスト",
       "name_ko": "상어 폭풍",
-      "wikiDescription": "Your Mark is empowered to circle sharks around it in a 300 radius, dealing 50 – 100 (based on level) magic damage to enemies it passes through as it travels and slowing targets hit by 30% for 1 second. If the missile hits an enemy champion, the sharks circle around their location in a 425 radius instead for 3 seconds, dealing「 25 – 75 (based on level) (+ 20% bonus AD) (+ 12% AP) magic damage every second 」「 75 – 225 (based on level) (+ 60% bonus AD) (+ 36% AP) total magic damage over the duration 」to enemies within the area and slowing them by 30% for 3 seconds. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+      "wikiDescription": "Your Mark is empowered to circle sharks around it in a 300 radius, dealing 50 – 100 (based on level) magic damage to enemies it passes through as it travels and slowing targets hit by 30% for 1 second. If the missile hits an enemy champion, the sharks circle around their location in a 425 radius instead for 3 seconds, dealing「 25 – 75 (based on level) (+ 20% bonus AD) (+ 12% AP) magic damage every second 」「 75 – 225 (based on level) (+ 60% bonus AD) (+ 36% AP) total magic damage over the duration 」to enemies within the area and slowing them by 30% for 3 seconds. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark. The damage dealt by this augment counts as area damage, thus it is able to trigger spell effects.",
       "wikiRarity": "gold",
       "description_zh_TW": "鯊魚會圍繞你的雪球盤旋，緩速並傷害鄰近敵軍。當你的雪球命中英雄時，對方會被困在鯊魚風暴中！",
       "description_zh_CN": "鲨鱼们环绕着你的【雪球】，对附近的敌人们造成伤害和减速。当你的【雪球】命中一个英雄时，其会陷入一阵鲨鱼风暴之中！",
@@ -5285,6 +5773,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "闪闪现现",
       "name_zh_TW": "二次閃現",
       "name_ja": "フラッシュ2",
@@ -5320,11 +5811,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "扳机炼狱",
       "name_zh_TW": "觸發地獄火狂襲",
       "name_ja": "巻き起こるインフェルノ",
       "name_ko": "지옥불 난사 발동",
-      "wikiDescription": "Your damaging basic attacks and abilities against at least one enemy champion unique from the previous damaging hit made against champions generate a stack of Style for 6 seconds, refreshing on subsequent unique or non-unique hits and stacking up to 6 times. For each stack, gain 4.25% / 4.5% / 4.75% / 5% (based on level) bonus movement speed, up to a maximum of 25.5% / 27% / 28.5% / 30% (based on level). Upon reaching maximum Style stacks, you unleash a torrent of shots for 2.277 seconds, during which you rapidly shoot at nearby enemies over 2.013 seconds at sporadic times in 0.2-second intervals each (up to 10 times per enemy), dealing 20 – 40 (based on level) (+ 40% AD) (+ 25% AP) physical damage with each shot, reduced by 75% against minions. Enemies below 30% of their maximum health are critically struck for「 double damage 」「 40 – 80 (based on level) (+ 80% AD) (+ 50% AP) physical damage 」(15 second cooldown). This effect ends prematurely if you become affected by cast-inhibiting crowd control. Shot damage applies life steal. Style stacks are consumed at the end of the shooting effect.",
+      "wikiDescription": "Your damaging basic attacks and abilities against at least one enemy champion unique from the previous damaging hit made against champions generate a stack of Style for 6 seconds, refreshing on subsequent unique or non-unique hits and stacking up to 7 times. For each stack, gain 4.25% / 4.5% / 4.75% / 5% (based on level) bonus movement speed, up to a maximum of 29.75% / 31.5% / 33.25% / 35% (based on level). Upon reaching maximum Style stacks, you unleash a torrent of shots for 2.277 seconds, during which you rapidly shoot at nearby enemies over 2.013 seconds at sporadic times in 0.2-second intervals each (up to 10 times per enemy), dealing 20 – 40 (based on level) (+ 40% AD) (+ 25% AP) physical damage with each shot, reduced by 75% against minions. Enemies below 30% of their maximum health are critically struck for「 double damage 」「 40 – 80 (based on level) (+ 80% AD) (+ 50% AP) physical damage 」(15 second cooldown). This effect ends prematurely if you become affected by cast-inhibiting crowd control. Style stacks are represented by grades (→→→→→→). The stacks are consumed at the end of the shooting effect. Shot damage applies life steal. The Style stack count and corresponding symbol letter (see above) is indicated underneath your champion's model.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "獲得敢死風采。煞氣等級達到S時，自動使用「地獄火狂襲」。",
       "description_zh_CN": "获得悍勇本色。在你达到S评价等级时，自动使用炼狱扳机。",
@@ -5353,6 +5847,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "藏身草丛",
       "name_zh_TW": "躲草叢",
       "name_ja": "Hide on Bush",
@@ -5387,6 +5884,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "你摸不到",
       "name_zh_TW": "無法掌握",
       "name_ja": "ヤケドするぜ",
@@ -5418,11 +5918,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "潘朵拉的盒子",
       "name_zh_TW": "潘朵拉的寶盒",
       "name_ja": "パンドラの箱",
       "name_ko": "판도라의 상자",
-      "wikiDescription": "Your current augments transform into an equal number of completely random Prismatic ones.",
+      "wikiDescription": "Gain one random Prismatic-tier augment. Additionally, your current augments transform into an equal number of completely random Prismatic-tier ones.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "將所有的增幅裝置物轉化為隨機稜鏡%i:Augment%增幅裝置。",
       "description_zh_CN": "将你的所有强化符文变为随机的棱彩阶%i:Augment%强化符文。",
@@ -5452,11 +5955,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "飞升仪式",
       "name_zh_TW": "昇華儀式",
       "name_ja": "超越の儀式",
       "name_ko": "초월 의식",
-      "wikiDescription": "Scoring a takedown against an enemy champion within 3 seconds of damaging them causes them to leave behind their Essence for 8 seconds. You can basic attack the Essence to consume it: causing you to blink to its location after winding up for 1 second, during which you are untargetable (except to turrets), displacement immune, and unable to act. Upon consumption of the Essence, you gain 100% bonus movement speed decaying over 2 seconds, heal yourself for 75 – 300 (based on level) (+ 50% bonus AD) (+ 25% AP), and reset the cooldowns of your basic abilities. The heal is increased by 0% – 100% (based on your missing health), for a maximum heal of 150 – 600 (based on level) (+ 100% bonus AD) (+ 50% AP).",
+      "wikiDescription": "Scoring a takedown against an enemy champion within 3 seconds of damaging them causes them to leave behind their Essence for 8 seconds. You can basic attack the Essence within 400 units to consume it: causing you to blink to its location after winding up for 1.25 seconds, during which you are untargetable (except to turrets), displacement immune, and unable to act. Upon consumption of the Essence, you gain 100% bonus movement speed decaying over 2 seconds, heal yourself for 75 – 300 (based on level) (+ 50% bonus AD) (+ 25% AP), and reset the cooldowns of your basic abilities. The heal is increased by 0% – 100% (based on your missing health), for a maximum heal of 150 – 600 (based on level) (+ 100% bonus AD) (+ 50% AP).",
       "wikiRarity": "prismatic",
       "description_zh_TW": "參與擊殺時，敵方英雄會留下精華。攻擊精華會獲得跑速，並重置基礎技能冷卻時間。",
       "description_zh_CN": "参与击杀敌方英雄后会留下其精华。攻击该精华会提供移动速度并重置基础技能冷却时间。",
@@ -5486,6 +5992,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "下雪天",
       "name_zh_TW": "降雪之日",
       "name_ja": "スノーデイ",
@@ -5517,6 +6026,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "缩小射线",
       "name_zh_TW": "縮小光線",
       "name_ja": "縮小光線",
@@ -5551,6 +6063,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "舞会女王",
       "name_zh_TW": "舞會皇后",
       "name_ja": "プロムクイーン",
@@ -5584,6 +6099,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "我们的治疗",
       "name_zh_TW": "共享治療",
       "name_ja": "みんなの回復",
@@ -5618,6 +6136,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "强力护盾",
       "name_zh_TW": "巨大盾牌",
       "name_ja": "マイティシールド",
@@ -5652,6 +6173,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "惊惧",
       "name_zh_TW": "恐懼",
       "name_ja": "恐怖",
@@ -5676,7 +6200,7 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "attack",
@@ -5685,6 +6209,9 @@
         "movement"
       ],
       "wikiDescription": "Attacks during your chosen ability apply Marks that explode at the end of its duration, dealing damage and granting Move Speed.",
+      "availability": {
+        "status": "unverified_legacy"
+      },
       "recentChanges": {
         "patch": "26.13",
         "changes": [
@@ -5715,6 +6242,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "弹球",
       "name_zh_TW": "彈珠台",
       "name_ja": "ピンボール",
@@ -5748,11 +6278,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "泰坦的坚决",
       "name_zh_TW": "泰坦的決意",
       "name_ja": "巨人の誓い",
       "name_ko": "거인의 결의",
-      "wikiDescription": "You generate a stack of Juggernauting for each instance of damage you deal or take (excluding damage over time), lasting for 6 seconds and refreshing on subsequent damage dealt or taken. For every 10 stacks of Juggernauting, you gain 15 – 30 (based on level) bonus Attack Damage or 25 – 50 (based on level) Ability Power (Adaptive), 4 – 8 (based on level) bonus armor and bonus magic resistance, 10% increased size, and 8% tenacity. Stacks expire one by one when the duration ends, with the decay rate being faster the more stacks you have.",
+      "wikiDescription": "You generate a stack of Juggernauting for each instance of damage you deal or take (excluding damage over time), lasting for 6 seconds and refreshing on subsequent damage dealt or taken. For every 10 stacks of Juggernauting, you gain 15 – 45 (based on level) bonus Attack Damage or 25 – 75 (based on level) Ability Power (Adaptive), 5 – 10 (based on level) bonus armor and bonus magic resistance, 10% increased size, and 8% tenacity. Stacks expire one by one when the duration ends, with the decay rate being faster the more stacks you have.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "受到或造成傷害時獲得層數。每累積@Stacks_Max@層，便獲得適性之力、物防、魔防、體型和韌性。",
       "description_zh_CN": "在承受或造成伤害时获得层数。每@Stacks_Max@层，获得适应之力、护甲、魔法抗性、体型和韧性。",
@@ -5781,11 +6314,14 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "多重射击",
       "name_zh_TW": "多重射擊",
       "name_ja": "マルチショット",
       "name_ko": "다중 공격",
-      "wikiDescription": "Assigns quests that require you to hit enemy champions with a specific ability's missile a number of times (counts up to 1 hit per champion per cast instance). There are six quest tiers, and each completed tier rewards you with an additional missile fired on the ability's cast. The reward effect also modifies the ability to fire all of its missiles in a cone. Subsequent missile hits from the same cast against the same enemy deal 30% damage.",
+      "wikiDescription": "Assigns quests that require you to hit enemy champions with a specific ability's missile a number of times (counts up to 1 hit per champion per cast instance). There are six quest tiers, and each completed tier rewards you with an additional missile fired on the ability's cast. The reward effect also modifies the ability to fire all of its missiles in a cone. Subsequent missile hits from the same cast against the same enemy deal 30% damage. Hit requirements as denoted below are rounded down to whole numbers, with a minimum value of 1.",
       "wikiRarity": "prismatic"
     },
     {
@@ -5811,11 +6347,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "冰雪爆裂",
       "name_zh_TW": "雪爆",
       "name_ja": "スノーブラスト",
       "name_ko": "눈 폭발",
-      "wikiDescription": "Empowers the Dash spell from Mark to deal 100% increased damage and upon arrival cause you to knock up the target and knock back nearby enemies. Additionally, your Mark's cooldown is reduced equivalent to 100 ability haste. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+      "wikiDescription": "Empowers the Dash spell from Mark to deal 100% increased damage and upon arrival cause you to knock up the target for 0.5 seconds and knock back nearby enemies. Additionally, your Mark's cooldown is reduced equivalent to 100 ability haste. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
       "wikiRarity": "gold",
       "description_zh_TW": "重施雪球會造成更高的傷害，擊飛目標，並擊退鄰近敵軍。",
       "description_zh_CN": "再次施放雪球会造成提升伤害、击飞该目标、并击退附近的敌人们。",
@@ -5845,6 +6384,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "转得我眩晕了",
       "name_zh_TW": "把我耍得團團轉",
       "name_ja": "振り回して",
@@ -5865,14 +6407,17 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "ability",
         "haste",
         "movement"
       ],
-      "wikiDescription": "On Ultimate cast, spawn a Zone that grants Ability Haste and Movement Speed. While inside, it fires missiles that deal the required number of% of your damage."
+      "wikiDescription": "On Ultimate cast, spawn a Zone that grants Ability Haste and Movement Speed. While inside, it fires missiles that deal the required number of% of your damage.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "GoldenSnowball",
@@ -5898,6 +6443,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "神圣雪球",
       "name_zh_TW": "神聖雪球",
       "name_ja": "聖なる雪玉",
@@ -5931,6 +6479,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "快步",
       "name_zh_TW": "快步移動",
       "name_ja": "クイックステップ",
@@ -5965,6 +6516,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "玻璃大炮",
       "name_zh_TW": "玻璃大砲",
       "name_ja": "グラスキャノン",
@@ -5981,8 +6535,8 @@
       "slug": "chain-reaction",
       "name": "Chain Reaction",
       "displayName": "Chain Reaction",
-      "rarity": "prismatic",
-      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/genericabilityaugmenticon_prismatic.png",
+      "rarity": "gold",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/genericabilityaugmenticon_gold.png",
       "names": {
         "en": "Chain Reaction",
         "zh_cn": "连锁反应",
@@ -5999,15 +6553,18 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "连锁反应",
       "name_zh_TW": "連鎖反應",
       "name_ja": "連鎖反応",
       "name_ko": "연쇄 반응",
-      "wikiDescription": "Upgrades one of your champion's abilities that has a knock back effect, empowering the ability to trigger a chain reaction effect when displaced champions hit other champions or terrain within 200 units. If a knocked back champion collides with another enemy champion during their displacement, the champions they collided with are dealt 100 – 400 (based on level) magic damage and knocked up for 0.5 seconds. If they collide with terrain during their displacement, they will rebound to take 150 – 800 (based on level) magic damage and become knocked up for 0.75 seconds and stunned for 0.5 seconds. The knock up duration is increased to up to 1.1 seconds based on how long the ability's cooldown is.",
-      "wikiRarity": "prismatic",
+      "wikiDescription": "Upgrades one of your champion's abilities that has a knock back effect, empowering the ability to trigger a chain reaction effect when displaced champions hit other champions or terrain within 200 units. If a knocked back champion collides with another enemy champion during their displacement, the champions they collided with are dealt 100 – 400 (based on level) magic damage and knocked up for 0.5 seconds. If they collide with terrain during their displacement, they will rebound to take 150 – 800 (based on level) magic damage and become knocked up for 0.75 seconds and stunned for 0.5 seconds. The knock up duration is increased to up to 1.1 seconds based on how long the ability's cooldown is. If the upgraded ability is an ultimate, this effect deals 250% damage, increasing the champion collision damage to 250 – 1000 (based on level) and the terrain collision damage to 375 – 2000 (based on level).",
+      "wikiRarity": "gold",
       "description_zh_TW": "如果目標被{{SpellName}}擊退時撞到另一位英雄，該英雄會被擊飛並受到傷害。如果撞擊地形，則延長擊飛時間並造成額外傷害。",
       "description_zh_CN": "如果一个被【{{SpellName}}】技能击退的目标命中了另一个英雄，则二者都会被击飞并受到伤害。在与地形产生碰撞时，该击飞时长会延长并且他们会受到额外伤害。",
-      "description_ja": "{{SpellName}}によってノックバックされた象が別のチャンピオンに当たると、両方がノックアップ状態になり、ダメージを受ける。地形に衝突すると、ノックアップの効果時間が延長され、追加ダメージを受ける。",
+      "description_ja": "{{SpellName}}によってノックバックされた対象が別のチャンピオンに当たると、両方がノックアップ状態になり、ダメージを受ける。地形に衝突すると、ノックアップの効果時間が延長され、追加ダメージを受ける。",
       "description_ko": "{{SpellName}} 스킬로 뒤로 밀어낸 대상이 다른 챔피언과 부딪히면 둘 다 공중에 뜨고 피해를 입습니다. 지형에 충돌하면 공중에 뜨는 시간이 길어지고 추가 피해를 입습니다."
     },
     {
@@ -6033,11 +6590,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "位面转移",
       "name_zh_TW": "次元轉移",
       "name_ja": "ディメンションシフト",
       "name_ko": "차원 이동",
-      "wikiDescription": "Replace a summoner spell with When the Darkness Comes. When the Darkness Comes: Sends a bright, cosmic light arcing to the target location over 2 seconds. Upon impact, the light spreads out to cause all units within a 500 radius to be sent to the Dark Realm for 8 seconds. If you are in the Dark Realm, you gain 25 – 100 (based on level) bonus attack damage, 25 – 100 (based on level) ability power, 200 – 1000 (based on level) bonus health, and 35% increased size. The Dark Realm is a battlefield that exists outside of the normal realm in an alternate dimension. It exists only for units hit by the cosmic light. The realm includes any terrain features that would exist in the map of the normal realm, including structures, walls, and brushes. Units between realms see each other as glowing stars, considering each other dead and negating any interactions between each other. Only units that were hit by the light will enter the realm; other units cannot follow them. Everything that occurs inside the Dark Realm is hidden to units outside of it, and vice versa. Structures exist in all realms at the same time, but are untargetable in the Dark Realm. Turrets will behave normally as if all units were in the same realm. Pets still inside the Dark Realm are killed at its end.",
+      "wikiDescription": "Replace a summoner spell with When the Darkness Comes. When the Darkness Comes: Sends a bright, cosmic light arcing to the target location over 2 seconds. Upon impact, the light spreads out to cause all units within a 500 radius to be sent to the Dark Realm for 8 seconds. All units in the Dark Realm gain 45% bonus movement speed. If you are in the Dark Realm, you gain 35 – 150 (based on level) bonus attack damage, 35 – 150 (based on level) ability power, 300 – 1500 (based on level) bonus health, and 35% increased size. The Dark Realm is a battlefield that exists outside of the normal realm in an alternate dimension. It exists only for units hit by the cosmic light. The realm includes any terrain features that would exist in the map of the normal realm, including structures, walls, and brushes. Units between realms see each other as glowing stars, considering each other dead and negating any interactions between each other. Only units that were hit by the light will enter the realm; other units cannot follow them. Everything that occurs inside the Dark Realm is hidden to units outside of it, and vice versa. Structures exist in all realms at the same time, but champions in the Dark Realm can only deal 1 damage to them per damage instance. Turrets will behave normally as if all units were in the same realm. Pets still inside the Dark Realm are killed at its end.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "獲得召喚師技能「黑暗時刻」。創造一個區域，將其中所有人傳送到另一個次元。",
       "description_zh_CN": "获得当黑暗到来召唤师技能。生成一个地带来将它其中的所有人传送到另一个位面。",
@@ -6067,11 +6627,14 @@
         "lifecycle": "active"
       },
       "type": "quest",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "魄罗蛮冲",
       "name_zh_TW": "普羅衝鋒",
       "name_ja": "ポロの大群",
       "name_ko": "포로 쇄도",
-      "wikiDescription": "Poro-Snaxes will now randomly appear around you every 35 – 20 (based on level) seconds. You can pick up a Poro-Snax by moving over it, granting you a Poro-Snax charge. Poro-Snaxes will not spawn while you are at the maximum number of Poro-Snax charges (2). Feeding a Poro with a Poro-Snax generates a stack of Poro Love. At 5 stacks, you are granted the Poro Charge summoner spell and are prompted to replace one of your summoner spells with it. You are then assigned with quests that require you to reach a certain amount of Poro Love stacks. There are nine quest tiers, and each completed tier rewards you with an additional Poro wave for Poro Charge. Poro Charge: After a 1-second delay, you unleash a stampede of Poros, summoning a phalanx of 5 massive Poros that charge forward in the target direction. Enemies hit by the charge are dealt 50 – 100 (based on level) (+ 20 per Poro Love stack) physical damage, reduced to 15% against minions, and slowed by 85% for 2 seconds. Each Poro stops upon colliding with an enemy champion. Fire additional waves of Poros based on the number of Poro Love stacks you have. Each subsequent wave is fired 0.75 seconds after the previous one. Enemy champions take 50% damage from subsequent waves that hit them.",
+      "wikiDescription": "Poro-Snaxes will now randomly appear around you every 25 – 15 (based on level) seconds. You can pick up a Poro-Snax by moving over it, granting you a Poro-Snax charge. Poro-Snaxes will not spawn while you are at the maximum number of Poro-Snax charges (2). Feeding a Poro with a Poro-Snax generates a stack of Poro Love. At 5 stacks, you are granted the Poro Charge summoner spell and are prompted to replace one of your summoner spells with it. You are then assigned with quests that require you to reach a certain amount of Poro Love stacks. There are nine quest tiers, and each completed tier rewards you with an additional Poro wave for Poro Charge. Poro Charge: After a 1-second delay, you unleash a stampede of Poros, summoning a phalanx of 5 massive Poros that charge forward in the target direction. Enemies hit by the charge are dealt 100 – 200 (based on level) (+ 20 per Poro Love stack) physical damage, reduced to 15% against minions, and slowed by 85% for 2 seconds. Each Poro stops upon colliding with an enemy champion. Fire additional waves of Poros based on the number of Poro Love stacks you have. Each subsequent wave is fired 0.75 seconds after the previous one. Enemy champions take 50% damage from subsequent waves that hit them.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "任務：收集普羅點心並餵食@QuestRequirement@普羅。 獎勵：召喚師技能「普羅衝鋒」——向敵方隊伍發射一波波超可愛又超危險的普羅。任務每升一級，就能發射更多次普羅。 「喔呵！你看看他們多可愛啊！」——普羅牧人",
       "description_zh_CN": "任务：收集【魄罗佳肴】并投喂@QuestRequirement@只魄罗 奖励：获得【魄罗冲锋】召唤师技能，可让魄罗们对敌方队伍发动几波攻势。每任务等级都会解锁额外的波次。 “噢吼！它们可真萌啊！”——魄罗驯养人",
@@ -6091,14 +6654,17 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "ability",
         "heal_shield",
         "dot"
       ],
-      "wikiDescription": "Your Enemy Missing pings will cause you to launch a missile at the pinged location, exploding upon arrival to deal 100 – 400 (based on level) (+ 10% of target's missing health) magic damage to enemies struck, and heal allied champions within for 50 – 200 (based on level) (+ 10% of target's missing health) . While equipped with this augment, the player can only use up to 3 Enemy Missing pings each within 6 seconds at most. This incurs a separate cooldown from the global one, sending an alert to the player that reads: You must wait before issuing more pings of that type. Otherwise, the global ping cooldown is incurred as normal. The heal is not affected by the -50% outgoing healing penalty from the ARAM global champion buff ."
+      "wikiDescription": "Your Enemy Missing pings will cause you to launch a missile at the pinged location, exploding upon arrival to deal 100 – 400 (based on level) (+ 10% of target's missing health) magic damage to enemies struck, and heal allied champions within for 50 – 200 (based on level) (+ 10% of target's missing health) . While equipped with this augment, the player can only use up to 3 Enemy Missing pings each within 6 seconds at most. This incurs a separate cooldown from the global one, sending an alert to the player that reads: You must wait before issuing more pings of that type. Otherwise, the global ping cooldown is incurred as normal. The heal is not affected by the -50% outgoing healing penalty from the ARAM global champion buff .",
+      "availability": {
+        "status": "removed"
+      }
     },
     {
       "augmentId": "Adamant",
@@ -6121,9 +6687,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "坚若磐石",
       "name_zh_TW": "意志堅定",
       "name_ja": "アダマント",
@@ -6157,9 +6726,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "魄罗之王的弹跳",
       "name_zh_TW": "普羅王跳跳",
       "name_ja": "ポロキングのバウンド",
@@ -6191,9 +6763,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "霸符兄弟",
       "name_zh_TW": "增益麻吉",
       "name_ja": "バフバディー",
@@ -6224,9 +6799,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "地狱三头犬",
       "name_zh_TW": "地獄三頭犬",
       "name_ja": "ケルベロス",
@@ -6254,9 +6832,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "作弊：我能回城！",
       "name_zh_TW": "作弊",
       "name_ja": "チート",
@@ -6288,10 +6869,12 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "小丑学院",
       "name_zh_TW": "小丑學院",
       "name_ja": "ピエロ大学",
@@ -6324,9 +6907,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "砸开那颗蛋",
       "name_zh_TW": "敲爆那顆蛋",
       "name_ja": "あのタマゴを割れ",
@@ -6359,6 +6945,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "由暴生急",
       "name_zh_TW": "暴擊和施法",
       "name_ja": "クリティカルキャスト",
@@ -6393,6 +6982,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "会心治疗",
       "name_zh_TW": "暴擊治療",
       "name_ja": "クリティカルヒール",
@@ -6428,11 +7020,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "暴击飞弹",
       "name_zh_TW": "暴擊沖天炮",
       "name_ja": "クリティカルミサイル",
       "name_ko": "치명적 미사일",
-      "wikiDescription": "Critical strikes against enemy champions launch 1 (+ 1 per 33.33% critical strike chance) missiles at the target that each deal 20 – 100 (based on level) magic damage. Additionally, gain 25% critical strike chance. Critical strikes from Jeweled Gauntlet and Vulnerability will launch missiles.",
+      "wikiDescription": "Critical strikes against enemy champions launch 1 (+ 1 per 50% critical strike chance) missiles at the target that each deal 15 – 65 (based on level) magic damage. Additionally, gain 25% critical strike chance. Maximum total missile count is 3 at 100% critical strike chance. Critical strike chance in excess of 100% does not count. Critical strikes from Jeweled Gauntlet and Vulnerability will launch missiles.",
       "wikiRarity": "gold",
       "description_zh_TW": "暴擊時，會發射飛彈，造成魔法傷害。 增加%i:scaleCrit% @CrtiChance*100@%暴擊率。",
       "description_zh_CN": "当你暴击时，发射飞弹造成魔法伤害。 获得%i:scaleCrit% @CrtiChance*100@%暴击几率。",
@@ -6462,6 +7057,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "暴击律动",
       "name_zh_TW": "暴擊節奏",
       "name_ja": "クリティカルの律動",
@@ -6495,9 +7093,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "魔鬼之舞",
       "name_zh_TW": "不死魔舞",
       "name_ja": "悪魔のダンス",
@@ -6530,9 +7131,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "你肩上的恶魔",
       "name_zh_TW": "小惡魔在低語",
       "name_ja": "肩の上の悪魔",
@@ -6549,8 +7153,8 @@
       "slug": "double-tap",
       "name": "Double Tap",
       "displayName": "Double Tap",
-      "rarity": "gold",
-      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/doubletap_small.png",
+      "rarity": "prismatic",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/dualwield_small.png",
       "names": {
         "en": "Double Tap",
         "zh_cn": "双发快射",
@@ -6568,14 +7172,17 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "双发快射",
       "name_zh_TW": "雙重命中",
       "name_ja": "ダブルタップ",
       "name_ko": "한 발에 두 놈",
       "wikiDescription": "Basic attacks that critically strike apply on-hit effects an additional time. Additionally, gain 25% critical strike chance.",
-      "wikiRarity": "gold",
+      "wikiRarity": "prismatic",
       "description_zh_TW": "暴擊額外施加一次%i:OnHit%命中效果。 增加%i:scaleCrit% @Calc_Crit_Chance@%暴擊率。",
-      "description_zh_CN": "你的暴击施加一次额外的%i:OnHit%附带攻击特效。 获得%i:scaleCrit% @Calc_Crit_Chance@暴击几率。",
+      "description_zh_CN": "你的暴击施加一次额外的%i:OnHit%攻击特效。 获得%i:scaleCrit% @Calc_Crit_Chance@暴击几率。",
       "description_ja": "クリティカルヒット時、%i:OnHit%通常攻撃時効果を追加でもう一度適用する。 %i:scaleCrit%クリティカル率が@Calc_Crit_Chance@増加する。",
       "description_ko": "치명타 발동 시 %i:OnHit% 적중 시 효과를 한 번 더 적용합니다. %i:scaleCrit% 치명타 확률을 @Calc_Crit_Chance@ 획득합니다."
     },
@@ -6600,9 +7207,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "卡皮巴拉空投",
       "name_zh_TW": "空降水豚",
       "name_ja": "ドロッピバラ",
@@ -6634,9 +7244,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "裁决使",
       "name_zh_TW": "處刑者",
       "name_ja": "処刑人",
@@ -6668,9 +7281,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "感受燃烧",
       "name_zh_TW": "燒起來吧",
       "name_ja": "熱気",
@@ -6700,9 +7316,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "最终都市列车",
       "name_zh_TW": "終城快車",
       "name_ja": "ファイナルシティ交通",
@@ -6735,9 +7354,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "冰霜 幽灵",
       "name_zh_TW": "寒霜幽魂",
       "name_ja": "フロストレイス",
@@ -6769,9 +7391,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "砍伤",
       "name_zh_TW": "深割",
       "name_ja": "深手",
@@ -6802,9 +7427,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "祖母的辣椒油",
       "name_zh_TW": "阿嬤的辣油",
       "name_ja": "おばあちゃんのラー油",
@@ -6837,6 +7465,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "恶趣味",
       "name_zh_TW": "惡趣味",
       "name_ja": "罪なる喜び",
@@ -6868,9 +7499,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "帽上加帽",
       "name_zh_TW": "帽上加帽",
       "name_ja": "帽子の上に帽子",
@@ -6900,9 +7534,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "当心小蛋糕！",
       "name_zh_TW": "小心杯子蛋糕！",
       "name_ja": "カップケーキに要注意！",
@@ -6933,9 +7570,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "圣火",
       "name_zh_TW": "神聖之火",
       "name_ja": "聖なる炎",
@@ -6966,9 +7606,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "小猫咪找妈妈",
       "name_zh_TW": "我是小貓咪媽咪在哪裡",
       "name_ja": "ボクは子ネコ。ママはどこ？",
@@ -7000,6 +7643,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "关键暴击",
       "name_zh_TW": "痛恨一擊",
       "name_ja": "まさにクリティカル",
@@ -7034,6 +7680,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "珠光护手",
       "name_zh_TW": "寶石手套",
       "name_ja": "ジュエル ガントレット",
@@ -7065,9 +7714,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "基石法师",
       "name_zh_TW": "符文術士",
       "name_ja": "キーストーンの奇術師",
@@ -7098,9 +7750,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "激光治疗",
       "name_zh_TW": "雷射治療",
       "name_ja": "レーザーヒール",
@@ -7131,9 +7786,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "闪电打击",
       "name_zh_TW": "電光石火",
       "name_ja": "ライトニングストライク",
@@ -7156,10 +7814,13 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [],
-      "wikiDescription": "Added to ARAM Mayhem in Patch 26.12. Riot lists this augment in the official patch notes; its full client tooltip is not exposed in the current 16.12 augment file yet."
+      "wikiDescription": "Added to ARAM Mayhem in Patch 26.12. Riot lists this augment in the official patch notes; its full client tooltip is not exposed in the current 16.12 augment file yet.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_OrbitalLaser_Active",
@@ -7184,6 +7845,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "轨道镭射",
       "name_zh_TW": "衛星雷射炮",
       "name_ja": "軌道レーザー",
@@ -7206,13 +7870,16 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "heal_shield",
         "movement"
       ],
-      "wikiDescription": "Allies encourage you when you walk past, granting you a Shield and Movement Speed."
+      "wikiDescription": "Allies encourage you when you walk past, granting you a Shield and Movement Speed.",
+      "availability": {
+        "status": "removed"
+      }
     },
     {
       "augmentId": "ARAM_Perseverance",
@@ -7235,9 +7902,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "坚韧",
       "name_zh_TW": "剛毅",
       "name_ja": "忍耐",
@@ -7271,9 +7941,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "魄罗爆破手",
       "name_zh_TW": "普羅能量炮",
       "name_ja": "ポロブラスター",
@@ -7296,12 +7969,15 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "ability"
       ],
-      "wikiDescription": "QUEST: Hit enemy champions with your chosen ability the required number of times. REWARD: Permanently increase your chosen ability damage."
+      "wikiDescription": "QUEST: Hit enemy champions with your chosen ability the required number of times. REWARD: Permanently increase your chosen ability damage.",
+      "availability": {
+        "status": "removed"
+      }
     },
     {
       "augmentId": "ARAM_QuantumComputing",
@@ -7324,9 +8000,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "量子计算",
       "name_zh_TW": "量子計算",
       "name_ja": "量子演算",
@@ -7351,13 +8030,16 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "heal_shield",
         "dot"
       ],
-      "wikiDescription": "QUEST: Heal allied champions for the required number of Health. REWARD: Any healing you provide now also Heals Over Time after the initial heal."
+      "wikiDescription": "QUEST: Heal allied champions for the required number of Health. REWARD: Any healing you provide now also Heals Over Time after the initial heal.",
+      "availability": {
+        "status": "removed"
+      }
     },
     {
       "slug": "rabble-rousing",
@@ -7378,7 +8060,10 @@
         "lifecycle": "active"
       },
       "type": "standalone",
-      "augmentId": "ARAM_RabbleRousing"
+      "augmentId": "ARAM_RabbleRousing",
+      "availability": {
+        "status": "confirmed_live"
+      }
     },
     {
       "augmentId": "RedEnvelopes",
@@ -7398,9 +8083,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "红包",
       "name_zh_TW": "紅包",
       "name_ja": "紅いお年玉袋",
@@ -7433,6 +8121,9 @@
         "lifecycle": "active"
       },
       "type": "ability",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "活力焕发",
       "name_zh_TW": "回春",
       "name_ja": "再生",
@@ -7465,9 +8156,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "退敌力场",
       "name_zh_TW": "反重力裝置",
       "name_ja": "リパルサー",
@@ -7498,9 +8192,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "无休回复",
       "name_zh_TW": "回復不休",
       "name_ja": "無尽蔵のスタミナ",
@@ -7531,9 +8228,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "自我毁灭",
       "name_zh_TW": "自我毀滅",
       "name_ja": "自己破壊",
@@ -7549,7 +8249,7 @@
       "name": "Slow And Steady",
       "displayName": "Slow And Steady",
       "rarity": "gold",
-      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/slowandsteady_large.png",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/slowandsteady_small.png",
       "names": {
         "en": "Slow And Steady",
         "zh_cn": "一板一眼",
@@ -7563,9 +8263,12 @@
       "flags": {
         "system_breaker": true,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "一板一眼",
       "name_zh_TW": "穩紮穩打",
       "name_ja": "ゆっくり着実に",
@@ -7598,6 +8301,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "慢炖",
       "name_zh_TW": "細煮慢燉",
       "name_ja": "スロウクッカー",
@@ -7628,9 +8334,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "雪球扭蛋机",
       "name_zh_TW": "雪球輪盤",
       "name_ja": "雪玉ルーレット",
@@ -7657,9 +8366,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "升级：雪球",
       "name_zh_TW": "雪球升級",
       "name_ja": "雪玉アップグレード",
@@ -7694,6 +8406,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "灵魂虹吸",
       "name_zh_TW": "靈魂虹吸",
       "name_ja": "ソウルサイフォン",
@@ -7726,9 +8441,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "速度恶魔",
       "name_zh_TW": "極限衝鋒",
       "name_ja": "悪魔のごとき脚速",
@@ -7747,12 +8465,15 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "kit_tags": [
         "cc"
       ],
-      "wikiDescription": "Occasionally send out squishy, slappy hands towards all nearby enemy champions, tethering them. Your next attack will pull in all tethered enemies."
+      "wikiDescription": "Occasionally send out squishy, slappy hands towards all nearby enemy champions, tethering them. Your next attack will pull in all tethered enemies.",
+      "availability": {
+        "status": "unverified_legacy"
+      }
     },
     {
       "augmentId": "ARAM_TankItOrLeaveIt",
@@ -7777,6 +8498,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "会心防御",
       "name_zh_TW": "毫髮無傷",
       "name_ja": "タンクこそ至高",
@@ -7810,9 +8534,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "残暴之力",
       "name_zh_TW": "兇殘之柄",
       "name_ja": "ブルータライザー",
@@ -7844,9 +8571,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "折磨者",
       "name_zh_TW": "烈焰折磨",
       "name_ja": "苦みの種",
@@ -7869,9 +8599,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
-      "kit_tags": []
+      "kit_tags": [],
+      "availability": {
+        "status": "removed"
+      }
     },
     {
       "augmentId": "ARAM_TrueshotProdigy",
@@ -7894,9 +8627,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "精准奇才",
       "name_zh_TW": "彈幕神童",
       "name_ja": "トゥルーショットプロディジー",
@@ -7927,9 +8663,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "接二连三",
       "name_zh_TW": "二次三次",
       "name_ja": "二度三度",
@@ -7957,9 +8696,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "升级：弯刀",
       "name_zh_TW": "升級彎刀",
       "name_ja": "カトラス アップグレード",
@@ -7990,9 +8732,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "升级：狂妄",
       "name_zh_TW": "升級傲慢",
       "name_ja": "ヒュブリス アップグレード",
@@ -8026,6 +8771,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "升级：米凯尔的祝福",
       "name_zh_TW": "升級米凱的祝福",
       "name_ja": "ミカエルの祝福 アップグレード",
@@ -8052,9 +8800,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "升级：荆棘之甲",
       "name_zh_TW": "升級荊棘之甲",
       "name_ja": "ソーンメイル アップグレード",
@@ -8085,9 +8836,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "吸血习性",
       "name_zh_TW": "吸血迷信",
       "name_ja": "吸血鬼信仰",
@@ -8122,9 +8876,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "ability",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "虚空冲刺",
       "name_zh_TW": "虛空衝刺",
       "name_ja": "ヴォイドダッシュ",
@@ -8157,9 +8914,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "虚空裂隙",
       "name_zh_TW": "虛空裂縫",
       "name_ja": "ヴォイドの裂谷",
@@ -8192,6 +8952,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "易损",
       "name_zh_TW": "見縫插針",
       "name_ja": "搦め手",
@@ -8224,9 +8987,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "负重爆气",
       "name_zh_TW": "重磅爆發",
       "name_ja": "加重ポップオフ",
@@ -8257,9 +9023,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "刃下生风",
       "name_zh_TW": "刃下狂風",
       "name_ja": "刃の下の風",
@@ -8293,6 +9062,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "狂热者",
       "name_zh_TW": "狂戰士",
       "name_ja": "狂信的",
@@ -8326,9 +9098,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "removed"
+      },
       "name_zh_CN": "升级：破晓绽放之剑",
       "name_zh_TW": "升級：破曉綻放之劍",
       "name_ja": "花咲く夜明けの剣 アップグレード",
@@ -8360,11 +9135,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "大地苏醒",
       "name_zh_TW": "大地覺醒",
       "name_ja": "アースウェイク",
       "name_ko": "대지의 각성",
-      "wikiDescription": "Dashing or blinking causes you to leave behind a trail from the location you moved to your destination that detonates after 0.75 seconds in a 300 radius, dealing 70 – 210 (based on level) (+ 125% bonus AD) (+ 60% AP) physical damage per explosion to enemies hit, reduced to 70% against minions. Enemies can be affected only once every second from all cast instances, and the effect is not triggered if you move beyond 2000 units with the dash or blink.",
+      "wikiDescription": "Dashing or blinking causes you to leave behind a trail from the location you moved to your destination that detonates after 0.75 seconds in a 300 radius, dealing 90 – 250 (based on level) (+ 125% bonus AD) (+ 60% AP) physical damage per explosion to enemies hit, reduced to 70% against minions. Enemies can be affected only once every second from all cast instances, and the effect is not triggered if you move beyond 2000 units with the dash or blink.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "施放衝刺、閃現或傳送技能後會留下軌跡，軌跡會在@ExplosionDelayTime@秒後引爆。",
       "description_zh_CN": "你的冲刺、闪烁或传送类技能会留下一条在@ExplosionDelayTime@秒后爆炸的轨迹。",
@@ -8391,6 +9169,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "闪现向前",
       "name_zh_TW": "閃光俠",
       "name_ja": "閃光",
@@ -8420,9 +9201,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "candidate_registry_present"
+      },
       "name_zh_CN": "？？？",
       "name_zh_TW": "？？？",
       "name_ja": "？？？",
@@ -8448,11 +9232,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "质变：黄金阶",
       "name_zh_TW": "質變：金級",
       "name_ja": "変質: ゴールド",
       "name_ko": "전환: 골드",
-      "wikiDescription": "Gain one random Gold augment, excluding the other two offerings in your current assortment.",
+      "wikiDescription": "Gain one random Gold-tier augment.",
       "wikiRarity": "silver",
       "description_zh_TW": "獲得一件隨機%i:Augment%金色增幅裝置。",
       "description_zh_CN": "获得1个随机%i:Augment%黄金阶强化符文。",
@@ -8479,6 +9266,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "完全自动化",
       "name_zh_TW": "全自動",
       "name_ja": "完全自動化",
@@ -8502,9 +9292,12 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "removed",
-        "lifecycle_patch": "26.13"
+        "lifecycle_observed_patch": "26.18"
       },
       "type": "standalone",
+      "availability": {
+        "status": "disabled"
+      },
       "name_zh_CN": "王中王，靴中靴",
       "name_zh_TW": "球鞋收藏家",
       "name_ja": "スニーカーヘッド",
@@ -8536,12 +9329,13 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "活力再生",
       "name_zh_TW": "活力補給",
       "name_ja": "エネルギー再充填",
       "name_ko": "재충전",
-      "wikiDescription": "Your Energized attacks against targets not hit by your previous Energized attack do not consume any Energize stacks on-hit. Additionally, when fully Energized, your next basic attack deals bonus magic damage on-hit equal to 10% of the target's current health.",
-      "wikiRarity": "silver",
       "description_zh_TW": "獲得一次充能普攻，造成@TargetCurrentHealthRatio*100@%目標現有生命的傷害。若該目標並非上次的目標，則使用次數會完全返還。",
       "description_zh_CN": "获得一次盈能攻击，它造成@TargetCurrentHealthRatio*100@%目标当前生命值的伤害。你的盈能攻击充能数会得到全额返还，如果目标与你前一次攻击的目标不是同一个。",
       "description_ja": "エネルギー充填状態の通常攻撃を1チャージ獲得し、対象の現在体力の@TargetCurrentHealthRatio*100@%にあたるダメージを与える。対象が前回とは異なる場合、チャージが全回復する。",
@@ -8567,11 +9361,14 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "大招工具人",
       "name_zh_TW": "大絕電腦",
       "name_ja": "アルティメット (AI)",
       "name_ko": "궁극기 봇",
-      "wikiDescription": "Your ability haste now only applies to the cooldown of your ultimate ability. In return, increase your ability haste by 150% and gain 100 ability haste.",
+      "wikiDescription": "Your ability haste now only applies to the cooldown of your ultimate ability. In return, you gain 100 ability haste and your ability haste is 50% more effective.",
       "wikiRarity": "prismatic"
     },
     {
@@ -8594,6 +9391,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "复位",
       "name_zh_TW": "躍回",
       "name_ja": "スナップバック",
@@ -8625,6 +9425,9 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "防护面纱",
       "name_zh_TW": "守護面紗",
       "name_ja": "ワーディングヴェール",
@@ -8656,12 +9459,13 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "良性循环",
       "name_zh_TW": "良性循環",
       "name_ja": "好循環",
       "name_ko": "선순환",
-      "wikiDescription": "Your heals grant a shield for 5 seconds that is equal to 20% of the healing value, and your shields grant a heal equal to 20% of the shield's strength. This effect cannot trigger from itself.",
-      "wikiRarity": "silver",
       "description_zh_TW": "你的治療會賦予額外的護盾，且你的護盾會賦予額外的治療。",
       "description_zh_CN": "你的治疗效果提供额外护盾，而你的护盾提供额外治疗效果。",
       "description_ja": "体力回復効果が追加のシールドを付与し、シールドが追加で体力回復効果を付与する。",
@@ -8687,10 +9491,299 @@
         "lifecycle": "active"
       },
       "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
       "name_zh_CN": "变废为宝",
       "name_zh_TW": "塵土變鑽石",
       "name_ja": "塵がダイヤモンドに",
       "name_ko": "먼지에서 다이아몬드로"
+    },
+    {
+      "augmentId": "DoOrDie",
+      "slug": "do-or-die",
+      "name": "Do or Die",
+      "displayName": "Do or Die",
+      "rarity": "prismatic",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/do_or_die_small.png",
+      "names": {
+        "en": "Do or Die",
+        "zh_cn": "或杀或死",
+        "zh_tw": "背水一戰",
+        "ja": "やるかやられるか",
+        "ko": "모 아니면 도"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active",
+        "lifecycle_observed_patch": "26.18"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "或杀或死",
+      "name_zh_TW": "背水一戰",
+      "name_ja": "やるかやられるか",
+      "name_ko": "모 아니면 도"
+    },
+    {
+      "augmentId": "DontStopCleavin",
+      "slug": "dont-stop-cleavin",
+      "name": "Don't Stop Cleavin'",
+      "displayName": "Don't Stop Cleavin'",
+      "rarity": "gold",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/dont_stop_cleaving_small.png",
+      "names": {
+        "en": "Don't Stop Cleavin'",
+        "zh_cn": "黑切联盟",
+        "zh_tw": "割個不停",
+        "ja": "斬り続けろ",
+        "ko": "끝없는 양날 베기"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active",
+        "lifecycle_observed_patch": "26.18"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "黑切联盟",
+      "name_zh_TW": "割個不停",
+      "name_ja": "斬り続けろ",
+      "name_ko": "끝없는 양날 베기"
+    },
+    {
+      "augmentId": "DoransBiggestFan",
+      "slug": "dorans-biggest-fan",
+      "name": "Doran's Biggest Fan",
+      "displayName": "Doran's Biggest Fan",
+      "rarity": "prismatic",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/dorans_fan_small.png",
+      "names": {
+        "en": "Doran's Biggest Fan",
+        "zh_cn": "多兰的最铁粉丝",
+        "zh_tw": "多蘭的頭號粉絲",
+        "ja": "ドランの大ファン",
+        "ko": "도란 열혈 팬"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active",
+        "lifecycle_observed_patch": "26.18"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "多兰的最铁粉丝",
+      "name_zh_TW": "多蘭的頭號粉絲",
+      "name_ja": "ドランの大ファン",
+      "name_ko": "도란 열혈 팬"
+    },
+    {
+      "augmentId": "DrinkUp",
+      "slug": "drink-up",
+      "name": "Drink Up",
+      "displayName": "Drink Up",
+      "rarity": "silver",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/drink_up_small.png",
+      "names": {
+        "en": "Drink Up",
+        "zh_cn": "一饮而尽",
+        "zh_tw": "一飲而盡",
+        "ja": "飲み干せ",
+        "ko": "들이켜"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active",
+        "lifecycle_observed_patch": "26.18"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "一饮而尽",
+      "name_zh_TW": "一飲而盡",
+      "name_ja": "飲み干せ",
+      "name_ko": "들이켜"
+    },
+    {
+      "augmentId": "FutureSightHeartsteel",
+      "slug": "time-warp-heartsteel",
+      "name": "Time Warp: Heartsteel",
+      "displayName": "Time Warp: Heartsteel",
+      "rarity": "gold",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/fs_heart_steal_small.png",
+      "names": {
+        "en": "Time Warp: Heartsteel",
+        "zh_cn": "时光发条：心之钢",
+        "zh_tw": "時間扭曲：雄心之鋼",
+        "ja": "タイムワープ: 心の鋼",
+        "ko": "시간 왜곡: 강철심장"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "时光发条：心之钢",
+      "name_zh_TW": "時間扭曲：雄心之鋼",
+      "name_ja": "タイムワープ: 心の鋼",
+      "name_ko": "시간 왜곡: 강철심장"
+    },
+    {
+      "augmentId": "HasteMakesWaste",
+      "slug": "haste-makes-waste",
+      "name": "Haste Makes Waste",
+      "displayName": "Haste Makes Waste",
+      "rarity": "prismatic",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/haste_makes_waste_small.png",
+      "names": {
+        "en": "Haste Makes Waste",
+        "zh_cn": "欲速则不达",
+        "zh_tw": "欲速則不達",
+        "ja": "急がば回れ",
+        "ko": "급할수록 돌아가라"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active",
+        "lifecycle_observed_patch": "26.18"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "欲速则不达",
+      "name_zh_TW": "欲速則不達",
+      "name_ja": "急がば回れ",
+      "name_ko": "급할수록 돌아가라"
+    },
+    {
+      "augmentId": "StabbyStabby",
+      "slug": "stabby-stabby",
+      "name": "Stabby Stabby",
+      "displayName": "Stabby Stabby",
+      "rarity": "silver",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/stabby_stabby_small.png",
+      "names": {
+        "en": "Stabby Stabby",
+        "zh_cn": "又快又狠",
+        "zh_tw": "刺刺",
+        "ja": "グサッグサッ",
+        "ko": "심술쟁이"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active",
+        "lifecycle_observed_patch": "26.18"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "又快又狠",
+      "name_zh_TW": "刺刺",
+      "name_ja": "グサッグサッ",
+      "name_ko": "심술쟁이"
+    },
+    {
+      "augmentId": "Upgrade_DeathFireGrasp",
+      "slug": "upgrade-deathfire-grasp",
+      "name": "Upgrade: Deathfire Grasp",
+      "displayName": "Upgrade: Deathfire Grasp",
+      "rarity": "gold",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/upgrade_deathfire_small.png",
+      "names": {
+        "en": "Upgrade: Deathfire Grasp",
+        "zh_cn": "升级：冥火之拥",
+        "zh_tw": "升級：冥火之擁",
+        "ja": "アップグレード: デスファイア グラスプ",
+        "ko": "업그레이드: 죽음불꽃 손아귀"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "升级：冥火之拥",
+      "name_zh_TW": "升級：冥火之擁",
+      "name_ja": "アップグレード: デスファイア グラスプ",
+      "name_ko": "업그레이드: 죽음불꽃 손아귀"
+    },
+    {
+      "augmentId": "Upgrade_InnervatingLocket",
+      "slug": "upgrade-innervating-locket",
+      "name": "Upgrade: Innervating Locket",
+      "displayName": "Upgrade: Innervating Locket",
+      "rarity": "gold",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/upgrade_innervating_small.png",
+      "names": {
+        "en": "Upgrade: Innervating Locket",
+        "zh_cn": "升级：激发之匣",
+        "zh_tw": "升級：支配寶匣",
+        "ja": "アップグレード: 心身統御のペンダント",
+        "ko": "업그레이드: 활력증진의 펜던트"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "升级：激发之匣",
+      "name_zh_TW": "升級：支配寶匣",
+      "name_ja": "アップグレード: 心身統御のペンダント",
+      "name_ko": "업그레이드: 활력증진의 펜던트"
+    },
+    {
+      "augmentId": "Upgrade_ZzRotPortal",
+      "slug": "upgrade-zzrot-portal",
+      "name": "Upgrade: Zz'Rot Portal",
+      "displayName": "Upgrade: Zz'Rot Portal",
+      "rarity": "silver",
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/upgrade_zzrotportal_small.png",
+      "names": {
+        "en": "Upgrade: Zz'Rot Portal",
+        "zh_cn": "升级：兹若特传送门",
+        "zh_tw": "升級：虛空之門",
+        "ja": "アップグレード: ジ＝ロット・ポータル",
+        "ko": "업그레이드: 즈롯 차원문"
+      },
+      "kit_tags": [],
+      "flags": {
+        "system_breaker": false,
+        "lifecycle": "active"
+      },
+      "type": "standalone",
+      "availability": {
+        "status": "confirmed_live"
+      },
+      "name_zh_CN": "升级：兹若特传送门",
+      "name_zh_TW": "升級：虛空之門",
+      "name_ja": "アップグレード: ジ＝ロット・ポータル",
+      "name_ko": "업그레이드: 즈롯 차원문"
     }
   ]
 }

@@ -3,9 +3,9 @@
   "entity_type": "champion",
   "branch": "latest",
   "lane": "live",
-  "source_version": "16.13.7915903+branch.releases-16-13.content.release",
-  "source_patch_label": "26.13",
-  "observed_at": "2026-07-11T11:21:39.980692Z",
+  "source_version": "16.18.8159717+branch.releases-16-18.content.release",
+  "source_patch_label": "26.18",
+  "observed_at": "2026-09-10T09:10:31.033048Z",
   "source_url": "",
   "entities": [
     {
@@ -1214,13 +1214,13 @@
                 0.0
               ],
               "Effect1Amount": [
-                35.0,
-                75.0,
-                115.0,
-                155.0,
-                195.0,
-                235.0,
-                275.0
+                30.0,
+                70.0,
+                110.0,
+                150.0,
+                190.0,
+                230.0,
+                270.0
               ],
               "Effect2Amount": [
                 4.0,
@@ -1562,7 +1562,7 @@
           "attackSpeed": 0.6579999923706055,
           "attackSpeedPerLevel": 1.3600000143051147,
           "attackSpeedRatio": 0.625,
-          "health": 596.0,
+          "health": 575.0,
           "healthPerLevel": 106.0,
           "healthRegen": 1.100000023841858,
           "healthRegenPerLevel": 0.10999999940395355,
@@ -3135,7 +3135,7 @@
           "healthPerLevel": 106.0,
           "healthRegen": 1.600000023841858,
           "healthRegenPerLevel": 0.14000000059604645,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 340.0
         }
       },
@@ -3802,10 +3802,10 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              14.0,
-              13.0,
               12.0,
+              11.5,
               11.0,
+              10.5,
               10.0,
               10.0
             ],
@@ -5216,7 +5216,7 @@
         },
         "base_stats": {
           "armor": 33.0,
-          "armorPerLevel": 4.5,
+          "armorPerLevel": 5.0,
           "attackDamage": 65.0,
           "attackDamagePerLevel": 2.5,
           "attackRange": 175.0,
@@ -5750,7 +5750,7 @@
           "healthPerLevel": 105.0,
           "healthRegen": 0.699999988079071,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -6263,7 +6263,7 @@
         "base_stats": {
           "armor": 39.0,
           "armorPerLevel": 4.949999809265137,
-          "attackDamage": 61.0,
+          "attackDamage": 58.0,
           "attackDamagePerLevel": 3.299999952316284,
           "attackRange": 175.0,
           "attackSpeed": 0.7059999704360962,
@@ -9411,7 +9411,7 @@
           "healthPerLevel": 104.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.14000000059604645,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -9935,7 +9935,7 @@
           "healthRegen": 1.7000000476837158,
           "healthRegenPerLevel": 0.17000000178813934,
           "magicResistance": 32.0,
-          "moveSpeed": 330.0
+          "moveSpeed": 335.0
         }
       },
       "id": "12",
@@ -14118,7 +14118,7 @@
           "healthPerLevel": 107.0,
           "healthRegen": 1.100000023841858,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -14510,12 +14510,12 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
+              13.0,
               12.0,
               11.0,
               10.0,
               9.0,
-              8.0,
-              8.0
+              9.0
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
@@ -14794,12 +14794,12 @@
             ],
             "cost": "@ManaCostPerSecond@ Mana per second",
             "cost_coefficients": [
+              30.0,
               35.0,
               40.0,
               45.0,
               50.0,
-              55.0,
-              60.0
+              55.0
             ],
             "effect_amounts": {
               "Effect10Amount": [
@@ -15034,11 +15034,11 @@
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
               22.0,
-              20.5,
-              19.0,
-              17.5,
+              20.0,
+              18.0,
               16.0,
-              14.5
+              14.0,
+              12.0
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
@@ -17779,7 +17779,7 @@
           "healthPerLevel": 102.0,
           "healthRegen": 0.800000011920929,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 335.0
         }
       },
@@ -17800,11 +17800,11 @@
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
               11.0,
-              10.5,
-              10.0,
-              9.5,
-              9.0,
-              9.0
+              11.0,
+              11.0,
+              11.0,
+              11.0,
+              11.0
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
@@ -18825,7 +18825,7 @@
           "healthPerLevel": 104.0,
           "healthRegen": 0.6499999761581421,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 335.0
         }
       },
@@ -19368,12 +19368,12 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              22.0,
-              19.0,
-              16.0,
-              13.0,
-              10.0,
-              10.0
+              21.0,
+              18.0,
+              15.0,
+              12.0,
+              9.0,
+              9.0
             ],
             "cost": "Costs @HPCost*100@% of current Health (@HealthCostTooltip@)",
             "cost_coefficients": [
@@ -19860,7 +19860,7 @@
         },
         "base_stats": {
           "armor": 33.0,
-          "armorPerLevel": 4.699999809265137,
+          "armorPerLevel": 5.199999809265137,
           "attackDamage": 60.0,
           "attackDamagePerLevel": 3.4000000953674316,
           "attackRange": 175.0,
@@ -22354,12 +22354,12 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              15.0,
-              14.0,
-              13.0,
               12.0,
+              11.5,
               11.0,
-              11.0
+              10.5,
+              10.0,
+              9.5
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
@@ -23008,7 +23008,7 @@
           "healthPerLevel": 107.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.12999999523162842,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -24054,7 +24054,7 @@
           "healthPerLevel": 102.0,
           "healthRegen": 0.800000011920929,
           "healthRegenPerLevel": 0.10000000149011612,
-          "magicResistance": 28.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -24101,58 +24101,58 @@
                 0.0
               ],
               "Effect1Amount": [
-                30.0,
-                35.0,
-                40.0,
-                45.0,
-                50.0,
-                55.0,
-                60.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect2Amount": [
-                2.75,
-                2.75,
-                2.75,
-                2.75,
-                2.75,
-                2.75,
-                2.75
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect3Amount": [
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect4Amount": [
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect5Amount": [
-                800.0,
-                800.0,
-                800.0,
-                800.0,
-                800.0,
-                800.0,
-                800.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect6Amount": [
-                400.0,
-                400.0,
-                400.0,
-                400.0,
-                400.0,
-                400.0,
-                400.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect7Amount": [
                 0.0,
@@ -24234,67 +24234,67 @@
                 0.0
               ],
               "Effect2Amount": [
-                50.0,
-                100.0,
-                150.0,
-                200.0,
-                250.0,
-                300.0,
-                350.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect3Amount": [
-                25.0,
-                25.0,
-                37.5,
-                50.0,
-                62.5,
-                75.0,
-                75.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect4Amount": [
-                135.0,
-                150.0,
-                165.0,
-                180.0,
-                195.0,
-                210.0,
-                225.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect5Amount": [
-                450.0,
-                450.0,
-                450.0,
-                450.0,
-                450.0,
-                450.0,
-                450.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect6Amount": [
-                200.0,
-                200.0,
-                200.0,
-                200.0,
-                200.0,
-                200.0,
-                200.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect7Amount": [
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect8Amount": [
-                425.0,
-                425.0,
-                425.0,
-                425.0,
-                425.0,
-                425.0,
-                425.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect9Amount": [
                 0.0,
@@ -24473,58 +24473,58 @@
                 0.0
               ],
               "Effect1Amount": [
-                27.5,
-                35.0,
-                42.5,
-                50.0,
-                57.5,
-                65.0,
-                72.5
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect2Amount": [
-                35.0,
-                70.0,
-                80.0,
-                90.0,
-                100.0,
-                110.0,
-                125.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect3Amount": [
-                5.0,
-                10.0,
-                15.0,
-                20.0,
-                25.0,
-                30.0,
-                35.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect4Amount": [
-                70.0,
-                80.0,
-                90.0,
-                100.0,
-                110.0,
-                120.0,
-                130.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect5Amount": [
-                30.0,
-                30.0,
-                30.0,
-                30.0,
-                30.0,
-                30.0,
-                30.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect6Amount": [
-                8.0,
-                8.0,
-                8.0,
-                8.0,
-                8.0,
-                8.0,
-                8.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect7Amount": [
                 0.0,
@@ -25642,12 +25642,12 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              20.0,
-              19.0,
+              24.0,
+              21.0,
               18.0,
-              17.0,
-              16.0,
-              16.0
+              15.0,
+              12.0,
+              12.0
             ],
             "cost": "No Cost",
             "cost_coefficients": [
@@ -25766,10 +25766,10 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              1.0,
-              1.0,
-              1.0,
-              1.0,
+              4.0,
+              3.25,
+              2.5,
+              1.75,
               1.0,
               1.0
             ],
@@ -26019,7 +26019,7 @@
               10.0,
               9.0,
               8.0,
-              8.0
+              10.0
             ],
             "cost": "No Cost",
             "cost_coefficients": [
@@ -26133,14 +26133,14 @@
           }
         },
         "base_stats": {
-          "armor": 32.0,
-          "armorPerLevel": 4.699999809265137,
-          "attackDamage": 60.0,
+          "armor": 28.0,
+          "armorPerLevel": 5.0,
+          "attackDamage": 55.0,
           "attackDamagePerLevel": 1.5,
           "attackRange": 150.0,
-          "attackSpeed": 0.8500000238418579,
-          "attackSpeedRatio": 0.8500000238418579,
-          "health": 610.0,
+          "attackSpeed": 0.6700000166893005,
+          "attackSpeedRatio": 0.6700000166893005,
+          "health": 580.0,
           "healthPerLevel": 105.0,
           "healthRegen": 1.2000000476837158,
           "healthRegenPerLevel": 0.11999999731779099,
@@ -27189,7 +27189,7 @@
           "healthPerLevel": 107.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -27712,7 +27712,7 @@
           "healthPerLevel": 104.0,
           "healthRegen": 1.399999976158142,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -28235,7 +28235,7 @@
           "healthPerLevel": 100.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.12999999523162842,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -28758,7 +28758,7 @@
           "healthPerLevel": 101.0,
           "healthRegen": 0.699999988079071,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -29281,7 +29281,7 @@
           "healthPerLevel": 110.0,
           "healthRegen": 0.6499999761581421,
           "healthRegenPerLevel": 0.14000000059604645,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -29804,7 +29804,7 @@
           "healthPerLevel": 105.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.10000000149011612,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -31886,7 +31886,7 @@
           "armor": 34.0,
           "armorPerLevel": 4.599999904632568,
           "attackDamage": 57.0,
-          "attackDamagePerLevel": 3.5,
+          "attackDamagePerLevel": 4.0,
           "attackRange": 200.0,
           "attackSpeed": 0.6579999923706055,
           "attackSpeedPerLevel": 2.75,
@@ -32417,7 +32417,7 @@
           "healthPerLevel": 89.0,
           "healthRegen": 0.699999988079071,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -32940,7 +32940,7 @@
           "healthPerLevel": 100.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.12999999523162842,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 335.0
         }
       },
@@ -33368,13 +33368,13 @@
                 5.25
               ],
               "Effect2Amount": [
-                0.2,
-                0.2,
-                0.2,
-                0.2,
-                0.2,
-                0.2,
-                0.2
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect3Amount": [
                 25.0,
@@ -34649,7 +34649,7 @@
           "Q": {
             "coefficients": {
               "coefficient1": 0.3,
-              "coefficient2": 0.6
+              "coefficient2": 0.7
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
@@ -34662,12 +34662,12 @@
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
+              40.0,
               50.0,
               60.0,
               70.0,
               80.0,
-              90.0,
-              100.0
+              90.0
             ],
             "effect_amounts": {
               "Effect10Amount": [
@@ -40262,7 +40262,7 @@
           "healthPerLevel": 98.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.11999999731779099,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -45491,7 +45491,7 @@
           "healthPerLevel": 108.0,
           "healthRegen": 0.6499999761581421,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 335.0
         }
       },
@@ -49665,7 +49665,7 @@
           "armor": 27.0,
           "armorPerLevel": 4.5,
           "attackDamage": 52.0,
-          "attackDamagePerLevel": 2.0,
+          "attackDamagePerLevel": 2.5,
           "attackRange": 550.0,
           "attackSpeed": 0.6439999938011169,
           "attackSpeedPerLevel": 2.799999952316284,
@@ -49674,7 +49674,7 @@
           "healthPerLevel": 100.0,
           "healthRegen": 1.100000023841858,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -51766,7 +51766,7 @@
           "healthPerLevel": 114.0,
           "healthRegen": 0.800000011920929,
           "healthRegenPerLevel": 0.15000000596046448,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -52800,8 +52800,8 @@
           }
         },
         "base_stats": {
-          "armor": 34.0,
-          "armorPerLevel": 5.0,
+          "armor": 32.0,
+          "armorPerLevel": 4.699999809265137,
           "attackDamage": 52.0,
           "attackDamagePerLevel": 3.0,
           "attackRange": 500.0,
@@ -54277,49 +54277,49 @@
                 0.0
               ],
               "Effect1Amount": [
-                0.2,
-                0.2,
-                0.28,
-                0.36,
-                0.44,
-                0.52,
-                0.6
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect2Amount": [
-                0.3,
-                0.3,
-                0.45,
-                0.6,
-                0.75,
-                0.9,
-                0.9
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect3Amount": [
-                0.25,
-                0.25,
-                0.25,
-                0.25,
-                0.25,
-                0.25,
-                0.25
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect4Amount": [
-                8.0,
-                8.0,
-                8.0,
-                8.0,
-                8.0,
-                8.0,
-                8.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect5Amount": [
-                775.0,
-                775.0,
-                775.0,
-                775.0,
-                775.0,
-                775.0,
-                775.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect6Amount": [
                 0.0,
@@ -55426,7 +55426,7 @@
           "healthPerLevel": 107.0,
           "healthRegen": 0.6499999761581421,
           "healthRegenPerLevel": 0.15000000596046448,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -56519,13 +56519,13 @@
                 0.0
               ],
               "Effect1Amount": [
-                40.0,
-                80.0,
-                130.0,
-                180.0,
-                230.0,
-                280.0,
-                310.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect2Amount": [
                 1.0,
@@ -56945,13 +56945,13 @@
                 0.0
               ],
               "Effect7Amount": [
-                30.0,
-                30.0,
-                30.0,
-                30.0,
-                30.0,
-                30.0,
-                30.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect8Amount": [
                 0.0,
@@ -56995,7 +56995,7 @@
           "healthPerLevel": 107.0,
           "healthRegen": 0.699999988079071,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -59087,7 +59087,7 @@
           "healthPerLevel": 102.0,
           "healthRegen": 0.6499999761581421,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -62213,7 +62213,7 @@
           }
         },
         "base_stats": {
-          "armor": 38.0,
+          "armor": 36.0,
           "armorPerLevel": 4.199999809265137,
           "attackDamage": 62.0,
           "attackDamagePerLevel": 2.5999999046325684,
@@ -62221,7 +62221,7 @@
           "attackSpeed": 0.7210000157356262,
           "attackSpeedPerLevel": 2.700000047683716,
           "attackSpeedRatio": 0.7210000157356262,
-          "health": 655.0,
+          "health": 640.0,
           "healthPerLevel": 109.0,
           "healthRegen": 1.399999976158142,
           "healthRegenPerLevel": 0.15000000596046448,
@@ -67084,12 +67084,12 @@
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
+              46.0,
+              42.0,
+              38.0,
+              34.0,
               30.0,
-              30.0,
-              30.0,
-              30.0,
-              30.0,
-              30.0
+              26.0
             ],
             "effect_amounts": {
               "Effect10Amount": [
@@ -67448,13 +67448,13 @@
           "attackDamagePerLevel": 2.3499999046325684,
           "attackRange": 550.0,
           "attackSpeed": 0.6579999923706055,
-          "attackSpeedPerLevel": 3.299999952316284,
-          "attackSpeedRatio": 0.6579999923706055,
-          "health": 550.0,
-          "healthPerLevel": 103.0,
-          "healthRegen": 0.699999988079071,
-          "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "attackSpeedPerLevel": 2.799999952316284,
+          "attackSpeedRatio": 0.6700000166893005,
+          "health": 580.0,
+          "healthPerLevel": 98.0,
+          "healthRegen": 0.800000011920929,
+          "healthRegenPerLevel": 0.10000000149011612,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -68006,12 +68006,12 @@
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
-              40.0,
-              40.0,
-              40.0,
-              40.0,
-              40.0,
-              40.0
+              45.0,
+              45.0,
+              45.0,
+              45.0,
+              45.0,
+              45.0
             ],
             "effect_amounts": {
               "Effect10Amount": [
@@ -68116,7 +68116,7 @@
           },
           "Q": {
             "coefficients": {
-              "coefficient1": 0.65,
+              "coefficient1": 0.75,
               "coefficient2": 0.0
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
@@ -68149,12 +68149,12 @@
               ],
               "Effect1Amount": [
                 30.0,
-                75.0,
-                110.0,
-                145.0,
-                180.0,
-                215.0,
-                250.0
+                65.0,
+                100.0,
+                135.0,
+                170.0,
+                205.0,
+                240.0
               ],
               "Effect2Amount": [
                 3.0,
@@ -69017,8 +69017,8 @@
           "attackDamagePerLevel": 2.200000047683716,
           "attackRange": 525.0,
           "attackSpeed": 0.6579999923706055,
-          "attackSpeedPerLevel": 2.3499999046325684,
-          "attackSpeedRatio": 0.4000000059604645,
+          "attackSpeedPerLevel": 1.5,
+          "attackSpeedRatio": 0.625,
           "health": 598.0,
           "healthPerLevel": 108.0,
           "healthRegen": 1.5,
@@ -72823,7 +72823,7 @@
           },
           "Q": {
             "coefficients": {
-              "coefficient1": 1.0,
+              "coefficient1": 0.0,
               "coefficient2": 0.0
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
@@ -72855,67 +72855,67 @@
                 0.0
               ],
               "Effect1Amount": [
-                30.0,
-                30.0,
-                55.0,
-                80.0,
-                105.0,
-                130.0,
-                130.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect2Amount": [
-                0.5,
-                0.5,
-                0.5,
-                0.5,
-                0.5,
-                0.5,
-                0.5
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect3Amount": [
-                15.0,
-                20.0,
-                25.0,
-                30.0,
-                35.0,
-                40.0,
-                45.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect4Amount": [
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0,
-                1.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect5Amount": [
-                9.0,
-                9.0,
-                9.0,
-                9.0,
-                9.0,
-                9.0,
-                9.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect6Amount": [
-                50.0,
-                50.0,
-                80.0,
-                110.0,
-                140.0,
-                170.0,
-                170.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect7Amount": [
-                100.0,
-                100.0,
-                100.0,
-                100.0,
-                100.0,
-                100.0,
-                100.0
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
               ],
               "Effect8Amount": [
                 0.0,
@@ -73197,7 +73197,7 @@
         "base_stats": {
           "armor": 35.0,
           "armorPerLevel": 5.0,
-          "attackDamage": 60.0,
+          "attackDamage": 56.0,
           "attackDamagePerLevel": 4.0,
           "attackRange": 125.0,
           "attackSpeed": 0.6579999923706055,
@@ -73205,7 +73205,7 @@
           "attackSpeedRatio": 0.625,
           "health": 610.0,
           "healthPerLevel": 110.0,
-          "healthRegen": 1.600000023841858,
+          "healthRegen": 1.7999999523162842,
           "healthRegenPerLevel": 0.1599999964237213,
           "magicResistance": 32.0,
           "moveSpeed": 345.0
@@ -74280,7 +74280,7 @@
               5.0,
               5.0
             ],
-            "cost": "Channeling Cost <font color='#CC3300'>@Effect2Amount@% of max Health (@ChargeHealthTooltip@)</font>",
+            "cost": "Channeling Cost <font color='#CC3300'>@MaxHealthCost@% of max Health (@ChargeHealthTooltip@)</font>",
             "cost_coefficients": [
               0.0,
               0.0,
@@ -76336,7 +76336,7 @@
           "armor": 25.0,
           "armorPerLevel": 4.400000095367432,
           "attackDamage": 55.0,
-          "attackDamagePerLevel": 2.5,
+          "attackDamagePerLevel": 3.0,
           "attackRange": 575.0,
           "attackSpeed": 0.6499999761581421,
           "attackSpeedPerLevel": 2.0,
@@ -76345,7 +76345,7 @@
           "healthPerLevel": 110.0,
           "healthRegen": 0.800000011920929,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -76864,7 +76864,7 @@
           "attackSpeed": 0.6880000233650208,
           "attackSpeedPerLevel": 3.299999952316284,
           "attackSpeedRatio": 0.625,
-          "health": 655.0,
+          "health": 620.0,
           "healthPerLevel": 109.0,
           "healthRegen": 1.7999999523162842,
           "healthRegenPerLevel": 0.18000000715255737,
@@ -77391,7 +77391,7 @@
           "healthPerLevel": 102.0,
           "healthRegen": 0.800000011920929,
           "healthRegenPerLevel": 0.12999999523162842,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 325.0
         }
       },
@@ -77411,12 +77411,12 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              18.0,
               16.0,
               14.0,
               12.0,
               10.0,
-              10.0
+              8.0,
+              8.0
             ],
             "cost": "No Cost",
             "cost_coefficients": [
@@ -85758,7 +85758,7 @@
           "healthPerLevel": 100.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.11999999731779099,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },
@@ -89418,7 +89418,7 @@
           "healthPerLevel": 99.0,
           "healthRegen": 0.75,
           "healthRegenPerLevel": 0.10999999940395355,
-          "magicResistance": 30.0,
+          "magicResistance": 33.0,
           "moveSpeed": 330.0
         }
       },

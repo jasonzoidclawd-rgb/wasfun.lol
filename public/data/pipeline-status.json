@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-10T09:11:10.652640Z",
+  "overall": "ok",
+  "degraded_lanes": [],
+  "structural": {
+    "patch": "26.18",
+    "source": "riot_patch_notes"
+  },
+  "statistics": {
+    "patch": "26.17",
+    "observed_at": "2026-09-10T09:00:23.980438+00:00",
+    "source": "https://arammayhem.com"
+  }
+}

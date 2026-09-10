@@ -44,9 +44,9 @@
       "conflict"
     ],
     "byStatus": {
-      "confirmed_live": 198,
+      "confirmed_live": 209,
       "candidate_registry_present": 1,
-      "disabled": 11,
+      "disabled": 10,
       "removed": 42,
       "unverified_legacy": 16,
       "conflict": 0
@@ -1802,9 +1802,9 @@
     "count": 16,
     "augments": [
       {
-        "slug": "warlock-juicebox",
+        "slug": "adaptive-ward",
         "augmentId": null,
-        "name": "Warlock Juicebox",
+        "name": "Adaptive Ward",
         "signals": {
           "cdragon_registry": {
             "present": false,
@@ -1830,244 +1830,14 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
             "removed": false
           },
           "existing_catalog": {
-            "slug": "warlock-juicebox",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "pursuit-of-haste",
-        "augmentId": "ARAM_SpecializedRecursion",
-        "name": "Pursuit of Haste",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "pursuit-of-haste",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "forged-by-the-master",
-        "augmentId": null,
-        "name": "Forged By The Master",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "forged-by-the-master",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "siphon",
-        "augmentId": "ARAM_SustainingStrike",
-        "name": "Siphon",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "siphon",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "terraind",
-        "augmentId": null,
-        "name": "Terrain'd",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "terraind",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "from-downtown",
-        "augmentId": "ARAM_BangBang",
-        "name": "From Downtown",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "from-downtown",
+            "slug": "adaptive-ward",
             "lifecycle": "removed"
           },
           "resolution": {
@@ -2106,7 +1876,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2114,6 +1884,98 @@
           },
           "existing_catalog": {
             "slug": "dont-change-the-channel",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "forged-by-the-master",
+        "augmentId": null,
+        "name": "Forged By The Master",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "forged-by-the-master",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "from-downtown",
+        "augmentId": "ARAM_BangBang",
+        "name": "From Downtown",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "from-downtown",
             "lifecycle": "removed"
           },
           "resolution": {
@@ -2152,7 +2014,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2160,282 +2022,6 @@
           },
           "existing_catalog": {
             "slug": "its-go-time",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "trusty-weapon",
-        "augmentId": null,
-        "name": "Trusty Weapon",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "trusty-weapon",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "overloaded",
-        "augmentId": null,
-        "name": "Overloaded",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "overloaded",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "adaptive-ward",
-        "augmentId": null,
-        "name": "Adaptive Ward",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "adaptive-ward",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "porcupine",
-        "augmentId": null,
-        "name": "Porcupine",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "porcupine",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "pin-cushion",
-        "augmentId": null,
-        "name": "Pin Cushion",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "pin-cushion",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": []
-          }
-        }
-      },
-      {
-        "slug": "surge-field",
-        "augmentId": null,
-        "name": "Surge Field",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "surge-field",
             "lifecycle": "removed"
           },
           "resolution": {
@@ -2474,7 +2060,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2482,6 +2068,236 @@
           },
           "existing_catalog": {
             "slug": "one-trick-pony",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "overloaded",
+        "augmentId": null,
+        "name": "Overloaded",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "overloaded",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "pin-cushion",
+        "augmentId": null,
+        "name": "Pin Cushion",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "pin-cushion",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "porcupine",
+        "augmentId": null,
+        "name": "Porcupine",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "porcupine",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "pursuit-of-haste",
+        "augmentId": "ARAM_SpecializedRecursion",
+        "name": "Pursuit of Haste",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "pursuit-of-haste",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "siphon",
+        "augmentId": "ARAM_SustainingStrike",
+        "name": "Siphon",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "siphon",
             "lifecycle": "removed"
           },
           "resolution": {
@@ -2520,7 +2336,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2528,6 +2344,190 @@
           },
           "existing_catalog": {
             "slug": "squishy-slappy-grab",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "surge-field",
+        "augmentId": null,
+        "name": "Surge Field",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "surge-field",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "terraind",
+        "augmentId": null,
+        "name": "Terrain'd",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "terraind",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "trusty-weapon",
+        "augmentId": null,
+        "name": "Trusty Weapon",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "trusty-weapon",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "warlock-juicebox",
+        "augmentId": null,
+        "name": "Warlock Juicebox",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "warlock-juicebox",
             "lifecycle": "removed"
           },
           "resolution": {
@@ -2579,7 +2579,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2599,7 +2599,7 @@
     ]
   },
   "disabled": {
-    "count": 11,
+    "count": 10,
     "augments": [
       {
         "slug": "adamant",
@@ -2630,7 +2630,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -2638,7 +2638,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2656,60 +2656,6 @@
             "removedSources": [
               "tombstone"
             ]
-          }
-        }
-      },
-      {
-        "slug": "clown-college",
-        "augmentId": "ARAM_ClownCollege",
-        "name": "Clown College",
-        "signals": {
-          "cdragon_registry": {
-            "present": true,
-            "augmentId": "ARAM_ClownCollege",
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": true,
-            "keys": [
-              "kiwi_aram_clowncollege_name"
-            ],
-            "tokens": [
-              "clowncollege"
-            ]
-          },
-          "wiki": {
-            "present": true,
-            "status": "disabled",
-            "availabilityNotes": [
-              "This augment is currently disabled."
-            ],
-            "hasDescription": true,
-            "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "clown-college",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [
-              "wiki"
-            ],
-            "removedSources": []
           }
         }
       },
@@ -2742,7 +2688,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -2750,7 +2696,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2797,7 +2743,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -2805,7 +2751,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2855,7 +2801,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -2863,7 +2809,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2913,7 +2859,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -2921,7 +2867,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2969,7 +2915,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -2977,7 +2923,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -2985,6 +2931,62 @@
           },
           "existing_catalog": {
             "slug": "quantum-computing",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [
+              "wiki"
+            ],
+            "removedSources": []
+          }
+        }
+      },
+      {
+        "slug": "sneakerhead",
+        "augmentId": "Quest_Sneakerhead",
+        "name": "Sneakerhead",
+        "signals": {
+          "cdragon_registry": {
+            "present": true,
+            "augmentId": "Quest_Sneakerhead",
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": true,
+            "keys": [
+              "kiwi_quest_sneakerhead_name",
+              "kiwi_quest_sneakerhead_summary",
+              "kiwi_quest_sneakerhead_tooltip"
+            ],
+            "tokens": [
+              "questsneakerhead"
+            ]
+          },
+          "wiki": {
+            "present": true,
+            "status": "disabled",
+            "availabilityNotes": [
+              "This augment is currently disabled."
+            ],
+            "hasDescription": true,
+            "hasNotes": false,
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": false
+          },
+          "existing_catalog": {
+            "slug": "sneakerhead",
             "lifecycle": "removed"
           },
           "resolution": {
@@ -3025,7 +3027,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -3033,7 +3035,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3084,7 +3086,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": null
@@ -3092,7 +3094,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3142,7 +3144,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": "live"
@@ -3150,7 +3152,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3172,116 +3174,12 @@
             ]
           }
         }
-      },
-      {
-        "slug": "sneakerhead",
-        "augmentId": "Quest_Sneakerhead",
-        "name": "Sneakerhead",
-        "signals": {
-          "cdragon_registry": {
-            "present": true,
-            "augmentId": "Quest_Sneakerhead",
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": true,
-            "keys": [
-              "kiwi_quest_sneakerhead_name",
-              "kiwi_quest_sneakerhead_summary",
-              "kiwi_quest_sneakerhead_tooltip"
-            ],
-            "tokens": [
-              "questsneakerhead"
-            ]
-          },
-          "wiki": {
-            "present": true,
-            "status": "disabled",
-            "availabilityNotes": [
-              "This augment is currently disabled."
-            ],
-            "hasDescription": true,
-            "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": false
-          },
-          "existing_catalog": {
-            "slug": "sneakerhead",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [
-              "wiki"
-            ],
-            "removedSources": []
-          }
-        }
       }
     ]
   },
   "removed": {
     "count": 42,
     "augments": [
-      {
-        "slug": "mystery-augment",
-        "augmentId": null,
-        "name": "???",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": true
-          },
-          "existing_catalog": {
-            "slug": "mystery-augment",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": [
-              "tombstone"
-            ]
-          }
-        }
-      },
       {
         "slug": "bounce-of-the-poro-king",
         "augmentId": "ARAM_PoroKing",
@@ -3317,7 +3215,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3370,7 +3268,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3423,7 +3321,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3476,7 +3374,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3531,7 +3429,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3585,7 +3483,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3640,7 +3538,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3693,7 +3591,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3747,7 +3645,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3802,7 +3700,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3857,7 +3755,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3912,7 +3810,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -3967,7 +3865,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4021,7 +3919,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4076,7 +3974,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4130,7 +4028,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4185,7 +4083,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4238,7 +4136,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4253,6 +4151,54 @@
             "disabledSources": [],
             "removedSources": [
               "tencent",
+              "tombstone"
+            ]
+          }
+        }
+      },
+      {
+        "slug": "mystery-augment",
+        "augmentId": null,
+        "name": "???",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": true
+          },
+          "existing_catalog": {
+            "slug": "mystery-augment",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": [
               "tombstone"
             ]
           }
@@ -4287,7 +4233,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4341,7 +4287,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4390,7 +4336,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4398,54 +4344,6 @@
           },
           "existing_catalog": {
             "slug": "pursuit-of-power",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [],
-            "disabledSources": [],
-            "removedSources": [
-              "tombstone"
-            ]
-          }
-        }
-      },
-      {
-        "slug": "support-main",
-        "augmentId": null,
-        "name": "Quest: Support Main",
-        "signals": {
-          "cdragon_registry": {
-            "present": false,
-            "augmentId": null,
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": false,
-            "keys": [],
-            "tokens": []
-          },
-          "wiki": {
-            "present": false,
-            "status": "absent",
-            "availabilityNotes": [],
-            "hasDescription": false,
-            "hasNotes": false,
-            "wikiFetchedAt": null
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": false
-          },
-          "tombstone": {
-            "removed": true
-          },
-          "existing_catalog": {
-            "slug": "support-main",
             "lifecycle": "removed"
           },
           "resolution": {
@@ -4492,7 +4390,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4547,7 +4445,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4600,7 +4498,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4655,7 +4553,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4710,7 +4608,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4763,7 +4661,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4817,7 +4715,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4832,6 +4730,54 @@
             "disabledSources": [],
             "removedSources": [
               "tencent",
+              "tombstone"
+            ]
+          }
+        }
+      },
+      {
+        "slug": "support-main",
+        "augmentId": null,
+        "name": "Quest: Support Main",
+        "signals": {
+          "cdragon_registry": {
+            "present": false,
+            "augmentId": null,
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": false,
+            "keys": [],
+            "tokens": []
+          },
+          "wiki": {
+            "present": false,
+            "status": "absent",
+            "availabilityNotes": [],
+            "hasDescription": false,
+            "hasNotes": false,
+            "wikiFetchedAt": null
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": true
+          },
+          "existing_catalog": {
+            "slug": "support-main",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [],
+            "disabledSources": [],
+            "removedSources": [
               "tombstone"
             ]
           }
@@ -4870,7 +4816,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4916,7 +4862,7 @@
             "availabilityNotes": [],
             "hasDescription": false,
             "hasNotes": true,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
           },
           "tencent": {
             "status": "removed"
@@ -4924,7 +4870,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -4975,7 +4921,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5028,7 +4974,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5081,7 +5027,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5136,7 +5082,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5191,7 +5137,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5206,6 +5152,62 @@
             "disabledSources": [],
             "removedSources": [
               "tencent",
+              "tombstone"
+            ]
+          }
+        }
+      },
+      {
+        "slug": "upgrade-sword-of-blossoming-dawn",
+        "augmentId": "Upgrade_SwordOfBlossom",
+        "name": "Upgrade Sword of Blossoming Dawn",
+        "signals": {
+          "cdragon_registry": {
+            "present": true,
+            "augmentId": "Upgrade_SwordOfBlossom",
+            "definitionPlaceholder": false
+          },
+          "kiwi": {
+            "present": true,
+            "keys": [
+              "kiwi_upgrade_swordofblossom_name",
+              "kiwi_upgrade_swordofblossom_summary",
+              "kiwi_upgrade_swordofblossom_tooltip"
+            ],
+            "tokens": [
+              "upgradeswordofblossom"
+            ]
+          },
+          "wiki": {
+            "present": true,
+            "status": "live",
+            "availabilityNotes": [],
+            "hasDescription": true,
+            "hasNotes": false,
+            "wikiFetchedAt": "2026-09-10T09:00:15+00:00"
+          },
+          "tencent": {
+            "status": null
+          },
+          "telemetry": {
+            "status": null
+          },
+          "cdragon_diff": {
+            "removed": false
+          },
+          "tombstone": {
+            "removed": true
+          },
+          "existing_catalog": {
+            "slug": "upgrade-sword-of-blossoming-dawn",
+            "lifecycle": "removed"
+          },
+          "resolution": {
+            "liveSources": [
+              "wiki"
+            ],
+            "disabledSources": [],
+            "removedSources": [
               "tombstone"
             ]
           }
@@ -5246,7 +5248,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5301,7 +5303,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5356,7 +5358,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5411,7 +5413,7 @@
           "telemetry": {
             "status": null
           },
-          "patch_notes": {
+          "cdragon_diff": {
             "removed": false
           },
           "tombstone": {
@@ -5426,63 +5428,6 @@
             "disabledSources": [],
             "removedSources": [
               "tencent",
-              "tombstone"
-            ]
-          }
-        }
-      },
-      {
-        "slug": "upgrade-sword-of-blossoming-dawn",
-        "augmentId": "Upgrade_SwordOfBlossom",
-        "name": "Upgrade Sword of Blossoming Dawn",
-        "signals": {
-          "cdragon_registry": {
-            "present": true,
-            "augmentId": "Upgrade_SwordOfBlossom",
-            "definitionPlaceholder": false
-          },
-          "kiwi": {
-            "present": true,
-            "keys": [
-              "kiwi_upgrade_swordofblossom_name",
-              "kiwi_upgrade_swordofblossom_summary",
-              "kiwi_upgrade_swordofblossom_tooltip"
-            ],
-            "tokens": [
-              "upgradeswordofblossom"
-            ]
-          },
-          "wiki": {
-            "present": true,
-            "status": "live",
-            "availabilityNotes": [],
-            "hasDescription": true,
-            "hasNotes": false,
-            "wikiFetchedAt": "2026-06-30T18:42:05+00:00"
-          },
-          "tencent": {
-            "status": null
-          },
-          "telemetry": {
-            "status": null
-          },
-          "patch_notes": {
-            "removed": true
-          },
-          "tombstone": {
-            "removed": true
-          },
-          "existing_catalog": {
-            "slug": "upgrade-sword-of-blossoming-dawn",
-            "lifecycle": "removed"
-          },
-          "resolution": {
-            "liveSources": [
-              "wiki"
-            ],
-            "disabledSources": [],
-            "removedSources": [
-              "patch_notes",
               "tombstone"
             ]
           }

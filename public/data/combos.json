@@ -1,6 +1,6 @@
 {
-  "patch": "26.13",
-  "scraped_at": "2026-07-12T22:39:39.095225+00:00",
+  "patch": "26.17",
+  "scraped_at": "2026-09-10T09:00:23.980438+00:00",
   "generated_from": "internal-pool-mechanics",
   "combos": [
     {
@@ -85,12 +85,12 @@
     },
     {
       "champion": "amumu",
-      "augment": "Mad Scientist",
+      "augment": "Master of Duality",
       "tier": "S"
     },
     {
       "champion": "amumu",
-      "augment": "Master of Duality",
+      "augment": "Pinball",
       "tier": "S"
     },
     {
@@ -100,12 +100,7 @@
     },
     {
       "champion": "anivia",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "anivia",
-      "augment": "Master of Duality",
+      "augment": "Vulnerability",
       "tier": "S"
     },
     {
@@ -130,12 +125,12 @@
     },
     {
       "champion": "aphelios",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "aphelios",
-      "augment": "Deft",
+      "augment": "Double Tap",
       "tier": "S"
     },
     {
@@ -149,48 +144,18 @@
       "tier": "S"
     },
     {
-      "champion": "aurelionsol",
-      "augment": "Infernal Conduit",
-      "tier": "S"
-    },
-    {
-      "champion": "aurelionsol",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "aurelionsol",
-      "augment": "Master of Duality",
-      "tier": "S"
-    },
-    {
-      "champion": "aurora",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "aurora",
-      "augment": "Multishot",
-      "tier": "S"
-    },
-    {
-      "champion": "aurora",
-      "augment": "Spell Split",
-      "tier": "S"
-    },
-    {
       "champion": "azir",
       "augment": "Bolstered",
       "tier": "S"
     },
     {
       "champion": "azir",
-      "augment": "Infernal Conduit",
+      "augment": "Master of Duality",
       "tier": "S"
     },
     {
       "champion": "azir",
-      "augment": "Master of Duality",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
@@ -310,7 +275,7 @@
     },
     {
       "champion": "cassiopeia",
-      "augment": "Firebrand",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -335,7 +300,7 @@
     },
     {
       "champion": "corki",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -385,7 +350,7 @@
     },
     {
       "champion": "drmundo",
-      "augment": "Master of Duality",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
@@ -450,11 +415,6 @@
     },
     {
       "champion": "fiddlesticks",
-      "augment": "Bolstered",
-      "tier": "S"
-    },
-    {
-      "champion": "fiddlesticks",
       "augment": "Combusting Interest",
       "tier": "S"
     },
@@ -464,18 +424,23 @@
       "tier": "S"
     },
     {
+      "champion": "fiddlesticks",
+      "augment": "Infernal Conduit",
+      "tier": "S"
+    },
+    {
       "champion": "fiora",
       "augment": "Blade Waltz",
       "tier": "S"
     },
     {
       "champion": "fiora",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "fiora",
-      "augment": "Deft",
+      "augment": "Critical Rhythm",
       "tier": "S"
     },
     {
@@ -620,7 +585,7 @@
     },
     {
       "champion": "illaoi",
-      "augment": "Tank It Or Leave It",
+      "augment": "Twin Fire",
       "tier": "S"
     },
     {
@@ -635,7 +600,7 @@
     },
     {
       "champion": "irelia",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -665,7 +630,7 @@
     },
     {
       "champion": "janna",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
@@ -686,21 +651,6 @@
     {
       "champion": "jayce",
       "augment": "Chain Reaction",
-      "tier": "S"
-    },
-    {
-      "champion": "jayce",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "jayce",
-      "augment": "Vulnerability",
-      "tier": "S"
-    },
-    {
-      "champion": "jhin",
-      "augment": "Back To Basics",
       "tier": "S"
     },
     {
@@ -710,7 +660,12 @@
     },
     {
       "champion": "jhin",
-      "augment": "Bread And Butter",
+      "augment": "Crit 'n Cast",
+      "tier": "S"
+    },
+    {
+      "champion": "jhin",
+      "augment": "Mad Scientist",
       "tier": "S"
     },
     {
@@ -720,12 +675,12 @@
     },
     {
       "champion": "kaisa",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "kaisa",
-      "augment": "Dashing",
+      "augment": "Critical Rhythm",
       "tier": "S"
     },
     {
@@ -735,12 +690,12 @@
     },
     {
       "champion": "karma",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "karma",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -775,17 +730,7 @@
     },
     {
       "champion": "katarina",
-      "augment": "Chain Reaction",
-      "tier": "S"
-    },
-    {
-      "champion": "katarina",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "katarina",
-      "augment": "Multishot",
+      "augment": "Vulnerability",
       "tier": "S"
     },
     {
@@ -795,12 +740,12 @@
     },
     {
       "champion": "kayle",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Mercy's Strike",
       "tier": "S"
     },
     {
       "champion": "kayle",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
@@ -845,7 +790,7 @@
     },
     {
       "champion": "khazix",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -860,27 +805,12 @@
     },
     {
       "champion": "kindred",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "kled",
       "augment": "Chain Reaction",
-      "tier": "S"
-    },
-    {
-      "champion": "kogmaw",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "kogmaw",
-      "augment": "Multishot",
-      "tier": "S"
-    },
-    {
-      "champion": "kogmaw",
-      "augment": "Spell Split",
       "tier": "S"
     },
     {
@@ -945,17 +875,7 @@
     },
     {
       "champion": "lillia",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "lillia",
-      "augment": "Multishot",
-      "tier": "S"
-    },
-    {
-      "champion": "lillia",
-      "augment": "Spell Split",
+      "augment": "Vulnerability",
       "tier": "S"
     },
     {
@@ -971,6 +891,21 @@
     {
       "champion": "lissandra",
       "augment": "Spell Split",
+      "tier": "S"
+    },
+    {
+      "champion": "locke",
+      "augment": "Bolstered",
+      "tier": "S"
+    },
+    {
+      "champion": "locke",
+      "augment": "Ravenous Bind",
+      "tier": "S"
+    },
+    {
+      "champion": "locke",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -980,12 +915,12 @@
     },
     {
       "champion": "lulu",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "lulu",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -1015,12 +950,12 @@
     },
     {
       "champion": "malzahar",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
       "champion": "malzahar",
-      "augment": "Infernal Conduit",
+      "augment": "Jeweled Gauntlet",
       "tier": "S"
     },
     {
@@ -1045,12 +980,12 @@
     },
     {
       "champion": "masteryi",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "masteryi",
-      "augment": "Deft",
+      "augment": "Critical Rhythm",
       "tier": "S"
     },
     {
@@ -1060,12 +995,12 @@
     },
     {
       "champion": "mel",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "mel",
-      "augment": "Multishot",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -1140,12 +1075,12 @@
     },
     {
       "champion": "naafiri",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "naafiri",
-      "augment": "Ravenous Bind",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -1175,7 +1110,7 @@
     },
     {
       "champion": "nasus",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -1215,12 +1150,12 @@
     },
     {
       "champion": "nidalee",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "nidalee",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -1364,16 +1299,6 @@
       "tier": "S"
     },
     {
-      "champion": "quinn",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "quinn",
-      "augment": "Vulnerability",
-      "tier": "S"
-    },
-    {
       "champion": "rakan",
       "augment": "Bolstered",
       "tier": "S"
@@ -1440,12 +1365,12 @@
     },
     {
       "champion": "renata",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "renata",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -1475,7 +1400,7 @@
     },
     {
       "champion": "rengar",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -1560,12 +1485,12 @@
     },
     {
       "champion": "seraphine",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "seraphine",
-      "augment": "Multishot",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -1590,12 +1515,12 @@
     },
     {
       "champion": "shaco",
-      "augment": "Combusting Interest",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "shaco",
-      "augment": "Critical Rhythm",
+      "augment": "Combusting Interest",
       "tier": "S"
     },
     {
@@ -1649,6 +1574,21 @@
       "tier": "S"
     },
     {
+      "champion": "sivir",
+      "augment": "Jeweled Gauntlet",
+      "tier": "S"
+    },
+    {
+      "champion": "sivir",
+      "augment": "Multishot",
+      "tier": "S"
+    },
+    {
+      "champion": "sivir",
+      "augment": "Spell Split",
+      "tier": "S"
+    },
+    {
       "champion": "skarner",
       "augment": "Bolstered",
       "tier": "S"
@@ -1665,17 +1605,7 @@
     },
     {
       "champion": "smolder",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "smolder",
-      "augment": "Multishot",
-      "tier": "S"
-    },
-    {
-      "champion": "smolder",
-      "augment": "Spell Split",
+      "augment": "Vulnerability",
       "tier": "S"
     },
     {
@@ -1685,12 +1615,12 @@
     },
     {
       "champion": "sona",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "sona",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -1700,27 +1630,17 @@
     },
     {
       "champion": "soraka",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "soraka",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
       "champion": "swain",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "swain",
-      "augment": "Multishot",
-      "tier": "S"
-    },
-    {
-      "champion": "swain",
-      "augment": "Spell Split",
+      "augment": "Vulnerability",
       "tier": "S"
     },
     {
@@ -1825,7 +1745,7 @@
     },
     {
       "champion": "teemo",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -1841,16 +1761,6 @@
     {
       "champion": "thresh",
       "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "tristana",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "tristana",
-      "augment": "Vulnerability",
       "tier": "S"
     },
     {
@@ -1945,7 +1855,7 @@
     },
     {
       "champion": "varus",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -1990,12 +1900,12 @@
     },
     {
       "champion": "vex",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "vex",
-      "augment": "Multishot",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -2035,12 +1945,12 @@
     },
     {
       "champion": "viktor",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "viktor",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -2050,12 +1960,12 @@
     },
     {
       "champion": "vladimir",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "vladimir",
-      "augment": "Mercy's Strike",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -2080,12 +1990,12 @@
     },
     {
       "champion": "warwick",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Mercy's Strike",
       "tier": "S"
     },
     {
       "champion": "warwick",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
@@ -2155,12 +2065,12 @@
     },
     {
       "champion": "yorick",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {
       "champion": "yorick",
-      "augment": "Ravenous Bind",
+      "augment": "Rejuvenation",
       "tier": "S"
     },
     {
@@ -2236,21 +2146,6 @@
     {
       "champion": "zilean",
       "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "zoe",
-      "augment": "Jeweled Gauntlet",
-      "tier": "S"
-    },
-    {
-      "champion": "zoe",
-      "augment": "Multishot",
-      "tier": "S"
-    },
-    {
-      "champion": "zoe",
-      "augment": "Spell Split",
       "tier": "S"
     },
     {

@@ -3,9 +3,9 @@
   "entity_type": "augment",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.14.7942794+branch.releases-16-14.content.release",
-  "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-  "observed_at": "2026-07-13T19:16:25.768897Z",
+  "source_version": "16.19.8163976+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+  "observed_at": "2026-09-10T09:10:44.105491Z",
   "source_url": "",
   "entities": [
     {
@@ -440,7 +440,7 @@
       "fields": {
         "name": "Divine Intervention",
         "rarity": "gold",
-        "tooltip": "@InitalDelay@ seconds into combat, call upon a protective star that slowly descends upon you. When it lands, you and nearby allies become <keywordMajor>Invulnerable</keywordMajor> for @InvulnerabilityDuration@ seconds. Then <keywordMajor>Autocast</keywordMajor> this every @BaseCD@ seconds."
+        "tooltip": "Every @BaseCD@ seconds, <keywordMajor>Autocast</keywordMajor> a protective star that slowly descends upon you. When it lands, you and nearby allies become <keywordMajor>Invulnerable</keywordMajor> for @InvulnerabilityDuration@ seconds."
       },
       "id": "ARAM_DivineIntervention",
       "names": {
@@ -471,7 +471,7 @@
     {
       "fields": {
         "name": "Double Tap",
-        "rarity": "gold",
+        "rarity": "prismatic",
         "tooltip": "Your Critical Strikes apply <OnHit>%i:OnHit% On-Hit</OnHit> effects an additional time.<br><br>Gain <attention>%i:scaleCrit% @Calc_Crit_Chance@ Crit chance</attention>."
       },
       "id": "ARAM_DoubleTap",
@@ -1024,7 +1024,7 @@
       "fields": {
         "name": "Infernal Conduit",
         "rarity": "prismatic",
-        "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemy champions.<br><br>Damage Dealt: @f2@"
+        "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamagePerSecond@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemy champions.<br><br>Damage Dealt: @f2@"
       },
       "id": "ARAM_InfernalConduit",
       "names": {
@@ -2084,7 +2084,7 @@
       "fields": {
         "name": "Stuck In Here With Me",
         "rarity": "prismatic",
-        "tooltip": "After using your <keywordMajor>Ultimate</keywordMajor>, gain @DamageMitigation@ damage reduction for @TauntChannelTime@ seconds, after which you <status>Taunt</status> enemies inside for @TauntDuration@ seconds."
+        "tooltip": "After using your <keywordMajor>Ultimate</keywordMajor>, gain @DamageMitigation@ damage reduction for @TauntChannelTime@ seconds, after which you <status>Taunt</status> enemies inside for @TauntDuration@ seconds. <br><br>Gain @UltimateHaste@ Ultimate Ability Haste."
       },
       "id": "ARAM_StuckInHereWithMe",
       "names": {
@@ -2404,7 +2404,7 @@
       "fields": {
         "name": "Upgrade Infinity Edge",
         "rarity": "gold",
-        "tooltip": "Gain @CritChance*100@% %i:scaleCrit% Critical Strike Chance and <gold>500 Gold</gold>.<br>Having Infinity Edge allows your Critical Strikes to deal random <keyword>bonus Critical Strike Damage</keyword>, scaling up to @CritChanceToDamage*100@% of your Critical Strike Chance.<br><br>Crit Damage Dealt: <attention>@f1@</attention><br><br><br>"
+        "tooltip": "Gain <gold>500 Gold</gold>.<br>Having Infinity Edge allows your Critical Strikes to deal random <keyword>bonus Critical Strike Damage</keyword>, scaling up to @CritChanceToDamage*100@% of your Critical Strike Chance.<br><br>Crit Damage Dealt: <attention>@f1@</attention><br><br><br>"
       },
       "id": "ARAM_Upgrade_IE",
       "names": {
@@ -2688,7 +2688,7 @@
       "fields": {
         "name": "Combusting Interest",
         "rarity": "gold",
-        "tooltip": "Burns and damage over time applied to champions generates <gold>@GoldPerProc@ + @PercentGoldFromDamage*100@% of damage dealt as Gold</gold>.<br><br>Gold Generated: <b>@f1@</b>"
+        "tooltip": "Burn and damage-over-time on champions generate <gold>@GoldPerProc@ + @PercentGoldFromDamage*100@% of damage dealt as Gold</gold>.<br><br>Gold Generated: <b>@f1@</b>"
       },
       "id": "BloodMoneyBurn",
       "names": {
@@ -2739,8 +2739,8 @@
     {
       "fields": {
         "name": "Chain Reaction",
-        "rarity": "prismatic",
-        "tooltip": "If a champion you <status>Knock Back</status> with {{SpellName}} hits another champion, they are <status>Knocked Up</status> for @ChampCollideKnockupDuration@ seconds and are dealt <magicDamage>@EnemyHitDamage@ magic damage</magicDamage>. If enemy champions collide with terrain, they are <status>Knocked Up</status> for @MinKnockUpDuration@ seconds and are dealt <magicDamage>@WallCollisionDamage@ magic damage</magicDamage>.<br><br>Enemies Knocked Up: @f1@<br>Walls Hit: @f2@<br><br><rules>Knock Up Duration and Height scale with your spell's cooldown.</rules>"
+        "rarity": "gold",
+        "tooltip": "If a champion you <status>Knock Back</status> with {{SpellName}} hits another champion, they are <status>Knocked Up</status> for @ChampCollideKnockupDuration@ seconds and are dealt <magicDamage>@EnemyHitDamage@ magic damage</magicDamage>. If enemy champions collide with terrain, they are <status>Knocked Up</status> for @MinKnockUpDuration@ seconds and are dealt <magicDamage>@WallCollisionDamage@ magic damage</magicDamage>.<br><br>Enemies Knocked Up: @f1@<br>Walls Hit: @f2@<br><br><rules>Knock Up Duration and Height scale with your spell's cooldown.<br><rules>Damage is increased to @Ult_DamageAmp@ for Ultimate Abilities.</rules></rules>"
       },
       "id": "ChainReaction",
       "names": {
@@ -2826,6 +2826,22 @@
     },
     {
       "fields": {
+        "name": "Do or Die",
+        "rarity": "prismatic",
+        "tooltip": "Double the max stacks of <keywordMajor>Mejai's Soulstealer</keywordMajor>, <keywordMajor>Leviathan</keywordMajor>, and <keywordMajor>Sword of the Occult</keywordMajor>.<br><br><flavorText>'No no Jarvan I said do OR die'</flavorText>"
+      },
+      "id": "DoOrDie",
+      "names": {
+        "en": "Do or Die",
+        "ja": "やるかやられるか",
+        "ko": "모 아니면 도",
+        "zh-CN": "或杀或死",
+        "zh-TW": "背水一戰"
+      },
+      "slug": "do-or-die"
+    },
+    {
+      "fields": {
         "name": "Donation",
         "rarity": "gold",
         "tooltip": "Receive <font color=\"#ffd138\">@GoldAmount@</font> Gold. Thanks chat! :)"
@@ -2842,6 +2858,38 @@
     },
     {
       "fields": {
+        "name": "Don't Stop Cleavin'",
+        "rarity": "gold",
+        "tooltip": "You may purchase unlimited amounts of <keywordMajor>The Black Cleaver</keywordMajor>. On purchase, increase the new <keywordMajor>Black Cleaver's</keywordMajor> stats by @PercentageAmp*100@% for each copy you already have.<br><br>Instantly gain <keywordMajor>The Brutalizer</keywordMajor>."
+      },
+      "id": "DontStopCleavin",
+      "names": {
+        "en": "Don't Stop Cleavin'",
+        "ja": "斬り続けろ",
+        "ko": "끝없는 양날 베기",
+        "zh-CN": "黑切联盟",
+        "zh-TW": "割個不停"
+      },
+      "slug": "dont-stop-cleavin"
+    },
+    {
+      "fields": {
+        "name": "Doran's Biggest Fan",
+        "rarity": "prismatic",
+        "tooltip": "Each purchase of <keywordMajor>Doran's Blade</keywordMajor>, <keywordMajor>Ring</keywordMajor>, and <keywordMajor>Shield</keywordMajor> beyond the first grants a stack to the original item. <br><br>Each stack grants @EffectivenessMod*100@% of the item's stats.<br><br><rules>The passive effects of these items do not increase. Your respective <keywordMajor>Doran's items</keywordMajor> are no longer sellable.</rules><br><br><flavorText>Like 30 Doran's Items</flavorText>"
+      },
+      "id": "DoransBiggestFan",
+      "names": {
+        "en": "Doran's Biggest Fan",
+        "ja": "ドランの大ファン",
+        "ko": "도란 열혈 팬",
+        "zh-CN": "多兰的最铁粉丝",
+        "zh-TW": "多蘭的頭號粉絲"
+      },
+      "slug": "dorans-biggest-fan"
+    },
+    {
+      "fields": {
         "name": "Bolstered",
         "rarity": "silver",
         "tooltip": "Shields granted from {{SpellName}} are up to @BonusRatioMax*100@% stronger, scaling with target's missing Health.<br><br>Bonus Shield: @f1@<br><rules>Most effective at @MinHealthThreshold*100@% max health</rules>."
@@ -2855,6 +2903,22 @@
         "zh-TW": "能力強化"
       },
       "slug": "double-defense"
+    },
+    {
+      "fields": {
+        "name": "Drink Up",
+        "rarity": "silver",
+        "tooltip": "Everyone on your team instantly gains @InitalHealthPots@ <keywordMajor>Health Potions</keywordMajor>.<br><br>Gain @HealthPotsPerEvent@ <keywordMajor>Health Potions</keywordMajor> every @TakeDownCount@ takedowns."
+      },
+      "id": "DrinkUp",
+      "names": {
+        "en": "Drink Up",
+        "ja": "飲み干せ",
+        "ko": "들이켜",
+        "zh-CN": "一饮而尽",
+        "zh-TW": "一飲而盡"
+      },
+      "slug": "drink-up"
     },
     {
       "fields": {
@@ -3006,6 +3070,18 @@
     },
     {
       "fields": {
+        "name": "Time Warp: Heartsteel",
+        "rarity": "gold",
+        "tooltip": "After gaining <scaleHealth>@BonusHealthRequirement@ Bonus Health</scaleHealth>, reach into the future and gain a <keywordMajor>Heartsteel</keywordMajor>.<br><br><rules>Heartsteel is not sellable.</rules><br><br><flavorText>Tap 10 Energy...</flavorText>"
+      },
+      "id": "FutureSightHeartsteel",
+      "names": {
+        "en": "Time Warp: Heartsteel"
+      },
+      "slug": "future-sight-heartsteel"
+    },
+    {
+      "fields": {
         "name": "Gash",
         "rarity": "prismatic",
         "tooltip": "Gain @AS*100@% <speed>Attack Speed</speed>. Attacks apply <trueDamage>{{ Item_Melee_Ranged_Split_Dynamic }} true damage</trueDamage> {{ Item_Keyword_OnHit }}.<br><br>Total Damage Dealt to Champions: @f1@"
@@ -3111,6 +3187,22 @@
         "zh-TW": "巴龍之爪"
       },
       "slug": "hand-of-baron"
+    },
+    {
+      "fields": {
+        "name": "Haste Makes Waste",
+        "rarity": "prismatic",
+        "tooltip": "Gain @AddedCDR*100@% %i:scaleCooldown% Cooldown Reduction.<br><br>Increase your  %i:scaleCooldown% Cooldown Reduction cap by @IncCapCDR*100@%."
+      },
+      "id": "HasteMakesWaste",
+      "names": {
+        "en": "Haste Makes Waste",
+        "ja": "急がば回れ",
+        "ko": "급할수록 돌아가라",
+        "zh-CN": "欲速则不达",
+        "zh-TW": "欲速則不達"
+      },
+      "slug": "haste-makes-waste"
     },
     {
       "fields": {
@@ -3224,7 +3316,7 @@
       "fields": {
         "name": "Mercy's Strike",
         "rarity": "gold",
-        "tooltip": "After using {{SpellName}}, your next basic attack gains <attention>@AttackRangeInc@ bonus attack range</attention>, <speed>@ASBonus*100@% attack speed</speed> and deals an additional <magicDamage>@MaxHealthDamage@ max Health magic damage</magicDamage>.<br><br>Total Damage Dealt: @f1.0@"
+        "tooltip": "After healing or shielding your ally with {{SpellName}}, your next basic attack gains <attention>@AttackRangeInc@ bonus attack range</attention>, <speed>@ASBonus*100@% attack speed</speed> and deals an additional <magicDamage>@MaxHealthDamage@ max Health magic damage</magicDamage>.<br><br>Total Damage Dealt: @f1.0@<br><rules>Turret take @HealthPercentBase*100@% max health magic damage. </rules>"
       },
       "id": "MercysStrike",
       "names": {
@@ -3268,7 +3360,7 @@
       "fields": {
         "name": "Nature is Healing",
         "rarity": "gold",
-        "tooltip": "Regenerate <healing>@MaxHealthHealPerSecond@ max Health</healing> per second while in <keyword>Brush</keyword>.<br><br>Total Healing: @f1.0@"
+        "tooltip": "Entering <keyword>Brush</keyword> restores <healing>@FlatHeal@ + @MissingHealthHeal@ Missing Health</healing>, @BrushCooldown@ second cooldown per brush.<br><br>Total Healing: @f1.0@"
       },
       "id": "NatureIsHealing",
       "names": {
@@ -3284,7 +3376,7 @@
       "fields": {
         "name": "Nightstalking",
         "rarity": "gold",
-        "tooltip": "Takedowns against enemy champions within @TakedownWindow@ seconds of damaging them renders you invisible for @StealthDuration@ seconds."
+        "tooltip": "Takedowns against enemy champions within @TakedownWindow@ seconds of damaging them grants you <speed>@StealthMoveSpeed*100@% Move Speed</speed> and renders you invisible for @StealthDuration@ seconds."
       },
       "id": "Nightstalking",
       "names": {
@@ -3568,7 +3660,7 @@
       "fields": {
         "name": "Soul Eater",
         "rarity": "gold",
-        "tooltip": "<status>Immobilizing</status> an enemy champion grants <scaleHealth>@HealthGainPerStack@ max Health</scaleHealth>.<br><br>Total Health Gained: <scaleHealth>@HealthGained@</scaleHealth>"
+        "tooltip": "<status>Immobilizing</status> an enemy champion grants <scaleHealth>@HealthGainPerStack@ max Health</scaleHealth>.<br><br>Total Health Gained: <scaleHealth>@HealthGained@</scaleHealth><br><rules>If taken as your second Augment, starts with <scaleHealth>@StartingHPIfSecondAugmentTT@ Health</scaleHealth>.</rules>"
       },
       "id": "SoulEater",
       "names": {
@@ -3594,6 +3686,22 @@
     },
     {
       "fields": {
+        "name": "Stabby Stabby",
+        "rarity": "silver",
+        "tooltip": "Gain <armorPen>@ARPenConversion@</armorPen> Cooldown Reduction.<br><br>Increase your Cooldown Reduction Cap by @CDRCapIncrease*100@%."
+      },
+      "id": "StabbyStabby",
+      "names": {
+        "en": "Stabby Stabby",
+        "ja": "グサッグサッ",
+        "ko": "심술쟁이",
+        "zh-CN": "又快又狠",
+        "zh-TW": "刺刺"
+      },
+      "slug": "stabby-stabby"
+    },
+    {
+      "fields": {
         "name": "Swift and Safe",
         "rarity": "silver",
         "tooltip": "Gain a <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds after a Dash or Blink (@Cooldown@ seconds Cooldown).<br>"
@@ -3612,7 +3720,7 @@
       "fields": {
         "name": "Stay Resolute",
         "rarity": "silver",
-        "tooltip": "Damaging enemy champions with {{SpellName}} grants you @ARMR_Inc@ <scaleArmor>Armor</scaleArmor> or <scaleMR>Magic Resistance</scaleMR> based on their %i:miniAdaptiveForce% Damage Type. <br><br>Bonus <scaleArmor>Armor</scaleArmor>: @f1@<br>Bonus <scaleMR>Magic Resistance</scaleMR>: @f2@<br><br><br><rules> If this is not your first augment, gain @AdditionalARMR@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>.<br>@SpellIDCD@ seconds cooldown per target.</rules>"
+        "tooltip": "Damaging enemy champions with {{SpellName}} grants you @ARMR_Inc@ <scaleArmor>Armor</scaleArmor> or <scaleMR>Magic Resistance</scaleMR> based on their %i:miniAdaptiveForce% Damage Type. <br><br>Bonus <scaleArmor>Armor</scaleArmor>: @f1@<br>Bonus <scaleMR>Magic Resistance</scaleMR>: @f2@<br><br><br><rules>If this is not your first augment, gain @AdditionalARMR@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>.</rules>"
       },
       "id": "TitansPulse",
       "names": {
@@ -3666,6 +3774,38 @@
     },
     {
       "fields": {
+        "name": "Upgrade: Deathfire Grasp",
+        "rarity": "gold",
+        "tooltip": "Increase <keywordMajor>Deathfire Grasp's</keywordMajor> damage amplification to @NewDamageAmpOverwriteItem*100@% and reduce its Cooldown by @CooldownMod*100@%. <br><br><keywordMajor>Deathfire Grasp</keywordMajor> now targets all enemy champions within a @TargetAoE@ radius of your target."
+      },
+      "id": "Upgrade_DeathFireGrasp",
+      "names": {
+        "en": "Upgrade: Deathfire Grasp",
+        "ja": "アップグレード: デスファイア グラスプ",
+        "ko": "업그레이드: 죽음불꽃 손아귀",
+        "zh-CN": "升级：冥火之拥",
+        "zh-TW": "升級：冥火之擁"
+      },
+      "slug": "upgrade_-death-fire-grasp"
+    },
+    {
+      "fields": {
+        "name": "Upgrade: Innervating Locket",
+        "rarity": "gold",
+        "tooltip": "Increase <keywordMajor>Innervating Locket's</keywordMajor> <healing>Health</healing> and <scaleMana>Mana</scaleMana> restored by @RestoreMultiplier*100@%.<br><br><keywordMajor>Innervating Locket</keywordMajor> restores <healing>Health</healing> and <scaleMana>Mana</scaleMana> to all allied champions around your target.<br><br><flavorText>If you thought that Udyr was unkillable before...</flavorText>"
+      },
+      "id": "Upgrade_InnervatingLocket",
+      "names": {
+        "en": "Upgrade: Innervating Locket",
+        "ja": "アップグレード: 心身統御のペンダント",
+        "ko": "업그레이드: 활력증진의 펜던트",
+        "zh-CN": "升级：激发之匣",
+        "zh-TW": "升級：支配寶匣"
+      },
+      "slug": "upgrade_-innervating-locket"
+    },
+    {
+      "fields": {
         "name": "Upgrade Mikael's Blessing",
         "rarity": "prismatic",
         "tooltip": "Gain Mikael's Blessing. Reduce Mikael's Blessing Cooldown to @Cooldown@ seconds.<br><br>On Mikael's Blessing activate, unleashes a wave to nearby ally champions, cleansing <status>Disabling</status> and <status>Immobilizing</status> effects, restoring <healing>@HealCalc@ Health</healing>, and granting @TenacityAmount*100@% Tenacity for @TenacityDuration@ seconds."
@@ -3707,6 +3847,22 @@
         "zh-TW": "升級荊棘之甲"
       },
       "slug": "upgrade_-thornmail"
+    },
+    {
+      "fields": {
+        "name": "Upgrade: Zz'Rot Portal",
+        "rarity": "silver",
+        "tooltip": "<keywordMajor>Zz'Rot Portal</keywordMajor> spawns @BaseMinionAdd@ additional minion, plus an additional minion for every @LevelsPerMinion@ levels you have.<br><br>Minions are also spawned when the portal is destroyed."
+      },
+      "id": "Upgrade_ZzRotPortal",
+      "names": {
+        "en": "Upgrade: Zz'Rot Portal",
+        "ja": "アップグレード: ジ＝ロット・ポータル",
+        "ko": "업그레이드: 즈롯 차원문",
+        "zh-CN": "升级：兹若特传送门",
+        "zh-TW": "升級：虛空之門"
+      },
+      "slug": "upgrade_-zz-rot-portal"
     },
     {
       "fields": {
