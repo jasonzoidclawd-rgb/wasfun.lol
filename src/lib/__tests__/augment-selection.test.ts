@@ -1,15 +1,21 @@
 import { describe, expect, test } from "vitest";
 import {
-  advanceOcrSelection,
   addAugmentAliases,
   isCompleteThreeCardOffer,
   matchAugment,
   matchAugmentFrame,
   shouldClearOcrStateForGameflow,
-  shouldEndAugmentSelectionForLevel,
   shouldRunOcrForGameflow,
-  shouldStartAugmentSelection,
 } from "../../../overlay/src/augmentSelection";
+import {
+  applyScanToOffer,
+  emptyOfferState,
+  offerActive,
+} from "../../../overlay/src/offerLifecycle";
+import {
+  eligibleRoundCount,
+  resolveRoundDelivery,
+} from "../../../overlay/src/roundDelivery";
 import type { PoolAugment } from "../../../overlay/src/scoring";
 
 function augment(slug: string, name: string, name_zh_TW: string): PoolAugment {
@@ -26,43 +32,67 @@ function augment(slug: string, name: string, name_zh_TW: string): PoolAugment {
   };
 }
 
+const identity = (title: string) => title;
+
+function scan(state = emptyOfferState<string>(), titles: Array<string | null>) {
+  return applyScanToOffer(state, titles, identity, (title) => title, () => true);
+}
+
 describe("overlay augment selection matching", () => {
-  test("starts any newly reached augment threshold without requiring death state", () => {
-    expect(shouldStartAugmentSelection({ augmentLevel: 3 })).toBe(true);
-    expect(shouldStartAugmentSelection({ augmentLevel: 7 })).toBe(true);
-    expect(shouldStartAugmentSelection({ augmentLevel: 11 })).toBe(true);
-    expect(shouldStartAugmentSelection({ augmentLevel: 15 })).toBe(true);
-  });
+  test("level thresholds create ELIGIBILITY, not delivery", () => {
+    // Mayhem delivers R1 at the level-3 timing but R2/R3/R4 only during a
+    // death sequence after crossing 7/11/15. Crossing a threshold alive must
+    // never open a fast scan window or consume a round.
+    expect(eligibleRoundCount(3)).toBe(1);
+    expect(eligibleRoundCount(7)).toBe(2);
+    expect(eligibleRoundCount(11)).toBe(3);
+    expect(eligibleRoundCount(15)).toBe(4);
 
-  test("does not start when no new augment threshold was reached", () => {
-    expect(shouldStartAugmentSelection({ augmentLevel: undefined })).toBe(false);
-  });
-
-  test("keeps level 7 selection active until the player advances past level 7", () => {
-    expect(shouldEndAugmentSelectionForLevel({
+    const aliveAtSeven = resolveRoundDelivery({
       playerLevel: 7,
-      lastAugmentLevel: 7,
-    })).toBe(false);
-    expect(shouldEndAugmentSelectionForLevel({
-      playerLevel: 8,
-      lastAugmentLevel: 7,
-    })).toBe(true);
+      isDead: false,
+      completedRounds: 1,
+      offerLatched: false,
+    });
+    expect(aliveAtSeven.scanMode).toBe("ambient");
+    expect(aliveAtSeven.pendingRounds).toBe(1);
   });
 
-  test("ends selection only after raw card text disappears for two consecutive OCR passes", () => {
-    const seen = advanceOcrSelection(
-      { hasSeenCards: false, emptyPasses: 0 },
-      3,
-    );
-    const rerollGap = advanceOcrSelection(seen, 0);
-    const newCards = advanceOcrSelection(rerollGap, 3);
-    const firstEmpty = advanceOcrSelection(newCards, 0);
-    const secondEmpty = advanceOcrSelection(firstEmpty, 0);
+  test("a level gained during an open offer never ends the selection", () => {
+    // Regression pin for the level 3→4 badge wipe: the delivery model has no
+    // level-derived completion input at all — a latched offer keeps its fast
+    // scan loop at any level.
+    const midOffer = resolveRoundDelivery({
+      playerLevel: 8,
+      isDead: false,
+      completedRounds: 1,
+      offerLatched: true,
+    });
+    expect(midOffer.scanMode).toBe("fast");
+  });
 
-    expect(rerollGap.shouldStop).toBe(false);
-    expect(newCards.emptyPasses).toBe(0);
-    expect(firstEmpty.shouldStop).toBe(false);
-    expect(secondEmpty.shouldStop).toBe(true);
+  test("ends the offer only after card text disappears for two consecutive OCR passes", () => {
+    const seen = scan(undefined, ["卡一", "卡二", "卡三"]);
+    expect(offerActive(seen.state)).toBe(true);
+
+    const firstEmpty = scan(seen.state, [null, null, null]);
+    expect(firstEmpty.cleared).toBe(false);
+    expect(offerActive(firstEmpty.state)).toBe(true);
+
+    const secondEmpty = scan(firstEmpty.state, [null, null, null]);
+    expect(secondEmpty.cleared).toBe(true);
+    expect(offerActive(secondEmpty.state)).toBe(false);
+  });
+
+  test("treats a full-screen refresh gap as transient, not selection exit", () => {
+    const seen = scan(undefined, ["卡一", "卡二", "卡三"]);
+    const refreshGap = scan(seen.state, [null, null, null]);
+    const refreshed = scan(refreshGap.state, ["卡一", "卡二", "卡三"]);
+
+    expect(refreshGap.cleared).toBe(false);
+    expect(refreshed.cleared).toBe(false);
+    expect(refreshed.state.screenEmptyPasses).toBe(0);
+    expect(offerActive(refreshed.state)).toBe(true);
   });
 
   test("preserves three-card slot order from OCR fixture frames", () => {
@@ -111,17 +141,6 @@ describe("overlay augment selection matching", () => {
 
     expect(matched.map((card) => card.regionIndex)).toEqual([0, 2]);
     expect(isCompleteThreeCardOffer(matched)).toBe(false);
-  });
-
-  test("treats reroll refresh frames as transient gaps, not selection exit", () => {
-    const firstCards = advanceOcrSelection({ hasSeenCards: false, emptyPasses: 0 }, 3);
-    const refreshGap = advanceOcrSelection(firstCards, 0);
-    const refreshedCards = advanceOcrSelection(refreshGap, 2);
-
-    expect(refreshGap.shouldStop).toBe(false);
-    expect(refreshGap.emptyPasses).toBe(1);
-    expect(refreshedCards.shouldStop).toBe(false);
-    expect(refreshedCards.emptyPasses).toBe(0);
   });
 
   test("clears stale OCR state when normalized gameflow leaves live capture", () => {

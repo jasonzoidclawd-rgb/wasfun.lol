@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test League Augment Overlay"
+  short_description: "Record and verify live overlay behavior"
+  default_prompt: "Use $test-league-augment-overlay to run a human-controlled, evidence-backed live overlay validation session."

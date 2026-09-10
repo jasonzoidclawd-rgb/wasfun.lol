@@ -1,8 +1,42 @@
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Anton (OFL 1.1 — see src/assets/fonts/OFL.txt), bundled locally so the
+   overlay never requests a remote font at runtime. Used for the tier glyph
+   only, matching the v1 dashboard tier-badge typography. */
+@font-face {
+  font-family: "Anton";
+  src: url("./assets/fonts/anton-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* DESIGN.md tier tokens: God/S+ → Weak/C. */
+:root {
+  --tier-god: #ff4655;
+  --tier-strong: #ff8c00;
+  --tier-good: #3b82f6;
+  --tier-average: #22c55e;
+  --tier-weak: #6b7280;
+}
+
+.tier-splus { --tier-accent: var(--tier-god); }
+.tier-s { --tier-accent: var(--tier-strong); }
+.tier-a { --tier-accent: var(--tier-good); }
+.tier-b { --tier-accent: var(--tier-average); }
+.tier-c { --tier-accent: var(--tier-weak); }
 
 html, body, #root {
   width: 100%;
@@ -27,21 +61,86 @@ html, body, #root {
 .status-disconnected { background: #ef4444; }
 .status-ocr { background: #a78bfa; box-shadow: 0 0 6px #a78bfa; }
 
-/* ─── Badge (positioned on augment cards) ─── */
-.badge {
+/* ─── Badge chip (compact horizontal strip ABOVE each card frame) ───
+   Geometry contract: badgeLayout.ts BADGE_CHIP_SIZE (118×32 CSS px, height
+   within 28–36px), content `[S+ · 61.6%]`. The chip is placed OUTSIDE the
+   card artwork — above the derived card frame, side-anchored as fallback —
+   never over card art, HUD, reroll, or the central upgrade button. */
+.badge-chip {
   position: absolute;
-  transform: translate(-50%, 0);
+  transform: none;
+  box-sizing: border-box;
+  width: 118px;
+  height: 32px;
   background: rgba(8, 12, 20, 0.92);
   backdrop-filter: blur(12px);
   border: 1.5px solid rgba(100, 116, 139, 0.3);
-  border-radius: 8px;
-  padding: 6px 14px;
+  border-radius: 7px;
+  padding: 0 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 2px;
-  min-width: 100px;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
   z-index: 50;
+  /* Info-only surface: must never intercept clicks on the cards, reroll, or the
+     central upgrade button beneath it (fix #9). There is no native click-through
+     (no ignoreCursorEvents), so this CSS is the guarantee. */
+  pointer-events: none;
+}
+
+/* Explicit per-slot pipeline states — never stale, never invented data. */
+.badge-chip-state {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.badge-chip-scanning { border-color: rgba(167, 139, 250, 0.5); }
+.badge-chip-scanning .badge-chip-state { color: #a78bfa; }
+.badge-chip-unmatched { border-color: rgba(251, 113, 133, 0.5); }
+.badge-chip-unmatched .badge-chip-state { color: #fb7185; }
+.badge-chip-ocr-error { border-color: rgba(251, 113, 133, 0.5); }
+.badge-chip-ocr-error .badge-chip-state { color: #fb7185; }
+.badge-chip-no-data { border-color: rgba(148, 163, 184, 0.5); }
+.badge-chip-no-data .badge-chip-state { color: #94a3b8; }
+.badge-chip-loading-data { border-color: rgba(167, 139, 250, 0.5); }
+.badge-chip-loading-data .badge-chip-state { color: #a78bfa; }
+.badge-chip-data-error { border-color: rgba(251, 113, 133, 0.5); }
+.badge-chip-data-error .badge-chip-state { color: #fb7185; }
+
+.badge-chip-sep {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.badge-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Explicit geometry-preview badges carry a prominent watermark so synthetic
+   card geometry can never be mistaken for a real in-game offer (fix #3). */
+.badge-preview {
+  border-style: dashed;
+  border-color: rgba(251, 191, 36, 0.7);
+}
+
+.preview-watermark {
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.14);
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  border-radius: 3px;
+  padding: 1px 5px;
+  text-transform: uppercase;
 }
 
 .badge-S { border-color: rgba(251, 191, 36, 0.5); box-shadow: 0 0 12px rgba(251, 191, 36, 0.15); }
@@ -49,30 +148,43 @@ html, body, #root {
 .badge-B { border-color: rgba(96, 165, 250, 0.3); }
 .badge-C { border-color: rgba(148, 163, 184, 0.2); }
 
-.badge-label {
-  font-size: 8px;
-  color: #64748b;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+/* Tier glyph: v1 dashboard typography (Anton 400, slight italic skew and
+   counter-rotation about the optical center). Applies to the GLYPH only —
+   the separator and percentage keep the compact UI font. */
+.badge-tier {
+  font-family: Anton, Impact, "Arial Narrow", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--tier-accent, #94a3b8);
+  display: inline-block;
+  transform: skewX(-9deg) rotate(-4deg);
+  /* Optical vertical centering: Anton's tall cap height sits high on the
+     line box, so rotate about a point slightly below geometric center. */
+  transform-origin: 50% 56%;
 }
 
-.badge-tier {
-  font-size: 42px;
-  font-weight: 900;
-  line-height: 1;
-  text-shadow: 0 0 20px currentColor;
+/* Two-character glyphs (S+) get slight negative tracking so the plus tucks
+   against the S, per the dashboard reference. */
+.badge-tier-two-char {
+  letter-spacing: -1px;
+}
+
+.badge-chip[class*="tier-"] {
+  border-color: var(--tier-accent, rgba(100, 116, 139, 0.3));
+}
+
+.badge-wr {
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #f1f5f9;
 }
 
 .badge-score {
   font-size: 11px;
   color: #94a3b8;
   font-weight: 700;
-}
-
-.badge-prob {
-  font-size: 9px;
-  color: #64748b;
-  font-weight: 500;
 }
 
 .badge-grade {
@@ -98,7 +210,6 @@ html, body, #root {
   border: 1px solid rgba(74, 222, 128, 0.4);
   border-radius: 3px;
   padding: 0 3px;
-  margin-bottom: 2px;
   letter-spacing: 0.5px;
 }
 
@@ -166,36 +277,6 @@ html, body, #root {
   border: 1px solid rgba(251, 113, 133, 0.35);
   border-radius: 6px;
   padding: 5px 8px;
-}
-
-.calibration-panel {
-  position: fixed;
-  top: 24px;
-  right: 8px;
-  z-index: 120;
-  display: grid;
-  gap: 2px;
-  max-width: 340px;
-  padding: 8px 10px;
-  color: #94a3b8;
-  font-size: 10px;
-  line-height: 1.3;
-  background: rgba(8, 12, 20, 0.72);
-  border: 1px solid rgba(56, 189, 248, 0.24);
-  border-radius: 6px;
-  backdrop-filter: blur(8px);
-  pointer-events: none;
-}
-
-.calibration-title {
-  color: #bae6fd;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.calibration-warning {
-  color: #fbbf24;
 }
 
 /* ─── Member coach ─── */
@@ -271,6 +352,31 @@ html, body, #root {
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(100, 116, 139, 0.24);
   border-radius: 8px;
+}
+
+/* Tier chip: DESIGN.md data-label badge (sm radius, label-sm type). */
+.tier-chip {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  padding: 1px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--tier-accent, #94a3b8);
+  color: var(--tier-accent, #94a3b8);
+  background: rgba(8, 12, 20, 0.6);
+}
+
+.coach-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.coach-wr {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #f1f5f9;
 }
 
 /* ─── Free collector ─── */

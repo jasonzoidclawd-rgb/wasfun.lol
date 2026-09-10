@@ -1,7 +1,7 @@
 {
   "patch": "26.13",
   "augments": 268,
-  "tests": "450",
+  "tests": "1209",
   "parityBudget": 0,
-  "lastTag": "pre-docs-review-4a83c26"
+  "lastTag": "overlay-collapse-diagnostics-2026-08-05"
 }

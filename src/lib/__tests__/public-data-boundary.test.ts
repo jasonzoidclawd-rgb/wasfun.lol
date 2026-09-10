@@ -129,7 +129,10 @@ describe("public data boundary", () => {
       expect(champion).toHaveProperty("rank");
       expect(champion).toHaveProperty("win_rate");
       expect(champion).toHaveProperty("pick_rate");
+      expect(champion.champion_key).toMatch(/^\d+$/);
     }
+    expect(new Set(publicChampions.champions.map((champion) => champion.champion_key)).size)
+      .toBe(publicChampions.champions.length);
   });
 
   test("member overlay sync is a separate package and does not loosen website public catalogs", () => {

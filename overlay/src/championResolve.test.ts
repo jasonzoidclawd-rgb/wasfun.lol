@@ -37,6 +37,7 @@ describe("resolveKnownChampionSlug", () => {
     expect(resolveKnownChampionSlug("   ", slugByName, knownSlugs)).toBeNull();
     expect(resolveKnownChampionSlug("???", slugByName, knownSlugs)).toBeNull();
     expect(resolveKnownChampionSlug("Choose a champion", slugByName, knownSlugs)).toBeNull();
+    expect(resolveKnownChampionSlug("FutureChampion", slugByName, knownSlugs)).toBeNull();
   });
 });
 

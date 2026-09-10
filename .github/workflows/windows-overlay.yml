@@ -15,6 +15,12 @@ on:
       - "data/internal/**"
       - "overlay/**"
 
+# Least-privilege: this job compiles, tests and builds the overlay only. It has
+# no write access and never creates a release or publishes artifacts — the
+# unsigned bundle is retained solely for inspection.
+permissions:
+  contents: read
+
 jobs:
   build-windows-overlay:
     name: Build Windows Tauri overlay
@@ -37,6 +43,7 @@ jobs:
         shell: pwsh
         run: |
           rustup toolchain install stable --profile minimal
+          rustup component add clippy
           rustup default stable
           rustc --version
           cargo --version
@@ -52,29 +59,37 @@ jobs:
         working-directory: overlay
         run: npm ci
 
-      - name: Run overlay tests
+      - name: Verify version consistency and run overlay tests
         working-directory: overlay
         run: npm test
 
-      - name: Build overlay renderer
+      - name: Type-check and build overlay renderer
         working-directory: overlay
         run: npm run build
 
-      - name: Run Rust tests
+      - name: Run Rust tests (native Windows target)
         working-directory: overlay/src-tauri
         run: cargo test
+
+      - name: Rust lints (clippy)
+        working-directory: overlay/src-tauri
+        run: cargo clippy --all-targets
 
       - name: Audit renderer artifacts
         working-directory: overlay
         run: npm run audit:windows-artifact
 
-      - name: Build Windows installer
+      - name: Build Windows installers (NSIS + MSI)
         working-directory: overlay
         run: npm run package:windows
 
       - name: Audit packaged artifacts
         working-directory: overlay
         run: npm run audit:windows-artifact
+
+      - name: Verify deterministic artifact names
+        working-directory: overlay
+        run: npm run audit:windows-artifact-names
 
       - name: Upload Windows overlay bundle
         uses: actions/upload-artifact@v4.6.2

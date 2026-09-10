@@ -15,41 +15,37 @@ export interface GameflowCaptureGate {
   liveCaptureAllowed: boolean;
 }
 
-export function shouldStartAugmentSelection({
-  augmentLevel,
-}: {
-  augmentLevel: number | undefined;
-}): boolean {
-  return augmentLevel !== undefined;
+export const AUGMENT_LEVELS = [3, 7, 11, 15] as const;
+
+export interface AugmentRound {
+  round: number;
+  level: number;
 }
 
-export function shouldEndAugmentSelectionForLevel({
-  playerLevel,
-  lastAugmentLevel,
-}: {
-  playerLevel: number;
-  lastAugmentLevel: number;
-}): boolean {
-  return lastAugmentLevel > 0 && playerLevel > lastAugmentLevel;
+/**
+ * Level-derived round label for DISPLAY only (HUD "R2" indicator). Round
+ * DELIVERY lives in `roundDelivery.ts`: crossing a threshold makes a round
+ * eligible; delivery happens at the R1 timing or during a death sequence, and
+ * completion is counted only on strong evidence — never from level.
+ */
+export function augmentRoundForLevel(level: number): AugmentRound | null {
+  for (let index = AUGMENT_LEVELS.length - 1; index >= 0; index -= 1) {
+    const threshold = AUGMENT_LEVELS[index];
+    if (level >= threshold) return { round: index + 1, level: threshold };
+  }
+  return null;
 }
 
-export function advanceOcrSelection(
-  state: { hasSeenCards: boolean; emptyPasses: number },
-  detectedCardCount: number,
-) {
-  if (detectedCardCount > 0) {
-    return { hasSeenCards: true, emptyPasses: 0, shouldStop: false };
-  }
-  if (!state.hasSeenCards) {
-    return { ...state, shouldStop: false };
-  }
-
-  const emptyPasses = state.emptyPasses + 1;
-  return {
-    hasSeenCards: true,
-    emptyPasses,
-    shouldStop: emptyPasses >= 2,
-  };
+export function ocrRunIsCurrent({
+  active,
+  currentRunId,
+  runId,
+}: {
+  active: boolean;
+  currentRunId: number;
+  runId: number;
+}): boolean {
+  return active && currentRunId === runId;
 }
 
 function levenshtein(a: string, b: string): number {
@@ -176,8 +172,25 @@ export function shouldRunOcrForGameflow(
   return gameflow?.liveCaptureAllowed === true;
 }
 
+/**
+ * A missing/failed gameflow sample (LCU read error, timeout) is not a
+ * confirmed transition — it must not instantly sleep the probe scheduler for
+ * a round that is actually still in progress. Only a confirmed sample changes
+ * the gate; a missing one carries the last confirmed value forward, mirroring
+ * `shouldClearOcrStateForGameflow`'s existing "null never clears" policy.
+ */
+export function resolveGameflowCaptureAllowed(
+  previous: boolean,
+  gameflow: GameflowCaptureGate | null | undefined,
+): boolean {
+  return gameflow == null ? previous : shouldRunOcrForGameflow(gameflow);
+}
+
 export function shouldClearOcrStateForGameflow(
   gameflow: GameflowCaptureGate | null | undefined,
 ): boolean {
-  return !shouldRunOcrForGameflow(gameflow);
+  // A transient LCU read failure must not erase the current round or make the
+  // next selection impossible. A confirmed non-live phase is the only clear
+  // boundary; OCR start remains fail-closed until a live phase is confirmed.
+  return gameflow != null && !shouldRunOcrForGameflow(gameflow);
 }

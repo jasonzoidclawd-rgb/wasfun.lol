@@ -107,7 +107,7 @@ def published_entries(payload: Any) -> List[Dict[str, Any]]:
         champion_id = next(
             (
                 numeric_id(row.get(field))
-                for field in ("id", "championId", "key")
+                for field in ("champion_key", "id", "championId", "key")
                 if numeric_id(row.get(field))
             ),
             None,

@@ -64,6 +64,7 @@ function normalizeAugmentSet(set, wikiSet) {
 function compactChampion(champion) {
   return {
     slug: champion.slug,
+    champion_key: champion.champion_key,
     name: champion.name,
     name_zh_TW: champion.name_zh_TW,
     name_zh_CN: champion.name_zh_CN,

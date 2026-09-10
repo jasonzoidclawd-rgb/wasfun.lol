@@ -1,6 +1,11 @@
 # Mayhem Oracle overlay (Tauri + React + TypeScript)
 
 Desktop companion overlay for ARAM Mayhem. Vite frontend + Tauri (Rust) shell.
+Version **0.5.0**.
+
+- [Release notes 0.5.0](docs/release-notes-0.5.0.md)
+- [Windows build, runtime & architecture notes](docs/windows.md)
+- [Windows human-validation checklist](docs/windows-validation-checklist.md)
 
 ## Runtime configuration
 

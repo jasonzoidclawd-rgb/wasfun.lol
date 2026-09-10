@@ -1,6 +1,6 @@
 [package]
 name = "mayhem-oracle-overlay"
-version = "0.1.0"
+version = "0.5.0"
 description = "ARAM Mayhem augment overlay"
 authors = ["jason"]
 edition = "2021"
@@ -32,6 +32,8 @@ sha2 = "0.10"
 [target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.26"
 objc = "0.2"
+core-graphics = "0.24"
+core-foundation = "0.10"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 windows = { version = "0.61", features = [
@@ -41,4 +43,8 @@ windows = { version = "0.61", features = [
     "Graphics_Imaging",
     "Media_Ocr",
     "Storage_Streams",
+    "Win32_Foundation",
+    "Win32_System_Threading",
+    "Win32_UI_HiDpi",
+    "Win32_UI_WindowsAndMessaging",
 ] }

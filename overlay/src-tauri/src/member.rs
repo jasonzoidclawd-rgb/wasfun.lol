@@ -244,10 +244,7 @@ pub fn parse_bootstrap_response(status: u16, body: &str) -> Result<BootstrapResp
     serde_json::from_str(body).map_err(|error| format!("invalid-bootstrap-response: {error}"))
 }
 
-pub fn parse_game_session_response(
-    status: u16,
-    body: &str,
-) -> Result<GameSessionResponse, String> {
+pub fn parse_game_session_response(status: u16, body: &str) -> Result<GameSessionResponse, String> {
     if status != 200 {
         return Err(api_error(status, body));
     }
@@ -273,7 +270,11 @@ fn canonical_value(value: &Value) -> Value {
 }
 
 fn resolve_openssl() -> Result<String, String> {
-    for candidate in ["/opt/homebrew/bin/openssl", "/usr/local/bin/openssl", "openssl"] {
+    for candidate in [
+        "/opt/homebrew/bin/openssl",
+        "/usr/local/bin/openssl",
+        "openssl",
+    ] {
         if candidate.starts_with('/') && !Path::new(candidate).is_file() {
             continue;
         }
@@ -298,13 +299,7 @@ fn verify_ed25519(data: &[u8], signature: &[u8], public_key_pem: &str) -> Result
     std::fs::write(&data_path, data).map_err(|error| error.to_string())?;
     std::fs::write(&signature_path, signature).map_err(|error| error.to_string())?;
     let output = Command::new(resolve_openssl()?)
-        .args([
-            "pkeyutl",
-            "-verify",
-            "-rawin",
-            "-pubin",
-            "-inkey",
-        ])
+        .args(["pkeyutl", "-verify", "-rawin", "-pubin", "-inkey"])
         .arg(public_key_path)
         .arg("-in")
         .arg(data_path)
@@ -338,18 +333,29 @@ pub fn verify_manifest(
     let signature_bytes = base64::engine::general_purpose::STANDARD
         .decode(&manifest.signature)
         .map_err(|error| error.to_string())?;
-    verify_ed25519(&canonical_json(&unsigned)?, &signature_bytes, public_key_pem)
+    verify_ed25519(
+        &canonical_json(&unsigned)?,
+        &signature_bytes,
+        public_key_pem,
+    )
 }
 
 fn tar_string(bytes: &[u8]) -> Result<String, String> {
-    let end = bytes.iter().position(|byte| *byte == 0).unwrap_or(bytes.len());
+    let end = bytes
+        .iter()
+        .position(|byte| *byte == 0)
+        .unwrap_or(bytes.len());
     std::str::from_utf8(&bytes[..end])
         .map(str::to_string)
         .map_err(|error| error.to_string())
 }
 
 fn tar_size(bytes: &[u8]) -> Result<usize, String> {
-    let value = tar_string(bytes)?.trim().trim_matches('\0').trim().to_string();
+    let value = tar_string(bytes)?
+        .trim()
+        .trim_matches('\0')
+        .trim()
+        .to_string();
     usize::from_str_radix(if value.is_empty() { "0" } else { &value }, 8)
         .map_err(|error| error.to_string())
 }
@@ -410,8 +416,7 @@ pub fn verify_model_package(
             }
             "model-config.json" => {
                 config = Some(
-                    serde_json::from_slice::<Value>(&bytes)
-                        .map_err(|error| error.to_string())?,
+                    serde_json::from_slice::<Value>(&bytes).map_err(|error| error.to_string())?,
                 );
             }
             _ => return Err("model-package-has-unexpected-entry".to_string()),

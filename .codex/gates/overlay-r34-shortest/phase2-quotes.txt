@@ -1,0 +1,24 @@
+### first geometry record
+[geometry-timing] {"benchElapsedMs":703,"probeSeq":1,"stale":false,"preCaptureMs":37,"captureMs":71,"analysisMs":55,"padMs":539,"nativeElapsedMs":703,"roundTripMs":703,"timeoutClassification":"none","attemptGeneration":1,"dispatchWaitMs":0,"resumeWaitMs":0,"closureWorkMs":702,"unattributedNativeMs":1,"transportMs":0,"asyncRuntimeMs":0,"captureWidth":1280,"captureHeight":720,"capturedRealFrame":true}
+
+### last geometry record
+[geometry-timing] {"benchElapsedMs":1199359,"probeSeq":1598,"stale":false,"preCaptureMs":1,"captureMs":55,"analysisMs":57,"padMs":589,"nativeElapsedMs":704,"roundTripMs":704,"timeoutClassification":"none","attemptGeneration":1598,"dispatchWaitMs":0,"resumeWaitMs":0,"closureWorkMs":702,"unattributedNativeMs":2,"transportMs":0,"asyncRuntimeMs":0,"captureWidth":1280,"captureHeight":720,"capturedRealFrame":true}
+
+### max nativeElapsedMs record (846)
+[geometry-timing] {"benchElapsedMs":859451,"probeSeq":1145,"stale":false,"preCaptureMs":2,"captureMs":376,"analysisMs":465,"padMs":0,"nativeElapsedMs":846,"roundTripMs":846,"timeoutClassification":"none","attemptGeneration":1145,"dispatchWaitMs":0,"resumeWaitMs":0,"closureWorkMs":843,"unattributedNativeMs":3,"transportMs":0,"asyncRuntimeMs":0,"captureWidth":2560,"captureHeight":1440,"capturedRealFrame":true}
+
+### first heartbeat
+[async-runtime-heartbeat] {"benchElapsedMs":1008,"intervalMs":250,"ticks":4,"expectedTicks":4,"maxDriftMs":2,"lastDriftMs":2,"elapsedMs":1007}
+
+### last heartbeat
+[async-runtime-heartbeat] {"benchElapsedMs":1199000,"intervalMs":250,"ticks":4,"expectedTicks":4,"maxDriftMs":2,"lastDriftMs":2,"elapsedMs":1007}
+
+### worst heartbeat drift (6 ms)
+[async-runtime-heartbeat] {"benchElapsedMs":890661,"intervalMs":250,"ticks":4,"expectedTicks":4,"maxDriftMs":6,"lastDriftMs":6,"elapsedMs":1011}
+
+### worst game-poll sysinfo (62 ms)
+[bench-game-poll] {"benchElapsedMs":928637,"sysinfoMs":62,"processCount":414}
+
+### bench-start / bench-end
+[bench-start] {"minutes":20,"tickIntervalMs":150,"closureTargetMs":703,"workerThreads":10,"nativeCaptureTimeoutMs":1500,"maxConcurrentCaptures":4}
+[bench-end] {"benchElapsedMs":1200000,"probesIssued":1599,"outstandingAtEnd":1}

@@ -63,6 +63,40 @@ def fetch_json(url: str):
         return json.loads(resp.read())
 
 
+def enrich_champion_rows(champions, champ_data, ad_growth_data=None):
+    """Attach Riot numeric champion keys and base stats by canonical identity."""
+    ad_growth_data = ad_growth_data or {}
+    by_slug = {}
+    for key, info in champ_data.items():
+        champion_key = str(info.get("key") or "")
+        if not champion_key.isdigit():
+            continue
+        raw_stats = info.get("stats") or {}
+        mapped = {
+            our_key: raw_stats[dd_key]
+            for dd_key, our_key in STAT_MAP.items()
+            if dd_key in raw_stats
+        }
+        fallback = ad_growth_data.get(
+            str(info.get("name") or "").lower(),
+            ad_growth_data.get(key.lower()),
+        )
+        if fallback is not None:
+            mapped["adGrowth"] = fallback
+        by_slug[canonical_slug(str(info.get("id") or key))] = (champion_key, mapped)
+
+    matched = 0
+    unmatched = []
+    for champion in champions:
+        resolved = by_slug.get(canonical_champion_slug(str(champion.get("slug") or "")))
+        if resolved is None:
+            unmatched.append(champion.get("name") or champion.get("slug") or "unknown")
+            continue
+        champion["champion_key"], champion["baseStats"] = resolved
+        matched += 1
+    return matched, unmatched
+
+
 def main():
     # 1. Get latest DDragon version
     versions = fetch_json("https://ddragon.leagueoflegends.com/api/versions.json")
@@ -89,51 +123,9 @@ def main():
             ad_growth_data[info["name"].lower()] = info["stats"].get("attackdamageperlevel", 0)
             ad_growth_data[key.lower()] = info["stats"].get("attackdamageperlevel", 0)
 
-    # Build lookup: lowercase name → stats
-    dd_by_name: dict[str, dict] = {}
-    for key, info in champ_data.items():
-        name = info["name"]
-        raw_stats = info["stats"]
-        mapped = {}
-        for dd_key, our_key in STAT_MAP.items():
-            if dd_key in raw_stats:
-                mapped[our_key] = raw_stats[dd_key]
-        # Fix adGrowth from fallback if broken
-        if ad_growth_broken:
-            fallback = ad_growth_data.get(name.lower(), ad_growth_data.get(key.lower(), 0))
-            mapped["adGrowth"] = fallback
-        # asGrowth is given as percent (e.g. 2.0 = 2%), keep as-is for clarity
-        dd_by_name[name.lower()] = mapped
-        # Also index by key (e.g. "MonkeyKing" for Wukong)
-        dd_by_name[key.lower()] = mapped
-
     # 3. Load existing champions.json
     existing = json.loads(OUT.read_text("utf-8"))
     champions = existing["champions"]
-
-    matched = 0
-    unmatched = []
-    for champ in champions:
-        name = champ["name"].lower()
-        slug = champ.get("slug", "").lower().replace("-", "").replace("'", "").replace(".", "").replace(" ", "")
-
-        stats = dd_by_name.get(name)
-        if not stats:
-            # Try slug-based matching (e.g. "drmundo" → "dr. mundo")
-            stats = dd_by_name.get(slug)
-        if not stats:
-            # Try removing spaces/punctuation from DDragon keys
-            for dd_name, dd_stats in dd_by_name.items():
-                clean = dd_name.replace("'", "").replace(".", "").replace(" ", "").replace("-", "")
-                if clean == slug:
-                    stats = dd_stats
-                    break
-
-        if stats:
-            champ["baseStats"] = stats
-            matched += 1
-        else:
-            unmatched.append(champ["name"])
 
     # Data Dragon is the authoritative active roster. arammayhem may lag a
     # newly released champion's statistical feed, but a missing stat row must
@@ -145,7 +137,6 @@ def main():
         slug = canonical_slug(info.get("id") or key)
         if not slug or slug in existing_slugs:
             continue
-        stats = dd_by_name.get(info["name"].lower()) or dd_by_name.get(key.lower(), {})
         champion_id = str(info.get("key") or "")
         champions.append({
             "slug": slug,
@@ -156,13 +147,16 @@ def main():
             "pick_rate": None,
             "tags": [str(tag).lower() for tag in info.get("tags", [])],
             "icon": CDRAGON_ICON_TEMPLATE.format(champion_id=champion_id),
-            "baseStats": stats,
+            "champion_key": champion_id,
+            "baseStats": {},
         })
         existing_slugs.add(slug)
         added.append(slug)
 
     if added:
         print(f"Added {len(added)} Data Dragon roster champion(s) without arammayhem stats: {added}")
+
+    matched, unmatched = enrich_champion_rows(champions, champ_data, ad_growth_data)
 
     print(f"Matched: {matched}/{len(champions)}")
     if unmatched:

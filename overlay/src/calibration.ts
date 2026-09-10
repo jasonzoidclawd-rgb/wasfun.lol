@@ -16,15 +16,23 @@ export interface NormalizedRegion {
   h: number;
 }
 
-export interface NormalizedAnchor {
-  x: number;
-  y: number;
+export interface CssSize {
+  width: number;
+  height: number;
 }
 
 export interface OverlayCalibration {
   monitor: MonitorInfo;
   gameWindow: PhysicalRect | null;
   viewport: PhysicalRect;
+  /**
+   * The rect (same calibrated space as `viewport`) the overlay webview's CSS
+   * box maps onto — the monitor on macOS (fullscreen overlay window), the
+   * viewport on Windows (the backend repositions the window onto it). All
+   * CSS conversion goes through `cssRectFromCalibratedRect` with this anchor;
+   * `monitor.scaleFactor` is display metadata only, never geometry.
+   */
+  overlayAnchor: PhysicalRect;
   mode: "league-window" | "borderless-monitor-fallback" | "monitor-fallback";
   warnings: string[];
 }
@@ -33,12 +41,6 @@ export const CARD_NAME_REGIONS: NormalizedRegion[] = [
   { x: 0.219, y: 0.347, w: 0.172, h: 0.083 },
   { x: 0.414, y: 0.347, w: 0.172, h: 0.083 },
   { x: 0.609, y: 0.347, w: 0.172, h: 0.083 },
-];
-
-export const BADGE_ANCHORS: NormalizedAnchor[] = [
-  { x: 0.305, y: 0.62 },
-  { x: 0.5, y: 0.62 },
-  { x: 0.695, y: 0.62 },
 ];
 
 const FULLSCREEN_TOLERANCE_PX = 24;
@@ -82,6 +84,7 @@ export function selectOverlayViewport(
       monitor,
       gameWindow: null,
       viewport: rectOnly(monitor),
+      overlayAnchor: rectOnly(monitor),
       mode: "monitor-fallback",
       warnings: ["League window not detected; using monitor bounds."],
     };
@@ -92,6 +95,7 @@ export function selectOverlayViewport(
       monitor,
       gameWindow,
       viewport: rectOnly(monitor),
+      overlayAnchor: rectOnly(monitor),
       mode: "borderless-monitor-fallback",
       warnings: [],
     };
@@ -101,6 +105,7 @@ export function selectOverlayViewport(
     monitor,
     gameWindow,
     viewport: rectOnly(gameWindow),
+    overlayAnchor: rectOnly(monitor),
     mode: "league-window",
     warnings: [],
   };
@@ -123,42 +128,34 @@ export function physicalRectForNormalizedRegion(
   };
 }
 
-export function cssRectFromPhysicalRect(
+/**
+ * THE coordinate-space boundary (fix #3, scale-flap regression).
+ *
+ * Every calibrated rect (viewport, detected card rects, normalized regions
+ * resolved against the viewport) converts to overlay-window CSS pixels here,
+ * exactly once, as a pure ratio between the overlay anchor and the CSS window
+ * size the webview itself reports (window.innerWidth/innerHeight):
+ *
+ *   cssX = (x − anchor.x) × cssWindow.width / anchor.width
+ *
+ * scaleFactor / devicePixelRatio NEVER enter: a monitor whose reported scale
+ * flaps 1.0↔2.0 (observed on macOS) yields identical CSS geometry, and
+ * detected-window vs monitor-fallback modes are equivalent by construction
+ * because both express rects in the same anchored space.
+ */
+export function cssRectFromCalibratedRect(
   rect: PhysicalRect,
-  scaleFactor: number,
+  anchor: PhysicalRect,
+  cssWindow: CssSize,
 ): PhysicalRect {
-  const divisor = safeScaleFactor(scaleFactor);
+  const ratioX = cssWindow.width / Math.max(1, anchor.width);
+  const ratioY = cssWindow.height / Math.max(1, anchor.height);
 
   return {
-    x: Math.round(rect.x / divisor),
-    y: Math.round(rect.y / divisor),
-    width: Math.round(rect.width / divisor),
-    height: Math.round(rect.height / divisor),
-  };
-}
-
-export function physicalPointFromCssPoint(
-  point: { x: number; y: number },
-  scaleFactor: number,
-): { x: number; y: number } {
-  const multiplier = safeScaleFactor(scaleFactor);
-
-  return {
-    x: Math.round(point.x * multiplier),
-    y: Math.round(point.y * multiplier),
-  };
-}
-
-export function cssPointFromNormalizedAnchor(
-  anchor: NormalizedAnchor,
-  viewport: PhysicalRect,
-  scaleFactor: number,
-): { left: string; top: string } {
-  const divisor = safeScaleFactor(scaleFactor);
-
-  return {
-    left: `${Math.round((anchor.x * viewport.width) / divisor)}px`,
-    top: `${Math.round((anchor.y * viewport.height) / divisor)}px`,
+    x: Math.round((rect.x - anchor.x) * ratioX),
+    y: Math.round((rect.y - anchor.y) * ratioY),
+    width: Math.round(rect.width * ratioX),
+    height: Math.round(rect.height * ratioY),
   };
 }
 
@@ -169,8 +166,4 @@ function rectOnly(rect: PhysicalRect): PhysicalRect {
     width: rect.width,
     height: rect.height,
   };
-}
-
-function safeScaleFactor(scaleFactor: number): number {
-  return Number.isFinite(scaleFactor) && scaleFactor > 0 ? scaleFactor : 1;
 }

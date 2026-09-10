@@ -2,14 +2,17 @@ import type {
   DecisionMode,
   DecisionResult,
 } from "../contracts/decision";
-import { GRADE_TOKENS } from "../model/inference";
 import { localizedGrade } from "../model/presentation";
+import { formatWinRate, tierClassName, tierForGrade } from "../model/tier";
 
 interface CoachPanelProps {
   open: boolean;
   result: DecisionResult | null;
   mode: DecisionMode;
   onModeChange: (mode: DecisionMode) => void;
+  winRateBySlug: Record<string, number | string | null>;
+  /** Dev tier-fixture only: show raw win-rate precision instead of 1 decimal. */
+  rawWinRate?: boolean;
 }
 
 function interaction(
@@ -24,6 +27,8 @@ export function CoachPanel({
   result,
   mode,
   onModeChange,
+  winRateBySlug,
+  rawWinRate = false,
 }: CoachPanelProps) {
   if (!open) return null;
 
@@ -49,13 +54,21 @@ export function CoachPanel({
       </div>
       <p className="coach-hint">Confirm a picked card with 1, 2, or 3.</p>
       {!result && <p>Open an augment screen to see ranked options.</p>}
-      {result?.candidates.map((candidate, index) => (
+      {result?.candidates.map((candidate, index) => {
+        const tier = tierForGrade(candidate.grade);
+        return (
         <section className="coach-candidate" key={candidate.augmentSlug}>
           <div className="coach-rank">
             <span>#{index + 1} {candidate.augmentSlug}</span>
-            <strong style={{ color: GRADE_TOKENS[candidate.grade].color }}>
-              {localizedGrade(candidate.grade, navigator.language)}
+            <strong className={`tier-chip ${tierClassName(tier)}`}>
+              {tier}
             </strong>
+          </div>
+          <div className="coach-stats">
+            <span className="coach-wr">
+              {formatWinRate(winRateBySlug[candidate.augmentSlug], { raw: rawWinRate })}
+            </span>
+            <span>{localizedGrade(candidate.grade, navigator.language)}</span>
           </div>
           <span>{candidate.confidence} confidence</span>
           {candidate.warnings.length > 0 && (
@@ -73,7 +86,8 @@ export function CoachPanel({
             Round: {interaction(candidate, (reason) => reason.startsWith("round:"))}
           </span>
         </section>
-      ))}
+        );
+      })}
     </aside>
   );
 }

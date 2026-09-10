@@ -12,9 +12,9 @@ Maintained by `scripts/update-state.sh` (post-commit hook via
 <!-- STATE:START -->
 - Patch: `26.13`
 - Augments: `268`
-- Tests passing: `450`
+- Tests passing: `1209`
 - Cross-parity budget: `0` divergent champions
-- Last tag: `pre-docs-review-4a83c26`
+- Last tag: `overlay-collapse-diagnostics-2026-08-05`
 <!-- STATE:END -->
 
 ## Operating Principles
@@ -52,6 +52,19 @@ Maintained by `scripts/update-state.sh` (post-commit hook via
 - Overlay work is compliance-sensitive: no game automation, hidden-information
   access, or client injection without explicit review.
 
+### ARAM Mayhem augment cardinality invariant
+
+Do not equate four augment offer rounds with four final owned augments.
+
+- There are exactly four offer-round owners.
+- One round may produce multiple final augment results.
+- Final ownership representations must support at least five entries.
+- Transformation chains remain within their originating round.
+- Never derive round progression from final augment inventory length.
+
+Canonical contract:
+`docs/specs/overlay-v1-product-contract.md`
+
 ## Verification
 
 ```bash
@@ -71,8 +84,8 @@ stat -f "%Sm %N" src-tauri/target/release/mayhem-oracle-overlay
 ```
 
 rtk caveat: when command output is verification evidence, use absolute tool
-paths (`/usr/bin/diff`, `/usr/bin/grep`, `/usr/bin/wc`) — the rtk shell hook
-has returned wrong results for bare `diff` / `ls` / `find`.
+paths (`/usr/bin/diff`, `/usr/bin/grep`, `/usr/bin/wc`, `/usr/bin/git`) — the rtk shell hook
+has returned wrong results for bare `diff` / `ls` / `find` / `git`.
 
 ## Data Pipeline
 
@@ -88,6 +101,10 @@ update-data step gate, data-integrity test).
 ## Pointers
 
 - `AGENTS.md` — agent operating rules · `CO_WORKFLOW.md` — Claude/Codex handoffs
+- `.claude/skills/slice-contract/SKILL.md` — the bounded-slice contract:
+  evidence pinning, phase reports, true-seam red tests, frozen tests, gate
+  lists, terminal states. `scripts/checkpoint.sh` snapshots the worktree
+  before risky work (`--help` documents the commit path).
 - `GAME_MECHANICS.md` — selection mechanics, 26.12 changes, live-gate checklist
 - `docs/handoffs/current-github-context.md` — recent PR/merge state to verify
   before assuming what is already on `main`.

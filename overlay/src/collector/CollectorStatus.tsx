@@ -10,8 +10,7 @@ import {
   openCollectorControlsWindow,
   openConsentWindow,
   publishCollectorStatus,
-  shouldShowCollectorControlsWindow,
-  shouldShowConsentWindow,
+  resolveCollectorWindowVisibility,
 } from "./collectorWindows";
 
 export type CollectorConsent = "pending" | "accepted" | "declined";
@@ -30,13 +29,23 @@ interface CollectorStatusProps {
   onStatus: (status: CollectorSnapshot) => void;
 }
 
+interface CollectorOverlayControllerProps extends CollectorStatusProps {
+  showPanel?: boolean;
+}
+
 interface CollectorStatusOptions {
   poll?: boolean;
   publishRefreshes?: boolean;
 }
 
+// A `() => {}` written inline as the default is re-evaluated on every call,
+// so callers that omit `onStatus` get a new identity per render. That
+// destabilises `applyStatus` and makes both effects below re-run on every
+// commit, re-subscribing the event listener each time.
+const IGNORE_STATUS = () => {};
+
 export function useCollectorStatus(
-  onStatus: (status: CollectorSnapshot) => void = () => {},
+  onStatus: (status: CollectorSnapshot) => void = IGNORE_STATUS,
   {
     poll = true,
     publishRefreshes = false,
@@ -210,26 +219,48 @@ export function CollectorStatus({ onStatus }: CollectorStatusProps) {
   );
 }
 
-export function CollectorOverlayController({ onStatus }: CollectorStatusProps) {
+export function CollectorOverlayController({
+  onStatus,
+  showPanel = true,
+}: CollectorOverlayControllerProps) {
   const { status } = useCollectorStatus(onStatus, {
     poll: true,
     publishRefreshes: true,
   });
+  const visibleWindowsRef = useRef<{
+    consentWindow: boolean;
+    collectorControlsWindow: boolean;
+  } | null>(null);
 
   useEffect(() => {
-    if (!status) return;
+    const nextVisibility = resolveCollectorWindowVisibility({
+      status,
+      controlsVisible: showPanel,
+    });
+    const previousVisibility = visibleWindowsRef.current;
+    visibleWindowsRef.current = nextVisibility;
 
-    if (shouldShowConsentWindow(status)) {
+    if (nextVisibility.consentWindow && previousVisibility?.consentWindow !== true) {
       void openConsentWindow();
-      void closeWindow(COLLECTOR_CONTROLS_WINDOW_LABEL);
-      return;
+    } else if (!nextVisibility.consentWindow && (
+      previousVisibility === null || previousVisibility.consentWindow
+    )) {
+      // Close on the initial hidden render too. A stale native window can
+      // survive an overlay restart while League/Riot Client is foreground.
+      void closeWindow(CONSENT_WINDOW_LABEL);
     }
 
-    if (shouldShowCollectorControlsWindow(status)) {
-      void closeWindow(CONSENT_WINDOW_LABEL);
+    if (nextVisibility.collectorControlsWindow && previousVisibility?.collectorControlsWindow !== true) {
       void openCollectorControlsWindow();
+    } else if (!nextVisibility.collectorControlsWindow && (
+      previousVisibility === null || previousVisibility.collectorControlsWindow
+    )) {
+      // The first status refresh must also close a previously opened controls
+      // window; no controller state is unmounted or reset here.
+      void closeWindow(COLLECTOR_CONTROLS_WINDOW_LABEL);
     }
-  }, [status]);
+
+  }, [showPanel, status]);
 
   return null;
 }

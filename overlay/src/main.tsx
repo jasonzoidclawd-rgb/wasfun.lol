@@ -11,6 +11,10 @@ import {
   currentWindowLabel,
 } from "./collector/collectorWindows";
 
+if (import.meta.env.DEV) {
+  void import("./dev/DevOverlayDiagnostics.css");
+}
+
 function Root() {
   const label = currentWindowLabel();
 

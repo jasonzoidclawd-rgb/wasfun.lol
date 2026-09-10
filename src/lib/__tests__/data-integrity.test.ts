@@ -25,6 +25,14 @@ describe("data integrity", () => {
     expect(new Set(augmentSlugs).size).toBe(augmentSlugs.length);
   });
 
+  test("every champion has a unique numeric Riot champion key", () => {
+    const keys = championsData.champions.map((champion) =>
+      String((champion as unknown as { champion_key?: string }).champion_key ?? ""),
+    );
+    expect(keys.every((key) => /^\d+$/.test(key))).toBe(true);
+    expect(new Set(keys).size).toBe(championsData.champions.length);
+  });
+
   test("localized champion names are unique in the public index locales", () => {
     for (const field of ["name_zh_TW", "name_zh_CN", "name_ja", "name_ko"] as const) {
       const names = championsData.champions

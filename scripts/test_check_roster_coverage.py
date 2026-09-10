@@ -14,6 +14,21 @@ FIXTURES = ROOT / "scripts" / "fixtures" / "roster-coverage"
 
 
 class RosterCoverageTests(unittest.TestCase):
+    def test_published_numeric_champion_key_is_the_primary_roster_join(self):
+        ddragon = load_json(FIXTURES / "ddragon-16.13.1.json")
+        cdragon = load_json(FIXTURES / "cdragon-summary.json")
+        published = {
+            "champions": [
+                {"slug": "brand", "champion_key": "63", "icon": "https://example.test/999.png"},
+                {"slug": "locke", "champion_key": "805"},
+            ]
+        }
+
+        report = build_roster_report(ddragon, published, cdragon)
+
+        self.assertEqual(report["missing_active_champion_ids"], [])
+        self.assertEqual(report["duplicate_published_ids"], {})
+
     def test_fixture_exposes_the_current_locke_gap(self):
         ddragon = load_json(FIXTURES / "ddragon-16.13.1.json")
         cdragon = load_json(FIXTURES / "cdragon-summary.json")

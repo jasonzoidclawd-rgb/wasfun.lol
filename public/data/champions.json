@@ -41,7 +41,8 @@
       "name_zh_TW": "布蘭德",
       "name_zh_CN": "复仇焰魂",
       "name_ja": "ブランド",
-      "name_ko": "브랜드"
+      "name_ko": "브랜드",
+      "champion_key": "63"
     },
     {
       "slug": "vayne",
@@ -83,7 +84,8 @@
       "name_zh_TW": "汎",
       "name_zh_CN": "暗夜猎手",
       "name_ja": "ヴェイン",
-      "name_ko": "베인"
+      "name_ko": "베인",
+      "champion_key": "67"
     },
     {
       "slug": "sett",
@@ -126,7 +128,8 @@
       "name_zh_TW": "賽特",
       "name_zh_CN": "腕豪",
       "name_ja": "セト",
-      "name_ko": "세트"
+      "name_ko": "세트",
+      "champion_key": "875"
     },
     {
       "slug": "graves",
@@ -166,7 +169,8 @@
       "name_zh_TW": "葛雷夫",
       "name_zh_CN": "法外狂徒",
       "name_ja": "グレイブス",
-      "name_ko": "그레이브즈"
+      "name_ko": "그레이브즈",
+      "champion_key": "104"
     },
     {
       "slug": "sion",
@@ -207,7 +211,8 @@
       "name_zh_TW": "賽恩",
       "name_zh_CN": "亡灵战神",
       "name_ja": "サイオン",
-      "name_ko": "사이온"
+      "name_ko": "사이온",
+      "champion_key": "14"
     },
     {
       "slug": "lucian",
@@ -249,7 +254,8 @@
       "name_zh_TW": "路西恩",
       "name_zh_CN": "圣枪游侠",
       "name_ja": "ルシアン",
-      "name_ko": "루시안"
+      "name_ko": "루시안",
+      "champion_key": "236"
     },
     {
       "slug": "caitlyn",
@@ -290,7 +296,8 @@
       "name_zh_TW": "凱特琳",
       "name_zh_CN": "皮城女警",
       "name_ja": "ケイトリン",
-      "name_ko": "케이틀린"
+      "name_ko": "케이틀린",
+      "champion_key": "51"
     },
     {
       "slug": "drmundo",
@@ -332,7 +339,8 @@
       "name_zh_TW": "蒙多醫生",
       "name_zh_CN": "祖安狂人",
       "name_ja": "ドクター・ムンド",
-      "name_ko": "문도 박사"
+      "name_ko": "문도 박사",
+      "champion_key": "36"
     },
     {
       "slug": "jinx",
@@ -373,7 +381,8 @@
       "name_zh_TW": "吉茵珂絲",
       "name_zh_CN": "暴走萝莉",
       "name_ja": "ジンクス",
-      "name_ko": "징크스"
+      "name_ko": "징크스",
+      "champion_key": "222"
     },
     {
       "slug": "yasuo",
@@ -416,7 +425,8 @@
       "name_zh_TW": "犽宿",
       "name_zh_CN": "疾风剑豪",
       "name_ja": "ヤスオ",
-      "name_ko": "야스오"
+      "name_ko": "야스오",
+      "champion_key": "157"
     },
     {
       "slug": "tahmkench",
@@ -458,7 +468,8 @@
       "name_zh_TW": "貪啃奇",
       "name_zh_CN": "河流之王",
       "name_ja": "タム・ケンチ",
-      "name_ko": "탐 켄치"
+      "name_ko": "탐 켄치",
+      "champion_key": "223"
     },
     {
       "slug": "lillia",
@@ -500,7 +511,8 @@
       "name_zh_TW": "莉莉亞",
       "name_zh_CN": "含羞蓓蕾",
       "name_ja": "リリア",
-      "name_ko": "릴리아"
+      "name_ko": "릴리아",
+      "champion_key": "876"
     },
     {
       "slug": "ryze",
@@ -540,7 +552,8 @@
       "name_zh_TW": "雷茲",
       "name_zh_CN": "符文法师",
       "name_ja": "ライズ",
-      "name_ko": "라이즈"
+      "name_ko": "라이즈",
+      "champion_key": "13"
     },
     {
       "slug": "aurelionsol",
@@ -580,7 +593,8 @@
       "name_zh_TW": "翱銳龍獸",
       "name_zh_CN": "铸星龙王",
       "name_ja": "オレリオン・ソル",
-      "name_ko": "아우렐리온 솔"
+      "name_ko": "아우렐리온 솔",
+      "champion_key": "136"
     },
     {
       "slug": "morgana",
@@ -623,7 +637,8 @@
       "name_zh_TW": "魔甘娜",
       "name_zh_CN": "堕落天使",
       "name_ja": "モルガナ",
-      "name_ko": "모르가나"
+      "name_ko": "모르가나",
+      "champion_key": "25"
     },
     {
       "slug": "missfortune",
@@ -666,7 +681,8 @@
       "name_zh_TW": "好運姐",
       "name_zh_CN": "赏金猎人",
       "name_ja": "ミス・フォーチュン",
-      "name_ko": "미스 포츈"
+      "name_ko": "미스 포츈",
+      "champion_key": "21"
     },
     {
       "slug": "teemo",
@@ -708,7 +724,8 @@
       "name_zh_TW": "提摩",
       "name_zh_CN": "迅捷斥候",
       "name_ja": "ティーモ",
-      "name_ko": "티모"
+      "name_ko": "티모",
+      "champion_key": "17"
     },
     {
       "slug": "rell",
@@ -750,7 +767,8 @@
       "name_zh_TW": "銳兒",
       "name_zh_CN": "镕铁少女",
       "name_ja": "レル",
-      "name_ko": "렐"
+      "name_ko": "렐",
+      "champion_key": "526"
     },
     {
       "slug": "twistedfate",
@@ -793,7 +811,8 @@
       "name_zh_TW": "逆命",
       "name_zh_CN": "卡牌大师",
       "name_ja": "ツイステッド・フェイト",
-      "name_ko": "트위스티드 페이트"
+      "name_ko": "트위스티드 페이트",
+      "champion_key": "4"
     },
     {
       "slug": "kayn",
@@ -833,7 +852,8 @@
       "name_zh_TW": "慨影",
       "name_zh_CN": "影流之镰",
       "name_ja": "ケイン",
-      "name_ko": "케인"
+      "name_ko": "케인",
+      "champion_key": "141"
     },
     {
       "slug": "malzahar",
@@ -873,7 +893,8 @@
       "name_zh_TW": "馬爾札哈",
       "name_zh_CN": "虚空先知",
       "name_ja": "マルザハール",
-      "name_ko": "말자하"
+      "name_ko": "말자하",
+      "champion_key": "90"
     },
     {
       "slug": "trundle",
@@ -916,7 +937,8 @@
       "name_zh_TW": "特朗德",
       "name_zh_CN": "巨魔之王",
       "name_ja": "トランドル",
-      "name_ko": "트런들"
+      "name_ko": "트런들",
+      "champion_key": "48"
     },
     {
       "slug": "seraphine",
@@ -957,7 +979,8 @@
       "name_zh_TW": "瑟菈紛",
       "name_zh_CN": "星籁歌姬",
       "name_ja": "セラフィーン",
-      "name_ko": "세라핀"
+      "name_ko": "세라핀",
+      "champion_key": "147"
     },
     {
       "slug": "kayle",
@@ -1000,7 +1023,8 @@
       "name_zh_TW": "凱爾",
       "name_zh_CN": "正义天使",
       "name_ja": "ケイル",
-      "name_ko": "케일"
+      "name_ko": "케일",
+      "champion_key": "10"
     },
     {
       "slug": "kaisa",
@@ -1042,7 +1066,8 @@
       "name_zh_TW": "凱莎",
       "name_zh_CN": "虚空之女",
       "name_ja": "カイ＝サ",
-      "name_ko": "카이사"
+      "name_ko": "카이사",
+      "champion_key": "145"
     },
     {
       "slug": "yunara",
@@ -1083,7 +1108,8 @@
       "name_zh_TW": "尤娜拉",
       "name_zh_CN": "不破之誓",
       "name_ja": "ユナラ",
-      "name_ko": "유나라"
+      "name_ko": "유나라",
+      "champion_key": "804"
     },
     {
       "slug": "ashe",
@@ -1124,7 +1150,8 @@
       "name_zh_TW": "艾希",
       "name_zh_CN": "寒冰射手",
       "name_ja": "アッシュ",
-      "name_ko": "애쉬"
+      "name_ko": "애쉬",
+      "champion_key": "22"
     },
     {
       "slug": "smolder",
@@ -1166,7 +1193,8 @@
       "name_zh_TW": "史矛德",
       "name_zh_CN": "炽炎雏龙",
       "name_ja": "スモルダー",
-      "name_ko": "스몰더"
+      "name_ko": "스몰더",
+      "champion_key": "901"
     },
     {
       "slug": "masteryi",
@@ -1208,7 +1236,8 @@
       "name_zh_TW": "易大師",
       "name_zh_CN": "无极剑圣",
       "name_ja": "マスター・イー",
-      "name_ko": "마스터 이"
+      "name_ko": "마스터 이",
+      "champion_key": "11"
     },
     {
       "slug": "yone",
@@ -1251,7 +1280,8 @@
       "name_zh_TW": "犽凝",
       "name_zh_CN": "封魔剑魂",
       "name_ja": "ヨネ",
-      "name_ko": "요네"
+      "name_ko": "요네",
+      "champion_key": "777"
     },
     {
       "slug": "aurora",
@@ -1293,7 +1323,8 @@
       "name_zh_TW": "歐羅拉",
       "name_zh_CN": "双界灵兔",
       "name_ja": "オーロラ",
-      "name_ko": "오로라"
+      "name_ko": "오로라",
+      "champion_key": "893"
     },
     {
       "slug": "tristana",
@@ -1334,7 +1365,8 @@
       "name_zh_TW": "崔絲塔娜",
       "name_zh_CN": "麦林炮手",
       "name_ja": "トリスターナ",
-      "name_ko": "트리스타나"
+      "name_ko": "트리스타나",
+      "champion_key": "18"
     },
     {
       "slug": "shen",
@@ -1375,7 +1407,8 @@
       "name_zh_TW": "慎",
       "name_zh_CN": "暮光之眼",
       "name_ja": "シェン",
-      "name_ko": "쉔"
+      "name_ko": "쉔",
+      "champion_key": "98"
     },
     {
       "slug": "galio",
@@ -1421,7 +1454,8 @@
       "name_zh_TW": "加里歐",
       "name_zh_CN": "正义巨像",
       "name_ja": "ガリオ",
-      "name_ko": "갈리오"
+      "name_ko": "갈리오",
+      "champion_key": "3"
     },
     {
       "slug": "karthus",
@@ -1459,7 +1493,8 @@
       "name_zh_TW": "卡爾瑟斯",
       "name_zh_CN": "死亡颂唱者",
       "name_ja": "カーサス",
-      "name_ko": "카서스"
+      "name_ko": "카서스",
+      "champion_key": "30"
     },
     {
       "slug": "nautilus",
@@ -1503,7 +1538,8 @@
       "name_zh_TW": "納帝魯斯",
       "name_zh_CN": "深海泰坦",
       "name_ja": "ノーチラス",
-      "name_ko": "노틸러스"
+      "name_ko": "노틸러스",
+      "champion_key": "111"
     },
     {
       "slug": "maokai",
@@ -1545,7 +1581,8 @@
       "name_zh_TW": "茂凱",
       "name_zh_CN": "扭曲树精",
       "name_ja": "マオカイ",
-      "name_ko": "마오카이"
+      "name_ko": "마오카이",
+      "champion_key": "57"
     },
     {
       "slug": "illaoi",
@@ -1586,7 +1623,8 @@
       "name_zh_TW": "伊羅旖",
       "name_zh_CN": "海兽祭司",
       "name_ja": "イラオイ",
-      "name_ko": "일라오이"
+      "name_ko": "일라오이",
+      "champion_key": "420"
     },
     {
       "slug": "ornn",
@@ -1627,7 +1665,8 @@
       "name_zh_TW": "鄂爾",
       "name_zh_CN": "山隐之焰",
       "name_ja": "オーン",
-      "name_ko": "오른"
+      "name_ko": "오른",
+      "champion_key": "516"
     },
     {
       "slug": "jhin",
@@ -1669,7 +1708,8 @@
       "name_zh_TW": "燼",
       "name_zh_CN": "戏命师",
       "name_ja": "ジン",
-      "name_ko": "진"
+      "name_ko": "진",
+      "champion_key": "202"
     },
     {
       "slug": "leona",
@@ -1710,7 +1750,8 @@
       "name_zh_TW": "雷歐娜",
       "name_zh_CN": "曙光女神",
       "name_ja": "レオナ",
-      "name_ko": "레오나"
+      "name_ko": "레오나",
+      "champion_key": "89"
     },
     {
       "slug": "hwei",
@@ -1749,7 +1790,8 @@
       "name_zh_TW": "赫威",
       "name_zh_CN": "异画师",
       "name_ja": "フェイ",
-      "name_ko": "흐웨이"
+      "name_ko": "흐웨이",
+      "champion_key": "910"
     },
     {
       "slug": "ekko",
@@ -1791,7 +1833,8 @@
       "name_zh_TW": "艾克",
       "name_zh_CN": "时间刺客",
       "name_ja": "エコー",
-      "name_ko": "에코"
+      "name_ko": "에코",
+      "champion_key": "245"
     },
     {
       "slug": "sejuani",
@@ -1832,7 +1875,8 @@
       "name_zh_TW": "史瓦妮",
       "name_zh_CN": "北地之怒",
       "name_ja": "セジュアニ",
-      "name_ko": "세주아니"
+      "name_ko": "세주아니",
+      "champion_key": "113"
     },
     {
       "slug": "corki",
@@ -1875,7 +1919,8 @@
       "name_zh_TW": "庫奇",
       "name_zh_CN": "英勇投弹手",
       "name_ja": "コーキ",
-      "name_ko": "코르키"
+      "name_ko": "코르키",
+      "champion_key": "42"
     },
     {
       "slug": "varus",
@@ -1918,7 +1963,8 @@
       "name_zh_TW": "法洛士",
       "name_zh_CN": "惩戒之箭",
       "name_ja": "ヴァルス",
-      "name_ko": "바루스"
+      "name_ko": "바루스",
+      "champion_key": "110"
     },
     {
       "slug": "veigar",
@@ -1957,7 +2003,8 @@
       "name_zh_TW": "維迦",
       "name_zh_CN": "邪恶小法师",
       "name_ja": "ベイガー",
-      "name_ko": "베이가"
+      "name_ko": "베이가",
+      "champion_key": "45"
     },
     {
       "slug": "zilean",
@@ -1998,7 +2045,8 @@
       "name_zh_TW": "極靈",
       "name_zh_CN": "时光守护者",
       "name_ja": "ジリアン",
-      "name_ko": "질리언"
+      "name_ko": "질리언",
+      "champion_key": "26"
     },
     {
       "slug": "senna",
@@ -2040,7 +2088,8 @@
       "name_zh_TW": "姍娜",
       "name_zh_CN": "涤魂圣枪",
       "name_ja": "セナ",
-      "name_ko": "세나"
+      "name_ko": "세나",
+      "champion_key": "235"
     },
     {
       "slug": "fizz",
@@ -2082,7 +2131,8 @@
       "name_zh_TW": "飛斯",
       "name_zh_CN": "潮汐海灵",
       "name_ja": "フィズ",
-      "name_ko": "피즈"
+      "name_ko": "피즈",
+      "champion_key": "105"
     },
     {
       "slug": "nasus",
@@ -2123,7 +2173,8 @@
       "name_zh_TW": "納瑟斯",
       "name_zh_CN": "沙漠死神",
       "name_ja": "ナサス",
-      "name_ko": "나서스"
+      "name_ko": "나서스",
+      "champion_key": "75"
     },
     {
       "slug": "xayah",
@@ -2163,7 +2214,8 @@
       "name_zh_TW": "剎雅",
       "name_zh_CN": "逆羽",
       "name_ja": "ザヤ",
-      "name_ko": "자야"
+      "name_ko": "자야",
+      "champion_key": "498"
     },
     {
       "slug": "zyra",
@@ -2203,7 +2255,8 @@
       "name_zh_TW": "枷蘿",
       "name_zh_CN": "荆棘之兴",
       "name_ja": "ザイラ",
-      "name_ko": "자이라"
+      "name_ko": "자이라",
+      "champion_key": "143"
     },
     {
       "slug": "syndra",
@@ -2242,7 +2295,8 @@
       "name_zh_TW": "星朵拉",
       "name_zh_CN": "暗黑元首",
       "name_ja": "シンドラ",
-      "name_ko": "신드라"
+      "name_ko": "신드라",
+      "champion_key": "134"
     },
     {
       "slug": "ezreal",
@@ -2284,7 +2338,8 @@
       "name_zh_TW": "伊澤瑞爾",
       "name_zh_CN": "探险家",
       "name_ja": "エズリアル",
-      "name_ko": "이즈리얼"
+      "name_ko": "이즈리얼",
+      "champion_key": "81"
     },
     {
       "slug": "xinzhao",
@@ -2328,7 +2383,8 @@
       "name_zh_TW": "趙信",
       "name_zh_CN": "德邦总管",
       "name_ja": "シン・ジャオ",
-      "name_ko": "신 짜오"
+      "name_ko": "신 짜오",
+      "champion_key": "5"
     },
     {
       "slug": "velkoz",
@@ -2369,7 +2425,8 @@
       "name_zh_TW": "威寇茲",
       "name_zh_CN": "虚空之眼",
       "name_ja": "ヴェル＝コズ",
-      "name_ko": "벨코즈"
+      "name_ko": "벨코즈",
+      "champion_key": "161"
     },
     {
       "slug": "aphelios",
@@ -2408,7 +2465,8 @@
       "name_zh_TW": "亞菲利歐",
       "name_zh_CN": "残月之肃",
       "name_ja": "アフェリオス",
-      "name_ko": "아펠리오스"
+      "name_ko": "아펠리오스",
+      "champion_key": "523"
     },
     {
       "slug": "alistar",
@@ -2450,7 +2508,8 @@
       "name_zh_TW": "亞歷斯塔",
       "name_zh_CN": "牛头酋长",
       "name_ja": "アリスター",
-      "name_ko": "알리스타"
+      "name_ko": "알리스타",
+      "champion_key": "12"
     },
     {
       "slug": "lux",
@@ -2490,7 +2549,8 @@
       "name_zh_TW": "拉克絲",
       "name_zh_CN": "光辉女郎",
       "name_ja": "ラックス",
-      "name_ko": "럭스"
+      "name_ko": "럭스",
+      "champion_key": "99"
     },
     {
       "slug": "malphite",
@@ -2532,7 +2592,8 @@
       "name_zh_TW": "墨菲特",
       "name_zh_CN": "熔岩巨兽",
       "name_ja": "マルファイト",
-      "name_ko": "말파이트"
+      "name_ko": "말파이트",
+      "champion_key": "54"
     },
     {
       "slug": "hecarim",
@@ -2575,7 +2636,8 @@
       "name_zh_TW": "赫克林",
       "name_zh_CN": "战争之影",
       "name_ja": "ヘカリム",
-      "name_ko": "헤카림"
+      "name_ko": "헤카림",
+      "champion_key": "120"
     },
     {
       "slug": "ahri",
@@ -2617,7 +2679,8 @@
       "name_zh_TW": "阿璃",
       "name_zh_CN": "九尾妖狐",
       "name_ja": "アーリ",
-      "name_ko": "아리"
+      "name_ko": "아리",
+      "champion_key": "103"
     },
     {
       "slug": "viktor",
@@ -2658,7 +2721,8 @@
       "name_zh_TW": "維克特",
       "name_zh_CN": "奥术先驱",
       "name_ja": "ビクター",
-      "name_ko": "빅토르"
+      "name_ko": "빅토르",
+      "champion_key": "112"
     },
     {
       "slug": "soraka",
@@ -2698,7 +2762,8 @@
       "name_zh_TW": "索拉卡",
       "name_zh_CN": "众星之子",
       "name_ja": "ソラカ",
-      "name_ko": "소라카"
+      "name_ko": "소라카",
+      "champion_key": "16"
     },
     {
       "slug": "samira",
@@ -2739,7 +2804,8 @@
       "name_zh_TW": "煞蜜拉",
       "name_zh_CN": "沙漠玫瑰",
       "name_ja": "サミーラ",
-      "name_ko": "사미라"
+      "name_ko": "사미라",
+      "champion_key": "360"
     },
     {
       "slug": "jarvaniv",
@@ -2782,7 +2848,8 @@
       "name_zh_TW": "嘉文四世",
       "name_zh_CN": "德玛西亚皇子",
       "name_ja": "ジャーヴァンⅣ",
-      "name_ko": "자르반 4세"
+      "name_ko": "자르반 4세",
+      "champion_key": "59"
     },
     {
       "slug": "akshan",
@@ -2822,7 +2889,8 @@
       "name_zh_TW": "埃可尚",
       "name_zh_CN": "影哨",
       "name_ja": "アクシャン",
-      "name_ko": "아크샨"
+      "name_ko": "아크샨",
+      "champion_key": "166"
     },
     {
       "slug": "xerath",
@@ -2862,7 +2930,8 @@
       "name_zh_TW": "齊勒斯",
       "name_zh_CN": "远古巫灵",
       "name_ja": "ゼラス",
-      "name_ko": "제라스"
+      "name_ko": "제라스",
+      "champion_key": "101"
     },
     {
       "slug": "rumble",
@@ -2905,7 +2974,8 @@
       "name_zh_TW": "藍寶",
       "name_zh_CN": "机械公敌",
       "name_ja": "ランブル",
-      "name_ko": "럼블"
+      "name_ko": "럼블",
+      "champion_key": "68"
     },
     {
       "slug": "gwen",
@@ -2945,7 +3015,8 @@
       "name_zh_TW": "關",
       "name_zh_CN": "灵罗娃娃",
       "name_ja": "グウェン",
-      "name_ko": "그웬"
+      "name_ko": "그웬",
+      "champion_key": "887"
     },
     {
       "slug": "twitch",
@@ -2986,7 +3057,8 @@
       "name_zh_TW": "圖奇",
       "name_zh_CN": "瘟疫之源",
       "name_ja": "トゥイッチ",
-      "name_ko": "트위치"
+      "name_ko": "트위치",
+      "champion_key": "29"
     },
     {
       "slug": "sivir",
@@ -3026,7 +3098,8 @@
       "name_zh_TW": "希維爾",
       "name_zh_CN": "战争女神",
       "name_ja": "シヴィア",
-      "name_ko": "시비르"
+      "name_ko": "시비르",
+      "champion_key": "15"
     },
     {
       "slug": "jax",
@@ -3066,7 +3139,8 @@
       "name_zh_TW": "賈克斯",
       "name_zh_CN": "武器大师",
       "name_ja": "ジャックス",
-      "name_ko": "잭스"
+      "name_ko": "잭스",
+      "champion_key": "24"
     },
     {
       "slug": "chogath",
@@ -3107,7 +3181,8 @@
       "name_zh_TW": "科加斯",
       "name_zh_CN": "虚空恐惧",
       "name_ja": "チョ＝ガス",
-      "name_ko": "초가스"
+      "name_ko": "초가스",
+      "champion_key": "31"
     },
     {
       "slug": "singed",
@@ -3149,7 +3224,8 @@
       "name_zh_TW": "辛吉德",
       "name_zh_CN": "炼金术士",
       "name_ja": "シンジド",
-      "name_ko": "신지드"
+      "name_ko": "신지드",
+      "champion_key": "27"
     },
     {
       "slug": "amumu",
@@ -3189,7 +3265,8 @@
       "name_zh_TW": "阿姆姆",
       "name_zh_CN": "殇之木乃伊",
       "name_ja": "アムム",
-      "name_ko": "아무무"
+      "name_ko": "아무무",
+      "champion_key": "32"
     },
     {
       "slug": "fiora",
@@ -3232,7 +3309,8 @@
       "name_zh_TW": "菲歐拉",
       "name_zh_CN": "无双剑姬",
       "name_ja": "フィオラ",
-      "name_ko": "피오라"
+      "name_ko": "피오라",
+      "champion_key": "114"
     },
     {
       "slug": "mel",
@@ -3274,7 +3352,8 @@
       "name_zh_TW": "梅爾",
       "name_zh_CN": "流光镜影",
       "name_ja": "メル",
-      "name_ko": "멜"
+      "name_ko": "멜",
+      "champion_key": "800"
     },
     {
       "slug": "garen",
@@ -3316,7 +3395,8 @@
       "name_zh_TW": "蓋倫",
       "name_zh_CN": "德玛西亚之力",
       "name_ja": "ガレン",
-      "name_ko": "가렌"
+      "name_ko": "가렌",
+      "champion_key": "86"
     },
     {
       "slug": "kogmaw",
@@ -3356,7 +3436,8 @@
       "name_zh_TW": "寇格魔",
       "name_zh_CN": "深渊巨口",
       "name_ja": "コグ＝マウ",
-      "name_ko": "코그모"
+      "name_ko": "코그모",
+      "champion_key": "96"
     },
     {
       "slug": "sona",
@@ -3397,7 +3478,8 @@
       "name_zh_TW": "索娜",
       "name_zh_CN": "琴瑟仙女",
       "name_ja": "ソナ",
-      "name_ko": "소나"
+      "name_ko": "소나",
+      "champion_key": "37"
     },
     {
       "slug": "kindred",
@@ -3438,7 +3520,8 @@
       "name_zh_TW": "鏡爪",
       "name_zh_CN": "永猎双子",
       "name_ja": "キンドレッド",
-      "name_ko": "킨드레드"
+      "name_ko": "킨드레드",
+      "champion_key": "203"
     },
     {
       "slug": "swain",
@@ -3480,7 +3563,8 @@
       "name_zh_TW": "斯溫",
       "name_zh_CN": "诺克萨斯统领",
       "name_ja": "スウェイン",
-      "name_ko": "스웨인"
+      "name_ko": "스웨인",
+      "champion_key": "50"
     },
     {
       "slug": "heimerdinger",
@@ -3521,7 +3605,8 @@
       "name_zh_TW": "漢默丁格",
       "name_zh_CN": "大发明家",
       "name_ja": "ハイマーディンガー",
-      "name_ko": "하이머딩거"
+      "name_ko": "하이머딩거",
+      "champion_key": "74"
     },
     {
       "slug": "gangplank",
@@ -3561,7 +3646,8 @@
       "name_zh_TW": "剛普朗克",
       "name_zh_CN": "海洋之灾",
       "name_ja": "ガングプランク",
-      "name_ko": "갱플랭크"
+      "name_ko": "갱플랭크",
+      "champion_key": "41"
     },
     {
       "slug": "poppy",
@@ -3604,7 +3690,8 @@
       "name_zh_TW": "波比",
       "name_zh_CN": "圣锤之毅",
       "name_ja": "ポッピー",
-      "name_ko": "뽀삐"
+      "name_ko": "뽀삐",
+      "champion_key": "78"
     },
     {
       "slug": "vladimir",
@@ -3645,7 +3732,8 @@
       "name_zh_TW": "弗拉迪米爾",
       "name_zh_CN": "猩红收割者",
       "name_ja": "ブラッドミア",
-      "name_ko": "블라디미르"
+      "name_ko": "블라디미르",
+      "champion_key": "8"
     },
     {
       "slug": "yuumi",
@@ -3686,7 +3774,8 @@
       "name_zh_TW": "悠咪",
       "name_zh_CN": "魔法猫咪",
       "name_ja": "ユーミ",
-      "name_ko": "유미"
+      "name_ko": "유미",
+      "champion_key": "350"
     },
     {
       "slug": "mordekaiser",
@@ -3729,7 +3818,8 @@
       "name_zh_TW": "魔鬥凱薩",
       "name_zh_CN": "铁铠冥魂",
       "name_ja": "モルデカイザー",
-      "name_ko": "모데카이저"
+      "name_ko": "모데카이저",
+      "champion_key": "82"
     },
     {
       "slug": "sylas",
@@ -3772,7 +3862,8 @@
       "name_zh_TW": "賽勒斯",
       "name_zh_CN": "解脱者",
       "name_ja": "サイラス",
-      "name_ko": "사일러스"
+      "name_ko": "사일러스",
+      "champion_key": "517"
     },
     {
       "slug": "zed",
@@ -3811,7 +3902,8 @@
       "name_zh_TW": "劫",
       "name_zh_CN": "影流之主",
       "name_ja": "ゼド",
-      "name_ko": "제드"
+      "name_ko": "제드",
+      "champion_key": "238"
     },
     {
       "slug": "ziggs",
@@ -3851,7 +3943,8 @@
       "name_zh_TW": "希格斯",
       "name_zh_CN": "爆破鬼才",
       "name_ja": "ジグス",
-      "name_ko": "직스"
+      "name_ko": "직스",
+      "champion_key": "115"
     },
     {
       "slug": "shaco",
@@ -3893,7 +3986,8 @@
       "name_zh_TW": "薩科",
       "name_zh_CN": "恶魔小丑",
       "name_ja": "シャコ",
-      "name_ko": "샤코"
+      "name_ko": "샤코",
+      "champion_key": "35"
     },
     {
       "slug": "janna",
@@ -3934,7 +4028,8 @@
       "name_zh_TW": "珍娜",
       "name_zh_CN": "风暴之怒",
       "name_ja": "ジャンナ",
-      "name_ko": "잔나"
+      "name_ko": "잔나",
+      "champion_key": "40"
     },
     {
       "slug": "draven",
@@ -3975,7 +4070,8 @@
       "name_zh_TW": "達瑞文",
       "name_zh_CN": "荣耀行刑官",
       "name_ja": "ドレイヴン",
-      "name_ko": "드레이븐"
+      "name_ko": "드레이븐",
+      "champion_key": "119"
     },
     {
       "slug": "katarina",
@@ -4017,7 +4113,8 @@
       "name_zh_TW": "卡特蓮娜",
       "name_zh_CN": "不祥之刃",
       "name_ja": "カタリナ",
-      "name_ko": "카타리나"
+      "name_ko": "카타리나",
+      "champion_key": "55"
     },
     {
       "slug": "renata",
@@ -4059,7 +4156,8 @@
       "name_zh_TW": "睿娜妲‧格萊斯克",
       "name_zh_CN": "炼金男爵",
       "name_ja": "レナータ・グラスク",
-      "name_ko": "레나타 글라스크"
+      "name_ko": "레나타 글라스크",
+      "champion_key": "888"
     },
     {
       "slug": "shyvana",
@@ -4102,7 +4200,8 @@
       "name_zh_TW": "希瓦娜",
       "name_zh_CN": "龙血武姬",
       "name_ja": "シヴァーナ",
-      "name_ko": "쉬바나"
+      "name_ko": "쉬바나",
+      "champion_key": "102"
     },
     {
       "slug": "jayce",
@@ -4144,7 +4243,8 @@
       "name_zh_TW": "杰西",
       "name_zh_CN": "未来守护者",
       "name_ja": "ジェイス",
-      "name_ko": "제이스"
+      "name_ko": "제이스",
+      "champion_key": "126"
     },
     {
       "slug": "fiddlesticks",
@@ -4186,7 +4286,8 @@
       "name_zh_TW": "費德提克",
       "name_zh_CN": "远古恐惧",
       "name_ja": "フィドルスティックス",
-      "name_ko": "피들스틱"
+      "name_ko": "피들스틱",
+      "champion_key": "9"
     },
     {
       "slug": "volibear",
@@ -4229,7 +4330,8 @@
       "name_zh_TW": "弗力貝爾",
       "name_zh_CN": "不灭狂雷",
       "name_ja": "ボリベア",
-      "name_ko": "볼리베어"
+      "name_ko": "볼리베어",
+      "champion_key": "106"
     },
     {
       "slug": "blitzcrank",
@@ -4272,7 +4374,8 @@
       "name_zh_TW": "布里茨",
       "name_zh_CN": "蒸汽机器人",
       "name_ja": "ブリッツクランク",
-      "name_ko": "블리츠크랭크"
+      "name_ko": "블리츠크랭크",
+      "champion_key": "53"
     },
     {
       "slug": "kassadin",
@@ -4313,7 +4416,8 @@
       "name_zh_TW": "卡薩丁",
       "name_zh_CN": "虚空行者",
       "name_ja": "カサディン",
-      "name_ko": "카사딘"
+      "name_ko": "카사딘",
+      "champion_key": "38"
     },
     {
       "slug": "zaahen",
@@ -4356,7 +4460,8 @@
       "name_zh_TW": "薩亨",
       "name_zh_CN": "不落魔锋",
       "name_ja": "ザーヘン",
-      "name_ko": "자헨"
+      "name_ko": "자헨",
+      "champion_key": "904"
     },
     {
       "slug": "darius",
@@ -4399,7 +4504,8 @@
       "name_zh_TW": "達瑞斯",
       "name_zh_CN": "诺克萨斯之手",
       "name_ja": "ダリウス",
-      "name_ko": "다리우스"
+      "name_ko": "다리우스",
+      "champion_key": "122"
     },
     {
       "slug": "milio",
@@ -4439,7 +4545,8 @@
       "name_zh_TW": "米里歐",
       "name_zh_CN": "明烛",
       "name_ja": "ミリオ",
-      "name_ko": "밀리오"
+      "name_ko": "밀리오",
+      "champion_key": "902"
     },
     {
       "slug": "tryndamere",
@@ -4480,7 +4587,8 @@
       "name_zh_TW": "泰達米爾",
       "name_zh_CN": "蛮族之王",
       "name_ja": "トリンダメア",
-      "name_ko": "트린다미어"
+      "name_ko": "트린다미어",
+      "champion_key": "23"
     },
     {
       "slug": "monkeyking",
@@ -4524,7 +4632,8 @@
       "name_zh_TW": "悟空",
       "name_zh_CN": "齐天大圣",
       "name_ja": "ウーコン",
-      "name_ko": "오공"
+      "name_ko": "오공",
+      "champion_key": "62"
     },
     {
       "slug": "karma",
@@ -4565,7 +4674,8 @@
       "name_zh_TW": "卡瑪",
       "name_zh_CN": "天启者",
       "name_ja": "カルマ",
-      "name_ko": "카르마"
+      "name_ko": "카르마",
+      "champion_key": "43"
     },
     {
       "slug": "vex",
@@ -4606,7 +4716,8 @@
       "name_zh_TW": "薇可絲",
       "name_zh_CN": "愁云使者",
       "name_ja": "ヴェックス",
-      "name_ko": "벡스"
+      "name_ko": "벡스",
+      "champion_key": "711"
     },
     {
       "slug": "rammus",
@@ -4646,7 +4757,8 @@
       "name_zh_TW": "拉姆斯",
       "name_zh_CN": "披甲龙龟",
       "name_ja": "ラムス",
-      "name_ko": "람머스"
+      "name_ko": "람머스",
+      "champion_key": "33"
     },
     {
       "slug": "ambessa",
@@ -4688,7 +4800,8 @@
       "name_zh_TW": "安比薩",
       "name_zh_CN": "铁血狼母",
       "name_ja": "アンベッサ",
-      "name_ko": "암베사"
+      "name_ko": "암베사",
+      "champion_key": "799"
     },
     {
       "slug": "pyke",
@@ -4730,7 +4843,8 @@
       "name_zh_TW": "派克",
       "name_zh_CN": "血港鬼影",
       "name_ja": "パイク",
-      "name_ko": "파이크"
+      "name_ko": "파이크",
+      "champion_key": "555"
     },
     {
       "slug": "viego",
@@ -4772,7 +4886,8 @@
       "name_zh_TW": "維爾戈",
       "name_zh_CN": "破败之王",
       "name_ja": "ヴィエゴ",
-      "name_ko": "비에고"
+      "name_ko": "비에고",
+      "champion_key": "234"
     },
     {
       "slug": "thresh",
@@ -4813,7 +4928,8 @@
       "name_zh_TW": "瑟雷西",
       "name_zh_CN": "魂锁典狱长",
       "name_ja": "スレッシュ",
-      "name_ko": "쓰레쉬"
+      "name_ko": "쓰레쉬",
+      "champion_key": "412"
     },
     {
       "slug": "nami",
@@ -4854,7 +4970,8 @@
       "name_zh_TW": "娜米",
       "name_zh_CN": "唤潮鲛姬",
       "name_ja": "ナミ",
-      "name_ko": "나미"
+      "name_ko": "나미",
+      "champion_key": "267"
     },
     {
       "slug": "orianna",
@@ -4895,7 +5012,8 @@
       "name_zh_TW": "奧莉安娜",
       "name_zh_CN": "发条魔灵",
       "name_ja": "オリアナ",
-      "name_ko": "오리아나"
+      "name_ko": "오리아나",
+      "champion_key": "61"
     },
     {
       "slug": "nidalee",
@@ -4937,7 +5055,8 @@
       "name_zh_TW": "奈德麗",
       "name_zh_CN": "狂野女猎手",
       "name_ja": "ニダリー",
-      "name_ko": "니달리"
+      "name_ko": "니달리",
+      "champion_key": "76"
     },
     {
       "slug": "gragas",
@@ -4982,7 +5101,8 @@
       "name_zh_TW": "古拉格斯",
       "name_zh_CN": "酒桶",
       "name_ja": "グラガス",
-      "name_ko": "그라가스"
+      "name_ko": "그라가스",
+      "champion_key": "79"
     },
     {
       "slug": "udyr",
@@ -5023,7 +5143,8 @@
       "name_zh_TW": "烏迪爾",
       "name_zh_CN": "兽灵行者",
       "name_ja": "ウディア",
-      "name_ko": "우디르"
+      "name_ko": "우디르",
+      "champion_key": "77"
     },
     {
       "slug": "gnar",
@@ -5066,7 +5187,8 @@
       "name_zh_TW": "吶兒",
       "name_zh_CN": "迷失之牙",
       "name_ja": "ナー",
-      "name_ko": "나르"
+      "name_ko": "나르",
+      "champion_key": "150"
     },
     {
       "slug": "lulu",
@@ -5108,7 +5230,8 @@
       "name_zh_TW": "露璐",
       "name_zh_CN": "仙灵女巫",
       "name_ja": "ルル",
-      "name_ko": "룰루"
+      "name_ko": "룰루",
+      "champion_key": "117"
     },
     {
       "slug": "briar",
@@ -5152,7 +5275,8 @@
       "name_zh_TW": "布蕾爾",
       "name_zh_CN": "狂厄蔷薇",
       "name_ja": "ブライアー",
-      "name_ko": "브라이어"
+      "name_ko": "브라이어",
+      "champion_key": "233"
     },
     {
       "slug": "kalista",
@@ -5192,7 +5316,8 @@
       "name_zh_TW": "克黎思妲",
       "name_zh_CN": "复仇之矛",
       "name_ja": "カリスタ",
-      "name_ko": "칼리스타"
+      "name_ko": "칼리스타",
+      "champion_key": "429"
     },
     {
       "slug": "azir",
@@ -5235,7 +5360,8 @@
       "name_zh_TW": "阿祈爾",
       "name_zh_CN": "沙漠皇帝",
       "name_ja": "アジール",
-      "name_ko": "아지르"
+      "name_ko": "아지르",
+      "champion_key": "268"
     },
     {
       "slug": "skarner",
@@ -5279,7 +5405,8 @@
       "name_zh_TW": "史加納",
       "name_zh_CN": "上古领主",
       "name_ja": "スカーナー",
-      "name_ko": "스카너"
+      "name_ko": "스카너",
+      "champion_key": "72"
     },
     {
       "slug": "ivern",
@@ -5320,7 +5447,8 @@
       "name_zh_TW": "埃爾文",
       "name_zh_CN": "翠神",
       "name_ja": "アイバーン",
-      "name_ko": "아이번"
+      "name_ko": "아이번",
+      "champion_key": "427"
     },
     {
       "slug": "pantheon",
@@ -5362,7 +5490,8 @@
       "name_zh_TW": "潘森",
       "name_zh_CN": "不屈之枪",
       "name_ja": "パンテオン",
-      "name_ko": "판테온"
+      "name_ko": "판테온",
+      "champion_key": "80"
     },
     {
       "slug": "aatrox",
@@ -5404,7 +5533,8 @@
       "name_zh_TW": "厄薩斯",
       "name_zh_CN": "暗裔剑魔",
       "name_ja": "エイトロックス",
-      "name_ko": "아트록스"
+      "name_ko": "아트록스",
+      "champion_key": "266"
     },
     {
       "slug": "taliyah",
@@ -5445,7 +5575,8 @@
       "name_zh_TW": "塔莉雅",
       "name_zh_CN": "岩雀",
       "name_ja": "タリヤ",
-      "name_ko": "탈리야"
+      "name_ko": "탈리야",
+      "champion_key": "163"
     },
     {
       "slug": "nocturne",
@@ -5488,7 +5619,8 @@
       "name_zh_TW": "夜曲",
       "name_zh_CN": "永恒梦魇",
       "name_ja": "ノクターン",
-      "name_ko": "녹턴"
+      "name_ko": "녹턴",
+      "champion_key": "56"
     },
     {
       "slug": "anivia",
@@ -5528,7 +5660,8 @@
       "name_zh_TW": "艾妮維亞",
       "name_zh_CN": "冰晶凤凰",
       "name_ja": "アニビア",
-      "name_ko": "애니비아"
+      "name_ko": "애니비아",
+      "champion_key": "34"
     },
     {
       "slug": "talon",
@@ -5569,7 +5702,8 @@
       "name_zh_TW": "塔隆",
       "name_zh_CN": "刀锋之影",
       "name_ja": "タロン",
-      "name_ko": "탈론"
+      "name_ko": "탈론",
+      "champion_key": "91"
     },
     {
       "slug": "taric",
@@ -5610,7 +5744,8 @@
       "name_zh_TW": "塔里克",
       "name_zh_CN": "瓦洛兰之盾",
       "name_ja": "タリック",
-      "name_ko": "타릭"
+      "name_ko": "타릭",
+      "champion_key": "44"
     },
     {
       "slug": "leesin",
@@ -5652,7 +5787,8 @@
       "name_zh_TW": "李星",
       "name_zh_CN": "盲僧",
       "name_ja": "リー・シン",
-      "name_ko": "리 신"
+      "name_ko": "리 신",
+      "champion_key": "64"
     },
     {
       "slug": "quinn",
@@ -5694,7 +5830,8 @@
       "name_zh_TW": "葵恩",
       "name_zh_CN": "德玛西亚之翼",
       "name_ja": "クイン",
-      "name_ko": "퀸"
+      "name_ko": "퀸",
+      "champion_key": "133"
     },
     {
       "slug": "urgot",
@@ -5737,7 +5874,8 @@
       "name_zh_TW": "烏爾加特",
       "name_zh_CN": "无畏战车",
       "name_ja": "アーゴット",
-      "name_ko": "우르곳"
+      "name_ko": "우르곳",
+      "champion_key": "6"
     },
     {
       "slug": "vi",
@@ -5779,7 +5917,8 @@
       "name_zh_TW": "菲艾",
       "name_zh_CN": "皮城执法官",
       "name_ja": "ヴァイ",
-      "name_ko": "바이"
+      "name_ko": "바이",
+      "champion_key": "254"
     },
     {
       "slug": "lissandra",
@@ -5820,7 +5959,8 @@
       "name_zh_TW": "麗珊卓",
       "name_zh_CN": "冰霜女巫",
       "name_ja": "リサンドラ",
-      "name_ko": "리산드라"
+      "name_ko": "리산드라",
+      "champion_key": "127"
     },
     {
       "slug": "qiyana",
@@ -5861,7 +6001,8 @@
       "name_zh_TW": "姬亞娜",
       "name_zh_CN": "元素女皇",
       "name_ja": "キヤナ",
-      "name_ko": "키아나"
+      "name_ko": "키아나",
+      "champion_key": "246"
     },
     {
       "slug": "braum",
@@ -5902,7 +6043,8 @@
       "name_zh_TW": "布郎姆",
       "name_zh_CN": "弗雷尔卓德之心",
       "name_ja": "ブラウム",
-      "name_ko": "브라움"
+      "name_ko": "브라움",
+      "champion_key": "201"
     },
     {
       "slug": "cassiopeia",
@@ -5943,7 +6085,8 @@
       "name_zh_TW": "卡莎碧雅",
       "name_zh_CN": "魔蛇之拥",
       "name_ja": "カシオペア",
-      "name_ko": "카시오페아"
+      "name_ko": "카시오페아",
+      "champion_key": "69"
     },
     {
       "slug": "khazix",
@@ -5984,7 +6127,8 @@
       "name_zh_TW": "卡力斯",
       "name_zh_CN": "虚空掠夺者",
       "name_ja": "カ＝ジックス",
-      "name_ko": "카직스"
+      "name_ko": "카직스",
+      "champion_key": "121"
     },
     {
       "slug": "riven",
@@ -6025,7 +6169,8 @@
       "name_zh_TW": "雷玟",
       "name_zh_CN": "放逐之刃",
       "name_ja": "リヴェン",
-      "name_ko": "리븐"
+      "name_ko": "리븐",
+      "champion_key": "92"
     },
     {
       "slug": "diana",
@@ -6065,7 +6210,8 @@
       "name_zh_TW": "黛安娜",
       "name_zh_CN": "皎月女神",
       "name_ja": "ダイアナ",
-      "name_ko": "다이애나"
+      "name_ko": "다이애나",
+      "champion_key": "131"
     },
     {
       "slug": "rengar",
@@ -6107,7 +6253,8 @@
       "name_zh_TW": "雷葛爾",
       "name_zh_CN": "傲之追猎者",
       "name_ja": "レンガー",
-      "name_ko": "렝가"
+      "name_ko": "렝가",
+      "champion_key": "107"
     },
     {
       "slug": "annie",
@@ -6149,7 +6296,8 @@
       "name_zh_TW": "安妮",
       "name_zh_CN": "黑暗之女",
       "name_ja": "アニー",
-      "name_ko": "애니"
+      "name_ko": "애니",
+      "champion_key": "1"
     },
     {
       "slug": "zeri",
@@ -6189,7 +6337,8 @@
       "name_zh_TW": "婕莉",
       "name_zh_CN": "祖安花火",
       "name_ja": "ゼリ",
-      "name_ko": "제리"
+      "name_ko": "제리",
+      "champion_key": "221"
     },
     {
       "slug": "zac",
@@ -6231,7 +6380,8 @@
       "name_zh_TW": "札克",
       "name_zh_CN": "生化魔人",
       "name_ja": "ザック",
-      "name_ko": "자크"
+      "name_ko": "자크",
+      "champion_key": "154"
     },
     {
       "slug": "neeko",
@@ -6271,7 +6421,8 @@
       "name_zh_TW": "妮可",
       "name_zh_CN": "万花通灵",
       "name_ja": "ニーコ",
-      "name_ko": "니코"
+      "name_ko": "니코",
+      "champion_key": "518"
     },
     {
       "slug": "nilah",
@@ -6314,7 +6465,8 @@
       "name_zh_TW": "淣菈",
       "name_zh_CN": "不羁之悦",
       "name_ja": "ニーラ",
-      "name_ko": "닐라"
+      "name_ko": "닐라",
+      "champion_key": "895"
     },
     {
       "slug": "naafiri",
@@ -6355,7 +6507,8 @@
       "name_zh_TW": "娜菲芮",
       "name_zh_CN": "百裂冥犬",
       "name_ja": "ナフィーリ",
-      "name_ko": "나피리"
+      "name_ko": "나피리",
+      "champion_key": "950"
     },
     {
       "slug": "rakan",
@@ -6396,7 +6549,8 @@
       "name_zh_TW": "銳空",
       "name_zh_CN": "幻翎",
       "name_ja": "ラカン",
-      "name_ko": "라칸"
+      "name_ko": "라칸",
+      "champion_key": "497"
     },
     {
       "slug": "nunu",
@@ -6439,7 +6593,8 @@
       "name_zh_TW": "努努和威朗普",
       "name_zh_CN": "雪原双子",
       "name_ja": "ヌヌ＆ウィルンプ",
-      "name_ko": "누누와 윌럼프"
+      "name_ko": "누누와 윌럼프",
+      "champion_key": "20"
     },
     {
       "slug": "warwick",
@@ -6483,7 +6638,8 @@
       "name_zh_TW": "沃維克",
       "name_zh_CN": "祖安怒兽",
       "name_ja": "ワーウィック",
-      "name_ko": "워윅"
+      "name_ko": "워윅",
+      "champion_key": "19"
     },
     {
       "slug": "ksante",
@@ -6525,7 +6681,8 @@
       "name_zh_TW": "卡桑帝",
       "name_zh_CN": "纳祖芒荣耀",
       "name_ja": "カ・サンテ",
-      "name_ko": "크산테"
+      "name_ko": "크산테",
+      "champion_key": "897"
     },
     {
       "slug": "kennen",
@@ -6566,7 +6723,8 @@
       "name_zh_TW": "凱能",
       "name_zh_CN": "狂暴之心",
       "name_ja": "ケネン",
-      "name_ko": "케넨"
+      "name_ko": "케넨",
+      "champion_key": "85"
     },
     {
       "slug": "zoe",
@@ -6606,7 +6764,8 @@
       "name_zh_TW": "柔依",
       "name_zh_CN": "暮光星灵",
       "name_ja": "ゾーイ",
-      "name_ko": "조이"
+      "name_ko": "조이",
+      "champion_key": "142"
     },
     {
       "slug": "leblanc",
@@ -6647,7 +6806,8 @@
       "name_zh_TW": "勒布朗",
       "name_zh_CN": "诡术妖姬",
       "name_ja": "ルブラン",
-      "name_ko": "르블랑"
+      "name_ko": "르블랑",
+      "champion_key": "7"
     },
     {
       "slug": "elise",
@@ -6689,7 +6849,8 @@
       "name_zh_TW": "伊莉絲",
       "name_zh_CN": "蜘蛛女皇",
       "name_ja": "エリス",
-      "name_ko": "엘리스"
+      "name_ko": "엘리스",
+      "champion_key": "60"
     },
     {
       "slug": "belveth",
@@ -6730,7 +6891,8 @@
       "name_zh_TW": "貝爾薇斯",
       "name_zh_CN": "虚空女皇",
       "name_ja": "ベル＝ヴェス",
-      "name_ko": "벨베스"
+      "name_ko": "벨베스",
+      "champion_key": "200"
     },
     {
       "slug": "renekton",
@@ -6774,7 +6936,8 @@
       "name_zh_TW": "雷尼克頓",
       "name_zh_CN": "荒漠屠夫",
       "name_ja": "レネクトン",
-      "name_ko": "레넥톤"
+      "name_ko": "레넥톤",
+      "champion_key": "58"
     },
     {
       "slug": "kled",
@@ -6815,7 +6978,8 @@
       "name_zh_TW": "克雷德",
       "name_zh_CN": "暴怒骑士",
       "name_ja": "クレッド",
-      "name_ko": "클레드"
+      "name_ko": "클레드",
+      "champion_key": "240"
     },
     {
       "slug": "reksai",
@@ -6859,7 +7023,8 @@
       "name_zh_TW": "雷珂煞",
       "name_zh_CN": "虚空遁地兽",
       "name_ja": "レク＝サイ",
-      "name_ko": "렉사이"
+      "name_ko": "렉사이",
+      "champion_key": "421"
     },
     {
       "slug": "olaf",
@@ -6901,7 +7066,8 @@
       "name_zh_TW": "歐拉夫",
       "name_zh_CN": "狂战士",
       "name_ja": "オラフ",
-      "name_ko": "올라프"
+      "name_ko": "올라프",
+      "champion_key": "2"
     },
     {
       "slug": "evelynn",
@@ -6943,7 +7109,8 @@
       "name_zh_TW": "伊芙琳",
       "name_zh_CN": "痛苦之拥",
       "name_ja": "イブリン",
-      "name_ko": "이블린"
+      "name_ko": "이블린",
+      "champion_key": "28"
     },
     {
       "slug": "akali",
@@ -6984,7 +7151,8 @@
       "name_zh_TW": "阿卡莉",
       "name_zh_CN": "离群之刺",
       "name_ja": "アカリ",
-      "name_ko": "아칼리"
+      "name_ko": "아칼리",
+      "champion_key": "84"
     },
     {
       "slug": "irelia",
@@ -7027,7 +7195,8 @@
       "name_zh_TW": "伊瑞莉雅",
       "name_zh_CN": "刀锋舞者",
       "name_ja": "イレリア",
-      "name_ko": "이렐리아"
+      "name_ko": "이렐리아",
+      "champion_key": "39"
     },
     {
       "slug": "yorick",
@@ -7069,7 +7238,8 @@
       "name_zh_TW": "約瑞科",
       "name_zh_CN": "牧魂人",
       "name_ja": "ヨリック",
-      "name_ko": "요릭"
+      "name_ko": "요릭",
+      "champion_key": "83"
     },
     {
       "slug": "camille",
@@ -7111,7 +7281,8 @@
       "name_zh_TW": "卡蜜兒",
       "name_zh_CN": "青钢影",
       "name_ja": "カミール",
-      "name_ko": "카밀"
+      "name_ko": "카밀",
+      "champion_key": "164"
     },
     {
       "slug": "bard",
@@ -7152,7 +7323,8 @@
       "name_zh_TW": "巴德",
       "name_zh_CN": "星界游神",
       "name_ja": "バード",
-      "name_ko": "바드"
+      "name_ko": "바드",
+      "champion_key": "432"
     },
     {
       "slug": "locke",
@@ -7193,7 +7365,8 @@
         "haste",
         "heal_shield",
         "movement"
-      ]
+      ],
+      "champion_key": "805"
     }
   ]
 }
