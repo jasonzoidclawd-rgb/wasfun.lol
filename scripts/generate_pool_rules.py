@@ -209,19 +209,84 @@ def extract_rules(patches: list, aug_map: dict, item_map: dict) -> dict:
     }
 
 
+_CDRAGON_VERSION_RE = re.compile(r"^(\d+)\.(\d+)")
+
+
+def _source_version_key(version: object) -> tuple[int, int] | None:
+    """Major/minor of a CDragon source version (e.g. '16.18.8159717+...')."""
+    match = _CDRAGON_VERSION_RE.match(str(version or ""))
+    if not match:
+        return None
+    return int(match.group(1)), int(match.group(2))
+
+
+def comparison_is_patch_adjacent(comparison: object) -> bool:
+    """True when a diff compares consecutive (or identical) game patches.
+
+    A snapshot diff proves "absent then present". That is only evidence of an
+    addition IN a specific patch when the two snapshots are one patch apart.
+    After a multi-patch blind interval — e.g. the 16.13 -> 16.18 comparison the
+    first run after the 2026-07/09 outage produced — it proves only "exists in
+    the first observation after the gap", and the entity may have arrived in any
+    of the intervening patches. Attributing it to the target patch fabricates a
+    specific, checkable claim, which is the same defect previously fixed for
+    removals.
+
+    Adjacency is decided on the CDragon source versions carried by the event,
+    never on timestamps. A season rollover keeps the minor number small, so a
+    single-major step into an early minor counts as adjacent; anything wider is
+    treated as a gap, which fails safe by withholding the date.
+    """
+    if not isinstance(comparison, dict):
+        return False
+    base = _source_version_key(comparison.get("base_version"))
+    target = _source_version_key(comparison.get("target_version"))
+    if base is None or target is None:
+        return False
+    if base == target:
+        return True
+    if base[0] == target[0]:
+        return 0 <= target[1] - base[1] <= 1
+    if target[0] - base[0] == 1:
+        return target[1] <= 1
+    return False
+
+
 def lifecycle_from_events(events: list[dict]) -> dict:
-    """Only CDragon additions/removals may alter augment lifecycle state."""
+    """Only CDragon additions/removals may alter augment lifecycle state.
+
+    A date is recorded only when the event's own comparison proves the two
+    snapshots were one patch apart. Events observed across a gap still exist in
+    the archive; they simply carry no patch attribution.
+    """
     added: dict[str, str] = {}
     removed: dict[str, str] = {}
+    undated: dict[str, str] = {}
     for event in events:
         if event.get("entity_type") != "augment" or not event.get("slug"):
             continue
+        kind = event.get("change_kind")
+        if kind not in {"added", "removed"}:
+            continue
+        slug = event["slug"]
+        if not comparison_is_patch_adjacent(event.get("comparison")):
+            undated.setdefault(slug, kind)
+            continue
         patch = str(event.get("source_patch_label") or "unknown")
-        if event.get("change_kind") == "added":
-            added.setdefault(event["slug"], patch)
-        elif event.get("change_kind") == "removed":
-            removed.setdefault(event["slug"], patch)
-    return {"added": dict(sorted(added.items())), "removed": dict(sorted(removed.items()))}
+        if kind == "added":
+            added.setdefault(slug, patch)
+        else:
+            removed.setdefault(slug, patch)
+    # A slug with a dated event anywhere is dated; the rest are first-observed.
+    undated = {
+        slug: kind for slug, kind in undated.items()
+        if slug not in added and slug not in removed
+    }
+    return {
+        "added": dict(sorted(added.items())),
+        "removed": dict(sorted(removed.items())),
+        "first_observed_across_gap": dict(sorted(undated.items())),
+    }
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
