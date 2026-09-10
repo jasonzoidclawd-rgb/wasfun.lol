@@ -4,7 +4,7 @@
   "lane": "preview",
   "status": "fresh",
   "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-  "observed_at": "2026-09-10T09:10:44.105491Z",
+  "observed_at": "2026-09-10T17:21:43.483886Z",
   "events": [
     {
       "entity_type": "item",
@@ -27,7 +27,7 @@
         "cost": 1330,
         "description": "<mainText><stats><attention> 20%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-10T09:10:44.105491Z",
+      "detected_at": "2026-09-10T17:21:43.483886Z",
       "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -56,7 +56,7 @@
         "cost": 2600,
         "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-10T09:10:44.105491Z",
+      "detected_at": "2026-09-10T17:21:43.483886Z",
       "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -81,7 +81,7 @@
       "after": {
         "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
       },
-      "detected_at": "2026-09-10T09:10:44.105491Z",
+      "detected_at": "2026-09-10T17:21:43.483886Z",
       "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,

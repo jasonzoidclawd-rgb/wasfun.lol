@@ -1,6 +1,6 @@
 {
   "patch": "26.17",
-  "scraped_at": "2026-09-10T09:00:14.131975+00:00",
+  "scraped_at": "2026-09-10T17:08:11.871550+00:00",
   "schemaVersion": "augment-truth-step5",
   "sources": {
     "definition": "data/internal/augment-base-catalog.json",
@@ -252,8 +252,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "heal_shield"
@@ -1338,8 +1337,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "ability",
       "availability": {
@@ -1652,8 +1650,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [],
       "wikiDescription": "Increase your Item and Augment damage by the required number of.",
@@ -2237,8 +2234,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "ability",
       "availability": {
@@ -2628,8 +2624,7 @@
       "type": "ability",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "ability",
@@ -2695,8 +2690,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "quest",
       "availability": {
@@ -3486,8 +3480,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "heal_shield"
@@ -3583,8 +3576,7 @@
       "type": "ability",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "movement",
@@ -3607,8 +3599,7 @@
       "type": "ability",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "ability"
@@ -4291,8 +4282,7 @@
       "type": "ability",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "ability",
@@ -4315,8 +4305,7 @@
       "type": "ability",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "tank",
@@ -5591,8 +5580,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "dot",
@@ -6199,8 +6187,7 @@
       "type": "ability",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "attack",
@@ -6406,8 +6393,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "ability",
@@ -6653,8 +6639,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "ability",
@@ -6686,8 +6671,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -6725,8 +6709,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -6762,8 +6745,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -6798,8 +6780,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -6831,8 +6812,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -6906,8 +6886,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7092,8 +7071,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7130,8 +7108,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7206,8 +7183,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7243,8 +7219,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7280,8 +7255,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7315,8 +7289,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7353,8 +7326,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7390,8 +7362,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7426,8 +7397,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7498,8 +7468,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7533,8 +7502,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7569,8 +7537,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7605,8 +7572,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7713,8 +7679,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7749,8 +7714,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7785,8 +7749,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7813,8 +7776,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [],
       "wikiDescription": "Added to ARAM Mayhem in Patch 26.12. Riot lists this augment in the official patch notes; its full client tooltip is not exposed in the current 16.12 augment file yet.",
@@ -7869,8 +7831,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "heal_shield",
@@ -7901,8 +7862,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7940,8 +7900,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -7968,8 +7927,7 @@
       "type": "ability",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "ability"
@@ -7999,8 +7957,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8029,8 +7986,7 @@
       "type": "quest",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "heal_shield",
@@ -8082,8 +8038,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8155,8 +8110,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8191,8 +8145,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8227,8 +8180,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8262,8 +8214,7 @@
       ],
       "flags": {
         "system_breaker": true,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8333,8 +8284,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8365,8 +8315,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8440,8 +8389,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8464,8 +8412,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [
         "cc"
@@ -8533,8 +8480,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8570,8 +8516,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8598,8 +8543,7 @@
       "type": "standalone",
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "kit_tags": [],
       "availability": {
@@ -8626,8 +8570,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8662,8 +8605,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8695,8 +8637,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8731,8 +8672,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8799,8 +8739,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8835,8 +8774,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8875,8 +8813,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "ability",
       "availability": {
@@ -8913,8 +8850,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -8986,8 +8922,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -9022,8 +8957,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -9097,8 +9031,7 @@
       ],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -9200,8 +9133,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -9291,8 +9223,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "removed",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle": "removed"
       },
       "type": "standalone",
       "availability": {
@@ -9517,7 +9448,8 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "active",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle_patch": "26.18",
+        "lifecycle_event": "added"
       },
       "type": "standalone",
       "availability": {
@@ -9546,7 +9478,8 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "active",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle_patch": "26.18",
+        "lifecycle_event": "added"
       },
       "type": "standalone",
       "availability": {
@@ -9575,7 +9508,8 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "active",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle_patch": "26.18",
+        "lifecycle_event": "added"
       },
       "type": "standalone",
       "availability": {
@@ -9604,7 +9538,8 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "active",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle_patch": "26.18",
+        "lifecycle_event": "added"
       },
       "type": "standalone",
       "availability": {
@@ -9661,7 +9596,8 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "active",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle_patch": "26.18",
+        "lifecycle_event": "added"
       },
       "type": "standalone",
       "availability": {
@@ -9690,7 +9626,8 @@
       "flags": {
         "system_breaker": false,
         "lifecycle": "active",
-        "lifecycle_observed_patch": "26.18"
+        "lifecycle_patch": "26.18",
+        "lifecycle_event": "added"
       },
       "type": "standalone",
       "availability": {
