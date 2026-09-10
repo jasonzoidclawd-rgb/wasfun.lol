@@ -152,7 +152,13 @@
     "searchKindChampion": "champion",
     "searchKindAugment": "augment",
     "searchKindPatchNote": "patch note",
-    "searchTriggerLabel": "Search"
+    "searchTriggerLabel": "Search",
+    "patchUnconfirmed": "Current patch not confirmed",
+    "metaAugmentsLive": "Live augments",
+    "metaAugmentsKnown": "Known entities",
+    "metaPatchStructural": "Game patch",
+    "metaPatchStatistics": "Statistics patch",
+    "metaPatchUnknown": "Not confirmed"
   },
   "tierList": {
     "title": "ARAM Mayhem Tier List",
@@ -213,7 +219,7 @@
     "ranged": "Ranged",
     "melee": "Melee",
     "poolConstruction": "Champion-Specific Pool",
-    "poolConstructionSubtitle": "Built from {total} augments for {name}; {kept} remain after Mayhem tailoring gates.",
+    "poolConstructionSubtitle": "Built from {total} known augment entities for {name}; {kept} remain after Mayhem tailoring gates.",
     "poolChipResource": "Resource",
     "poolChipTags": "Tags",
     "resourceMana": "Mana",
@@ -224,7 +230,7 @@
     "poolFilterStack": "Construction stack",
     "poolTopTailored": "Top tailored hits",
     "poolStepSource": "Source pool",
-    "poolStepSourceDetail": "All current-patch augments",
+    "poolStepSourceDetail": "All known augment entities",
     "poolStepLifecycle": "Patch lifecycle",
     "poolStepLifecycleDetail": "Disabled or removed augments",
     "poolStepHard": "Kit gates",
@@ -314,7 +320,8 @@
     "abilityStatRadius": "Radius",
     "abilityStatWidth": "Width",
     "abilityStatSpeed": "Speed",
-    "abilityStatCast": "Cast"
+    "abilityStatCast": "Cast",
+    "poolKnownTotal": "/ {total} known entities"
   },
   "championsIndex": {
     "viewTier": "Tier List",
@@ -336,13 +343,12 @@
   },
   "augments": {
     "title": "Augments",
-    "subtitle": "{count} augments · Patch {patch} · sorted by Oracle Score",
+    "subtitle": "{count} live augments · Patch {patch}",
     "metaTitle": "ARAM Mayhem Augments",
     "metaDescription": "Browse ARAM Mayhem augments with Oracle scores, rarities, patch status, and champion combo links.",
     "metaDetailTitle": "{name} Augment Guide",
     "metaDetailDescription": "{name} is a {rarity} ARAM Mayhem augment. See effect context, patch status, and strongest public champion combos.",
     "search": "Search name, set, or effect...",
-    "sortScore": "Sort: Oracle Score",
     "sortWinRate": "Sort: Win Rate",
     "sortName": "Sort: Name",
     "all": "All",
@@ -374,7 +380,19 @@
     "detailRemovedIn": "Removed in patch {patch}",
     "patchSummaryTitle": "Patch summary",
     "patchSummaryBody": "This augment page for {name} reflects public Arena Mayhem data for patch {patch}.",
-    "patchSummaryRemoved": "{name} is marked removed in patch {patch}."
+    "patchSummaryRemoved": "{name} is marked removed in patch {patch}.",
+    "sortRarity": "Sort: Rarity",
+    "subtitleNoPatch": "{count} live augments",
+    "population": "{live} live · {disabled} disabled · {historical} historical",
+    "statusColumn": "Status",
+    "patchUnknown": "Unknown",
+    "availability_confirmed_live": "Live",
+    "availability_disabled": "Disabled this patch",
+    "availability_removed": "Removed",
+    "availability_unverified_legacy": "Unverified (legacy)",
+    "availability_candidate_registry_present": "Candidate",
+    "availability_conflict": "Conflicting sources",
+    "availability_unknown": "Unknown"
   },
   "items": {
     "title": "ARAM Mayhem Items",
@@ -468,45 +486,45 @@
     "freshnessDays": "Detected {days}d ago",
     "freshnessStale": "Source may be stale",
     "freshnessUnavailable": "Source not confirmed",
-  "officialSource": "Official Riot source",
-  "structuredSource": "CommunityDragon structured data",
-  "articleByline": "By {authors}",
-  "viewRiotSource": "View Riot source",
-  "riotSourceShort": "Riot ↗",
-  "originalArticleLabel": "Original article (English)",
-  "recentTitle": "Recent patches",
-  "summaryTotal": "Total changes",
-  "summaryDamage": "Damage/model rows",
-  "summaryChampions": "Champion links",
-  "summaryAugments": "Augment links",
-  "summaryItems": "Item links",
-  "summaryAdded": "Added",
-  "summaryRemoved": "Removed",
-  "summaryHotfixes": "Hotfixes",
-  "modelImpact": "{count} model refs",
+    "officialSource": "Official Riot source",
+    "structuredSource": "CommunityDragon structured data",
+    "articleByline": "By {authors}",
+    "viewRiotSource": "View Riot source",
+    "riotSourceShort": "Riot ↗",
+    "originalArticleLabel": "Original article (English)",
+    "recentTitle": "Recent patches",
+    "summaryTotal": "Total changes",
+    "summaryDamage": "Damage/model rows",
+    "summaryChampions": "Champion links",
+    "summaryAugments": "Augment links",
+    "summaryItems": "Item links",
+    "summaryAdded": "Added",
+    "summaryRemoved": "Removed",
+    "summaryHotfixes": "Hotfixes",
+    "modelImpact": "{count} model refs",
     "removedTitle": "Removed / non-current augments",
     "removedSubtitle": "{count} augments are retained for history but hidden from current pools.",
     "removedName": "Augment",
     "removedRarity": "Rarity",
     "removedVersion": "Version",
-  "kinds": {
-    "buffed": "BUFFED",
-    "nerfed": "NERFED",
-    "changed": "CHANGED",
-    "mechanism": "MECHANISM",
-    "added": "ADDED",
-    "removed": "REMOVED",
-    "fixed": "FIXED",
-    "hotfix": "HOTFIX"
-  },
-  "objectTypes": {
-    "champion": "Champion",
-    "item": "Item",
-    "augment": "Augment",
-    "ability": "Ability",
-    "system": "System",
-    "unknown": "Unknown"
-  },
+    "kinds": {
+      "buffed": "BUFFED",
+      "nerfed": "NERFED",
+      "changed": "CHANGED",
+      "mechanism": "MECHANISM",
+      "added": "ADDED",
+      "removed": "REMOVED",
+      "fixed": "FIXED",
+      "hotfix": "HOTFIX"
+    },
+    "objectTypes": {
+      "champion": "Champion",
+      "item": "Item",
+      "augment": "Augment",
+      "ability": "Ability",
+      "system": "System",
+      "unknown": "Unknown"
+    },
     "sections": {
       "highlights": "Highlights",
       "general": "General Changes",
@@ -540,7 +558,7 @@
     "notAffiliated": "Not affiliated with Riot Games",
     "patchLabel": "Patch {patch}",
     "lastUpdated": "Updated {date}",
-    "methodology": "Tiers and rankings are derived from win-rate data for the current patch. Low pick-rate entries are statistically less reliable."
+    "methodology": "Champion tiers and win rates are observed by our statistics source for the statistics patch shown; the source does not publish sample sizes. Augment availability and effects come from Riot game data. Augment win rates are not published on public pages."
   },
   "advisor": {
     "title": "Mayhem Advisor",
@@ -971,5 +989,12 @@
       "google_identity_required": "Sign-in has moved. Use the Google button on this page to continue.",
       "auth_callback": "Sign-in could not be completed. Please try again."
     }
+  },
+  "freshness": {
+    "structural": "Current game data · Patch {patch}",
+    "structuralUnproven": "Current patch not confirmed — data may be out of date",
+    "statistics": "Observed statistics · Patch {patch}",
+    "statisticsBehind": "Statistics predate patch {patch}",
+    "degraded": "Some sources did not refresh on the last run"
   }
 }

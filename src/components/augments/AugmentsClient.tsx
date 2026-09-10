@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { baselineOracleScore, type ScoredAugment } from "@/lib/scoring/oracle-score";
+import type { ScoredAugment } from "@/lib/scoring/oracle-score";
 import { Tooltip } from "@/components/ui/Tooltip";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -26,12 +26,12 @@ const RARITY_STYLES = {
   },
 } as const;
 
-const SCORE_COLOR = (score: number) => {
-  if (score >= 80) return "text-amber-300";
-  if (score >= 70) return "text-yellow-400";
-  if (score >= 60) return "text-green-400";
-  return "text-slate-400";
-};
+// The public catalog carries no win rates (they are member-only), so the
+// client-side Oracle Score collapsed to a constant per rarity — 268 augments
+// rendered as exactly three numbers. A score that restates the rarity badge
+// beside it is noise dressed as analysis, so the public grid sorts and labels
+// by rarity directly and says so.
+const RARITY_ORDER: Record<string, number> = { prismatic: 0, gold: 1, silver: 2 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -57,19 +57,25 @@ export function AugmentsClient({
 
   const [activeRarity, setActiveRarity] = useState<Rarity>("all");
   const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState<"score" | "name">("score");
+  const [sortBy, setSortBy] = useState<"rarity" | "name">("rarity");
 
+  // Partition on the resolved availability verdict. `flags.lifecycle` maps
+  // four distinct states onto "removed", which is what made a temporarily
+  // disabled augment indistinguishable from one deleted patches ago.
   const currentAugments = useMemo(
-    () => augments.filter((a) => a.flags?.lifecycle !== "removed"),
+    () => augments.filter((a) => a.availability?.status === "confirmed_live"),
     [augments],
   );
-  const removedAugments = useMemo(
+  const notOfferedAugments = useMemo(
     () =>
       augments
-        .filter((a) => a.flags?.lifecycle === "removed")
+        .filter((a) => a.availability?.status && a.availability.status !== "confirmed_live")
         .sort((a, b) => {
-          const patchCompare = (b.flags?.lifecycle_patch ?? "").localeCompare(a.flags?.lifecycle_patch ?? "");
-          if (patchCompare !== 0) return patchCompare;
+          // Disabled first: it is a fact about the CURRENT patch, unlike the
+          // historical entries below it.
+          const rank = (x: ScoredAugment) => (x.availability?.status === "disabled" ? 0 : 1);
+          const byRank = rank(a) - rank(b);
+          if (byRank !== 0) return byRank;
           return localizedName(a, locale).localeCompare(localizedName(b, locale));
         }),
     [augments, locale],
@@ -92,7 +98,11 @@ export function AugmentsClient({
 
   const sorted = useMemo(() => {
     return [...filtered].sort((a, b) => {
-      if (sortBy === "score") return baselineOracleScore(b) - baselineOracleScore(a);
+      if (sortBy === "rarity") {
+        const delta =
+          (RARITY_ORDER[a.rarity] ?? 99) - (RARITY_ORDER[b.rarity] ?? 99);
+        if (delta !== 0) return delta;
+      }
       return a.name.localeCompare(b.name);
     });
   }, [filtered, sortBy]);
@@ -156,7 +166,7 @@ export function AugmentsClient({
           onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
           className="px-3 py-2 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-card)] text-sm focus:outline-none"
         >
-          <option value="score">{t("sortScore")}</option>
+          <option value="rarity">{t("sortRarity")}</option>
           <option value="name">{t("sortName")}</option>
         </select>
       </div>
@@ -183,7 +193,7 @@ export function AugmentsClient({
         {t("showing", { count: sorted.length, total: currentAugments.length })}
       </p>
 
-      <RemovedAugmentsTable augments={removedAugments} locale={locale} />
+      <NotOfferedAugmentsTable augments={notOfferedAugments} locale={locale} />
     </div>
   );
 }
@@ -340,11 +350,9 @@ function Stat({ children }: { children: React.ReactNode }) {
 function AugmentTooltip({
   aug,
   displayName,
-  score,
 }: {
   aug: ScoredAugment;
   displayName: string;
-  score: number;
 }) {
   const t = useTranslations("augments");
   const desc = aug.wikiDescription ?? aug.description;
@@ -373,7 +381,7 @@ function AugmentTooltip({
         </div>
       )}
       <div className="text-xs mt-2 text-white/50">
-        {t("oracleLabel")} {score}
+        {t(`availability_${aug.availability?.status ?? "unknown"}` as never)}
       </div>
     </div>
   );
@@ -393,11 +401,10 @@ function AugmentCard({
   const t = useTranslations("augments");
   const rarity = augment.rarity as keyof typeof RARITY_STYLES;
   const styles = RARITY_STYLES[rarity];
-  const score = baselineOracleScore(augment);
   const displayName = localizedName(augment, locale);
 
   return (
-    <Tooltip content={<AugmentTooltip aug={augment} displayName={displayName} score={score} />}>
+    <Tooltip content={<AugmentTooltip aug={augment} displayName={displayName} />}>
       <div
         className={`glass-card p-3 flex flex-col items-center gap-2 border border-[var(--color-border-default)] transition-all cursor-default ${styles.glow}`}
       >
@@ -441,16 +448,17 @@ function AugmentCard({
         >
           {rarityLabel}
         </span>
-        <div className="flex items-center justify-center gap-1.5 w-full text-[10px] text-[var(--color-text-muted)] mt-auto">
-          <span className="uppercase tracking-wide">{t("oracleLabel")}</span>
-          <span className={`font-bold ${SCORE_COLOR(score)}`}>{score}</span>
-        </div>
+        {augment.availability?.status && augment.availability.status !== "confirmed_live" && (
+          <div className="flex items-center justify-center w-full text-[10px] text-amber-300/90 mt-auto">
+            {t(`availability_${augment.availability.status}` as never)}
+          </div>
+        )}
       </div>
     </Tooltip>
   );
 }
 
-function RemovedAugmentsTable({
+function NotOfferedAugmentsTable({
   augments,
   locale,
 }: {
@@ -477,6 +485,7 @@ function RemovedAugmentsTable({
             <tr>
               <th className="px-3 py-2 font-medium">{t("removedArchiveName")}</th>
               <th className="px-3 py-2 font-medium">{t("removedArchiveRarity")}</th>
+              <th className="px-3 py-2 font-medium">{t("statusColumn")}</th>
               <th className="px-3 py-2 font-medium">{t("removedArchiveVersion")}</th>
             </tr>
           </thead>
@@ -489,8 +498,19 @@ function RemovedAugmentsTable({
                 <td className="px-3 py-2 text-[var(--color-text-muted)]">
                   {tChamp(augment.rarity)}
                 </td>
+                <td
+                  className={
+                    augment.availability?.status === "disabled"
+                      ? "px-3 py-2 text-amber-300/90"
+                      : "px-3 py-2 text-[var(--color-text-muted)]"
+                  }
+                >
+                  {t(`availability_${augment.availability?.status ?? "unknown"}` as never)}
+                </td>
                 <td className="px-3 py-2 text-red-300/85">
-                  {augment.flags?.lifecycle_patch ?? "26.12"}
+                  {/* First patch at which we OBSERVED this state — not a claim
+                      about when Riot changed it. Unknown stays unknown. */}
+                  {augment.flags?.lifecycle_observed_patch ?? t("patchUnknown")}
                 </td>
               </tr>
             ))}

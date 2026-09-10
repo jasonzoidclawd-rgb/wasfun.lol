@@ -56,9 +56,24 @@ const fixture: PatchNotesData = {
 };
 
 describe("patch-notes structured data", () => {
-  test("uses the stable public patch-note scrape time as lastmod", () => {
-    expect(resolvePatchNotesLastModified(fixture)?.toISOString()).toBe(
+  test("falls back to scrape time only when no publication date exists", () => {
+    const undated: PatchNotesData = {
+      ...fixture,
+      patches: [{ ...fixture.patches[0], publishedAt: undefined, released: undefined }],
+    };
+    expect(resolvePatchNotesLastModified(undated)?.toISOString()).toBe(
       "2026-06-23T18:00:00.000Z",
+    );
+  });
+
+  test("uses the patch publication date as lastmod, not the scrape time", () => {
+    // `dateModified`/`lastmod` describe when the CONTENT changed. Preferring
+    // `scraped_at` made every patch URL claim it changed on every daily run —
+    // it only looked stable while the published data was frozen. The sitemap
+    // suite asserts lastmod is never "now", which is unsatisfiable under
+    // scrape-time precedence once the pipeline actually runs.
+    expect(resolvePatchNotesLastModified(fixture)?.toISOString()).toBe(
+      "2026-06-25T12:00:00.000Z",
     );
   });
 
@@ -82,7 +97,7 @@ describe("patch-notes structured data", () => {
     expect(graph[0]).toMatchObject({
       name: "版本更新",
       inLanguage: "zh-TW",
-      dateModified: "2026-06-23T18:00:00.000Z",
+      dateModified: "2026-06-25T12:00:00.000Z",
     });
     expect(graph[2]).toMatchObject({
       numberOfItems: 2,
@@ -90,7 +105,7 @@ describe("patch-notes structured data", () => {
     expect(graph[3]).toMatchObject({
       headline: "League of Legends Patch 26.13 Notes",
       datePublished: "2026-06-25T12:00:00.000Z",
-      dateModified: "2026-06-23T18:00:00.000Z",
+      dateModified: "2026-06-25T12:00:00.000Z",
     });
     expect(JSON.stringify(jsonLd)).not.toContain("oracleScore");
   });

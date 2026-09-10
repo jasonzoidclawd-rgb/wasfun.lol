@@ -89,7 +89,13 @@
     "searchKindChampion": "챔피언",
     "searchKindAugment": "증강",
     "searchKindPatchNote": "패치 노트",
-    "searchTriggerLabel": "검색"
+    "searchTriggerLabel": "검색",
+    "patchUnconfirmed": "현재 패치 미확인",
+    "metaAugmentsLive": "사용 가능 증강",
+    "metaAugmentsKnown": "알려진 항목",
+    "metaPatchStructural": "게임 패치",
+    "metaPatchStatistics": "통계 패치",
+    "metaPatchUnknown": "미확인"
   },
   "tierList": {
     "title": "ARAM 메이헴 티어 리스트",
@@ -150,7 +156,7 @@
     "ranged": "원거리",
     "melee": "근접",
     "poolConstruction": "챔피언별 증강 풀",
-    "poolConstructionSubtitle": "{name} 기준 {total}개 증강에서 구성됨. Mayhem 맞춤 필터 후 {kept}개가 남습니다.",
+    "poolConstructionSubtitle": "{name}을(를) 위해 알려진 증강 항목 {total}개에서 구성했으며, Mayhem 필터 이후 {kept}개가 남습니다.",
     "poolChipResource": "자원",
     "poolChipTags": "태그",
     "resourceMana": "마나",
@@ -161,7 +167,7 @@
     "poolFilterStack": "구성 단계",
     "poolTopTailored": "상위 맞춤 후보",
     "poolStepSource": "원본 풀",
-    "poolStepSourceDetail": "현재 패치의 모든 증강",
+    "poolStepSourceDetail": "알려진 모든 증강 항목",
     "poolStepLifecycle": "패치 상태",
     "poolStepLifecycleDetail": "비활성화 또는 제거된 증강",
     "poolStepHard": "스킬 구성 조건",
@@ -251,17 +257,17 @@
     "abilityStatRadius": "반경",
     "abilityStatWidth": "폭",
     "abilityStatSpeed": "속도",
-    "abilityStatCast": "시전"
+    "abilityStatCast": "시전",
+    "poolKnownTotal": "/ 알려진 {total}개"
   },
   "augments": {
     "title": "증강",
-    "subtitle": "{count}개 증강 · 패치 {patch} · 오라클 점수순",
+    "subtitle": "{count}개 사용 가능 증강 · 패치 {patch}",
     "metaTitle": "ARAM 메이헴 증강",
     "metaDescription": "ARAM 메이헴 증강을 Oracle 점수, 희귀도, 패치 상태, 챔피언 조합 링크와 함께 확인하세요.",
     "metaDetailTitle": "{name} 증강 가이드",
     "metaDetailDescription": "{name}은 {rarity} ARAM 메이헴 증강입니다. 효과 맥락, 패치 상태, 공개 챔피언 강력 조합을 확인하세요.",
     "search": "이름, 세트, 효과 검색...",
-    "sortScore": "정렬: 오라클 점수",
     "sortWinRate": "정렬: 승률",
     "sortName": "정렬: 이름",
     "all": "전체",
@@ -293,7 +299,19 @@
     "detailRemovedIn": "{patch} 패치에서 삭제됨",
     "patchSummaryTitle": "패치 요약",
     "patchSummaryBody": "이 {name} 증강 페이지는 {patch} 패치의 ARAM 메이헴 공개 데이터를 반영합니다.",
-    "patchSummaryRemoved": "{name}은(는) {patch} 패치에서 제거됨으로 표시되었습니다."
+    "patchSummaryRemoved": "{name}은(는) {patch} 패치에서 제거됨으로 표시되었습니다.",
+    "sortRarity": "정렬: 희귀도",
+    "subtitleNoPatch": "{count}개 사용 가능",
+    "population": "{live} 사용 가능 · {disabled} 비활성 · {historical} 기록",
+    "statusColumn": "상태",
+    "patchUnknown": "알 수 없음",
+    "availability_confirmed_live": "사용 가능",
+    "availability_disabled": "이번 패치 비활성",
+    "availability_removed": "제거됨",
+    "availability_unverified_legacy": "미검증(구버전)",
+    "availability_candidate_registry_present": "후보",
+    "availability_conflict": "출처 충돌",
+    "availability_unknown": "알 수 없음"
   },
   "items": {
     "title": "ARAM 메이헴 아이템",
@@ -387,45 +405,45 @@
     "freshnessDays": "{days}일 전 감지됨",
     "freshnessStale": "소스가 오래되었을 수 있음",
     "freshnessUnavailable": "소스 미확인",
-  "officialSource": "Riot 공식 출처",
-  "structuredSource": "CommunityDragon 구조화 데이터",
-  "articleByline": "작성자: {authors}",
-  "viewRiotSource": "Riot 원문 보기",
-  "riotSourceShort": "Riot ↗",
-  "originalArticleLabel": "영문 원문",
-  "recentTitle": "최근 패치",
-  "summaryTotal": "전체 변경",
-  "summaryDamage": "피해 / 모델 행",
-  "summaryChampions": "챔피언 링크",
-  "summaryAugments": "증강 링크",
-  "summaryItems": "아이템 링크",
-  "summaryAdded": "추가",
-  "summaryRemoved": "제거",
-  "summaryHotfixes": "핫픽스",
-  "modelImpact": "모델 참조 {count}개",
+    "officialSource": "Riot 공식 출처",
+    "structuredSource": "CommunityDragon 구조화 데이터",
+    "articleByline": "작성자: {authors}",
+    "viewRiotSource": "Riot 원문 보기",
+    "riotSourceShort": "Riot ↗",
+    "originalArticleLabel": "영문 원문",
+    "recentTitle": "최근 패치",
+    "summaryTotal": "전체 변경",
+    "summaryDamage": "피해 / 모델 행",
+    "summaryChampions": "챔피언 링크",
+    "summaryAugments": "증강 링크",
+    "summaryItems": "아이템 링크",
+    "summaryAdded": "추가",
+    "summaryRemoved": "제거",
+    "summaryHotfixes": "핫픽스",
+    "modelImpact": "모델 참조 {count}개",
     "removedTitle": "삭제됨 / 현재 제외된 증강",
     "removedSubtitle": "{count}개 증강은 기록용으로 유지되며 현재 풀에서는 숨겨집니다.",
     "removedName": "증강",
     "removedRarity": "희귀도",
     "removedVersion": "버전",
-  "kinds": {
-    "buffed": "강화",
-    "nerfed": "약화",
-    "changed": "조정",
-    "mechanism": "메커니즘",
-    "added": "추가",
-    "removed": "제거",
-    "fixed": "수정",
-    "hotfix": "핫픽스"
-  },
-  "objectTypes": {
-    "champion": "챔피언",
-    "item": "아이템",
-    "augment": "증강",
-    "ability": "스킬",
-    "system": "시스템",
-    "unknown": "알 수 없음"
-  },
+    "kinds": {
+      "buffed": "강화",
+      "nerfed": "약화",
+      "changed": "조정",
+      "mechanism": "메커니즘",
+      "added": "추가",
+      "removed": "제거",
+      "fixed": "수정",
+      "hotfix": "핫픽스"
+    },
+    "objectTypes": {
+      "champion": "챔피언",
+      "item": "아이템",
+      "augment": "증강",
+      "ability": "스킬",
+      "system": "시스템",
+      "unknown": "알 수 없음"
+    },
     "sections": {
       "highlights": "주요 변경",
       "general": "일반 변경",
@@ -459,7 +477,7 @@
     "notAffiliated": "Riot Games와 무관합니다",
     "patchLabel": "패치 {patch}",
     "lastUpdated": "업데이트 {date}",
-    "methodology": "티어와 순위는 현재 패치의 승률 데이터를 기반으로 합니다. 픽률이 낮은 항목은 통계적으로 신뢰도가 낮습니다."
+    "methodology": "챔피언 티어와 승률은 표시된 통계 패치에 대해 통계 출처가 관측한 값이며, 출처는 표본 수를 공개하지 않습니다. 증강 제공 여부와 효과는 Riot 게임 데이터에서 가져옵니다. 증강 승률은 공개 페이지에 게시하지 않습니다."
   },
   "advisor": {
     "title": "메이헴 어드바이저",
@@ -971,5 +989,12 @@
       "google_identity_required": "로그인 방식이 변경되었습니다. 이 페이지의 Google 버튼을 이용해 주세요.",
       "auth_callback": "로그인을 완료하지 못했습니다. 다시 시도해 주세요."
     }
+  },
+  "freshness": {
+    "structural": "현재 게임 데이터 · 패치 {patch}",
+    "structuralUnproven": "현재 패치 미확인 — 데이터가 오래되었을 수 있습니다",
+    "statistics": "관측 통계 · 패치 {patch}",
+    "statisticsBehind": "통계가 패치 {patch} 이전 데이터입니다",
+    "degraded": "마지막 실행에서 일부 소스가 갱신되지 않았습니다"
   }
 }

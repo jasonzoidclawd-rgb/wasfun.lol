@@ -3,28 +3,38 @@ import { getTranslations, getLocale } from "next-intl/server";
 export async function MetaAtAGlance({
   sPlusCount,
   championCount,
-  augmentCount,
+  liveAugmentCount,
+  knownAugmentCount,
   changedAugmentCount,
-  patch,
+  structuralPatch,
+  statisticsPatch,
   updatedAt,
 }: {
   sPlusCount: number;
   championCount: number;
-  augmentCount: number;
+  /** Augments currently offerable in game. */
+  liveAugmentCount: number;
+  /** Every augment entity we track, including disabled and historical ones. */
+  knownAugmentCount: number;
   changedAugmentCount: number;
-  patch: string;
+  structuralPatch: string | null;
+  statisticsPatch: string | null;
   updatedAt: string;
 }) {
   const t = await getTranslations("dashboard");
   const locale = await getLocale();
   const updated = new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(updatedAt));
 
+  // Two different augment populations used to share the label "Augments" —
+  // 268 here and 198 on /augments. Each number now names what it counts.
   const rows: Array<[string, string | number]> = [
     [t("metaSPlus"), sPlusCount],
     [t("metaChampions"), championCount],
-    [t("metaAugments"), augmentCount],
+    [t("metaAugmentsLive"), liveAugmentCount],
+    [t("metaAugmentsKnown"), knownAugmentCount],
     [t("metaChangedAugments"), changedAugmentCount],
-    [t("metaPatch"), patch],
+    [t("metaPatchStructural"), structuralPatch ?? t("metaPatchUnknown")],
+    [t("metaPatchStatistics"), statisticsPatch ?? t("metaPatchUnknown")],
     [t("metaUpdated"), updated],
   ];
 

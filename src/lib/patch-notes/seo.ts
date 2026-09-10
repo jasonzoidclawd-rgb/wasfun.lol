@@ -66,10 +66,15 @@ export function resolvePatchNotesLastModified(
   data: PatchNotesData | null | undefined,
 ): Date | null {
   if (!data) return null;
+  // Content date first, scrape time last. `scraped_at` changes on every daily
+  // run even when no patch content changed, which would tell crawlers that
+  // every patch-note URL was modified today. It only looked stable while the
+  // data itself was frozen. Fall back to it solely when no publication date
+  // exists.
   return (
-    validDate(data.scraped_at) ??
     validDate(currentPatch(data)?.publishedAt) ??
-    validDate(currentPatch(data)?.released)
+    validDate(currentPatch(data)?.released) ??
+    validDate(data.scraped_at)
   );
 }
 

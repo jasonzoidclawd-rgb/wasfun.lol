@@ -89,7 +89,13 @@
     "searchKindChampion": "チャンピオン",
     "searchKindAugment": "オーグメント",
     "searchKindPatchNote": "パッチノート",
-    "searchTriggerLabel": "検索"
+    "searchTriggerLabel": "検索",
+    "patchUnconfirmed": "現在のパッチは未確認",
+    "metaAugmentsLive": "使用可能オーグメント",
+    "metaAugmentsKnown": "既知エントリ",
+    "metaPatchStructural": "ゲームパッチ",
+    "metaPatchStatistics": "統計パッチ",
+    "metaPatchUnknown": "未確認"
   },
   "tierList": {
     "title": "ARAMメイヘム ティアリスト",
@@ -150,7 +156,7 @@
     "ranged": "遠距離",
     "melee": "近接",
     "poolConstruction": "チャンピオン別プール",
-    "poolConstructionSubtitle": "{name} 用に {total} 個のオーグメントから構築。Mayhem のフィルター後に {kept} 個が残ります。",
+    "poolConstructionSubtitle": "{name} 用に {total} 件の既知オーグメントエントリから構築。Mayhem の絞り込み後に {kept} 件が残ります。",
     "poolChipResource": "リソース",
     "poolChipTags": "タグ",
     "resourceMana": "マナ",
@@ -161,7 +167,7 @@
     "poolFilterStack": "構築スタック",
     "poolTopTailored": "上位候補",
     "poolStepSource": "元プール",
-    "poolStepSourceDetail": "現パッチの全オーグメント",
+    "poolStepSourceDetail": "既知のオーグメント全エントリ",
     "poolStepLifecycle": "パッチ状態",
     "poolStepLifecycleDetail": "無効化または削除済みのオーグメント",
     "poolStepHard": "キット条件",
@@ -251,17 +257,17 @@
     "abilityStatRadius": "半径",
     "abilityStatWidth": "幅",
     "abilityStatSpeed": "速度",
-    "abilityStatCast": "詠唱"
+    "abilityStatCast": "詠唱",
+    "poolKnownTotal": "/ 既知 {total} 件"
   },
   "augments": {
     "title": "オーグメント",
-    "subtitle": "{count} 個のオーグメント · パッチ {patch} · オラクルスコア順",
+    "subtitle": "{count} 個の使用可能オーグメント · パッチ {patch}",
     "metaTitle": "ARAMメイヘム オーグメント",
     "metaDescription": "ARAMメイヘムのオーグメントを、Oracle スコア、レアリティ、パッチ状態、チャンピオンコンボリンク付きで確認できます。",
     "metaDetailTitle": "{name} オーグメントガイド",
     "metaDetailDescription": "{name} は {rarity} の ARAMメイヘム オーグメントです。効果の文脈、パッチ状態、公開チャンピオン強力コンボを確認できます。",
     "search": "名前、セット、効果で検索...",
-    "sortScore": "並び替え：オラクルスコア",
     "sortWinRate": "並び替え：勝率",
     "sortName": "並び替え：名前",
     "all": "すべて",
@@ -293,7 +299,19 @@
     "detailRemovedIn": "パッチ {patch} で削除",
     "patchSummaryTitle": "パッチ概要",
     "patchSummaryBody": "この {name} のオーグメントページは、パッチ {patch} の ARAMメイヘム公開データに基づいています。",
-    "patchSummaryRemoved": "{name} はパッチ {patch} で削除済みとしてマークされています。"
+    "patchSummaryRemoved": "{name} はパッチ {patch} で削除済みとしてマークされています。",
+    "sortRarity": "並び替え：レアリティ",
+    "subtitleNoPatch": "{count} 個の使用可能オーグメント",
+    "population": "{live} 使用可能 · {disabled} 無効 · {historical} 履歴",
+    "statusColumn": "状態",
+    "patchUnknown": "不明",
+    "availability_confirmed_live": "使用可能",
+    "availability_disabled": "このパッチで無効",
+    "availability_removed": "削除済み",
+    "availability_unverified_legacy": "未検証（旧）",
+    "availability_candidate_registry_present": "候補",
+    "availability_conflict": "ソース不一致",
+    "availability_unknown": "不明"
   },
   "items": {
     "title": "ARAMメイヘム アイテム",
@@ -387,45 +405,45 @@
     "freshnessDays": "{days}日前に検出",
     "freshnessStale": "ソースが古い可能性があります",
     "freshnessUnavailable": "ソース未確認",
-  "officialSource": "Riot公式ソース",
-  "structuredSource": "CommunityDragonの構造化データ",
-  "articleByline": "著者: {authors}",
-  "viewRiotSource": "Riot原文を見る",
-  "riotSourceShort": "Riot ↗",
-  "originalArticleLabel": "英語の原文",
-  "recentTitle": "最近のパッチ",
-  "summaryTotal": "総変更数",
-  "summaryDamage": "ダメージ / モデル行",
-  "summaryChampions": "チャンピオンリンク",
-  "summaryAugments": "オーグメントリンク",
-  "summaryItems": "アイテムリンク",
-  "summaryAdded": "追加",
-  "summaryRemoved": "削除",
-  "summaryHotfixes": "ホットフィックス",
-  "modelImpact": "{count} 件のモデル参照",
+    "officialSource": "Riot公式ソース",
+    "structuredSource": "CommunityDragonの構造化データ",
+    "articleByline": "著者: {authors}",
+    "viewRiotSource": "Riot原文を見る",
+    "riotSourceShort": "Riot ↗",
+    "originalArticleLabel": "英語の原文",
+    "recentTitle": "最近のパッチ",
+    "summaryTotal": "総変更数",
+    "summaryDamage": "ダメージ / モデル行",
+    "summaryChampions": "チャンピオンリンク",
+    "summaryAugments": "オーグメントリンク",
+    "summaryItems": "アイテムリンク",
+    "summaryAdded": "追加",
+    "summaryRemoved": "削除",
+    "summaryHotfixes": "ホットフィックス",
+    "modelImpact": "{count} 件のモデル参照",
     "removedTitle": "削除済み / 現在対象外のオーグメント",
     "removedSubtitle": "{count} 個のオーグメントは履歴用に保持され、現在のプールからは非表示です。",
     "removedName": "オーグメント",
     "removedRarity": "レアリティ",
     "removedVersion": "バージョン",
-  "kinds": {
-    "buffed": "強化",
-    "nerfed": "弱体化",
-    "changed": "調整",
-    "mechanism": "メカニクス",
-    "added": "追加",
-    "removed": "削除",
-    "fixed": "修正",
-    "hotfix": "ホットフィックス"
-  },
-  "objectTypes": {
-    "champion": "チャンピオン",
-    "item": "アイテム",
-    "augment": "オーグメント",
-    "ability": "スキル",
-    "system": "システム",
-    "unknown": "不明"
-  },
+    "kinds": {
+      "buffed": "強化",
+      "nerfed": "弱体化",
+      "changed": "調整",
+      "mechanism": "メカニクス",
+      "added": "追加",
+      "removed": "削除",
+      "fixed": "修正",
+      "hotfix": "ホットフィックス"
+    },
+    "objectTypes": {
+      "champion": "チャンピオン",
+      "item": "アイテム",
+      "augment": "オーグメント",
+      "ability": "スキル",
+      "system": "システム",
+      "unknown": "不明"
+    },
     "sections": {
       "highlights": "ハイライト",
       "general": "全般の変更",
@@ -459,7 +477,7 @@
     "notAffiliated": "Riot Gamesとは無関係です",
     "patchLabel": "パッチ {patch}",
     "lastUpdated": "更新日 {date}",
-    "methodology": "ティアとランキングは現在のパッチの勝率データに基づいています。ピック率の低い項目は統計的に信頼性が低くなります。"
+    "methodology": "チャンピオンのティアと勝率は、表示中の統計パッチについて統計ソースが観測したものです（サンプル数は公開されていません）。オーグメントの提供状況と効果は Riot のゲームデータに基づきます。オーグメントの勝率は公開ページでは提供しません。"
   },
   "advisor": {
     "title": "メイヘムアドバイザー",
@@ -971,5 +989,12 @@
       "google_identity_required": "サインイン方法が変わりました。このページの Google ボタンからお進みください。",
       "auth_callback": "サインインを完了できませんでした。もう一度お試しください。"
     }
+  },
+  "freshness": {
+    "structural": "現在のゲームデータ · パッチ {patch}",
+    "structuralUnproven": "現在のパッチが未確認 — データが古い可能性があります",
+    "statistics": "観測統計 · パッチ {patch}",
+    "statisticsBehind": "統計はパッチ {patch} より前のものです",
+    "degraded": "前回の更新で一部のソースが失敗しました"
   }
 }

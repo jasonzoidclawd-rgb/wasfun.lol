@@ -15,9 +15,10 @@ async function getMeta(): Promise<{ patch?: string; scraped_at?: string }> {
 }
 
 /**
- * Inline provenance line for data pages: shows how fresh the scrape is, links
- * the source, and states the (win-rate-derived) ranking methodology so the
- * numbers read as transparent rather than handed-down.
+ * Inline provenance line for data pages. The methodology sentence must describe
+ * what this page ACTUALLY publishes: the public augment catalog carries no win
+ * rates (they are member-only), so the previous claim that "rankings are
+ * derived from win-rate data for the current patch" was untrue on both counts.
  */
 export async function DataProvenance({ locale }: { locale: string }) {
   const t = await getTranslations("common");

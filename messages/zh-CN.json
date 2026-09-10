@@ -89,7 +89,13 @@
     "searchKindChampion": "英雄",
     "searchKindAugment": "强化",
     "searchKindPatchNote": "版本更新",
-    "searchTriggerLabel": "搜索"
+    "searchTriggerLabel": "搜索",
+    "patchUnconfirmed": "当前版本未确认",
+    "metaAugmentsLive": "可用增幅",
+    "metaAugmentsKnown": "已知条目",
+    "metaPatchStructural": "游戏版本",
+    "metaPatchStatistics": "统计版本",
+    "metaPatchUnknown": "未确认"
   },
   "tierList": {
     "title": "ARAM 大乱斗强度排名",
@@ -150,7 +156,7 @@
     "ranged": "远程",
     "melee": "近战",
     "poolConstruction": "英雄专属强化池",
-    "poolConstructionSubtitle": "为 {name} 从 {total} 个强化构建；经过随机模式筛选后保留 {kept} 个。",
+    "poolConstructionSubtitle": "以 {total} 个已知增幅条目为 {name} 构建；经 Mayhem 筛选后剩余 {kept} 个。",
     "poolChipResource": "资源",
     "poolChipTags": "标签",
     "resourceMana": "法力",
@@ -161,7 +167,7 @@
     "poolFilterStack": "构建流程",
     "poolTopTailored": "最佳筛选命中",
     "poolStepSource": "来源池",
-    "poolStepSourceDetail": "当前版本全部强化",
+    "poolStepSourceDetail": "所有已知增幅条目",
     "poolStepLifecycle": "版本生命周期",
     "poolStepLifecycleDetail": "停用或已移除的强化",
     "poolStepHard": "技能组门槛",
@@ -251,17 +257,17 @@
     "abilityStatRadius": "半径",
     "abilityStatWidth": "宽度",
     "abilityStatSpeed": "速度",
-    "abilityStatCast": "施放"
+    "abilityStatCast": "施放",
+    "poolKnownTotal": "/ {total} 个已知条目"
   },
   "augments": {
     "title": "强化",
-    "subtitle": "{count} 个强化 · 版本 {patch} · 按神谕评分排序",
+    "subtitle": "{count} 个可用增幅 · 版本 {patch}",
     "metaTitle": "ARAM 大乱斗强化",
     "metaDescription": "浏览 ARAM 大乱斗强化的神谕评分、稀有度、版本状态与英雄组合链接。",
     "metaDetailTitle": "{name} 强化指南",
     "metaDetailDescription": "{name} 是 {rarity} ARAM 大乱斗强化。查看效果脉络、版本状态与公开英雄强力组合。",
     "search": "搜索名称、套装或效果...",
-    "sortScore": "排序：神谕评分",
     "sortWinRate": "排序：胜率",
     "sortName": "排序：名称",
     "all": "全部",
@@ -293,7 +299,19 @@
     "detailRemovedIn": "已于 {patch} 版本移除",
     "patchSummaryTitle": "版本摘要",
     "patchSummaryBody": "本页的 {name} 强化内容反映 {patch} 版本的 ARAM 大乱斗公开数据。",
-    "patchSummaryRemoved": "{name} 已于 {patch} 版本标记为移除。"
+    "patchSummaryRemoved": "{name} 已于 {patch} 版本标记为移除。",
+    "sortRarity": "排序：稀有度",
+    "subtitleNoPatch": "{count} 个可用增幅",
+    "population": "{live} 可用 · {disabled} 停用 · {historical} 历史",
+    "statusColumn": "状态",
+    "patchUnknown": "未知",
+    "availability_confirmed_live": "可用",
+    "availability_disabled": "本版本停用",
+    "availability_removed": "已移除",
+    "availability_unverified_legacy": "未验证（旧版）",
+    "availability_candidate_registry_present": "候选",
+    "availability_conflict": "来源冲突",
+    "availability_unknown": "未知"
   },
   "items": {
     "title": "ARAM 大乱斗装备",
@@ -387,45 +405,45 @@
     "freshnessDays": "{days} 天前检测",
     "freshnessStale": "来源可能已过期",
     "freshnessUnavailable": "来源尚未确认",
-  "officialSource": "Riot 官方来源",
-  "structuredSource": "CommunityDragon 结构化数据",
-  "articleByline": "作者：{authors}",
-  "viewRiotSource": "查看 Riot 原文",
-  "riotSourceShort": "Riot ↗",
-  "originalArticleLabel": "英文原文",
-  "recentTitle": "近期版本",
-  "summaryTotal": "总变更",
-  "summaryDamage": "伤害 / 模型行",
-  "summaryChampions": "英雄链接",
-  "summaryAugments": "强化链接",
-  "summaryItems": "装备链接",
-  "summaryAdded": "新增",
-  "summaryRemoved": "移除",
-  "summaryHotfixes": "即时修正",
-  "modelImpact": "{count} 个模型引用",
+    "officialSource": "Riot 官方来源",
+    "structuredSource": "CommunityDragon 结构化数据",
+    "articleByline": "作者：{authors}",
+    "viewRiotSource": "查看 Riot 原文",
+    "riotSourceShort": "Riot ↗",
+    "originalArticleLabel": "英文原文",
+    "recentTitle": "近期版本",
+    "summaryTotal": "总变更",
+    "summaryDamage": "伤害 / 模型行",
+    "summaryChampions": "英雄链接",
+    "summaryAugments": "强化链接",
+    "summaryItems": "装备链接",
+    "summaryAdded": "新增",
+    "summaryRemoved": "移除",
+    "summaryHotfixes": "即时修正",
+    "modelImpact": "{count} 个模型引用",
     "removedTitle": "已移除 / 非当前强化符文",
     "removedSubtitle": "{count} 个强化符文保留作历史记录，但不会进入当前池。",
     "removedName": "强化符文",
     "removedRarity": "稀有度",
     "removedVersion": "版本",
-  "kinds": {
-    "buffed": "增强",
-    "nerfed": "削弱",
-    "changed": "调整",
-    "mechanism": "机制",
-    "added": "新增",
-    "removed": "移除",
-    "fixed": "修复",
-    "hotfix": "即时修正"
-  },
-  "objectTypes": {
-    "champion": "英雄",
-    "item": "道具",
-    "augment": "强化符文",
-    "ability": "技能",
-    "system": "系统",
-    "unknown": "未知"
-  },
+    "kinds": {
+      "buffed": "增强",
+      "nerfed": "削弱",
+      "changed": "调整",
+      "mechanism": "机制",
+      "added": "新增",
+      "removed": "移除",
+      "fixed": "修复",
+      "hotfix": "即时修正"
+    },
+    "objectTypes": {
+      "champion": "英雄",
+      "item": "道具",
+      "augment": "强化符文",
+      "ability": "技能",
+      "system": "系统",
+      "unknown": "未知"
+    },
     "sections": {
       "highlights": "重点",
       "general": "通用调整",
@@ -459,7 +477,7 @@
     "notAffiliated": "与拳头游戏无关联",
     "patchLabel": "版本 {patch}",
     "lastUpdated": "更新于 {date}",
-    "methodology": "段位与排名基于当前版本的胜率数据得出。选取率较低的条目在统计上可靠性较低。"
+    "methodology": "英雄分级与胜率来自统计来源在所示统计版本的观测数据；该来源未公布样本量。增幅的可用性与效果来自 Riot 游戏数据。公开页面不提供增幅胜率。"
   },
   "advisor": {
     "title": "大乱斗顾问",
@@ -971,5 +989,12 @@
       "google_identity_required": "登录方式已更新，请使用本页的 Google 按钮继续。",
       "auth_callback": "登录未能完成，请再试一次。"
     }
+  },
+  "freshness": {
+    "structural": "当前游戏数据 · 版本 {patch}",
+    "structuralUnproven": "当前版本未确认 — 数据可能已过期",
+    "statistics": "观测统计 · 版本 {patch}",
+    "statisticsBehind": "统计数据早于版本 {patch}",
+    "degraded": "上次更新时部分来源未成功"
   }
 }

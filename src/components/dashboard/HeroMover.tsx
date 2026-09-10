@@ -8,7 +8,7 @@ export type HeroChampion = LocalizedNameRecord & {
   tier: string;
   rank: number;
   win_rate: number;
-  pick_rate: number;
+  pick_rate: number | null;
   icon: string;
 };
 
@@ -43,7 +43,10 @@ export async function HeroMover({
             {champion.win_rate.toFixed(1)}% <span className="text-[var(--color-text-muted)]">{t("heroWinRate")}</span>
           </span>
           <span>
-            {champion.pick_rate.toFixed(1)}% <span className="text-[var(--color-text-muted)]">{t("heroPickRate")}</span>
+            {champion.pick_rate != null
+              ? `${champion.pick_rate.toFixed(1)}%`
+              : "—"}{" "}
+            <span className="text-[var(--color-text-muted)]">{t("heroPickRate")}</span>
           </span>
         </div>
       </div>

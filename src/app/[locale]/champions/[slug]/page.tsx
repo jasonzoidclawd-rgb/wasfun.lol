@@ -797,7 +797,7 @@ export default async function ChampionPage({
           <>
             <p className="text-[10px] text-[var(--color-text-muted)] mb-3 pl-3">
               <span className="font-medium text-[var(--color-text-primary)]">N={pool?.total ?? 0}</span>
-              <span> / {augments.length} total</span>
+              <span> {t("poolKnownTotal", { total: augments.length })}</span>
               {poolProfile.resource !== "mana" && (
                 <span>
                   {" · "}

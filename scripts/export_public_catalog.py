@@ -102,7 +102,13 @@ def build_public_augments(internal_dir: Path, forbidden: set[str]) -> dict:
         add_public_localized_augment_descriptions(augment)
         patch = removed_patches.get(slug) or added_patches.get(slug)
         if patch:
-            augment.setdefault("flags", {})["lifecycle_patch"] = patch
+            # `lifecycle_from_events` records the patch at which we FIRST
+            # OBSERVED this state, which is not the same claim as "Riot changed
+            # it in this patch" — the catalog bootstrap recorded every
+            # pre-existing removal at whatever patch was current that day. The
+            # field name has to carry that weaker meaning, because the UI was
+            # rendering it as a removal date.
+            augment.setdefault("flags", {})["lifecycle_observed_patch"] = patch
 
     return strip_keys(augments, forbidden)
 
@@ -182,7 +188,11 @@ def export_public_catalog(
         "oracleScore",
         "modelWeights",
         "scoreBreakdown",
-        "availability",
+        # `availability` is deliberately NOT stripped: its resolved `status` is
+        # the catalog's most useful public fact and the only thing that lets a
+        # reader tell a temporarily disabled augment from one deleted patches
+        # ago. The raw multi-source `signals` tree underneath it stays private —
+        # stripping it recursively leaves exactly {"status": ...}.
         "signals",
         "provenance",
         "dataValues",
@@ -238,12 +248,25 @@ def export_public_catalog(
     write_json(public_dir / "combos.json", combos)
 
     pool_rules = read_json(internal_dir / "pool-rules.json")
-    for field in ("disabled", "mutually_exclusive", "item_exclusions", "ally_exclusions"):
+    # `disabled` is published: which augments are currently switched off is a
+    # plain fact about the live game (the League wiki publishes it too), and
+    # emptying it made the site unable to distinguish disabled from removed.
+    # The curated exclusion/synergy rules remain member-only.
+    for field in ("mutually_exclusive", "item_exclusions", "ally_exclusions"):
         pool_rules[field] = []
     pool_rules["lifecycle"] = {"added": {}, "removed": {}}
     pool_rules.pop("availability", None)
     pool_rules.pop("availability_overrides", None)
     write_json(public_dir / "pool-rules.json", pool_rules)
+
+    # Lane/clock status drives the public degraded banner. Without it the site
+    # cannot tell a reader that its data is behind, which is how 59 days of
+    # stale data were presented as current.
+    status = read_json(internal_dir / "pipeline-status.json") if (
+        internal_dir / "pipeline-status.json"
+    ).exists() else {}
+    if status:
+        write_json(public_dir / "pipeline-status.json", strip_keys(status, forbidden_telemetry))
 
     # `patch-events.json` is the authoritative hotfix feed.  The legacy
     # mayhem-hotfixes file is intentionally not exported or consumed here.

@@ -43,6 +43,11 @@ export interface ScoredAugment {
     system_breaker?: boolean;
     lifecycle?: string;
     lifecycle_patch?: string;
+    /**
+     * Patch at which this lifecycle state was first OBSERVED — not a claim
+     * about when Riot changed it. Absent when unknown.
+     */
+    lifecycle_observed_patch?: string;
   };
 }
 

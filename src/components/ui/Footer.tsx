@@ -1,26 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import fs from "node:fs/promises";
-import path from "node:path";
-
-async function getPatch(): Promise<string | null> {
-  try {
-    const raw = await fs.readFile(
-      path.join(process.cwd(), "public/data/meta.json"),
-      "utf-8",
-    );
-    const meta = JSON.parse(raw) as { patch?: string };
-    return meta.patch ?? null;
-  } catch {
-    return null;
-  }
-}
+import { readPatchClocks } from "@/lib/data/clocks";
 
 export async function Footer() {
   const t = await getTranslations("footer");
   const tc = await getTranslations("common");
   const tn = await getTranslations("nav");
-  const patch = await getPatch();
+  // A bare "Patch X" in the footer reads as the GAME patch, so it comes from
+  // the structural clock — not from meta.json, which is the statistics clock
+  // and legitimately trails the live game.
+  const { structuralPatch: patch } = await readPatchClocks();
   const year = new Date().getFullYear();
 
   const columns: Array<{ title: string; links: Array<{ href: string; label: string }> }> = [

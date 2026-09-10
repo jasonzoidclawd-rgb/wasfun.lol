@@ -91,7 +91,16 @@ describe("sitemap freshness", () => {
 
     expect(urls).toEqual(expect.arrayContaining(expectedDetailUrls));
     expect(expectedDetailUrls.every((url) => generatedUrls.has(url))).toBe(true);
-    expect(generatedUrls).toContain("https://wasfun.lol/patch-notes/26.13");
+    // Assert against the published set, not a literal patch number: the
+    // patch-note window rolls forward every fortnight, so a pinned version
+    // (previously 26.13) silently ages out of the feed and fails for a reason
+    // that has nothing to do with the behaviour under test.
+    expect(patchNotesData.patches.length).toBeGreaterThan(0);
+    for (const patch of patchNotesData.patches) {
+      expect(generatedUrls).toContain(
+        localizedUrl(patchDetailRoute(patch.version), routing.defaultLocale),
+      );
+    }
     expect(proxySource).toContain('"/patch-notes/:path*"');
   });
 
