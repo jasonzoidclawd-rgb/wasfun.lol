@@ -1,6 +1,6 @@
 {
   "patch": "26.18",
-  "scraped_at": "2026-09-10T17:21:34.298298Z",
+  "scraped_at": "2026-09-10T18:21:25.923990Z",
   "availability": {
     "offerable": {
       "adapt": "confirmed_live",
@@ -301,18 +301,19 @@
     "void-dash"
   ],
   "lifecycle": {
-    "added": {
-      "do-or-die": "26.18",
-      "dont-stop-cleavin": "26.18",
-      "dorans-biggest-fan": "26.18",
-      "drink-up": "26.18",
-      "future-sight-heartsteel": "26.18",
-      "haste-makes-waste": "26.18",
-      "stabby-stabby": "26.18",
-      "upgrade_-death-fire-grasp": "26.18",
-      "upgrade_-innervating-locket": "26.18",
-      "upgrade_-zz-rot-portal": "26.18"
-    },
-    "removed": {}
+    "added": {},
+    "removed": {},
+    "first_observed_across_gap": {
+      "do-or-die": "added",
+      "dont-stop-cleavin": "added",
+      "dorans-biggest-fan": "added",
+      "drink-up": "added",
+      "future-sight-heartsteel": "added",
+      "haste-makes-waste": "added",
+      "stabby-stabby": "added",
+      "upgrade_-death-fire-grasp": "added",
+      "upgrade_-innervating-locket": "added",
+      "upgrade_-zz-rot-portal": "added"
+    }
   }
 }

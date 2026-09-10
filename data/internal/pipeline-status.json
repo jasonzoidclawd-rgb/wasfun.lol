@@ -1,15 +1,21 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T17:22:05.927040Z",
+  "generated_at": "2026-09-10T18:21:54.850641Z",
   "overall": "ok",
   "degraded_lanes": [],
+  "structural_lane": {
+    "status": "ok",
+    "carriedForward": 0,
+    "missingCurrentObservation": [],
+    "bootstrappedWithoutBaseStats": []
+  },
   "structural": {
     "patch": "26.18",
     "source": "riot_patch_notes"
   },
   "statistics": {
     "patch": "26.17",
-    "observed_at": "2026-09-10T17:08:31.702161+00:00",
+    "observed_at": "2026-09-10T18:09:11.569726+00:00",
     "source": "https://arammayhem.com"
   }
 }

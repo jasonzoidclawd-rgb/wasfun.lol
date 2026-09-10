@@ -1,6 +1,6 @@
 {
   "patch": "26.17",
-  "scraped_at": "2026-09-10T17:08:11.871550+00:00",
+  "scraped_at": "2026-09-10T18:08:56.674747+00:00",
   "schemaVersion": "augment-truth-step5",
   "sources": {
     "definition": "data/internal/augment-base-catalog.json",
@@ -9447,9 +9447,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "active",
-        "lifecycle_patch": "26.18",
-        "lifecycle_event": "added"
+        "lifecycle": "active"
       },
       "type": "standalone",
       "availability": {
@@ -9477,9 +9475,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "active",
-        "lifecycle_patch": "26.18",
-        "lifecycle_event": "added"
+        "lifecycle": "active"
       },
       "type": "standalone",
       "availability": {
@@ -9507,9 +9503,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "active",
-        "lifecycle_patch": "26.18",
-        "lifecycle_event": "added"
+        "lifecycle": "active"
       },
       "type": "standalone",
       "availability": {
@@ -9537,9 +9531,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "active",
-        "lifecycle_patch": "26.18",
-        "lifecycle_event": "added"
+        "lifecycle": "active"
       },
       "type": "standalone",
       "availability": {
@@ -9595,9 +9587,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "active",
-        "lifecycle_patch": "26.18",
-        "lifecycle_event": "added"
+        "lifecycle": "active"
       },
       "type": "standalone",
       "availability": {
@@ -9625,9 +9615,7 @@
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
-        "lifecycle": "active",
-        "lifecycle_patch": "26.18",
-        "lifecycle_event": "added"
+        "lifecycle": "active"
       },
       "type": "standalone",
       "availability": {
