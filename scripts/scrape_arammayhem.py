@@ -169,22 +169,74 @@ def parse_augments(html: str) -> list[dict]:
         if not slug_m:
             continue
 
-        # Win rate: old markup used a "59.03<!-- -->%" badge; rank rows render
-        # pick rate (duplicated for responsive grids) and win rate as plain
-        # percentages — win rate is the largest distinct value.
-        wr_m = re.search(r'">([\d.]+)<!-- -->%', block)
-        if wr_m:
-            win_rate = float(wr_m.group(1))
-        else:
-            pcts = {float(v) for v in re.findall(r"([\d.]+)\s*%", block) if float(v) <= 100}
-            win_rate = max(pcts) if pcts else None
+        win_rate, extraction = extract_augment_win_rate(block)
 
         rows.append({
             "sourceKey": normalize_path_slug(slug_m.group(1)),
             "win_rate": win_rate,
+            "extraction": extraction,
+            # Denominators the source does not publish. Recorded explicitly so
+            # downstream code can tell "not disclosed" from "not yet wired up",
+            # and so no consumer infers a sample size we never observed.
+            "games": None,
+            "sampleDisclosed": False,
         })
 
     return rows
+
+
+# Win-rate extraction must never infer meaning from magnitude. The previous
+# `max(percentages)` fallback silently published a pick rate as a win rate
+# whenever the labelled markup changed. Ambiguity now quarantines the row.
+_WR_BADGE_RE = re.compile(r'">([\d.]+)<!-- -->%')
+_WR_LABELLED_RE = re.compile(r'Win\s*Rate[^\d%]{0,20}?([\d.]+)\s*%', re.IGNORECASE)
+# Rank rows encode the two stats by emphasis, not by order or magnitude: the
+# primary (`text-foreground`) cell is the win rate, the de-emphasized
+# (`text-muted-foreground`) cell is the pick rate, which is also duplicated into
+# a mobile-only badge. Verified against all 198 live rows on 2026-09-10.
+_WR_PRIMARY_RE = re.compile(
+    r'<div class="(?![^"]*\bmuted\b)[^"]*\btext-foreground\b[^"]*">\s*([\d.]+)\s*%\s*</div>'
+)
+_PR_MUTED_RE = re.compile(
+    r'<div class="[^"]*\btext-muted-foreground\b[^"]*">\s*([\d.]+)\s*%\s*</div>'
+)
+
+
+def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
+    """Return (win_rate, extraction_method).
+
+    Ordered by decreasing certainty. Every branch identifies the win rate by an
+    explicit marker — never by magnitude. The previous `max(percentages)`
+    fallback would publish a pick rate as a win rate the moment the markup
+    changed, and would do so silently; ambiguity now quarantines the row.
+      1. dedicated win-rate badge markup                 -> "badge"
+      2. explicitly labelled "Win Rate: N%"              -> "labelled"
+      3. primary emphasis cell, corroborated by a muted
+         pick-rate cell in the same row                  -> "structural"
+      4. exactly one distinct percentage in the block    -> "sole_percentage"
+      5. anything else                                   -> quarantined, None
+    """
+    badge = _WR_BADGE_RE.search(block)
+    if badge:
+        return float(badge.group(1)), "badge"
+
+    labelled = _WR_LABELLED_RE.search(block)
+    if labelled:
+        return float(labelled.group(1)), "labelled"
+
+    primary = _WR_PRIMARY_RE.findall(block)
+    if len(primary) == 1 and _PR_MUTED_RE.search(block):
+        # Exactly one primary stat cell, plus the pick-rate cell we expect
+        # beside it: the layout matches what we verified, so this is unambiguous.
+        return float(primary[0]), "structural"
+
+    percentages = {float(v) for v in re.findall(r"([\d.]+)\s*%", block) if float(v) <= 100}
+    if len(percentages) == 1:
+        # Nothing to confuse it with; the single value can only be the win rate.
+        return percentages.pop(), "sole_percentage"
+    if not percentages:
+        return None, "quarantined_no_percentage"
+    return None, "quarantined_ambiguous_percentages"
 
 
 def load_existing_rows(filename: str, key: str) -> dict[str, dict]:
@@ -453,8 +505,21 @@ def main():
     # Tier list
     print("\n[2/8] Champion tier list")
     tier_html = fetch("/tier-list/")
-    champions = merge_champion_sources(parse_tier_list(tier_html), search_champions)
+    tier_list_rows = parse_tier_list(tier_html)
+    champions = merge_champion_sources(tier_list_rows, search_champions)
     print(f"  → {len(champions)} champions")
+    if not tier_list_rows:
+        # The structured search index still carries tier + win rate, so the run
+        # is not wrong — but a primary parser that silently returns nothing is
+        # how a field disappears without anyone noticing. Say so loudly.
+        print(
+            "  ⚠ tier-list HTML parser matched 0 champion cards; "
+            "serving tier/win-rate from the search index only. "
+            "Fields unique to the HTML card (e.g. pick rate) will be null."
+        )
+    missing_pick_rate = sum(1 for row in champions if row.get("pick_rate") is None)
+    if missing_pick_rate:
+        print(f"  ⚠ {missing_pick_rate}/{len(champions)} champions have no pick rate from source")
 
     # Augment win rates
     print("\n[3/5] Augment win rates")
@@ -462,7 +527,15 @@ def main():
     aug_html = fetch("/augments/")
     augment_win_rate_rows = parse_augments(aug_html)
     patch = extract_patch(tier_html, aug_html) or search_patch
+    quarantined = [r for r in augment_win_rate_rows if str(r.get("extraction", "")).startswith("quarantined")]
     print(f"  → {len(augment_win_rate_rows)} source rows, patch {patch}")
+    if quarantined:
+        # Loud but non-fatal: an extraction regression must be visible in the
+        # run log rather than silently degrading every downstream win rate.
+        print(
+            f"  ⚠ {len(quarantined)} row(s) quarantined (ambiguous win-rate markup): "
+            + ", ".join(sorted(r["sourceKey"] for r in quarantined)[:8])
+        )
 
     existing_champions = load_existing_rows("champions.json", "champions")
     for i, champ in enumerate(champions):

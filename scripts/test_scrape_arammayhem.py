@@ -106,17 +106,24 @@ class SearchIndexParserTests(unittest.TestCase):
 
 class AugmentWinRateFeedTests(unittest.TestCase):
     def test_arammayhem_augment_parser_returns_win_rate_rows_only(self):
+        # Mirrors live rank-row markup (verified 2026-09-10): the win rate is
+        # the primary `text-foreground` cell; the pick rate is the muted cell
+        # and is duplicated into a mobile-only badge.
         html = """
         <a href="/augments/adapt" class="augment-rank-row" data-rarity="silver" data-availability="live">
           <img src="/augments/adapt.png" alt="ADAPt">
-          <span>11.2%</span>
-          <span>55.96%</span>
+          <span class="text-info sm:hidden">11.2%</span>
+          <div class="text-right font-data text-base font-semibold text-foreground sm:text-lg">55.96%</div>
+          <div class="hidden text-right font-data text-sm text-muted-foreground sm:block">11.2%</div>
         </a>
         """
 
         rows = parse_augments(html)
 
-        self.assertEqual(rows, [{"sourceKey": "adapt", "win_rate": 55.96}])
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["sourceKey"], "adapt")
+        self.assertEqual(rows[0]["win_rate"], 55.96)
+        self.assertEqual(rows[0]["extraction"], "structural")
         assert_no_definition_fields(self, rows)
 
     def test_win_rate_feed_resolves_to_cdragon_ids_and_reports_unmatched_rows(self):
