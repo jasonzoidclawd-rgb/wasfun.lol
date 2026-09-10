@@ -30,7 +30,11 @@ describe("update-data workflow ordering", () => {
     expect(section).toMatch(/if:\s*always\(\)/);
   });
 
-  test("statistics lagging the live game does not fail the run", () => {
-    expect(workflow).toContain('"$status" = "statistics_behind"');
+  test("the tracking issue closes only on a bounded-healthy state", () => {
+    // Closing on any statistics lag is what auto-resolved the 59-day outage
+    // every single day it continued.
+    expect(workflow).toContain('"$healthy" = "yes"');
+    expect(workflow).not.toContain('"$status" = "statistics_behind"');
+    expect(workflow).toContain("statistics_stale");
   });
 });

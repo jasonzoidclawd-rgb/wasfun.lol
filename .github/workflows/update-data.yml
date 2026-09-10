@@ -78,26 +78,34 @@ jobs:
           cat freshness.json
 
           status=$(python3 -c "import json; print(json.load(open('freshness.json'))['status'])")
+          healthy=$(python3 -c "import json; print('yes' if json.load(open('freshness.json'))['healthy'] else 'no')")
+          stats_detail=$(python3 -c "import json; d=json.load(open('freshness.json'))['statistics']; print(f\"lag={d.get('patch_lag')} age={d.get('observation_age_hours')}h\")")
           structural=$(python3 -c "import json; d=json.load(open('freshness.json'))['structural']; print(f\"{d.get('published_patch') or 'unknown'} vs {d.get('upstream_patch') or 'unknown'}\")")
           statistics=$(python3 -c "import json; d=json.load(open('freshness.json'))['statistics']; print(f\"{d.get('published_patch') or 'unknown'} vs {d.get('upstream_patch') or 'unknown'}\")")
 
           gh label create data-staleness --color D93F0B --description "Automated data freshness drift" 2>/dev/null || true
           existing=$(gh issue list --label data-staleness --state open --limit 1 --json number --jq '.[0].number')
 
-          if [ "$status" = "fresh" ] || [ "$status" = "statistics_behind" ]; then
-            echo "Publishable state: $status (structural $structural | statistics $statistics)"
+          # Close the tracking issue ONLY on a genuinely healthy state. A mere
+          # patch lag is not recovery: the 59-day outage presented as "one more
+          # patch behind" every single day and would otherwise be auto-closed.
+          if [ "$healthy" = "yes" ]; then
+            echo "Publishable and healthy: $status (structural $structural | statistics $statistics $stats_detail)"
             if [ -n "$existing" ]; then
-              gh issue close "$existing" --comment "Recovered: $status. Structural $structural. Statistics $statistics. Run: $RUN_URL"
+              gh issue close "$existing" --comment "Recovered: $status. Structural $structural. Statistics $statistics ($stats_detail). Run: $RUN_URL"
             fi
             exit 0
           fi
 
           if [ "$status" = "unknown" ]; then
             title="Data freshness is unknown (structural $structural)"
-            body="UNKNOWN: structural=$structural statistics=$statistics. Could not determine freshness. Run: $RUN_URL"
+            body="UNKNOWN: structural=$structural statistics=$statistics ($stats_detail). Could not determine freshness. Run: $RUN_URL"
+          elif [ "$status" = "statistics_stale" ]; then
+            title="Statistics data is stale (statistics $statistics)"
+            body="STATISTICS_STALE: statistics=$statistics ($stats_detail) exceeds the bounded policy (max lag 1 patch, max age 72h). Structural=$structural. The statistics lane has stopped following the game. Run: $RUN_URL"
           else
             title="Structural data is stale (structural $structural)"
-            body="STRUCTURAL_STALE: structural=$structural statistics=$statistics. The published catalog is behind Riot's live patch. Run: $RUN_URL"
+            body="STRUCTURAL_STALE: structural=$structural statistics=$statistics ($stats_detail). The published catalog is behind Riot's live patch. Run: $RUN_URL"
           fi
 
           if [ -n "$existing" ]; then
