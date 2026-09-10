@@ -121,6 +121,16 @@ export default async function ChampionPage({
   const tm = await getTranslations("membership");
   const tg = await getTranslations("grades");
 
+  // Resolve the slug against public data and 404 unknown slugs BEFORE the
+  // entitlement gate below. The gate reads cookies(), which makes this route
+  // dynamically rendered when Supabase env is configured (production); a
+  // notFound() thrown after that point no longer yields a 404 status, so
+  // unknown slugs must be rejected while the response is still unstarted.
+  const publicData = await loadChampionDetailData("public");
+  const { champions, patch } = publicData;
+  const champ = champions.find((c) => c.slug === slug);
+  if (!champ) notFound();
+
   // Member decision content (pool construction, scored rankings) is gated on an
   // active entitlement — not merely being signed in. A logged-in non-member
   // must not receive server-rendered scores or breakdowns.
@@ -133,14 +143,9 @@ export default async function ChampionPage({
     return { isAuthenticated: gate.reason !== "unauthenticated", isMember: false };
   })();
 
-  const publicData = await loadChampionDetailData("public");
   const memberData = isMember ? await loadChampionDetailData("member") : null;
   const activeData = memberData ?? publicData;
-  const { champions, patch } = publicData;
   const { augments, combos, poolRules, abilities } = activeData;
-
-  const champ = champions.find((c) => c.slug === slug);
-  if (!champ) notFound();
   const activeChamp = activeData.champions.find((c) => c.slug === slug) ?? champ;
   const champName = localizedName(champ, locale);
   const localizedAugmentDescription = (augment: AugmentData): string =>
