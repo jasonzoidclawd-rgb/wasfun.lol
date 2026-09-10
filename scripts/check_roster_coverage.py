@@ -33,8 +33,12 @@ CDRAGON_SUMMARY_URL = (
     "rcp-be-lol-game-data/global/default/v1/champion-summary.json"
 )
 HEADERS = {"User-Agent": "MayhemOracle/1.0 (roster-coverage-gate)"}
-ICON_ID_RE = re.compile(r"/champion-icons/(\d+)\.png(?:$|[?#])")
-GENERIC_ICON_ID_RE = re.compile(r"/(\d+)\.png(?:$|[?#])")
+# Identity is NEVER inferred from a presentation URL. The statistics provider
+# moved its icons to `/icons/<slug>/64.png`, where the trailing number is a
+# pixel size — the old generic pattern read "64" as a champion id for all 173
+# champions. `scrape_base_stats.py` now stamps the canonical Riot id from Data
+# Dragon, and this gate reads only that.
+IDENTITY_FIELDS = ("id", "championId", "key")
 
 
 def load_json(path: Path) -> Any:
@@ -107,16 +111,12 @@ def published_entries(payload: Any) -> List[Dict[str, Any]]:
         champion_id = next(
             (
                 numeric_id(row.get(field))
-                for field in ("id", "championId", "key")
+                for field in IDENTITY_FIELDS
                 if numeric_id(row.get(field))
             ),
             None,
         )
-        icon = str(row.get("icon") or "")
-        icon_match = ICON_ID_RE.search(icon) or GENERIC_ICON_ID_RE.search(icon)
-        if not champion_id and icon_match:
-            champion_id = icon_match.group(1)
-        raw_slug = row.get("slug") or row.get("id") or row.get("name")
+        raw_slug = row.get("slug") or row.get("name")
         entries.append(
             {
                 "id": champion_id,
