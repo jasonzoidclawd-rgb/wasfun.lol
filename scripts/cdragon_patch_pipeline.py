@@ -58,10 +58,18 @@ FetchJson = Callable[[str], Union[dict[str, Any], list[Any]]]
 # which is a magic number that a future content drop can invalidate.
 DERIVED_VARIANT_MARKERS = ("relatedPrimeContentId", "relatedPrimeItemId")
 
-# A single missing character asset is a structured skip.  A systemic collapse
-# (CDragon partially published, path scheme changed) must still fail the lane
-# rather than silently promoting a gutted roster.
-CHAMPION_BIN_COVERAGE_FLOOR = 0.95
+# Absence of a current observation is NOT evidence that a stat changed.
+#
+# A ratio floor was wrong here: it let a transient 404 drop a champion's base
+# stats, and the snapshot diff then published that absence as a balance change
+# ("base_stats.health: 690 -> gone"). Continuity is semantic, not statistical —
+# for a champion we have seen before, a missing bin means "no new observation",
+# so the previously observed stats are carried forward and the diff is empty.
+#
+# The ceiling below only guards against a SYSTEMIC outage: if CDragon stops
+# serving a large share of bins, carrying everything forward would silently
+# serve a whole stale roster under a new patch label, so the lane fails instead.
+CHAMPION_BIN_RETENTION_CEILING = 0.05
 
 
 def _read_json(path: Path) -> dict[str, Any] | None:
@@ -353,10 +361,27 @@ def _is_missing_asset(exc: BaseException) -> bool:
     return isinstance(exc, HTTPError) and exc.code == 404
 
 
+def previous_base_stats(internal_dir: Path, branch: str) -> dict[str, dict[str, Any]]:
+    """Base stats from the last trusted snapshot of this lane, by canonical id."""
+    snapshot = _read_json(internal_dir / snapshot_filename("champion", branch))
+    if not isinstance(snapshot, dict):
+        return {}
+    stats: dict[str, dict[str, Any]] = {}
+    for row in snapshot.get("entities", []):
+        if not isinstance(row, dict):
+            continue
+        base = (row.get("fields") or {}).get("base_stats")
+        if isinstance(base, dict) and base:
+            stats[str(row.get("id"))] = base
+    return stats
+
+
 def fetch_branch_entities(
     branch: str,
     *,
     fetch_json: FetchJson = _fetch_json,
+    known_base_stats: dict[str, dict[str, Any]] | None = None,
+    report: dict[str, Any] | None = None,
 ) -> tuple[str, dict[str, list[dict[str, Any]]], dict[str, str]]:
     """Fetch all source inputs for one lane before normalization/promotion."""
     base = _cdragon_base(branch)
@@ -421,25 +446,54 @@ def fetch_branch_entities(
         if stats is not None:
             base_stats[canonical_id] = stats
 
-    # Coverage gate: of the rows that ARE prime playable champions, nearly all
-    # must have yielded base stats.  One new champion missing its bin degrades;
-    # a path-scheme change or partial CDragon publish fails the lane.
     prime_count = len(champion_rows) - len(skipped["derived_variant"])
     if prime_count == 0:
         raise SnapshotValidationError(
             f"champion coverage collapse: 0 prime champions in {len(champion_rows)} source rows"
         )
-    coverage = len(base_stats) / prime_count
-    if coverage < CHAMPION_BIN_COVERAGE_FLOOR:
+
+    # Semantic continuity. A champion we have observed before that has no bin
+    # this run has not lost its stats — we simply have no new observation, so
+    # the last trusted values are carried forward and the diff stays empty.
+    # A champion we have never observed has nothing to carry forward; it is
+    # bootstrapped without base stats, which is an addition, not a change.
+    known = known_base_stats if known_base_stats is not None else {}
+    retained: list[str] = []
+    bootstrapped: list[str] = []
+    for canonical_id in skipped["missing_character_bin"]:
+        carried = known.get(canonical_id)
+        if carried:
+            base_stats[canonical_id] = copy.deepcopy(carried)
+            retained.append(canonical_id)
+        else:
+            bootstrapped.append(canonical_id)
+
+    # Systemic guard: carrying a large share of the roster forward would serve a
+    # stale roster under a new patch label without any diff to reveal it.
+    retention_ratio = len(retained) / prime_count
+    if retention_ratio > CHAMPION_BIN_RETENTION_CEILING:
         raise SnapshotValidationError(
-            f"champion coverage collapse: base stats for {len(base_stats)}/{prime_count} "
-            f"prime champions ({coverage:.1%} < {CHAMPION_BIN_COVERAGE_FLOOR:.0%}); "
-            f"missing bins: {sorted(skipped['missing_character_bin'])[:10]}"
+            f"champion base-stat acquisition collapse: {len(retained)}/{prime_count} "
+            f"({retention_ratio:.1%}) would be carried forward, above the "
+            f"{CHAMPION_BIN_RETENTION_CEILING:.0%} ceiling; "
+            f"missing bins: {sorted(retained)[:10]}"
         )
+
+    acquisition = {
+        "prime_champions": prime_count,
+        "derived_variants_skipped": sorted(skipped["derived_variant"]),
+        "base_stats_observed": sorted(set(base_stats) - set(retained)),
+        "base_stats_retained": sorted(retained),
+        "bootstrapped_without_base_stats": sorted(bootstrapped),
+    }
+    if report is not None:
+        report["champion_acquisition"] = acquisition
+
     if skipped["derived_variant"] or skipped["missing_character_bin"]:
         print(
-            f"[CDragon:{branch}] skipped {len(skipped['derived_variant'])} derived variants, "
-            f"{len(skipped['missing_character_bin'])} missing character bins; "
+            f"[CDragon:{branch}] skipped {len(skipped['derived_variant'])} derived variants; "
+            f"{len(retained)} base-stat set(s) carried forward (no new observation), "
+            f"{len(bootstrapped)} new champion(s) without bins; "
             f"promoted {len(base_stats)}/{prime_count} prime champions",
             file=sys.stderr,
         )
@@ -492,7 +546,14 @@ def promote_branch(
 ) -> dict[str, Any]:
     """Acquire one lane, then atomically promote every output for that lane."""
     now = observed_at or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-    source_version, entities, _sources = fetch_branch_entities(branch, fetch_json=fetch_json)
+    report: dict[str, Any] = {}
+    source_version, entities, _sources = fetch_branch_entities(
+        branch,
+        fetch_json=fetch_json,
+        # Continuity is measured against this lane's own last trusted snapshot.
+        known_base_stats=previous_base_stats(internal_dir, branch),
+        report=report,
+    )
     source_patch_label = (
         _latest_patch_label(internal_dir, source_version)
         if branch == "latest"
@@ -521,6 +582,26 @@ def promote_branch(
         for entity_type, snapshot in update["snapshots"].items()
     }
     values[internal_dir / archive_name] = update["archive"]
+
+    # Degradation travels with the data it describes, so any consumer of the
+    # snapshot can see that some base stats were carried forward rather than
+    # observed this run.
+    acquisition = report.get("champion_acquisition") or {}
+    retained = acquisition.get("base_stats_retained") or []
+    bootstrapped = acquisition.get("bootstrapped_without_base_stats") or []
+    champion_path = internal_dir / snapshot_filename("champion", branch)
+    if champion_path in values and (retained or bootstrapped):
+        values[champion_path] = {
+            **values[champion_path],
+            "degraded": {
+                "reason": "champion_bin_unavailable",
+                "base_stats_retained": retained,
+                "bootstrapped_without_base_stats": bootstrapped,
+            },
+        }
+    update["acquisition"] = acquisition
+    update["degraded"] = bool(retained or bootstrapped)
+
     atomic_write_many(values)
     return update
 
@@ -544,6 +625,7 @@ def main() -> None:
         print(
             f"[CDragon:{branch}] promoted {len(update['snapshots'])} snapshots, "
             f"{len(update['new_events'])} events"
+            + (" [DEGRADED: base stats carried forward]" if update.get("degraded") else "")
             + (" (fresh PBE lineage)" if update["reset"] else ""),
         )
     if failures:

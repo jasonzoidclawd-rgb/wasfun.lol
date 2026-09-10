@@ -21,6 +21,7 @@ from cdragon_patch_pipeline import (
 from cdragon_snapshot_diff import (
     SnapshotValidationError,
     build_snapshot,
+    compare_snapshots,
     snapshot_filename,
 )
 
@@ -302,19 +303,15 @@ class CDragonSourceShapeTests(unittest.TestCase):
         variant_bins = [u for u in requested if "/characters/jade" in u]
         self.assertEqual(variant_bins, [], "must not request bins for derived variants")
 
-    def test_one_missing_prime_bin_degrades_instead_of_failing(self):
-        # 1 of 40 missing = 97.5% coverage, above the floor.
-        fetch, _ = make_cdragon_fetcher(prime_count=40, missing_bins={"champ7"})
-        _version, entities, _sources = fetch_branch_entities("latest", fetch_json=fetch)
-        self.assertEqual(len(entities["champion"]), 40)
-
     def test_systemic_bin_collapse_still_fails_the_lane(self):
-        # 20 of 40 missing = 50% coverage, far below the floor.
+        # 20 of 40 missing, all previously known: carrying that much forward
+        # would serve a stale roster under a new patch label.
         missing = {f"champ{i}" for i in range(1, 21)}
+        known = {str(i): {"health": 500} for i in range(1, 41)}
         fetch, _ = make_cdragon_fetcher(prime_count=40, missing_bins=missing)
         with self.assertRaises(SnapshotValidationError) as ctx:
-            fetch_branch_entities("latest", fetch_json=fetch)
-        self.assertIn("coverage collapse", str(ctx.exception))
+            fetch_branch_entities("latest", fetch_json=fetch, known_base_stats=known)
+        self.assertIn("acquisition collapse", str(ctx.exception))
 
     def test_non_404_errors_still_abort(self):
         fetch, _ = make_cdragon_fetcher(prime_count=5)
@@ -345,3 +342,112 @@ class CDragonSourceShapeTests(unittest.TestCase):
                 _latest_patch_label(Path(tmp), "16.18.8159717"),
                 "16.18.8159717",
             )
+
+
+# ── Semantic continuity (2026-09 review finding) ────────────────────────────
+# A ratio floor let transient 404s drop base stats, and the snapshot diff then
+# published that absence as a balance change. Absence of a current observation
+# is not evidence that a stat changed.
+
+def snapshot_of(rows, version):
+    return build_snapshot(
+        entity_type="champion", branch="latest", source_version=version,
+        source_patch_label="26.18", observed_at="2026-09-11T00:00:00Z",
+        entities=rows,
+    )
+
+
+def base_stats_map(rows):
+    out = {}
+    for row in rows:
+        base = (row.get("fields") or {}).get("base_stats")
+        if base:
+            out[str(row["id"])] = base
+    return out
+
+
+class ChampionBinContinuityTests(unittest.TestCase):
+    def _healthy(self, prime_count=40, variant_count=10):
+        fetch, _ = make_cdragon_fetcher(prime_count=prime_count, variant_count=variant_count)
+        _v, entities, _s = fetch_branch_entities("latest", fetch_json=fetch)
+        return entities["champion"]
+
+    def _degraded(self, missing, known, prime_count=40, variant_count=10, report=None):
+        fetch, _ = make_cdragon_fetcher(
+            prime_count=prime_count, variant_count=variant_count, missing_bins=missing
+        )
+        _v, entities, _s = fetch_branch_entities(
+            "latest", fetch_json=fetch, known_base_stats=known, report=report
+        )
+        return entities["champion"]
+
+    def _events(self, before, after):
+        return compare_snapshots(
+            snapshot_of(before, "16.18.1"),
+            snapshot_of(after, "16.18.2"),
+            detected_at="2026-09-11T00:00:00Z",
+        )
+
+    def test_one_missing_existing_bin_emits_no_fake_change(self):
+        healthy = self._healthy()
+        known = base_stats_map(healthy)
+        degraded = self._degraded({"champ7"}, known)
+        self.assertEqual(self._events(healthy, degraded), [])
+
+    def test_two_missing_existing_bins_emit_no_fake_change(self):
+        healthy = self._healthy()
+        known = base_stats_map(healthy)
+        degraded = self._degraded({"champ7", "champ8"}, known)
+        self.assertEqual(self._events(healthy, degraded), [])
+
+    def test_eight_missing_existing_bins_fail_rather_than_fabricate(self):
+        """8/40 = 20%, above the systemic ceiling — must fail, never fabricate."""
+        healthy = self._healthy()
+        known = base_stats_map(healthy)
+        with self.assertRaises(SnapshotValidationError) as ctx:
+            self._degraded({f"champ{i}" for i in range(1, 9)}, known)
+        self.assertIn("acquisition collapse", str(ctx.exception))
+
+    def test_missing_bins_within_ceiling_are_reported_as_retained(self):
+        healthy = self._healthy()
+        known = base_stats_map(healthy)
+        report = {}
+        self._degraded({"champ7"}, known, report=report)
+        acquisition = report["champion_acquisition"]
+        self.assertEqual(acquisition["base_stats_retained"], ["7"])
+        self.assertEqual(acquisition["bootstrapped_without_base_stats"], [])
+
+    def test_new_champion_without_bin_bootstraps_without_base_stats(self):
+        """Nothing to carry forward; an addition is not a change."""
+        report = {}
+        rows = self._degraded({"champ40"}, known={}, report=report)
+        self.assertEqual(len(rows), 40)
+        newcomer = next(r for r in rows if r["id"] == "40")
+        self.assertNotIn("base_stats", newcomer["fields"])
+        self.assertEqual(report["champion_acquisition"]["bootstrapped_without_base_stats"], ["40"])
+        self.assertEqual(report["champion_acquisition"]["base_stats_retained"], [])
+
+    def test_derived_variant_missing_bin_is_not_a_continuity_event(self):
+        report = {}
+        rows = self._degraded(set(), known={}, variant_count=10, report=report)
+        self.assertEqual(len(rows), 40)
+        self.assertEqual(len(report["champion_acquisition"]["derived_variants_skipped"]), 10)
+        self.assertEqual(report["champion_acquisition"]["base_stats_retained"], [])
+
+    def test_malformed_bin_payload_still_fails_closed(self):
+        fetch, _ = make_cdragon_fetcher(prime_count=5)
+
+        def malformed(url):
+            if ".bin.json" in url:
+                return ["not", "a", "record"]
+            return fetch(url)
+
+        with self.assertRaises(SnapshotValidationError):
+            fetch_branch_entities("latest", fetch_json=malformed)
+
+    def test_global_bin_path_failure_fails_the_lane(self):
+        healthy = self._healthy()
+        known = base_stats_map(healthy)
+        with self.assertRaises(SnapshotValidationError) as ctx:
+            self._degraded({f"champ{i}" for i in range(1, 41)}, known)
+        self.assertIn("acquisition collapse", str(ctx.exception))
