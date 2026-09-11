@@ -45,6 +45,7 @@ class DataFreshnessTests(unittest.TestCase):
                 freshness_status(stats_pub, stats_up),
                 stats_patch_lag=patch_lag(stats_pub, stats_up),
                 stats_age_hours=observation_age_hours(observed_at, NOW),
+                stats_structural_lag=patch_lag(stats_pub, struct_pub),
             )
 
         FRESH = "2026-09-10T22:00:00Z"
@@ -53,7 +54,9 @@ class DataFreshnessTests(unittest.TestCase):
 
         cases = [
             ("26.17", "26.17", "26.18", "26.18", FRESH, "statistics_source_current"),
-            ("26.16", "26.17", "26.18", "26.18", FRESH, "statistics_recently_behind"),
+            ("26.16", "26.17", "26.17", "26.17", FRESH, "statistics_recently_behind"),
+            # One patch behind the provider is fine; two behind the game is not.
+            ("26.16", "26.17", "26.18", "26.18", FRESH, "statistics_stale"),
             ("26.16", "26.17", "26.18", "26.18", OUTAGE_59D, "statistics_stale"),
             ("26.13", "26.17", "26.18", "26.18", FRESH, "statistics_stale"),
             ("26.13", "26.17", "26.18", "26.18", OUTAGE_59D, "statistics_stale"),
@@ -134,11 +137,14 @@ class DataFreshnessTests(unittest.TestCase):
                 main()  # must not raise
         self.assertIn('"status": "statistics_source_current"', out.getvalue())
 
+        # Provider-lag case: one behind the provider, and within one patch of the
+        # live game (a 26.18 game with 26.16 statistics is two behind; see
+        # StatisticsVersusLiveGameTests).
         out = StringIO()
         with patch("sys.argv", [
             "check",
             "--published-patch", "26.16", "--upstream-patch", "26.17",
-            "--published-structural-patch", "26.18", "--upstream-structural-patch", "26.18",
+            "--published-structural-patch", "26.17", "--upstream-structural-patch", "26.17",
             "--published-observed-at", "2026-09-10T22:00:00Z",
             "--now", "2026-09-11T00:00:00Z",
             "--json",
@@ -193,11 +199,12 @@ class DataFreshnessTests(unittest.TestCase):
             return "26.13"
 
         # Structural args are explicit so this stays hermetic; the subject of
-        # the test is stdout/stderr routing, not clock classification.
+        # the test is stdout/stderr routing, not clock classification (so the
+        # structural clock sits within the one-patch bound of the statistics).
         with patch("sys.argv", [
             "check", "--published-patch", "26.13",
-            "--published-structural-patch", "26.18",
-            "--upstream-structural-patch", "26.18",
+            "--published-structural-patch", "26.14",
+            "--upstream-structural-patch", "26.14",
             "--published-observed-at", "2026-09-10T22:00:00Z",
             "--now", "2026-09-11T00:00:00Z",
             "--json",
@@ -274,3 +281,79 @@ class FreshnessSemanticsTests(unittest.TestCase):
         payload = self._payload(**{"--published-observed-at": "2026-09-11T00:01:00Z"})
         self.assertEqual(payload["status"], "statistics_source_current")
         self.assertEqual(payload["statistics"]["observation_age_hours"], 0.0)
+
+
+class StatisticsVersusLiveGameTests(unittest.TestCase):
+    """The one-patch lag bound is measured against the LIVE GAME, not only the provider.
+
+    Regression: statistics 26.17 matching a provider still on 26.17 reported
+    healthy while the game was on 26.21 — crossLanePatchDelta 4. A provider that
+    has itself stopped following the game must not make us look current.
+    """
+
+    _payload = FreshnessSemanticsTests._payload
+
+    def _at(self, structural: str, statistics: str = "26.17", provider: str = "26.17"):
+        return self._payload(**{
+            "--published-patch": statistics, "--upstream-patch": provider,
+            "--published-structural-patch": structural,
+            "--upstream-structural-patch": structural,
+        })
+
+    def test_delta_0_is_healthy(self):
+        payload = self._at("26.17")
+        self.assertEqual(payload["relationships"]["crossLanePatchDelta"], 0)
+        self.assertTrue(payload["healthy"])
+        self.assertEqual(payload["status"], "statistics_source_current")
+
+    def test_delta_1_is_healthy(self):
+        """The current valid state: structural 26.18, statistics 26.17."""
+        payload = self._at("26.18")
+        rel = payload["relationships"]
+        self.assertEqual(rel["crossLanePatchDelta"], 1)
+        self.assertTrue(rel["structuralCurrent"])
+        self.assertTrue(rel["statisticsSourceCurrent"])
+        self.assertFalse(rel["crossLaneAligned"])
+        self.assertTrue(rel["statisticsPredateStructural"])
+        self.assertTrue(payload["healthy"])
+        self.assertEqual(payload["status"], "statistics_source_current")
+
+    def test_delta_2_or_more_is_not_healthy(self):
+        for structural, delta in (("26.19", 2), ("26.20", 3), ("26.24", 7)):
+            with self.subTest(structural=structural):
+                payload = self._at(structural)
+                self.assertEqual(payload["relationships"]["crossLanePatchDelta"], delta)
+                self.assertFalse(payload["healthy"])
+                self.assertEqual(payload["status"], "statistics_stale")
+
+    def test_provider_current_but_four_behind_the_game_is_not_healthy(self):
+        payload = self._at("26.21")
+        self.assertTrue(payload["relationships"]["statisticsSourceCurrent"])
+        self.assertEqual(payload["relationships"]["crossLanePatchDelta"], 4)
+        self.assertFalse(payload["healthy"])
+        self.assertEqual(payload["status"], "statistics_stale")
+
+    def test_cross_lane_breach_exits_as_statistics_stale(self):
+        argv = [
+            "check", "--published-patch", "26.17", "--upstream-patch", "26.17",
+            "--published-structural-patch", "26.21", "--upstream-structural-patch", "26.21",
+            "--published-observed-at", "2026-09-10T22:00:00Z",
+            "--now", "2026-09-11T00:00:00Z", "--json",
+        ]
+        with patch("sys.argv", argv), patch("sys.stdout", StringIO()):
+            with self.assertRaises(SystemExit) as cm:
+                main()
+        self.assertEqual(cm.exception.code, 3)
+
+    def test_age_and_future_guards_still_apply_at_delta_1(self):
+        stale = self._payload(**{"--published-observed-at": "2026-09-01T00:00:00Z"})
+        self.assertEqual(stale["status"], "statistics_stale")
+        future = self._payload(**{"--published-observed-at": "2026-09-11T05:00:00Z"})
+        self.assertEqual(future["status"], "unknown")
+
+    def test_unmeasured_cross_lane_lag_is_never_asserted_healthy(self):
+        from check_data_freshness import overall_status
+        self.assertEqual(
+            overall_status("fresh", "fresh", stats_patch_lag=0, stats_age_hours=1.0),
+            "unknown",
+        )

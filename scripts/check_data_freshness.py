@@ -162,6 +162,7 @@ def overall_status(
     *,
     stats_patch_lag: int | None = None,
     stats_age_hours: float | None = None,
+    stats_structural_lag: int | None = None,
 ) -> str:
     """Classify both clocks under the bounded policy.
 
@@ -169,6 +170,11 @@ def overall_status(
     within BOTH bounds; beyond either one the statistics clock is stale, which
     is the condition that previously went undetected for 59 days because any
     lag whatsoever was reported as an expected steady state.
+
+    The patch bound applies twice: to the provider (`stats_patch_lag`) AND to
+    the live game (`stats_structural_lag`, statistics vs published structural).
+    Matching a provider that has itself stopped following the game is not
+    currency — statistics 26.17 against a 26.21 game is four patches stale.
     """
     if structural == "stale":
         return "structural_stale"
@@ -179,6 +185,12 @@ def overall_status(
     if stats_age_hours is None:
         return "unknown"
     if stats_age_hours > STATISTICS_MAX_OBSERVATION_AGE_HOURS:
+        return "statistics_stale"
+
+    # Nor can an unmeasurable distance from the live game.
+    if stats_structural_lag is None:
+        return "unknown"
+    if stats_structural_lag > STATISTICS_MAX_PATCH_LAG:
         return "statistics_stale"
 
     if statistics == "stale":
@@ -268,6 +280,8 @@ def main() -> None:
             errors["now_error"] = f"unparseable --now: {args.now}"
     age_hours = observation_age_hours(observed_at, now)
     lag = patch_lag(published_statistics, upstream_statistics)
+    # Statistics vs structural truth: the one number both gates and reports.
+    cross_lane_delta = patch_lag(published_statistics, published_structural)
 
     statistics_status = freshness_status(published_statistics, upstream_statistics)
     structural_status = freshness_status(published_structural, upstream_structural)
@@ -276,6 +290,7 @@ def main() -> None:
         statistics_status,
         stats_patch_lag=lag,
         stats_age_hours=age_hours,
+        stats_structural_lag=cross_lane_delta,
     )
 
     # Both relationships, named so neither can be mistaken for the other.
@@ -301,11 +316,7 @@ def main() -> None:
             # structural patch == statistics patch (expected false in normal use)
             "crossLaneAligned": cross_lane_aligned,
             "statisticsPredateStructural": statistics_predate_structural,
-            "crossLanePatchDelta": (
-                None
-                if not (published_structural and published_statistics)
-                else patch_lag(published_statistics, published_structural)
-            ),
+            "crossLanePatchDelta": cross_lane_delta,
         },
         "policy": {
             "maxPatchLag": STATISTICS_MAX_PATCH_LAG,
