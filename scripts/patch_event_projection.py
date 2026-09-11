@@ -8,6 +8,8 @@ import html
 import re
 from typing import Any
 
+from generate_pool_rules import comparison_is_patch_adjacent
+
 
 SECTION_BY_ENTITY = {
     "champion": "champions",
@@ -184,9 +186,15 @@ def build_patch_notes_projection(
         for event in (pbe_archive or {}).get("events", [])
         if isinstance(event, dict) and event.get("lifecycle") == "landed"
     }
+    # A matching label is not evidence of WHEN a change happened: a diff across a
+    # tracking gap (16.13 -> 16.18) is labelled with its target patch but may hold
+    # any of the intervening patches' changes. Only an adjacent comparison dates
+    # a change, by the same rule the augment lifecycle path applies.
     current_events = [
         event for event in patch_events.get("events", [])
-        if isinstance(event, dict) and event.get("source_patch_label") == current_cycle
+        if isinstance(event, dict)
+        and event.get("source_patch_label") == current_cycle
+        and comparison_is_patch_adjacent(event.get("comparison"))
     ]
     current_events = [
         {
