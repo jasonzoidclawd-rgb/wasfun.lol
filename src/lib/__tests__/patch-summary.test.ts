@@ -168,14 +168,20 @@ describe("public patch summary", () => {
     expect(source).toContain("patchSummary.lines.map");
   });
 
-  test("item detail page renders a localized patch summary section from public meta patch", () => {
+  test("item detail page renders a localized patch summary section from the structural clock", () => {
     const source = readFileSync(
       path.join(process.cwd(), "src/app/[locale]/items/[identifier]/page.tsx"),
       "utf8",
     );
 
     expect(source).toContain('import { buildPatchSummary } from "@/lib/seo/patch-summary"');
-    expect(source).toContain('import { readItemsFile, readMetaFile } from "@/lib/data/read-public-file"');
+    // Item data is structural (CommunityDragon), so it is stamped with the
+    // structural clock. meta.json's patch is the STATISTICS clock (26.17 while
+    // the game is on 26.18) and must not label structural item data.
+    expect(source).toContain('import { readPatchClocks } from "@/lib/data/clocks"');
+    expect(source).toContain("patch: clocks.structuralPatch");
+    expect(source).not.toContain("readMetaFile");
+    expect(source).not.toContain("meta.patch");
     expect(source).toContain("const patchSummary = buildPatchSummary(");
     expect(source).toContain('t("patchSummaryTitle")');
     expect(source).toContain('t("patchSummaryBody", { name: itemName, patch })');

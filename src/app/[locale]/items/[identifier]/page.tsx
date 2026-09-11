@@ -9,7 +9,8 @@ import type { Item } from "@/lib/types";
 import { localizedName } from "@/lib/i18n/localized-name";
 import { buildItemDetailJsonLd } from "@/lib/seo/item-detail";
 import { buildPatchSummary } from "@/lib/seo/patch-summary";
-import { readItemsFile, readMetaFile } from "@/lib/data/read-public-file";
+import { readItemsFile } from "@/lib/data/read-public-file";
+import { readPatchClocks } from "@/lib/data/clocks";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 
 // Raw Riot API category identifier → translation key in items namespace.
@@ -288,10 +289,11 @@ export default async function ItemDetailPage({
   // Wiki URL: spaces → underscores, apostrophes encoded
   const wikiUrl = `https://wiki.leagueoflegends.com/en-us/${encodeURIComponent(item.name.replace(/ /g, "_"))}`;
   const route = `/items/${identifier}`;
-  // items.json carries no patch field; meta.json is the public patch source.
-  const meta = await readMetaFile<{ patch?: string }>();
+  // Item data is structural (CommunityDragon), so it is stamped with the
+  // structural clock — not meta.json's patch, which is the statistics clock.
+  const clocks = await readPatchClocks();
   const patchSummary = buildPatchSummary(
-    { patch: meta.patch },
+    { patch: clocks.structuralPatch },
     {
       title: t("patchSummaryTitle"),
       body: ({ patch }) => t("patchSummaryBody", { name: itemName, patch }),
