@@ -178,3 +178,221 @@ class WinRateRangeValidationTests(unittest.TestCase):
         )
         for augment_id, value in feed["win_rates"].items():
             self.assertEqual(validated_win_rate(value)[1], None, augment_id)
+
+
+# ── End-to-end token integrity (2026-09 pre-merge review) ───────────────────
+# The numeric boundary was right, but extraction trimmed tokens before they
+# reached it: "-1%" arrived as "1", "NaN%" did not arrive at all, and the
+# vacancy let a sibling pick rate be promoted. These cases run the real page
+# shape through `parse_augments`, not the validator in isolation.
+
+PICK_RATE = "63.98"
+
+
+def live_row(win_rate_cell: str, *, pick_rate: str = PICK_RATE, split: bool = False,
+             slug: str = "tank-engine") -> str:
+    """The live 2026-09-10 rank-row shape, with the win-rate cell's text replaced.
+
+    `split` renders every stat the way React server output does when a
+    component writes `{value}%`: `63.98<!-- -->%`.
+    """
+    sep = "<!-- -->" if split else ""
+    return (
+        f'<a href="/augments/{slug}/" class="augment-rank-row grid items-center" '
+        f'data-availability="live">'
+        '<div class="font-data text-lg font-bold text-foreground"><span data-rank-label>6</span></div>'
+        '<div class="flex min-w-0 items-center gap-3"><div class="min-w-0">'
+        '<div class="flex min-w-0 items-center gap-2">'
+        '<span class="truncate text-sm font-semibold text-foreground sm:text-base">Tank Engine</span>'
+        '</div><div class="mt-1 flex flex-wrap items-center gap-1.5">'
+        '<span class="rounded border px-1.5 py-0.5 text-2xs font-semibold">Gold</span>'
+        '<span class="rounded border border-info/50 bg-info/15 px-1.5 py-0.5 font-data '
+        f'text-xs font-bold text-info sm:hidden">{pick_rate}{sep}%</span>'
+        '</div></div></div>'
+        '<div class="text-right font-data text-base font-semibold text-foreground sm:text-lg">'
+        f'{win_rate_cell}</div>'
+        '<div class="hidden text-right font-data text-sm text-muted-foreground sm:block">'
+        f'{pick_rate}{sep}%</div>'
+        '</a>'
+    )
+
+
+def extracted(html: str) -> tuple[float | None, str]:
+    rows = parse_augments(html)
+    assert len(rows) == 1, rows
+    return rows[0]["win_rate"], rows[0]["extraction"]
+
+
+class SignedTokenTests(unittest.TestCase):
+    """A. A negative win rate must never be read as its magnitude."""
+
+    def test_labelled_negative_is_quarantined_not_flipped(self):
+        self.assertEqual(extracted(block("Win Rate: -1%")), (None, "quarantined_out_of_range"))
+
+    def test_sole_negative_is_quarantined_not_flipped(self):
+        self.assertEqual(extracted(block("<div>-1%</div>")), (None, "quarantined_out_of_range"))
+
+    def test_structural_negative_is_quarantined_not_flipped(self):
+        self.assertEqual(extracted(live_row("-1%")), (None, "quarantined_out_of_range"))
+
+    def test_badge_negative_is_quarantined_not_flipped(self):
+        self.assertEqual(
+            extracted(block('<span class="wr">-1<!-- -->%</span>')),
+            (None, "quarantined_out_of_range"),
+        )
+
+    def test_unicode_minus_is_a_sign_too(self):
+        self.assertEqual(extracted(block("Win Rate: −1%")), (None, "quarantined_out_of_range"))
+
+    def test_explicit_plus_sign_marks_a_delta_not_a_win_rate(self):
+        self.assertEqual(extracted(live_row("+1.2%")), (None, "quarantined_signed_value"))
+        self.assertEqual(extracted(live_row("-0%")), (None, "quarantined_signed_value"))
+
+
+class NonFiniteTokenTests(unittest.TestCase):
+    """B. An invalid explicit win rate quarantines; it never vacates the slot."""
+
+    def test_labelled_nan_does_not_promote_the_pick_rate(self):
+        for token in ("NaN", "Infinity", "inf", "-Infinity"):
+            with self.subTest(token=token):
+                wr, method = extracted(block(f"Win Rate: {token}% Pick Rate: {PICK_RATE}%"))
+                self.assertIsNone(wr)
+                self.assertNotEqual(wr, float(PICK_RATE))
+                self.assertEqual(method, "quarantined_non_finite_value")
+
+    def test_structural_nan_does_not_promote_the_pick_rate(self):
+        for token in ("NaN", "Infinity"):
+            with self.subTest(token=token):
+                self.assertEqual(
+                    extracted(live_row(f"{token}%")), (None, "quarantined_non_finite_value")
+                )
+
+    def test_badge_nan_does_not_promote_the_pick_rate(self):
+        self.assertEqual(
+            extracted(block(f'<span class="wr">NaN<!-- -->%</span> {PICK_RATE}%')),
+            (None, "quarantined_non_finite_value"),
+        )
+
+    def test_unmarked_nan_sibling_keeps_the_row_ambiguous(self):
+        wr, method = extracted(block(f"<div>NaN%</div><div>{PICK_RATE}%</div>"))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_ambiguous_percentages")
+
+
+class MissingWinRateTests(unittest.TestCase):
+    """C. An absent win rate beside a duplicated pick rate is not a sole value."""
+
+    def test_dash_win_rate_with_duplicated_pick_rate_is_quarantined(self):
+        for dash in ("—", "-", "N/A", ""):
+            with self.subTest(dash=dash):
+                wr, method = extracted(live_row(dash))
+                self.assertIsNone(wr, "the duplicated pick rate must not become the win rate")
+                self.assertEqual(method, "quarantined_pick_rate_only")
+
+    def test_labelled_absent_win_rate_is_quarantined(self):
+        wr, method = extracted(block(f"Win Rate: — Pick Rate: {PICK_RATE}%"))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_win_rate_unavailable")
+
+    def test_labelled_pick_rate_is_never_a_sole_win_rate(self):
+        wr, method = extracted(block(f"<div>Pick Rate: {PICK_RATE}%</div>"))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_pick_rate_only")
+
+    def test_unmarked_duplicate_is_not_collapsed_into_a_sole_value(self):
+        """Only the pick rate is rendered twice by this source (desktop + mobile)."""
+        wr, method = extracted(block(
+            f"<div>—</div><div>{PICK_RATE}%</div><span>{PICK_RATE}%</span>"
+        ))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_ambiguous_percentages")
+
+
+class ReactSplitMarkupTests(unittest.TestCase):
+    """D. `<!-- -->` split markup must not let the mobile pick-rate badge win."""
+
+    def test_split_row_reads_the_win_rate_not_the_first_badge(self):
+        wr, method = extracted(live_row("55.25<!-- -->%", split=True))
+        self.assertEqual(wr, 55.25)
+        self.assertNotEqual(wr, float(PICK_RATE))
+        self.assertEqual(method, "badge")
+
+    def test_split_row_with_absent_win_rate_is_quarantined(self):
+        wr, method = extracted(live_row("—", split=True))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_pick_rate_only")
+
+    def test_split_row_with_invalid_win_rate_is_quarantined(self):
+        self.assertEqual(
+            extracted(live_row("NaN<!-- -->%", split=True)),
+            (None, "quarantined_non_finite_value"),
+        )
+
+    def test_two_unmarked_badges_are_ambiguous_not_first_wins(self):
+        wr, method = extracted(block(
+            '<span class="wr">67.48<!-- -->%</span><span class="x">21.30<!-- -->%</span>'
+        ))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_ambiguous_percentages")
+
+
+class MalformedTokenTests(unittest.TestCase):
+    """E. A malformed token quarantines its row; it cannot end the lane."""
+
+    MALFORMED = ("1.2.3", "..", ".", "5..5", "1_0", "1e2", "1,5", "５５")
+
+    def test_malformed_tokens_quarantine_on_every_path(self):
+        for token in self.MALFORMED:
+            for label, html in (
+                ("sole", block(f"<div>{token}%</div>")),
+                ("labelled", block(f"Win Rate: {token}%")),
+                ("structural", live_row(f"{token}%")),
+                ("badge", block(f'<span class="wr">{token}<!-- -->%</span>')),
+            ):
+                with self.subTest(token=token, path=label):
+                    wr, method = extracted(html)  # must not raise
+                    self.assertIsNone(wr)
+                    self.assertEqual(method, "quarantined_unparseable_value")
+
+    def test_malformed_sibling_does_not_raise(self):
+        wr, method = extracted(block(f"<div>1.2.3%</div><div>{PICK_RATE}%</div>"))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_ambiguous_percentages")
+
+    def test_one_malformed_row_leaves_the_rest_of_the_page_intact(self):
+        page = (
+            live_row("55.25%", slug="good-one")
+            + live_row("1.2.3%", slug="broken")
+            + block("<div>1..2%</div><div>..%</div>", slug="also-broken")
+            + live_row("48.10%", slug="good-two")
+        )
+        rows = {row["sourceKey"]: row for row in parse_augments(page)}
+        self.assertEqual(rows["good-one"]["win_rate"], 55.25)
+        self.assertEqual(rows["good-two"]["win_rate"], 48.10)
+        self.assertIsNone(rows["broken"]["win_rate"])
+        self.assertEqual(rows["broken"]["extraction"], "quarantined_unparseable_value")
+        self.assertIsNone(rows["also-broken"]["win_rate"])
+
+
+class EndToEndAcceptanceTests(unittest.TestCase):
+    """Valid values still publish, end to end, on the live row shape."""
+
+    def test_valid_values_are_accepted(self):
+        for token, expected in (("0", 0.0), ("100", 100.0), ("55.25", 55.25),
+                                ("12.5", 12.5), ("97.0", 97.0), ("0.0", 0.0)):
+            for split in (False, True):
+                with self.subTest(token=token, split=split):
+                    cell = f"{token}<!-- -->%" if split else f"{token}%"
+                    wr, method = extracted(live_row(cell, split=split))
+                    self.assertEqual(wr, expected)
+                    self.assertEqual(method, "badge" if split else "structural")
+
+    def test_out_of_range_values_are_rejected(self):
+        for token in ("100.01", "155", "-0.01"):
+            with self.subTest(token=token):
+                self.assertEqual(
+                    extracted(live_row(f"{token}%")), (None, "quarantined_out_of_range")
+                )
+
+    def test_pick_rate_higher_than_win_rate_still_resolves_by_emphasis(self):
+        self.assertEqual(extracted(live_row("48.09%", pick_rate="60.32")), (48.09, "structural"))

@@ -25,6 +25,7 @@ import time
 import html as html_module
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import NamedTuple
 from urllib.request import urlopen, Request
 from urllib.parse import urljoin
 
@@ -206,20 +207,39 @@ WIN_RATE_PLAUSIBLE_MIN = 20.0
 WIN_RATE_PLAUSIBLE_MAX = 90.0
 
 
+# Plain decimal only. `float()` alone would also accept "1_0", "1e2", "nan" and
+# full-width digits, i.e. publish tokens no page renders as a win rate.
+_DECIMAL_TOKEN_RE = re.compile(r"([+-]?)(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)")
+_NON_FINITE_TOKENS = frozenset({"nan", "inf", "infinity"})
+
+
 def validated_win_rate(raw: object) -> tuple[float | None, str | None]:
     """Return (win_rate, quarantine_reason).
 
     The single numeric boundary for every extraction path. A reason is returned
-    instead of a value whenever the number cannot be a win rate at all.
+    instead of a value whenever the token cannot be a win rate at all. Text is
+    judged whole: a sign, "NaN" or "1.2.3" must reach this function intact.
     """
-    try:
-        value = float(str(raw).strip().rstrip("%"))
-    except (TypeError, ValueError):
-        return None, "quarantined_unparseable_value"
+    signed = False
+    if isinstance(raw, (int, float)) and not isinstance(raw, bool):
+        value = float(raw)
+    else:
+        text = str(raw).strip().rstrip("%").strip().replace("−", "-")
+        decimal = _DECIMAL_TOKEN_RE.fullmatch(text)
+        if not decimal:
+            if text.lstrip("+-").lower() in _NON_FINITE_TOKENS:
+                return None, "quarantined_non_finite_value"
+            return None, "quarantined_unparseable_value"
+        value = float(text)
+        signed = bool(decimal.group(1))
     if not math.isfinite(value):
         return None, "quarantined_non_finite_value"
     if not (WIN_RATE_MIN <= value <= WIN_RATE_MAX):
         return None, "quarantined_out_of_range"
+    if signed:
+        # A win rate is never written with a sign; "+1.2%" is a delta, and
+        # "-0%" is not zero evidence either.
+        return None, "quarantined_signed_value"
     return value, None
 
 
@@ -238,18 +258,99 @@ def is_implausible_win_rate(value: float | None) -> bool:
     )
 
 
-_WR_BADGE_RE = re.compile(r'">([\d.]+)<!-- -->%')
-_WR_LABELLED_RE = re.compile(r'Win\s*Rate[^\d%]{0,20}?([\d.]+)\s*%', re.IGNORECASE)
+# ── Tokenization ──
+# The COMPLETE token in front of a "%": sign, digits, dots and letters alike.
+# Capturing only `[\d.]+` is what read "-1%" as 1.0 and made "NaN%" invisible,
+# which vacated the win-rate slot for a sibling pick rate to fill. Tokens are
+# kept whole here and judged only by `validated_win_rate`.
+_TOKEN = r"([\w.,+\-\u2212]+)"
+_PERCENT_TOKEN_RE = re.compile(_TOKEN + r"\s*%")
+_CELL_PERCENT_RE = re.compile(r"\s*" + _TOKEN + r"\s*%\s*")
+_LEADING_PERCENT_RE = re.compile(r"\s*" + _TOKEN + r"\s*%")
+# React server output separates adjacent text nodes with an empty comment, so
+# `{value}%` arrives as `55.25<!-- -->%`. Comments are dropped before any text is
+# read, so a split value is read as one token rather than two fragments.
+_HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+_REACT_SPLIT_PERCENT_RE = re.compile(r"<!--\s*-->\s*%")
+# A leaf element: an open tag, text (plus React separators) only, its close tag.
+_LEAF_CELL_RE = re.compile(
+    r"<([a-zA-Z][\w-]*)\b([^>]*)>((?:[^<]|<!--.*?-->)*)</\1\s*>", re.DOTALL
+)
+_CLASS_ATTR_RE = re.compile(r'\bclass\s*=\s*"([^"]*)"')
+# A label and the text right after it; only separators or tags may intervene,
+# so a label with no value cannot reach across to the next label's number.
+_LABEL_VALUE = r"(?:[\s:\uff1a=]|<[^>]*>)*([^<]*)"
+_WR_LABEL_RE = re.compile(r"Win\s*Rate" + _LABEL_VALUE, re.IGNORECASE)
+_PR_LABEL_RE = re.compile(r"Pick\s*Rate" + _LABEL_VALUE, re.IGNORECASE)
+
 # Rank rows encode the two stats by emphasis, not by order or magnitude: the
 # primary (`text-foreground`) cell is the win rate, the de-emphasized
 # (`text-muted-foreground`) cell is the pick rate, which is also duplicated into
-# a mobile-only badge. Verified against all 198 live rows on 2026-09-10.
-_WR_PRIMARY_RE = re.compile(
-    r'<div class="(?![^"]*\bmuted\b)[^"]*\btext-foreground\b[^"]*">\s*([\d.]+)\s*%\s*</div>'
-)
-_PR_MUTED_RE = re.compile(
-    r'<div class="[^"]*\btext-muted-foreground\b[^"]*">\s*([\d.]+)\s*%\s*</div>'
-)
+# a mobile-only (`sm:hidden`) badge. Verified against all 198 live rows on
+# 2026-09-10. Muted and mobile-only cells are therefore evidence of a pick rate.
+_MUTED_CLASS_RE = re.compile(r"\bmuted\b")
+_MOBILE_ONLY_CLASS_RE = re.compile(r"(?:sm|md|lg|xl|2xl):hidden")
+
+
+class _StatCell(NamedTuple):
+    """A leaf element whose entire text is one percentage token."""
+    token: str
+    classes: tuple[str, ...]
+    react_split: bool
+
+    @property
+    def muted(self) -> bool:
+        return any(_MUTED_CLASS_RE.search(c) for c in self.classes)
+
+    @property
+    def primary(self) -> bool:
+        return "text-foreground" in self.classes and not self.muted
+
+    def marks_pick_rate(self, labelled_pick_rates: set[str]) -> bool:
+        return (
+            self.muted
+            or any(_MOBILE_ONLY_CLASS_RE.fullmatch(c) for c in self.classes)
+            or self.token in labelled_pick_rates
+        )
+
+
+def _stat_cells(block: str) -> list[_StatCell]:
+    cells = []
+    for match in _LEAF_CELL_RE.finditer(block):
+        raw_text = match.group(3)
+        text = html_module.unescape(_HTML_COMMENT_RE.sub("", raw_text))
+        token = _CELL_PERCENT_RE.fullmatch(text)
+        if not token:
+            continue
+        class_attr = _CLASS_ATTR_RE.search(match.group(2))
+        cells.append(_StatCell(
+            token=token.group(1),
+            classes=tuple(class_attr.group(1).split()) if class_attr else (),
+            react_split=bool(_REACT_SPLIT_PERCENT_RE.search(raw_text)),
+        ))
+    return cells
+
+
+def _labelled_tokens(label_re: re.Pattern[str], text: str) -> list[str | None]:
+    """The token after each label; None where the label has no percentage."""
+    tokens: list[str | None] = []
+    for match in label_re.finditer(text):
+        lead = _LEADING_PERCENT_RE.match(html_module.unescape(match.group(1)))
+        tokens.append(lead.group(1) if lead else None)
+    return tokens
+
+
+def _accept_all(tokens: list[str | None], method: str) -> tuple[float | None, str]:
+    """Every explicit win-rate token must be present, valid, and agree."""
+    if any(token is None for token in tokens):
+        return None, "quarantined_win_rate_unavailable"
+    accepted = [_accept(token, method) for token in tokens]
+    for value, outcome in accepted:
+        if value is None:
+            return None, outcome
+    if len({value for value, _ in accepted}) > 1:
+        return None, "quarantined_ambiguous_percentages"
+    return accepted[0]
 
 
 def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
@@ -259,37 +360,65 @@ def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
     explicit marker — never by magnitude. The previous `max(percentages)`
     fallback would publish a pick rate as a win rate the moment the markup
     changed, and would do so silently; ambiguity now quarantines the row.
-      1. dedicated win-rate badge markup                 -> "badge"
-      2. explicitly labelled "Win Rate: N%"              -> "labelled"
+      1. explicitly labelled "Win Rate: N%"              -> "labelled"
+      2. React-split `N<!-- -->%` badge that carries no
+         pick-rate evidence                              -> "badge"
       3. primary emphasis cell, corroborated by a muted
          pick-rate cell in the same row                  -> "structural"
-      4. exactly one distinct percentage in the block    -> "sole_percentage"
+      4. exactly one percentage occurrence in a block
+         with no pick-rate evidence                      -> "sole_percentage"
       5. anything else                                   -> quarantined, None
+
+    An explicit marker whose token is invalid or absent quarantines the row
+    right there. Falling through instead would let the next branch promote
+    whatever percentage is left — in practice, the pick rate.
     """
-    badge = _WR_BADGE_RE.search(block)
-    if badge:
-        return _accept(badge.group(1), "badge")
+    text = _HTML_COMMENT_RE.sub("", block)
+    labelled_pick_rates = {t for t in _labelled_tokens(_PR_LABEL_RE, text) if t}
 
-    labelled = _WR_LABELLED_RE.search(block)
+    labelled = _labelled_tokens(_WR_LABEL_RE, text)
     if labelled:
-        return _accept(labelled.group(1), "labelled")
+        return _accept_all(labelled, "labelled")
 
-    primary = _WR_PRIMARY_RE.findall(block)
-    if len(primary) == 1 and _PR_MUTED_RE.search(block):
+    cells = _stat_cells(block)
+    badges = [
+        cell for cell in cells
+        if cell.react_split and not cell.marks_pick_rate(labelled_pick_rates)
+    ]
+    if badges:
+        # Split markup is how React renders ANY `{value}%`, the mobile
+        # pick-rate badge included, so a badge counts only once pick-rate
+        # evidence has excluded it — never merely by appearing first.
+        return _accept_all([cell.token for cell in badges], "badge")
+
+    primary = [cell for cell in cells if cell.primary]
+    if len(primary) == 1 and any(cell.muted for cell in cells):
         # Exactly one primary stat cell, plus the pick-rate cell we expect
         # beside it: the layout matches what we verified, so this is unambiguous.
-        return _accept(primary[0], "structural")
+        return _accept(primary[0].token, "structural")
 
     # Candidates are collected WITHOUT a magnitude filter. Discarding
     # out-of-range siblings here would let the count fall to one and turn a
     # genuinely ambiguous row into a confident answer — magnitude reasoning by
     # the back door.
-    percentages = {float(v) for v in re.findall(r"([\d.]+)\s*%", block)}
-    if len(percentages) == 1:
-        # Nothing to confuse it with; the single value can only be the win rate.
-        return _accept(percentages.pop(), "sole_percentage")
-    if not percentages:
+    tokens = _PERCENT_TOKEN_RE.findall(text)
+    if not tokens:
         return None, "quarantined_no_percentage"
+    pick_rate_tokens = labelled_pick_rates | {
+        cell.token for cell in cells if cell.marks_pick_rate(labelled_pick_rates)
+    }
+    if pick_rate_tokens:
+        # The row demonstrably carries a pick rate, yet no win-rate marker
+        # resolved. Whatever is left cannot be told apart from it: a missing
+        # win rate beside the desktop + mobile pick-rate pair looks exactly so.
+        if all(token in pick_rate_tokens for token in tokens):
+            return None, "quarantined_pick_rate_only"
+        return None, "quarantined_ambiguous_percentages"
+    if len(tokens) == 1:
+        # One occurrence, not one distinct value: the only stat this source
+        # duplicates is the pick rate, so collapsing duplicates is precisely
+        # how a pick rate beside a missing win rate became a "sole" value.
+        return _accept(tokens[0], "sole_percentage")
     return None, "quarantined_ambiguous_percentages"
 
 
