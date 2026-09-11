@@ -64,11 +64,7 @@ export async function PatchNotesView({
         sourceUrl={data.sourceUrl || current.sourceUrl}
         freshness={freshness}
       />
-      <PatchSummary
-        patch={current}
-        removedAugmentsCount={removedAugments.length}
-        hotfixEventCount={hotfixEventCount}
-      />
+      <PatchSummary patch={current} hotfixEventCount={hotfixEventCount} />
       <PatchCard patch={current} locale={locale} isCurrent />
       <RemovedAugmentsTable augments={removedAugments} locale={locale} />
 
@@ -191,17 +187,15 @@ async function PatchHero({
 
 async function PatchSummary({
   patch,
-  removedAugmentsCount,
   hotfixEventCount,
 }: {
   patch: PatchNote;
-  removedAugmentsCount: number;
   hotfixEventCount: number;
 }) {
   const t = await getTranslations("patchNotes");
   const summary = patch.summary;
   if (!summary) return null;
-  const digest = buildPatchDigest(patch, removedAugmentsCount, hotfixEventCount);
+  const digest = buildPatchDigest(patch, hotfixEventCount);
 
   const cards = [
     ["summaryTotal", summary.totalChanges],

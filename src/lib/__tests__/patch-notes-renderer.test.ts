@@ -65,7 +65,7 @@ function syntheticPatch(kinds: ChangeKind[] = ["changed"]): PatchNote {
 
 describe("patch-notes digest", () => {
   test("uses explicit added and removed counts when summary carries them", () => {
-    const digest = buildPatchDigest(syntheticPatch(["added", "removed"]), 9, 3);
+    const digest = buildPatchDigest(syntheticPatch(["added", "removed"]), 3);
 
     expect(digest).toEqual({
       added: 1,
@@ -74,14 +74,32 @@ describe("patch-notes digest", () => {
     });
   });
 
-  test("falls back to removed augment archive count when summary has no removed kind", () => {
-    const digest = buildPatchDigest(syntheticPatch(["changed"]), 7, 2);
+  test("reports this patch's dated removal count", () => {
+    const patch = syntheticPatch(["removed"]);
+    patch.summary = { ...patch.summary!, byKind: { removed: 3 } };
 
-    expect(digest).toEqual({
-      added: 0,
-      removed: 7,
-      hotfixes: 2,
-    });
+    expect(buildPatchDigest(patch, 0).removed).toBe(3);
+  });
+
+  test("a patch with no dated removals reports zero, never the not-live archive", () => {
+    // Patch 26.18 after cross-gap events stopped being dated to it: no changes
+    // at all, while 69 augments are not currently live (42 removed, 10
+    // disabled, 16 unverified, 1 candidate). That archive count once filled
+    // this card as "Removed 69" — a claim about THIS patch that nothing dates.
+    const patch = syntheticPatch([]);
+    patch.summary = { ...patch.summary!, totalChanges: 0, byKind: {} };
+
+    expect(buildPatchDigest(patch, 0)).toEqual({ added: 0, removed: 0, hotfixes: 0 });
+  });
+
+  test("the patch summary cards are not fed the not-live augment archive", () => {
+    const source = readFileSync(
+      path.join(process.cwd(), "src/components/patch-notes/PatchNotesView.tsx"),
+      "utf8",
+    );
+
+    expect(source).toContain("buildPatchDigest(patch, hotfixEventCount)");
+    expect(source).not.toContain("removedAugmentsCount");
   });
 });
 
