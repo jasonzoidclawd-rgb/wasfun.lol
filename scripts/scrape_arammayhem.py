@@ -357,14 +357,21 @@ _SIGNLIKE = frozenset("+.,/~")
 def _changes_numeric_meaning(char: str) -> bool:
     """A character that, placed just before a number, changes what it says.
 
-    Dashes of every kind, math symbols (+ − ± < > ≈ ÷ ⁄ …), numerals and
-    fraction/decimal punctuation. A sign in its own element (`<span>-</span>1%`)
-    still makes the number negative.
+    Dashes of every kind; every symbol class — math (+ − ± ≈ ÷ ⁄), currency,
+    modifier and other (▼ ▲ ➖ are "So"); numerals; fraction/decimal
+    punctuation; and code points with no public meaning (private-use icon
+    glyphs, unassigned, controls). A sign in its own element (`<span>-</span>1%`)
+    still qualifies the number, so across tags these fail closed.
     """
     if char in _LABEL_SEPARATORS:
         return False
     category = unicodedata.category(char)
-    return category in ("Pd", "Sm") or category.startswith("N") or char in _SIGNLIKE
+    return (
+        category == "Pd"
+        or category[0] in ("S", "N")
+        or category in ("Co", "Cn", "Cc", "Cs")
+        or char in _SIGNLIKE
+    )
 
 
 class _Percentage(NamedTuple):
@@ -392,16 +399,26 @@ _MUTED_TEXT_CLASS_RE = re.compile(r"(?:[\w-]+:)*text-muted(?:-foreground)?(?:/\d
 _MOBILE_ONLY_CLASS_RE = re.compile(r"(?:sm|md|lg|xl|2xl):hidden")
 
 
-def _preceding_char(runs: list[_Run], run: int, offset: int) -> tuple[str | None, int]:
-    """The nearest visible character before `offset`, and the run holding it."""
-    before = runs[run].text[:offset].rstrip()
-    if before:
-        return before[-1], run
-    for index in range(run - 1, -1, -1):
-        text = runs[index].text.rstrip()
-        if text:
-            return text[-1], index
-    return None, -1
+def _is_unseen(char: str) -> bool:
+    """Whitespace, invisible format characters (soft hyphen, zero-width space)
+    and combining marks: none of them is the character a reader sees."""
+    return char.isspace() or unicodedata.category(char) in ("Cf", "Mn", "Me", "Mc")
+
+
+def _preceding_char(runs: list[_Run], run: int, offset: int) -> tuple[str | None, int, int]:
+    """The nearest semantically visible character before `offset`.
+
+    Returns (char, run holding it, its offset in that run), walking back across
+    rendered-text runs, so `<span>-&shy;</span>1%` finds the "-".
+    """
+    for index in range(run, -1, -1):
+        text = runs[index].text
+        position = (offset if index == run else len(text)) - 1
+        while position >= 0 and _is_unseen(text[position]):
+            position -= 1
+        if position >= 0:
+            return text[position], index, position
+    return None, -1, -1
 
 
 def _percentages(runs: list[_Run]) -> dict[tuple[int, int], _Percentage]:
@@ -422,7 +439,7 @@ def _percentages(runs: list[_Run]) -> dict[tuple[int, int], _Percentage]:
             head = text[:at].rstrip()
             tail = _EXPRESSION_TAIL_RE.search(head)
             start = tail.start()
-            char, holder = _preceding_char(runs, index, start)
+            char, holder, _ = _preceding_char(runs, index, start)
             if char is None:
                 partial = False
             elif holder == index:
@@ -515,11 +532,9 @@ def _labels(
                     break
 
             captions = None
-            char, holder = _preceding_char(runs, index, match.start())
+            char, holder, position = _preceding_char(runs, index, match.start())
             if char == "%" and (holder == index or in_group(holder)):
-                text = runs[holder].text
-                limit = match.start() if holder == index else len(text)
-                captions = percentages.get((holder, len(text[:limit].rstrip()) - 1))
+                captions = percentages.get((holder, position))
             labels.append(_Label(value=value, captions=captions, separated=separated))
     return labels
 
@@ -551,15 +566,15 @@ def _value_key(token: str) -> float | str:
 def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
     """Return (win_rate, extraction_method) for one augment block.
 
-    Paths, in order. Each identifies the win rate by an explicit marker, never
-    by magnitude, and none may accept a value the row already evidences as its
-    pick rate (a muted or mobile-only cell, a "Pick Rate" label, or a duplicate
-    of either):
+    Paths, strongest first. Each identifies the win rate by an explicit marker,
+    never by magnitude, and none may accept a value the row already evidences as
+    its pick rate (a muted or mobile-only cell, a "Pick Rate" label, or a
+    duplicate of either):
       1. an explicitly labelled "Win Rate: N%"             -> "labelled"
-      2. a React-split `N<!-- -->%` badge that is not
-         pick-rate evidence                                -> "badge"
-      3. the primary emphasis cell, corroborated by a
+      2. the primary emphasis cell, corroborated by a
          muted pick-rate cell in the same row              -> "structural"
+      3. a React-split `N<!-- -->%` badge that is not
+         pick-rate evidence                                -> "badge"
       4. exactly one percentage occurrence in a row with
          no pick-rate evidence                             -> "sole_percentage"
       5. anything else                                     -> quarantined, None
@@ -569,8 +584,14 @@ def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
     next branch promote whatever percentage is left — in practice, the pick rate.
     """
     reader = _RowReader()
-    reader.feed(block)
-    reader.close()
+    try:
+        reader.feed(block)
+        reader.close()
+    except Exception:
+        # Third-party markup Python's parser refuses outright (`<![foo[ ]]>`
+        # raises AssertionError in _markupbase). Fail closed for this row only,
+        # and use nothing the half-fed reader collected.
+        return None, "quarantined_unparseable_markup"
     runs = reader.runs
     found = _percentages(runs)
     percentages = list(found.values())
@@ -603,21 +624,29 @@ def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
                 return None, "quarantined_pick_rate_collision"
         return _accept_all([label.value for label in labels], "labelled")
 
-    badges = [cell for cell in cells if cell.react_split and not is_pick_rate(cell)]
+    def collides(candidates: list[_Percentage]) -> bool:
+        return any(_value_key(c.token) in pick_rate_values for c in candidates)
+
+    # Only STRUCTURAL pick-rate evidence (muted / mobile-only, here or on an
+    # ancestor) removes a cell from candidacy. A candidate whose only fault is
+    # sharing the pick rate's value is a collision: dropping it would hand the
+    # row to whatever weaker percentage is left.
+    primary = [cell for cell in cells if cell.primary and not (cell.muted or cell.mobile_only)]
+    if collides(primary):
+        return None, "quarantined_pick_rate_collision"
+    if len(primary) == 1 and any(cell.muted for cell in cells):
+        # Exactly one primary stat cell, plus the pick-rate cell we expect
+        # beside it: the layout matches what we verified, so this is unambiguous.
+        return _accept_percentage(primary[0], "structural")
+
+    badges = [cell for cell in cells if cell.react_split and not (cell.muted or cell.mobile_only)]
+    if collides(badges):
+        return None, "quarantined_pick_rate_collision"
     if badges:
         # Split markup is how React renders ANY `{value}%`, the mobile
         # pick-rate badge included, so a badge counts only once pick-rate
         # evidence has excluded it — never merely by appearing first.
         return _accept_all(badges, "badge")
-
-    primary = [cell for cell in cells if cell.primary and not (cell.muted or cell.mobile_only)]
-    if len(primary) == 1 and any(cell.muted for cell in cells):
-        # Exactly one primary stat cell, plus the pick-rate cell we expect
-        # beside it: the layout matches what we verified, so this is unambiguous
-        # — unless its value is the pick rate's.
-        if is_pick_rate(primary[0]):
-            return None, "quarantined_pick_rate_collision"
-        return _accept_percentage(primary[0], "structural")
 
     # Candidates are counted WITHOUT a magnitude filter. Discarding out-of-range
     # siblings here would let the count fall to one and turn a genuinely

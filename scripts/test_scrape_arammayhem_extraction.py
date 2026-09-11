@@ -3,8 +3,13 @@
 
 from __future__ import annotations
 
+import html
+import unicodedata
 import unittest
+from html.parser import HTMLParser
+from unittest.mock import patch
 
+import scrape_arammayhem
 from scrape_arammayhem import (
     extract_augment_win_rate,
     is_implausible_win_rate,
@@ -315,7 +320,9 @@ class ReactSplitMarkupTests(unittest.TestCase):
         wr, method = extracted(live_row("55.25<!-- -->%", split=True))
         self.assertEqual(wr, 55.25)
         self.assertNotEqual(wr, float(PICK_RATE))
-        self.assertEqual(method, "badge")
+        # The split win-rate cell is still the primary emphasis cell, which
+        # outranks the weaker badge fallback.
+        self.assertEqual(method, "structural")
 
     def test_split_row_with_absent_win_rate_is_quarantined(self):
         wr, method = extracted(live_row("—", split=True))
@@ -385,7 +392,7 @@ class EndToEndAcceptanceTests(unittest.TestCase):
                     cell = f"{token}<!-- -->%" if split else f"{token}%"
                     wr, method = extracted(live_row(cell, split=split))
                     self.assertEqual(wr, expected)
-                    self.assertEqual(method, "badge" if split else "structural")
+                    self.assertEqual(method, "structural")
 
     def test_out_of_range_values_are_rejected(self):
         for token in ("100.01", "155", "-0.01"):
@@ -556,14 +563,18 @@ class PickRateEvidenceTests(unittest.TestCase):
                 self.assertEqual(method, expected)
 
     def test_mobile_class_drift_is_still_pick_rate_by_duplication(self):
+        # Split, the drifted badge is a badge candidate that shares the pick
+        # rate's value: a collision. Unsplit, it is no candidate at all, and
+        # the row holds nothing but pick-rate evidence.
         for badge_classes in ("text-info max-sm:inline", "text-info", "text-foreground"):
-            for split in (True, False):
+            for split, expected in ((True, "quarantined_pick_rate_collision"),
+                                    (False, "quarantined_pick_rate_only")):
                 with self.subTest(classes=badge_classes, split=split):
                     wr, method = extracted(nested_mobile_row(
                         "—", split=split, badge_classes=badge_classes
                     ))
                     self.assertIsNone(wr)
-                    self.assertEqual(method, "quarantined_pick_rate_only")
+                    self.assertEqual(method, expected)
 
     def test_text_foreground_on_the_mobile_badge_does_not_make_it_primary(self):
         for split in (True, False):
@@ -580,7 +591,7 @@ class PickRateEvidenceTests(unittest.TestCase):
             with self.subTest(classes=badge_classes, split=True):
                 self.assertEqual(
                     extracted(nested_mobile_row("55.25<!-- -->%", badge_classes=badge_classes)),
-                    (55.25, "badge"),
+                    (55.25, "structural"),
                 )
             with self.subTest(classes=badge_classes, split=False):
                 self.assertEqual(
@@ -615,3 +626,189 @@ class LaneResilienceTests(unittest.TestCase):
             with self.subTest(row=slug):
                 self.assertIsNone(rows[slug]["win_rate"])
                 self.assertTrue(rows[slug]["extraction"].startswith("quarantined"))
+
+
+# ── Parser regressions of the HTML reader (2026-09 merge-gate review) ───────
+
+# Marked-section shapes the reviewer's fuzz run found raising AssertionError
+# out of Python's HTMLParser (_markupbase), which aborted the whole scrape.
+MARKED_SECTION_VARIANTS = (
+    "<![foo[ ]]>", "<![ x]>", "<!['/ix?b", "<![ac#xb ]b", "<![-",
+)
+EXTRA_SPLIT_CELL = '<div class="text-right font-data text-sm">12.50<!-- -->%</div>'
+
+
+def parser_rejects(markup: str) -> bool:
+    """Whether THIS Python's HTMLParser raises on `markup`.
+
+    CPython releases differ on non-standard `<![` sections (newer security
+    releases read them as bogus comments, as browsers do), so tests on real
+    inputs assert the quarantine wherever the parser actually refuses them.
+    """
+    parser = HTMLParser(convert_charrefs=True)
+    try:
+        parser.feed(markup)
+        parser.close()
+    except Exception:
+        return True
+    return False
+
+
+def with_extra_cell(row: str, cell: str = EXTRA_SPLIT_CELL) -> str:
+    assert row.endswith("</a>")
+    return row[: -len("</a>")] + cell + "</a>"
+
+
+class MalformedMarkupTests(unittest.TestCase):
+    """1. Markup the parser refuses quarantines ONE row; the lane continues."""
+
+    def test_a_parser_failure_quarantines_only_its_row_on_any_python(self):
+        original = scrape_arammayhem._RowReader.feed
+
+        def failing_feed(reader, data):
+            # Collect runs first, so a result built from partial runs would show.
+            original(reader, data)
+            if "BROKEN" in data:
+                raise AssertionError("unknown status keyword 'foo' in marked section")
+
+        with patch.object(scrape_arammayhem._RowReader, "feed", failing_feed):
+            self.assertEqual(
+                extract_augment_win_rate(live_row("48.10%") + "<i>BROKEN</i>"),
+                (None, "quarantined_unparseable_markup"),
+            )
+            rows = parse_augments(
+                live_row("55.25%", slug="good-one")
+                + block("<i>BROKEN</i><div>48.10%</div>", slug="broken")
+                + live_row("48.10%", slug="good-two")
+            )
+        by_slug = {row["sourceKey"]: row for row in rows}
+        self.assertEqual(by_slug["good-one"]["win_rate"], 55.25)
+        self.assertEqual(by_slug["good-two"]["win_rate"], 48.10)
+        self.assertIsNone(by_slug["broken"]["win_rate"])
+        self.assertEqual(by_slug["broken"]["extraction"], "quarantined_unparseable_markup")
+
+    def test_a_malformed_marked_section_does_not_raise(self):
+        wr, method = extract_augment_win_rate(block("<![foo[ ]]>"))
+        self.assertIsNone(wr)
+        if parser_rejects("<![foo[ ]]>"):
+            self.assertEqual(method, "quarantined_unparseable_markup")
+        else:
+            self.assertTrue(method.startswith("quarantined"), method)
+
+    def test_a_malformed_middle_row_leaves_its_neighbours_intact(self):
+        page = (
+            live_row("55.25%", slug="good-one")
+            + live_row("<![foo[ ]]>48.10%", slug="malformed")
+            + live_row("48.10%", slug="good-two")
+        )
+        rows = {row["sourceKey"]: row for row in parse_augments(page)}  # must not raise
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(rows["good-one"]["win_rate"], 55.25)
+        self.assertEqual(rows["good-two"]["win_rate"], 48.10)
+        self.assertNotEqual(rows["malformed"]["win_rate"], float(PICK_RATE))
+        if parser_rejects("<![foo[ ]]>"):
+            self.assertIsNone(rows["malformed"]["win_rate"])
+            self.assertEqual(rows["malformed"]["extraction"], "quarantined_unparseable_markup")
+
+    def test_fuzz_marked_section_variants_never_escape_the_row(self):
+        for markup in MARKED_SECTION_VARIANTS:
+            for name, html_row in (
+                ("row", live_row(f"{markup}48.10%")),
+                ("split row", live_row(f"{markup}48.10<!-- -->%", split=True)),
+                ("block", block(f"<div>55%</div>{markup}")),
+            ):
+                with self.subTest(markup=markup, shape=name):
+                    wr, method = extracted(html_row)  # must not raise
+                    self.assertNotEqual(wr, float(PICK_RATE))
+                    if parser_rejects(markup):
+                        self.assertEqual((wr, method), (None, "quarantined_unparseable_markup"))
+
+
+class CrossTagPrefixTests(unittest.TestCase):
+    """2. A qualifier in its own element means what it means in the same node."""
+
+    PREFIXES = (
+        "\u25bc", "\u25b2", "\u2796", "\u2796&#xFE0F;", "\u00b1", "\u2248", "&dollar;",
+        "-&shy;", "-&#8203;", "-&#x2060;", "-&#769;", "\u2212&shy;", "\u25bc&#8203;",
+    )
+
+    def test_symbol_or_invisible_prefixes_across_tags_quarantine(self):
+        for prefix in self.PREFIXES:
+            for path, row in (
+                ("sole", block(f"<div><span>{prefix}</span>1.2%</div>")),
+                ("structural", live_row(f"<span>{prefix}</span>1.2%")),
+                ("structural, split", live_row(f"<span>{prefix}</span>1.2<!-- -->%", split=True)),
+                ("badge", block(f'<span class="wr"><span>{prefix}</span>1.2<!-- -->%</span>')),
+            ):
+                with self.subTest(prefix=prefix, path=path):
+                    wr, method = extracted(row)
+                    self.assertIsNone(wr, f"{prefix!r} + 1.2% published {wr}")
+                    self.assertTrue(method.startswith("quarantined"), method)
+
+    def test_same_node_and_cross_tag_forms_agree_for_every_symbol_and_dash(self):
+        """Swept by Unicode category, not by example: every dash (Pd) and symbol
+        (S*) below U+3000 fails closed both inline and in its own element."""
+        swept = 0
+        for code in range(0x21, 0x3000):
+            char = chr(code)
+            category = unicodedata.category(char)
+            # Label separators ("=" is Sm) keep their pre-existing inline reading.
+            if char in ":=\uff1a" or not (category == "Pd" or category.startswith("S")):
+                continue
+            encoded = html.escape(char)
+            for spacer in ("", " "):
+                inline = extracted(block(f"<div>{encoded}{spacer}1.2%</div>"))
+                tagged = extracted(block(f"<div><span>{encoded}</span>{spacer}1.2%</div>"))
+                with self.subTest(char=f"U+{code:04X}", spacer=bool(spacer)):
+                    self.assertIsNone(inline[0])
+                    self.assertIsNone(tagged[0])
+            swept += 1
+        self.assertGreater(swept, 1000)
+
+    def test_ordinary_values_and_labels_still_resolve(self):
+        for token, expected in (("0", 0.0), ("100", 100.0), ("55.25", 55.25),
+                                ("12.5", 12.5), ("97.0", 97.0)):
+            with self.subTest(token=token):
+                self.assertEqual(extracted(live_row(f"{token}%")), (expected, "structural"))
+                self.assertEqual(extracted(block(f"<div><span>Gold</span>{token}%</div>")),
+                                 (expected, "sole_percentage"))
+                self.assertEqual(extracted(block(f"<div>{token}%</div>")),
+                                 (expected, "sole_percentage"))
+
+
+class CollisionPrecedenceTests(unittest.TestCase):
+    """3. A value-collision quarantines; it never hands the row to a weaker value."""
+
+    def test_primary_equal_to_pick_rate_never_promotes_an_extra_split_cell(self):
+        for name, row in (
+            ("unsplit win rate", with_extra_cell(live_row(f"{PICK_RATE}%"))),
+            ("split win rate", with_extra_cell(live_row(f"{PICK_RATE}<!-- -->%", split=True))),
+        ):
+            with self.subTest(case=name):
+                wr, method = extracted(row)
+                self.assertNotEqual(wr, 12.5)
+                self.assertEqual((wr, method), (None, "quarantined_pick_rate_collision"))
+
+    def test_a_badge_equal_to_pick_rate_is_a_collision_not_a_dropout(self):
+        row = block(
+            '<div class="hidden text-muted-foreground sm:block">63.98%</div>'
+            f'<span class="wr">{PICK_RATE}<!-- -->%</span>'
+            '<span class="x">12.50<!-- -->%</span>'
+        )
+        self.assertEqual(extracted(row), (None, "quarantined_pick_rate_collision"))
+
+    def test_the_real_win_rate_still_wins_beside_extra_structure(self):
+        for name, row in (
+            ("extra split cell", with_extra_cell(live_row("55.25%"))),
+            ("extra split cell, split row", with_extra_cell(live_row("55.25<!-- -->%", split=True))),
+            ("extra plain cell", with_extra_cell(
+                live_row("55.25%"), '<div class="text-right">12.50%</div>')),
+        ):
+            with self.subTest(case=name):
+                self.assertEqual(extracted(row), (55.25, "structural"))
+
+    def test_structural_pick_rate_evidence_is_excluded_not_a_collision(self):
+        self.assertEqual(extracted(nested_mobile_row("55.25<!-- -->%")), (55.25, "structural"))
+        self.assertEqual(extracted(nested_mobile_row("\u2014")), (None, "quarantined_pick_rate_only"))
+        self.assertEqual(extracted(live_row("\u2014", split=True)),
+                         (None, "quarantined_pick_rate_only"))
