@@ -396,3 +396,222 @@ class EndToEndAcceptanceTests(unittest.TestCase):
 
     def test_pick_rate_higher_than_win_rate_still_resolves_by_emphasis(self):
         self.assertEqual(extracted(live_row("48.09%", pick_rate="60.32")), (48.09, "structural"))
+
+
+# ── Fail-closed attribution (2026-09 final delta review) ────────────────────
+# Three residual ways a pick rate, or the tail of a larger expression, could
+# still be published as a win rate: a label reaching past the value it captions,
+# a numeric suffix read out of a signed or fractional expression, and a pick-rate
+# duplicate whose evidence sat on an enclosing element or drifted class.
+
+MOBILE_BADGE = (
+    '<span class="rounded border border-info/50 bg-info/15 px-1.5 py-0.5 font-data '
+    'text-xs font-bold text-info sm:hidden">{}</span>'
+)
+
+
+def nested_mobile_row(win_rate_cell: str, *, split: bool = True,
+                      badge_classes: str = "text-info sm:hidden") -> str:
+    """`live_row` with the mobile pick-rate badge's value inside an unclassed child."""
+    sep = "<!-- -->" if split else ""
+    row = live_row(win_rate_cell, split=split)
+    flat = MOBILE_BADGE.format(f"{PICK_RATE}{sep}%")
+    assert flat in row, "live_row's mobile badge markup changed"
+    return row.replace(
+        flat, f'<span class="{badge_classes}"><span>{PICK_RATE}{sep}%</span></span>'
+    )
+
+
+class LabelAttributionTests(unittest.TestCase):
+    """A1. A label may name only a value it provably introduces."""
+
+    SUFFIX_LABELS = {
+        "sr-only suffix": live_row('55.25%<span class="sr-only">Win rate</span>'),
+        "sr-only suffix, split": live_row(
+            '55.25<!-- -->%<span class="sr-only">Win rate</span>', split=True
+        ),
+        "visible suffix": live_row("55.25% <small>Win Rate</small>"),
+        "visible suffix, split": live_row("55.25<!-- -->% <small>Win Rate</small>", split=True),
+        "value-first cards": block(
+            "<div><b>55.25%</b><span>Win Rate</span></div>"
+            f"<div><b>{PICK_RATE}%</b><span>Pick Rate</span></div>"
+        ),
+        "value-first cards, split": block(
+            "<div><b>55.25<!-- -->%</b><span>Win Rate</span></div>"
+            f"<div><b>{PICK_RATE}<!-- -->%</b><span>Pick Rate</span></div>"
+        ),
+        "value-first flat": block(
+            f"<b>55.25%</b><span>Win Rate</span><b>{PICK_RATE}%</b><span>Pick Rate</span>"
+        ),
+        "value-first flat, split": block(
+            "<b>55.25<!-- -->%</b><span>Win Rate</span>"
+            f"<b>{PICK_RATE}<!-- -->%</b><span>Pick Rate</span>"
+        ),
+        "value-first text": block(f"55.25% Win Rate {PICK_RATE}% Pick Rate"),
+    }
+
+    def test_a_suffix_label_never_captures_the_following_pick_rate(self):
+        for name, html in self.SUFFIX_LABELS.items():
+            with self.subTest(layout=name):
+                wr, method = extracted(html)
+                self.assertNotEqual(wr, float(PICK_RATE), "the pick rate became the win rate")
+                self.assertIsNone(wr)
+                self.assertEqual(method, "quarantined_unattributed_label")
+
+    def test_five_suffix_labelled_rows_publish_no_pick_rate(self):
+        page = "".join(
+            live_row(
+                f'{50 + i / 10:.2f}%<span class="sr-only">Win rate</span>',
+                pick_rate=f"{30 + i:.2f}",
+                slug=f"row-{i}",
+            )
+            for i in range(5)
+        )
+        rows = parse_augments(page)
+        self.assertEqual(len(rows), 5)
+        for i, row in enumerate(rows):
+            with self.subTest(row=row["sourceKey"]):
+                self.assertNotEqual(row["win_rate"], 30 + i)
+                self.assertIsNone(row["win_rate"])
+                self.assertNotEqual(row["extraction"], "labelled")
+
+    def test_a_label_does_not_reach_out_of_its_own_group(self):
+        wr, method = extracted(block(
+            f"<div><span>Win Rate</span></div><div><b>{PICK_RATE}%</b></div>"
+        ))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_win_rate_unavailable")
+
+    def test_a_label_pointing_at_pick_rate_evidence_is_quarantined(self):
+        wr, method = extracted(block(
+            f'<span>Win Rate</span><div class="text-muted-foreground">{PICK_RATE}%</div>'
+        ))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_pick_rate_collision")
+
+    def test_label_first_layouts_still_resolve(self):
+        for name, html in {
+            "sr-only prefix": live_row('<span class="sr-only">Win rate</span>55.25%'),
+            "grouped cards": block(
+                f"<div><span>Pick Rate</span><b>{PICK_RATE}%</b></div>"
+                "<div><span>Win Rate</span><b>55.25%</b></div>"
+            ),
+            "separated text": block(f"Pick Rate: {PICK_RATE}% Win Rate: 55.25%"),
+        }.items():
+            with self.subTest(layout=name):
+                self.assertEqual(extracted(html), (55.25, "labelled"))
+
+
+class WholeExpressionTests(unittest.TestCase):
+    """A2. A numeric suffix of a larger expression is never the value."""
+
+    # Signed (entity, typographic and separated), fractional, split and
+    # decorated expressions whose trailing digits alone would look valid.
+    EXPRESSIONS = (
+        "&minus;1", "&#45;1", "&#x2212;1", "&plus;1", "–1", "—1", "－1",
+        "﹣1", "- 1", "− 1", "<span>-</span>1", "<span>&minus;</span>1",
+        "<b>–</b> 1", "1/2", "1⁄2", "1 5", "<b>1</b>5", "~55", "&gt;55",
+        "±55", "≈55",
+    )
+
+    def test_no_path_publishes_the_trailing_digits(self):
+        for expression in self.EXPRESSIONS:
+            for path, html in (
+                ("sole", block(f"<div>{expression}%</div>")),
+                ("structural", live_row(f"{expression}%")),
+                ("badge", block(f'<span class="wr">{expression}<!-- -->%</span>')),
+                ("labelled", block(f"Win Rate: {expression}%")),
+            ):
+                with self.subTest(expression=expression, path=path):
+                    wr, method = extracted(html)
+                    self.assertIsNone(wr, f"published {wr} from {expression!r}")
+                    self.assertTrue(method.startswith("quarantined"), method)
+
+    def test_standalone_values_are_still_accepted(self):
+        for token, expected in (("0", 0.0), ("100", 100.0), ("55.25", 55.25),
+                                ("12.5", 12.5), ("97.0", 97.0)):
+            with self.subTest(token=token):
+                self.assertEqual(extracted(block(f"<div>{token}%</div>")),
+                                 (expected, "sole_percentage"))
+                self.assertEqual(extracted(block(f"<div>Win Rate: {token}%</div>")),
+                                 (expected, "labelled"))
+
+
+class PickRateEvidenceTests(unittest.TestCase):
+    """A3. A value already evidenced as the pick rate never becomes the win rate."""
+
+    def test_nested_mobile_pick_rate_with_invalid_or_missing_win_rate(self):
+        for name, html, expected in (
+            ("WR NaN", nested_mobile_row("NaN<!-- -->%"), "quarantined_non_finite_value"),
+            ("WR dash", nested_mobile_row("—"), "quarantined_pick_rate_only"),
+            ("WR absent", nested_mobile_row("").replace(
+                '<div class="text-right font-data text-base font-semibold text-foreground '
+                'sm:text-lg"></div>', ""), "quarantined_pick_rate_only"),
+            ("WR dash, unsplit", nested_mobile_row("—", split=False),
+             "quarantined_pick_rate_only"),
+        ):
+            with self.subTest(case=name):
+                wr, method = extracted(html)
+                self.assertIsNone(wr, "the nested mobile pick rate became the win rate")
+                self.assertEqual(method, expected)
+
+    def test_mobile_class_drift_is_still_pick_rate_by_duplication(self):
+        for badge_classes in ("text-info max-sm:inline", "text-info", "text-foreground"):
+            for split in (True, False):
+                with self.subTest(classes=badge_classes, split=split):
+                    wr, method = extracted(nested_mobile_row(
+                        "—", split=split, badge_classes=badge_classes
+                    ))
+                    self.assertIsNone(wr)
+                    self.assertEqual(method, "quarantined_pick_rate_only")
+
+    def test_text_foreground_on_the_mobile_badge_does_not_make_it_primary(self):
+        for split in (True, False):
+            with self.subTest(split=split):
+                wr, method = extracted(nested_mobile_row(
+                    "—", split=split, badge_classes="text-foreground sm:hidden"
+                ))
+                self.assertIsNone(wr)
+                self.assertEqual(method, "quarantined_pick_rate_only")
+
+    def test_real_win_rate_still_resolves_beside_drifted_pick_rate(self):
+        for badge_classes in ("text-info sm:hidden", "text-info max-sm:inline",
+                              "text-foreground sm:hidden"):
+            with self.subTest(classes=badge_classes, split=True):
+                self.assertEqual(
+                    extracted(nested_mobile_row("55.25<!-- -->%", badge_classes=badge_classes)),
+                    (55.25, "badge"),
+                )
+            with self.subTest(classes=badge_classes, split=False):
+                self.assertEqual(
+                    extracted(nested_mobile_row("55.25%", split=False,
+                                                badge_classes=badge_classes)),
+                    (55.25, "structural"),
+                )
+
+    def test_a_primary_cell_equal_to_the_pick_rate_is_not_trusted(self):
+        wr, method = extracted(live_row(f"{PICK_RATE}%"))
+        self.assertIsNone(wr)
+        self.assertEqual(method, "quarantined_pick_rate_collision")
+
+
+class LaneResilienceTests(unittest.TestCase):
+    """A4. New malformed shapes quarantine their own row; the lane continues."""
+
+    def test_malformed_rows_are_quarantined_individually(self):
+        page = (
+            live_row("55.25%", slug="good-one")
+            + live_row('55.25%<span class="sr-only">Win rate</span>', slug="suffix-label")
+            + block("<div><span>-</span>1%</div>", slug="split-sign")
+            + nested_mobile_row("NaN<!-- -->%").replace("tank-engine", "nested-nan")
+            + block("<div>1/2%</div>", slug="fraction")
+            + live_row("48.10%", slug="good-two")
+        )
+        rows = {row["sourceKey"]: row for row in parse_augments(page)}
+        self.assertEqual(len(rows), 6)
+        self.assertEqual(rows["good-one"]["win_rate"], 55.25)
+        self.assertEqual(rows["good-two"]["win_rate"], 48.10)
+        for slug in ("suffix-label", "split-sign", "nested-nan", "fraction"):
+            with self.subTest(row=slug):
+                self.assertIsNone(rows[slug]["win_rate"])
+                self.assertTrue(rows[slug]["extraction"].startswith("quarantined"))
