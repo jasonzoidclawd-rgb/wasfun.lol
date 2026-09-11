@@ -397,7 +397,9 @@
     "patchSummaryUnverified": "{name} is a legacy entry we could not confirm against current game data.",
     "patchSummaryCandidate": "{name} appears in the game registry but is not confirmed as currently offered.",
     "patchSummaryAddedIn": "{name} was added in patch {patch}.",
-    "patchSummaryRemovedIn": "{name} was removed in patch {patch}."
+    "patchSummaryRemovedIn": "{name} was removed in patch {patch}.",
+    "patchSummaryFirstObservedIn": "{name} was first observed in patch {patch}.",
+    "patchSummaryFirstObservedRemovedIn": "{name} was first observed as removed in patch {patch}."
   },
   "items": {
     "title": "ARAM Mayhem Items",

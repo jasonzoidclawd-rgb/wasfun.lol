@@ -51,6 +51,7 @@ interface AugmentRecord {
     lifecycle?: string;
     lifecycle_patch?: string;
     lifecycle_event?: string;
+    lifecycle_provenance?: string;
   };
 }
 
@@ -221,6 +222,7 @@ export default async function AugmentDetailPage({
       availabilityStatus: augment.availability?.status,
       lifecyclePatch: augment.flags?.lifecycle_patch,
       lifecycleEvent: augment.flags?.lifecycle_event,
+      lifecycleProvenance: augment.flags?.lifecycle_provenance,
     },
     {
       title: t("patchSummaryTitle"),
@@ -229,12 +231,22 @@ export default async function AugmentDetailPage({
         AVAILABILITY_SUMMARY_KEYS[status]
           ? t(AVAILABILITY_SUMMARY_KEYS[status], { name: augmentName })
           : undefined,
-      dated: ({ patch, event }) =>
-        event === "added"
-          ? t("patchSummaryAddedIn", { name: augmentName, patch })
-          : event === "removed"
+      // A snapshot diff dates our OBSERVATION. Causal wording is reserved for
+      // an authoritative Riot record, which no current source produces.
+      dated: ({ patch, event, provenance }) => {
+        const causal = provenance === "riot_patch_notes";
+        if (event === "added") {
+          return causal
+            ? t("patchSummaryAddedIn", { name: augmentName, patch })
+            : t("patchSummaryFirstObservedIn", { name: augmentName, patch });
+        }
+        if (event === "removed") {
+          return causal
             ? t("patchSummaryRemovedIn", { name: augmentName, patch })
-            : undefined,
+            : t("patchSummaryFirstObservedRemovedIn", { name: augmentName, patch });
+        }
+        return undefined;
+      },
     },
   );
 

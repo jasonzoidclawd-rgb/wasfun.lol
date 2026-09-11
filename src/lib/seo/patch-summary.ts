@@ -6,6 +6,12 @@ type PatchSummaryInput = {
   lifecyclePatch?: string | null;
   /** Which transition that patch refers to ("added" | "removed"). */
   lifecycleEvent?: string | null;
+  /**
+   * How the date was established. "snapshot_diff" means we observed the
+   * transition between two adjacent snapshots, which dates the OBSERVATION,
+   * not Riot's change. Only an authoritative Riot record may carry causal copy.
+   */
+  lifecycleProvenance?: string | null;
 };
 
 /**
@@ -22,7 +28,11 @@ type PatchSummaryCopy = {
    */
   availability?: (status: string) => string | undefined;
   /** Rendered only when a genuinely dated transition exists. */
-  dated?: (values: { patch: string; event: string }) => string | undefined;
+  dated?: (values: {
+    patch: string;
+    event: string;
+    provenance: string;
+  }) => string | undefined;
 };
 
 type PatchSummary = {
@@ -64,7 +74,13 @@ export function buildPatchSummary(
   const lifecyclePatch = clean(input.lifecyclePatch);
   const lifecycleEvent = clean(input.lifecycleEvent);
   if (lifecyclePatch && lifecycleEvent) {
-    const datedLine = copy.dated?.({ patch: lifecyclePatch, event: lifecycleEvent });
+    // Unknown provenance is treated as the weaker claim, never the stronger.
+    const provenance = clean(input.lifecycleProvenance) ?? "snapshot_diff";
+    const datedLine = copy.dated?.({
+      patch: lifecyclePatch,
+      event: lifecycleEvent,
+      provenance,
+    });
     if (datedLine) lines.push(datedLine);
   }
 

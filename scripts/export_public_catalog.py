@@ -108,12 +108,21 @@ def build_public_augments(internal_dir: Path, forbidden: set[str]) -> dict:
         # inferring "removed in" from the entity's current state.
         removed_patch = removed_patches.get(slug)
         added_patch = added_patches.get(slug)
+        # Provenance travels with the date. Every dated event we can currently
+        # produce comes from a CDragon snapshot diff, which establishes when we
+        # FIRST OBSERVED the transition — not that Riot made the change in that
+        # patch. An undocumented hotfix, a late CDragon publish, or an
+        # incomplete previous snapshot all produce the same observation, so the
+        # copy must stay evidential. `riot_patch_notes` is modelled for a future
+        # authoritative entity-level source; the Riot lane carries prose only.
         if removed_patch:
             augment.setdefault("flags", {})["lifecycle_patch"] = removed_patch
             augment["flags"]["lifecycle_event"] = "removed"
+            augment["flags"]["lifecycle_provenance"] = "snapshot_diff"
         elif added_patch:
             augment.setdefault("flags", {})["lifecycle_patch"] = added_patch
             augment["flags"]["lifecycle_event"] = "added"
+            augment["flags"]["lifecycle_provenance"] = "snapshot_diff"
 
     return strip_keys(augments, forbidden)
 

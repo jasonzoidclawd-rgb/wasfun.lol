@@ -316,7 +316,9 @@
     "patchSummaryUnverified": "{name} 是無法以目前遊戲資料確認的舊項目。",
     "patchSummaryCandidate": "{name} 存在於遊戲登錄檔中，但無法確認目前是否提供。",
     "patchSummaryAddedIn": "{name} 於 {patch} 版本加入。",
-    "patchSummaryRemovedIn": "{name} 於 {patch} 版本移除。"
+    "patchSummaryRemovedIn": "{name} 於 {patch} 版本移除。",
+    "patchSummaryFirstObservedIn": "{name} 最早於 {patch} 版本被觀測到。",
+    "patchSummaryFirstObservedRemovedIn": "{name} 最早於 {patch} 版本被觀測為已移除。"
   },
   "items": {
     "title": "ARAM 大亂鬥裝備",

@@ -316,7 +316,9 @@
     "patchSummaryUnverified": "{name} は現在のゲームデータで確認できなかった旧エントリです。",
     "patchSummaryCandidate": "{name} はゲームレジストリに存在しますが、現在提供されているかは確認できません。",
     "patchSummaryAddedIn": "{name} はパッチ {patch} で追加されました。",
-    "patchSummaryRemovedIn": "{name} はパッチ {patch} で削除されました。"
+    "patchSummaryRemovedIn": "{name} はパッチ {patch} で削除されました。",
+    "patchSummaryFirstObservedIn": "{name} はパッチ {patch} で初めて確認されました。",
+    "patchSummaryFirstObservedRemovedIn": "{name} はパッチ {patch} で削除済みとして初めて確認されました。"
   },
   "items": {
     "title": "ARAMメイヘム アイテム",

@@ -316,7 +316,9 @@
     "patchSummaryUnverified": "{name}은(는) 현재 게임 데이터로 확인하지 못한 과거 항목입니다.",
     "patchSummaryCandidate": "{name}은(는) 게임 레지스트리에 있으나 현재 제공 여부는 확인되지 않았습니다.",
     "patchSummaryAddedIn": "{name}은(는) 패치 {patch}에서 추가되었습니다.",
-    "patchSummaryRemovedIn": "{name}은(는) 패치 {patch}에서 제거되었습니다."
+    "patchSummaryRemovedIn": "{name}은(는) 패치 {patch}에서 제거되었습니다.",
+    "patchSummaryFirstObservedIn": "{name}은(는) 패치 {patch}에서 처음 확인되었습니다.",
+    "patchSummaryFirstObservedRemovedIn": "{name}은(는) 패치 {patch}에서 제거된 상태로 처음 확인되었습니다."
   },
   "items": {
     "title": "ARAM 메이헴 아이템",

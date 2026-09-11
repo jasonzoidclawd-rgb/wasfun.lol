@@ -18,8 +18,13 @@ const COPY = {
       unverified_legacy: "Historical entry we could not verify.",
       candidate_registry_present: "Candidate entry.",
     })[status],
-  dated: ({ patch, event }: { patch: string; event: string }) =>
-    event === "added" ? `Added in ${patch}.` : `Removed in ${patch}.`,
+  dated: ({ patch, event, provenance }: { patch: string; event: string; provenance: string }) => {
+    const causal = provenance === "riot_patch_notes";
+    if (event === "added") {
+      return causal ? `Added in ${patch}.` : `First observed in ${patch}.`;
+    }
+    return causal ? `Removed in ${patch}.` : `First observed as removed in ${patch}.`;
+  },
 };
 
 describe("patch summary lifecycle truth", () => {
@@ -42,18 +47,46 @@ describe("patch summary lifecycle truth", () => {
     expect(summary!.lines.join(" ")).not.toContain("Removed in 26.18");
   });
 
-  test("a dated event renders its own patch and its own verb", () => {
+  test("a snapshot-derived date renders OBSERVATION wording, not causal", () => {
+    // Adjacency proves the transition happened between two observations one
+    // patch apart. It does not prove Riot made the change in that patch: an
+    // undocumented hotfix, a late CDragon publish, or an incomplete previous
+    // snapshot all produce the same evidence.
     const summary = buildPatchSummary(
       {
         patch: "26.18",
         availabilityStatus: "confirmed_live",
         lifecyclePatch: "26.18",
         lifecycleEvent: "added",
+        lifecycleProvenance: "snapshot_diff",
+      },
+      COPY,
+    );
+    expect(summary!.lines).toContain("First observed in 26.18.");
+    expect(summary!.lines.join(" ")).not.toContain("Added in 26.18.");
+  });
+
+  test("causal wording is reserved for an authoritative Riot record", () => {
+    const summary = buildPatchSummary(
+      {
+        patch: "26.18",
+        availabilityStatus: "confirmed_live",
+        lifecyclePatch: "26.18",
+        lifecycleEvent: "added",
+        lifecycleProvenance: "riot_patch_notes",
       },
       COPY,
     );
     expect(summary!.lines).toContain("Added in 26.18.");
-    expect(summary!.lines.join(" ")).not.toContain("Removed");
+  });
+
+  test("unknown provenance falls back to the WEAKER claim", () => {
+    const summary = buildPatchSummary(
+      { patch: "26.18", lifecyclePatch: "26.18", lifecycleEvent: "removed" },
+      COPY,
+    );
+    expect(summary!.lines).toContain("First observed as removed in 26.18.");
+    expect(summary!.lines.join(" ")).not.toContain("Removed in 26.18.");
   });
 
   test("a lifecycle patch without an event kind is not rendered", () => {
@@ -107,5 +140,13 @@ describe("published lifecycle dates are event-derived", () => {
     expect(
       data.augments.some((a) => "lifecycle_observed_patch" in (a.flags ?? {})),
     ).toBe(false);
+
+    // Every dated event we can currently produce is snapshot-derived, so none
+    // may carry causal provenance.
+    for (const augment of data.augments) {
+      if (augment.flags?.lifecycle_patch) {
+        expect(augment.flags.lifecycle_provenance, augment.slug).toBe("snapshot_diff");
+      }
+    }
   });
 });
