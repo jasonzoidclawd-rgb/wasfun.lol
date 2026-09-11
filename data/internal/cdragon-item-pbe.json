@@ -3,9 +3,9 @@
   "entity_type": "item",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.19.8168182+branch.main.content.beta",
-  "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
-  "observed_at": "2026-09-11T20:17:23.249608Z",
+  "source_version": "16.19.8173481+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.19.8173481+branch.main.content.beta",
+  "observed_at": "2026-09-11T23:52:48.200512Z",
   "source_url": "",
   "entities": [
     {

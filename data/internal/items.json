@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-10T18:10:39.614321+00:00",
+  "scraped_at": "2026-09-11T23:44:03.485362+00:00",
   "mayhemExclusive": [
     {
       "slug": "atmas-reckoning",
@@ -4623,7 +4623,7 @@
       "wikiPassives": [
         {
           "label": "Unique - Unmake:",
-          "text": "Enemy champions within 700 units of you become cursed, causing them to receive 12% increased magic damage from all sources."
+          "text": "Enemy champions within 700 units of you become cursed, causing them to receive 12% increased magic damage post-mitigation from all sources."
         }
       ],
       "wikiNotes": [
@@ -7906,7 +7906,7 @@
       "wikiPassives": [
         {
           "label": "Unique - Unmake:",
-          "text": "Enemy champions within 700 units of you become cursed, causing them to receive 12% increased magic damage from all sources."
+          "text": "Enemy champions within 700 units of you become cursed, causing them to receive 12% increased magic damage post-mitigation from all sources."
         }
       ],
       "wikiNotes": [
