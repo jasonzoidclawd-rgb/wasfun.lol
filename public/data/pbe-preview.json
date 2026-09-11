@@ -3,9 +3,65 @@
   "branch": "pbe",
   "lane": "preview",
   "status": "fresh",
-  "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-  "observed_at": "2026-09-10T18:21:30.854735Z",
+  "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
+  "observed_at": "2026-09-11T20:17:23.249608Z",
   "events": [
+    {
+      "entity_type": "augment",
+      "canonical_id": "ARAM_Hellbent",
+      "slug": "hellbent",
+      "names": {
+        "en": "Hellbent",
+        "ja": "ヘルベント",
+        "ko": "열의",
+        "zh-CN": "濒死悟道",
+        "zh-TW": "陰魂不散"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "removed",
+      "fields_changed": [],
+      "before": {
+        "name": "Hellbent",
+        "rarity": "prismatic",
+        "tooltip": "Striking enemy champions with Attacks or Abilities grants you a stack of <attention>Revivemaxxing</attention> for @Stacks_Duration@ seconds (max: @Stacks_Max@). At max stacks become <danger>Hellbent</danger>.<br><br><danger>Hellbent</danger>: Upon dying, <attention>revive</attention> over the course of @Revive_Duration@ seconds at <scaleHealth>@Calc_Revive_Max_Health@ max Health</scaleHealth>. Afterwards, you gain <attention>@Calc_AdaptiveForce@ Adaptive Force</attention>, <speed>@Calc_MoveSpeed@ Move Speed towards enemy champions</speed>, and <lifeSteal>@Calc_Omnivamp@ Omnivamp</lifeSteal> for @Buff_Duration@ seconds.<br><br>This has a @Cooldown@ second cooldown."
+      },
+      "after": {},
+      "detected_at": "2026-09-11T20:17:23.249608Z",
+      "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": true,
+      "href": "/augments/hellbent"
+    },
+    {
+      "entity_type": "augment",
+      "canonical_id": "ARAM_SpiritBomb",
+      "slug": "spirit-bomb",
+      "names": {
+        "en": "Spirit Bomb",
+        "ja": "スピリットボム",
+        "ko": "영혼 폭탄",
+        "zh-CN": "灵魄炸弹",
+        "zh-TW": "靈魂炸彈"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "removed",
+      "fields_changed": [],
+      "before": {
+        "name": "Spirit Bomb",
+        "rarity": "prismatic",
+        "tooltip": "<healing>Healing</healing> and <shield>Shielding</shield> builds up a <keywordMajor>Spirit Bomb</keywordMajor>. At max stacks, toss the <keywordMajor>Spirit Bomb</keywordMajor> at your <scaleHealth>lowest Health ally</scaleHealth>. After reaching the target, it <healing>heals nearby allies for @Calc_Heal@ of their missing Health</healing> and grants them a <shield>@Calc_Shield@ current Health shield</shield> for @Shield_Duration@ seconds.<br><br><rules>Spirit Bombs Tossed: @f1.0@<br>Healing: @f2.0@<br>Shielding: @f3.0@</rules>"
+      },
+      "after": {},
+      "detected_at": "2026-09-11T20:17:23.249608Z",
+      "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": true,
+      "href": "/augments/spirit-bomb"
+    },
     {
       "entity_type": "item",
       "canonical_id": "773162",
@@ -27,8 +83,8 @@
         "cost": 1330,
         "description": "<mainText><stats><attention> 20%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-10T18:21:30.854735Z",
-      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "detected_at": "2026-09-11T20:17:23.249608Z",
+      "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
@@ -56,8 +112,8 @@
         "cost": 2600,
         "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-10T18:21:30.854735Z",
-      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "detected_at": "2026-09-11T20:17:23.249608Z",
+      "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
@@ -81,8 +137,8 @@
       "after": {
         "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
       },
-      "detected_at": "2026-09-10T18:21:30.854735Z",
-      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "detected_at": "2026-09-11T20:17:23.249608Z",
+      "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,

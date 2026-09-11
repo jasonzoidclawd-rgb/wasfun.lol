@@ -3,9 +3,9 @@
   "entity_type": "champion",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.19.8163976+branch.main.content.beta",
-  "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-  "observed_at": "2026-09-10T18:21:30.854735Z",
+  "source_version": "16.19.8168182+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.19.8168182+branch.main.content.beta",
+  "observed_at": "2026-09-11T20:17:23.249608Z",
   "source_url": "",
   "entities": [
     {
