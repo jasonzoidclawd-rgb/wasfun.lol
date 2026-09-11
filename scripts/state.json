@@ -1,7 +1,9 @@
 {
-  "patch": "26.13",
-  "augments": 268,
-  "tests": "450",
+  "structuralPatch": "26.18",
+  "patch": "26.17",
+  "augments": 209,
+  "knownAugments": 278,
+  "tests": "471",
   "parityBudget": 0,
-  "lastTag": "pre-docs-review-4a83c26"
+  "lastTag": "model-decision-v1"
 }

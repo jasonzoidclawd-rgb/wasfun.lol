@@ -9,6 +9,21 @@ import unittest
 from patch_event_projection import build_patch_notes_projection, build_preview_projection
 
 
+ADJACENT = {
+    "base_branch": "latest",
+    "base_version": "16.12.7900000+branch.releases-16-12.content.release",
+    "target_branch": "latest",
+    "target_version": "16.13.7915903+branch.releases-16-13.content.release",
+}
+# The first run after the 2026-07/09 outage: five patches in one diff.
+CROSS_GAP = {
+    "base_branch": "latest",
+    "base_version": "16.13.7915903+branch.releases-16-13.content.release",
+    "target_branch": "latest",
+    "target_version": "16.18.8159717+branch.releases-16-18.content.release",
+}
+
+
 def event(**overrides: object) -> dict:
     base = {
         "entity_type": "champion",
@@ -25,6 +40,7 @@ def event(**overrides: object) -> dict:
         "source_patch_label": "26.13",
         "landed": False,
         "is_hotfix": True,
+        "comparison": ADJACENT,
     }
     base.update(overrides)
     return base
@@ -123,6 +139,65 @@ class PatchEventProjectionTests(unittest.TestCase):
 
         change = projection["patches"][0]["sections"][0]["changes"][0]
         self.assertTrue(change["landedFromPbe"])
+
+    def test_cross_gap_event_is_not_dated_to_the_current_patch_by_its_label(self):
+        """A 16.13 -> 16.18 diff carries label 26.18 but proves no 26.18 change.
+
+        Regression: all 275 events of the first post-outage comparison were
+        projected as "Patch 26.18" changes, dating five patches of accumulated
+        change to one. The lifecycle path already refused to date them.
+        """
+        patch_events = {
+            "current_open_cycle": "26.18",
+            "observed_at": "2026-09-10T18:21:25Z",
+            "status": "fresh",
+            "events": [
+                event(slug="brand", source_patch_label="26.18", comparison=CROSS_GAP),
+                event(slug="garen", canonical_id="86", source_patch_label="26.18",
+                      comparison=CROSS_GAP, change_kind="added"),
+                event(slug="teemo", canonical_id="17", source_patch_label="26.18",
+                      comparison=None),
+            ],
+        }
+        metadata = {"patches": [{
+            "version": "26.18",
+            "articleTitle": "Patch 26.18 Notes",
+            "publishedAt": "2026-09-09T18:00:00Z",
+            "sourceUrl": "https://riot.example/26-18",
+            "authors": [],
+            "intro": "",
+        }]}
+
+        projection = build_patch_notes_projection(patch_events, metadata)
+        current = projection["patches"][0]
+
+        self.assertEqual(current["version"], "26.18")
+        self.assertEqual(current["sections"], [])
+        self.assertEqual(current["summary"]["totalChanges"], 0)
+        # Status, freshness and the Riot source link are untouched.
+        self.assertEqual(projection["status"], "fresh")
+        self.assertEqual(projection["scraped_at"], "2026-09-10T18:21:25Z")
+        self.assertEqual(projection["sourceUrl"], "https://riot.example/26-18")
+        self.assertEqual(current["sourceUrl"], "https://riot.example/26-18")
+        self.assertEqual(current["title"], "Patch 26.18 Notes")
+
+    def test_adjacent_event_in_the_same_run_is_still_dated(self):
+        adjacent_18 = {**ADJACENT,
+                       "base_version": "16.17.8100000+branch.releases-16-17.content.release",
+                       "target_version": "16.18.8159717+branch.releases-16-18.content.release"}
+        projection = build_patch_notes_projection(
+            {
+                "current_open_cycle": "26.18",
+                "events": [
+                    event(slug="brand", source_patch_label="26.18", comparison=adjacent_18),
+                    event(slug="garen", source_patch_label="26.18", comparison=CROSS_GAP),
+                ],
+            },
+            {"patches": []},
+        )
+        changes = projection["patches"][0]["sections"][0]["changes"]
+        self.assertEqual([c["targets"][0]["slug"] for c in changes], ["brand"])
+        self.assertEqual(projection["patches"][0]["summary"]["totalChanges"], 1)
 
     def test_preview_projection_is_bounded_and_only_links_live_canonical_entities(self):
         archive = {

@@ -36,15 +36,27 @@ async function loadPbePreview(): Promise<PbePreviewData | null> {
 async function loadRemovedAugments(): Promise<RemovedPatchAugment[]> {
   try {
     const data = await readAugmentsFile<{ augments: RemovedPatchAugment[] }>();
+    // `flags.lifecycle` collapses disabled / removed / unverified / candidate
+    // onto "removed". Partition on the resolved verdict instead, and order by
+    // state first — most lifecycle dates are genuinely unknown, so sorting by
+    // date would order the table by an absent value.
+    const STATE_ORDER: Record<string, number> = {
+      disabled: 0,
+      removed: 1,
+      unverified_legacy: 2,
+      candidate_registry_present: 3,
+    };
     return data.augments
-      .filter((augment) => augment.flags?.lifecycle === "removed")
+      .filter(
+        (augment) =>
+          augment.availability?.status &&
+          augment.availability.status !== "confirmed_live",
+      )
       .sort((a, b) => {
-        const patchCompare = (b.flags?.lifecycle_patch ?? "").localeCompare(
-          a.flags?.lifecycle_patch ?? "",
-          undefined,
-          { numeric: true },
-        );
-        return patchCompare || a.name.localeCompare(b.name);
+        const rank =
+          (STATE_ORDER[a.availability?.status ?? ""] ?? 9) -
+          (STATE_ORDER[b.availability?.status ?? ""] ?? 9);
+        return rank || a.name.localeCompare(b.name);
       });
   } catch {
     return [];

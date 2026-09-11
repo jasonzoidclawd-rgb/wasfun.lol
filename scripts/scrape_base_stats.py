@@ -89,7 +89,14 @@ def main():
             ad_growth_data[info["name"].lower()] = info["stats"].get("attackdamageperlevel", 0)
             ad_growth_data[key.lower()] = info["stats"].get("attackdamageperlevel", 0)
 
-    # Build lookup: lowercase name → stats
+    # Build lookup: lowercase name/key → {"id": canonical Riot id, "stats": {...}}
+    #
+    # Data Dragon is the champion IDENTITY authority for this catalog, not just
+    # a stats source. Every champion gets its canonical numeric Riot id stamped
+    # here so downstream consumers never have to infer identity from a
+    # presentation URL — which is exactly what broke the roster gate when the
+    # statistics provider moved its icons to `/icons/<slug>/64.png`, where the
+    # trailing number is a pixel size.
     dd_by_name: dict[str, dict] = {}
     for key, info in champ_data.items():
         name = info["name"]
@@ -103,9 +110,22 @@ def main():
             fallback = ad_growth_data.get(name.lower(), ad_growth_data.get(key.lower(), 0))
             mapped["adGrowth"] = fallback
         # asGrowth is given as percent (e.g. 2.0 = 2%), keep as-is for clarity
-        dd_by_name[name.lower()] = mapped
+        entry = {
+            "id": str(info.get("key") or ""),
+            "stats": mapped,
+            # Riot role tags (Fighter/Tank/Mage/...). The statistics provider
+            # used to supply these via a `data-tags` attribute; its tier-list
+            # markup changed and the structured fallback carries no tags, so
+            # 172/173 champions silently lost their roles and the kit-tag
+            # classifier stopped seeing e.g. Garen as a tank. Data Dragon is the
+            # canonical source for roles — take them from here.
+            "tags": [str(tag).lower() for tag in info.get("tags", [])],
+        }
+        dd_by_name[name.lower()] = entry
         # Also index by key (e.g. "MonkeyKing" for Wukong)
-        dd_by_name[key.lower()] = mapped
+        dd_by_name[key.lower()] = entry
+        # And by canonical slug, so slug-matched champions resolve identically.
+        dd_by_name[canonical_slug(info.get("id") or key)] = entry
 
     # 3. Load existing champions.json
     existing = json.loads(OUT.read_text("utf-8"))
@@ -117,20 +137,30 @@ def main():
         name = champ["name"].lower()
         slug = champ.get("slug", "").lower().replace("-", "").replace("'", "").replace(".", "").replace(" ", "")
 
-        stats = dd_by_name.get(name)
-        if not stats:
+        entry = dd_by_name.get(name)
+        if not entry:
             # Try slug-based matching (e.g. "drmundo" → "dr. mundo")
-            stats = dd_by_name.get(slug)
-        if not stats:
+            entry = dd_by_name.get(slug) or dd_by_name.get(champ.get("slug", ""))
+        if not entry:
             # Try removing spaces/punctuation from DDragon keys
-            for dd_name, dd_stats in dd_by_name.items():
+            for dd_name, dd_entry in dd_by_name.items():
                 clean = dd_name.replace("'", "").replace(".", "").replace(" ", "").replace("-", "")
                 if clean == slug:
-                    stats = dd_stats
+                    entry = dd_entry
                     break
 
-        if stats:
-            champ["baseStats"] = stats
+        if entry:
+            champ["baseStats"] = entry["stats"]
+            if entry["tags"] and not champ.get("tags"):
+                champ["tags"] = entry["tags"]
+            # Canonical identity, stamped explicitly. Downstream gates read this
+            # field and never parse an image URL.
+            if entry["id"]:
+                champ["id"] = entry["id"]
+                # Keep the icon on Riot-derived infrastructure keyed by that same
+                # canonical id, so presentation cannot drift away from identity
+                # when a third party reorganizes its CDN.
+                champ["icon"] = CDRAGON_ICON_TEMPLATE.format(champion_id=entry["id"])
             matched += 1
         else:
             unmatched.append(champ["name"])
@@ -145,16 +175,18 @@ def main():
         slug = canonical_slug(info.get("id") or key)
         if not slug or slug in existing_slugs:
             continue
-        stats = dd_by_name.get(info["name"].lower()) or dd_by_name.get(key.lower(), {})
+        entry = dd_by_name.get(info["name"].lower()) or dd_by_name.get(key.lower()) or {}
+        stats = entry.get("stats", {})
         champion_id = str(info.get("key") or "")
         champions.append({
+            "id": champion_id,
             "slug": slug,
             "name": info["name"],
             "tier": None,
             "rank": None,
             "win_rate": None,
             "pick_rate": None,
-            "tags": [str(tag).lower() for tag in info.get("tags", [])],
+            "tags": entry.get("tags", []),
             "icon": CDRAGON_ICON_TEMPLATE.format(champion_id=champion_id),
             "baseStats": stats,
         })
@@ -164,7 +196,11 @@ def main():
     if added:
         print(f"Added {len(added)} Data Dragon roster champion(s) without arammayhem stats: {added}")
 
+    tagged = sum(1 for champ in champions if champ.get("tags"))
+    identified = sum(1 for champ in champions if champ.get("id"))
     print(f"Matched: {matched}/{len(champions)}")
+    print(f"Canonical ids stamped: {identified}/{len(champions)}")
+    print(f"Role tags present:     {tagged}/{len(champions)}")
     if unmatched:
         print(f"Unmatched: {unmatched}")
 

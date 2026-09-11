@@ -10,11 +10,13 @@ Maintained by `scripts/update-state.sh` (post-commit hook via
 `scripts/install-hooks.sh`); do not hand-edit this block.
 
 <!-- STATE:START -->
-- Patch: `26.13`
-- Augments: `268`
-- Tests passing: `450`
+- Game patch (structural): `26.18`
+- Statistics patch: `26.17`
+- Live augments: `209`
+- Known augment entities: `278`
+- Tests passing: `471`
 - Cross-parity budget: `0` divergent champions
-- Last tag: `pre-docs-review-4a83c26`
+- Last tag: `model-decision-v1`
 <!-- STATE:END -->
 
 ## Operating Principles

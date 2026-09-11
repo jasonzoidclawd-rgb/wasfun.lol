@@ -64,7 +64,6 @@ describe("public data boundary", () => {
       "scoreBreakdown",
       "computedPool",
       "championPools",
-      "availability",
       "signals",
       "provenance",
       "dataValues",
@@ -80,7 +79,8 @@ describe("public data boundary", () => {
       "definitionPlaceholder",
       "legacyCatalogRow",
     ];
-    const forbiddenItemKeys = new Set(forbiddenTelemetry);
+    // Items have no availability concept — keep it forbidden there.
+    const forbiddenItemKeys = new Set([...forbiddenTelemetry, "availability"]);
     const forbiddenAugmentKeys = new Set([...forbiddenTelemetry, "wikiNotes"]);
 
     // Freemium teaser: a small slice of S-tier "strong combos" is published
@@ -103,7 +103,10 @@ describe("public data boundary", () => {
     }
     expect([...perChampion.values()].every((count) => count <= 3)).toBe(true);
 
-    expect(publicPoolRules.disabled).toEqual([]);
+    // Which augments are currently switched off is a plain fact about the live
+    // game (the League wiki publishes it). Emptying this list made the site
+    // unable to distinguish "disabled this patch" from "removed patches ago".
+    expect(Array.isArray(publicPoolRules.disabled)).toBe(true);
     expect(publicPoolRules.mutually_exclusive).toEqual([]);
     expect(publicPoolRules.item_exclusions).toEqual([]);
     expect(publicPoolRules.ally_exclusions).toEqual([]);
@@ -117,6 +120,38 @@ describe("public data boundary", () => {
         Array.isArray(item.wikiNotes) && item.wikiNotes.length > 0
       ).length,
     ).toBeGreaterThan(0);
+  });
+
+  test("publishes bounded availability status without the raw signal tree", () => {
+    const publicAugments = readJson("public/data/augments.json") as {
+      augments: Array<{ slug: string; availability?: Record<string, unknown> }>;
+    };
+    const allowedStatuses = new Set([
+      "confirmed_live",
+      "disabled",
+      "removed",
+      "unverified_legacy",
+      "candidate_registry_present",
+      "conflict",
+    ]);
+
+    const withAvailability = publicAugments.augments.filter((a) => a.availability);
+    expect(withAvailability.length).toBe(publicAugments.augments.length);
+
+    for (const augment of withAvailability) {
+      // Exactly the resolved verdict — the multi-source signals tree that
+      // produced it stays internal.
+      expect(Object.keys(augment.availability!)).toEqual(["status"]);
+      expect(allowedStatuses.has(String(augment.availability!.status))).toBe(true);
+    }
+
+    // The distinction that matters: disabled must not be flattened into removed.
+    const statuses = new Set(
+      withAvailability.map((a) => String(a.availability!.status)),
+    );
+    expect(statuses.has("confirmed_live")).toBe(true);
+    expect(statuses.has("disabled")).toBe(true);
+    expect(statuses.has("removed")).toBe(true);
   });
 
   test("keeps champion rank, win rate, and pick rate public", () => {

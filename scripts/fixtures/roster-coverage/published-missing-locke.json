@@ -6,7 +6,8 @@
       "name": "Brand",
       "win_rate": 55.6,
       "pick_rate": 14.19,
-      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/63.png"
+      "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/63.png",
+      "id": "63"
     }
   ]
 }

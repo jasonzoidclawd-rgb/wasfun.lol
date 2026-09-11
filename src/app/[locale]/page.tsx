@@ -18,6 +18,7 @@ import { ComboHighlights } from "@/components/dashboard/ComboHighlights";
 import { AdvisorTeaser } from "@/components/dashboard/AdvisorTeaser";
 import { CompanionLauncher } from "@/components/dashboard/CompanionLauncher";
 import { RotateHint } from "@/components/ui/RotateHint";
+import { readPatchClocks } from "@/lib/data/clocks";
 
 type ChampionRecord = LocalizedNameRecord &
   HeroChampion &
@@ -26,6 +27,7 @@ type ChampionRecord = LocalizedNameRecord &
 type AugmentRecord = LocalizedNameRecord &
   ChangedAugment & {
     wikiDescription?: string;
+    availability?: { status?: string };
   };
 
 type ComboRecord = { champion: string; augment: string; tier: string };
@@ -52,17 +54,26 @@ export default async function HomePage({
   const champions = championsFile.champions;
   const augments = augmentsFile.augments;
   const { patch, scraped_at } = metaFile;
+  const clocks = await readPatchClocks();
+  const liveAugmentCount = augments.filter(
+    (augment) => augment.availability?.status === "confirmed_live",
+  ).length;
 
   // A new champion may be present in the roster before the third-party
   // statistical feed has a tier/rank/rate row. Keep that identity visible on
   // its detail page, but reserve ranking surfaces for complete stat records.
+  //
+  // "Complete" is defined by what the source still publishes. As of 2026-09-10
+  // arammayhem.com no longer publishes champion pick rate anywhere (its tier
+  // cards carry tier + win rate only), so requiring it here would leave every
+  // ranking surface permanently empty. Pick rate is rendered when present and
+  // omitted when not, rather than gating the ranking.
   const byRank = [...champions]
     .filter(
       (champion) =>
         champion.tier != null &&
         champion.rank != null &&
-        champion.win_rate != null &&
-        champion.pick_rate != null,
+        champion.win_rate != null,
     )
     .sort((a, b) => a.rank - b.rank);
   const heroChampion = byRank[0];
@@ -107,15 +118,17 @@ export default async function HomePage({
     <>
       <DashboardIslands />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-6 md:gap-3.5 lg:grid-cols-12 lg:gap-4">
-        <PatchPulseBanner patch={patch} />
+        <PatchPulseBanner />
         <RotateHint />
         <HeroMover champion={heroChampion} total={champions.length} patch={patch} />
         <MetaAtAGlance
           sPlusCount={sPlusCount}
           championCount={champions.length}
-          augmentCount={augments.length}
+          liveAugmentCount={liveAugmentCount}
+          knownAugmentCount={augments.length}
           changedAugmentCount={changedAugments.length}
-          patch={patch}
+          structuralPatch={clocks.structuralPatch}
+          statisticsPatch={clocks.statisticsPatch}
           updatedAt={scraped_at}
         />
         <TierMiniGrid champions={tierChampions} />

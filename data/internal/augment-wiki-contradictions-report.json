@@ -4,7 +4,7 @@
   "source": "lol_wiki",
   "sourceUrl": "https://wiki.leagueoflegends.com/en-us/ARAM:_Mayhem/Augments",
   "counts": {
-    "existence": 58,
+    "existence": 75,
     "rarity": 2,
     "availability": 14
   },
@@ -108,6 +108,14 @@
     {
       "kind": "wiki_only",
       "source": "lol_wiki",
+      "sourceKey": "Reload",
+      "name": "Reload",
+      "wikiRarity": "gold",
+      "status": "unmatched"
+    },
+    {
+      "kind": "wiki_only",
+      "source": "lol_wiki",
       "sourceKey": "Siphon",
       "name": "Siphon",
       "wikiRarity": "silver",
@@ -143,6 +151,38 @@
       "sourceKey": "Trusty Weapon",
       "name": "Trusty Weapon",
       "wikiRarity": "silver",
+      "status": "unmatched"
+    },
+    {
+      "kind": "wiki_only",
+      "source": "lol_wiki",
+      "sourceKey": "Ultra Hydra",
+      "name": "Ultra Hydra",
+      "wikiRarity": "prismatic",
+      "status": "unmatched"
+    },
+    {
+      "kind": "wiki_only",
+      "source": "lol_wiki",
+      "sourceKey": "Upgrade Death's Dance",
+      "name": "Upgrade Death's Dance",
+      "wikiRarity": "silver",
+      "status": "unmatched"
+    },
+    {
+      "kind": "wiki_only",
+      "source": "lol_wiki",
+      "sourceKey": "Upgrade Ravenous Hydra",
+      "name": "Upgrade Ravenous Hydra",
+      "wikiRarity": "gold",
+      "status": "unmatched"
+    },
+    {
+      "kind": "wiki_only",
+      "source": "lol_wiki",
+      "sourceKey": "Upgrade Sundered Sky",
+      "name": "Upgrade Sundered Sky",
+      "wikiRarity": "gold",
       "status": "unmatched"
     },
     {
@@ -359,6 +399,34 @@
     {
       "kind": "cdragon_only",
       "source": "cdragon",
+      "augmentId": "DoOrDie",
+      "name": "Do or Die",
+      "rarity": "prismatic"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "DontStopCleavin",
+      "name": "Don't Stop Cleavin'",
+      "rarity": "gold"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "DoransBiggestFan",
+      "name": "Doran's Biggest Fan",
+      "rarity": "prismatic"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "DrinkUp",
+      "name": "Drink Up",
+      "rarity": "silver"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
       "augmentId": "DustToDiamonds",
       "name": "Dust To Diamonds",
       "rarity": "silver"
@@ -369,6 +437,13 @@
       "augmentId": "FullyAutomated",
       "name": "Fully Automated",
       "rarity": "silver"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "FutureSightHeartsteel",
+      "name": "Time Warp: Heartsteel",
+      "rarity": "gold"
     },
     {
       "kind": "cdragon_only",
@@ -387,6 +462,13 @@
     {
       "kind": "cdragon_only",
       "source": "cdragon",
+      "augmentId": "HasteMakesWaste",
+      "name": "Haste Makes Waste",
+      "rarity": "prismatic"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
       "augmentId": "HatOnAHat",
       "name": "Hat on a Hat",
       "rarity": "silver"
@@ -397,6 +479,13 @@
       "augmentId": "LaserHeal",
       "name": "Laser Heal",
       "rarity": "prismatic"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "ReEnergize",
+      "name": "ReEnergize",
+      "rarity": "silver"
     },
     {
       "kind": "cdragon_only",
@@ -415,6 +504,27 @@
     {
       "kind": "cdragon_only",
       "source": "cdragon",
+      "augmentId": "StabbyStabby",
+      "name": "Stabby Stabby",
+      "rarity": "silver"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "Upgrade_DeathFireGrasp",
+      "name": "Upgrade: Deathfire Grasp",
+      "rarity": "gold"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "Upgrade_InnervatingLocket",
+      "name": "Upgrade: Innervating Locket",
+      "rarity": "gold"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
       "augmentId": "Upgrade_MikaelsBlessing",
       "name": "Upgrade Mikael's Blessing",
       "rarity": "prismatic"
@@ -424,6 +534,20 @@
       "source": "cdragon",
       "augmentId": "Upgrade_Thornmail",
       "name": "Upgrade Thornmail",
+      "rarity": "silver"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "Upgrade_ZzRotPortal",
+      "name": "Upgrade: Zz'Rot Portal",
+      "rarity": "silver"
+    },
+    {
+      "kind": "cdragon_only",
+      "source": "cdragon",
+      "augmentId": "VirtuousCycle",
+      "name": "Virtuous Cycle",
       "rarity": "silver"
     },
     {
@@ -457,16 +581,6 @@
       "source": "lol_wiki",
       "augmentId": "Adamant",
       "name": "Adamant",
-      "signal": "wiki_availability_note_with_cdragon_registry_presence",
-      "wikiAvailabilityNotes": [
-        "This augment is currently disabled."
-      ],
-      "note": "Registry presence is definition only; Step 4 records wiki evidence and does not resolve availability."
-    },
-    {
-      "source": "lol_wiki",
-      "augmentId": "ARAM_ClownCollege",
-      "name": "Clown College",
       "signal": "wiki_availability_note_with_cdragon_registry_presence",
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
@@ -563,6 +677,16 @@
       "signal": "wiki_availability_note_with_cdragon_registry_presence",
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
+      ],
+      "note": "Registry presence is definition only; Step 4 records wiki evidence and does not resolve availability."
+    },
+    {
+      "source": "lol_wiki",
+      "augmentId": "SnapBack",
+      "name": "Snap Back",
+      "signal": "wiki_availability_note_with_cdragon_registry_presence",
+      "wikiAvailabilityNotes": [
+        "This augment exists in the internal augment data but appears to be disabled."
       ],
       "note": "Registry presence is definition only; Step 4 records wiki evidence and does not resolve availability."
     },

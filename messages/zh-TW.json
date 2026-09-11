@@ -89,7 +89,13 @@
     "searchKindChampion": "英雄",
     "searchKindAugment": "增強",
     "searchKindPatchNote": "版本更新",
-    "searchTriggerLabel": "搜尋"
+    "searchTriggerLabel": "搜尋",
+    "patchUnconfirmed": "目前版本未確認",
+    "metaAugmentsLive": "可用增幅",
+    "metaAugmentsKnown": "已知項目",
+    "metaPatchStructural": "遊戲版本",
+    "metaPatchStatistics": "統計版本",
+    "metaPatchUnknown": "未確認"
   },
   "tierList": {
     "title": "ARAM 大亂鬥強度排名",
@@ -150,7 +156,7 @@
     "ranged": "遠程",
     "melee": "近戰",
     "poolConstruction": "英雄專屬增強池",
-    "poolConstructionSubtitle": "為 {name} 從 {total} 個增強建構；經過隨機模式篩選後保留 {kept} 個。",
+    "poolConstructionSubtitle": "以 {total} 個已知增幅項目為 {name} 建構；經 Mayhem 篩選後剩餘 {kept} 個。",
     "poolChipResource": "資源",
     "poolChipTags": "標籤",
     "resourceMana": "魔力",
@@ -161,7 +167,7 @@
     "poolFilterStack": "建構流程",
     "poolTopTailored": "最佳篩選命中",
     "poolStepSource": "來源池",
-    "poolStepSourceDetail": "目前版本所有增強",
+    "poolStepSourceDetail": "所有已知增幅項目",
     "poolStepLifecycle": "版本生命週期",
     "poolStepLifecycleDetail": "停用或已移除的增強",
     "poolStepHard": "技能組門檻",
@@ -251,17 +257,18 @@
     "abilityStatRadius": "半徑",
     "abilityStatWidth": "寬度",
     "abilityStatSpeed": "速度",
-    "abilityStatCast": "施放"
+    "abilityStatCast": "施放",
+    "poolKnownTotal": "/ {total} 個已知項目",
+    "pickRateUnavailable": "目前來源未提供選用率"
   },
   "augments": {
     "title": "增強",
-    "subtitle": "{count} 個增強 · 版本 {patch} · 依神諭評分排序",
+    "subtitle": "{count} 個可用增幅 · 版本 {patch}",
     "metaTitle": "ARAM 大亂鬥增強",
     "metaDescription": "瀏覽 ARAM 大亂鬥增強的神諭評分、稀有度、版本狀態與英雄組合連結。",
     "metaDetailTitle": "{name} 增強指南",
     "metaDetailDescription": "{name} 是 {rarity} ARAM 大亂鬥增強。查看效果脈絡、版本狀態與公開英雄強力組合。",
     "search": "搜尋名稱、套組或效果...",
-    "sortScore": "排序：神諭評分",
     "sortWinRate": "排序：勝率",
     "sortName": "排序：名稱",
     "all": "全部",
@@ -290,10 +297,28 @@
     "detailBack": "所有增幅",
     "detailStrongOn": "強力英雄組合",
     "detailKitSynergy": "套件協同",
-    "detailRemovedIn": "已於 {patch} 版本移除",
     "patchSummaryTitle": "版本摘要",
     "patchSummaryBody": "本頁的 {name} 增強內容反映 {patch} 版本的 ARAM 大亂鬥公開資料。",
-    "patchSummaryRemoved": "{name} 已於 {patch} 版本標記為移除。"
+    "patchSummaryRemoved": "{name} 已從目前的增幅池移除。",
+    "sortRarity": "排序：稀有度",
+    "subtitleNoPatch": "{count} 個可用增幅",
+    "population": "{live} 可用 · {disabled} 停用 · {removed} 已移除 · {unverified} 未確認 · {candidate} 候選",
+    "statusColumn": "狀態",
+    "patchUnknown": "未知",
+    "availability_confirmed_live": "可用",
+    "availability_disabled": "本版本停用",
+    "availability_removed": "已移除",
+    "availability_unverified_legacy": "未確認（舊版）",
+    "availability_candidate_registry_present": "未確認是否提供",
+    "availability_conflict": "來源衝突",
+    "availability_unknown": "未知",
+    "patchSummaryDisabled": "{name} 目前已停用，本版本不會出現。",
+    "patchSummaryUnverified": "{name} 是無法以目前遊戲資料確認的舊項目。",
+    "patchSummaryCandidate": "{name} 存在於遊戲登錄檔中，但無法確認目前是否提供。",
+    "patchSummaryAddedIn": "{name} 於 {patch} 版本加入。",
+    "patchSummaryRemovedIn": "{name} 於 {patch} 版本移除。",
+    "patchSummaryFirstObservedIn": "{name} 最早於 {patch} 版本被觀測到。",
+    "patchSummaryFirstObservedRemovedIn": "{name} 最早於 {patch} 版本被觀測為已移除。"
   },
   "items": {
     "title": "ARAM 大亂鬥裝備",
@@ -387,45 +412,45 @@
     "freshnessDays": "{days} 天前偵測",
     "freshnessStale": "來源可能已過期",
     "freshnessUnavailable": "來源尚未確認",
-  "officialSource": "Riot 官方來源",
-  "structuredSource": "CommunityDragon 結構化資料",
-  "articleByline": "作者：{authors}",
-  "viewRiotSource": "查看 Riot 原文",
-  "riotSourceShort": "Riot ↗",
-  "originalArticleLabel": "英文原文",
-  "recentTitle": "近期版本",
-  "summaryTotal": "總變更",
-  "summaryDamage": "傷害 / 模型列",
-  "summaryChampions": "英雄連結",
-  "summaryAugments": "增幅連結",
-  "summaryItems": "裝備連結",
-  "summaryAdded": "新增",
-  "summaryRemoved": "移除",
-  "summaryHotfixes": "即時修正",
-  "modelImpact": "{count} 個模型參照",
-    "removedTitle": "已移除 / 非當前增幅符文",
-    "removedSubtitle": "{count} 個增幅符文保留作歷史紀錄，但不會出現在當前池中。",
+    "officialSource": "Riot 官方來源",
+    "structuredSource": "CommunityDragon 結構化資料",
+    "articleByline": "作者：{authors}",
+    "viewRiotSource": "查看 Riot 原文",
+    "riotSourceShort": "Riot ↗",
+    "originalArticleLabel": "英文原文",
+    "recentTitle": "近期版本",
+    "summaryTotal": "總變更",
+    "summaryDamage": "傷害 / 模型列",
+    "summaryChampions": "英雄連結",
+    "summaryAugments": "增幅連結",
+    "summaryItems": "裝備連結",
+    "summaryAdded": "新增",
+    "summaryRemoved": "移除",
+    "summaryHotfixes": "即時修正",
+    "modelImpact": "{count} 個模型參照",
+    "removedTitle": "未確認目前提供的增幅",
+    "removedSubtitle": "{count} 個增幅仍被追蹤，但未確認目前是否提供。",
     "removedName": "增幅符文",
     "removedRarity": "稀有度",
     "removedVersion": "版本",
-  "kinds": {
-    "buffed": "增強",
-    "nerfed": "削弱",
-    "changed": "調整",
-    "mechanism": "機制",
-    "added": "新增",
-    "removed": "移除",
-    "fixed": "修正",
-    "hotfix": "即時修正"
-  },
-  "objectTypes": {
-    "champion": "英雄",
-    "item": "道具",
-    "augment": "增幅符文",
-    "ability": "技能",
-    "system": "系統",
-    "unknown": "未知"
-  },
+    "kinds": {
+      "buffed": "增強",
+      "nerfed": "削弱",
+      "changed": "調整",
+      "mechanism": "機制",
+      "added": "新增",
+      "removed": "移除",
+      "fixed": "修正",
+      "hotfix": "即時修正"
+    },
+    "objectTypes": {
+      "champion": "英雄",
+      "item": "道具",
+      "augment": "增幅符文",
+      "ability": "技能",
+      "system": "系統",
+      "unknown": "未知"
+    },
     "sections": {
       "highlights": "重點",
       "general": "通用調整",
@@ -448,7 +473,16 @@
         "gold": "黃金",
         "prismatic": "稜彩"
       }
-    }
+    },
+    "removedStatus": "狀態",
+    "removedVersionUnknown": "未知",
+    "availability_confirmed_live": "可用",
+    "availability_disabled": "本版本停用",
+    "availability_removed": "已移除",
+    "availability_unverified_legacy": "未確認（舊版）",
+    "availability_candidate_registry_present": "未確認是否提供",
+    "availability_conflict": "來源衝突",
+    "availability_unknown": "未知"
   },
   "common": {
     "search": "搜尋英雄...",
@@ -459,7 +493,7 @@
     "notAffiliated": "與拳頭遊戲無關聯",
     "patchLabel": "版本 {patch}",
     "lastUpdated": "更新於 {date}",
-    "methodology": "階級與排名根據目前版本的勝率資料計算。選取率較低的項目在統計上可靠性較低。"
+    "methodology": "英雄分級與勝率來自統計來源於所示統計版本的觀測資料；該來源未公布樣本數。增幅的可用性與效果來自 Riot 遊戲資料。公開頁面不提供增幅勝率。"
   },
   "advisor": {
     "title": "大亂鬥顧問",
@@ -971,5 +1005,12 @@
       "google_identity_required": "登入方式已更新，請使用本頁的 Google 按鈕繼續。",
       "auth_callback": "登入未能完成，請再試一次。"
     }
+  },
+  "freshness": {
+    "structural": "目前遊戲資料 · 版本 {patch}",
+    "structuralUnproven": "目前版本未確認 — 資料可能已過期",
+    "statistics": "觀測統計 · 版本 {patch}",
+    "statisticsBehind": "統計資料早於版本 {patch}",
+    "degraded": "上次更新時部分來源未成功"
   }
 }

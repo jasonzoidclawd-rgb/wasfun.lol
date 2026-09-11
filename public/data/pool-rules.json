@@ -1,10 +1,21 @@
 {
-  "patch": "26.13",
-  "scraped_at": "2026-06-23T18:00:00.000Z",
+  "patch": "26.18",
+  "scraped_at": "2026-09-10T18:21:25.923990Z",
   "item_exclusions": [],
   "mutually_exclusive": [],
   "ally_exclusions": [],
-  "disabled": [],
+  "disabled": [
+    "adamant",
+    "devil-on-your-shoulder",
+    "droppybara",
+    "final-city-transit",
+    "perseverance",
+    "quantum-computing",
+    "sneakerhead",
+    "snowball-upgrade",
+    "vampirism",
+    "void-dash"
+  ],
   "lifecycle": {
     "added": {},
     "removed": {}

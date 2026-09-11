@@ -100,9 +100,29 @@ def build_public_augments(internal_dir: Path, forbidden: set[str]) -> dict:
         if not slug:
             continue
         add_public_localized_augment_descriptions(augment)
-        patch = removed_patches.get(slug) or added_patches.get(slug)
-        if patch:
-            augment.setdefault("flags", {})["lifecycle_patch"] = patch
+        # A lifecycle patch is published ONLY when it comes from an observed
+        # CDragon transition (we saw the entity present, then absent, or the
+        # reverse). Entities that were already absent when tracking began have
+        # no such event and therefore get no date — absent, not guessed. The
+        # event kind travels with it so copy can say "added in" rather than
+        # inferring "removed in" from the entity's current state.
+        removed_patch = removed_patches.get(slug)
+        added_patch = added_patches.get(slug)
+        # Provenance travels with the date. Every dated event we can currently
+        # produce comes from a CDragon snapshot diff, which establishes when we
+        # FIRST OBSERVED the transition — not that Riot made the change in that
+        # patch. An undocumented hotfix, a late CDragon publish, or an
+        # incomplete previous snapshot all produce the same observation, so the
+        # copy must stay evidential. `riot_patch_notes` is modelled for a future
+        # authoritative entity-level source; the Riot lane carries prose only.
+        if removed_patch:
+            augment.setdefault("flags", {})["lifecycle_patch"] = removed_patch
+            augment["flags"]["lifecycle_event"] = "removed"
+            augment["flags"]["lifecycle_provenance"] = "snapshot_diff"
+        elif added_patch:
+            augment.setdefault("flags", {})["lifecycle_patch"] = added_patch
+            augment["flags"]["lifecycle_event"] = "added"
+            augment["flags"]["lifecycle_provenance"] = "snapshot_diff"
 
     return strip_keys(augments, forbidden)
 
@@ -182,7 +202,11 @@ def export_public_catalog(
         "oracleScore",
         "modelWeights",
         "scoreBreakdown",
-        "availability",
+        # `availability` is deliberately NOT stripped: its resolved `status` is
+        # the catalog's most useful public fact and the only thing that lets a
+        # reader tell a temporarily disabled augment from one deleted patches
+        # ago. The raw multi-source `signals` tree underneath it stays private —
+        # stripping it recursively leaves exactly {"status": ...}.
         "signals",
         "provenance",
         "dataValues",
@@ -238,12 +262,25 @@ def export_public_catalog(
     write_json(public_dir / "combos.json", combos)
 
     pool_rules = read_json(internal_dir / "pool-rules.json")
-    for field in ("disabled", "mutually_exclusive", "item_exclusions", "ally_exclusions"):
+    # `disabled` is published: which augments are currently switched off is a
+    # plain fact about the live game (the League wiki publishes it too), and
+    # emptying it made the site unable to distinguish disabled from removed.
+    # The curated exclusion/synergy rules remain member-only.
+    for field in ("mutually_exclusive", "item_exclusions", "ally_exclusions"):
         pool_rules[field] = []
     pool_rules["lifecycle"] = {"added": {}, "removed": {}}
     pool_rules.pop("availability", None)
     pool_rules.pop("availability_overrides", None)
     write_json(public_dir / "pool-rules.json", pool_rules)
+
+    # Lane/clock status drives the public degraded banner. Without it the site
+    # cannot tell a reader that its data is behind, which is how 59 days of
+    # stale data were presented as current.
+    status = read_json(internal_dir / "pipeline-status.json") if (
+        internal_dir / "pipeline-status.json"
+    ).exists() else {}
+    if status:
+        write_json(public_dir / "pipeline-status.json", strip_keys(status, forbidden_telemetry))
 
     # `patch-events.json` is the authoritative hotfix feed.  The legacy
     # mayhem-hotfixes file is intentionally not exported or consumed here.

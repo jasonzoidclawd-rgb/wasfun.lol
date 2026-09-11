@@ -142,7 +142,7 @@ describe("item detail structured data", () => {
     expect(source).toContain('t("passiveStandardModeNote")');
     expect(source).not.toContain("Passive description from standard mode");
     // Public data reads go through the shared tracer-friendly helpers.
-    expect(source).toContain('import { readItemsFile, readMetaFile } from "@/lib/data/read-public-file"');
+    expect(source).toContain('import { readItemsFile } from "@/lib/data/read-public-file"');
     expect(source).not.toContain('readFile(filePath, "utf-8")');
   });
 

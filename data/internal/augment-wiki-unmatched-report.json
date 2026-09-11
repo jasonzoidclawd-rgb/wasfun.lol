@@ -4,9 +4,9 @@
   "source": "lol_wiki",
   "sourceUrl": "https://wiki.leagueoflegends.com/en-us/ARAM:_Mayhem/Augments",
   "counts": {
-    "wikiRows": 222,
-    "matchedAugmentIds": 206,
-    "unmatchedWikiRows": 18
+    "wikiRows": 225,
+    "matchedAugmentIds": 204,
+    "unmatchedWikiRows": 23
   },
   "sources": {
     "wiki": [
@@ -167,6 +167,19 @@
         "wikiRarity": "gold"
       },
       {
+        "sourceKey": "Reload",
+        "name": "Reload",
+        "status": "unmatched",
+        "tokens": [
+          {
+            "field": "sourceKey",
+            "value": "Reload",
+            "token": "reload"
+          }
+        ],
+        "wikiRarity": "gold"
+      },
+      {
         "sourceKey": "Siphon",
         "name": "Siphon",
         "status": "unmatched",
@@ -230,6 +243,58 @@
           }
         ],
         "wikiRarity": "silver"
+      },
+      {
+        "sourceKey": "Ultra Hydra",
+        "name": "Ultra Hydra",
+        "status": "unmatched",
+        "tokens": [
+          {
+            "field": "sourceKey",
+            "value": "Ultra Hydra",
+            "token": "ultrahydra"
+          }
+        ],
+        "wikiRarity": "prismatic"
+      },
+      {
+        "sourceKey": "Upgrade Death's Dance",
+        "name": "Upgrade Death's Dance",
+        "status": "unmatched",
+        "tokens": [
+          {
+            "field": "sourceKey",
+            "value": "Upgrade Death's Dance",
+            "token": "upgradedeathsdance"
+          }
+        ],
+        "wikiRarity": "silver"
+      },
+      {
+        "sourceKey": "Upgrade Ravenous Hydra",
+        "name": "Upgrade Ravenous Hydra",
+        "status": "unmatched",
+        "tokens": [
+          {
+            "field": "sourceKey",
+            "value": "Upgrade Ravenous Hydra",
+            "token": "upgraderavenoushydra"
+          }
+        ],
+        "wikiRarity": "gold"
+      },
+      {
+        "sourceKey": "Upgrade Sundered Sky",
+        "name": "Upgrade Sundered Sky",
+        "status": "unmatched",
+        "tokens": [
+          {
+            "field": "sourceKey",
+            "value": "Upgrade Sundered Sky",
+            "token": "upgradesunderedsky"
+          }
+        ],
+        "wikiRarity": "gold"
       },
       {
         "sourceKey": "Warlock Juicebox",

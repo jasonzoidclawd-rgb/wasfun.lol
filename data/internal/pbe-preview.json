@@ -2,9 +2,9 @@
   "schema_version": 1,
   "branch": "pbe",
   "lane": "preview",
-  "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-  "observed_at": "2026-07-13T19:16:25.768897Z",
-  "status": "not_yet_confirmed",
+  "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+  "observed_at": "2026-09-10T18:21:30.854735Z",
+  "status": "fresh",
   "events": [
     {
       "after": {
@@ -28,7 +28,7 @@
         "tooltip"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Dropkick",
@@ -39,11 +39,12 @@
       },
       "slug": "dropkick",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
     },
     {
       "after": {
@@ -80,8 +81,8 @@
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "last_seen_at": "2026-07-11T11:22:04.994004Z"
     },
     {
@@ -106,18 +107,19 @@
         "base_stats.attackDamagePerLevel"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Corki"
       },
       "slug": "corki",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
     },
     {
       "after": {
@@ -141,18 +143,56 @@
         "base_stats.attackDamagePerLevel"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Yunara"
       },
       "slug": "yunara",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
+    },
+    {
+      "after": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed"
+        ],
+        "cost": 1330,
+        "description": "<mainText><stats><attention> 20%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
+      },
+      "before": {},
+      "branch": "pbe",
+      "canonical_id": "773162",
+      "change_kind": "added",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8159717+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8163976+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-10T18:21:30.854735Z",
+      "entity_type": "item",
+      "fields_changed": [],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Cloak and Dagger"
+      },
+      "slug": "cloak-and-dagger",
+      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-09-10T18:21:30.854735Z"
     },
     {
       "after": {
@@ -176,18 +216,19 @@
         "description"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Hextech Rocketbelt"
       },
       "slug": "hextech-rocketbelt",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
     },
     {
       "after": {
@@ -211,18 +252,19 @@
         "description"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Immortal Path"
       },
       "slug": "immortal-path",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
     },
     {
       "after": {
@@ -246,18 +288,58 @@
         "description"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Kraken Slayer"
       },
       "slug": "kraken-slayer",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
+    },
+    {
+      "after": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "Armor",
+          "SpellDamage",
+          "Tenacity"
+        ],
+        "cost": 2600,
+        "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
+      },
+      "before": {},
+      "branch": "pbe",
+      "canonical_id": "773161",
+      "change_kind": "added",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8159717+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8163976+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-10T18:21:30.854735Z",
+      "entity_type": "item",
+      "fields_changed": [],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Moonflair Spellblade"
+      },
+      "slug": "moonflair-spellblade",
+      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-09-10T18:21:30.854735Z"
     },
     {
       "after": {
@@ -281,18 +363,19 @@
         "description"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Navori Flickerblades"
       },
       "slug": "navori-flickerblades",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
     },
     {
       "after": {
@@ -316,18 +399,19 @@
         "description"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Phantom Dancer"
       },
       "slug": "phantom-dancer",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
     },
     {
       "after": {
@@ -351,18 +435,19 @@
         "cost"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Protoplasm Harness"
       },
       "slug": "protoplasm-harness",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
     },
     {
       "after": {
@@ -386,18 +471,54 @@
         "description"
       ],
       "is_hotfix": false,
-      "landed": false,
+      "landed": true,
       "lane": "preview",
       "names": {
         "en": "Rapid Firecannon"
       },
       "slug": "rapid-firecannon",
       "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "lifecycle": "upcoming",
+      "lifecycle": "landed",
       "first_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
+      "observed_cycles": 2,
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-07-11T11:22:04.994004Z",
+      "landed_at": "2026-09-10T08:39:45.762098Z"
+    },
+    {
+      "after": {
+        "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
+      },
+      "before": {
+        "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Grants <speed>+30% bonus Move Speed</speed> that builds up over 2 seconds when near turrets or void gates. <jadeUnique>Active</jadeUnique>  150s<br>Spawns a gate at the target location for 150 seconds (Can't be placed near turrets). Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane. <br><br>After 4 seconds, a <keywordMajor>Voidspawn's</keywordMajor> health will rapidly decay to 0. The fourth <keywordMajor>Voidspawn</keywordMajor> and every <keywordMajor>Voidspawn</keywordMajor> thereafter will deal bonus damage equal to 50% of your resistances.</mainText>"
+      },
+      "branch": "pbe",
+      "canonical_id": "773512",
+      "change_kind": "text",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8159717+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8163976+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-10T18:21:30.854735Z",
+      "entity_type": "item",
+      "fields_changed": [
+        "description"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Zz'Rot Portal"
+      },
+      "slug": "zz-rot-portal",
+      "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 1,
-      "last_seen_cycle": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-      "last_seen_at": "2026-07-11T11:22:04.994004Z"
+      "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+      "last_seen_at": "2026-09-10T18:21:30.854735Z"
     }
   ]
 }

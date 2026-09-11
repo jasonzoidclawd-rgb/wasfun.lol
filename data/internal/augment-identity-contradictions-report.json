@@ -4,7 +4,7 @@
     "identity": 0,
     "existence": 41,
     "rarity": 0,
-    "availability": 49
+    "availability": 48
   },
   "identity": [],
   "existence": [
@@ -371,13 +371,6 @@
       "source": "internal_augments",
       "augmentNameId": "ARAM_Recall",
       "name": "Cheating",
-      "signal": "internal_removed_but_cdragon_registry_present",
-      "note": "Registry presence is definition only; this is reported, not resolved."
-    },
-    {
-      "source": "internal_augments",
-      "augmentNameId": "ARAM_ClownCollege",
-      "name": "Clown College",
       "signal": "internal_removed_but_cdragon_registry_present",
       "note": "Registry presence is definition only; this is reported, not resolved."
     },

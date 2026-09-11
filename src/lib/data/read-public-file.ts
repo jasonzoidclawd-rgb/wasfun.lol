@@ -46,3 +46,7 @@ export function readPbePreviewFile<T>(): Promise<T> {
 export function readCombosFile<T>(): Promise<T> {
   return parseJsonFile<T>(path.join(process.cwd(), "public", "data", "combos.json"));
 }
+
+export function readPipelineStatusFile<T>(): Promise<T> {
+  return parseJsonFile<T>(path.join(process.cwd(), "public", "data", "pipeline-status.json"));
+}

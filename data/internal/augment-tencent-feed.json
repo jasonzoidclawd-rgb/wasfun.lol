@@ -3,9 +3,9 @@
   "source": "https://lol.qq.com/gicp/news/410/37088140.html",
   "note": "Section-aware corroboration: Mayhem added/adjusted => live; removed/disabled sections => non-current; unrelated prose is ignored.",
   "counts": {
-    "keys": 267,
+    "keys": 277,
     "live": 58,
-    "no_signal": 173,
+    "no_signal": 183,
     "removed": 36
   },
   "augments": {
@@ -1242,7 +1242,22 @@
         ]
       }
     },
+    "DoOrDie": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
     "Donation": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
+    "DontStopCleavin": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
+    "DoransBiggestFan": {
       "tencent_status": null,
       "matchedNames": [],
       "matchedSections": {}
@@ -1257,6 +1272,11 @@
           "加固护盾"
         ]
       }
+    },
+    "DrinkUp": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
     },
     "Dropybara_Active": {
       "tencent_status": null,
@@ -1326,6 +1346,11 @@
       "matchedNames": [],
       "matchedSections": {}
     },
+    "FutureSightHeartsteel": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
     "Gash": {
       "tencent_status": "removed",
       "matchedNames": [
@@ -1369,6 +1394,11 @@
       "matchedSections": {}
     },
     "HandOfBaron": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
+    "HasteMakesWaste": {
       "tencent_status": null,
       "matchedNames": [],
       "matchedSections": {}
@@ -1626,6 +1656,11 @@
         ]
       }
     },
+    "StabbyStabby": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
     "SwiftAndSafe": {
       "tencent_status": null,
       "matchedNames": [],
@@ -1657,6 +1692,16 @@
       "matchedNames": [],
       "matchedSections": {}
     },
+    "Upgrade_DeathFireGrasp": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
+    "Upgrade_InnervatingLocket": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
+    },
     "Upgrade_MikaelsBlessing": {
       "tencent_status": null,
       "matchedNames": [],
@@ -1677,6 +1722,11 @@
           "升级：荆棘之甲"
         ]
       }
+    },
+    "Upgrade_ZzRotPortal": {
+      "tencent_status": null,
+      "matchedNames": [],
+      "matchedSections": {}
     },
     "Vampirism": {
       "tencent_status": null,

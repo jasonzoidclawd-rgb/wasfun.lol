@@ -1,6 +1,6 @@
 {
-  "patch": "26.13",
-  "scraped_at": "2026-07-12T22:39:39.095225+00:00",
+  "patch": "26.17",
+  "scraped_at": "2026-09-10T18:09:11.569726+00:00",
   "generated_from": "internal-pool-mechanics",
   "combos": [
     {
@@ -130,12 +130,12 @@
     },
     {
       "champion": "aphelios",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "aphelios",
-      "augment": "Deft",
+      "augment": "Critical Rhythm",
       "tier": "S"
     },
     {
@@ -310,7 +310,7 @@
     },
     {
       "champion": "cassiopeia",
-      "augment": "Firebrand",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -335,7 +335,7 @@
     },
     {
       "champion": "corki",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -470,12 +470,12 @@
     },
     {
       "champion": "fiora",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "fiora",
-      "augment": "Deft",
+      "augment": "Critical Rhythm",
       "tier": "S"
     },
     {
@@ -635,7 +635,7 @@
     },
     {
       "champion": "irelia",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -720,12 +720,12 @@
     },
     {
       "champion": "kaisa",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "kaisa",
-      "augment": "Dashing",
+      "augment": "Critical Rhythm",
       "tier": "S"
     },
     {
@@ -845,7 +845,7 @@
     },
     {
       "champion": "khazix",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -860,7 +860,7 @@
     },
     {
       "champion": "kindred",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -974,6 +974,21 @@
       "tier": "S"
     },
     {
+      "champion": "locke",
+      "augment": "Bolstered",
+      "tier": "S"
+    },
+    {
+      "champion": "locke",
+      "augment": "Mercy's Strike",
+      "tier": "S"
+    },
+    {
+      "champion": "locke",
+      "augment": "Multishot",
+      "tier": "S"
+    },
+    {
       "champion": "lulu",
       "augment": "Bolstered",
       "tier": "S"
@@ -1015,12 +1030,12 @@
     },
     {
       "champion": "malzahar",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
       "champion": "malzahar",
-      "augment": "Infernal Conduit",
+      "augment": "Jeweled Gauntlet",
       "tier": "S"
     },
     {
@@ -1045,12 +1060,12 @@
     },
     {
       "champion": "masteryi",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "masteryi",
-      "augment": "Deft",
+      "augment": "Critical Rhythm",
       "tier": "S"
     },
     {
@@ -1175,7 +1190,7 @@
     },
     {
       "champion": "nasus",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -1475,7 +1490,7 @@
     },
     {
       "champion": "rengar",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -1590,12 +1605,12 @@
     },
     {
       "champion": "shaco",
-      "augment": "Combusting Interest",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
       "champion": "shaco",
-      "augment": "Critical Rhythm",
+      "augment": "Combusting Interest",
       "tier": "S"
     },
     {
@@ -1825,7 +1840,7 @@
     },
     {
       "champion": "teemo",
-      "augment": "Icathia's Fall",
+      "augment": "Infernal Conduit",
       "tier": "S"
     },
     {
@@ -1945,7 +1960,7 @@
     },
     {
       "champion": "varus",
-      "augment": "Critical Rhythm",
+      "augment": "Clown College",
       "tier": "S"
     },
     {
@@ -2080,12 +2095,12 @@
     },
     {
       "champion": "warwick",
-      "augment": "Jeweled Gauntlet",
+      "augment": "Mercy's Strike",
       "tier": "S"
     },
     {
       "champion": "warwick",
-      "augment": "Mercy's Strike",
+      "augment": "Ravenous Bind",
       "tier": "S"
     },
     {

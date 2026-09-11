@@ -3,9 +3,9 @@
   "entity_type": "item",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.14.7942794+branch.releases-16-14.content.release",
-  "source_patch_label": "pbe-cycle-16.14.7942794+branch.releases-16-14.content.release",
-  "observed_at": "2026-07-13T19:16:25.768897Z",
+  "source_version": "16.19.8163976+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.19.8163976+branch.main.content.beta",
+  "observed_at": "2026-09-10T18:21:30.854735Z",
   "source_url": "",
   "entities": [
     {
@@ -2288,7 +2288,7 @@
           "AbilityHaste"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 55</attention> Ability Power<br><attention> 15</attention> Ability Haste<br><attention> 6%</attention> Move Speed<br><attention> 150%</attention> Base Mana Regen</stats><br><br><active>Inspiring Speech</active><br>Grants nearby allies Move Speed for a few seconds.</mainText>"
+        "description": "<mainText><stats><attention> 55</attention> Ability Power<br><attention> 15</attention> Ability Haste<br><attention> 6%</attention> Move Speed<br><attention> 150%</attention> Base Mana Regen</stats><br><br> +0 Health Regen per 5s<br> +0 Mana Regen per 5s<br> -0% Cooldown Reduction<br><br><active>Inspiring Speech</active><br>Grants nearby allies Move Speed for a few seconds.</mainText>"
       },
       "id": "222065",
       "names": {
@@ -2730,7 +2730,7 @@
           "CriticalStrike"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 45</attention> Attack Damage<br><attention> 40%</attention> Attack Speed<br><attention> 0%</attention> Critical Strike Chance</stats><br><br><passive>Practice Makes Lethal</passive><br>On-Attack, gain Critical Strike Chance permanently up to 25%.<br><br><passive>Flurry</passive><br>On-Attacking an enemy champion, gain 30% Attack Speed for 6 seconds (30 second cooldown). <br>Attacks reduce this cooldown by 1 second, increased to 2 seconds for Critical Strikes.</mainText>"
+        "description": "<mainText><stats><attention> 45</attention> Attack Damage<br><attention> 45%</attention> Attack Speed<br><attention> 0%</attention> Critical Strike Chance</stats><br><br><passive>Practice Makes Lethal</passive><br>On-Attack, gain Critical Strike Chance permanently up to 25%.<br><br><passive>Flurry</passive><br>On-Attacking an enemy champion, gain 30% Attack Speed for 6 seconds (30 second cooldown). <br>Attacks reduce this cooldown by 1 second, increased to 2 seconds for Critical Strikes.</mainText>"
       },
       "id": "223032",
       "names": {
@@ -2747,7 +2747,7 @@
           "ArmorPenetration"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 30%</attention> Armor Penetration<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Sepsis</passive><br>Dealing physical damage applies <status>40% Grievous Wounds</status> to enemy champions for 3 seconds.<br><br><buffedStat>If an enemy heals for more than 60% of their maximum health while continously affected by <status>Grievous Wounds</status>, it is increased to <status>80% Grievous Wounds</status>.</buffedStat><br><br><rules><status>Grievous Wounds</status> reduces the effectiveness of Healing and Regeneration effects.</rules></mainText>"
+        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 30%</attention> Armor Penetration<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Sepsis</passive><br>Dealing physical damage applies <status>40% Grievous Wounds</status> to enemy champions for 3 seconds.<br><br><buffedStat>If an enemy heals for more than 60% of their maximum health while continously affected by <status>Grievous Wounds</status>, it is increased to <status>80% Grievous Wounds</status>.</buffedStat><br><br><rules><status>Grievous Wounds</status> reduces the effectiveness of Healing and Regeneration effects.</rules></mainText>"
       },
       "id": "223033",
       "names": {
@@ -2764,7 +2764,7 @@
           "ArmorPenetration"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 40%</attention> Armor Penetration<br><attention> 25%</attention> Critical Strike Chance</stats><br><br></mainText>"
+        "description": "<mainText><stats><attention> 45</attention> Attack Damage<br><attention> 40%</attention> Armor Penetration<br><attention> 25%</attention> Critical Strike Chance</stats><br><br></mainText>"
       },
       "id": "223036",
       "names": {
@@ -2998,7 +2998,7 @@
           "AbilityHaste"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 350</attention> Health<br><attention> 20</attention> Ability Haste</stats><br><br><passive>Carve</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces the target's <scaleArmor>Armor by 6%</scaleArmor> for 6 seconds. (Stacks 5 times).<br><br><passive>Fervor</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> grants <speed>20 Move Speed</speed> for 2 seconds.</mainText>"
+        "description": "<mainText><stats><attention> 45</attention> Attack Damage<br><attention> 350</attention> Health<br><attention> 20</attention> Ability Haste</stats><br><br><passive>Carve</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces the target's <scaleArmor>Armor by 6%</scaleArmor> for 6 seconds. (stacks 5 times).<br><br><passive>Fervor</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> grants <speed> Move Speed</speed> for 2 seconds.</mainText>"
       },
       "id": "223071",
       "names": {
@@ -3207,7 +3207,7 @@
           "CriticalStrike"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 20%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.<br><br><passive>Bolt</passive><br>Your <keyword>Energized Attack</keyword> applies <magicDamage> bonus magic damage</magicDamage> and grants <speed>45% Move Speed</speed> for 2s.<br><br><buffedStat>Energized stacks twice as fast in Arena.</buffedStat><br></mainText>"
+        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 25%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.<br><br><passive>Bolt</passive><br>Your <keyword>Energized Attack</keyword> applies <magicDamage> bonus magic damage</magicDamage> and grants <speed>45% Move Speed</speed> for 2s.<br><br><buffedStat>Energized stacks twice as fast in Arena.</buffedStat><br></mainText>"
       },
       "id": "223095",
       "names": {
@@ -3277,7 +3277,7 @@
           "AbilityHaste"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 30</attention> Ability Power<br><attention> 15</attention> Ability Haste<br><attention> 100%</attention> Base Mana Regen<br><attention> 12%</attention> Heal and Shield Power</stats><br><br><br><br> <active>ACTIVE</active>  (0s)<br><active>Intervention</active><br>Target an area within. After 2.5 seconds, call down a beam of light to restore Health to allies and damage enemy champions.</mainText>"
+        "description": "<mainText><stats><attention> 30</attention> Ability Power<br><attention> 15</attention> Ability Haste<br><attention> 100%</attention> Base Mana Regen<br><attention> 10%</attention> Heal and Shield Power</stats><br><br><br><br> <active>ACTIVE</active>  (0s)<br><active>Intervention</active><br>Target an area within. After 2.5 seconds, call down a beam of light to restore Health to allies and damage enemy champions.</mainText>"
       },
       "id": "223107",
       "names": {
@@ -3857,7 +3857,7 @@
           "ArmorPenetration"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 40%</attention> Attack Speed</stats><br><br><passive>Shadow</passive><br>Attacks deal <magicDamage>30 bonus magic damage</magicDamage>  <OnHit>On-Hit</OnHit>.<br><br><passive>Juxtaposition</passive><br>Alternate between <keywordMajor>Light</keywordMajor> and <keywordMajor>Dark</keywordMajor> Attacks against champions: <li><keywordMajor>Light</keywordMajor> Attacks grant <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for 5s. <li><keywordMajor>Dark</keywordMajor> Attacks grant 8% <scaleArmor>Armor Penetration</scaleArmor> and <scaleMR>Magic Penetration</scaleMR> for 5s. </mainText>"
+        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 40%</attention> Attack Speed</stats><br><br><passive>Shadow</passive><br>Attacks deal <magicDamage> bonus magic damage</magicDamage>  <OnHit>On-Hit</OnHit>.<br><br><passive>Juxtaposition</passive><br>Alternate between <keywordMajor>Light</keywordMajor> and <keywordMajor>Dark</keywordMajor> Attacks against champions: <li><keywordMajor>Light</keywordMajor> Attacks grant <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for 5s. <li><keywordMajor>Dark</keywordMajor> Attacks grant 8% <scaleArmor>Armor Penetration</scaleArmor> and <scaleMR>Magic Penetration</scaleMR> for 5s. </mainText>"
       },
       "id": "223302",
       "names": {
@@ -3875,7 +3875,7 @@
           "NonbootsMovement"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 40</attention> Ability Power<br><attention> 12%</attention> Heal and Shield Power<br><attention> 150%</attention> Base Mana Regen<br><attention> 6%</attention> Move Speed</stats><br><br><passive>Sanctify</passive><br>Healing or Shielding another ally enhances you both for 6 seconds, granting your Attacks <attackSpeed>40% Attack Speed</attackSpeed> and <magicDamage>25 magic damage</magicDamage>  <OnHit>On-Hit</OnHit>.</mainText>"
+        "description": "<mainText><stats><attention> 40</attention> Ability Power<br><attention> 10%</attention> Heal and Shield Power<br><attention> 150%</attention> Base Mana Regen<br><attention> 6%</attention> Move Speed</stats><br><br><passive>Sanctify</passive><br>Healing or Shielding another ally enhances you both for 6 seconds, granting your Attacks <attackSpeed>40% Attack Speed</attackSpeed> and <magicDamage>25 magic damage</magicDamage>  <OnHit>On-Hit</OnHit>.</mainText>"
       },
       "id": "223504",
       "names": {
@@ -4237,7 +4237,7 @@
           "AbilityHaste"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 350</attention> Health<br><attention> 10</attention> Ability Haste</stats><br><br><passive>Lightshield Strike</passive><br>Your first Attack against a champion <attention>Critically Strikes</attention> and <healing>restores Health</healing>.</mainText>"
+        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 400</attention> Health<br><attention> 10</attention> Ability Haste</stats><br><br><passive>Lightshield Strike</passive><br>Your first Attack against a champion <attention>Critically Strikes</attention> and <healing>restores Health</healing>.</mainText>"
       },
       "id": "226610",
       "names": {
@@ -4255,7 +4255,7 @@
           "AbilityHaste"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 65</attention> Ability Power<br><attention> 14%</attention> Heal and Shield Power<br><attention> 150%</attention> Base Mana Regen<br><attention> 15</attention> Ability Haste</stats><br><br><passive>Rapids</passive><br>Healing or Shielding an ally grants you both  <magicDamage>40 Ability Power</magicDamage> and  <attention>15 Ability Haste</attention> for 6 seconds.</mainText>"
+        "description": "<mainText><stats><attention> 65</attention> Ability Power<br><attention> 10%</attention> Heal and Shield Power<br><attention> 150%</attention> Base Mana Regen<br><attention> 15</attention> Ability Haste</stats><br><br><passive>Rapids</passive><br>Healing or Shielding an ally grants you both  <magicDamage>40 Ability Power</magicDamage> and  <attention>15 Ability Haste</attention> for 6 seconds.</mainText>"
       },
       "id": "226616",
       "names": {
@@ -4548,6 +4548,23 @@
         "active_effects": true,
         "categories": [
           "Damage",
+          "LifeSteal",
+          "AbilityHaste"
+        ],
+        "cost": 6000,
+        "description": "<mainText><stats><attention> 200</attention> Attack Damage<br><attention> 25</attention> Ability Haste<br><attention> 25</attention> Lethality<br><attention> 1000</attention> Health<br><attention> 15%</attention> Omnivamp</stats><br><br> <active>Ultra Hydra</active> (0s)<br>On active, enhance your next basic attack to deal <physicalDamage>physical damage</physicalDamage> to enemies around you and to enemies behind the target. <active>Ultra Hydra</active> (0s)<br>On active, enhance your next basic attack to deal <physicalDamage>physical damage</physicalDamage> to enemies around you and to enemies behind the target.</mainText>"
+      },
+      "id": "226668",
+      "names": {
+        "en": "Ultra Hydra"
+      },
+      "slug": "ultra-hydra"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Damage",
           "CriticalStrike",
           "AttackSpeed",
           "Active",
@@ -4695,7 +4712,7 @@
           "AbilityHaste"
         ],
         "cost": 2500,
-        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 40%</attention> Armor Penetration<br><attention> 15</attention> Ability Haste</stats><br><br><passive>Bitter Cold</passive><br>Damaging Abilities <status>Slow</status> enemies <scaleHealth>below 50% Health</scaleHealth> by 50% for 1 second.</mainText>"
+        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 45%</attention> Armor Penetration<br><attention> 15</attention> Ability Haste</stats><br><br><passive>Bitter Cold</passive><br>Damaging Abilities <status>Slow</status> enemies <scaleHealth>below 60% Health</scaleHealth> by 50% for 1 second.</mainText>"
       },
       "id": "226694",
       "names": {
@@ -4894,7 +4911,7 @@
           "AbilityHaste"
         ],
         "cost": 3000,
-        "description": "<mainText><stats><ornnBonus> 70</ornnBonus> Attack Damage<br><ornnBonus> 700</ornnBonus> Health<br><ornnBonus> 40</ornnBonus> Ability Haste</stats><br><br><passive>Carve</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces the target's <scaleArmor>Armor by 6%</scaleArmor> for 6 seconds. (stacks 5 times).<br><br><passive>Fervor</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> grants <speed>20 Move Speed</speed> for 2 seconds.</mainText>"
+        "description": "<mainText><stats><ornnBonus> 70</ornnBonus> Attack Damage<br><ornnBonus> 700</ornnBonus> Health<br><ornnBonus> 40</ornnBonus> Ability Haste</stats><br><br><passive>Carve</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces the target's <scaleArmor>Armor by 6%</scaleArmor> for 6 seconds. (stacks 5 times).<br><br><passive>Fervor</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> grants <speed> Move Speed</speed> for 2 seconds.</mainText>"
       },
       "id": "228005",
       "names": {
@@ -5181,7 +5198,7 @@
           "ArmorPenetration",
           "AbilityHaste"
         ],
-        "cost": 3200,
+        "cost": 3000,
         "description": "<mainText><stats><attention> 55</attention> Attack Damage<br><attention> 22</attention> Lethality<br><attention> 15</attention> Ability Haste</stats><br><br><passive>Shaped Charge</passive>  (0s)<br>Dealing Ability damage to a Champion or Epic Monster deals an additional <trueDamage> true damage</trueDamage>.<br><br><passive>Sabotage</passive><br>Taking down a champion within 3 seconds of damaging them grants Sabotage for 90 seconds. While you have Sabotage, your next Attack against an Epic Monster or Turret deals an additional <trueDamage> true damage</trueDamage> over 3 seconds. </mainText>"
       },
       "id": "2520",
@@ -5390,7 +5407,7 @@
           "Boots"
         ],
         "cost": 1100,
-        "description": "<mainText><stats><attention> 25%</attention> Attack Speed<br><attention> 45</attention> Move Speed</stats><br><br></mainText>"
+        "description": "<mainText><stats><attention> 30%</attention> Attack Speed<br><attention> 45</attention> Move Speed</stats><br><br></mainText>"
       },
       "id": "3006",
       "names": {
@@ -5584,8 +5601,8 @@
           "CriticalStrike",
           "AttackSpeed"
         ],
-        "cost": 3100,
-        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 40%</attention> Attack Speed<br><attention> 0%</attention> Critical Strike Chance</stats><br><br><passive>Practice Makes Lethal</passive><br>On-Attack, gain Critical Strike Chance permanently up to 25%.<br><br><passive>Flurry</passive><br>On-Attacking an enemy champion, gain 30% Attack Speed for 6 seconds (30 second cooldown). <br>Attacks reduce this cooldown by 1 second, increased to 2 seconds for Critical Strikes.</mainText>"
+        "cost": 3000,
+        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 45%</attention> Attack Speed<br><attention> 0%</attention> Critical Strike Chance</stats><br><br><passive>Practice Makes Lethal</passive><br>On-Attack, gain Critical Strike Chance permanently up to 25%.<br><br><passive>Flurry</passive><br>On-Attacking an enemy champion, gain 30% Attack Speed for 6 seconds (30 second cooldown). <br>Attacks reduce this cooldown by 1 second, increased to 2 seconds for Critical Strikes.</mainText>"
       },
       "id": "3032",
       "names": {
@@ -5890,7 +5907,7 @@
           "Aura",
           "AbilityHaste"
         ],
-        "cost": 2700,
+        "cost": 2800,
         "description": "<mainText><stats><attention> 350</attention> Health<br><attention> 50</attention> Armor<br><attention> 10</attention> Ability Haste</stats><br><br><passive>Immolate</passive><br>After taking or dealing damage, deal <magicDamage>magic damage</magicDamage> per second to nearby enemies for 3 seconds. </mainText>"
       },
       "id": "3068",
@@ -5928,7 +5945,7 @@
           "AbilityHaste"
         ],
         "cost": 3000,
-        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 400</attention> Health<br><attention> 20</attention> Ability Haste</stats><br><br><passive>Carve</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces the target's <scaleArmor>Armor by 6%</scaleArmor> for 6 seconds. (stacks 5 times).<br><br><passive>Fervor</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> grants <speed>20 Move Speed</speed> for 2 seconds.</mainText>"
+        "description": "<mainText><stats><attention> 45</attention> Attack Damage<br><attention> 400</attention> Health<br><attention> 20</attention> Ability Haste</stats><br><br><passive>Carve</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> to champions reduces the target's <scaleArmor>Armor by 6%</scaleArmor> for 6 seconds. (stacks 5 times).<br><br><passive>Fervor</passive><br>Dealing <physicalDamage>physical damage</physicalDamage> grants <speed> Move Speed</speed> for 2 seconds.</mainText>"
       },
       "id": "3071",
       "names": {
@@ -6030,7 +6047,7 @@
           "OnHit"
         ],
         "cost": 1200,
-        "description": "<mainText><stats><attention> 20</attention> Attack Damage</stats><br><br><passive>Cleave</passive><br>Attacks deal <physicalDamage>physical damage</physicalDamage> to nearby enemies.<br> <active>Crescent</active><br>Deal <physicalDamage>physical damage</physicalDamage> to enemies around you.</mainText>"
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage</stats><br><br><passive>Cleave</passive><br>Attacks deal <physicalDamage>physical damage</physicalDamage> to nearby enemies.<br> <active>Crescent</active><br>Deal <physicalDamage>physical damage</physicalDamage> to enemies around you.</mainText>"
       },
       "id": "3077",
       "names": {
@@ -6116,7 +6133,7 @@
           "NonbootsMovement"
         ],
         "cost": 2650,
-        "description": "<mainText><stats><attention> 40%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance<br><attention> 4%</attention> Move Speed</stats><br><br><passive>Wind's Fury</passive><br>Attacks fire bolts at 2 additional enemies near the target.<br>Each bolt deals <physicalDamage>physical damage</physicalDamage> and applies  <OnHit>On-Hit</OnHit> effects.</mainText>"
+        "description": "<mainText><stats><attention> 40%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance<br><attention> 5%</attention> Move Speed</stats><br><br><passive>Wind's Fury</passive><br>Attacks fire bolts at 2 additional enemies near the target.<br>Each bolt deals <physicalDamage>physical damage</physicalDamage> and applies  <OnHit>On-Hit</OnHit> effects.</mainText>"
       },
       "id": "3085",
       "names": {
@@ -6219,28 +6236,10 @@
           "AttackSpeed",
           "NonbootsMovement"
         ],
-        "cost": 3000,
-        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 20%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.<br><br><passive>Bolt</passive><br>Your <keyword>Energized Attack</keyword> applies <magicDamage> bonus magic damage</magicDamage> and grants <speed>45% Movement Speed</speed> for 1.5 seconds.<br></mainText>"
+        "cost": 3200,
+        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 25%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.<br><br><passive>Bolt</passive><br>Your <keyword>Energized Attack</keyword> applies <magicDamage> bonus magic damage</magicDamage> and grants <speed>45% Movement Speed</speed> for 1.5 seconds.<br></mainText>"
       },
       "id": "3095",
-      "names": {
-        "en": "Deprecated item"
-      },
-      "slug": "deprecated-item"
-    },
-    {
-      "fields": {
-        "active_effects": false,
-        "categories": [
-          "Damage",
-          "CriticalStrike",
-          "AttackSpeed",
-          "NonbootsMovement"
-        ],
-        "cost": 3200,
-        "description": "<mainText><stats><attention> 50</attention> Attack Damage<br><attention> 20%</attention> Attack Speed<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.<br><br><passive>Bolt</passive><br>Your <keyword>Energized Attack</keyword> applies <magicDamage> bonus magic damage</magicDamage> and grants <speed>45% Movement Speed</speed> for 1.5 seconds.<br></mainText>"
-      },
-      "id": "3097",
       "names": {
         "en": "Stormrazor"
       },
@@ -6481,7 +6480,7 @@
           "Boots"
         ],
         "cost": 1000,
-        "description": "<mainText><stats></stats><br><br><attention> 25</attention> Move Speed <br>When out of combat for at least 5 seconds, increase this item's effect to <attention> 45</attention>.</mainText>"
+        "description": ""
       },
       "id": "3117",
       "names": {
@@ -6565,7 +6564,7 @@
           "OnHit"
         ],
         "cost": 3000,
-        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 30</attention> Ability Power<br><attention> 25%</attention> Attack Speed</stats><br><br><passive>Wrath</passive><br>Attacks deal <magicDamage>30 bonus magic damage  <OnHit>On-Hit</OnHit></magicDamage>.<br><br><passive>Seething Strike</passive><br>Attacks grant <attackSpeed>8% Attack Speed</attackSpeed> for 3 seconds. (stacks 4 times). <br>While fully stacked, every third Attack applies  <OnHit>On-Hit</OnHit> effects twice.</mainText>"
+        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 30</attention> Ability Power<br><attention> 25%</attention> Attack Speed</stats><br><br><passive>Wrath</passive><br>Attacks deal <magicDamage>30 bonus magic damage  <OnHit>On-Hit</OnHit></magicDamage>.<br><br><passive>Seething Strike</passive><br>Attacks grant <attackSpeed>8% Attack Speed</attackSpeed> for 4 seconds. (stacks 4 times). <br>While fully stacked, every third Attack applies  <OnHit>On-Hit</OnHit> effects twice.</mainText>"
       },
       "id": "3124",
       "names": {
@@ -6975,7 +6974,7 @@
           "Boots"
         ],
         "cost": 1000,
-        "description": "<mainText><stats><attention> 65</attention> Move Speed</stats><br><br><passive>Fleetfooted</passive><br>Reduce the effectiveness of <keyword>Slows</keyword> by 40%.<br><br><passive>Noxian Fervor</passive><br>Gain 5% of your <speed>Move Speed</speed> as Adaptive Force.</mainText>"
+        "description": "<mainText><stats><attention> 65</attention> Move Speed</stats><br><br><passive>Fleetfooted</passive><br>Reduce the effectiveness of <keyword>Slows</keyword> by 25%.<br><br><passive>Noxian Fervor</passive><br>Gain 5% of your <speed>Move Speed</speed> as Adaptive Force.</mainText>"
       },
       "id": "3170",
       "names": {
@@ -7008,7 +7007,7 @@
           "NonbootsMovement"
         ],
         "cost": 1100,
-        "description": "<mainText><stats><attention> 40%</attention> Attack Speed<br><attention> 45</attention> Move Speed<br><attention> 5%</attention> Life Steal</stats><br><br><passive>Noxian Gait</passive><br>Attacks against Champions grant <speed>Move Speed</speed>  <OnHit>On-Hit</OnHit> decaying over 2 seconds.</mainText>"
+        "description": "<mainText><stats><attention> 45%</attention> Attack Speed<br><attention> 45</attention> Move Speed<br><attention> 5%</attention> Life Steal</stats><br><br></mainText>"
       },
       "id": "3172",
       "names": {
@@ -7026,7 +7025,7 @@
           "MagicResist"
         ],
         "cost": 1250,
-        "description": "<mainText><stats><attention> 30</attention> Magic Resist<br><attention> 45</attention> Move Speed<br><attention> 30%</attention> Tenacity</stats><br><br><passive>Noxian Persistence</passive>  (0s)<br>After taking magic damage from a Champion, gain a <shield></shield> <magicDamage>magic</magicDamage> <shield>shield</shield> for 5 seconds.</mainText>"
+        "description": "<mainText><stats><attention> 25</attention> Magic Resist<br><attention> 45</attention> Move Speed<br><attention> 30%</attention> Tenacity</stats><br><br><passive>Noxian Persistence</passive>  (0s)<br>After taking magic damage from a Champion, gain a <shield></shield> <magicDamage>magic</magicDamage> <shield>shield</shield> for 5 seconds.</mainText>"
       },
       "id": "3173",
       "names": {
@@ -7058,7 +7057,7 @@
           "MagicPenetration"
         ],
         "cost": 1100,
-        "description": "<mainText><stats><attention> 18</attention> Magic Penetration<br><attention> 8%</attention> Magic Penetration<br><attention> 45</attention> Move Speed</stats><br><br></mainText>"
+        "description": "<mainText><stats><attention> 20</attention> Magic Penetration<br><attention> 8%</attention> Magic Penetration<br><attention> 45</attention> Move Speed</stats><br><br></mainText>"
       },
       "id": "3175",
       "names": {
@@ -7714,7 +7713,7 @@
           "ArmorPenetration"
         ],
         "cost": 3000,
-        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 35%</attention> Attack Speed</stats><br><br><passive>Shadow</passive><br>Attacks deal <magicDamage>30 bonus magic damage</magicDamage>  <OnHit>On-Hit</OnHit>.<br><br><passive>Juxtaposition</passive><br>Alternate between <keywordMajor>Light</keywordMajor> and <keywordMajor>Dark</keywordMajor> Attacks against champions: <li><keywordMajor>Light</keywordMajor> Attacks grant <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for 5s. <li><keywordMajor>Dark</keywordMajor> Attacks grant 10% <scaleArmor>Armor Penetration</scaleArmor> and <scaleMR>Magic Penetration</scaleMR> for 5s. </mainText>"
+        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 35%</attention> Attack Speed</stats><br><br><passive>Shadow</passive><br>Attacks deal <magicDamage> bonus magic damage</magicDamage>  <OnHit>On-Hit</OnHit>.<br><br><passive>Juxtaposition</passive><br>Alternate between <keywordMajor>Light</keywordMajor> and <keywordMajor>Dark</keywordMajor> Attacks against champions: <li><keywordMajor>Light</keywordMajor> Attacks grant <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for 5s. <li><keywordMajor>Dark</keywordMajor> Attacks grant 10% <scaleArmor>Armor Penetration</scaleArmor> and <scaleMR>Magic Penetration</scaleMR> for 5s. </mainText>"
       },
       "id": "3302",
       "names": {
@@ -10377,7 +10376,7 @@
           "AbilityHaste"
         ],
         "cost": 3100,
-        "description": "<mainText><stats><attention> 45</attention> Attack Damage<br><attention> 400</attention> Health<br><attention> 10</attention> Ability Haste</stats><br><br><passive>Lightshield Strike</passive><br>Your first Attack against a champion <attention>Critically Strikes</attention> and <healing>restores Health</healing>.</mainText>"
+        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 400</attention> Health<br><attention> 10</attention> Ability Haste</stats><br><br><passive>Lightshield Strike</passive><br>Your first Attack against a champion <attention>Critically Strikes</attention> and <healing>restores Health</healing>.</mainText>"
       },
       "id": "6610",
       "names": {
@@ -11345,6 +11344,2764 @@
         "en": "Gangplank Placeholder"
       },
       "slug": "gangplank-placeholder"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Boots"
+        ],
+        "cost": 325,
+        "description": "<mainText><stats></stats><br><br><danger>Limited to 1.</danger><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>25 Move Speed</speed></mainText>"
+      },
+      "id": "771001",
+      "names": {
+        "en": "Boots of Speed"
+      },
+      "slug": "boots-of-speed"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "ManaRegen"
+        ],
+        "cost": 180,
+        "description": "<mainText><stats><attention> 3</attention> Mana Regen per 5 seconds</stats><br><br></mainText>"
+      },
+      "id": "771004",
+      "names": {
+        "en": "Faerie Charm"
+      },
+      "slug": "faerie-charm"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "HealthRegen"
+        ],
+        "cost": 180,
+        "description": "<mainText><stats><attention> 5</attention> Health Regen per 5 seconds</stats><br><br></mainText>"
+      },
+      "id": "771006",
+      "names": {
+        "en": "Rejuvenation Bead"
+      },
+      "slug": "rejuvenation-bead"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health"
+        ],
+        "cost": 1000,
+        "description": "<mainText><stats><attention> 380</attention> Health</stats><br><br></mainText>"
+      },
+      "id": "771011",
+      "names": {
+        "en": "Giant's Belt"
+      },
+      "slug": "giant-s-belt"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike"
+        ],
+        "cost": 730,
+        "description": "<mainText><stats><attention> 15%</attention> Critical Strike Chance</stats><br><br></mainText>"
+      },
+      "id": "771018",
+      "names": {
+        "en": "Cloak of Agility"
+      },
+      "slug": "cloak-of-agility"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage"
+        ],
+        "cost": 860,
+        "description": "<mainText><stats><attention> 40</attention> Ability Power</stats><br><br></mainText>"
+      },
+      "id": "771026",
+      "names": {
+        "en": "Blasting Wand"
+      },
+      "slug": "blasting-wand"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Mana"
+        ],
+        "cost": 400,
+        "description": "<mainText><stats><attention> 200</attention> Mana</stats><br><br><flavorText>\"Some say that Sapphire was the original source of classical magic.\"</flavorText></mainText>"
+      },
+      "id": "771027",
+      "names": {
+        "en": "Sapphire Crystal"
+      },
+      "slug": "sapphire-crystal"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health"
+        ],
+        "cost": 475,
+        "description": "<mainText><stats><attention> 180</attention> Health</stats><br><br></mainText>"
+      },
+      "id": "771028",
+      "names": {
+        "en": "Ruby Crystal"
+      },
+      "slug": "ruby-crystal"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor"
+        ],
+        "cost": 300,
+        "description": "<mainText><stats><attention> 15</attention> Armor</stats><br><br></mainText>"
+      },
+      "id": "771029",
+      "names": {
+        "en": "Cloth Armor"
+      },
+      "slug": "cloth-armor"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor"
+        ],
+        "cost": 720,
+        "description": "<mainText><stats><attention> 40</attention> Armor</stats><br><br></mainText>"
+      },
+      "id": "771031",
+      "names": {
+        "en": "Chain Vest"
+      },
+      "slug": "chain-vest"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock"
+        ],
+        "cost": 400,
+        "description": "<mainText><stats><attention> 20</attention> Magic Resist</stats><br><br></mainText>"
+      },
+      "id": "771033",
+      "names": {
+        "en": "Null-Magic Mantle"
+      },
+      "slug": "null-magic-mantle"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage"
+        ],
+        "cost": 400,
+        "description": "<mainText><stats><attention> 10</attention> Attack Damage</stats><br><br></mainText>"
+      },
+      "id": "771036",
+      "names": {
+        "en": "Long Sword"
+      },
+      "slug": "long-sword"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage"
+        ],
+        "cost": 875,
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage</stats><br><br></mainText>"
+      },
+      "id": "771037",
+      "names": {
+        "en": "Pickaxe"
+      },
+      "slug": "pickaxe"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage"
+        ],
+        "cost": 1550,
+        "description": "<mainText><stats><attention> 45</attention> Attack Damage</stats><br><br></mainText>"
+      },
+      "id": "771038",
+      "names": {
+        "en": "B. F. Sword"
+      },
+      "slug": "b-f-sword"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "OnHit"
+        ],
+        "cost": 300,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks deal <magicDamage>10 magic damage</magicDamage> to monsters On-Hit.<br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 10%.</mainText>"
+      },
+      "id": "771039",
+      "names": {
+        "en": "Hunter's Machete"
+      },
+      "slug": "hunter-s-machete"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed"
+        ],
+        "cost": 400,
+        "description": "<mainText><stats><attention> 12%</attention> Attack Speed</stats><br><br></mainText>"
+      },
+      "id": "771042",
+      "names": {
+        "en": "Dagger"
+      },
+      "slug": "dagger"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed"
+        ],
+        "cost": 900,
+        "description": "<mainText><stats><attention> 30%</attention> Attack Speed</stats><br><br></mainText>"
+      },
+      "id": "771043",
+      "names": {
+        "en": "Recurve Bow"
+      },
+      "slug": "recurve-bow"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike"
+        ],
+        "cost": 400,
+        "description": "<mainText><stats><attention> 8%</attention> Critical Strike Chance</stats><br><br></mainText>"
+      },
+      "id": "771051",
+      "names": {
+        "en": "Brawler's Gloves"
+      },
+      "slug": "brawler-s-gloves"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage"
+        ],
+        "cost": 435,
+        "description": "<mainText><stats><attention> 20</attention> Ability Power</stats><br><br></mainText>"
+      },
+      "id": "771052",
+      "names": {
+        "en": "Amplifying Tome"
+      },
+      "slug": "amplifying-tome"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "LifeSteal"
+        ],
+        "cost": 800,
+        "description": "<mainText><stats><attention> 10</attention> Attack Damage<br><attention> 10%</attention> Life Steal</stats><br><br></mainText>"
+      },
+      "id": "771053",
+      "names": {
+        "en": "Vampiric Scepter"
+      },
+      "slug": "vampiric-scepter"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "HealthRegen"
+        ],
+        "cost": 440,
+        "description": "<mainText><stats><attention> 100</attention> Health<br><attention> 10</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Shieldwall:</jadeUnique> Blocks 8 damage from champion Basic Attacks.</mainText>"
+      },
+      "id": "771054",
+      "names": {
+        "en": "Doran's Shield"
+      },
+      "slug": "doran-s-shield"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Damage",
+          "LifeSteal",
+          "OnHit"
+        ],
+        "cost": 475,
+        "description": "<mainText><stats><attention> 80</attention> Health<br><attention> 10</attention> Attack Damage</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks restore <healing>5 Health</healing> On-Hit.</mainText>"
+      },
+      "id": "771055",
+      "names": {
+        "en": "Doran's Blade"
+      },
+      "slug": "doran-s-blade"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellDamage",
+          "ManaRegen"
+        ],
+        "cost": 400,
+        "description": "<mainText><stats><attention> 60</attention> Health<br><attention> 15</attention> Ability Power<br><attention> 3</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Restores <scaleMana>4 Mana</scaleMana> upon killing a unit.</mainText>"
+      },
+      "id": "771056",
+      "names": {
+        "en": "Doran's Ring"
+      },
+      "slug": "doran-s-ring"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock"
+        ],
+        "cost": 720,
+        "description": "<mainText><stats><attention> 40</attention> Magic Resist</stats><br><br></mainText>"
+      },
+      "id": "771057",
+      "names": {
+        "en": "Negatron Cloak"
+      },
+      "slug": "negatron-cloak"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage"
+        ],
+        "cost": 1600,
+        "description": "<mainText><stats><attention> 80</attention> Ability Power</stats><br><br></mainText>"
+      },
+      "id": "771058",
+      "names": {
+        "en": "Needlessly Large Rod"
+      },
+      "slug": "needlessly-large-rod"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "HealthRegen",
+          "ManaRegen",
+          "OnHit"
+        ],
+        "cost": 700,
+        "description": "<mainText><stats><attention> 14</attention> Health Regen per 5 seconds<br><attention> 7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks deal <magicDamage>10 magic damage</magicDamage> to monsters On-Hit.<br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 20%.</mainText>"
+      },
+      "id": "771080",
+      "names": {
+        "en": "Spirit Stone"
+      },
+      "slug": "spirit-stone"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "HealthRegen",
+          "ManaRegen",
+          "OnHit"
+        ],
+        "cost": 0,
+        "description": "GeneratedTip_Item_771500_ExternalDescription"
+      },
+      "id": "771500",
+      "names": {
+        "en": "Penetrating Bullets"
+      },
+      "slug": "penetrating-bullets"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [],
+        "cost": 60,
+        "description": ""
+      },
+      "id": "772001",
+      "names": {
+        "en": "Recall"
+      },
+      "slug": "recall"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Consumable",
+          "Lane",
+          "Jungle"
+        ],
+        "cost": 35,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>150 Health</healing> over 15 seconds.<br><br><jadeLimit>Limited to 5 at one time.</jadeLimit></mainText>"
+      },
+      "id": "772003",
+      "names": {
+        "en": "Health Potion"
+      },
+      "slug": "health-potion"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Consumable"
+        ],
+        "cost": 35,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Restores <scaleMana>100 Mana</scaleMana> over 15 seconds.</mainText>"
+      },
+      "id": "772004",
+      "names": {
+        "en": "Mana Potion"
+      },
+      "slug": "mana-potion"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Consumable"
+        ],
+        "cost": 35,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>80 Health</healing> and <scaleMana>50 Mana</scaleMana> over 10 seconds.</mainText>"
+      },
+      "id": "772009",
+      "names": {
+        "en": "Total Biscuit of Rejuvenation"
+      },
+      "slug": "total-biscuit-of-rejuvenation"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Health",
+          "Damage",
+          "Consumable"
+        ],
+        "cost": 350,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants <scaleHealth> Health</scaleHealth> and <physicalDamage>15 Attack Damage</physicalDamage> for 180 seconds.</mainText>"
+      },
+      "id": "772037",
+      "names": {
+        "en": "Elixir of Fortitude"
+      },
+      "slug": "elixir-of-fortitude"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed",
+          "Consumable"
+        ],
+        "cost": 250,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants <attackSpeed> Attack Speed</attackSpeed> and 15% Critical Strike Chance for 180 seconds.</mainText>"
+      },
+      "id": "772038",
+      "names": {
+        "en": "Elixir of Agility"
+      },
+      "slug": "elixir-of-agility"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellDamage",
+          "Consumable",
+          "CooldownReduction"
+        ],
+        "cost": 250,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants <scaleAP> Ability Power</scaleAP> and 10% Cooldown Reduction for 180 seconds.</mainText>"
+      },
+      "id": "772039",
+      "names": {
+        "en": "Elixir of Brilliance"
+      },
+      "slug": "elixir-of-brilliance"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "ManaRegen",
+          "Consumable",
+          "Lane",
+          "Jungle"
+        ],
+        "cost": 345,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Replenishment: </jadeUnique>Holds 3 charges and refills upon visiting the shop.<br><br> <jadeUnique>Active</jadeUnique><br>Consumes a charge to restore <healing>120 Health</healing> and <scaleMana>60 Mana</scaleMana> over 12 seconds.</mainText>"
+      },
+      "id": "772041",
+      "names": {
+        "en": "Crystalline Flask"
+      },
+      "slug": "crystalline-flask"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Consumable",
+          "Vision",
+          "Stealth"
+        ],
+        "cost": 400,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Grants detection of nearby invisible units for up to 4 minutes. <jadeRules>Revealing a ward in this manner grants a portion of the gold reward for killing that unit.</jadeRules></mainText>"
+      },
+      "id": "772042",
+      "names": {
+        "en": "Oracle's Elixir"
+      },
+      "slug": "oracle-s-elixir"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Consumable",
+          "Vision",
+          "Stealth"
+        ],
+        "cost": 125,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Places an invisible ward that reveals the surrounding area and invisible units in the area for 3 minutes.<jadeRules> Revealing a ward in this manner grants a portion of the gold reward when that unit is killed.</jadeRules></mainText>"
+      },
+      "id": "772043",
+      "names": {
+        "en": "Vision Ward"
+      },
+      "slug": "vision-ward"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Consumable",
+          "Vision"
+        ],
+        "cost": 75,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Places an invisible ward that reveals the surrounding area for 3 minutes.</mainText>"
+      },
+      "id": "772044",
+      "names": {
+        "en": "Sight Ward"
+      },
+      "slug": "sight-ward"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Health",
+          "Consumable",
+          "Vision"
+        ],
+        "cost": 1700,
+        "description": "<mainText><stats><attention> 380</attention> Health</stats><br><br><jadeUnique>Ward Refresh:</jadeUnique> Holds 5 charges and refills upon visiting the shop.<br><br> <jadeUnique>Active</jadeUnique><br>Consumes a charge to place an invisible ward that reveals the surrounding area for 3 minutes <jadeRules>(maximum 3 wards placed from this item at once).</jadeRules></mainText>"
+      },
+      "id": "772045",
+      "names": {
+        "en": "Ruby Sightstone"
+      },
+      "slug": "ruby-sightstone"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Health",
+          "Consumable",
+          "Vision"
+        ],
+        "cost": 800,
+        "description": "<mainText><stats><attention> 180</attention> Health</stats><br><br><jadeUnique>Ward Refresh:</jadeUnique> Holds 3 charges and refills upon visiting the shop.<br><br> <jadeUnique>Active</jadeUnique><br>Consumes a charge to place an invisible ward that reveals the surrounding area for 3 minutes <jadeRules>(maximum 2 wards placed from this item at once).</jadeRules></mainText>"
+      },
+      "id": "772049",
+      "names": {
+        "en": "Sightstone"
+      },
+      "slug": "sightstone"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Consumable",
+          "Vision"
+        ],
+        "cost": 75,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume:</jadeUnique> Places an invisible ward that reveals the surrounding area for 3 minutes.</mainText>"
+      },
+      "id": "772050",
+      "names": {
+        "en": "Explorer's Ward"
+      },
+      "slug": "explorer-s-ward"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Damage",
+          "LifeSteal",
+          "Consumable",
+          "Vision",
+          "Trinket",
+          "SpellVamp"
+        ],
+        "cost": 0,
+        "description": "<mainText><stats><attention> 30</attention> Health<br><attention> 17.69</attention> Armor<br><attention> 12.06</attention> Magic Resist<br><attention> 22</attention> Ability Power</stats><br><br></mainText>"
+      },
+      "id": "772139",
+      "names": {
+        "en": "AP Rune Replacer"
+      },
+      "slug": "ap-rune-replacer"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Damage",
+          "LifeSteal",
+          "Consumable",
+          "Vision",
+          "Trinket",
+          "SpellVamp"
+        ],
+        "cost": 0,
+        "description": "<mainText><stats><attention> 36</attention> Health<br><attention> 12.69</attention> Armor<br><attention> 12.06</attention> Magic Resist<br><attention> 17%</attention> Attack Speed<br><attention> 9.55</attention> Attack Damage</stats><br><br></mainText>"
+      },
+      "id": "772140",
+      "names": {
+        "en": "AD Rune Replacer"
+      },
+      "slug": "ad-rune-replacer"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "SpellDamage",
+          "Aura"
+        ],
+        "cost": 2560,
+        "description": "<mainText><stats><attention> 70</attention> Ability Power<br><attention> 45</attention> Magic Resist</stats><br><br><jadeUnique>Aura - Despair:</jadeUnique> Reduces the <scaleMR>Magic Resist</scaleMR> of nearby enemies by <scaleMR>20</scaleMR></mainText>"
+      },
+      "id": "773001",
+      "names": {
+        "en": "Abyssal Scepter"
+      },
+      "slug": "abyssal-scepter"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "Mana",
+          "ManaRegen"
+        ],
+        "cost": 2700,
+        "description": "<mainText><stats><attention> 250</attention> Mana<br><attention> 60</attention> Ability Power<br><attention> 10</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Insight:</jadeUnique> Grants <scaleAP>Ability Power</scaleAP> equal to <scaleMana>3% of maximum Mana</scaleMana>.<br><jadeUnique>Mana Charge:</jadeUnique> Grants <scaleMana>+8 maximum Mana</scaleMana> (max <scaleMana>750 Mana</scaleMana>) for each spell cast and Mana expenditure (occurs up to 2 times every 4 seconds).<br><jadeLimit>Transforms into <attention>Seraph's Embrace</attention> at <scaleMana>+750 Mana.</scaleMana></jadeLimit></mainText>"
+      },
+      "id": "773003",
+      "names": {
+        "en": "Archangel's Staff"
+      },
+      "slug": "archangel-s-staff"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "Mana",
+          "ManaRegen",
+          "OnHit"
+        ],
+        "cost": 2100,
+        "description": "<mainText><stats><attention> 250</attention> Mana<br><attention> 20</attention> Attack Damage<br><attention> 7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Awe:</jadeUnique> Grants bonus <physicalDamage>Attack Damage</physicalDamage> equal to <scaleMana>2%</scaleMana> of maximum Mana.<br><jadeUnique>Mana Charge:</jadeUnique> Grants <scaleMana>4 maximum Mana</scaleMana> (max <scaleMana>750</scaleMana> Mana) for each Basic Attack, spell cast, and Mana expenditure (occurs up to 2 times every 8 seconds).<br><jadeLimit>Transforms into <attention>Muramana</attention> at <scaleMana>750 Mana</scaleMana>.</jadeLimit></mainText>"
+      },
+      "id": "773004",
+      "names": {
+        "en": "Manamune"
+      },
+      "slug": "manamune"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "Damage",
+          "CriticalStrike"
+        ],
+        "cost": 2300,
+        "description": "<mainText><stats><attention> 45</attention> Armor<br><attention> 15%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Impact:</jadeUnique> Grants bonus <physicalDamage>Attack Damage</physicalDamage> equal to <physicalDamage>1.5%</physicalDamage> of <scaleHealth>Maximum Health</scaleHealth>.</mainText>"
+      },
+      "id": "773005",
+      "names": {
+        "en": "Atma's Impaler"
+      },
+      "slug": "atma-s-impaler"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed",
+          "Boots"
+        ],
+        "cost": 900,
+        "description": "<mainText><stats><attention> 20%</attention> Attack Speed</stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed></mainText>"
+      },
+      "id": "773006",
+      "names": {
+        "en": "Berserker's Greaves"
+      },
+      "slug": "berserker-s-greaves"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Boots"
+        ],
+        "cost": 1000,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>60</speed> Move Speed<br><jadeUnique>Slow Resist:</jadeUnique> Movement slowing effects are reduced by <speed>25%</speed>.</mainText>"
+      },
+      "id": "773009",
+      "names": {
+        "en": "Boots of Swiftness"
+      },
+      "slug": "boots-of-swiftness"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Mana"
+        ],
+        "cost": 1200,
+        "description": "<mainText><stats><attention> 200</attention> Health<br><attention> 300</attention> Mana</stats><br><br><jadeUnique>Contemplation:</jadeUnique> Upon leveling up, restores <healing>150 Health</healing> and <scaleMana>200 Mana</scaleMana> over 8 seconds.</mainText>"
+      },
+      "id": "773010",
+      "names": {
+        "en": "Catalyst the Protector"
+      },
+      "slug": "catalyst-the-protector"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Boots",
+          "MagicPenetration"
+        ],
+        "cost": 1100,
+        "description": "<mainText><stats><attention> 15</attention> Magic Penetration</stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed></mainText>"
+      },
+      "id": "773020",
+      "names": {
+        "en": "Sorcerer's Shoes"
+      },
+      "slug": "sorcerer-s-shoes"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Damage",
+          "OnHit",
+          "Slow"
+        ],
+        "cost": 3300,
+        "description": "<mainText><stats><attention> 700</attention> Health<br><attention> 30</attention> Attack Damage</stats><br><br><jadeUnique>Icy:</jadeUnique> Basic Attacks <status>Slow</status> the target's <speed>Move Speed</speed> for 1.5 seconds On-Hit (40% <status>Slow</status> for Melee Attacks, 30% <status>Slow</status> for Ranged Attacks).<br><br><flavorText>\"We brought it back just for you.\"</flavorText></mainText>"
+      },
+      "id": "773022",
+      "names": {
+        "en": "Frozen Mallet"
+      },
+      "slug": "frozen-mallet"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellBlock",
+          "SpellDamage",
+          "NonbootsMovement",
+          "Slow"
+        ],
+        "cost": 1900,
+        "description": "<mainText><stats><attention> 40</attention> Ability Power<br><attention> 40</attention> Magic Resist<br><attention> 6%</attention> Move Speed</stats><br><br> <jadeUnique>Active</jadeUnique>  120s<br>Summons up to 2 invulnerable ghosts that seek out the two nearest enemy champions for 6 seconds. If a ghost reaches its target, it reveals the target and <status>Slows</status> their <speed>Move Speed</speed> by 40% for 2.5 seconds (120 second cooldown).</mainText>"
+      },
+      "id": "773023",
+      "names": {
+        "en": "Twin Shadows"
+      },
+      "slug": "twin-shadows"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "Mana",
+          "CooldownReduction"
+        ],
+        "cost": 1350,
+        "description": "<mainText><stats><attention> 45</attention> Armor<br><attention> 300</attention> Mana</stats><br><br><jadeUnique>Coolheaded: </jadeUnique>10% Cooldown Reduction</mainText>"
+      },
+      "id": "773024",
+      "names": {
+        "en": "Glacial Shroud"
+      },
+      "slug": "glacial-shroud"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "SpellDamage",
+          "Mana",
+          "CooldownReduction",
+          "Slow"
+        ],
+        "cost": 3250,
+        "description": "<mainText><stats><attention> 30</attention> Ability Power<br><attention> 500</attention> Mana<br><attention> 70</attention> Armor<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Spellblade of True Ice:</jadeUnique> After using an ability, the next Basic Attack (On-Hit) deals bonus <physicalDamage>physical damage equal to 125% of base Attack Damage</physicalDamage> to enemies near the target, and creates a field around the target for 2 seconds that <status>Slows</status> enemy <speed>Move Speed</speed> by 30% (2 second cooldown, half-sized field if ranged).</mainText>"
+      },
+      "id": "773025",
+      "names": {
+        "en": "Iceborn Gauntlet"
+      },
+      "slug": "iceborn-gauntlet"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "Armor"
+        ],
+        "cost": 2750,
+        "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 40</attention> Magic Resist</stats><br><br><jadeUnique>Guardian's Intervention: </jadeUnique> Upon taking lethal damage, restores 30% of maximum <scaleHealth>Health</scaleHealth> and <scaleMana>Mana</scaleMana> after 4 seconds of stasis (5 minute cooldown).</mainText>"
+      },
+      "id": "773026",
+      "names": {
+        "en": "Guardian Angel"
+      },
+      "slug": "guardian-angel"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellDamage",
+          "Mana"
+        ],
+        "cost": 2800,
+        "description": "<mainText><stats><attention> 450</attention> Health<br><attention> 450</attention> Mana<br><attention> 60</attention> Ability Power</stats><br><br><jadeUnique>Wisdom of Ages:</jadeUnique> Grants <scaleHealth>20 Health</scaleHealth>, <scaleMana>20 Mana</scaleMana>, and <scaleAP>2 Ability Power</scaleAP> per stack (max <scaleHealth>200 Health</scaleHealth>, <scaleMana>200 Mana</scaleMana>, and <scaleAP>20 Ability Power</scaleAP>). Grants 1 stack per minute (max 10 stacks).<br><jadeUnique>Contemplation:</jadeUnique> Upon leveling up, restores <healing>150 Health</healing> and <scaleMana>200 Mana</scaleMana> over 8 seconds.</mainText>"
+      },
+      "id": "773027",
+      "names": {
+        "en": "Rod of Ages"
+      },
+      "slug": "rod-of-ages"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "ManaRegen"
+        ],
+        "cost": 880,
+        "description": "<mainText><stats><attention> 25</attention> Magic Resist<br><attention> 7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Mana Font:</jadeUnique> Increases <scaleMana>Mana Regen</scaleMana> by 1% per 1% of missing <scaleMana>Mana</scaleMana>.</mainText>"
+      },
+      "id": "773028",
+      "names": {
+        "en": "Chalice of Harmony"
+      },
+      "slug": "chalice-of-harmony"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "CriticalStrike"
+        ],
+        "cost": 3800,
+        "description": "<mainText><stats><attention> 70</attention> Attack Damage<br><attention> 25%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Infinite Precision:</jadeUnique> Critical strikes deal <physicalDamage>250% damage</physicalDamage> instead of 200%.</mainText>"
+      },
+      "id": "773031",
+      "names": {
+        "en": "Infinity Edge"
+      },
+      "slug": "infinity-edge"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "ArmorPenetration"
+        ],
+        "cost": 2300,
+        "description": "<mainText><stats><attention> 40</attention> Attack Damage</stats><br><br><jadeUnique>Piercing Volley:</jadeUnique> You ignore <armorPen>35%</armorPen> of your opponent's <scaleArmor>Armor</scaleArmor>.</mainText>"
+      },
+      "id": "773035",
+      "names": {
+        "en": "Last Whisper"
+      },
+      "slug": "last-whisper"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "ManaRegen",
+          "Aura"
+        ],
+        "cost": 300,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Aura - Mana Warp:</jadeUnique> Grants nearby allied champions <scaleMana>5 Mana Regen</scaleMana> per 5 seconds.</mainText>"
+      },
+      "id": "773037",
+      "names": {
+        "en": "Mana Manipulator"
+      },
+      "slug": "mana-manipulator"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [],
+        "cost": 2700,
+        "description": "<mainText><stats><attention> 1000</attention> Mana<br><attention> 60</attention> Ability Power<br><attention> 10</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Insight:</jadeUnique> Grants <scaleAP>Ability Power</scaleAP> equal to <scaleMana>3% of maximum Mana</scaleMana>.<br> <jadeUnique>Active</jadeUnique>  120s<br>Consumes <scaleMana>20</scaleMana>% of current Mana to grant a <shield>Shield</shield> for 3 seconds that absorbs damage equal to <shield>150</shield> plus the amount of Mana consumed (120 second cooldown).<br><br></mainText>"
+      },
+      "id": "773040",
+      "names": {
+        "en": "Seraph's Embrace"
+      },
+      "slug": "seraph-s-embrace"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage"
+        ],
+        "cost": 1235,
+        "description": "<mainText><stats><attention> 20</attention> Ability Power</stats><br><br><jadeUnique>Soul Capture:</jadeUnique> Grants <scaleAP>8 Ability Power</scaleAP> per stack. Grants 2 stacks for a kill or 1 stack for an assist (max 20 stacks). A third of the stacks are lost upon death. At 20 stacks, grants 15% Cooldown Reduction.</mainText>"
+      },
+      "id": "773041",
+      "names": {
+        "en": "Mejai's Soulstealer"
+      },
+      "slug": "mejai-s-soulstealer"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "OnHit"
+        ],
+        "cost": 2100,
+        "description": "<mainText><stats><attention> 20</attention> Attack Damage<br><attention> 1000</attention> Mana<br><attention> 7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Awe:</jadeUnique> Grants bonus <physicalDamage> Attack Damage</physicalDamage> equal to <scaleMana>2% of maximum Mana.</scaleMana><br><jadeUnique>UNIQUE Toggle:</jadeUnique> Single target Spells and Attacks (On-Hit) consume <scaleMana>3%</scaleMana> of current Mana to deal bonus <physicalDamage>physical damage</physicalDamage> equal to twice the amount of <scaleMana>Mana</scaleMana> consumed.</mainText>"
+      },
+      "id": "773042",
+      "names": {
+        "en": "Muramana"
+      },
+      "slug": "muramana"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Damage",
+          "OnHit"
+        ],
+        "cost": 1250,
+        "description": "<mainText><stats><attention> 200</attention> Health<br><attention> 20</attention> Attack Damage</stats><br><br><jadeUnique>Rage:</jadeUnique> Basic Attacks grant <speed>20 Move Speed</speed> for 2 seconds On-Hit.<br>Kills grant <speed>60 Move Speed</speed> for 2 seconds.</mainText>"
+      },
+      "id": "773044",
+      "names": {
+        "en": "Phage"
+      },
+      "slug": "phage"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed",
+          "NonbootsMovement"
+        ],
+        "cost": 2800,
+        "description": "<mainText><stats><attention> 50%</attention> Attack Speed<br><attention> 30%</attention> Critical Strike Chance<br><attention> 5%</attention> Move Speed</stats><br><br><jadeUnique>Ghostly Waltz:</jadeUnique> Champion can move through units.</mainText>"
+      },
+      "id": "773046",
+      "names": {
+        "en": "Phantom Dancer"
+      },
+      "slug": "phantom-dancer"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "Boots"
+        ],
+        "cost": 1000,
+        "description": "<mainText><stats><attention> 25</attention> Armor</stats><br><br><jadeUnique>Ninja Footwork:</jadeUnique> Blocks <scaleArmor>10%</scaleArmor> of the damage from Basic Attacks.<br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed></mainText>"
+      },
+      "id": "773047",
+      "names": {
+        "en": "Ninja Tabi"
+      },
+      "slug": "ninja-tabi"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Damage",
+          "LifeSteal",
+          "CooldownReduction",
+          "Aura"
+        ],
+        "cost": 2550,
+        "description": "<mainText><stats><attention> 250</attention> Health<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Aura - Triumph:</jadeUnique> Grants nearby allied champions <lifeSteal>10% Life Steal</lifeSteal> and <physicalDamage>20 Attack Damage</physicalDamage>.</mainText>"
+      },
+      "id": "773050",
+      "names": {
+        "en": "Stark's Fervor"
+      },
+      "slug": "stark-s-fervor"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Armor"
+        ],
+        "cost": 650,
+        "description": "<mainText><stats><attention> 20</attention> Armor</stats><br><br><jadeUnique>Aura - Valor:</jadeUnique> Grants nearby allied champions <healing>7 Health Regen</healing> per 5 seconds.</mainText>"
+      },
+      "id": "773052",
+      "names": {
+        "en": "Emblem of Valor"
+      },
+      "slug": "emblem-of-valor"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Health",
+          "HealthRegen",
+          "SpellDamage",
+          "ManaRegen"
+        ],
+        "cost": 2835,
+        "description": "<mainText><stats><attention> 350</attention> Health<br><attention> 50</attention> Ability Power<br><attention> 15</attention> Health Regen per 5 seconds<br><attention> 15</attention> Mana Regen per 5 seconds</stats><br><br> <jadeUnique>Active</jadeUnique>  120s<br>Prevents nearby enemy turrets from attacking for 2.5 seconds. This effect cannot be used against the same turret more than once every 7.5 seconds.</mainText>"
+      },
+      "id": "773056",
+      "names": {
+        "en": "Ohmwrecker"
+      },
+      "slug": "ohmwrecker"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "Mana"
+        ],
+        "cost": 1200,
+        "description": "<mainText><stats><attention> 200</attention> Mana<br><attention> 25</attention> Ability Power</stats><br><br><jadeUnique>Spellblade:</jadeUnique> After using an ability, the next Basic Attack deals bonus <physicalDamage>physical damage</physicalDamage> equal to base <physicalDamage>Attack Damage</physicalDamage> On-Hit (2 second cooldown).</mainText>"
+      },
+      "id": "773057",
+      "names": {
+        "en": "Sheen"
+      },
+      "slug": "sheen"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Armor",
+          "SpellDamage",
+          "CooldownReduction",
+          "Aura"
+        ],
+        "cost": 2360,
+        "description": "<mainText><stats><attention> 40</attention> Ability Power<br><attention> 30</attention> Armor<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Aura - Leadership:</jadeUnique> Grants nearby allies <healing>10 Health Regen</healing> per 5 seconds. Nearby allied minions deal 15% increased damage.<br> <jadeUnique>Active</jadeUnique>  180s<br>Empowers a nearby siege or super minion with an additional <healing> Health</healing>, <scaleArmor>40 Armor</scaleArmor>, <attackSpeed>50% Attack Speed</attackSpeed>, and 75 Attack Range and grants all gold the unit earns.</mainText>"
+      },
+      "id": "773060",
+      "names": {
+        "en": "Banner of Command"
+      },
+      "slug": "banner-of-command"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "ManaRegen",
+          "Aura",
+          "CooldownReduction"
+        ],
+        "cost": 2285,
+        "description": "<mainText><stats><attention> 520</attention> Health</stats><br><br><jadeUnique>Whispers of the Dead:</jadeUnique> Nearby allied Champions gain 10% Cooldown Reduction and <scaleMana>12 Mana Regen</scaleMana> per 5 seconds.</mainText>"
+      },
+      "id": "773063",
+      "names": {
+        "en": "Soul Shroud"
+      },
+      "slug": "soul-shroud"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "HealthRegen",
+          "NonbootsMovement"
+        ],
+        "cost": 2610,
+        "description": "<mainText><stats><attention> 76</attention> Magic Resist<br><attention> 8%</attention> Move Speed<br><attention> 20</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Steadfast</jadeUnique>: Regenerate an additional <scaleHealth> health</scaleHealth> per 5 seconds.</mainText>"
+      },
+      "id": "773064",
+      "names": {
+        "en": "Force of Nature"
+      },
+      "slug": "force-of-nature"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellBlock",
+          "HealthRegen",
+          "CooldownReduction"
+        ],
+        "cost": 2750,
+        "description": "<mainText><stats><attention> 400</attention> Health<br><attention> 55</attention> Magic Resist<br><attention> 4</attention> Health Regen per 5 seconds<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Lifeforce:</jadeUnique> Increases <healing>self-healing</healing>, <healing>Health Regen</healing>, <lifeSteal>Lifesteal</lifeSteal>, and <lifeSteal>Spell Vamp</lifeSteal> effects by 20%.</mainText>"
+      },
+      "id": "773065",
+      "names": {
+        "en": "Spirit Visage"
+      },
+      "slug": "spirit-visage"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "CooldownReduction"
+        ],
+        "cost": 850,
+        "description": "<mainText><stats><attention> 200</attention> Health</stats><br><br><jadeUnique>Kindlespark:</jadeUnique> 10% Cooldown Reduction</mainText>"
+      },
+      "id": "773067",
+      "names": {
+        "en": "Kindlegem"
+      },
+      "slug": "kindlegem"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Armor"
+        ],
+        "cost": 2650,
+        "description": "<mainText><stats><attention> 450</attention> Health<br><attention> 45</attention> Armor</stats><br><br><jadeUnique>Searing Heat:</jadeUnique> Deals <magicDamage>40 magic damage</magicDamage> per second to nearby enemies.</mainText>"
+      },
+      "id": "773068",
+      "names": {
+        "en": "Sunfire Cape"
+      },
+      "slug": "sunfire-cape"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Health",
+          "HealthRegen",
+          "ManaRegen",
+          "NonbootsMovement",
+          "CooldownReduction"
+        ],
+        "cost": 2100,
+        "description": "<mainText><stats><attention> 250</attention> Health<br><attention> 10</attention> Health Regen per 5 seconds<br><attention> 10</attention> Mana Regen per 5 seconds<br><attention> 10%</attention> Cooldown Reduction</stats><br><br> <jadeUnique>Active</jadeUnique>  60s<br>Grants nearby allies <speed>40% Move Speed</speed> for 3 seconds.</mainText>"
+      },
+      "id": "773069",
+      "names": {
+        "en": "Shurelya's Reverie"
+      },
+      "slug": "shurelya-s-reverie"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Mana",
+          "ManaRegen"
+        ],
+        "cost": 700,
+        "description": "<mainText><stats><attention> 250</attention> Mana<br><attention> 7</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Mana Charge: </jadeUnique>Grants <scaleMana>4 maximum Mana</scaleMana> (max <scaleMana>750 Mana</scaleMana>) for each spell cast and Mana expenditure (occurs up to 2 times every 4 seconds).<br><br></mainText>"
+      },
+      "id": "773070",
+      "names": {
+        "en": "Tear of the Goddess"
+      },
+      "slug": "tear-of-the-goddess"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Damage",
+          "OnHit",
+          "CooldownReduction",
+          "ArmorPenetration"
+        ],
+        "cost": 3000,
+        "description": "<mainText><stats><attention> 200</attention> Health<br><attention> 50</attention> Attack Damage<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Wicked Edge:</jadeUnique> <armorPen>10 Lethality</armorPen><br><jadeUnique>Cleaving Strike:</jadeUnique> Dealing <physicalDamage>physical damage</physicalDamage> to an enemy champion reduces their <scaleArmor>Armor by 5%</scaleArmor> for 4 seconds (stacks up to 5 times, up to 25%).</mainText>"
+      },
+      "id": "773071",
+      "names": {
+        "en": "The Black Cleaver"
+      },
+      "slug": "the-black-cleaver"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "LifeSteal"
+        ],
+        "cost": 3200,
+        "description": "<mainText><stats><attention> 70</attention> Attack Damage<br><attention> 12%</attention> Life Steal</stats><br><br><jadeUnique>Bloodthirst:</jadeUnique> Grants <physicalDamage>1 Attack Damage</physicalDamage> and <lifeSteal>0.2% Life Steal</lifeSteal> per stack (max <physicalDamage>30 Attack Damage</physicalDamage> and <lifeSteal>6% Life Steal</lifeSteal>). Grants 1 stack per unit kill (max 30 stacks). Half of the stacks are lost upon death.</mainText>"
+      },
+      "id": "773072",
+      "names": {
+        "en": "The Bloodthirster"
+      },
+      "slug": "the-bloodthirster"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Armor",
+          "Bilgewater"
+        ],
+        "cost": 3000,
+        "description": "<mainText><stats><attention> 450</attention> Health<br><attention> 45</attention> Armor</stats><br><br><jadeUnique>Excessive Heat:</jadeUnique> Deals <magicDamage>40 magic damage</magicDamage> per second to nearby enemies.</mainText>"
+      },
+      "id": "773073",
+      "names": {
+        "en": "Stack of Sunfire Capes"
+      },
+      "slug": "stack-of-sunfire-capes"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Damage",
+          "LifeSteal",
+          "OnHit"
+        ],
+        "cost": 3300,
+        "description": "<mainText><stats><attention> 75</attention> Attack Damage<br><attention> 12%</attention> Life Steal<br><attention> 15</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Insatiable Hunger:</jadeUnique> <lifeSteal>Life Steal</lifeSteal> applies to damage dealt by this item.<br><jadeUnique>Cleave:</jadeUnique> Basic Attacks deal 20% to 60% of total <physicalDamage>Attack Damage</physicalDamage> as bonus <physicalDamage>physical damage</physicalDamage> to enemies near the target On-Hit (enemies closest to the target take the most damage). <jadeUnique>Active</jadeUnique>  10s<br>Deals 60% to 100% of total <physicalDamage>Attack Damage</physicalDamage> as <physicalDamage>physical damage</physicalDamage> to nearby enemy units (closest enemies take the most damage).</mainText>"
+      },
+      "id": "773074",
+      "names": {
+        "en": "Ravenous Hydra"
+      },
+      "slug": "ravenous-hydra"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor"
+        ],
+        "cost": 2200,
+        "description": "<mainText><stats><attention> 100</attention> Armor</stats><br><br><jadeUnique>Enchanted Spikes:</jadeUnique> Upon being hit by a Basic Attack, returns 30% of the incoming damage (before being reduced by defenses) to the attacker as <magicDamage>magic damage</magicDamage>.</mainText>"
+      },
+      "id": "773075",
+      "names": {
+        "en": "Thornmail"
+      },
+      "slug": "thornmail"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Damage",
+          "OnHit"
+        ],
+        "cost": 1900,
+        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 15</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Cleave:</jadeUnique> Basic Attacks deal 20% to 60% of total <physicalDamage>Attack Damage</physicalDamage> as bonus <physicalDamage>physical damage</physicalDamage> to enemies near the target On-Hit (enemies closest to the target take the most damage). <jadeUnique>Active</jadeUnique>  10s<br>Deals 60% to 100% of total Attack Damage as <physicalDamage>physical damage</physicalDamage> to nearby enemy units (closest enemies take the most damage).</mainText>"
+      },
+      "id": "773077",
+      "names": {
+        "en": "Tiamat"
+      },
+      "slug": "tiamat"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Damage",
+          "CriticalStrike",
+          "AttackSpeed",
+          "SpellDamage",
+          "Mana",
+          "NonbootsMovement",
+          "OnHit",
+          "Slow"
+        ],
+        "cost": 3628,
+        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 30</attention> Ability Power<br><attention> 30%</attention> Attack Speed<br><attention> 10%</attention> Critical Strike Chance<br><attention> 8%</attention> Move Speed<br><attention> 250</attention> Health<br><attention> 200</attention> Mana</stats><br><br><jadeUnique>Rage:</jadeUnique> Basic Attacks grant <speed>20 Move Speed</speed> for 2 seconds On-Hit. Kills grant <speed>60 Move Speed</speed> for 2 seconds.<br><jadeUnique>Spellblade of Tons of Damage:</jadeUnique> After using an ability, the next Basic Attack deals bonus <physicalDamage>physical damage</physicalDamage> equal to <physicalDamage>200% of base Attack Damage</physicalDamage> On-Hit (2 second cooldown).</mainText>"
+      },
+      "id": "773078",
+      "names": {
+        "en": "Trinity Force"
+      },
+      "slug": "trinity-force"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "Slow"
+        ],
+        "cost": 1000,
+        "description": "<mainText><stats><attention> 50</attention> Armor</stats><br><br><jadeUnique>Cold Steel:</jadeUnique> When hit by Basic Attacks, reduces the attacker's <attackSpeed>Attack Speed</attackSpeed> by 15% for 1 second.</mainText>"
+      },
+      "id": "773082",
+      "names": {
+        "en": "Warden's Mail"
+      },
+      "slug": "warden-s-mail"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "HealthRegen"
+        ],
+        "cost": 3000,
+        "description": "<mainText><stats><attention> 920</attention> Health<br><attention> 10</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Permanently gain <scaleHealth>3.5 Health</scaleHealth> and <healing>0.1 Health Regen</healing> per 5 sec. per stack. 1 stack is gained per minion or monster kill and 10 stacks are gained per Takedown. Maximum bonuses: <scaleHealth> Health</scaleHealth> and <healing> Health Regen</healing> per 5 seconds.</mainText>"
+      },
+      "id": "773083",
+      "names": {
+        "en": "Warmog's Armor"
+      },
+      "slug": "warmog-s-armor"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "Damage",
+          "Mana"
+        ],
+        "cost": 2250,
+        "description": "<mainText><stats><attention> 500</attention> Health<br><attention> 450</attention> Mana<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Innervation</jadeUnique>: Restore <healing>60 Health</healing> and <scaleMana>25 Mana</scaleMana> over 2 seconds to the lowest-Health nearby allied Champion whenever you use an Ability. <keywordMajor>Innervation</keywordMajor> has a 3 second cooldown.</mainText>"
+      },
+      "id": "773084",
+      "names": {
+        "en": "Innervating Locket"
+      },
+      "slug": "innervating-locket"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed",
+          "OnHit"
+        ],
+        "cost": 2400,
+        "description": "<mainText><stats><attention> 70%</attention> Attack Speed</stats><br><br><jadeUnique>Hurricane Volley:</jadeUnique> When Attacking, bolts are fired at up to 2 enemies near the target, each dealing each dealing <physicalDamage> physical damage</physicalDamage>. These bolts apply on-hit effects.</mainText>"
+      },
+      "id": "773085",
+      "names": {
+        "en": "Runaan's Hurricane"
+      },
+      "slug": "runaan-s-hurricane"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed",
+          "NonbootsMovement"
+        ],
+        "cost": 1175,
+        "description": "<mainText><stats><attention> 18%</attention> Attack Speed<br><attention> 10%</attention> Critical Strike Chance<br><attention> 5%</attention> Move Speed</stats><br><br></mainText>"
+      },
+      "id": "773086",
+      "names": {
+        "en": "Zeal"
+      },
+      "slug": "zeal"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed",
+          "NonbootsMovement",
+          "OnHit"
+        ],
+        "cost": 2500,
+        "description": "<mainText><stats><attention> 40%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance<br><attention> 6%</attention> Move Speed</stats><br><br><jadeUnique>Statikk Shank:</jadeUnique> Grants Static Charges upon moving or Attacking. At 100 Charges, Attacking expends all Charges to deal <magicDamage>100 bonus magic damage</magicDamage>  to up to 4 targets On-Hit (this damage can critically strike).</mainText>"
+      },
+      "id": "773087",
+      "names": {
+        "en": "Statikk Shiv"
+      },
+      "slug": "statikk-shiv"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage"
+        ],
+        "cost": 3300,
+        "description": "<mainText><stats><attention> 120</attention> Ability Power</stats><br><br><jadeUnique>Magical Opus:</jadeUnique> Increases <scaleAP>Ability Power by 30%</scaleAP>.</mainText>"
+      },
+      "id": "773089",
+      "names": {
+        "en": "Rabadon's Deathcap"
+      },
+      "slug": "rabadon-s-deathcap"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "AttackSpeed",
+          "OnHit"
+        ],
+        "cost": 2150,
+        "description": "<mainText><stats><attention> 40%</attention> Attack Speed<br><attention> 25</attention> Magic Resist</stats><br><br><jadeUnique>Feedback Loop:</jadeUnique> Basic Attacks deal <magicDamage>42 bonus magic damage</magicDamage> On-Hit and increase your<scaleMR> Magic Resist</scaleMR> by 5 for 5 seconds (stacks up to 4 times.)</mainText>"
+      },
+      "id": "773091",
+      "names": {
+        "en": "Wit's End"
+      },
+      "slug": "wit-s-end"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellDamage",
+          "ManaRegen",
+          "Aura",
+          "Slow",
+          "GoldPer"
+        ],
+        "cost": 1600,
+        "description": "<mainText><stats><attention> 45</attention> Ability Power</stats><br><br><jadeUnique>Lucky Shadow:</jadeUnique> <gold>4 Gold</gold> per 10 seconds<br><jadeUnique>Mana Infusion:</jadeUnique> Grants nearby allied champions <scaleMana>5 Mana Regen</scaleMana> per 5 seconds. <jadeUnique>Active</jadeUnique>  60s<br>Surrounds an ally with a blizzard for 4 seconds that <status>Slows</status> nearby enemy <speed>Movement Speed</speed> by 30%.</mainText>"
+      },
+      "id": "773092",
+      "names": {
+        "en": "Shard of True Ice"
+      },
+      "slug": "shard-of-true-ice"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike",
+          "GoldPer"
+        ],
+        "cost": 800,
+        "description": "<mainText><stats><attention> 10%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Avarice:</jadeUnique> <gold>3 Gold</gold> per 10 seconds<br><jadeUnique>Greed:</jadeUnique> Grants <gold>2 Gold</gold> upon killing a unit.</mainText>"
+      },
+      "id": "773093",
+      "names": {
+        "en": "Avarice Blade"
+      },
+      "slug": "avarice-blade"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "HealthRegen",
+          "ManaRegen",
+          "GoldPer"
+        ],
+        "cost": 700,
+        "description": "<mainText><stats><attention> 7</attention> Health Regen per 5 seconds<br><attention> 9</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Transmute:</jadeUnique><gold> 5 Gold</gold> per 10 seconds.</mainText>"
+      },
+      "id": "773096",
+      "names": {
+        "en": "Philosopher's Stone"
+      },
+      "slug": "philosopher-s-stone"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage"
+        ],
+        "cost": 765,
+        "description": "<mainText><stats><attention> 25</attention> Ability Power</stats><br><br><jadeUnique>Lucky Shadow:</jadeUnique><gold> 4 Gold</gold> per 10 seconds</mainText>"
+      },
+      "id": "773098",
+      "names": {
+        "en": "Lucky Pick"
+      },
+      "slug": "lucky-pick"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "Mana",
+          "NonbootsMovement"
+        ],
+        "cost": 3000,
+        "description": "<mainText><stats><attention> 80</attention> Ability Power<br><attention> 250</attention> Mana<br><attention> 5%</attention> Move Speed</stats><br><br><jadeUnique>Spellblade of The Arcane:</jadeUnique> After using an ability, the next Basic Attack deals <magicDamage> bonus magic damage</magicDamage> On-Hit (2 second cooldown).</mainText>"
+      },
+      "id": "773100",
+      "names": {
+        "en": "Lich Bane"
+      },
+      "slug": "lich-bane"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed",
+          "CooldownReduction"
+        ],
+        "cost": 1250,
+        "description": "<mainText><stats><attention> 40%</attention> Attack Speed</stats><br><br><jadeUnique>Light as a Feather: </jadeUnique>10% Cooldown Reduction</mainText>"
+      },
+      "id": "773101",
+      "names": {
+        "en": "Stinger"
+      },
+      "slug": "stinger"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "HealthRegen",
+          "SpellDamage"
+        ],
+        "cost": 2750,
+        "description": "<mainText><stats><attention> 450</attention> Health<br><attention> 55</attention> Magic Resist</stats><br><br><jadeUnique>Intangibility:</jadeUnique> Grants a <shield>Spell Shield</shield> that blocks the next enemy ability. This <shield>Shield</shield> refreshes after no damage is taken from enemy champions for 25 seconds.<br><jadeUnique>Shadow Mending:</jadeUnique> Grants <healing>45 Health Regen</healing> per 5 for up to 10 seconds after taking damage from an enemy champion or when the <shield>Spell Shield</shield> breaks.</mainText>"
+      },
+      "id": "773102",
+      "names": {
+        "en": "Banshee's Veil"
+      },
+      "slug": "banshee-s-veil"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellBlock",
+          "Armor",
+          "Aura"
+        ],
+        "cost": 2150,
+        "description": "<mainText><stats><attention> 250</attention> Health<br><attention> 20</attention> Armor<br><attention> 20</attention> Magic Resist</stats><br><br><jadeUnique>Aura - Legion:</jadeUnique> Grants nearby allies <scaleArmor> 10 Armor</scaleArmor> and <scaleMR> 15 Magic Resist</scaleMR>. This effect is increased by 50% on allied minions.</mainText>"
+      },
+      "id": "773105",
+      "names": {
+        "en": "Aegis of the Legion"
+      },
+      "slug": "aegis-of-the-legion"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "OnHit",
+          "Jungle"
+        ],
+        "cost": 700,
+        "description": "<mainText><stats><attention> 25</attention> Armor</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks have a 25% chance to deal <magicDamage>300 bonus magic damage</magicDamage> to minions and monsters On-Hit.</mainText>"
+      },
+      "id": "773106",
+      "names": {
+        "en": "Madred's Razors"
+      },
+      "slug": "madred-s-razors"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellBlock",
+          "HealthRegen",
+          "Armor",
+          "Aura"
+        ],
+        "cost": 2950,
+        "description": "<mainText><stats><attention> 300</attention> Health<br><attention> 20</attention> Armor<br><attention> 30</attention> Magic Resist</stats><br><br><jadeUnique>Aura - Legion:</jadeUnique> Grants nearby allies <scaleArmor> 10 Armor</scaleArmor> and <scaleMR> 25 Magic Resist</scaleMR>. This effect is increased by 50% on allied minions.</mainText>"
+      },
+      "id": "773107",
+      "names": {
+        "en": "Runic Bulwark"
+      },
+      "slug": "runic-bulwark"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "CooldownReduction"
+        ],
+        "cost": 820,
+        "description": "<mainText><stats><attention> 30</attention> Ability Power</stats><br><br><jadeUnique>Fiendish Recall:</jadeUnique> 10% Cooldown Reduction</mainText>"
+      },
+      "id": "773108",
+      "names": {
+        "en": "Fiendish Codex"
+      },
+      "slug": "fiendish-codex"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "Damage",
+          "AttackSpeed",
+          "OnHit"
+        ],
+        "cost": 3800,
+        "description": "<mainText><stats><attention> 40</attention> Attack Damage<br><attention> 40%</attention> Attack Speed<br><attention> 25</attention> Armor</stats><br><br><jadeUnique>Seeing Red</jadeUnique>: Attacks deal <healing>4% of the target's maximum Health</healing> as <magicDamage>bonus magic damage</magicDamage> on-hit.<br><br><rules>Deals a maximum of 120 bonus damage to monsters.</rules></mainText>"
+      },
+      "id": "773109",
+      "names": {
+        "en": "Madred's Bloodrazor"
+      },
+      "slug": "madred-s-bloodrazor"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "Mana",
+          "CooldownReduction",
+          "Aura"
+        ],
+        "cost": 2900,
+        "description": "<mainText><stats><attention> 95</attention> Armor<br><attention> 400</attention> Mana<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Aura - Frostbite:</jadeUnique> Reduces the <attackSpeed>Attack Speed</attackSpeed> of nearby enemies by 20%.</mainText>"
+      },
+      "id": "773110",
+      "names": {
+        "en": "Frozen Heart"
+      },
+      "slug": "frozen-heart"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "Boots",
+          "Tenacity"
+        ],
+        "cost": 1200,
+        "description": "<mainText><stats><attention> 25</attention> Magic Resist</stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
+      },
+      "id": "773111",
+      "names": {
+        "en": "Mercury's Treads"
+      },
+      "slug": "mercury-s-treads"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed",
+          "SpellDamage",
+          "OnHit",
+          "MagicPenetration"
+        ],
+        "cost": 2035,
+        "description": "<mainText><stats><attention> 25</attention> Ability Power<br><attention> 45%</attention> Attack Speed</stats><br><br><jadeUnique>Cursed Blade:</jadeUnique> Basic Attacks deal <magicDamage> bonus magic damage</magicDamage> On-Hit and remove <scaleMR>4 Magic Resist</scaleMR> from the target for 8 seconds (stacks up to 7 times).</mainText>"
+      },
+      "id": "773114",
+      "names": {
+        "en": "Malady"
+      },
+      "slug": "malady"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed",
+          "SpellDamage",
+          "CooldownReduction"
+        ],
+        "cost": 2500,
+        "description": "<mainText><stats><attention> 65</attention> Ability Power<br><attention> 50%</attention> Attack Speed<br><attention> 20%</attention> Cooldown Reduction</stats><br><br></mainText>"
+      },
+      "id": "773115",
+      "names": {
+        "en": "Nashor's Tooth"
+      },
+      "slug": "nashor-s-tooth"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellDamage",
+          "Slow"
+        ],
+        "cost": 2900,
+        "description": "<mainText><stats><attention> 500</attention> Health<br><attention> 80</attention> Ability Power</stats><br><br><jadeUnique>Frost Crystal:</jadeUnique> Dealing spell damage <status>Slows</status> the target's <speed>Move Speed</speed> by 35% for 1.5 seconds (15% for multi-target and damage-over-time spells).</mainText>"
+      },
+      "id": "773116",
+      "names": {
+        "en": "Rylai's Crystal Scepter"
+      },
+      "slug": "rylai-s-crystal-scepter"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Boots"
+        ],
+        "cost": 1000,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed>. Increases to <speed>105 Move Speed</speed> when out of combat for 5 seconds.</mainText>"
+      },
+      "id": "773117",
+      "names": {
+        "en": "Boots of Mobility"
+      },
+      "slug": "boots-of-mobility"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "CriticalStrike",
+          "OnHit"
+        ],
+        "cost": 1900,
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Rending Strike:</jadeUnique> Basic Attacks inflict <status>Grievous Wounds</status> on enemy champions for 1.5 seconds On-Hit.<br><br><jadeRules>(<status>Grievous Wounds</status> reduces incoming healing and regeneration effects by 50%.)</jadeRules></mainText>"
+      },
+      "id": "773123",
+      "names": {
+        "en": "Executioner's Calling"
+      },
+      "slug": "executioner-s-calling"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "AttackSpeed",
+          "LifeSteal",
+          "SpellDamage",
+          "OnHit",
+          "SpellVamp"
+        ],
+        "cost": 2600,
+        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 40</attention> Ability Power</stats><br><br><jadeUnique>Growing Fury:</jadeUnique> Basic Attacks (on attack) and spell casts grant <attackSpeed>4% Attack Speed</attackSpeed> and <scaleAP>4 Ability Power</scaleAP> for 8 seconds (stacks up to 8 times).<br><jadeUnique>Enrage:</jadeUnique> Falling below 50% Health grants <attackSpeed>20% Attack Speed</attackSpeed>, <lifeSteal>10% Life Steal</lifeSteal>, and <lifeSteal>10% Spell Vamp</lifeSteal> until out of combat (30 second cooldown).</mainText>"
+      },
+      "id": "773124",
+      "names": {
+        "en": "Guinsoo's Rageblade"
+      },
+      "slug": "guinsoo-s-rageblade"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellDamage",
+          "CooldownReduction"
+        ],
+        "cost": 3100,
+        "description": "<mainText><stats><attention> 120</attention> Ability Power<br><attention> 10%</attention> Cooldown Reduction</stats><br><br> <jadeUnique>Active</jadeUnique>  60s<br>Deals 15% of target champion's maximum Health in <magicDamage>magic damage</magicDamage> and increases all subsequent <magicDamage>magic damage</magicDamage> taken by the target by 20% for 4 seconds.</mainText>"
+      },
+      "id": "773128",
+      "names": {
+        "en": "Deathfire Grasp"
+      },
+      "slug": "deathfire-grasp"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed"
+        ],
+        "cost": 2150,
+        "description": "<mainText><stats></stats><br><br><attention> 45%</attention> Attack Speed.<br><br><jadeUnique>Forsaken: </jadeUnique>This item does not grant any <attackSpeed>Attack Speed</attackSpeed> while on cooldown. Champion kills reduce the current cooldown by 50%. <jadeUnique>Active</jadeUnique>  60s<br>Grants <attackSpeed>100% Attack Speed</attackSpeed> and <scaleCrit>100% Critical Strike Chance</scaleCrit> for 3 seconds or 3 critical strikes.</mainText>"
+      },
+      "id": "773131",
+      "names": {
+        "en": "Sword of the Divine"
+      },
+      "slug": "sword-of-the-divine"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "GoldPer"
+        ],
+        "cost": 825,
+        "description": "<mainText><stats><attention> 200</attention> Health</stats><br><br><jadeUnique>Shelling Out:</jadeUnique><gold> 5 Gold</gold> per 10 seconds.</mainText>"
+      },
+      "id": "773132",
+      "names": {
+        "en": "Heart of Gold"
+      },
+      "slug": "heart-of-gold"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "CooldownReduction",
+          "ArmorPenetration"
+        ],
+        "cost": 1337,
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage</stats><br><br><jadeUnique>Onslaught:</jadeUnique> 10% Cooldown Reduction<br><jadeUnique>Crushing Blow:</jadeUnique> <armorPen>10 Lethality</armorPen></mainText>"
+      },
+      "id": "773134",
+      "names": {
+        "en": "The Brutalizer"
+      },
+      "slug": "the-brutalizer"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "MagicPenetration"
+        ],
+        "cost": 2295,
+        "description": "<mainText><stats><attention> 70</attention> Ability Power</stats><br><br><jadeUnique>Touch of the Void:</jadeUnique> Magic damage ignores <status>35%</status> of the target's <scaleMR>Magic Resist</scaleMR>.</mainText>"
+      },
+      "id": "773135",
+      "names": {
+        "en": "Void Staff"
+      },
+      "slug": "void-staff"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellDamage",
+          "MagicPenetration"
+        ],
+        "cost": 1485,
+        "description": "<mainText><stats><attention> 25</attention> Ability Power<br><attention> 200</attention> Health</stats><br><br><jadeUnique>Eyes of Pain:</jadeUnique> <status>15 Magic Penetration</status></mainText>"
+      },
+      "id": "773136",
+      "names": {
+        "en": "Haunting Guise"
+      },
+      "slug": "haunting-guise"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health"
+        ],
+        "cost": 1275,
+        "description": "<mainText><stats><attention> 180</attention> Health</stats><br><br><jadeUnique>Juggernaut:</jadeUnique> Grants <scaleHealth>32 Health</scaleHealth> per stack. Grants 2 stacks for a kill or 1 stack for an assist (maximum 20 stacks). A third of the stacks are lost upon death. At 20 stacks, reduces all damage taken by 15%.</mainText>"
+      },
+      "id": "773138",
+      "names": {
+        "en": "Leviathan"
+      },
+      "slug": "leviathan"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellBlock",
+          "Damage",
+          "NonbootsMovement"
+        ],
+        "cost": 3700,
+        "description": "<mainText><stats><attention> 60</attention> Attack Damage<br><attention> 45</attention> Magic Resist</stats><br><br> <jadeUnique>Active</jadeUnique>  90s<br>Removes all debuffs, and if champion is melee, also grants <speed>50% bonus Move Speed</speed> for 1 second.</mainText>"
+      },
+      "id": "773139",
+      "names": {
+        "en": "Mercurial Scimitar"
+      },
+      "slug": "mercurial-scimitar"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellBlock"
+        ],
+        "cost": 1550,
+        "description": "<mainText><stats><attention> 45</attention> Magic Resist</stats><br><br> <jadeUnique>Active</jadeUnique>  90s<br>Removes all debuffs.</mainText>"
+      },
+      "id": "773140",
+      "names": {
+        "en": "Quicksilver Sash"
+      },
+      "slug": "quicksilver-sash"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage"
+        ],
+        "cost": 1200,
+        "description": "<mainText><stats><attention> 10</attention> Attack Damage</stats><br><br><jadeUnique>Demonic Pact:</jadeUnique> Grants <physicalDamage>5 Attack Damage</physicalDamage> per stack. Grants 2 stacks for a kill or 1 stack for an assist (max 20 stacks). A third of the stacks are lost upon death. At 20 stacks, grants <speed>15% bonus Move Speed</speed>.</mainText>"
+      },
+      "id": "773141",
+      "names": {
+        "en": "Sword of the Occult"
+      },
+      "slug": "sword-of-the-occult"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Damage",
+          "CriticalStrike",
+          "AttackSpeed",
+          "NonbootsMovement",
+          "CooldownReduction",
+          "ArmorPenetration"
+        ],
+        "cost": 2700,
+        "description": "<mainText><stats><attention> 30</attention> Attack Damage<br><attention> 15%</attention> Critical Strike Chance<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Spirit Edge:</jadeUnique> <armorPen>20 Lethality</armorPen> <jadeUnique>Active</jadeUnique>  45s<br>Grants <speed>20% Move Speed</speed> and <attackSpeed>40% Attack Speed</attackSpeed> (lasts 6 seconds for melee champions, 4 seconds for ranged champions).</mainText>"
+      },
+      "id": "773142",
+      "names": {
+        "en": "Youmuu's Ghostblade"
+      },
+      "slug": "youmuu-s-ghostblade"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Health",
+          "Armor"
+        ],
+        "cost": 3125,
+        "description": "<mainText><stats><attention> 500</attention> Health<br><attention> 70</attention> Armor</stats><br><br><jadeUnique>Cold Steel:</jadeUnique> When hit by Basic Attacks, reduces the attacker's <attackSpeed>Attack Speed by 15%</attackSpeed> and <speed>Move Speed by 10%</speed> for 1 seconds. <jadeUnique>Active</jadeUnique>  60s<br><status>Slows</status> nearby enemy units by 35% for  seconds.</mainText>"
+      },
+      "id": "773143",
+      "names": {
+        "en": "Randuin's Omen"
+      },
+      "slug": "randuin-s-omen"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Damage",
+          "LifeSteal",
+          "Slow"
+        ],
+        "cost": 1400,
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage<br><attention> 12%</attention> Life Steal</stats><br><br> <jadeUnique>Active</jadeUnique>  90s<br>Deals <magicDamage>100 magic damage</magicDamage> and <status>Slows</status> the target champion's <speed>Move Speed by 25%</speed> for 2 seconds.</mainText>"
+      },
+      "id": "773144",
+      "names": {
+        "en": "Bilgewater Cutlass"
+      },
+      "slug": "bilgewater-cutlass"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "SpellVamp"
+        ],
+        "cost": 1200,
+        "description": "<mainText><stats><attention> 40</attention> Ability Power</stats><br><br><jadeUnique>Hex Bullets: </jadeUnique><lifeSteal>12% Spell Vamp</lifeSteal></mainText>"
+      },
+      "id": "773145",
+      "names": {
+        "en": "Hextech Revolver"
+      },
+      "slug": "hextech-revolver"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Damage",
+          "LifeSteal",
+          "SpellDamage",
+          "Slow",
+          "SpellVamp"
+        ],
+        "cost": 3400,
+        "description": "<mainText><stats><attention> 65</attention> Ability Power<br><attention> 45</attention> Attack Damage<br><attention> 12%</attention> Life Steal</stats><br><br><jadeUnique>Hex Cannon: </jadeUnique><lifeSteal>20% Spell Vamp</lifeSteal><br><jadeUnique>Reload:</jadeUnique> Basic Attacks (On-Hit) and single-target spells against champions reduce the cooldown of this item by 3 seconds. <jadeUnique>Active</jadeUnique>  60s<br>Deals <magicDamage> magic damage</magicDamage> and <status>Slows</status> the target champion's <speed>Move Speed by 40%</speed> for 2 seconds.</mainText>"
+      },
+      "id": "773146",
+      "names": {
+        "en": "Hextech Gunblade"
+      },
+      "slug": "hextech-gunblade"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellDamage",
+          "MagicPenetration"
+        ],
+        "cost": 2900,
+        "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 300</attention> Health</stats><br><br><jadeUnique>Eyes of Pain:</jadeUnique> <status>15 Magic Penetration</status><br><jadeUnique>Mana Burn:</jadeUnique> Dealing spell damage applies a damage-over-time effect for 3 seconds that deals <magicDamage>bonus magic damage equal to 2% of the target's current Health per second</magicDamage>. This bonus damage is doubled against movement-impaired units and capped at <magicDamage>100 damage per second</magicDamage> vs. monsters.</mainText>"
+      },
+      "id": "773151",
+      "names": {
+        "en": "Liandry's Torment"
+      },
+      "slug": "liandry-s-torment"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "Aura",
+          "SpellVamp"
+        ],
+        "cost": 2550,
+        "description": "<mainText><stats><attention> 50</attention> Ability Power</stats><br><br><jadeUnique>Aura - Tradition:</jadeUnique> Grants nearby allied champions <scaleAP>30 Ability Power</scaleAP> and <lifeSteal>20% Spellvamp</lifeSteal>.</mainText>"
+      },
+      "id": "773152",
+      "names": {
+        "en": "Will of the Ancients"
+      },
+      "slug": "will-of-the-ancients"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Damage",
+          "AttackSpeed",
+          "LifeSteal",
+          "OnHit"
+        ],
+        "cost": 3200,
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage<br><attention> 40%</attention> Attack Speed<br><attention> 15%</attention> Life Steal</stats><br><br><jadeUnique>Ruination:</jadeUnique> Basic Attacks deal <scaleHealth>5% of the target's current Health</scaleHealth> as bonus <physicalDamage>physical damage</physicalDamage> On-Hit. (Max 60 to Minions and Monsters) <jadeUnique>Active</jadeUnique>  90s<br>Deals <scaleHealth>15% max health</scaleHealth> to target champion (Min 100 Damage) and steals <speed>30%</speed> of their <speed>Move Speed</speed> for 3 seconds.</mainText>"
+      },
+      "id": "773153",
+      "names": {
+        "en": "Blade of The Ruined King"
+      },
+      "slug": "blade-of-the-ruined-king"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Armor",
+          "Damage",
+          "LifeSteal",
+          "Vision",
+          "Active",
+          "OnHit",
+          "Jungle"
+        ],
+        "cost": 2000,
+        "description": "<mainText><stats><attention> 30%</attention> Attack Speed<br><attention> 25</attention> Armor<br><attention> 15%</attention> Life Steal</stats><br><br><jadeUnique>Passive:</jadeUnique> Basic Attacks have a 25% chance to deal <magicDamage>500 bonus magic damage</magicDamage> to minions and monsters On-Hit.<br><br><jadeLimit>Transforms into <attention>Feral Flare</attention> after earning 30 large Monsters kills or Champion takedowns.</jadeLimit> <jadeUnique>Active</jadeUnique>  180s<br>Places an invisible Sight Ward that reveals the surrounding area for 180 seconds.</mainText>"
+      },
+      "id": "773154",
+      "names": {
+        "en": "Wriggle's Lantern"
+      },
+      "slug": "wriggle-s-lantern"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "Damage"
+        ],
+        "cost": 1350,
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage<br><attention> 25</attention> Magic Resist</stats><br><br><jadeUnique>Lifeline:</jadeUnique> Upon taking <magicDamage>magic damage</magicDamage> that would reduce Health below 30%, grants a <shield>Shield</shield> that absorbs <magicDamage>250 magic damage</magicDamage> for 5 seconds (90 second cooldown).</mainText>"
+      },
+      "id": "773155",
+      "names": {
+        "en": "Hexdrinker"
+      },
+      "slug": "hexdrinker"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "Damage"
+        ],
+        "cost": 3200,
+        "description": "<mainText><stats><attention> 60</attention> Attack Damage<br><attention> 40</attention> Magic Resist</stats><br><br><jadeUnique>Feeding Frenzy:</jadeUnique> Grants <physicalDamage>1 Attack Damage</physicalDamage> for every 2% of missing <scaleHealth>Health</scaleHealth>, up to a maximum of <physicalDamage>35 Attack Damage</physicalDamage>.<br><jadeUnique>Lifeline:</jadeUnique> Upon taking <magicDamage>magic damage</magicDamage> that would reduce <scaleHealth>Health</scaleHealth> below 30%, grants a <shield>Shield</shield> that absorbs <magicDamage>400 magic damage</magicDamage> for 5 seconds (90 second cooldown).</mainText>"
+      },
+      "id": "773156",
+      "names": {
+        "en": "Maw of Malmortius"
+      },
+      "slug": "maw-of-malmortius"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Armor",
+          "SpellDamage"
+        ],
+        "cost": 3260,
+        "description": "<mainText><stats><attention> 120</attention> Ability Power<br><attention> 50</attention> Armor</stats><br><br> <jadeUnique>Active</jadeUnique>  90s<br>Champion becomes <status>Invulnerable</status> and <status>Untargetable</status> for 2.5 seconds, but is unable to move, attack, cast spells, or use items during this time.</mainText>"
+      },
+      "id": "773157",
+      "names": {
+        "en": "Zhonya's Hourglass"
+      },
+      "slug": "zhonya-s-hourglass"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Boots",
+          "CooldownReduction"
+        ],
+        "cost": 1000,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Light Step:</jadeUnique>15% Cooldown Reduction<br><jadeUnique>Enhanced Movement:</jadeUnique> <speed>45 Move Speed</speed><br><br><flavorText>\"This item is dedicated in honor of Ionia's victory over Noxus in the Rematch for the Southern Provinces on 10 December, 20 CLE.\"</flavorText></mainText>"
+      },
+      "id": "773158",
+      "names": {
+        "en": "Ionian Boots of Lucidity"
+      },
+      "slug": "ionian-boots-of-lucidity"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Armor",
+          "Damage",
+          "LifeSteal",
+          "Vision",
+          "OnHit"
+        ],
+        "cost": 2000,
+        "description": "<mainText><stats><attention> 30%</attention> Attack Speed<br><attention> 25</attention> Armor<br><attention> 15%</attention> Life Steal</stats><br><br><jadeUnique>Feral Mark:</jadeUnique> Gain a Feral stack for each champion takedown scored and large monster killed. Basic Attacks deal <magicDamage>25 (+1 per Feral stack) bonus magic damage</magicDamage> on-hit. Minions and monsters have a 25% chance to take 425 more damage. <jadeUnique>Active</jadeUnique>  180s<br>Places an invisible Sight Ward that reveals the surrounding area for 180 seconds.</mainText>"
+      },
+      "id": "773160",
+      "names": {
+        "en": "Feral Flare"
+      },
+      "slug": "feral-flare"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "Armor",
+          "SpellDamage",
+          "Tenacity"
+        ],
+        "cost": 2600,
+        "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
+      },
+      "id": "773161",
+      "names": {
+        "en": "Moonflair Spellblade"
+      },
+      "slug": "moonflair-spellblade"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "CriticalStrike",
+          "AttackSpeed"
+        ],
+        "cost": 1330,
+        "description": "<mainText><stats><attention> 20%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
+      },
+      "id": "773162",
+      "names": {
+        "en": "Cloak and Dagger"
+      },
+      "slug": "cloak-and-dagger"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "ManaRegen",
+          "CooldownReduction"
+        ],
+        "cost": 2200,
+        "description": "<mainText><stats><attention> 75</attention> Ability Power<br><attention> 12</attention> Mana Regen per 5 seconds<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Morello's Hatred:</jadeUnique> Dealing magic damage to enemy champions below <scaleHealth>40% Health</scaleHealth> inflicts <status>Grievous Wounds</status> for 4 seconds.<br><br><jadeRules>(<status>Grievous Wounds</status> reduces incoming healing and regeneration effects by 50%.)</jadeRules></mainText>"
+      },
+      "id": "773165",
+      "names": {
+        "en": "Morellonomicon"
+      },
+      "slug": "morellonomicon"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "AttackSpeed",
+          "NonbootsMovement",
+          "CooldownReduction",
+          "Tenacity"
+        ],
+        "cost": 2850,
+        "description": "<mainText><stats><attention> 25</attention> Attack Damage<br><attention> 50%</attention> Attack Speed<br><attention> 10%</attention> Move Speed<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
+      },
+      "id": "773172",
+      "names": {
+        "en": "Zephyr"
+      },
+      "slug": "zephyr"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "HealthRegen",
+          "ManaRegen"
+        ],
+        "cost": 1100,
+        "description": "<mainText><stats><attention> 10</attention> Health Regen per 5 seconds<br><attention> 15</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Aid:</jadeUnique> <spellName>Heal, Clairvoyance</spellName> and <spellName>Clarity</spellName> summoner spell cooldowns are reduced by 30%.<br><jadeUnique>Eleisa's Blessing:</jadeUnique> Upon gaining 3 levels with this item, all effects of this item become permanent, and this item is consumed.</mainText>"
+      },
+      "id": "773173",
+      "names": {
+        "en": "Eleisa's Miracle"
+      },
+      "slug": "eleisa-s-miracle"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellBlock",
+          "SpellDamage",
+          "ManaRegen",
+          "CooldownReduction"
+        ],
+        "cost": 2600,
+        "description": "<mainText><stats><attention> 60</attention> Ability Power<br><attention> 40</attention> Magic Resist<br><attention> 20%</attention> Cooldown Reduction<br><attention> 15</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Rabble-Rousing:</jadeUnique> Restores <healing> Health</healing> and <scaleMana> Mana</scaleMana> on kill or assist.<br><jadeUnique>Mana Font:</jadeUnique> Increases <scaleMana>Mana Regen</scaleMana> by 1% for every 1% of missing Mana.</mainText>"
+      },
+      "id": "773174",
+      "names": {
+        "en": "Shushei's Mana Jug"
+      },
+      "slug": "shushei-s-mana-jug"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "AttackSpeed",
+          "OnHit"
+        ],
+        "cost": 1950,
+        "description": "<mainText><stats><attention> 50%</attention> Attack Speed<br><attention> 250</attention> Health</stats><br><br><jadeUnique>Ionic Charge:</jadeUnique> Every 4th Basic Attack unleases a chain of lightning, dealing <magicDamage>125 magic damage</magicDamage> to up to 4 targets in a 400 radius of each other. Targets cannot be hit twice by the same lightning.</mainText>"
+      },
+      "id": "773178",
+      "names": {
+        "en": "Ionic Spark"
+      },
+      "slug": "ionic-spark"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Health",
+          "HealthRegen",
+          "Armor",
+          "Aura"
+        ],
+        "cost": 2225,
+        "description": "<mainText><stats><attention> 300</attention> Health<br><attention> 35</attention> Armor</stats><br><br><jadeUnique>Solari Resilience:</jadeUnique> Grants nearby allied champions <healing>15 Health Regen</healing> per 5 seconds. <jadeUnique>Active</jadeUnique>  60s<br>Grants a <shield>Shield</shield> to nearby allies for 5 seconds that absorbs up to  damage.</mainText>"
+      },
+      "id": "773190",
+      "names": {
+        "en": "Locket of the Iron Solari"
+      },
+      "slug": "locket-of-the-iron-solari"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Armor",
+          "SpellDamage"
+        ],
+        "cost": 1160,
+        "description": "<mainText><stats><attention> 30</attention> Armor<br><attention> 20</attention> Ability Power</stats><br><br><jadeUnique>Seeker's Insight:</jadeUnique> Killing a unit grants 0.5 bonus <scaleArmor>Armor</scaleArmor> and <scaleAP>Ability Power.</scaleAP> This bonus stacks up to 30 times.</mainText>"
+      },
+      "id": "773191",
+      "names": {
+        "en": "Seeker's Armguard"
+      },
+      "slug": "seeker-s-armguard"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "SpellDamage",
+          "ManaRegen",
+          "OnHit",
+          "CooldownReduction",
+          "SpellVamp"
+        ],
+        "cost": 2000,
+        "description": "<mainText><stats><attention> 40</attention> Ability Power<br><attention> 10</attention> Mana Regen per 5 seconds<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Wraith Touch:</jadeUnique> <lifeSteal>20% Spell Vamp</lifeSteal><br><jadeUnique>Haunting Memories:</jadeUnique> Reduces the cooldown of <spellName>Smite</spellName> by 20%.<br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 30%.</mainText>"
+      },
+      "id": "773206",
+      "names": {
+        "en": "Spirit of the Spectral Wraith"
+      },
+      "slug": "spirit-of-the-spectral-wraith"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "HealthRegen",
+          "ManaRegen",
+          "OnHit",
+          "CooldownReduction",
+          "Tenacity"
+        ],
+        "cost": 2000,
+        "description": "<mainText><stats><attention> 500</attention> Health<br><attention> 14</attention> Health Regen per 5 seconds<br><attention> 7</attention> Mana Regen per 5 seconds<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 30%.<br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by 35%.</mainText>"
+      },
+      "id": "773207",
+      "names": {
+        "en": "Spirit of the Ancient Golem"
+      },
+      "slug": "spirit-of-the-ancient-golem"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "HealthRegen",
+          "Damage",
+          "ManaRegen",
+          "OnHit",
+          "CooldownReduction"
+        ],
+        "cost": 2000,
+        "description": "<mainText><stats><attention> 35</attention> Attack Damage<br><attention> 14</attention> Health Regen per 5 seconds<br><attention> 7</attention> Mana Regen per 5 seconds<br><attention> 10%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Butcher:</jadeUnique> Damage dealt to monsters increased by 30%.<br><jadeUnique>Touch of Flame:</jadeUnique> Basic Attacks and spells that do not inflict damage-over-time deal  bonus <trueDamage>true damage</trueDamage> over 3 seconds On-Hit.</mainText>"
+      },
+      "id": "773209",
+      "names": {
+        "en": "Spirit of the Elder Lizard"
+      },
+      "slug": "spirit-of-the-elder-lizard"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Health",
+          "SpellBlock",
+          "HealthRegen"
+        ],
+        "cost": 1400,
+        "description": "<mainText><stats><attention> 200</attention> Health<br><attention> 45</attention> Magic Resist</stats><br><br><jadeUnique>Shadow Mending:</jadeUnique> Grants <healing>15 Health Regen</healing> per 5 seconds for up to 10 seconds after taking damage from an enemy champion.</mainText>"
+      },
+      "id": "773211",
+      "names": {
+        "en": "Spectre's Cowl"
+      },
+      "slug": "spectre-s-cowl"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellBlock",
+          "HealthRegen",
+          "ManaRegen"
+        ],
+        "cost": 2500,
+        "description": "<mainText><stats><attention> 40</attention> Magic Resist<br><attention> 7</attention> Health Regen per 5 seconds<br><attention> 18</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Mana Font:</jadeUnique> Increases <scaleMana>Mana Regen</scaleMana> by 1% for every 1% of missing Mana. <jadeUnique>Active</jadeUnique>  180s<br>Removes all <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> on an allied champion and <healing>Heals</healing> that champion for <healing>150</healing> (<scaleHealth>+10% of maximum Health</scaleHealth>).</mainText>"
+      },
+      "id": "773222",
+      "names": {
+        "en": "Mikael's Crucible"
+      },
+      "slug": "mikael-s-crucible"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Active",
+          "Jungle",
+          "Lane",
+          "Trinket",
+          "Vision"
+        ],
+        "cost": 0,
+        "description": "<mainText><stats></stats><br><br> <jadeUnique>Active</jadeUnique>  s<br>Places an <keyword>Invisible</keyword> Stealth Ward that grants vision for 60 seconds.</mainText>"
+      },
+      "id": "773340",
+      "names": {
+        "en": "Yellow Trinket"
+      },
+      "slug": "yellow-trinket"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "Active",
+          "Jungle",
+          "Lane",
+          "Trinket",
+          "Vision"
+        ],
+        "cost": 0,
+        "description": "<mainText><stats></stats><br><br> <jadeUnique>Active</jadeUnique>  s<br>Reveals enemy wards in the area for 8 seconds.</mainText>"
+      },
+      "id": "773348",
+      "names": {
+        "en": "Red Trinket"
+      },
+      "slug": "red-trinket"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "AttackSpeed",
+          "SpellDamage",
+          "ManaRegen",
+          "NonbootsMovement",
+          "AbilityHaste"
+        ],
+        "cost": 2200,
+        "description": "<mainText><stats><attention> 40</attention> Ability Power<br><attention> 10%</attention> Cooldown Reduction<br><attention> 10</attention> Mana Regen per 5 seconds</stats><br><br><jadeUnique>Dedication:</jadeUnique> <speed>8% Move Speed</speed><br><jadeUnique>Fervent Vapor:</jadeUnique> Your <healing>Heals</healing> and <shield>Shields</shield> on another unit grant them 25% attack speed for 6 seconds. This does not include regeneration effects or effects on yourself.</mainText>"
+      },
+      "id": "773504",
+      "names": {
+        "en": "Ardent Censer"
+      },
+      "slug": "ardent-censer"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "SpellBlock",
+          "HealthRegen",
+          "Armor",
+          "Active",
+          "NonbootsMovement"
+        ],
+        "cost": 2700,
+        "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
+      },
+      "id": "773512",
+      "names": {
+        "en": "Zz'Rot Portal"
+      },
+      "slug": "zz-rot-portal"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "SpellDamage",
+          "Mana"
+        ],
+        "cost": 750,
+        "description": ""
+      },
+      "id": "773513",
+      "names": {
+        "en": "Prototype Hex Core"
+      },
+      "slug": "prototype-hex-core"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "SpellDamage",
+          "Mana"
+        ],
+        "cost": 1500,
+        "description": ""
+      },
+      "id": "773514",
+      "names": {
+        "en": "Hex Core mk-1"
+      },
+      "slug": "hex-core-mk-1"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "SpellDamage",
+          "Mana"
+        ],
+        "cost": 2250,
+        "description": ""
+      },
+      "id": "773515",
+      "names": {
+        "en": "Hex Core mk-2"
+      },
+      "slug": "hex-core-mk-2"
+    },
+    {
+      "fields": {
+        "active_effects": false,
+        "categories": [
+          "Damage",
+          "SpellDamage",
+          "Mana"
+        ],
+        "cost": 3000,
+        "description": ""
+      },
+      "id": "773516",
+      "names": {
+        "en": "Perfect Hex Core"
+      },
+      "slug": "perfect-hex-core"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Consumable",
+          "Lane",
+          "Jungle"
+        ],
+        "cost": 35,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>150 Health</healing> over 15 seconds.<br><br><jadeLimit>Limited to 5 at one time.</jadeLimit></mainText>"
+      },
+      "id": "773517",
+      "names": {
+        "en": "Eggnog"
+      },
+      "slug": "eggnog"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Consumable",
+          "Lane",
+          "Jungle"
+        ],
+        "cost": 35,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>150 Health</healing> over 15 seconds.<br><br><jadeLimit>Limited to 5 at one time.</jadeLimit></mainText>"
+      },
+      "id": "773518",
+      "names": {
+        "en": "Bag of Tea"
+      },
+      "slug": "bag-of-tea"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Consumable",
+          "Lane",
+          "Jungle"
+        ],
+        "cost": 35,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>150 Health</healing> over 15 seconds.<br><br><jadeLimit>Limited to 5 at one time.</jadeLimit></mainText>"
+      },
+      "id": "773519",
+      "names": {
+        "en": "Candy Corn"
+      },
+      "slug": "candy-corn"
+    },
+    {
+      "fields": {
+        "active_effects": true,
+        "categories": [
+          "HealthRegen",
+          "Consumable",
+          "Lane",
+          "Jungle"
+        ],
+        "cost": 35,
+        "description": "<mainText><stats></stats><br><br><jadeUnique>Click to Consume: </jadeUnique>Restores <healing>150 Health</healing> over 15 seconds.</mainText>"
+      },
+      "id": "773521",
+      "names": {
+        "en": "Health Potion"
+      },
+      "slug": "health-potion"
     },
     {
       "fields": {

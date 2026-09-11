@@ -15,14 +15,19 @@ Output files:
 """
 
 from __future__ import annotations
+import collections
+import math
 import os
 import re
 import json
 import tempfile
 import time
 import html as html_module
+import unicodedata
 from datetime import datetime, timezone
+from html.parser import HTMLParser
 from pathlib import Path
+from typing import NamedTuple
 from urllib.request import urlopen, Request
 from urllib.parse import urljoin
 
@@ -154,8 +159,10 @@ def parse_augments(html: str) -> list[dict]:
     rows = []
 
     # Two markups: rank rows (2026-06-12 redesign) and the older card grid.
+    # A row starts at its opening `<a`, not at the `href` the pattern matched:
+    # sliced mid-tag, the row's own attributes would be read as rendered text.
     card_starts = [
-        m.start()
+        tag_open if (tag_open := html.rfind("<", 0, m.start())) >= 0 else m.start()
         for m in re.finditer(
             r'href="/augments/[^"]+"\s+class="augment-(?:rank-row|card)', html
         )
@@ -169,22 +176,496 @@ def parse_augments(html: str) -> list[dict]:
         if not slug_m:
             continue
 
-        # Win rate: old markup used a "59.03<!-- -->%" badge; rank rows render
-        # pick rate (duplicated for responsive grids) and win rate as plain
-        # percentages — win rate is the largest distinct value.
-        wr_m = re.search(r'">([\d.]+)<!-- -->%', block)
-        if wr_m:
-            win_rate = float(wr_m.group(1))
-        else:
-            pcts = {float(v) for v in re.findall(r"([\d.]+)\s*%", block) if float(v) <= 100}
-            win_rate = max(pcts) if pcts else None
+        win_rate, extraction = extract_augment_win_rate(block)
 
         rows.append({
             "sourceKey": normalize_path_slug(slug_m.group(1)),
             "win_rate": win_rate,
+            "extraction": extraction,
+            # Denominators the source does not publish. Recorded explicitly so
+            # downstream code can tell "not disclosed" from "not yet wired up",
+            # and so no consumer infers a sample size we never observed.
+            "games": None,
+            "sampleDisclosed": False,
         })
 
     return rows
+
+
+# Win-rate extraction must never infer meaning from magnitude. The previous
+# `max(percentages)` fallback silently published a pick rate as a win rate
+# whenever the labelled markup changed. Ambiguity now quarantines the row.
+#
+# Failing closed on markup is not enough on its own: a marker can still be
+# present while the cell behind it has been repurposed to carry something that
+# is not a win rate. Every extraction path therefore routes its raw text through
+# one numeric boundary, so no branch can publish a value the others would reject.
+WIN_RATE_MIN = 0.0
+WIN_RATE_MAX = 100.0
+
+# Plausibility band, for REPORTING ONLY. Observed 2026-09-10: augment win rates
+# span 46.6-65.2 and champion win rates 40.7-56.6. A value outside this band is
+# arithmetically valid and is published, but is worth a look — we have no
+# evidence that would justify discarding a real extreme, so it is never dropped.
+WIN_RATE_PLAUSIBLE_MIN = 20.0
+WIN_RATE_PLAUSIBLE_MAX = 90.0
+
+
+# Plain decimal only. `float()` alone would also accept "1_0", "1e2", "nan" and
+# full-width digits, i.e. publish tokens no page renders as a win rate.
+_DECIMAL_TOKEN_RE = re.compile(r"([+-]?)(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)")
+_NON_FINITE_TOKENS = frozenset({"nan", "inf", "infinity"})
+
+
+def validated_win_rate(raw: object) -> tuple[float | None, str | None]:
+    """Return (win_rate, quarantine_reason).
+
+    The single numeric boundary for every extraction path. A reason is returned
+    instead of a value whenever the token cannot be a win rate at all. Text is
+    judged whole: a sign, "NaN" or "1.2.3" must reach this function intact.
+    """
+    signed = False
+    if isinstance(raw, (int, float)) and not isinstance(raw, bool):
+        value = float(raw)
+    else:
+        text = str(raw).strip().rstrip("%").strip().replace("−", "-")
+        decimal = _DECIMAL_TOKEN_RE.fullmatch(text)
+        if not decimal:
+            if text.lstrip("+-").lower() in _NON_FINITE_TOKENS:
+                return None, "quarantined_non_finite_value"
+            return None, "quarantined_unparseable_value"
+        value = float(text)
+        signed = bool(decimal.group(1))
+    if not math.isfinite(value):
+        return None, "quarantined_non_finite_value"
+    if not (WIN_RATE_MIN <= value <= WIN_RATE_MAX):
+        return None, "quarantined_out_of_range"
+    if signed:
+        # A win rate is never written with a sign; "+1.2%" is a delta, and
+        # "-0%" is not zero evidence either.
+        return None, "quarantined_signed_value"
+    return value, None
+
+
+def _accept(raw: object, method: str) -> tuple[float | None, str]:
+    """Apply the shared boundary, keeping the method name only on success."""
+    value, reason = validated_win_rate(raw)
+    if reason:
+        return None, reason
+    return value, method
+
+
+def is_implausible_win_rate(value: float | None) -> bool:
+    """Valid but unusual. Reported, never silently discarded."""
+    return value is not None and not (
+        WIN_RATE_PLAUSIBLE_MIN <= value <= WIN_RATE_PLAUSIBLE_MAX
+    )
+
+
+# ── Reading a row ──
+# A row is read the way a browser renders it: tags delimit text, entities are
+# decoded, and React's empty `<!-- -->` separators vanish, so `55.25<!-- -->%`
+# is one value. Every text run keeps the elements enclosing it, because what a
+# number IS — win rate or pick rate — is carried by the markup around it, not
+# only by the innermost tag.
+_VOID_ELEMENTS = frozenset({
+    "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta",
+    "source", "track", "wbr",
+})
+_OPAQUE_ELEMENTS = frozenset({"script", "style"})
+# A percentage that is not rendered text (an attribute, a stylesheet) is never
+# a candidate, but it still counts against a "sole" percentage, as it always has.
+_OPAQUE_PERCENT_RE = re.compile(r"[\w.,+\-\u2212]\s*%")
+
+
+class _Run(NamedTuple):
+    """Text between two tags, with every enclosing element, outermost first."""
+    text: str
+    path: tuple[int, ...]
+    classes: tuple[tuple[str, ...], ...]
+    separators: tuple[int, ...]  # offsets where a React comment was dropped
+
+
+class _RowReader(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.runs: list[_Run] = []
+        self.opaque_percentages = 0
+        self._stack: list[tuple[str, int, tuple[str, ...]]] = []
+        self._text: list[str] = []
+        self._separators: list[int] = []
+        self._ids = 0
+
+    def _flush(self) -> None:
+        if self._text:
+            self.runs.append(_Run(
+                text="".join(self._text),
+                path=tuple(element_id for _, element_id, _ in self._stack),
+                classes=tuple(classes for _, _, classes in self._stack),
+                separators=tuple(self._separators),
+            ))
+        self._text, self._separators = [], []
+
+    def _attributes(self, attrs: list[tuple[str, str | None]]) -> tuple[str, ...]:
+        for _, value in attrs:
+            self.opaque_percentages += len(_OPAQUE_PERCENT_RE.findall(value or ""))
+        class_value = next((value or "" for name, value in attrs if name == "class"), "")
+        return tuple(class_value.split())
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self._flush()
+        classes = self._attributes(attrs)
+        if tag not in _VOID_ELEMENTS:
+            self._ids += 1
+            self._stack.append((tag, self._ids, classes))
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self._flush()
+        self._attributes(attrs)
+
+    def handle_endtag(self, tag: str) -> None:
+        self._flush()
+        for depth in range(len(self._stack) - 1, -1, -1):
+            if self._stack[depth][0] == tag:
+                del self._stack[depth:]
+                return
+
+    def handle_comment(self, data: str) -> None:
+        self._separators.append(sum(len(part) for part in self._text))
+
+    def handle_data(self, data: str) -> None:
+        if self._stack and self._stack[-1][0] in _OPAQUE_ELEMENTS:
+            self.opaque_percentages += len(_OPAQUE_PERCENT_RE.findall(data))
+            return
+        self._text.append(data)
+
+    def close(self) -> None:
+        super().close()
+        self._flush()
+
+
+# ── Whole percentage expressions ──
+# The candidate in front of a "%" is EVERYTHING back to whitespace or a label
+# separator — sign, digits, dots and letters alike — and it is judged whole by
+# `validated_win_rate`. Keeping only the digits a pattern liked is what read
+# "-1%" as 1 and made "NaN%" invisible.
+_LABEL_SEPARATORS = ":\uff1a="
+_EXPRESSION_TAIL_RE = re.compile(r"[^\s:\uff1a=%]*\Z")
+_SIGNLIKE = frozenset("+.,/~")
+
+
+def _changes_numeric_meaning(char: str) -> bool:
+    """A character that, placed just before a number, changes what it says.
+
+    Dashes of every kind; every symbol class — math (+ − ± ≈ ÷ ⁄), currency,
+    modifier and other (▼ ▲ ➖ are "So"); numerals; fraction/decimal
+    punctuation; and code points with no public meaning (private-use icon
+    glyphs, unassigned, controls). A sign in its own element (`<span>-</span>1%`)
+    still qualifies the number, so across tags these fail closed.
+    """
+    if char in _LABEL_SEPARATORS:
+        return False
+    category = unicodedata.category(char)
+    return (
+        category == "Pd"
+        or category[0] in ("S", "N")
+        or category in ("Co", "Cn", "Cc", "Cs")
+        or char in _SIGNLIKE
+    )
+
+
+class _Percentage(NamedTuple):
+    """One "%" in the row's rendered text."""
+    token: str          # the whole expression in front of the "%"
+    run: int
+    start: int          # offset of `token` in its run
+    is_cell: bool       # the expression is its run's entire text
+    react_split: bool   # written `N<!-- -->%`
+    partial: bool       # something just before it would change its meaning
+    muted: bool         # de-emphasized, here or in an enclosing element
+    mobile_only: bool   # a mobile-only duplicate, here or in an enclosing element
+    primary: bool       # the emphasized (`text-foreground`) cell
+
+
+# Rank rows encode the two stats by emphasis, not by order or magnitude: the
+# primary (`text-foreground`) cell is the win rate, the de-emphasized
+# (`text-muted-foreground`) cell is the pick rate, which is also duplicated into
+# a mobile-only (`sm:hidden`) badge. Verified against all 198 live rows on
+# 2026-09-10. Muted and mobile-only cells are therefore evidence of a pick rate,
+# and that holds for everything inside them, not only the element carrying the
+# class.
+_MUTED_CLASS_RE = re.compile(r"\bmuted\b")
+_MUTED_TEXT_CLASS_RE = re.compile(r"(?:[\w-]+:)*text-muted(?:-foreground)?(?:/\d+)?")
+_MOBILE_ONLY_CLASS_RE = re.compile(r"(?:sm|md|lg|xl|2xl):hidden")
+
+
+def _is_unseen(char: str) -> bool:
+    """Whitespace, invisible format characters (soft hyphen, zero-width space)
+    and combining marks: none of them is the character a reader sees."""
+    return char.isspace() or unicodedata.category(char) in ("Cf", "Mn", "Me", "Mc")
+
+
+def _preceding_char(runs: list[_Run], run: int, offset: int) -> tuple[str | None, int, int]:
+    """The nearest semantically visible character before `offset`.
+
+    Returns (char, run holding it, its offset in that run), walking back across
+    rendered-text runs, so `<span>-&shy;</span>1%` finds the "-".
+    """
+    for index in range(run, -1, -1):
+        text = runs[index].text
+        position = (offset if index == run else len(text)) - 1
+        while position >= 0 and _is_unseen(text[position]):
+            position -= 1
+        if position >= 0:
+            return text[position], index, position
+    return None, -1, -1
+
+
+def _percentages(runs: list[_Run]) -> dict[tuple[int, int], _Percentage]:
+    """Every percentage, keyed by (run, offset of its "%")."""
+    found: dict[tuple[int, int], _Percentage] = {}
+    for index, run in enumerate(runs):
+        text = run.text
+        own = run.classes[-1] if run.classes else ()
+        every = [c for classes in run.classes for c in classes]
+        muted = (
+            any(_MUTED_CLASS_RE.search(c) for c in own)
+            or any(_MUTED_TEXT_CLASS_RE.fullmatch(c) for c in every)
+        )
+        mobile_only = any(_MOBILE_ONLY_CLASS_RE.fullmatch(c) for c in every)
+        primary = "text-foreground" in own and not any(_MUTED_CLASS_RE.search(c) for c in own)
+        for match in re.finditer("%", text):
+            at = match.start()
+            head = text[:at].rstrip()
+            tail = _EXPRESSION_TAIL_RE.search(head)
+            start = tail.start()
+            char, holder, _ = _preceding_char(runs, index, start)
+            if char is None:
+                partial = False
+            elif holder == index:
+                # Same text node: only a label, a separator or a previous
+                # percentage may stand before the number.
+                partial = not (char.isalpha() or char in _LABEL_SEPARATORS or char == "%")
+            else:
+                partial = _changes_numeric_meaning(char)
+            found[(index, at)] = _Percentage(
+                token=tail.group(),
+                run=index,
+                start=start,
+                is_cell=not text[:start].strip() and not text[at + 1:].strip(),
+                react_split=any(c <= at and not text[c:at].strip() for c in run.separators),
+                partial=partial,
+                muted=muted,
+                mobile_only=mobile_only,
+                primary=primary,
+            )
+    return found
+
+
+# ── Labels ──
+# A label names a value only when the value provably belongs to it: the value
+# must come next, inside the label's own group (the label element's parent), with
+# nothing but separators in between. A label that directly follows a percentage
+# and has no separator may be captioning THAT value (`55.25% Win rate`), so it
+# cannot also be allowed to claim the next one — in that layout the next value
+# is the pick rate.
+_WR_LABEL_RE = re.compile(r"Win\s*Rate", re.IGNORECASE)
+_PR_LABEL_RE = re.compile(r"Pick\s*Rate", re.IGNORECASE)
+
+
+class _Label(NamedTuple):
+    value: _Percentage | None      # the percentage the label introduces
+    captions: _Percentage | None   # a percentage the label may be captioning
+    separated: bool                # "Label: value" — explicitly a prefix
+
+
+def _strip_separators(text: str) -> tuple[str, bool]:
+    stripped = text.lstrip()
+    separated = False
+    while stripped[:1] and stripped[0] in _LABEL_SEPARATORS:
+        stripped = stripped[1:].lstrip()
+        separated = True
+    return stripped, separated
+
+
+def _leading_percentage(
+    percentages: dict[tuple[int, int], _Percentage], run: int, text: str, offset: int
+) -> _Percentage | None:
+    """The percentage that starts exactly at `offset`, if one does."""
+    at = text.find("%", offset)
+    if at < 0 or not re.fullmatch(r"\S*\s*", text[offset:at]):
+        return None
+    candidate = percentages.get((run, at))
+    return candidate if candidate is not None and candidate.start == offset else None
+
+
+def _labels(
+    label_re: re.Pattern[str],
+    runs: list[_Run],
+    percentages: dict[tuple[int, int], _Percentage],
+) -> list[_Label]:
+    labels: list[_Label] = []
+    for index, run in enumerate(runs):
+        group = run.path[:-1]
+
+        def in_group(other: int) -> bool:
+            return runs[other].path[:len(group)] == group
+
+        for match in label_re.finditer(run.text):
+            rest, separated = _strip_separators(run.text[match.end():])
+            value = None
+            if rest:
+                value = _leading_percentage(
+                    percentages, index, run.text, len(run.text) - len(rest)
+                )
+            else:
+                for later in range(index + 1, len(runs)):
+                    rest, more = _strip_separators(runs[later].text)
+                    separated = separated or more
+                    if not rest:
+                        continue
+                    if in_group(later):
+                        value = _leading_percentage(
+                            percentages, later, runs[later].text,
+                            len(runs[later].text) - len(rest),
+                        )
+                    break
+
+            captions = None
+            char, holder, position = _preceding_char(runs, index, match.start())
+            if char == "%" and (holder == index or in_group(holder)):
+                captions = percentages.get((holder, position))
+            labels.append(_Label(value=value, captions=captions, separated=separated))
+    return labels
+
+
+def _accept_percentage(candidate: _Percentage, method: str) -> tuple[float | None, str]:
+    value, outcome = _accept(candidate.token, method)
+    if value is not None and candidate.partial:
+        # "- 1%", "<span>-</span>1%", "1 5%": the digits are only the tail of
+        # the expression on screen, so they are not its value.
+        return None, "quarantined_partial_expression"
+    return value, outcome
+
+
+def _accept_all(candidates: list[_Percentage], method: str) -> tuple[float | None, str]:
+    """Every candidate must be valid, and they must agree."""
+    accepted = [_accept_percentage(candidate, method) for candidate in candidates]
+    for value, outcome in accepted:
+        if value is None:
+            return None, outcome
+    if len({value for value, _ in accepted}) > 1:
+        return None, "quarantined_ambiguous_percentages"
+    return accepted[0]
+
+
+def _value_key(token: str) -> float | str:
+    return float(token) if _DECIMAL_TOKEN_RE.fullmatch(token) else token
+
+
+def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
+    """Return (win_rate, extraction_method) for one augment block.
+
+    Paths, strongest first. Each identifies the win rate by an explicit marker,
+    never by magnitude, and none may accept a value the row already evidences as
+    its pick rate (a muted or mobile-only cell, a "Pick Rate" label, or a
+    duplicate of either):
+      1. an explicitly labelled "Win Rate: N%"             -> "labelled"
+      2. the primary emphasis cell, corroborated by a
+         muted pick-rate cell in the same row              -> "structural"
+      3. a React-split `N<!-- -->%` badge that is not
+         pick-rate evidence                                -> "badge"
+      4. exactly one percentage occurrence in a row with
+         no pick-rate evidence                             -> "sole_percentage"
+      5. anything else                                     -> quarantined, None
+
+    An explicit marker whose value is invalid, absent, unattributable or a pick
+    rate quarantines the row right there. Falling through instead would let the
+    next branch promote whatever percentage is left — in practice, the pick rate.
+    """
+    reader = _RowReader()
+    try:
+        reader.feed(block)
+        reader.close()
+    except Exception:
+        # Third-party markup Python's parser refuses outright (`<![foo[ ]]>`
+        # raises AssertionError in _markupbase). Fail closed for this row only,
+        # and use nothing the half-fed reader collected.
+        return None, "quarantined_unparseable_markup"
+    runs = reader.runs
+    found = _percentages(runs)
+    percentages = list(found.values())
+    cells = [p for p in percentages if p.is_cell]
+
+    # Pick-rate evidence is settled before any candidate is considered.
+    pick_rate_labels = _labels(_PR_LABEL_RE, runs, found)
+    evidence = [p for p in percentages if p.muted or p.mobile_only]
+    for label in pick_rate_labels:
+        evidence += [label.value] if label.value is not None else []
+        if label.captions is not None and not label.separated:
+            evidence.append(label.captions)
+    pick_rate_values = {_value_key(p.token) for p in evidence}
+
+    def is_pick_rate(candidate: _Percentage) -> bool:
+        return (
+            candidate.muted
+            or candidate.mobile_only
+            or _value_key(candidate.token) in pick_rate_values
+        )
+
+    labels = _labels(_WR_LABEL_RE, runs, found)
+    if labels:
+        for label in labels:
+            if label.captions is not None and not label.separated:
+                return None, "quarantined_unattributed_label"
+            if label.value is None:
+                return None, "quarantined_win_rate_unavailable"
+            if is_pick_rate(label.value):
+                return None, "quarantined_pick_rate_collision"
+        return _accept_all([label.value for label in labels], "labelled")
+
+    def collides(candidates: list[_Percentage]) -> bool:
+        return any(_value_key(c.token) in pick_rate_values for c in candidates)
+
+    # Only STRUCTURAL pick-rate evidence (muted / mobile-only, here or on an
+    # ancestor) removes a cell from candidacy. A candidate whose only fault is
+    # sharing the pick rate's value is a collision: dropping it would hand the
+    # row to whatever weaker percentage is left.
+    primary = [cell for cell in cells if cell.primary and not (cell.muted or cell.mobile_only)]
+    if collides(primary):
+        return None, "quarantined_pick_rate_collision"
+    if len(primary) == 1 and any(cell.muted for cell in cells):
+        # Exactly one primary stat cell, plus the pick-rate cell we expect
+        # beside it: the layout matches what we verified, so this is unambiguous.
+        return _accept_percentage(primary[0], "structural")
+
+    badges = [cell for cell in cells if cell.react_split and not (cell.muted or cell.mobile_only)]
+    if collides(badges):
+        return None, "quarantined_pick_rate_collision"
+    if badges:
+        # Split markup is how React renders ANY `{value}%`, the mobile
+        # pick-rate badge included, so a badge counts only once pick-rate
+        # evidence has excluded it — never merely by appearing first.
+        return _accept_all(badges, "badge")
+
+    # Candidates are counted WITHOUT a magnitude filter. Discarding out-of-range
+    # siblings here would let the count fall to one and turn a genuinely
+    # ambiguous row into a confident answer — magnitude reasoning by the back door.
+    if not percentages and not reader.opaque_percentages:
+        return None, "quarantined_no_percentage"
+    if evidence:
+        # The row demonstrably carries a pick rate, yet no win-rate marker
+        # resolved. Whatever is left cannot be told apart from it: a missing
+        # win rate beside the desktop + mobile pick-rate pair looks exactly so.
+        if not reader.opaque_percentages and all(is_pick_rate(p) for p in percentages):
+            return None, "quarantined_pick_rate_only"
+        return None, "quarantined_ambiguous_percentages"
+    if len(percentages) == 1 and not reader.opaque_percentages:
+        # One occurrence, not one distinct value: the only stat this source
+        # duplicates is the pick rate, so collapsing duplicates is precisely
+        # how a pick rate beside a missing win rate became a "sole" value.
+        return _accept_percentage(percentages[0], "sole_percentage")
+    return None, "quarantined_ambiguous_percentages"
 
 
 def load_existing_rows(filename: str, key: str) -> dict[str, dict]:
@@ -453,8 +934,21 @@ def main():
     # Tier list
     print("\n[2/8] Champion tier list")
     tier_html = fetch("/tier-list/")
-    champions = merge_champion_sources(parse_tier_list(tier_html), search_champions)
+    tier_list_rows = parse_tier_list(tier_html)
+    champions = merge_champion_sources(tier_list_rows, search_champions)
     print(f"  → {len(champions)} champions")
+    if not tier_list_rows:
+        # The structured search index still carries tier + win rate, so the run
+        # is not wrong — but a primary parser that silently returns nothing is
+        # how a field disappears without anyone noticing. Say so loudly.
+        print(
+            "  ⚠ tier-list HTML parser matched 0 champion cards; "
+            "serving tier/win-rate from the search index only. "
+            "Fields unique to the HTML card (e.g. pick rate) will be null."
+        )
+    missing_pick_rate = sum(1 for row in champions if row.get("pick_rate") is None)
+    if missing_pick_rate:
+        print(f"  ⚠ {missing_pick_rate}/{len(champions)} champions have no pick rate from source")
 
     # Augment win rates
     print("\n[3/5] Augment win rates")
@@ -462,7 +956,27 @@ def main():
     aug_html = fetch("/augments/")
     augment_win_rate_rows = parse_augments(aug_html)
     patch = extract_patch(tier_html, aug_html) or search_patch
+    quarantined = [r for r in augment_win_rate_rows if str(r.get("extraction", "")).startswith("quarantined")]
     print(f"  → {len(augment_win_rate_rows)} source rows, patch {patch}")
+    if quarantined:
+        # Loud but non-fatal: an extraction regression must be visible in the
+        # run log rather than silently degrading every downstream win rate.
+        reasons = collections.Counter(r["extraction"] for r in quarantined)
+        print(
+            f"  ⚠ {len(quarantined)} row(s) quarantined {dict(reasons)}: "
+            + ", ".join(sorted(r["sourceKey"] for r in quarantined)[:8])
+        )
+    implausible = [
+        r for r in augment_win_rate_rows if is_implausible_win_rate(r.get("win_rate"))
+    ]
+    if implausible:
+        # Valid arithmetic, unusual value. Published, but surfaced so a
+        # repurposed cell that still lands inside 0-100 does not pass unnoticed.
+        print(
+            f"  ⚠ {len(implausible)} row(s) outside the plausible win-rate band "
+            f"({WIN_RATE_PLAUSIBLE_MIN}-{WIN_RATE_PLAUSIBLE_MAX}%): "
+            + ", ".join(f"{r['sourceKey']}={r['win_rate']}" for r in implausible[:8])
+        )
 
     existing_champions = load_existing_rows("champions.json", "champions")
     for i, champ in enumerate(champions):

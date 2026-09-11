@@ -201,14 +201,24 @@ describe("pool orchestrator — real-data behavior", () => {
 
 describe("pool orchestrator — 26.12 availability wiring", () => {
   test("non-offerable augments are excluded with their resolved availability reason", () => {
-    const expectedReasons = new Map([
-      ["slow-and-steady", "removed"],
-      ["clown-college", "disabled"],
-      ["adamant", "disabled"],
-      ["warlock-juicebox", "unverified_legacy"],
-    ]);
-    const nonOfferable = augmentsData.augments.filter((augment) => expectedReasons.has(augment.slug));
-    expect(nonOfferable.length).toBe(expectedReasons.size);
+    // Expectations are DERIVED from the availability resolver, never hardcoded
+    // per slug. Riot re-enabled Clown College in 26.18 and the resolver moved
+    // it to `confirmed_live`; a hardcoded map would have asserted a fact about
+    // the game that stopped being true, which is the same second-authority
+    // problem that let `pool-rules.disabled` drift.
+    const sampleSlugs = ["slow-and-steady", "clown-college", "adamant", "warlock-juicebox"];
+    const nonOfferable = augmentsData.augments.filter(
+      (augment) =>
+        sampleSlugs.includes(augment.slug) &&
+        augment.availability?.status !== undefined &&
+        augment.availability.status !== "confirmed_live",
+    );
+    const expectedReasons = new Map(
+      nonOfferable.map((augment) => [augment.slug, augment.availability!.status as string]),
+    );
+    // The sample must still exercise more than one non-offerable reason.
+    expect(new Set(expectedReasons.values()).size).toBeGreaterThan(1);
+    expect(nonOfferable.length).toBeGreaterThan(0);
 
     const result = getChampionAugmentPool({
       championSlug: "garen",

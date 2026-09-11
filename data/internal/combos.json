@@ -1,6 +1,6 @@
 {
-  "patch": "26.13",
-  "scraped_at": "2026-07-12T22:39:39.095225+00:00",
+  "patch": "26.17",
+  "scraped_at": "2026-09-10T18:09:11.569726+00:00",
   "generated_from": "internal-pool-mechanics",
   "combos": [
     {
@@ -40,6 +40,13 @@
     },
     {
       "champion": "aatrox",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "aatrox",
       "augment": "Courage of the Colossus",
       "augmentSlug": "courage-of-the-colossus",
       "tier": "A",
@@ -208,13 +215,6 @@
     },
     {
       "champion": "aatrox",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "aatrox",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -324,6 +324,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "aatrox",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "aatrox",
@@ -506,6 +513,13 @@
       "augmentSlug": "bread-and-jam",
       "tier": "A",
       "ref": "mechanical:ability_haste"
+    },
+    {
+      "champion": "ahri",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
     },
     {
       "champion": "ahri",
@@ -908,13 +922,6 @@
     },
     {
       "champion": "ahri",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "ahri",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -940,6 +947,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "ahri",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "ahri",
@@ -1015,6 +1029,13 @@
       "champion": "akali",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "akali",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -1173,6 +1194,13 @@
       "ref": "mechanical:lifesteal"
     },
     {
+      "champion": "akali",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "akshan",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
@@ -1239,6 +1267,13 @@
       "champion": "akshan",
       "augment": "Tap Dancer",
       "augmentSlug": "tap-dancer",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "akshan",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "A",
       "ref": "mechanical:attack_speed"
     },
@@ -1311,13 +1346,6 @@
       "augmentSlug": "quickstep",
       "tier": "B",
       "ref": "ability-fit:Q/E"
-    },
-    {
-      "champion": "akshan",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "akshan",
@@ -1356,6 +1384,13 @@
     },
     {
       "champion": "akshan",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:ap_scaling"
+    },
+    {
+      "champion": "akshan",
       "augment": "Empyrean Promise",
       "augmentSlug": "empyrean-promise",
       "tier": "C",
@@ -1657,8 +1692,22 @@
     },
     {
       "champion": "alistar",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "alistar",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "alistar",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -1825,6 +1874,13 @@
     },
     {
       "champion": "ambessa",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "ambessa",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -1986,13 +2042,6 @@
     },
     {
       "champion": "ambessa",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "ambessa",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -2074,6 +2123,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "ambessa",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "ambessa",
@@ -2335,6 +2391,13 @@
       "ref": "ability-fit:Q/W/E"
     },
     {
+      "champion": "amumu",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "anivia",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
@@ -2420,13 +2483,6 @@
     },
     {
       "champion": "anivia",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "anivia",
       "augment": "Juiced",
       "augmentSlug": "juiced",
       "tier": "A",
@@ -2457,6 +2513,13 @@
       "champion": "anivia",
       "augment": "Slap Around",
       "augmentSlug": "slap-around",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "anivia",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -2756,13 +2819,6 @@
     },
     {
       "champion": "annie",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "annie",
       "augment": "Juiced",
       "augmentSlug": "juiced",
       "tier": "A",
@@ -2798,6 +2854,13 @@
     },
     {
       "champion": "annie",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "annie",
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
@@ -2828,6 +2891,13 @@
       "champion": "annie",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "annie",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -2931,13 +3001,6 @@
     },
     {
       "champion": "annie",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "annie",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -2989,6 +3052,13 @@
       "champion": "aphelios",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "aphelios",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "S",
       "ref": "mechanical:on_hit"
     },
@@ -3106,13 +3176,6 @@
     },
     {
       "champion": "aphelios",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "aphelios",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "S",
@@ -3138,6 +3201,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "aphelios",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "aphelios",
@@ -3367,6 +3437,13 @@
       "champion": "ashe",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "ashe",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "B",
       "ref": "mechanical:lifesteal"
     },
@@ -3610,6 +3687,13 @@
     },
     {
       "champion": "aurora",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "aurora",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -3729,13 +3813,6 @@
     },
     {
       "champion": "aurora",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "aurora",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -3775,6 +3852,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "aurora",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "aurora",
@@ -3880,6 +3964,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "azir",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
     },
     {
       "champion": "azir",
@@ -4109,6 +4200,13 @@
       "champion": "azir",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "azir",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "B",
       "ref": "mechanical:lifesteal"
     },
@@ -4345,8 +4443,22 @@
     },
     {
       "champion": "bard",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "bard",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "bard",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -4543,6 +4655,13 @@
       "champion": "belveth",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "belveth",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -4716,6 +4835,13 @@
     },
     {
       "champion": "belveth",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "belveth",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -4846,13 +4972,6 @@
       "augmentSlug": "overflow",
       "tier": "B",
       "ref": "mechanical:mana_scaling"
-    },
-    {
-      "champion": "belveth",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "belveth",
@@ -5163,6 +5282,13 @@
       "ref": "mechanical:lifesteal"
     },
     {
+      "champion": "blitzcrank",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "brand",
       "augment": "Jeweled Gauntlet",
       "augmentSlug": "jeweled-gauntlet",
@@ -5210,13 +5336,6 @@
       "augmentSlug": "dropkick",
       "tier": "A",
       "ref": "mechanical:execute"
-    },
-    {
-      "champion": "brand",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "brand",
@@ -5280,6 +5399,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "brand",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "brand",
@@ -5348,6 +5474,13 @@
       "champion": "brand",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "brand",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -5448,13 +5581,6 @@
       "augmentSlug": "purist-caster",
       "tier": "C",
       "ref": "mechanical:attack_speed"
-    },
-    {
-      "champion": "brand",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "brand",
@@ -5646,6 +5772,13 @@
       "ref": "ability-fit:Q/W/E/R"
     },
     {
+      "champion": "braum",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "briar",
       "augment": "Bolstered",
       "augmentSlug": "double-defense",
@@ -5747,6 +5880,13 @@
       "champion": "briar",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "briar",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -5850,13 +5990,6 @@
     },
     {
       "champion": "briar",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "briar",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -5913,13 +6046,6 @@
     },
     {
       "champion": "briar",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "briar",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "A",
@@ -5952,6 +6078,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "briar",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "briar",
@@ -6027,6 +6160,13 @@
       "champion": "caitlyn",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "caitlyn",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -6151,13 +6291,6 @@
     },
     {
       "champion": "caitlyn",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "caitlyn",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -6211,6 +6344,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "caitlyn",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "caitlyn",
@@ -6330,6 +6470,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "S",
       "ref": "ability-fit:E/R"
+    },
+    {
+      "champion": "camille",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "camille",
@@ -6459,13 +6606,6 @@
     },
     {
       "champion": "camille",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "camille",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -6505,6 +6645,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "camille",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "camille",
@@ -6767,20 +6914,6 @@
     },
     {
       "champion": "cassiopeia",
-      "augment": "Firebrand",
-      "augmentSlug": "firebrand",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "cassiopeia",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "cassiopeia",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "S",
@@ -6792,13 +6925,6 @@
       "augmentSlug": "jeweled-gauntlet",
       "tier": "S",
       "ref": "mechanical:ability_crit"
-    },
-    {
-      "champion": "cassiopeia",
-      "augment": "Master of Duality",
-      "augmentSlug": "master-of-duality",
-      "tier": "S",
-      "ref": "mechanical:on_cast"
     },
     {
       "champion": "cassiopeia",
@@ -6865,10 +6991,31 @@
     },
     {
       "champion": "cassiopeia",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "cassiopeia",
       "augment": "Vulnerability",
       "augmentSlug": "vulnerability",
       "tier": "S",
       "ref": "mechanical:ability_crit"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Dropkick",
+      "augmentSlug": "dropkick",
+      "tier": "A",
+      "ref": "mechanical:execute"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Empowered By The Faithful",
+      "augmentSlug": "empowered-by-the-faithful",
+      "tier": "A",
+      "ref": "mechanical:execute"
     },
     {
       "champion": "cassiopeia",
@@ -6928,13 +7075,6 @@
     },
     {
       "champion": "cassiopeia",
-      "augment": "Spin Me Right Round",
-      "augmentSlug": "spin-me-right-round",
-      "tier": "B",
-      "ref": "mechanical:immobilize_trigger"
-    },
-    {
-      "champion": "cassiopeia",
       "augment": "Stay Resolute",
       "augmentSlug": "stay-resolute",
       "tier": "B",
@@ -6953,6 +7093,174 @@
       "augmentSlug": "tooth-fairy",
       "tier": "B",
       "ref": "mechanical:immobilize_trigger"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Blade Waltz",
+      "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Dimension Shift",
+      "augmentSlug": "dimension-shift",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "DropBear",
+      "augmentSlug": "dropbear",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Endless Decimation",
+      "augmentSlug": "endless-decimation",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "escAPADe",
+      "augmentSlug": "escapade",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Ethereal Weapon",
+      "augmentSlug": "ethereal-weapon",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Final Form",
+      "augmentSlug": "final-form",
+      "tier": "C",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Flashbang",
+      "augmentSlug": "flashbang",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "From Beginning To End",
+      "augmentSlug": "from-beginning-to-end",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Goldrend",
+      "augmentSlug": "goldrend",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Goredrink",
+      "augmentSlug": "goredrink",
+      "tier": "C",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Hellbent",
+      "augmentSlug": "hellbent",
+      "tier": "C",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Ok Boomerang",
+      "augmentSlug": "ok-boomerang",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Ominous Pact",
+      "augmentSlug": "ominous-pact",
+      "tier": "C",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Purist - Caster",
+      "augmentSlug": "purist-caster",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Rite of Ascension",
+      "augmentSlug": "rite-of-ascension",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Shark Tempest",
+      "augmentSlug": "shark-tempest",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Snap Back",
+      "augmentSlug": "snap-back",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Spin Me Right Round",
+      "augmentSlug": "spin-me-right-round",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Triggered Inferno",
+      "augmentSlug": "triggered-inferno",
+      "tier": "C",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Upgrade Sheen",
+      "augmentSlug": "upgrade-sheen",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "cassiopeia",
+      "augment": "Zealot",
+      "augmentSlug": "zealot",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "chogath",
@@ -7243,6 +7551,13 @@
     },
     {
       "champion": "chogath",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "chogath",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -7334,13 +7649,6 @@
     },
     {
       "champion": "chogath",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "chogath",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -7397,6 +7705,13 @@
     },
     {
       "champion": "chogath",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "chogath",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
@@ -7413,13 +7728,6 @@
       "champion": "corki",
       "augment": "Firebrand",
       "augmentSlug": "firebrand",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "corki",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "S",
       "ref": "mechanical:dot_synergy"
     },
@@ -7474,6 +7782,13 @@
     },
     {
       "champion": "corki",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "corki",
       "augment": "Vulnerability",
       "augmentSlug": "vulnerability",
       "tier": "S",
@@ -7483,6 +7798,13 @@
       "champion": "corki",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "corki",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -7625,13 +7947,6 @@
       "augmentSlug": "purist-caster",
       "tier": "A",
       "ref": "mechanical:attack_speed"
-    },
-    {
-      "champion": "corki",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "corki",
@@ -7789,13 +8104,6 @@
     },
     {
       "champion": "darius",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "darius",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "S",
@@ -7845,6 +8153,13 @@
     },
     {
       "champion": "darius",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "darius",
       "augment": "Vulnerability",
       "augmentSlug": "vulnerability",
       "tier": "S",
@@ -7854,6 +8169,13 @@
       "champion": "darius",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "darius",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -7959,13 +8281,6 @@
       "champion": "darius",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "darius",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -8183,6 +8498,13 @@
       "champion": "diana",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "diana",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -8468,13 +8790,6 @@
     },
     {
       "champion": "diana",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "diana",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
       "tier": "C",
@@ -8486,6 +8801,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "diana",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "diana",
@@ -8510,6 +8832,13 @@
     },
     {
       "champion": "draven",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "draven",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -8685,13 +9014,6 @@
     },
     {
       "champion": "draven",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "draven",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -8780,6 +9102,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "draven",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "draven",
@@ -8944,13 +9273,6 @@
     },
     {
       "champion": "drmundo",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "drmundo",
       "augment": "Pressure Cooker",
       "augmentSlug": "pressure-cooker",
       "tier": "A",
@@ -8960,6 +9282,13 @@
       "champion": "drmundo",
       "augment": "Titan's Resolve",
       "augmentSlug": "titans-resolve",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "drmundo",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -9140,6 +9469,13 @@
     },
     {
       "champion": "ekko",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "ekko",
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
@@ -9233,6 +9569,13 @@
       "champion": "ekko",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "ekko",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -9707,8 +10050,22 @@
     },
     {
       "champion": "elise",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "elise",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "elise",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -10162,8 +10519,22 @@
     },
     {
       "champion": "evelynn",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "evelynn",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "evelynn",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -10428,6 +10799,13 @@
     },
     {
       "champion": "ezreal",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "ezreal",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -10446,6 +10824,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "ezreal",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "ezreal",
@@ -10554,13 +10939,6 @@
     },
     {
       "champion": "ezreal",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "ezreal",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -10612,13 +10990,6 @@
       "champion": "fiddlesticks",
       "augment": "Firebrand",
       "augmentSlug": "firebrand",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "fiddlesticks",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "S",
       "ref": "mechanical:dot_synergy"
     },
@@ -10701,6 +11072,13 @@
     },
     {
       "champion": "fiddlesticks",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "fiddlesticks",
       "augment": "Vulnerability",
       "augmentSlug": "vulnerability",
       "tier": "S",
@@ -10834,6 +11212,13 @@
     },
     {
       "champion": "fiora",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "fiora",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "S",
@@ -10953,13 +11338,6 @@
     },
     {
       "champion": "fiora",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "fiora",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "S",
@@ -10992,6 +11370,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "fiora",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "fiora",
@@ -11184,6 +11569,13 @@
     },
     {
       "champion": "fizz",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "fizz",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -11251,13 +11643,6 @@
       "augmentSlug": "holy-snowball",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "fizz",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "fizz",
@@ -11377,6 +11762,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "fizz",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "fizz",
@@ -11564,13 +11956,6 @@
       "champion": "galio",
       "augment": "Firebrand",
       "augmentSlug": "firebrand",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "galio",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -11634,6 +12019,13 @@
       "champion": "galio",
       "augment": "Titan's Resolve",
       "augmentSlug": "titans-resolve",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "galio",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -11730,6 +12122,13 @@
     },
     {
       "champion": "galio",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "galio",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -11926,13 +12325,6 @@
     },
     {
       "champion": "gangplank",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "gangplank",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -11942,6 +12334,13 @@
       "champion": "gangplank",
       "augment": "Pressure Cooker",
       "augmentSlug": "pressure-cooker",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "gangplank",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -12019,6 +12418,13 @@
       "champion": "garen",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "garen",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -12115,13 +12521,6 @@
     },
     {
       "champion": "garen",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "garen",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -12168,13 +12567,6 @@
       "augmentSlug": "pressure-cooker",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "garen",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "garen",
@@ -12231,6 +12623,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "garen",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "garen",
@@ -12542,6 +12941,13 @@
     },
     {
       "champion": "gnar",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "gnar",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -12560,6 +12966,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "gnar",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "gnar",
@@ -12644,13 +13057,6 @@
       "augmentSlug": "quickstep",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
-    },
-    {
-      "champion": "gnar",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "gnar",
@@ -13048,6 +13454,13 @@
       "champion": "gragas",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "gragas",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "B",
       "ref": "mechanical:lifesteal"
     },
@@ -13067,6 +13480,13 @@
     },
     {
       "champion": "gragas",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "gragas",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -13202,6 +13622,13 @@
       "champion": "graves",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "graves",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -13375,13 +13802,6 @@
     },
     {
       "champion": "graves",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "graves",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -13466,6 +13886,13 @@
     },
     {
       "champion": "graves",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "graves",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -13510,6 +13937,13 @@
       "champion": "gwen",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "gwen",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -13675,6 +14109,13 @@
       "ref": "mechanical:lifesteal"
     },
     {
+      "champion": "gwen",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "hecarim",
       "augment": "Chain Reaction",
       "augmentSlug": "chain-reaction",
@@ -13741,6 +14182,13 @@
       "champion": "hecarim",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "hecarim",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -13855,13 +14303,6 @@
       "augmentSlug": "heavy-hitter",
       "tier": "A",
       "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "hecarim",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "hecarim",
@@ -13907,13 +14348,6 @@
     },
     {
       "champion": "hecarim",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "hecarim",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "A",
@@ -13977,6 +14411,13 @@
     },
     {
       "champion": "hecarim",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "hecarim",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -14334,6 +14775,13 @@
     },
     {
       "champion": "heimerdinger",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "heimerdinger",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -14439,13 +14887,6 @@
     },
     {
       "champion": "heimerdinger",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "heimerdinger",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -14492,6 +14933,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "heimerdinger",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "heimerdinger",
@@ -14581,6 +15029,13 @@
       "champion": "hwei",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "hwei",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -14691,13 +15146,6 @@
     },
     {
       "champion": "hwei",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "hwei",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -14740,6 +15188,13 @@
     },
     {
       "champion": "hwei",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "hwei",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
@@ -14777,6 +15232,13 @@
       "champion": "illaoi",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "illaoi",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -14894,13 +15356,6 @@
     },
     {
       "champion": "illaoi",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "illaoi",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "A",
@@ -14926,6 +15381,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "illaoi",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "illaoi",
@@ -15003,6 +15465,13 @@
       "augmentSlug": "double-defense",
       "tier": "S",
       "ref": "ability-fit:Q"
+    },
+    {
+      "champion": "irelia",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "irelia",
@@ -15153,13 +15622,6 @@
     },
     {
       "champion": "irelia",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "irelia",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -15206,6 +15668,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "irelia",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "irelia",
@@ -15491,6 +15960,13 @@
       "champion": "ivern",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "ivern",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -15825,13 +16301,6 @@
     },
     {
       "champion": "ivern",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "ivern",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -15850,6 +16319,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "ivern",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "ivern",
@@ -16098,8 +16574,22 @@
     },
     {
       "champion": "janna",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "janna",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "janna",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -16259,6 +16749,13 @@
     },
     {
       "champion": "jarvaniv",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "jarvaniv",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -16378,13 +16875,6 @@
     },
     {
       "champion": "jarvaniv",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "jarvaniv",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -16438,6 +16928,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "jarvaniv",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "jarvaniv",
@@ -16613,6 +17110,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "jax",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:lifesteal"
     },
     {
       "champion": "jax",
@@ -16870,6 +17374,13 @@
       "champion": "jayce",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "jayce",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "B",
       "ref": "mechanical:lifesteal"
     },
@@ -17078,6 +17589,13 @@
     },
     {
       "champion": "jhin",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "jhin",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -17197,13 +17715,6 @@
     },
     {
       "champion": "jhin",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "jhin",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "A",
@@ -17236,6 +17747,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "jhin",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "jhin",
@@ -17353,6 +17871,13 @@
       "champion": "jinx",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "jinx",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -17484,13 +18009,6 @@
     },
     {
       "champion": "jinx",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "jinx",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -17544,6 +18062,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "jinx",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "jinx",
@@ -17647,6 +18172,13 @@
       "champion": "kaisa",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "kaisa",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "S",
       "ref": "mechanical:on_hit"
     },
@@ -17806,13 +18338,6 @@
     },
     {
       "champion": "kaisa",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "kaisa",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "S",
@@ -17859,6 +18384,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "kaisa",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "kaisa",
@@ -18086,6 +18618,13 @@
     },
     {
       "champion": "kalista",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "kalista",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -18254,13 +18793,6 @@
     },
     {
       "champion": "kalista",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "kalista",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -18342,6 +18874,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "kalista",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "kalista",
@@ -18603,6 +19142,13 @@
       "ref": "mechanical:lifesteal"
     },
     {
+      "champion": "karma",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "karthus",
       "augment": "Jeweled Gauntlet",
       "augmentSlug": "jeweled-gauntlet",
@@ -18704,6 +19250,13 @@
       "champion": "karthus",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "karthus",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -18814,13 +19367,6 @@
     },
     {
       "champion": "karthus",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "karthus",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -18853,6 +19399,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "karthus",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "karthus",
@@ -19024,8 +19577,22 @@
     },
     {
       "champion": "kassadin",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "kassadin",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "kassadin",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -19180,13 +19747,6 @@
       "champion": "katarina",
       "augment": "Firebrand",
       "augmentSlug": "firebrand",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "katarina",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -19248,6 +19808,13 @@
     },
     {
       "champion": "katarina",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "katarina",
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
@@ -19499,6 +20066,13 @@
       "ref": "mechanical:lifesteal"
     },
     {
+      "champion": "kayle",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "kayn",
       "augment": "Bolstered",
       "augmentSlug": "double-defense",
@@ -19530,6 +20104,13 @@
       "champion": "kayn",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "kayn",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -19689,6 +20270,13 @@
     },
     {
       "champion": "kayn",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "kayn",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -19747,13 +20335,6 @@
       "champion": "kayn",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "kayn",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -19962,13 +20543,6 @@
     },
     {
       "champion": "kennen",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "kennen",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -20088,6 +20662,13 @@
     },
     {
       "champion": "kennen",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "kennen",
       "augment": "With Haste",
       "augmentSlug": "with-haste",
       "tier": "A",
@@ -20132,6 +20713,13 @@
       "champion": "kennen",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "kennen",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -20235,13 +20823,6 @@
     },
     {
       "champion": "kennen",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "kennen",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -20302,6 +20883,13 @@
       "augmentSlug": "double-defense",
       "tier": "S",
       "ref": "ability-fit:W"
+    },
+    {
+      "champion": "khazix",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "khazix",
@@ -20473,13 +21061,6 @@
     },
     {
       "champion": "khazix",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "khazix",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -20547,6 +21128,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "khazix",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "khazix",
@@ -20725,6 +21313,13 @@
     },
     {
       "champion": "kindred",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "kindred",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "S",
@@ -20851,13 +21446,6 @@
     },
     {
       "champion": "kindred",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "kindred",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -20897,6 +21485,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "kindred",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "kindred",
@@ -21009,6 +21604,13 @@
       "augmentSlug": "double-defense",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "kled",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
     },
     {
       "champion": "kled",
@@ -21229,6 +21831,13 @@
     },
     {
       "champion": "kled",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "kled",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -21294,13 +21903,6 @@
       "champion": "kled",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "kled",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -21585,6 +22187,13 @@
       "ref": "mechanical:lifesteal"
     },
     {
+      "champion": "kogmaw",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "ksante",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
@@ -21604,6 +22213,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "S",
       "ref": "ability-fit:W/R"
+    },
+    {
+      "champion": "ksante",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "ksante",
@@ -21712,13 +22328,6 @@
     },
     {
       "champion": "ksante",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "ksante",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -21786,6 +22395,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "ksante",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "ksante",
@@ -21952,6 +22568,13 @@
       "champion": "leblanc",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "leblanc",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -22279,13 +22902,6 @@
     },
     {
       "champion": "leblanc",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "leblanc",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -22304,6 +22920,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "leblanc",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "leblanc",
@@ -22353,6 +22976,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "leesin",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "leesin",
@@ -22517,13 +23147,6 @@
     },
     {
       "champion": "leesin",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "leesin",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -22605,6 +23228,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "leesin",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "leesin",
@@ -22757,6 +23387,13 @@
       "champion": "leona",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "leona",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -22887,6 +23524,13 @@
       "ref": "ability-fit:Q/W/E/R"
     },
     {
+      "champion": "leona",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "lillia",
       "augment": "Jeweled Gauntlet",
       "augmentSlug": "jeweled-gauntlet",
@@ -22944,13 +23588,6 @@
     },
     {
       "champion": "lillia",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "lillia",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -22997,6 +23634,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "lillia",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "lillia",
@@ -23079,6 +23723,13 @@
       "champion": "lillia",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "lillia",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -23193,13 +23844,6 @@
       "augmentSlug": "purist-caster",
       "tier": "C",
       "ref": "mechanical:attack_speed"
-    },
-    {
-      "champion": "lillia",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "lillia",
@@ -23455,6 +24099,13 @@
     },
     {
       "champion": "lissandra",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "lissandra",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -23574,13 +24225,6 @@
     },
     {
       "champion": "lissandra",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "lissandra",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -23616,15 +24260,176 @@
     },
     {
       "champion": "lissandra",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "lissandra",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
       "ref": "mechanical:attack_speed"
     },
     {
+      "champion": "locke",
+      "augment": "Bolstered",
+      "augmentSlug": "double-defense",
+      "tier": "S",
+      "ref": "ability-fit:W"
+    },
+    {
+      "champion": "locke",
+      "augment": "Mercy's Strike",
+      "augmentSlug": "mercys-strike",
+      "tier": "S",
+      "ref": "ability-fit:W"
+    },
+    {
+      "champion": "locke",
+      "augment": "Multishot",
+      "augmentSlug": "multishot",
+      "tier": "S",
+      "ref": "ability-fit:Q"
+    },
+    {
+      "champion": "locke",
+      "augment": "Ravenous Bind",
+      "augmentSlug": "ravenous-bind",
+      "tier": "S",
+      "ref": "ability-fit:W"
+    },
+    {
+      "champion": "locke",
+      "augment": "Rejuvenation",
+      "augmentSlug": "rejuvenation",
+      "tier": "S",
+      "ref": "ability-fit:W"
+    },
+    {
+      "champion": "locke",
+      "augment": "Spell Split",
+      "augmentSlug": "spell-split",
+      "tier": "S",
+      "ref": "ability-fit:Q"
+    },
+    {
+      "champion": "locke",
+      "augment": "Tripleshot",
+      "augmentSlug": "tripleshot",
+      "tier": "S",
+      "ref": "ability-fit:Q"
+    },
+    {
+      "champion": "locke",
+      "augment": "Juiced",
+      "augmentSlug": "juiced",
+      "tier": "A",
+      "ref": "mechanical:mana_scaling"
+    },
+    {
+      "champion": "locke",
+      "augment": "Overflow",
+      "augmentSlug": "overflow",
+      "tier": "A",
+      "ref": "mechanical:mana_scaling"
+    },
+    {
+      "champion": "locke",
+      "augment": "BONK!",
+      "augmentSlug": "bonk",
+      "tier": "B",
+      "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "locke",
+      "augment": "Echo Cast",
+      "augmentSlug": "echo-cast",
+      "tier": "B",
+      "ref": "ability-fit:W/R"
+    },
+    {
+      "champion": "locke",
+      "augment": "Final Form",
+      "augmentSlug": "final-form",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "locke",
+      "augment": "Goredrink",
+      "augmentSlug": "goredrink",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "locke",
+      "augment": "Hellbent",
+      "augmentSlug": "hellbent",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "locke",
+      "augment": "Jeweled Gauntlet",
+      "augmentSlug": "jeweled-gauntlet",
+      "tier": "B",
+      "ref": "mechanical:ability_crit"
+    },
+    {
+      "champion": "locke",
+      "augment": "Ominous Pact",
+      "augmentSlug": "ominous-pact",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "locke",
+      "augment": "Quickstep",
+      "augmentSlug": "quickstep",
+      "tier": "B",
+      "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "locke",
+      "augment": "Stay Resolute",
+      "augmentSlug": "stay-resolute",
+      "tier": "B",
+      "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "locke",
+      "augment": "Terror",
+      "augmentSlug": "terror",
+      "tier": "B",
+      "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "locke",
+      "augment": "Triggered Inferno",
+      "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "locke",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "lucian",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "lucian",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -23812,13 +24617,6 @@
     },
     {
       "champion": "lucian",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "lucian",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -23879,6 +24677,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "lucian",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "lucian",
@@ -24050,13 +24855,6 @@
     },
     {
       "champion": "lulu",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "lulu",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -24141,6 +24939,13 @@
     },
     {
       "champion": "lulu",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "lulu",
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
@@ -24171,6 +24976,13 @@
       "champion": "lulu",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "lulu",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -24278,13 +25090,6 @@
       "augmentSlug": "purist-caster",
       "tier": "C",
       "ref": "mechanical:attack_speed"
-    },
-    {
-      "champion": "lulu",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "lulu",
@@ -24540,8 +25345,22 @@
     },
     {
       "champion": "lux",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "lux",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "lux",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -24967,6 +25786,13 @@
     },
     {
       "champion": "malphite",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "malphite",
       "augment": "DropBear",
       "augmentSlug": "dropbear",
       "tier": "C",
@@ -25037,13 +25863,6 @@
     },
     {
       "champion": "malphite",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "malphite",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "C",
@@ -25079,6 +25898,13 @@
     },
     {
       "champion": "malphite",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "malphite",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
@@ -25088,13 +25914,6 @@
       "champion": "malzahar",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "malzahar",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "S",
       "ref": "mechanical:dot_synergy"
     },
@@ -25130,6 +25949,13 @@
       "champion": "malzahar",
       "augment": "Slap Around",
       "augmentSlug": "slap-around",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "malzahar",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "S",
       "ref": "mechanical:dot_synergy"
     },
@@ -25387,6 +26213,13 @@
     },
     {
       "champion": "malzahar",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "malzahar",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -25475,13 +26308,6 @@
       "augmentSlug": "ominous-pact",
       "tier": "C",
       "ref": "mechanical:lifesteal"
-    },
-    {
-      "champion": "malzahar",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "malzahar",
@@ -25611,13 +26437,6 @@
     },
     {
       "champion": "maokai",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "maokai",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -25674,6 +26493,13 @@
     },
     {
       "champion": "maokai",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "maokai",
       "augment": "Final Form",
       "augmentSlug": "final-form",
       "tier": "B",
@@ -25711,6 +26537,13 @@
       "champion": "maokai",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "maokai",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -25802,6 +26635,13 @@
       "champion": "masteryi",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "masteryi",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "S",
       "ref": "mechanical:on_hit"
     },
@@ -25926,13 +26766,6 @@
     },
     {
       "champion": "masteryi",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "masteryi",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "S",
@@ -25965,6 +26798,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "masteryi",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "masteryi",
@@ -26007,13 +26847,6 @@
       "augmentSlug": "hellbent",
       "tier": "A",
       "ref": "mechanical:lifesteal"
-    },
-    {
-      "champion": "masteryi",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "masteryi",
@@ -26143,13 +26976,6 @@
     },
     {
       "champion": "mel",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "mel",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -26187,6 +27013,13 @@
       "champion": "mel",
       "augment": "Slap Around",
       "augmentSlug": "slap-around",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "mel",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -26409,13 +27242,6 @@
     },
     {
       "champion": "milio",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "milio",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -26479,6 +27305,13 @@
     },
     {
       "champion": "milio",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "milio",
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
@@ -26537,6 +27370,13 @@
       "champion": "milio",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "milio",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -26661,6 +27501,13 @@
     },
     {
       "champion": "missfortune",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "missfortune",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -26759,13 +27606,6 @@
     },
     {
       "champion": "missfortune",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "missfortune",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -26843,13 +27683,6 @@
     },
     {
       "champion": "missfortune",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "missfortune",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -26910,6 +27743,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "missfortune",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "missfortune",
@@ -27008,6 +27848,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "monkeyking",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "monkeyking",
@@ -27144,13 +27991,6 @@
     },
     {
       "champion": "monkeyking",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "monkeyking",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -27232,13 +28072,6 @@
       "augmentSlug": "quickstep",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "monkeyking",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "monkeyking",
@@ -27354,6 +28187,13 @@
     },
     {
       "champion": "monkeyking",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "monkeyking",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -27501,20 +28341,6 @@
     },
     {
       "champion": "mordekaiser",
-      "augment": "Courage of the Colossus",
-      "augmentSlug": "courage-of-the-colossus",
-      "tier": "A",
-      "ref": "mechanical:immobilize_trigger"
-    },
-    {
-      "champion": "mordekaiser",
-      "augment": "Cruelty",
-      "augmentSlug": "cruelty",
-      "tier": "A",
-      "ref": "mechanical:immobilize_trigger"
-    },
-    {
-      "champion": "mordekaiser",
       "augment": "Dropkick",
       "augmentSlug": "dropkick",
       "tier": "A",
@@ -27531,20 +28357,6 @@
       "champion": "mordekaiser",
       "augment": "Firebrand",
       "augmentSlug": "firebrand",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "mordekaiser",
-      "augment": "Guilty Pleasure",
-      "augmentSlug": "guilty-pleasure",
-      "tier": "A",
-      "ref": "mechanical:immobilize_trigger"
-    },
-    {
-      "champion": "mordekaiser",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -27578,24 +28390,10 @@
     },
     {
       "champion": "mordekaiser",
-      "augment": "Soul Eater",
-      "augmentSlug": "soul-eater",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "A",
-      "ref": "mechanical:immobilize_trigger"
-    },
-    {
-      "champion": "mordekaiser",
-      "augment": "Spin Me Right Round",
-      "augmentSlug": "spin-me-right-round",
-      "tier": "A",
-      "ref": "mechanical:immobilize_trigger"
-    },
-    {
-      "champion": "mordekaiser",
-      "augment": "Tooth Fairy",
-      "augmentSlug": "tooth-fairy",
-      "tier": "A",
-      "ref": "mechanical:immobilize_trigger"
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "mordekaiser",
@@ -27613,10 +28411,31 @@
     },
     {
       "champion": "mordekaiser",
+      "augment": "Courage of the Colossus",
+      "augmentSlug": "courage-of-the-colossus",
+      "tier": "B",
+      "ref": "mechanical:immobilize_trigger"
+    },
+    {
+      "champion": "mordekaiser",
+      "augment": "Cruelty",
+      "augmentSlug": "cruelty",
+      "tier": "B",
+      "ref": "mechanical:immobilize_trigger"
+    },
+    {
+      "champion": "mordekaiser",
       "augment": "Echo Cast",
       "augmentSlug": "echo-cast",
       "tier": "B",
       "ref": "ability-fit:Q/E"
+    },
+    {
+      "champion": "mordekaiser",
+      "augment": "Guilty Pleasure",
+      "augmentSlug": "guilty-pleasure",
+      "tier": "B",
+      "ref": "mechanical:immobilize_trigger"
     },
     {
       "champion": "mordekaiser",
@@ -27634,6 +28453,20 @@
     },
     {
       "champion": "mordekaiser",
+      "augment": "Soul Eater",
+      "augmentSlug": "soul-eater",
+      "tier": "B",
+      "ref": "mechanical:immobilize_trigger"
+    },
+    {
+      "champion": "mordekaiser",
+      "augment": "Spin Me Right Round",
+      "augmentSlug": "spin-me-right-round",
+      "tier": "B",
+      "ref": "mechanical:immobilize_trigger"
+    },
+    {
+      "champion": "mordekaiser",
       "augment": "Stay Resolute",
       "augmentSlug": "stay-resolute",
       "tier": "B",
@@ -27645,6 +28478,13 @@
       "augmentSlug": "terror",
       "tier": "B",
       "ref": "ability-fit:Q/E"
+    },
+    {
+      "champion": "mordekaiser",
+      "augment": "Tooth Fairy",
+      "augmentSlug": "tooth-fairy",
+      "tier": "B",
+      "ref": "mechanical:immobilize_trigger"
     },
     {
       "champion": "morgana",
@@ -27753,13 +28593,6 @@
     },
     {
       "champion": "morgana",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "morgana",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -27844,6 +28677,13 @@
     },
     {
       "champion": "morgana",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "morgana",
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
@@ -27881,6 +28721,13 @@
       "champion": "morgana",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "morgana",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -28005,13 +28852,6 @@
     },
     {
       "champion": "morgana",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "morgana",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -28096,6 +28936,13 @@
     },
     {
       "champion": "naafiri",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "naafiri",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -28170,13 +29017,6 @@
       "augmentSlug": "holy-snowball",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "naafiri",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "naafiri",
@@ -28264,6 +29104,13 @@
     },
     {
       "champion": "naafiri",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "naafiri",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -28329,13 +29176,6 @@
       "champion": "naafiri",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "naafiri",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -28691,8 +29531,22 @@
     },
     {
       "champion": "nami",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "nami",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "nami",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -28824,13 +29678,6 @@
     },
     {
       "champion": "nasus",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "nasus",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "S",
@@ -28847,6 +29694,13 @@
       "champion": "nasus",
       "augment": "Titan's Resolve",
       "augmentSlug": "titans-resolve",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "nasus",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "S",
       "ref": "mechanical:dot_synergy"
     },
@@ -28971,6 +29825,13 @@
     },
     {
       "champion": "nasus",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "nasus",
       "augment": "Double Tap",
       "augmentSlug": "double-tap",
       "tier": "B",
@@ -29029,13 +29890,6 @@
       "champion": "nasus",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "nasus",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -29188,13 +30042,6 @@
     },
     {
       "champion": "nautilus",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "nautilus",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -29304,6 +30151,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "nautilus",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "nautilus",
@@ -29356,6 +30210,13 @@
     },
     {
       "champion": "nautilus",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "nautilus",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "C",
@@ -29528,13 +30389,6 @@
       "augmentSlug": "purist-caster",
       "tier": "C",
       "ref": "mechanical:attack_speed"
-    },
-    {
-      "champion": "nautilus",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "nautilus",
@@ -29762,8 +30616,22 @@
     },
     {
       "champion": "neeko",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "neeko",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "neeko",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -29951,6 +30819,20 @@
     },
     {
       "champion": "nidalee",
+      "augment": "Vulnerability",
+      "augmentSlug": "vulnerability",
+      "tier": "S",
+      "ref": "mechanical:ability_crit"
+    },
+    {
+      "champion": "nidalee",
+      "augment": "Combusting Interest",
+      "augmentSlug": "combusting-interest",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "nidalee",
       "augment": "Dropkick",
       "augmentSlug": "dropkick",
       "tier": "A",
@@ -29965,10 +30847,17 @@
     },
     {
       "champion": "nidalee",
+      "augment": "Firebrand",
+      "augmentSlug": "firebrand",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "nidalee",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
-      "ref": "mechanical:on_cast"
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "nidalee",
@@ -29986,6 +30875,13 @@
     },
     {
       "champion": "nidalee",
+      "augment": "Pressure Cooker",
+      "augmentSlug": "pressure-cooker",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "nidalee",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -29993,10 +30889,24 @@
     },
     {
       "champion": "nidalee",
+      "augment": "Skilled Sniper",
+      "augmentSlug": "skilled-sniper",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "nidalee",
       "augment": "Twin Fire",
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "nidalee",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "nidalee",
@@ -30168,6 +31078,13 @@
     },
     {
       "champion": "nilah",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "nilah",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -30256,13 +31173,6 @@
       "augmentSlug": "holy-snowball",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "nilah",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "nilah",
@@ -30357,6 +31267,13 @@
     },
     {
       "champion": "nilah",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "nilah",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -30443,13 +31360,6 @@
       "champion": "nilah",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "nilah",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -30609,6 +31519,13 @@
     },
     {
       "champion": "nocturne",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "nocturne",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -30763,13 +31680,6 @@
     },
     {
       "champion": "nocturne",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "nocturne",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -30816,6 +31726,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "nocturne",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "nocturne",
@@ -31183,6 +32100,13 @@
     },
     {
       "champion": "nunu",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "nunu",
       "augment": "ADAPt",
       "augmentSlug": "adapt",
       "tier": "C",
@@ -31192,6 +32116,13 @@
       "champion": "nunu",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "nunu",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -31449,6 +32380,13 @@
     },
     {
       "champion": "olaf",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "olaf",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -31533,13 +32471,6 @@
     },
     {
       "champion": "olaf",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "olaf",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -31577,6 +32508,13 @@
       "champion": "olaf",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ap_scaling"
+    },
+    {
+      "champion": "olaf",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ap_scaling"
     },
@@ -32016,6 +32954,13 @@
     },
     {
       "champion": "orianna",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "orianna",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -32114,13 +33059,6 @@
     },
     {
       "champion": "orianna",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "orianna",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -32167,6 +33105,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "orianna",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "orianna",
@@ -32230,13 +33175,6 @@
       "augmentSlug": "guilty-pleasure",
       "tier": "A",
       "ref": "mechanical:immobilize_trigger"
-    },
-    {
-      "champion": "ornn",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "ornn",
@@ -32307,6 +33245,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "ornn",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "ornn",
@@ -32426,6 +33371,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "pantheon",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
     },
     {
       "champion": "pantheon",
@@ -32646,6 +33598,13 @@
     },
     {
       "champion": "pantheon",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "pantheon",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -32769,13 +33728,6 @@
       "augmentSlug": "ominous-pact",
       "tier": "B",
       "ref": "mechanical:lifesteal"
-    },
-    {
-      "champion": "pantheon",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "pantheon",
@@ -32905,6 +33857,13 @@
     },
     {
       "champion": "poppy",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "poppy",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -32993,13 +33952,6 @@
       "augmentSlug": "holy-snowball",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "poppy",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "poppy",
@@ -33108,6 +34060,13 @@
     },
     {
       "champion": "poppy",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "poppy",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -33206,13 +34165,6 @@
     },
     {
       "champion": "poppy",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "poppy",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -33299,6 +34251,13 @@
       "champion": "pyke",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "pyke",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -33420,13 +34379,6 @@
       "augmentSlug": "holy-snowball",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "pyke",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "pyke",
@@ -33567,6 +34519,13 @@
       "augmentSlug": "tooth-fairy",
       "tier": "A",
       "ref": "mechanical:immobilize_trigger"
+    },
+    {
+      "champion": "pyke",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "pyke",
@@ -33675,13 +34634,6 @@
     },
     {
       "champion": "pyke",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "pyke",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -33735,6 +34687,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "qiyana",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "qiyana",
@@ -33878,13 +34837,6 @@
     },
     {
       "champion": "qiyana",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "qiyana",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -33952,13 +34904,6 @@
       "augmentSlug": "quickstep",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "qiyana",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "qiyana",
@@ -34064,6 +35009,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "qiyana",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "qiyana",
@@ -34193,6 +35145,13 @@
     },
     {
       "champion": "quinn",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "quinn",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -34361,13 +35320,6 @@
     },
     {
       "champion": "quinn",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "quinn",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -34456,6 +35408,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "quinn",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "quinn",
@@ -34615,6 +35574,13 @@
       "champion": "rakan",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "rakan",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -34942,13 +35908,6 @@
     },
     {
       "champion": "rakan",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "rakan",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -34967,6 +35926,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "rakan",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "rakan",
@@ -35145,6 +36111,13 @@
     },
     {
       "champion": "rammus",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "rammus",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -35250,13 +36223,6 @@
     },
     {
       "champion": "rammus",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "rammus",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -35299,6 +36265,13 @@
     },
     {
       "champion": "rammus",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "rammus",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
@@ -35331,6 +36304,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "S",
       "ref": "ability-fit:W"
+    },
+    {
+      "champion": "reksai",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "reksai",
@@ -35467,13 +36447,6 @@
     },
     {
       "champion": "reksai",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "reksai",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "S",
@@ -35548,6 +36521,13 @@
       "augmentSlug": "ult-bot",
       "tier": "S",
       "ref": "mechanical:ability_haste"
+    },
+    {
+      "champion": "reksai",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "reksai",
@@ -35639,13 +36619,6 @@
       "augmentSlug": "hellbent",
       "tier": "A",
       "ref": "mechanical:lifesteal"
-    },
-    {
-      "champion": "reksai",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "reksai",
@@ -35880,6 +36853,13 @@
     },
     {
       "champion": "rell",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "rell",
       "augment": "Juiced",
       "augmentSlug": "juiced",
       "tier": "B",
@@ -36013,13 +36993,6 @@
     },
     {
       "champion": "renata",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "renata",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -36108,6 +37081,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "renata",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "renata",
@@ -36181,6 +37161,13 @@
     },
     {
       "champion": "renekton",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "renekton",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -36269,13 +37256,6 @@
       "augmentSlug": "holy-snowball",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "renekton",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "renekton",
@@ -36412,6 +37392,13 @@
     },
     {
       "champion": "renekton",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "renekton",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -36524,13 +37511,6 @@
     },
     {
       "champion": "renekton",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "renekton",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -36591,6 +37571,13 @@
       "augmentSlug": "double-defense",
       "tier": "S",
       "ref": "ability-fit:W"
+    },
+    {
+      "champion": "rengar",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "rengar",
@@ -36713,13 +37700,6 @@
     },
     {
       "champion": "rengar",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "rengar",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -36759,6 +37739,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "rengar",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "rengar",
@@ -36986,6 +37973,13 @@
     },
     {
       "champion": "riven",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "riven",
       "augment": "Courage of the Colossus",
       "augmentSlug": "courage-of-the-colossus",
       "tier": "A",
@@ -37112,13 +38106,6 @@
     },
     {
       "champion": "riven",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "riven",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -37186,6 +38173,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "riven",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "riven",
@@ -37322,13 +38316,6 @@
     },
     {
       "champion": "rumble",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "rumble",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "S",
@@ -37396,6 +38383,13 @@
       "augmentSlug": "tripleshot",
       "tier": "S",
       "ref": "ability-fit:Q/E/R"
+    },
+    {
+      "champion": "rumble",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "rumble",
@@ -37632,6 +38626,13 @@
       "champion": "rumble",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "rumble",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -38043,6 +39044,13 @@
     },
     {
       "champion": "ryze",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "ryze",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -38155,13 +39163,6 @@
     },
     {
       "champion": "ryze",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "ryze",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -38211,6 +39212,13 @@
     },
     {
       "champion": "ryze",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "ryze",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
@@ -38220,6 +39228,13 @@
       "champion": "samira",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "samira",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -38372,6 +39387,13 @@
     },
     {
       "champion": "samira",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "samira",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -38437,13 +39459,6 @@
       "champion": "samira",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "samira",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -38883,8 +39898,22 @@
     },
     {
       "champion": "sejuani",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "sejuani",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "sejuani",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -39156,6 +40185,13 @@
     },
     {
       "champion": "senna",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "senna",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -39174,6 +40210,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "senna",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "senna",
@@ -39279,13 +40322,6 @@
       "augmentSlug": "quickstep",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
-    },
-    {
-      "champion": "senna",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "senna",
@@ -39485,6 +40521,13 @@
     },
     {
       "champion": "seraphine",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "seraphine",
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
@@ -39550,6 +40593,13 @@
       "champion": "sett",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "sett",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -39688,13 +40738,6 @@
     },
     {
       "champion": "sett",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "sett",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -39769,6 +40812,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "sett",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "sett",
@@ -39926,6 +40976,13 @@
     },
     {
       "champion": "shaco",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "shaco",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "S",
@@ -40003,13 +41060,6 @@
     },
     {
       "champion": "shaco",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "shaco",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "S",
@@ -40073,13 +41123,6 @@
     },
     {
       "champion": "shaco",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "shaco",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "S",
@@ -40119,6 +41162,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "shaco",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "shaco",
@@ -40273,6 +41323,13 @@
       "augmentSlug": "double-defense",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "shen",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
     },
     {
       "champion": "shen",
@@ -40591,13 +41648,6 @@
     },
     {
       "champion": "shen",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "shen",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -40658,6 +41708,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "shen",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "shen",
@@ -40796,6 +41853,13 @@
       "champion": "shyvana",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "shyvana",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "B",
       "ref": "mechanical:lifesteal"
     },
@@ -40822,6 +41886,13 @@
     },
     {
       "champion": "shyvana",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "shyvana",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -40941,6 +42012,13 @@
     },
     {
       "champion": "shyvana",
+      "augment": "Titan's Resolve",
+      "augmentSlug": "titans-resolve",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "shyvana",
       "augment": "Twin Fire",
       "augmentSlug": "twin-fire",
       "tier": "C",
@@ -40983,13 +42061,6 @@
     },
     {
       "champion": "singed",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "singed",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "S",
@@ -41020,6 +42091,13 @@
       "champion": "singed",
       "augment": "Titan's Resolve",
       "augmentSlug": "titans-resolve",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "singed",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "S",
       "ref": "mechanical:dot_synergy"
     },
@@ -41270,6 +42348,13 @@
     },
     {
       "champion": "sion",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "sion",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -41288,6 +42373,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "sion",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "sion",
@@ -41382,13 +42474,6 @@
     },
     {
       "champion": "sion",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "sion",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -41426,6 +42511,13 @@
       "champion": "sivir",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "sivir",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -41557,13 +42649,6 @@
     },
     {
       "champion": "sivir",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "sivir",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -41603,6 +42688,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "sivir",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "sivir",
@@ -41753,13 +42845,6 @@
     },
     {
       "champion": "skarner",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "skarner",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -41816,6 +42901,13 @@
     },
     {
       "champion": "skarner",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "skarner",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -41834,6 +42926,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "skarner",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "skarner",
@@ -41970,13 +43069,6 @@
     },
     {
       "champion": "skarner",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "skarner",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -42138,13 +43230,6 @@
     },
     {
       "champion": "smolder",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "smolder",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -42257,6 +43342,13 @@
     },
     {
       "champion": "smolder",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "smolder",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -42275,6 +43367,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "smolder",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "smolder",
@@ -42373,13 +43472,6 @@
       "augmentSlug": "overflow",
       "tier": "B",
       "ref": "mechanical:mana_scaling"
-    },
-    {
-      "champion": "smolder",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "smolder",
@@ -42555,6 +43647,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "sona",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:lifesteal"
     },
     {
       "champion": "sona",
@@ -42796,6 +43895,13 @@
     },
     {
       "champion": "soraka",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "soraka",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -42901,13 +44007,6 @@
     },
     {
       "champion": "soraka",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "soraka",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -42947,6 +44046,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "soraka",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "soraka",
@@ -43008,13 +44114,6 @@
       "champion": "swain",
       "augment": "Firebrand",
       "augmentSlug": "firebrand",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "swain",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "A",
       "ref": "mechanical:dot_synergy"
     },
@@ -43108,6 +44207,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "swain",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "swain",
@@ -43239,6 +44345,13 @@
       "champion": "sylas",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "sylas",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -43491,6 +44604,13 @@
       "champion": "sylas",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "sylas",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "B",
       "ref": "mechanical:lifesteal"
     },
@@ -43783,6 +44903,13 @@
     },
     {
       "champion": "syndra",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "syndra",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -43881,13 +45008,6 @@
     },
     {
       "champion": "syndra",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "syndra",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -43934,6 +45054,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "syndra",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "syndra",
@@ -44161,6 +45288,13 @@
     },
     {
       "champion": "tahmkench",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "tahmkench",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -44280,13 +45414,6 @@
     },
     {
       "champion": "tahmkench",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "tahmkench",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -44326,6 +45453,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "tahmkench",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "tahmkench",
@@ -44415,6 +45549,13 @@
       "champion": "taliyah",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "taliyah",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -44581,6 +45722,13 @@
     },
     {
       "champion": "talon",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "talon",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -44662,13 +45810,6 @@
       "augmentSlug": "holy-snowball",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "talon",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "talon",
@@ -44784,6 +45925,13 @@
     },
     {
       "champion": "talon",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "talon",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -44879,13 +46027,6 @@
       "augmentSlug": "ominous-pact",
       "tier": "B",
       "ref": "mechanical:lifesteal"
-    },
-    {
-      "champion": "talon",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "talon",
@@ -45042,6 +46183,13 @@
       "ref": "ability-fit:Q/W/E"
     },
     {
+      "champion": "taric",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
       "champion": "teemo",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
@@ -45052,13 +46200,6 @@
       "champion": "teemo",
       "augment": "Firebrand",
       "augmentSlug": "firebrand",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "teemo",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
       "tier": "S",
       "ref": "mechanical:dot_synergy"
     },
@@ -45092,6 +46233,13 @@
     },
     {
       "champion": "teemo",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "teemo",
       "augment": "Vulnerability",
       "augmentSlug": "vulnerability",
       "tier": "S",
@@ -45304,6 +46452,13 @@
       "champion": "thresh",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "thresh",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -45617,13 +46772,6 @@
     },
     {
       "champion": "thresh",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "thresh",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -45649,6 +46797,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "thresh",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "thresh",
@@ -45771,6 +46926,13 @@
     },
     {
       "champion": "tristana",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "tristana",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -45789,6 +46951,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:W/E/R"
+    },
+    {
+      "champion": "tristana",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "tristana",
@@ -45887,13 +47056,6 @@
       "augmentSlug": "quickstep",
       "tier": "B",
       "ref": "ability-fit:W/E/R"
-    },
-    {
-      "champion": "tristana",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "tristana",
@@ -46065,13 +47227,6 @@
     },
     {
       "champion": "trundle",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "trundle",
       "augment": "Lil' Extra Help",
       "augmentSlug": "lil-extra-help",
       "tier": "A",
@@ -46114,6 +47269,13 @@
     },
     {
       "champion": "trundle",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "trundle",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -46124,7 +47286,7 @@
       "augment": "BONK!",
       "augmentSlug": "bonk",
       "tier": "B",
-      "ref": "ability-fit:Q/W/E"
+      "ref": "ability-fit:Q/E"
     },
     {
       "champion": "trundle",
@@ -46212,13 +47374,6 @@
     },
     {
       "champion": "trundle",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "trundle",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -46236,14 +47391,14 @@
       "augment": "Stay Resolute",
       "augmentSlug": "stay-resolute",
       "tier": "B",
-      "ref": "ability-fit:Q/W/E"
+      "ref": "ability-fit:Q/E"
     },
     {
       "champion": "trundle",
       "augment": "Terror",
       "augmentSlug": "terror",
       "tier": "B",
-      "ref": "ability-fit:Q/W/E"
+      "ref": "ability-fit:Q/E"
     },
     {
       "champion": "trundle",
@@ -46270,6 +47425,13 @@
       "champion": "trundle",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ap_scaling"
+    },
+    {
+      "champion": "trundle",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ap_scaling"
     },
@@ -46513,6 +47675,13 @@
     },
     {
       "champion": "tryndamere",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "tryndamere",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -46531,6 +47700,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/E/R"
+    },
+    {
+      "champion": "tryndamere",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "tryndamere",
@@ -46608,13 +47784,6 @@
       "augmentSlug": "quickstep",
       "tier": "B",
       "ref": "ability-fit:Q/E/R"
-    },
-    {
-      "champion": "tryndamere",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "tryndamere",
@@ -46821,6 +47990,13 @@
     },
     {
       "champion": "twistedfate",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "twistedfate",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -46954,13 +48130,6 @@
     },
     {
       "champion": "twistedfate",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "twistedfate",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -47014,6 +48183,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "twistedfate",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "twistedfate",
@@ -47150,6 +48326,13 @@
     },
     {
       "champion": "twitch",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "twitch",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -47234,13 +48417,6 @@
     },
     {
       "champion": "twitch",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "twitch",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -47297,13 +48473,6 @@
     },
     {
       "champion": "twitch",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "twitch",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -47350,6 +48519,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "twitch",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "twitch",
@@ -47514,8 +48690,22 @@
     },
     {
       "champion": "udyr",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "udyr",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "udyr",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -47591,13 +48781,6 @@
     },
     {
       "champion": "udyr",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "udyr",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -47658,6 +48841,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "S",
       "ref": "ability-fit:E"
+    },
+    {
+      "champion": "urgot",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "urgot",
@@ -47787,13 +48977,6 @@
     },
     {
       "champion": "urgot",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "urgot",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -47833,6 +49016,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "urgot",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "urgot",
@@ -48088,6 +49278,13 @@
     },
     {
       "champion": "varus",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "varus",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "S",
@@ -48235,13 +49432,6 @@
     },
     {
       "champion": "varus",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "varus",
       "augment": "Rejuvenation",
       "augmentSlug": "rejuvenation",
       "tier": "S",
@@ -48295,6 +49485,13 @@
       "augmentSlug": "typhoon",
       "tier": "S",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "varus",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "varus",
@@ -48480,6 +49677,13 @@
     },
     {
       "champion": "vayne",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "vayne",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -48655,13 +49859,6 @@
     },
     {
       "champion": "vayne",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "vayne",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -48750,6 +49947,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "vayne",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "vayne",
@@ -48998,6 +50202,13 @@
     },
     {
       "champion": "veigar",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "veigar",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -49096,13 +50307,6 @@
     },
     {
       "champion": "veigar",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "veigar",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -49149,6 +50353,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "veigar",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "veigar",
@@ -49404,13 +50615,6 @@
     },
     {
       "champion": "velkoz",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "velkoz",
       "augment": "Ominous Pact",
       "augmentSlug": "ominous-pact",
       "tier": "A",
@@ -49443,6 +50647,13 @@
       "augmentSlug": "triggered-inferno",
       "tier": "A",
       "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "velkoz",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "velkoz",
@@ -49532,6 +50743,13 @@
       "champion": "velkoz",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "velkoz",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -49686,6 +50904,13 @@
       "champion": "vex",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "vex",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -49964,13 +51189,6 @@
     },
     {
       "champion": "vex",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "vex",
       "augment": "Shark Tempest",
       "augmentSlug": "shark-tempest",
       "tier": "C",
@@ -50003,6 +51221,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "vex",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "vex",
@@ -50113,6 +51338,13 @@
       "champion": "vi",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "vi",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -50286,13 +51518,6 @@
     },
     {
       "champion": "vi",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "vi",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -50374,6 +51599,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "vi",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "vi",
@@ -50486,6 +51718,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "viego",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "viego",
@@ -50643,13 +51882,6 @@
     },
     {
       "champion": "viego",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "viego",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -50738,6 +51970,13 @@
       "augmentSlug": "ult-bot",
       "tier": "A",
       "ref": "mechanical:ability_haste"
+    },
+    {
+      "champion": "viego",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "viego",
@@ -50881,13 +52120,6 @@
     },
     {
       "champion": "viktor",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "viktor",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -50955,6 +52187,13 @@
       "augmentSlug": "twin-fire",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "viktor",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:dot_synergy"
     },
     {
       "champion": "viktor",
@@ -51238,8 +52477,22 @@
     },
     {
       "champion": "vladimir",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "vladimir",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "vladimir",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -51399,6 +52652,13 @@
     },
     {
       "champion": "volibear",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "volibear",
       "augment": "Critical Rhythm",
       "augmentSlug": "critical-rhythm",
       "tier": "A",
@@ -51518,13 +52778,6 @@
     },
     {
       "champion": "volibear",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "volibear",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -51578,6 +52831,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "volibear",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "volibear",
@@ -51707,13 +52967,6 @@
     },
     {
       "champion": "warwick",
-      "augment": "Jeweled Gauntlet",
-      "augmentSlug": "jeweled-gauntlet",
-      "tier": "S",
-      "ref": "mechanical:ability_crit"
-    },
-    {
-      "champion": "warwick",
       "augment": "Mercy's Strike",
       "augmentSlug": "mercys-strike",
       "tier": "S",
@@ -51735,10 +52988,31 @@
     },
     {
       "champion": "warwick",
+      "augment": "Blade Waltz",
+      "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
       "augment": "Courage of the Colossus",
       "augmentSlug": "courage-of-the-colossus",
       "tier": "A",
       "ref": "mechanical:immobilize_trigger"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Critical Rhythm",
+      "augmentSlug": "critical-rhythm",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "warwick",
@@ -51749,10 +53023,31 @@
     },
     {
       "champion": "warwick",
+      "augment": "Deft",
+      "augmentSlug": "deft",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Double Tap",
+      "augmentSlug": "double-tap",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
       "augment": "Dropkick",
       "augmentSlug": "dropkick",
       "tier": "A",
       "ref": "mechanical:execute"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Dual Wield",
+      "augmentSlug": "dual-wield",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
@@ -51763,6 +53058,34 @@
     },
     {
       "champion": "warwick",
+      "augment": "Endless Decimation",
+      "augmentSlug": "endless-decimation",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Ethereal Weapon",
+      "augmentSlug": "ethereal-weapon",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Fan The Hammer",
+      "augmentSlug": "fan-the-hammer",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Get Excited!",
+      "augmentSlug": "get-excited",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "warwick",
       "augment": "Guilty Pleasure",
       "augmentSlug": "guilty-pleasure",
       "tier": "A",
@@ -51770,24 +53093,45 @@
     },
     {
       "champion": "warwick",
-      "augment": "Infernal Conduit",
-      "augmentSlug": "infernal-conduit",
+      "augment": "Heavy Hitter",
+      "augmentSlug": "heavy-hitter",
       "tier": "A",
-      "ref": "mechanical:on_cast"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
       "augment": "Juiced",
       "augmentSlug": "juiced",
       "tier": "A",
-      "ref": "mechanical:mana_scaling"
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Light 'Em Up!",
+      "augmentSlug": "light-em-up",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Lil' Extra Help",
+      "augmentSlug": "lil-extra-help",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
-      "ref": "mechanical:on_cast"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
@@ -51798,17 +53142,10 @@
     },
     {
       "champion": "warwick",
-      "augment": "Overflow",
-      "augmentSlug": "overflow",
+      "augment": "Mystic Punch",
+      "augmentSlug": "mystic-punch",
       "tier": "A",
-      "ref": "mechanical:mana_scaling"
-    },
-    {
-      "champion": "warwick",
-      "augment": "Phenomenal Evil",
-      "augmentSlug": "phenomenal-evil",
-      "tier": "A",
-      "ref": "mechanical:on_cast"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
@@ -51816,6 +53153,13 @@
       "augmentSlug": "searing-dawn",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Shrink Ray",
+      "augmentSlug": "shrink-ray",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
@@ -51836,7 +53180,14 @@
       "augment": "Spin Me Right Round",
       "augmentSlug": "spin-me-right-round",
       "tier": "A",
-      "ref": "mechanical:immobilize_trigger"
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Symphony of War",
+      "augmentSlug": "symphony-of-war",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "warwick",
@@ -51844,6 +53195,13 @@
       "augmentSlug": "tank-it-or-leave-it",
       "tier": "A",
       "ref": "mechanical:on_cast"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Tap Dancer",
+      "augmentSlug": "tap-dancer",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
@@ -51861,17 +53219,31 @@
     },
     {
       "champion": "warwick",
-      "augment": "BONK!",
-      "augmentSlug": "bonk",
-      "tier": "B",
-      "ref": "ability-fit:Q/W/E/R"
+      "augment": "Typhoon",
+      "augmentSlug": "typhoon",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "warwick",
-      "augment": "Echo Cast",
-      "augmentSlug": "echo-cast",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "warwick",
+      "augment": "Zealot",
+      "augmentSlug": "zealot",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "warwick",
+      "augment": "BONK!",
+      "augmentSlug": "bonk",
       "tier": "B",
-      "ref": "ability-fit:Q/W/R"
+      "ref": "ability-fit:Q/R"
     },
     {
       "champion": "warwick",
@@ -51896,13 +53268,6 @@
     },
     {
       "champion": "warwick",
-      "augment": "Lil' Extra Help",
-      "augmentSlug": "lil-extra-help",
-      "tier": "B",
-      "ref": "ability-fit:Q/W/E/R"
-    },
-    {
-      "champion": "warwick",
       "augment": "Ominous Pact",
       "augmentSlug": "ominous-pact",
       "tier": "B",
@@ -51913,21 +53278,21 @@
       "augment": "Quickstep",
       "augmentSlug": "quickstep",
       "tier": "B",
-      "ref": "ability-fit:Q/W/E/R"
+      "ref": "ability-fit:Q/R"
     },
     {
       "champion": "warwick",
       "augment": "Stay Resolute",
       "augmentSlug": "stay-resolute",
       "tier": "B",
-      "ref": "ability-fit:Q/W/E/R"
+      "ref": "ability-fit:Q/R"
     },
     {
       "champion": "warwick",
       "augment": "Terror",
       "augmentSlug": "terror",
       "tier": "B",
-      "ref": "ability-fit:Q/W/E/R"
+      "ref": "ability-fit:Q/R"
     },
     {
       "champion": "warwick",
@@ -51949,6 +53314,13 @@
       "augmentSlug": "chain-reaction",
       "tier": "A",
       "ref": "ability-fit:R"
+    },
+    {
+      "champion": "xayah",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "xayah",
@@ -52071,13 +53443,6 @@
     },
     {
       "champion": "xayah",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "xayah",
       "augment": "Searing Dawn",
       "augmentSlug": "searing-dawn",
       "tier": "A",
@@ -52124,6 +53489,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "xayah",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "xayah",
@@ -52379,8 +53751,22 @@
     },
     {
       "champion": "xerath",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "xerath",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "xerath",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -52827,6 +54213,13 @@
     },
     {
       "champion": "xinzhao",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "xinzhao",
       "augment": "With Haste",
       "augmentSlug": "with-haste",
       "tier": "A",
@@ -52852,6 +54245,13 @@
       "augmentSlug": "bonk",
       "tier": "B",
       "ref": "ability-fit:Q/W/E/R"
+    },
+    {
+      "champion": "xinzhao",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "xinzhao",
@@ -52974,13 +54374,6 @@
     },
     {
       "champion": "xinzhao",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "B",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "xinzhao",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "B",
@@ -53058,6 +54451,13 @@
     },
     {
       "champion": "yasuo",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "yasuo",
       "augment": "Courage of the Colossus",
       "augmentSlug": "courage-of-the-colossus",
       "tier": "A",
@@ -53233,13 +54633,6 @@
     },
     {
       "champion": "yasuo",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "yasuo",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -53328,6 +54721,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "yasuo",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "yasuo",
@@ -53450,6 +54850,13 @@
     },
     {
       "champion": "yone",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "yone",
       "augment": "Courage of the Colossus",
       "augmentSlug": "courage-of-the-colossus",
       "tier": "A",
@@ -53625,13 +55032,6 @@
     },
     {
       "champion": "yone",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "yone",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -53723,6 +55123,13 @@
     },
     {
       "champion": "yone",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "yone",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -53802,6 +55209,13 @@
       "champion": "yorick",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "yorick",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -53912,13 +55326,6 @@
     },
     {
       "champion": "yorick",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "yorick",
       "augment": "Shrink Ray",
       "augmentSlug": "shrink-ray",
       "tier": "A",
@@ -53951,6 +55358,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "yorick",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "yorick",
@@ -54047,6 +55461,13 @@
       "champion": "yunara",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "yunara",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -54185,13 +55606,6 @@
     },
     {
       "champion": "yunara",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "yunara",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -54273,13 +55687,6 @@
       "augmentSlug": "quickstep",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "yunara",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "yunara",
@@ -54378,6 +55785,13 @@
       "augmentSlug": "ult-bot",
       "tier": "A",
       "ref": "mechanical:ability_haste"
+    },
+    {
+      "champion": "yunara",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "yunara",
@@ -54507,13 +55921,6 @@
     },
     {
       "champion": "yuumi",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "S",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "yuumi",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "S",
@@ -54640,6 +56047,13 @@
     },
     {
       "champion": "yuumi",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "S",
+      "ref": "mechanical:dot_synergy"
+    },
+    {
+      "champion": "yuumi",
       "augment": "Vulnerability",
       "augmentSlug": "vulnerability",
       "tier": "S",
@@ -54656,6 +56070,13 @@
       "champion": "yuumi",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "yuumi",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -54892,6 +56313,13 @@
     },
     {
       "champion": "zaahen",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zaahen",
       "augment": "Combusting Interest",
       "augmentSlug": "combusting-interest",
       "tier": "A",
@@ -55018,13 +56446,6 @@
     },
     {
       "champion": "zaahen",
-      "augment": "Icathia's Fall",
-      "augmentSlug": "void-immolation",
-      "tier": "A",
-      "ref": "mechanical:dot_synergy"
-    },
-    {
-      "champion": "zaahen",
       "augment": "Infernal Conduit",
       "augmentSlug": "infernal-conduit",
       "tier": "A",
@@ -55092,13 +56513,6 @@
       "augmentSlug": "quickstep",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
-    },
-    {
-      "champion": "zaahen",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
     },
     {
       "champion": "zaahen",
@@ -55190,6 +56604,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zaahen",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "zaahen",
@@ -55445,6 +56866,13 @@
     },
     {
       "champion": "zac",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zac",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -55557,13 +56985,6 @@
     },
     {
       "champion": "zac",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "zac",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -55613,6 +57034,13 @@
     },
     {
       "champion": "zac",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "zac",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
@@ -55622,6 +57050,13 @@
       "champion": "zed",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zed",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -55781,13 +57216,6 @@
     },
     {
       "champion": "zed",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "zed",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -55865,6 +57293,13 @@
     },
     {
       "champion": "zed",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "zed",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "A",
@@ -55902,6 +57337,13 @@
       "champion": "zeri",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zeri",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:on_hit"
     },
@@ -56075,13 +57517,6 @@
     },
     {
       "champion": "zeri",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "A",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "zeri",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "A",
@@ -56163,6 +57598,13 @@
       "augmentSlug": "typhoon",
       "tier": "A",
       "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zeri",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "A",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "zeri",
@@ -56397,8 +57839,22 @@
     },
     {
       "champion": "ziggs",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "ziggs",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "C",
+      "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "ziggs",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
     },
@@ -56691,6 +58147,13 @@
     },
     {
       "champion": "zilean",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zilean",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -56803,13 +58266,6 @@
     },
     {
       "champion": "zilean",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "zilean",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -56859,6 +58315,13 @@
     },
     {
       "champion": "zilean",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "zilean",
       "augment": "Zealot",
       "augmentSlug": "zealot",
       "tier": "C",
@@ -56896,6 +58359,13 @@
       "champion": "zoe",
       "augment": "Blade Waltz",
       "augmentSlug": "blade-waltz",
+      "tier": "A",
+      "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "zoe",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
     },
@@ -57127,6 +58597,13 @@
       "champion": "zoe",
       "augment": "Triggered Inferno",
       "augmentSlug": "triggered-inferno",
+      "tier": "B",
+      "ref": "mechanical:lifesteal"
+    },
+    {
+      "champion": "zoe",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
       "tier": "B",
       "ref": "mechanical:lifesteal"
     },
@@ -57531,6 +59008,13 @@
     },
     {
       "champion": "zyra",
+      "augment": "Clown College",
+      "augmentSlug": "clown-college",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zyra",
       "augment": "Dimension Shift",
       "augmentSlug": "dimension-shift",
       "tier": "C",
@@ -57629,13 +59113,6 @@
     },
     {
       "champion": "zyra",
-      "augment": "ReEnergize",
-      "augmentSlug": "reenergize",
-      "tier": "C",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "zyra",
       "augment": "Rite of Ascension",
       "augmentSlug": "rite-of-ascension",
       "tier": "C",
@@ -57668,6 +59145,13 @@
       "augmentSlug": "upgrade-sheen",
       "tier": "C",
       "ref": "mechanical:ad_scaling"
+    },
+    {
+      "champion": "zyra",
+      "augment": "Urf's Champion",
+      "augmentSlug": "quest-urfs-champion",
+      "tier": "C",
+      "ref": "mechanical:attack_speed"
     },
     {
       "champion": "zyra",
