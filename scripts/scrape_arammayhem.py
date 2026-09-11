@@ -15,6 +15,8 @@ Output files:
 """
 
 from __future__ import annotations
+import collections
+import math
 import os
 import re
 import json
@@ -188,6 +190,54 @@ def parse_augments(html: str) -> list[dict]:
 # Win-rate extraction must never infer meaning from magnitude. The previous
 # `max(percentages)` fallback silently published a pick rate as a win rate
 # whenever the labelled markup changed. Ambiguity now quarantines the row.
+#
+# Failing closed on markup is not enough on its own: a marker can still be
+# present while the cell behind it has been repurposed to carry something that
+# is not a win rate. Every extraction path therefore routes its raw text through
+# one numeric boundary, so no branch can publish a value the others would reject.
+WIN_RATE_MIN = 0.0
+WIN_RATE_MAX = 100.0
+
+# Plausibility band, for REPORTING ONLY. Observed 2026-09-10: augment win rates
+# span 46.6-65.2 and champion win rates 40.7-56.6. A value outside this band is
+# arithmetically valid and is published, but is worth a look — we have no
+# evidence that would justify discarding a real extreme, so it is never dropped.
+WIN_RATE_PLAUSIBLE_MIN = 20.0
+WIN_RATE_PLAUSIBLE_MAX = 90.0
+
+
+def validated_win_rate(raw: object) -> tuple[float | None, str | None]:
+    """Return (win_rate, quarantine_reason).
+
+    The single numeric boundary for every extraction path. A reason is returned
+    instead of a value whenever the number cannot be a win rate at all.
+    """
+    try:
+        value = float(str(raw).strip().rstrip("%"))
+    except (TypeError, ValueError):
+        return None, "quarantined_unparseable_value"
+    if not math.isfinite(value):
+        return None, "quarantined_non_finite_value"
+    if not (WIN_RATE_MIN <= value <= WIN_RATE_MAX):
+        return None, "quarantined_out_of_range"
+    return value, None
+
+
+def _accept(raw: object, method: str) -> tuple[float | None, str]:
+    """Apply the shared boundary, keeping the method name only on success."""
+    value, reason = validated_win_rate(raw)
+    if reason:
+        return None, reason
+    return value, method
+
+
+def is_implausible_win_rate(value: float | None) -> bool:
+    """Valid but unusual. Reported, never silently discarded."""
+    return value is not None and not (
+        WIN_RATE_PLAUSIBLE_MIN <= value <= WIN_RATE_PLAUSIBLE_MAX
+    )
+
+
 _WR_BADGE_RE = re.compile(r'">([\d.]+)<!-- -->%')
 _WR_LABELLED_RE = re.compile(r'Win\s*Rate[^\d%]{0,20}?([\d.]+)\s*%', re.IGNORECASE)
 # Rank rows encode the two stats by emphasis, not by order or magnitude: the
@@ -218,22 +268,26 @@ def extract_augment_win_rate(block: str) -> tuple[float | None, str]:
     """
     badge = _WR_BADGE_RE.search(block)
     if badge:
-        return float(badge.group(1)), "badge"
+        return _accept(badge.group(1), "badge")
 
     labelled = _WR_LABELLED_RE.search(block)
     if labelled:
-        return float(labelled.group(1)), "labelled"
+        return _accept(labelled.group(1), "labelled")
 
     primary = _WR_PRIMARY_RE.findall(block)
     if len(primary) == 1 and _PR_MUTED_RE.search(block):
         # Exactly one primary stat cell, plus the pick-rate cell we expect
         # beside it: the layout matches what we verified, so this is unambiguous.
-        return float(primary[0]), "structural"
+        return _accept(primary[0], "structural")
 
-    percentages = {float(v) for v in re.findall(r"([\d.]+)\s*%", block) if float(v) <= 100}
+    # Candidates are collected WITHOUT a magnitude filter. Discarding
+    # out-of-range siblings here would let the count fall to one and turn a
+    # genuinely ambiguous row into a confident answer — magnitude reasoning by
+    # the back door.
+    percentages = {float(v) for v in re.findall(r"([\d.]+)\s*%", block)}
     if len(percentages) == 1:
         # Nothing to confuse it with; the single value can only be the win rate.
-        return percentages.pop(), "sole_percentage"
+        return _accept(percentages.pop(), "sole_percentage")
     if not percentages:
         return None, "quarantined_no_percentage"
     return None, "quarantined_ambiguous_percentages"
@@ -532,9 +586,21 @@ def main():
     if quarantined:
         # Loud but non-fatal: an extraction regression must be visible in the
         # run log rather than silently degrading every downstream win rate.
+        reasons = collections.Counter(r["extraction"] for r in quarantined)
         print(
-            f"  ⚠ {len(quarantined)} row(s) quarantined (ambiguous win-rate markup): "
+            f"  ⚠ {len(quarantined)} row(s) quarantined {dict(reasons)}: "
             + ", ".join(sorted(r["sourceKey"] for r in quarantined)[:8])
+        )
+    implausible = [
+        r for r in augment_win_rate_rows if is_implausible_win_rate(r.get("win_rate"))
+    ]
+    if implausible:
+        # Valid arithmetic, unusual value. Published, but surfaced so a
+        # repurposed cell that still lands inside 0-100 does not pass unnoticed.
+        print(
+            f"  ⚠ {len(implausible)} row(s) outside the plausible win-rate band "
+            f"({WIN_RATE_PLAUSIBLE_MIN}-{WIN_RATE_PLAUSIBLE_MAX}%): "
+            + ", ".join(f"{r['sourceKey']}={r['win_rate']}" for r in implausible[:8])
         )
 
     existing_champions = load_existing_rows("champions.json", "champions")
