@@ -211,7 +211,11 @@ step "10/19 LoL Wiki item passives  →  internal items.json (enrich)"
 run_lane item-passive-enrich optional python3 scripts/enrich_wiki.py
 
 step "10b/19 Data Dragon  →  localized champion, ability & item names (enrich)"
-run_lane locale-name-enrich optional python3 scripts/enrich_locale_names.py
+# Required, not enrichment: step 8 has just rebuilt abilities/items with English
+# fields only, and this lane is what puts their translations back. The locale
+# coverage gate below checks champions/augments only, so a failure here would
+# otherwise publish de-localized abilities and items as a merely degraded run.
+run_lane locale-name-enrich required python3 scripts/enrich_locale_names.py
 
 step "11/19 Riot prose  →  patch title/date/canonical metadata only"
 # Structural patch authority: labels the catalog. Required.

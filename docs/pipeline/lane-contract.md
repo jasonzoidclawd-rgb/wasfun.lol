@@ -44,7 +44,7 @@ Riot's live patch — exits non-zero.
 | cdragon-entities (8) | CDragon | `abilities.json`, `items.json` | catalog | required | all-or-nothing |
 | ability-stats-enrich (9) | CDragon ability stats | `abilities.json` (enrich) | enrichment | **optional** | previous values retained |
 | item-passive-enrich (10) | LoL Wiki | `items.json` (enrich) | enrichment | **optional** | previous values retained |
-| locale-name-enrich (10b) | Data Dragon | localized names | enrichment | **optional** | previous values retained |
+| locale-name-enrich (10b) | Data Dragon | localized names | catalog | **required** — step 8 rebuilds abilities/items English-only, so previous values are NOT retained | run aborts; nothing published |
 | **riot-patch-metadata (11)** | leagueoflegends.com patch notes | `patch-metadata.json` | structural | **required** — labels the catalog | all-or-nothing |
 | **cdragon-live (12)** | CDragon `latest` | `cdragon-*-latest.json`, `patch-events.json` | structural | **required** | atomic per branch |
 | pbe-preview (13) | CDragon `pbe` | `cdragon-*-pbe.json`, `pbe-preview.json` | preview | **optional** — advisory only | atomic per branch |
