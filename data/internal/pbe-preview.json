@@ -3,7 +3,7 @@
   "branch": "pbe",
   "lane": "preview",
   "source_patch_label": "pbe-cycle-16.19.8173481+branch.main.content.beta",
-  "observed_at": "2026-09-12T09:53:25.108376Z",
+  "observed_at": "2026-09-12T13:26:31.654083Z",
   "status": "fresh",
   "events": [
     {
@@ -58,11 +58,11 @@
       "change_kind": "removed",
       "comparison": {
         "base_branch": "latest",
-        "base_version": "16.18.8174437+branch.releases-16-18.content.release",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
         "target_version": "16.19.8173481+branch.main.content.beta"
       },
-      "detected_at": "2026-09-12T09:53:25.108376Z",
+      "detected_at": "2026-09-12T13:26:31.654083Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -81,7 +81,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
       "observed_cycles": 2,
       "last_seen_cycle": "pbe-cycle-16.19.8173481+branch.main.content.beta",
-      "last_seen_at": "2026-09-12T09:53:25.108376Z"
+      "last_seen_at": "2026-09-12T13:26:31.654083Z"
     },
     {
       "after": {
@@ -134,11 +134,11 @@
       "change_kind": "removed",
       "comparison": {
         "base_branch": "latest",
-        "base_version": "16.18.8174437+branch.releases-16-18.content.release",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
         "target_version": "16.19.8173481+branch.main.content.beta"
       },
-      "detected_at": "2026-09-12T09:53:25.108376Z",
+      "detected_at": "2026-09-12T13:26:31.654083Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -157,7 +157,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
       "observed_cycles": 2,
       "last_seen_cycle": "pbe-cycle-16.19.8173481+branch.main.content.beta",
-      "last_seen_at": "2026-09-12T09:53:25.108376Z"
+      "last_seen_at": "2026-09-12T13:26:31.654083Z"
     },
     {
       "after": {
@@ -247,11 +247,11 @@
       "change_kind": "added",
       "comparison": {
         "base_branch": "latest",
-        "base_version": "16.18.8174437+branch.releases-16-18.content.release",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
         "target_version": "16.19.8173481+branch.main.content.beta"
       },
-      "detected_at": "2026-09-12T09:53:25.108376Z",
+      "detected_at": "2026-09-12T13:26:31.654083Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -266,7 +266,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 3,
       "last_seen_cycle": "pbe-cycle-16.19.8173481+branch.main.content.beta",
-      "last_seen_at": "2026-09-12T09:53:25.108376Z"
+      "last_seen_at": "2026-09-12T13:26:31.654083Z"
     },
     {
       "after": {
@@ -394,11 +394,11 @@
       "change_kind": "added",
       "comparison": {
         "base_branch": "latest",
-        "base_version": "16.18.8174437+branch.releases-16-18.content.release",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
         "target_version": "16.19.8173481+branch.main.content.beta"
       },
-      "detected_at": "2026-09-12T09:53:25.108376Z",
+      "detected_at": "2026-09-12T13:26:31.654083Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -413,7 +413,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 3,
       "last_seen_cycle": "pbe-cycle-16.19.8173481+branch.main.content.beta",
-      "last_seen_at": "2026-09-12T09:53:25.108376Z"
+      "last_seen_at": "2026-09-12T13:26:31.654083Z"
     },
     {
       "after": {
@@ -571,11 +571,11 @@
       "change_kind": "text",
       "comparison": {
         "base_branch": "latest",
-        "base_version": "16.18.8174437+branch.releases-16-18.content.release",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
         "target_version": "16.19.8173481+branch.main.content.beta"
       },
-      "detected_at": "2026-09-12T09:53:25.108376Z",
+      "detected_at": "2026-09-12T13:26:31.654083Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -592,7 +592,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 3,
       "last_seen_cycle": "pbe-cycle-16.19.8173481+branch.main.content.beta",
-      "last_seen_at": "2026-09-12T09:53:25.108376Z"
+      "last_seen_at": "2026-09-12T13:26:31.654083Z"
     }
   ]
 }
