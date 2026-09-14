@@ -1,6 +1,6 @@
 {
   "patch": "26.18",
-  "scraped_at": "2026-09-13T13:59:12.754468+00:00",
+  "scraped_at": "2026-09-13T23:48:35.369566+00:00",
   "schemaVersion": "augment-truth-step5",
   "sources": {
     "definition": "data/internal/augment-base-catalog.json",
@@ -2456,7 +2456,7 @@
       "name_zh_TW": "射手法師",
       "name_ja": "マークスメイジ",
       "name_ko": "마법 명사수",
-      "wikiDescription": "Basic attacks deal bonus physical damage equal to 75% AP.",
+      "wikiDescription": "Basic attacks on-attack deal bonus physical damage equal to 75% AP.",
       "wikiRarity": "gold",
       "description_zh_TW": "你的普攻造成等同於@APRatio*100@%魔攻的額外物理傷害。",
       "description_zh_CN": "你的攻击造成相当于你@APRatio*100@%法术强度的额外物理伤害。",
