@@ -3,9 +3,9 @@
   "entity_type": "augment",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.19.8173481+branch.main.content.beta",
-  "source_patch_label": "pbe-cycle-16.19.8173481+branch.main.content.beta",
-  "observed_at": "2026-09-14T17:21:48.705681Z",
+  "source_version": "16.19.8178499+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.19.8178499+branch.main.content.beta",
+  "observed_at": "2026-09-14T21:15:19.685100Z",
   "source_url": "",
   "entities": [
     {
@@ -980,7 +980,7 @@
       "fields": {
         "name": "Titan's Resolve",
         "rarity": "prismatic",
-        "tooltip": "Dealing and receiving champion damage grants you a stack of <keyword>Juggernauting</keyword> for @Stack_Duration@ seconds. For every @Stacks_Max@ stacks of <keyword>Juggernauting</keyword> you gain <attention>@Calc_AF@ Adaptive Force</attention>, <scaleArmor>@Calc_Defenses@ Armor</scaleArmor>, <scaleMR>@Calc_Defenses@ Magic Resist</scaleMR>, <attention>@Calc_Size@ Size</attention>, and <status>@Calc_Tenacity@ Tenacity</status>.<br><br><rules>Stacks fall off faster the more you have.<br>Maximum Juggernauting Level: @f1.0@</rules>"
+        "tooltip": "Dealing and receiving champion damage grants you @StacksPerHit@ stack of <keyword>Juggernauting</keyword> for @Stack_Duration@ seconds. For every @Stacks_Max@ stacks of <keyword>Juggernauting</keyword> you gain <attention>@Calc_AF@ Adaptive Force</attention>, <scaleArmor>@Calc_Defenses@ Armor</scaleArmor>, <scaleMR>@Calc_Defenses@ Magic Resist</scaleMR>, <attention>@Calc_Size@ Size</attention>, and <status>@Calc_Tenacity@ Tenacity</status>.<br><br><rules>Stacks fall off faster the more you have.<br>Maximum Juggernauting Level: @f1.0@</rules>"
       },
       "id": "ARAM_ImTheJuggernaut",
       "names": {
