@@ -1,6 +1,6 @@
 {
   "patch": "26.18",
-  "scraped_at": "2026-09-13T23:48:41.402713+00:00",
+  "scraped_at": "2026-09-14T16:04:18.240675+00:00",
   "generated_from": "internal-pool-mechanics",
   "combos": [
     {
@@ -180,6 +180,13 @@
     },
     {
       "champion": "aatrox",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "aatrox",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -399,13 +406,6 @@
       "champion": "aatrox",
       "augment": "Hellbent",
       "augmentSlug": "hellbent",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "aatrox",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
       "tier": "C",
       "ref": "mechanical:ap_scaling"
     },
@@ -904,7 +904,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "ahri",
@@ -2007,6 +2007,13 @@
     },
     {
       "champion": "ambessa",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "ambessa",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -2226,13 +2233,6 @@
       "champion": "ambessa",
       "augment": "Hellbent",
       "augmentSlug": "hellbent",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "ambessa",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
       "tier": "C",
       "ref": "mechanical:ap_scaling"
     },
@@ -2983,7 +2983,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "annie",
@@ -3152,6 +3152,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "aphelios",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "aphelios",
@@ -3781,7 +3788,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "aurora",
@@ -4940,6 +4947,13 @@
     },
     {
       "champion": "belveth",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "belveth",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "B",
@@ -5545,7 +5559,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "brand",
@@ -5997,6 +6011,13 @@
     },
     {
       "champion": "briar",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "briar",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -6246,6 +6267,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "caitlyn",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "caitlyn",
@@ -6540,6 +6568,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "camille",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "camille",
@@ -6823,13 +6858,6 @@
     },
     {
       "champion": "camille",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "camille",
       "augment": "Ok Boomerang",
       "augmentSlug": "ok-boomerang",
       "tier": "C",
@@ -7162,7 +7190,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "cassiopeia",
@@ -7603,7 +7631,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "chogath",
@@ -7884,6 +7912,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "corki",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "corki",
@@ -8227,6 +8262,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "darius",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "darius",
@@ -8723,7 +8765,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "diana",
@@ -8937,6 +8979,13 @@
     },
     {
       "champion": "draven",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "draven",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -10855,6 +10904,13 @@
     },
     {
       "champion": "ezreal",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "ezreal",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "B",
@@ -11251,6 +11307,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "fiora",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "fiora",
@@ -12479,6 +12542,13 @@
     },
     {
       "champion": "garen",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "garen",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -12628,13 +12698,6 @@
       "champion": "garen",
       "augment": "Hellbent",
       "augmentSlug": "hellbent",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "garen",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
       "tier": "C",
       "ref": "mechanical:ap_scaling"
     },
@@ -12971,6 +13034,13 @@
       "champion": "gnar",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "gnar",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -13697,6 +13767,13 @@
     },
     {
       "champion": "graves",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "graves",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -14250,6 +14327,13 @@
     },
     {
       "champion": "hecarim",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "hecarim",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "A",
@@ -14785,7 +14869,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "heimerdinger",
@@ -15037,7 +15121,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "hwei",
@@ -15255,6 +15339,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "illaoi",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "illaoi",
@@ -15489,6 +15580,13 @@
     },
     {
       "champion": "irelia",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "irelia",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "S",
@@ -16178,7 +16276,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "ivern",
@@ -16753,6 +16851,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "jarvaniv",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "jarvaniv",
@@ -17596,6 +17701,13 @@
     },
     {
       "champion": "jhin",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "jhin",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "A",
@@ -17873,6 +17985,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "jinx",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "jinx",
@@ -18174,6 +18293,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "kaisa",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "kaisa",
@@ -18629,6 +18755,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "kalista",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "kalista",
@@ -19209,7 +19342,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "karthus",
@@ -20679,7 +20812,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "kennen",
@@ -20869,6 +21002,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "khazix",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "khazix",
@@ -21268,6 +21408,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "kindred",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "kindred",
@@ -22730,7 +22877,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "leblanc",
@@ -22962,6 +23109,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "leesin",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "leesin",
@@ -23668,7 +23822,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "lillia",
@@ -24046,7 +24200,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "lissandra",
@@ -24425,6 +24579,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "lucian",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "lucian",
@@ -24907,7 +25068,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "lulu",
@@ -25683,6 +25844,13 @@
       "champion": "malphite",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "C",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "malphite",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "C",
       "ref": "mechanical:on_hit"
     },
@@ -26125,7 +26293,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "malzahar",
@@ -26567,6 +26735,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "masteryi",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "masteryi",
@@ -27459,6 +27634,13 @@
     },
     {
       "champion": "missfortune",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "missfortune",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -27834,6 +28016,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "monkeyking",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "monkeyking",
@@ -28638,7 +28827,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "morgana",
@@ -29687,6 +29876,13 @@
       "champion": "nasus",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "nasus",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -30164,7 +30360,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "nautilus",
@@ -31439,6 +31635,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "nocturne",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "nocturne",
@@ -32838,7 +33041,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "orianna",
@@ -33507,6 +33710,13 @@
     },
     {
       "champion": "pantheon",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "pantheon",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "B",
@@ -33922,6 +34132,13 @@
       "champion": "poppy",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "poppy",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -34389,6 +34606,13 @@
     },
     {
       "champion": "pyke",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "pyke",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "B",
@@ -34641,6 +34865,13 @@
     },
     {
       "champion": "qiyana",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "qiyana",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -34865,13 +35096,6 @@
     },
     {
       "champion": "qiyana",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "qiyana",
       "augment": "Ok Boomerang",
       "augmentSlug": "ok-boomerang",
       "tier": "C",
@@ -35058,6 +35282,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "quinn",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "quinn",
@@ -35652,7 +35883,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "rakan",
@@ -35967,7 +36198,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "rammus",
@@ -36185,6 +36416,13 @@
       "augmentSlug": "mad-scientist",
       "tier": "S",
       "ref": "mechanical:ability_haste"
+    },
+    {
+      "champion": "reksai",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "reksai",
@@ -37259,6 +37497,13 @@
     },
     {
       "champion": "renekton",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "renekton",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "B",
@@ -37417,6 +37662,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "rengar",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "rengar",
@@ -37833,6 +38085,13 @@
     },
     {
       "champion": "riven",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "riven",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -38003,13 +38262,6 @@
       "champion": "riven",
       "augment": "Hellbent",
       "augmentSlug": "hellbent",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "riven",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
       "tier": "C",
       "ref": "mechanical:ap_scaling"
     },
@@ -38893,7 +39145,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "ryze",
@@ -40045,6 +40297,13 @@
     },
     {
       "champion": "senna",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "senna",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "B",
@@ -40458,6 +40717,13 @@
     },
     {
       "champion": "sett",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "sett",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -40654,13 +40920,6 @@
     },
     {
       "champion": "sett",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "sett",
       "augment": "Ok Boomerang",
       "augmentSlug": "ok-boomerang",
       "tier": "C",
@@ -40833,6 +41092,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "shaco",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "shaco",
@@ -41357,7 +41623,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "shen",
@@ -42180,6 +42446,13 @@
     },
     {
       "champion": "sion",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "sion",
       "augment": "Mind to Matter",
       "augmentSlug": "mind-to-matter",
       "tier": "B",
@@ -42352,6 +42625,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "sivir",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "sivir",
@@ -42742,6 +43022,13 @@
       "champion": "skarner",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "skarner",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -43155,6 +43442,13 @@
       "champion": "smolder",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "smolder",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -43688,7 +43982,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "soraka",
@@ -44689,7 +44983,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "syndra",
@@ -45095,7 +45389,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "tahmkench",
@@ -45710,6 +46004,13 @@
       "champion": "talon",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "talon",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -46446,7 +46747,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "thresh",
@@ -46725,6 +47026,13 @@
       "champion": "tristana",
       "augment": "Light 'Em Up!",
       "augmentSlug": "light-em-up",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "tristana",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
       "tier": "B",
       "ref": "mechanical:on_hit"
     },
@@ -47458,6 +47766,13 @@
     },
     {
       "champion": "tryndamere",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "tryndamere",
       "augment": "Mystic Punch",
       "augmentSlug": "mystic-punch",
       "tier": "B",
@@ -47784,6 +48099,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "twistedfate",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "twistedfate",
@@ -48120,6 +48442,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "twitch",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "twitch",
@@ -48277,13 +48606,6 @@
     },
     {
       "champion": "twitch",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "twitch",
       "augment": "Ok Boomerang",
       "augmentSlug": "ok-boomerang",
       "tier": "C",
@@ -48620,6 +48942,13 @@
     },
     {
       "champion": "urgot",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "urgot",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "S",
@@ -48886,13 +49215,6 @@
     },
     {
       "champion": "urgot",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "urgot",
       "augment": "Ok Boomerang",
       "augmentSlug": "ok-boomerang",
       "tier": "C",
@@ -49058,6 +49380,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "S",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "varus",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "S",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "varus",
@@ -49492,6 +49821,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "vayne",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "vayne",
@@ -49946,7 +50282,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "veigar",
@@ -50828,7 +51164,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "vex",
@@ -51151,6 +51487,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "vi",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "vi",
@@ -51508,6 +51851,13 @@
       "augmentSlug": "mad-scientist",
       "tier": "A",
       "ref": "mechanical:ability_haste"
+    },
+    {
+      "champion": "viego",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "viego",
@@ -52407,6 +52757,13 @@
     },
     {
       "champion": "volibear",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "volibear",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -52764,6 +53121,13 @@
     },
     {
       "champion": "warwick",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "warwick",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -53055,6 +53419,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "xayah",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "xayah",
@@ -53961,6 +54332,13 @@
     },
     {
       "champion": "xinzhao",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "B",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "xinzhao",
       "augment": "Mind to Matter",
       "augmentSlug": "mind-to-matter",
       "tier": "B",
@@ -54224,6 +54602,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "yasuo",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "yasuo",
@@ -54616,6 +55001,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "yone",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "yone",
@@ -54910,6 +55302,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "yorick",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "yorick",
@@ -55239,6 +55638,13 @@
       "augmentSlug": "mad-scientist",
       "tier": "A",
       "ref": "mechanical:ability_haste"
+    },
+    {
+      "champion": "yunara",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "yunara",
@@ -56068,6 +56474,13 @@
     },
     {
       "champion": "zaahen",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
+    },
+    {
+      "champion": "zaahen",
       "augment": "Master of Duality",
       "augmentSlug": "master-of-duality",
       "tier": "A",
@@ -56301,13 +56714,6 @@
       "champion": "zaahen",
       "augment": "Hellbent",
       "augmentSlug": "hellbent",
-      "tier": "C",
-      "ref": "mechanical:ap_scaling"
-    },
-    {
-      "champion": "zaahen",
-      "augment": "Marksmage",
-      "augmentSlug": "marksmage",
       "tier": "C",
       "ref": "mechanical:ap_scaling"
     },
@@ -56554,7 +56960,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "zac",
@@ -56772,6 +57178,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "zed",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "zed",
@@ -57066,6 +57479,13 @@
       "augmentSlug": "lil-extra-help",
       "tier": "A",
       "ref": "mechanical:attack_speed"
+    },
+    {
+      "champion": "zeri",
+      "augment": "Marksmage",
+      "augmentSlug": "marksmage",
+      "tier": "A",
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "zeri",
@@ -57821,7 +58241,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "zilean",
@@ -58675,7 +59095,7 @@
       "augment": "Marksmage",
       "augmentSlug": "marksmage",
       "tier": "C",
-      "ref": "mechanical:ad_scaling"
+      "ref": "mechanical:on_hit"
     },
     {
       "champion": "zyra",
