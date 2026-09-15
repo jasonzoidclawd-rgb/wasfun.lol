@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "identity_key": "CDragon augmentNameId",
-  "generated_at": "2026-09-15T00:06:24.692397+00:00",
+  "generated_at": "2026-09-15T14:33:33.050872+00:00",
   "source": "https://raw.communitydragon.org/latest",
   "sources": {
     "roster": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/cherry-augments.json",

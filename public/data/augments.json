@@ -1,6 +1,6 @@
 {
   "patch": "26.18",
-  "scraped_at": "2026-09-15T00:06:24.692397+00:00",
+  "scraped_at": "2026-09-15T14:33:33.050872+00:00",
   "schemaVersion": "augment-truth-step5",
   "sources": {
     "definition": "data/internal/augment-base-catalog.json",
@@ -2419,7 +2419,7 @@
       "name_zh_TW": "溫泉加速",
       "name_ja": "ホームガード",
       "name_ko": "민병대",
-      "wikiDescription": "Gain 100% bonus movement speed. This bonus is lost for 6 seconds after taking damage from champions.",
+      "wikiDescription": "Gain 100% bonus movement speed. This bonus is lost for 6 seconds after taking damage.",
       "wikiRarity": "silver",
       "description_zh_TW": "獲得@spell.Augment_Homeguard:MovementSpeed*100@%跑速，承受傷害後@spell.Augment_Homeguard:DisableCooldown@秒內會失效。",
       "description_zh_CN": "获得@spell.Augment_Homeguard:MovementSpeed*100@%移动速度，在受到伤害后失效@spell.Augment_Homeguard:DisableCooldown@秒。",
@@ -3353,7 +3353,7 @@
       "name_zh_TW": "一轉就贏",
       "name_ja": "勝利への回転",
       "name_ko": "승리를 위한 회전",
-      "wikiDescription": "Your spinning abilities deal 30% increased damage and have their cooldown reduced equivalent to 30 ability haste. The damage amplifier is increaesd to 50% for ultimate abilities. Eligible Abilities: Ahri's Fox-Fire and Spirit Rush, Amumu's Tantrum, Ambessa's Lacerate, Darius' Decimate, Draven's Spinning Axe, Stand Aside, and Whirling Death, Garen's Judgment, Hecarim's Rampage, Jax's Counter Strike, Katarina's Voracity and Death Lotus, Kayn's Reaping Slash, Lillia's Blooming Blows, Nocturne's Umbra Blades, Rammus' Powerball, Renekton's Cull the Meek and Slice and Dice, Rek'Sai's Queen's Wrath, Riven's Broken Wings, Samira's Blade Whirl and Inferno Trigger, Sylas' Petricite Burst, Wukong's Cyclone, Tryndamere's Spinning Slash, Xin Zhao's Crescent Guard, Zed's Shadow Slash PENDING FOR TEST:: Akshan's Avengerang and Heroic Swing, Lillia's Watch Out! Eep! and Swirlseed, Poppy's Keeper's Verdict, etc.",
+      "wikiDescription": "Your spinning abilities deal 30% increased damage and have their cooldown reduced equivalent to 30 ability haste. The damage amplifier is increased to 50% for ultimate abilities. Eligible Abilities: Ahri's Fox-Fire and Spirit Rush, Amumu's Tantrum, Ambessa's Lacerate, Darius' Decimate, Draven's Spinning Axe, Stand Aside, and Whirling Death, Garen's Judgment, Hecarim's Rampage, Jax's Counter Strike, Katarina's Voracity and Death Lotus, Kayn's Reaping Slash, Lillia's Blooming Blows, Nocturne's Umbra Blades, Rammus' Powerball, Renekton's Cull the Meek and Slice and Dice, Rek'Sai's Queen's Wrath, Riven's Broken Wings, Samira's Blade Whirl and Inferno Trigger, Sylas' Petricite Burst, Wukong's Cyclone, Tryndamere's Spinning Slash, Xin Zhao's Crescent Guard, Zed's Shadow Slash PENDING FOR TEST:: Akshan's Avengerang and Heroic Swing, Lillia's Watch Out! Eep! and Swirlseed, Poppy's Keeper's Verdict, etc.",
       "wikiRarity": "silver",
       "description_zh_TW": "旋轉技能增加%i:scaleAH%@SpinHaste@技能加速，並額外造成@SpinDamageAmp@傷害，大絕額外造成@SpinDamageAmp_Ult@傷害。",
       "description_zh_CN": "你的旋转类技能获得%i:scaleAH%@SpinHaste@技能急速并且造成@SpinDamageAmp@额外伤害，对于终极技能，该额外伤害提升至@SpinDamageAmp_Ult@。",
@@ -5694,7 +5694,7 @@
       "name_zh_TW": "法術迸裂",
       "name_ja": "スペルスプリット",
       "name_ko": "주문 분산",
-      "wikiDescription": "Upgrades one of your champion's abilities that has a missile, empowering the ability's missile to split in two over 0.25 seconds upon hitting an enemy, at maximum range, or when recast. Each of the split missiles fire perpendicularly in opposite directions and apply the same effects to enemies they hit. Subsequent missile hits from the same cast against the same enemy deal 30% damage. Recast can be used after 0.15 seconds of the initial cast.",
+      "wikiDescription": "Upgrades one of your champion's abilities that has a missile, empowering the ability's missile to split in two over 0.25 seconds upon reaching maximum range, or when recast. Each of the split missiles fire perpendicularly in opposite directions and apply the same effects to enemies they hit. Subsequent missile hits from the same cast against the same enemy deal 30% damage. Recast can be used after 0.15 seconds of the initial cast.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "你的{{SpellName}}飛彈在命中、達到最遠距離或重施技能時會分裂成兩發。",
       "description_zh_CN": "在命中时、最大距离时或再次施放时，你的【{{SpellName}}】技能的飞弹会分裂为两部分。",
@@ -5987,7 +5987,7 @@
       "name_zh_TW": "降雪之日",
       "name_ja": "スノーデイ",
       "name_ko": "눈 오는 날",
-      "wikiDescription": "Your Mark deals bonus magic damage equal to 100% of its damage and has its cooldown reduced equivalent to 100 ability haste. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
+      "wikiDescription": "Your Mark deals 100% increased damage and has its cooldown reduced equivalent to 100 ability haste. If Mark is not equipped, you will be prompted to replace one of your summoner spells with Mark.",
       "wikiRarity": "silver"
     },
     {
@@ -6859,7 +6859,7 @@
       "name_zh_TW": "小丑學院",
       "name_ja": "ピエロ大学",
       "name_ko": "광대 대학",
-      "wikiDescription": "Gain Shaco's Backstab, Deceive and Hallucinate's explosion. Replace a summoner spell with Deceive. Passive - Backstab: Your basic attacks deal 20 – 35 (based on level) (+ 50% bonus AD) (+ 35% AP) bonus physical damage on-hit when hitting an enemy from behind. Active - Deceive: Become invisible for up to 3 seconds and blink to the target location within 400 units after a 0.125-second delay. Your next basic attack while in stealth deals 100 (+ 150% bonus AD) (+ 55% AP) bonus physical damage, increased to「 155 (+ 232.5% bonus AD) (+ 85.25% AP) bonus physical damage 」「 155% damage 」if Backstab was applied (45 second cooldown). Passive - Hallucinate Death: Upon your death, release an explosion in a 350 radius of your death location, dealing magic damage equal to 25% of target's maximum health to enemies within the area. Additionally, you deploy a box at the location of your death that instantly fears nearby enemies for 1 second. This box does not attack but lasts for 3 seconds.",
+      "wikiDescription": "Gain Shaco's Backstab, Deceive and Hallucinate's explosion. Replace a summoner spell with Deceive. Passive - Backstab: Your basic attacks deal 20 – 35 (based on level) (+ 50% bonus AD) (+ 35% AP) bonus physical damage on-hit when hitting an enemy from behind. Active - Deceive: Become invisible for up to 3 seconds and blink to the target location within 400 units after a 0.125-second delay. Your next basic attack while in stealth deals 100 (+ 150% bonus AD) (+ 55% AP) bonus physical damage, increased to「 155 (+ 232.5% bonus AD) (+ 85.25% AP) bonus physical damage 」「 155% damage 」if Backstab was applied (45 second cooldown). Passive - Hallucinate Death: Upon your death, release an explosion in a 350 radius of your death location, dealing true damage equal to 25% of target's maximum health to enemies within the area. Additionally, you deploy a box at the location of your death that instantly fears nearby enemies for 1 second. This box does not attack but lasts for 3 seconds.",
       "wikiRarity": "prismatic",
       "description_zh_TW": "獲得召喚師技能「欺詐魔術」。 欺詐魔術：傳送並進入隱形狀態。隱形期間，下一次普攻造成額外物理傷害。 死亡時生成一個會爆炸的盒子，對鄰近敵軍造成大量魔法傷害及恐懼效果。",
       "description_zh_CN": "获得召唤师技能欺诈魔术。 欺诈魔术：你传送并变为隐形。你在隐形状态下的下一次攻击造成额外物理伤害。在你阵亡时，生成一个爆炸盒子来对附近的敌人们造成大量魔法伤害和恐惧。",
@@ -9299,7 +9299,7 @@
       "name_zh_TW": "大絕電腦",
       "name_ja": "アルティメット (AI)",
       "name_ko": "궁극기 봇",
-      "wikiDescription": "Your ability haste now only applies to the cooldown of your ultimate ability. In return, you gain 100 ability haste and your ability haste is 50% more effective.",
+      "wikiDescription": "Your ability haste now only applies to the cooldown of your ultimate ability. In return, you gain 100 ability haste and your ability haste and ultimate haste are 50% more effective. The 50% increased haste effectiveness does not multiply your actual ability haste value (as seen in your champion's stats HUD panel) by 1.5. The multipler is applied when the cooldown of your ultimate's ability is calculated: New Ultimate Cooldown=Base Ultimate Cooldown×100100+(Haste×1.5)",
       "wikiRarity": "prismatic"
     },
     {

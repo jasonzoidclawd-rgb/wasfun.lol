@@ -1,6 +1,6 @@
 {
   "patch": "26.18",
-  "scraped_at": "2026-09-15T00:06:31.956016+00:00",
+  "scraped_at": "2026-09-15T14:33:39.610516+00:00",
   "generated_from": "internal-pool-mechanics",
   "combos": [
     {
@@ -15636,13 +15636,6 @@
     },
     {
       "champion": "irelia",
-      "augment": "Spell Split",
-      "augmentSlug": "spell-split",
-      "tier": "S",
-      "ref": "mechanical:on_hit"
-    },
-    {
-      "champion": "irelia",
       "augment": "Spin Me Right Round",
       "augmentSlug": "spin-me-right-round",
       "tier": "S",
@@ -15801,6 +15794,13 @@
       "augmentSlug": "snowblast",
       "tier": "A",
       "ref": "mechanical:dash_synergy"
+    },
+    {
+      "champion": "irelia",
+      "augment": "Spell Split",
+      "augmentSlug": "spell-split",
+      "tier": "A",
+      "ref": "ability-fit:R"
     },
     {
       "champion": "irelia",
@@ -18348,7 +18348,7 @@
       "augment": "Spell Split",
       "augmentSlug": "spell-split",
       "tier": "S",
-      "ref": "mechanical:on_hit"
+      "ref": "ability-fit:Q/W"
     },
     {
       "champion": "kaisa",
@@ -21085,7 +21085,7 @@
       "augment": "Spell Split",
       "augmentSlug": "spell-split",
       "tier": "S",
-      "ref": "mechanical:on_hit"
+      "ref": "ability-fit:W"
     },
     {
       "champion": "khazix",
@@ -49449,7 +49449,7 @@
       "augment": "Spell Split",
       "augmentSlug": "spell-split",
       "tier": "S",
-      "ref": "mechanical:on_hit"
+      "ref": "ability-fit:Q/W/R"
     },
     {
       "champion": "varus",
