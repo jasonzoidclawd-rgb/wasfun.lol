@@ -3,7 +3,7 @@
   "branch": "pbe",
   "lane": "preview",
   "source_patch_label": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-  "observed_at": "2026-09-15T00:17:23.212146Z",
+  "observed_at": "2026-09-15T02:48:37.339433Z",
   "status": "fresh",
   "events": [
     {
@@ -62,7 +62,7 @@
         "target_branch": "pbe",
         "target_version": "16.19.8178499+branch.main.content.beta"
       },
-      "detected_at": "2026-09-15T00:17:23.212146Z",
+      "detected_at": "2026-09-15T02:48:37.339433Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -81,7 +81,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
       "observed_cycles": 3,
       "last_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "last_seen_at": "2026-09-15T00:17:23.212146Z"
+      "last_seen_at": "2026-09-15T02:48:37.339433Z"
     },
     {
       "after": {
@@ -99,7 +99,7 @@
         "target_branch": "pbe",
         "target_version": "16.19.8178499+branch.main.content.beta"
       },
-      "detected_at": "2026-09-15T00:17:23.212146Z",
+      "detected_at": "2026-09-15T02:48:37.339433Z",
       "entity_type": "augment",
       "fields_changed": [
         "tooltip"
@@ -116,7 +116,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "last_seen_at": "2026-09-15T00:17:23.212146Z"
+      "last_seen_at": "2026-09-15T02:48:37.339433Z"
     },
     {
       "after": {
@@ -173,7 +173,7 @@
         "target_branch": "pbe",
         "target_version": "16.19.8178499+branch.main.content.beta"
       },
-      "detected_at": "2026-09-15T00:17:23.212146Z",
+      "detected_at": "2026-09-15T02:48:37.339433Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -192,7 +192,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
       "observed_cycles": 3,
       "last_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "last_seen_at": "2026-09-15T00:17:23.212146Z"
+      "last_seen_at": "2026-09-15T02:48:37.339433Z"
     },
     {
       "after": {
@@ -286,7 +286,7 @@
         "target_branch": "pbe",
         "target_version": "16.19.8178499+branch.main.content.beta"
       },
-      "detected_at": "2026-09-15T00:17:23.212146Z",
+      "detected_at": "2026-09-15T02:48:37.339433Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -301,7 +301,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 4,
       "last_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "last_seen_at": "2026-09-15T00:17:23.212146Z"
+      "last_seen_at": "2026-09-15T02:48:37.339433Z"
     },
     {
       "after": {
@@ -433,7 +433,7 @@
         "target_branch": "pbe",
         "target_version": "16.19.8178499+branch.main.content.beta"
       },
-      "detected_at": "2026-09-15T00:17:23.212146Z",
+      "detected_at": "2026-09-15T02:48:37.339433Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -448,7 +448,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 4,
       "last_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "last_seen_at": "2026-09-15T00:17:23.212146Z"
+      "last_seen_at": "2026-09-15T02:48:37.339433Z"
     },
     {
       "after": {
@@ -610,7 +610,7 @@
         "target_branch": "pbe",
         "target_version": "16.19.8178499+branch.main.content.beta"
       },
-      "detected_at": "2026-09-15T00:17:23.212146Z",
+      "detected_at": "2026-09-15T02:48:37.339433Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -627,7 +627,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 4,
       "last_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "last_seen_at": "2026-09-15T00:17:23.212146Z"
+      "last_seen_at": "2026-09-15T02:48:37.339433Z"
     }
   ]
 }
