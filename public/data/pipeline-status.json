@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-14T16:14:11.604797Z",
+  "generated_at": "2026-09-15T00:17:59.553452Z",
   "overall": "ok",
   "degraded_lanes": [],
   "structural_lane": {
@@ -15,7 +15,7 @@
   },
   "statistics": {
     "patch": "26.18",
-    "observed_at": "2026-09-14T16:04:18.240675+00:00",
+    "observed_at": "2026-09-15T00:06:31.956016+00:00",
     "source": "https://arammayhem.com"
   }
 }
