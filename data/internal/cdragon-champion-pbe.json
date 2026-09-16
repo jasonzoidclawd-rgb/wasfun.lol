@@ -3,9 +3,9 @@
   "entity_type": "champion",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.19.8183952+branch.main.content.beta",
-  "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-  "observed_at": "2026-09-16T15:53:32.681629Z",
+  "source_version": "16.19.8189424+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+  "observed_at": "2026-09-16T20:43:50.611570Z",
   "source_url": "",
   "entities": [
     {
@@ -7582,7 +7582,7 @@
           },
           "R": {
             "coefficients": {
-              "coefficient1": 0.6,
+              "coefficient1": 0.7,
               "coefficient2": 1.0
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
@@ -7839,7 +7839,7 @@
           "attackSpeedPerLevel": 3.200000047683716,
           "attackSpeedRatio": 0.6899999976158142,
           "health": 620.0,
-          "healthPerLevel": 99.0,
+          "healthPerLevel": 105.0,
           "healthRegen": 1.7000000476837158,
           "healthRegenPerLevel": 0.10999999940395355,
           "magicResistance": 32.0,
@@ -9401,7 +9401,7 @@
         "base_stats": {
           "armor": 29.0,
           "armorPerLevel": 4.5,
-          "attackDamage": 62.0,
+          "attackDamage": 64.0,
           "attackDamagePerLevel": 3.4000000953674316,
           "attackRange": 550.0,
           "attackSpeed": 0.6790000200271606,
@@ -10903,13 +10903,13 @@
                 40.0
               ],
               "Effect4Amount": [
-                2.0,
-                2.0,
-                2.0,
-                2.0,
-                2.0,
-                2.0,
-                2.0
+                2.25,
+                2.25,
+                2.25,
+                2.25,
+                2.25,
+                2.25,
+                2.25
               ],
               "Effect5Amount": [
                 0.0,
@@ -10921,13 +10921,13 @@
                 0.0
               ],
               "Effect6Amount": [
-                2.0,
-                2.0,
-                2.0,
-                2.0,
-                2.0,
-                2.0,
-                2.0
+                2.25,
+                2.25,
+                2.25,
+                2.25,
+                2.25,
+                2.25,
+                2.25
               ],
               "Effect7Amount": [
                 60.0,
@@ -12578,12 +12578,12 @@
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
-              35.0,
-              45.0,
-              55.0,
-              65.0,
-              75.0,
-              85.0
+              40.0,
+              50.0,
+              60.0,
+              70.0,
+              80.0,
+              90.0
             ],
             "effect_amounts": {
               "Effect10Amount": [
@@ -13061,7 +13061,7 @@
         },
         "base_stats": {
           "armor": 22.0,
-          "armorPerLevel": 4.199999809265137,
+          "armorPerLevel": 4.699999809265137,
           "attackDamage": 55.0,
           "attackDamagePerLevel": 3.0,
           "attackRange": 550.0,
@@ -32931,7 +32931,7 @@
           "armor": 28.0,
           "armorPerLevel": 4.199999809265137,
           "attackDamage": 60.0,
-          "attackDamagePerLevel": 2.5,
+          "attackDamagePerLevel": 2.9000000953674316,
           "attackRange": 500.0,
           "attackSpeed": 0.6380000114440918,
           "attackSpeedPerLevel": 2.5,
@@ -36591,8 +36591,8 @@
         "base_stats": {
           "armor": 30.0,
           "armorPerLevel": 4.699999809265137,
-          "attackDamage": 63.0,
-          "attackDamagePerLevel": 3.5,
+          "attackDamage": 61.0,
+          "attackDamagePerLevel": 3.9000000953674316,
           "attackRange": 125.0,
           "attackSpeed": 0.6439999938011169,
           "attackSpeedPerLevel": 2.0,
@@ -37516,10 +37516,10 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              20.0,
               18.0,
-              16.0,
-              14.0,
+              16.5,
+              15.0,
+              13.5,
               12.0,
               12.0
             ],
@@ -61970,12 +61970,12 @@
             },
             "cooldown": "@Cooldown@s %i:cooldown%",
             "cooldown_coefficients": [
-              140.0,
-              115.0,
-              90.0,
-              90.0,
-              90.0,
-              90.0
+              160.0,
+              130.0,
+              100.0,
+              100.0,
+              100.0,
+              100.0
             ],
             "cost": "@Cost@ @AbilityResourceName@",
             "cost_coefficients": [
@@ -81039,7 +81039,7 @@
           }
         },
         "base_stats": {
-          "armor": 22.0,
+          "armor": 24.0,
           "armorPerLevel": 4.5,
           "attackDamage": 61.0,
           "attackDamagePerLevel": 3.0999999046325684,

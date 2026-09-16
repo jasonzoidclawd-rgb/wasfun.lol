@@ -2,8 +2,8 @@
   "schema_version": 1,
   "branch": "pbe",
   "lane": "preview",
-  "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-  "observed_at": "2026-09-16T15:53:32.681629Z",
+  "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+  "observed_at": "2026-09-16T20:43:50.611570Z",
   "status": "fresh",
   "events": [
     {
@@ -60,9 +60,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8183952+branch.main.content.beta"
+        "target_version": "16.19.8189424+branch.main.content.beta"
       },
-      "detected_at": "2026-09-16T15:53:32.681629Z",
+      "detected_at": "2026-09-16T20:43:50.611570Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -76,12 +76,12 @@
         "zh-TW": "陰魂不散"
       },
       "slug": "hellbent",
-      "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
-      "observed_cycles": 4,
-      "last_seen_cycle": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-      "last_seen_at": "2026-09-16T15:53:32.681629Z"
+      "observed_cycles": 5,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
     },
     {
       "after": {
@@ -97,9 +97,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8183952+branch.main.content.beta"
+        "target_version": "16.19.8189424+branch.main.content.beta"
       },
-      "detected_at": "2026-09-16T15:53:32.681629Z",
+      "detected_at": "2026-09-16T20:43:50.611570Z",
       "entity_type": "augment",
       "fields_changed": [
         "tooltip"
@@ -111,12 +111,12 @@
         "en": "Titan's Resolve"
       },
       "slug": "im-the-juggernaut",
-      "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "observed_cycles": 2,
-      "last_seen_cycle": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-      "last_seen_at": "2026-09-16T15:53:32.681629Z"
+      "observed_cycles": 3,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
     },
     {
       "after": {
@@ -171,9 +171,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8183952+branch.main.content.beta"
+        "target_version": "16.19.8189424+branch.main.content.beta"
       },
-      "detected_at": "2026-09-16T15:53:32.681629Z",
+      "detected_at": "2026-09-16T20:43:50.611570Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -187,12 +187,61 @@
         "zh-TW": "靈魂炸彈"
       },
       "slug": "spirit-bomb",
-      "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
-      "observed_cycles": 4,
-      "last_seen_cycle": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-      "last_seen_at": "2026-09-16T15:53:32.681629Z"
+      "observed_cycles": 5,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "abilities.W.cooldown_coefficients": [
+          18.0,
+          16.5,
+          15.0,
+          13.5,
+          12.0,
+          12.0
+        ]
+      },
+      "before": {
+        "abilities.W.cooldown_coefficients": [
+          20.0,
+          18.0,
+          16.0,
+          14.0,
+          12.0,
+          12.0
+        ]
+      },
+      "branch": "pbe",
+      "canonical_id": "266",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "abilities.W.cooldown_coefficients"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Aatrox"
+      },
+      "slug": "aatrox",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
     },
     {
       "after": {
@@ -229,6 +278,358 @@
       "last_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "last_seen_at": "2026-07-11T11:22:04.994004Z",
       "landed_at": "2026-09-10T08:39:45.762098Z"
+    },
+    {
+      "after": {
+        "base_stats.attackDamage": 64.0
+      },
+      "before": {
+        "base_stats.attackDamage": 62.0
+      },
+      "branch": "pbe",
+      "canonical_id": "119",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "base_stats.attackDamage"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Draven"
+      },
+      "slug": "draven",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "abilities.R.coefficients.coefficient1": 0.7,
+        "base_stats.healthPerLevel": 105.0
+      },
+      "before": {
+        "abilities.R.coefficients.coefficient1": 0.6,
+        "base_stats.healthPerLevel": 99.0
+      },
+      "branch": "pbe",
+      "canonical_id": "114",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "abilities.R.coefficients.coefficient1",
+        "base_stats.healthPerLevel"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Fiora"
+      },
+      "slug": "fiora",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "abilities.W.effect_amounts.Effect4Amount": [
+          2.25,
+          2.25,
+          2.25,
+          2.25,
+          2.25,
+          2.25,
+          2.25
+        ],
+        "abilities.W.effect_amounts.Effect6Amount": [
+          2.25,
+          2.25,
+          2.25,
+          2.25,
+          2.25,
+          2.25,
+          2.25
+        ]
+      },
+      "before": {
+        "abilities.W.effect_amounts.Effect4Amount": [
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ],
+        "abilities.W.effect_amounts.Effect6Amount": [
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      "branch": "pbe",
+      "canonical_id": "121",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "abilities.W.effect_amounts.Effect4Amount",
+        "abilities.W.effect_amounts.Effect6Amount"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Kha'Zix"
+      },
+      "slug": "khazix",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "base_stats.armor": 24.0
+      },
+      "before": {
+        "base_stats.armor": 22.0
+      },
+      "branch": "pbe",
+      "canonical_id": "876",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "base_stats.armor"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Lillia"
+      },
+      "slug": "lillia",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "base_stats.attackDamagePerLevel": 2.9000000953674316
+      },
+      "before": {
+        "base_stats.attackDamagePerLevel": 2.5
+      },
+      "branch": "pbe",
+      "canonical_id": "236",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "base_stats.attackDamagePerLevel"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Lucian"
+      },
+      "slug": "lucian",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "abilities.R.cooldown_coefficients": [
+          160.0,
+          130.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0
+        ]
+      },
+      "before": {
+        "abilities.R.cooldown_coefficients": [
+          140.0,
+          115.0,
+          90.0,
+          90.0,
+          90.0,
+          90.0
+        ]
+      },
+      "branch": "pbe",
+      "canonical_id": "56",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "abilities.R.cooldown_coefficients"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Nocturne"
+      },
+      "slug": "nocturne",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "abilities.E.cost_coefficients": [
+          40.0,
+          50.0,
+          60.0,
+          70.0,
+          80.0,
+          90.0
+        ],
+        "base_stats.armorPerLevel": 4.699999809265137
+      },
+      "before": {
+        "abilities.E.cost_coefficients": [
+          35.0,
+          45.0,
+          55.0,
+          65.0,
+          75.0,
+          85.0
+        ],
+        "base_stats.armorPerLevel": 4.199999809265137
+      },
+      "branch": "pbe",
+      "canonical_id": "13",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "abilities.E.cost_coefficients",
+        "base_stats.armorPerLevel"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Ryze"
+      },
+      "slug": "ryze",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
+        "base_stats.attackDamage": 61.0,
+        "base_stats.attackDamagePerLevel": 3.9000000953674316
+      },
+      "before": {
+        "base_stats.attackDamage": 63.0,
+        "base_stats.attackDamagePerLevel": 3.5
+      },
+      "branch": "pbe",
+      "canonical_id": "254",
+      "change_kind": "numeric",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "champion",
+      "fields_changed": [
+        "base_stats.attackDamage",
+        "base_stats.attackDamagePerLevel"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Vi"
+      },
+      "slug": "vi",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
     },
     {
       "after": {
@@ -284,9 +685,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8183952+branch.main.content.beta"
+        "target_version": "16.19.8189424+branch.main.content.beta"
       },
-      "detected_at": "2026-09-16T15:53:32.681629Z",
+      "detected_at": "2026-09-16T20:43:50.611570Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -296,12 +697,12 @@
         "en": "Cloak and Dagger"
       },
       "slug": "cloak-and-dagger",
-      "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-      "observed_cycles": 5,
-      "last_seen_cycle": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-      "last_seen_at": "2026-09-16T15:53:32.681629Z"
+      "observed_cycles": 6,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
     },
     {
       "after": {
@@ -431,9 +832,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8183952+branch.main.content.beta"
+        "target_version": "16.19.8189424+branch.main.content.beta"
       },
-      "detected_at": "2026-09-16T15:53:32.681629Z",
+      "detected_at": "2026-09-16T20:43:50.611570Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -443,12 +844,12 @@
         "en": "Moonflair Spellblade"
       },
       "slug": "moonflair-spellblade",
-      "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-      "observed_cycles": 5,
-      "last_seen_cycle": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-      "last_seen_at": "2026-09-16T15:53:32.681629Z"
+      "observed_cycles": 6,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
     },
     {
       "after": {
@@ -596,6 +997,41 @@
     },
     {
       "after": {
+        "description": "<mainText><stats><attention> 60</attention> Health<br><attention> 75%</attention> Base Health Regen<br><attention> 50%</attention> Base Mana Regen<br><attention> 5</attention> Gold Per 10 Seconds</stats><br><br><passive>Support Quest</passive><br>Earn <keywordMajor>0</keywordMajor> gold from this item to transform it into <rarityGeneric>Bounty of Worlds</rarityGeneric>. <br><br><passive>Shared Riches</passive>  (0s, max 0 charges)<br>While near an ally champion, damage enemy champions or kill minions to gain gold. <active>Active</active> (3 charges)<br>Places an <keyword>Invisible</keyword> Stealth Ward that grants vision.</mainText>"
+      },
+      "before": {
+        "description": "<mainText><stats><attention> 100</attention> Health<br><attention> 50%</attention> Base Health Regen<br><attention> 50%</attention> Base Mana Regen<br><attention> 5</attention> Gold Per 10 Seconds</stats><br><br><passive>Support Quest</passive><br>Earn <keywordMajor>0</keywordMajor> gold from this item to transform it into <rarityGeneric>Bounty of Worlds</rarityGeneric>. <br><br><passive>Shared Riches</passive>  (0s, max 0 charges)<br>While near an ally champion, damage enemy champions or kill minions to gain gold. <active>Active</active> (3 charges)<br>Places an <keyword>Invisible</keyword> Stealth Ward that grants vision.</mainText>"
+      },
+      "branch": "pbe",
+      "canonical_id": "3866",
+      "change_kind": "text",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.19.8189424+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-16T20:43:50.611570Z",
+      "entity_type": "item",
+      "fields_changed": [
+        "description"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Runic Compass"
+      },
+      "slug": "runic-compass",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
+    },
+    {
+      "after": {
         "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
       },
       "before": {
@@ -608,9 +1044,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8183952+branch.main.content.beta"
+        "target_version": "16.19.8189424+branch.main.content.beta"
       },
-      "detected_at": "2026-09-16T15:53:32.681629Z",
+      "detected_at": "2026-09-16T20:43:50.611570Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -622,12 +1058,12 @@
         "en": "Zz'Rot Portal"
       },
       "slug": "zz-rot-portal",
-      "source_patch_label": "pbe-cycle-16.19.8183952+branch.main.content.beta",
+      "source_patch_label": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-      "observed_cycles": 5,
-      "last_seen_cycle": "pbe-cycle-16.19.8183952+branch.main.content.beta",
-      "last_seen_at": "2026-09-16T15:53:32.681629Z"
+      "observed_cycles": 6,
+      "last_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
+      "last_seen_at": "2026-09-16T20:43:50.611570Z"
     }
   ]
 }
