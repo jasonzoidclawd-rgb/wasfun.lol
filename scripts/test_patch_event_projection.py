@@ -173,7 +173,10 @@ class PatchEventProjectionTests(unittest.TestCase):
 
         self.assertEqual(current["version"], "26.18")
         self.assertEqual(current["sections"], [])
-        self.assertEqual(current["summary"]["totalChanges"], 0)
+        # Withholding the date must not become a claim that nothing changed:
+        # nothing was measured for 26.18, so no count is published at all.
+        self.assertEqual(current["structuredDiff"], "unavailable")
+        self.assertNotIn("summary", current)
         # Status, freshness and the Riot source link are untouched.
         self.assertEqual(projection["status"], "fresh")
         self.assertEqual(projection["scraped_at"], "2026-09-10T18:21:25Z")
@@ -197,7 +200,79 @@ class PatchEventProjectionTests(unittest.TestCase):
         )
         changes = projection["patches"][0]["sections"][0]["changes"]
         self.assertEqual([c["targets"][0]["slug"] for c in changes], ["brand"])
+        self.assertEqual(projection["patches"][0]["structuredDiff"], "available")
         self.assertEqual(projection["patches"][0]["summary"]["totalChanges"], 1)
+
+    def test_recorded_adjacent_comparison_makes_zero_changes_a_verified_zero(self):
+        """An adjacent comparison that finds nothing is a fact, not a blank.
+
+        Events alone cannot say this: zero events look identical whether the
+        comparison ran or never happened. The archive's `comparisons` record is
+        what separates "we checked, nothing changed" from "we never checked".
+        """
+        adjacent_18 = {
+            "base_version": "16.17.8100000+branch.releases-16-17.content.release",
+            "target_version": "16.18.8159717+branch.releases-16-18.content.release",
+        }
+        projection = build_patch_notes_projection(
+            {
+                "current_open_cycle": "26.18",
+                "comparisons": [
+                    {"entity_type": "augment", "source_patch_label": "26.18", **adjacent_18},
+                ],
+                "events": [],
+            },
+            {"patches": []},
+        )
+        current = projection["patches"][0]
+
+        self.assertEqual(current["structuredDiff"], "available")
+        self.assertEqual(current["summary"]["totalChanges"], 0)
+        self.assertEqual(current["sections"], [])
+
+    def test_recorded_cross_gap_comparison_is_not_evidence_of_zero(self):
+        projection = build_patch_notes_projection(
+            {
+                "current_open_cycle": "26.18",
+                "comparisons": [
+                    {"entity_type": "augment", "source_patch_label": "26.18", **CROSS_GAP},
+                ],
+                "events": [],
+            },
+            {"patches": []},
+        )
+        current = projection["patches"][0]
+
+        self.assertEqual(current["structuredDiff"], "unavailable")
+        self.assertNotIn("summary", current)
+
+    def test_a_comparison_recorded_for_another_cycle_proves_nothing_here(self):
+        projection = build_patch_notes_projection(
+            {
+                "current_open_cycle": "26.18",
+                "comparisons": [
+                    {"entity_type": "augment", "source_patch_label": "26.13", **ADJACENT},
+                ],
+                "events": [],
+            },
+            {"patches": []},
+        )
+
+        self.assertEqual(projection["patches"][0]["structuredDiff"], "unavailable")
+
+    def test_prose_only_history_entries_publish_no_summary(self):
+        projection = build_patch_notes_projection(
+            {"current_open_cycle": "26.18", "events": []},
+            {"patches": [
+                {"version": "26.18", "articleTitle": "Patch 26.18 Notes"},
+                {"version": "26.17", "articleTitle": "Patch 26.17 Notes"},
+                {"version": "26.16", "articleTitle": "Patch 26.16 Notes"},
+            ]},
+        )
+
+        for patch in projection["patches"][1:]:
+            self.assertEqual(patch["structuredDiff"], "unavailable", patch["version"])
+            self.assertNotIn("summary", patch)
 
     def test_preview_projection_is_bounded_and_only_links_live_canonical_entities(self):
         archive = {

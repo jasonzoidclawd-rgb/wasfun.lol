@@ -19,13 +19,7 @@
         "sternest"
       ],
       "intro": "The Beacon of Hope has officially been inducted into the Hall of Legends. Congratulations, Caps! This week's patch kicks off our event that honors the most decorated player in European League of Legends history. The Hall of Legends battle pass will take you on a journey through his storied career, and features new cosmetics plus brand new skins co-developed by Caps himself. We can't wait to celebrate such a humble, confident, and resilient competitor with you all. This patch also features changes to Summoner's Rift balance, with some targeted nerfs on overperforming pro supports like Nautilus and Bard, as well as some taps to Seraphine bot and Zeri. A round of buffs is in order for Viego, Zaahen, Master Yi, Ekko, and Kassadin. Finally, Cassiopeia has slithered her way into an adjustment to help reduce her pro skew. Classic will be having a big old Demacian reunion this week as Fiora, Galio, Poppy, Shyvana, and Xin Zhao join the fray in addition to a host of balance changes and the results of our first Council vote! For all you Mayhem heads out there, we're making sure that the Augment choices you receive make more sense for the champion you're playing, as we continue to improve the Augment pools. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
-      "summary": {
-        "totalChanges": 0,
-        "byKind": {},
-        "byEntityType": {},
-        "byLabel": {},
-        "damageRelevant": 0
-      },
+      "structuredDiff": "unavailable",
       "sections": []
     },
     {
@@ -40,13 +34,7 @@
         "sternest"
       ],
       "intro": "In 26.17 we’ve got a small amount of relief for top lane with Nasus and Vayne nerfs, and some followup on last patch to a handful of champions and items. We’re buffing a variety of melee AD carries, like Irelia, Qiyana, Yasuo, and Yone, who’ve been forced to snowball-or-lose for a while instead of having a reliable endgame to scale towards. Xerath continues to overperform in the mid lane in particular, as do Nocturne and Graves in the jungle. Finally, Sundered Sky wasn’t hit quite as hard as we were looking for, and we’re also looking to give Stormrazor a place in some builds again. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
-      "summary": {
-        "totalChanges": 0,
-        "byKind": {},
-        "byEntityType": {},
-        "byLabel": {},
-        "damageRelevant": 0
-      },
+      "structuredDiff": "unavailable",
       "sections": []
     },
     {
@@ -62,13 +50,7 @@
         "Riot Yina"
       ],
       "intro": "With this patch, we have a bunch of systems adjustments aimed at some of the strategies that have been emerging in bot lane, as well as opening up some space for itemization diversity in jungle. Recently we've been seeing increased support roaming really early into the game, to the point where they seem to be operating as a second jungler. While this may be interesting as a strategic option, we feel it is damaging to game integrity when it's the default approach and supports are no longer meaningfully participating in a lane, so we're making higher tradeoffs for this playstyle by tweaking role quest progress for supports and directly addressing specific champions like Camille who have moved into the support role leading this meta. Related, mages are picking up as a prominent class selection in bot lane in both pro and regular play. While they've been niche but powerful picks for a long time, both from your feedback and the stats, it's clear that it's time for some adjustments to equalize the power here a bit between mages and ADCs. Similar to the approach with supports above, they'll still be viable, just not clearly dominant. Additionally, we are tweaking the AD fighter itemization space and the jungle pets to encourage a more diverse meta beyond Sundered Sky users to include more AP and Tank junglers. We're excited to see what shakes out next! Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
-      "summary": {
-        "totalChanges": 0,
-        "byKind": {},
-        "byEntityType": {},
-        "byLabel": {},
-        "damageRelevant": 0
-      },
+      "structuredDiff": "unavailable",
       "sections": []
     },
     {
@@ -83,13 +65,7 @@
         "Riot Yina"
       ],
       "intro": "Welcome to patch 26.15 and Season 3, where Bel’Veth, the Empress of the Void has some changes she’d like to introduce to you, starting with her patchwork update that leans into her evolution fantasy (permanent ult form, anyone?). After that, we’ve got some nerfs to some recent and longer overperforming champions in Locke, Naafiri, Riven, Sylas, and Morde, and then a handful of buffs to some large tanky champions (and Kai’Sa I guess), along with some item and rune adjustments. On the ranked front with the new Season, you can only cash in Aegis of Valor in games you win to remove mixed incentives, and we’re bringing back duoing to Master tier! Continue on for ARAM: Mayhem and Arena changes! Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
-      "summary": {
-        "totalChanges": 0,
-        "byKind": {},
-        "byEntityType": {},
-        "byLabel": {},
-        "damageRelevant": 0
-      },
+      "structuredDiff": "unavailable",
       "sections": []
     },
     {
@@ -104,13 +80,7 @@
         "Riot Yina"
       ],
       "intro": "Hail the victorious three-peat champions, and welcome to Patch 26.14! This patch we have an array of changes to champs like locking down Locke, helping our favorite fish who's flopping a little in support, and hitting mute on the songstress in bot lane. Blue buff is getting a little bit of love, and we have some adjustments to a few items. Outside of Summoner's Rift, we've got some Mayhem and Arena adjustments for modes enjoyers, and Summoner's Rift Clash will be taking place this patch! So time to hit up the squad, give yourselves a punny name, and suddenly forget how to do even the most basic tasks in-game, if you're anything like my friend group. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
-      "summary": {
-        "totalChanges": 0,
-        "byKind": {},
-        "byEntityType": {},
-        "byLabel": {},
-        "damageRelevant": 0
-      },
+      "structuredDiff": "unavailable",
       "sections": []
     }
   ]

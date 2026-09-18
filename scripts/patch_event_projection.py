@@ -149,7 +149,43 @@ def _summary(events: list[dict[str, Any]]) -> dict[str, Any]:
     return summary
 
 
+def structured_diff_available(patch_events: dict[str, Any], cycle: str) -> bool:
+    """True only when a patch-adjacent snapshot comparison covers `cycle`.
+
+    A count of zero means two incompatible things, and publishing them the same
+    way is what let the site render "0 changes" as if it had checked. This
+    separates them:
+
+      available   — an adjacent comparison ran, so the count is a verified
+                    fact. Zero then means "verified: nothing changed".
+      unavailable — no adjacent comparison covers this patch (a multi-patch
+                    tracking gap like 16.13 -> 16.18, a lane that never ran, or
+                    a history entry we only ever had prose for). Nothing is
+                    known, so nothing may be counted.
+
+    Adjacency is decided by the same rule that governs dating an individual
+    change. The archive's `comparisons` record is the authority; the per-event
+    comparisons are a fallback for archives written before that record existed.
+    """
+    for record in patch_events.get("comparisons", []):
+        if not isinstance(record, dict):
+            continue
+        if str(record.get("source_patch_label") or "") != cycle:
+            continue
+        if comparison_is_patch_adjacent(record):
+            return True
+    return any(
+        isinstance(event, dict)
+        and event.get("source_patch_label") == cycle
+        and comparison_is_patch_adjacent(event.get("comparison"))
+        for event in patch_events.get("events", [])
+    )
+
+
 def _metadata_patch(metadata: dict[str, Any]) -> dict[str, Any]:
+    """A prose-only card. No structural diff was ever computed for it, so it
+    carries the unavailable marker and NO summary — never a summary of zeroes.
+    """
     return {
         "version": metadata.get("version", "unknown"),
         "title": metadata.get("articleTitle", ""),
@@ -158,7 +194,7 @@ def _metadata_patch(metadata: dict[str, Any]) -> dict[str, Any]:
         "publishedAt": metadata.get("publishedAt", ""),
         "authors": metadata.get("authors", []),
         "intro": metadata.get("intro", ""),
-        "summary": _empty_summary(),
+        "structuredDiff": "unavailable",
         "sections": [],
     }
 
@@ -232,8 +268,16 @@ def build_patch_notes_projection(
             {"id": section, "title": section.replace("_", " ").title(), "changes": changes}
             for section, changes in sorted(groups.items())
         ],
-        "summary": _summary(current_events),
     })
+    # The summary is a claim that the diff was computed. Publish it only with
+    # the evidence to back it; otherwise the card says "unavailable" and counts
+    # nothing.
+    if structured_diff_available(patch_events, current_cycle):
+        current["structuredDiff"] = "available"
+        current["summary"] = _summary(current_events)
+    else:
+        current["structuredDiff"] = "unavailable"
+        current.pop("summary", None)
     history = [
         _metadata_patch(entry)
         for entry in metadata.get("patches", [])

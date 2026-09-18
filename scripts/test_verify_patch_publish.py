@@ -13,6 +13,16 @@ from verify_patch_publish import (
 )
 
 
+def summary(total: int = 1, kind: str = "added") -> dict:
+    return {
+        "totalChanges": total,
+        "byKind": {kind: total} if total else {},
+        "byEntityType": {"augment": total} if total else {},
+        "byLabel": {},
+        "damageRelevant": 0,
+    }
+
+
 def patch_note(
     *,
     patch: str = "26.13",
@@ -28,6 +38,8 @@ def patch_note(
         "title": f"Patch {patch} Notes",
         "released": "2026-06-25",
         "publishedAt": "2026-06-25T12:00:00Z",
+        "structuredDiff": "available",
+        "summary": summary(1, kind),
         "sections": [
             {
                 "id": "augments",
@@ -114,6 +126,74 @@ class VerifyPatchPublishTests(unittest.TestCase):
         self.assertEqual(summary["zhTwText"], 3)
         self.assertEqual(summary["zhTwCoverage"], 1.0)
         self.assertEqual(summary["kinds"], ["added", "buffed", "changed"])
+
+    def test_unmeasured_patch_may_not_publish_a_summary_of_zeroes(self):
+        """A zeroed summary without a diff presents "unchecked" as "unchanged"."""
+        unmeasured = patch_note(patch="26.13")
+        unmeasured["structuredDiff"] = "unavailable"
+        unmeasured["summary"] = summary(0)
+        unmeasured["sections"] = []
+        notes = public_patch_notes(
+            notes=[unmeasured, patch_note(patch="26.12", kind="buffed"),
+                   patch_note(patch="26.11", kind="changed")],
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self.write_public_data(root, patch_notes=notes)
+
+            with self.assertRaisesRegex(PatchPublishError, "no structured diff to back it"):
+                verify_patch_publish(root=root, changed_paths=["public/data/patch-notes.json"])
+
+    def test_unmeasured_patch_without_a_summary_publishes_cleanly(self):
+        unmeasured = patch_note(patch="26.13")
+        unmeasured["structuredDiff"] = "unavailable"
+        unmeasured.pop("summary")
+        unmeasured["sections"] = []
+        notes = public_patch_notes(
+            notes=[unmeasured, patch_note(patch="26.12", kind="buffed"),
+                   patch_note(patch="26.11", kind="changed")],
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self.write_public_data(root, patch_notes=notes)
+
+            result = verify_patch_publish(
+                root=root, changed_paths=["public/data/patch-notes.json"],
+            )
+
+        self.assertEqual(result["totalChanges"], 2)
+
+    def test_every_published_patch_must_declare_its_diff_state(self):
+        legacy = patch_note(patch="26.13")
+        legacy.pop("structuredDiff")
+        notes = public_patch_notes(
+            notes=[legacy, patch_note(patch="26.12", kind="buffed"),
+                   patch_note(patch="26.11", kind="changed")],
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self.write_public_data(root, patch_notes=notes)
+
+            with self.assertRaisesRegex(PatchPublishError, "must declare structuredDiff"):
+                verify_patch_publish(root=root, changed_paths=["public/data/patch-notes.json"])
+
+    def test_claimed_diff_without_a_summary_is_rejected(self):
+        hollow = patch_note(patch="26.13")
+        hollow.pop("summary")
+        notes = public_patch_notes(
+            notes=[hollow, patch_note(patch="26.12", kind="buffed"),
+                   patch_note(patch="26.11", kind="changed")],
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self.write_public_data(root, patch_notes=notes)
+
+            with self.assertRaisesRegex(PatchPublishError, "publishes no summary"):
+                verify_patch_publish(root=root, changed_paths=["public/data/patch-notes.json"])
 
     def test_low_zh_tw_text_coverage_is_reported_not_blocking(self):
         """Localized change TEXT is an unimplemented gap, tracked not gated.

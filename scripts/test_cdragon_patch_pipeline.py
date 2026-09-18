@@ -120,6 +120,108 @@ class CDragonPatchPipelineTests(unittest.TestCase):
         self.assertEqual(len(landed["archive"]["events"]), len(pbe["archive"]["events"]))
         self.assertTrue(all(event["landed"] for event in landed["archive"]["events"]))
 
+    def test_latest_archive_records_the_comparisons_the_run_performed(self):
+        """Zero events is ambiguous; the comparison record is what disambiguates.
+
+        Without it, a run that diffed two adjacent snapshots and found nothing
+        is indistinguishable from a run that never diffed anything — and the
+        projection can only ever publish "unknown".
+        """
+        latest_old = {kind: snapshot(kind, "latest", "16.13.1", rows) for kind, rows in entities(0).items()}
+        update = build_branch_update(
+            branch="latest",
+            source_version="16.13.2",
+            source_patch_label="26.13",
+            observed_at="2026-07-11T02:00:00Z",
+            entities_by_type=entities(1),
+            previous_snapshots=latest_old,
+            latest_snapshots={},
+            previous_archive=None,
+        )
+        comparisons = update["archive"]["comparisons"]
+
+        self.assertEqual(
+            sorted(record["entity_type"] for record in comparisons),
+            ["augment", "champion", "item"],
+        )
+        for record in comparisons:
+            self.assertEqual(record["source_patch_label"], "26.13")
+            self.assertEqual(record["base_version"], "16.13.1")
+            self.assertEqual(record["target_version"], "16.13.2")
+            self.assertEqual(record["base_branch"], "latest")
+            self.assertEqual(record["target_branch"], "latest")
+
+    def test_an_unchanged_run_still_records_that_it_compared(self):
+        latest_old = {kind: snapshot(kind, "latest", "16.13.1", rows) for kind, rows in entities(0).items()}
+        update = build_branch_update(
+            branch="latest",
+            source_version="16.13.2",
+            source_patch_label="26.13",
+            observed_at="2026-07-11T02:00:00Z",
+            entities_by_type=entities(0),
+            previous_snapshots=latest_old,
+            latest_snapshots={},
+            previous_archive=None,
+        )
+
+        self.assertEqual(update["archive"]["events"], [])
+        self.assertEqual(len(update["archive"]["comparisons"]), 3)
+
+    def test_a_first_run_with_no_baseline_records_no_comparison(self):
+        """Nothing was compared, so nothing may later read as "nothing changed"."""
+        update = build_branch_update(
+            branch="latest",
+            source_version="16.13.2",
+            source_patch_label="26.13",
+            observed_at="2026-07-11T02:00:00Z",
+            entities_by_type=entities(0),
+            previous_snapshots={},
+            latest_snapshots={},
+            previous_archive=None,
+        )
+
+        self.assertEqual(update["archive"]["comparisons"], [])
+
+    def test_comparison_records_accumulate_across_runs_without_duplicating(self):
+        first_base = {kind: snapshot(kind, "latest", "16.13.1", rows) for kind, rows in entities(0).items()}
+        first = build_branch_update(
+            branch="latest",
+            source_version="16.13.2",
+            source_patch_label="26.13",
+            observed_at="2026-07-11T02:00:00Z",
+            entities_by_type=entities(1),
+            previous_snapshots=first_base,
+            latest_snapshots={},
+            previous_archive=None,
+        )
+        repeat = build_branch_update(
+            branch="latest",
+            source_version="16.13.2",
+            source_patch_label="26.13",
+            observed_at="2026-07-11T03:00:00Z",
+            entities_by_type=entities(1),
+            previous_snapshots=first_base,
+            latest_snapshots={},
+            previous_archive=first["archive"],
+        )
+        later = build_branch_update(
+            branch="latest",
+            source_version="16.14.1",
+            source_patch_label="26.14",
+            observed_at="2026-07-25T02:00:00Z",
+            entities_by_type=entities(2),
+            previous_snapshots=first["snapshots"],
+            latest_snapshots={},
+            previous_archive=repeat["archive"],
+        )
+
+        self.assertEqual(len(repeat["archive"]["comparisons"]), 3)
+        self.assertEqual(len(later["archive"]["comparisons"]), 6)
+        self.assertEqual(
+            sorted({record["source_patch_label"] for record in later["archive"]["comparisons"]}),
+            ["26.13", "26.14"],
+        )
+
     def test_pbe_version_regression_starts_a_fresh_lineage_without_removals(self):
         previous = {kind: snapshot(kind, "pbe", "16.14.9", rows) for kind, rows in entities(1).items()}
         prior_archive = {

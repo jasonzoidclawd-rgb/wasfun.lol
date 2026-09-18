@@ -36,6 +36,7 @@ function syntheticPatch(kinds: ChangeKind[] = ["changed"]): PatchNote {
     released: "2026-06-25",
     publishedAt: "2026-06-25T12:00:00Z",
     intro: "Welcome to the official English article intro.",
+    structuredDiff: "available",
     summary: {
       totalChanges: kinds.length,
       byKind: Object.fromEntries(kinds.map((kind) => [kind, 1])),
@@ -78,14 +79,14 @@ describe("patch-notes digest", () => {
     const patch = syntheticPatch(["removed"]);
     patch.summary = { ...patch.summary!, byKind: { removed: 3 } };
 
-    expect(buildPatchDigest(patch, 0).removed).toBe(3);
+    expect(buildPatchDigest(patch, 0)!.removed).toBe(3);
   });
 
   test("a patch with no dated removals reports zero, never the not-live archive", () => {
-    // Patch 26.18 after cross-gap events stopped being dated to it: no changes
-    // at all, while 69 augments are not currently live (42 removed, 10
-    // disabled, 16 unverified, 1 candidate). That archive count once filled
-    // this card as "Removed 69" — a claim about THIS patch that nothing dates.
+    // A VERIFIED zero: the comparison ran and dated no removal, while 69
+    // augments are not currently live (42 removed, 10 disabled, 16 unverified,
+    // 1 candidate). That archive count once filled this card as "Removed 69" —
+    // a claim about THIS patch that nothing dates.
     const patch = syntheticPatch([]);
     patch.summary = { ...patch.summary!, totalChanges: 0, byKind: {} };
 

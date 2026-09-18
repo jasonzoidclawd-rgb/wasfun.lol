@@ -206,6 +206,13 @@ export interface PatchSection {
   changes: PatchChange[];
 }
 
+/**
+ * Whether a patch-adjacent structural diff was actually computed for a patch.
+ * "unavailable" is NOT zero changes: it means nothing was measured, so no
+ * count may be rendered. Absent (legacy payloads) is treated as unavailable.
+ */
+export type PatchStructuredDiffState = "available" | "unavailable";
+
 export interface PatchNote {
   version: string;          // "26.8"
   title: string;            // raw card title from source
@@ -214,6 +221,8 @@ export interface PatchNote {
   publishedAt?: string;
   authors?: string[];
   intro?: string;
+  structuredDiff?: PatchStructuredDiffState;
+  /** Present only when `structuredDiff` is "available". */
   summary?: {
     totalChanges: number;
     byKind: Partial<Record<ChangeKind, number>>;

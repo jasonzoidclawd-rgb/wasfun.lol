@@ -42,12 +42,14 @@ export async function HeroMover({
           <span>
             {champion.win_rate.toFixed(1)}% <span className="text-[var(--color-text-muted)]">{t("heroWinRate")}</span>
           </span>
-          <span>
-            {champion.pick_rate != null
-              ? `${champion.pick_rate.toFixed(1)}%`
-              : "—"}{" "}
-            <span className="text-[var(--color-text-muted)]">{t("heroPickRate")}</span>
-          </span>
+          {/* "— pick" labels a number we do not have. Drop the whole stat
+              rather than print a placeholder next to a real one. */}
+          {champion.pick_rate != null ? (
+            <span>
+              {champion.pick_rate.toFixed(1)}%{" "}
+              <span className="text-[var(--color-text-muted)]">{t("heroPickRate")}</span>
+            </span>
+          ) : null}
         </div>
       </div>
       <Link

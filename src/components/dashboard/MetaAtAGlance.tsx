@@ -16,7 +16,8 @@ export async function MetaAtAGlance({
   liveAugmentCount: number;
   /** Every augment entity we track, including disabled and historical ones. */
   knownAugmentCount: number;
-  changedAugmentCount: number;
+  /** null when no structural diff covers this patch — unknown, not zero. */
+  changedAugmentCount: number | null;
   structuralPatch: string | null;
   statisticsPatch: string | null;
   updatedAt: string;
@@ -32,7 +33,9 @@ export async function MetaAtAGlance({
     [t("metaChampions"), championCount],
     [t("metaAugmentsLive"), liveAugmentCount],
     [t("metaAugmentsKnown"), knownAugmentCount],
-    [t("metaChangedAugments"), changedAugmentCount],
+    // "0 changed" is a measurement. Without a structural diff we have not
+    // measured, so the row reads unknown rather than zero.
+    [t("metaChangedAugments"), changedAugmentCount ?? t("metaChangedUnknown")],
     [t("metaPatchStructural"), structuralPatch ?? t("metaPatchUnknown")],
     [t("metaPatchStatistics"), statisticsPatch ?? t("metaPatchUnknown")],
     [t("metaUpdated"), updated],

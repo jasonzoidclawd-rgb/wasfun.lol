@@ -19,6 +19,8 @@ import { AdvisorTeaser } from "@/components/dashboard/AdvisorTeaser";
 import { CompanionLauncher } from "@/components/dashboard/CompanionLauncher";
 import { RotateHint } from "@/components/ui/RotateHint";
 import { readPatchClocks } from "@/lib/data/clocks";
+import { patchChangeState } from "@/lib/patch-notes/digest";
+import type { PatchNote } from "@/lib/types";
 
 type ChampionRecord = LocalizedNameRecord &
   HeroChampion &
@@ -34,6 +36,9 @@ type ComboRecord = { champion: string; augment: string; tier: string };
 
 type PatchNoteChange = { text: { en: string } };
 type PatchNoteSection = { id: string; changes: PatchNoteChange[] };
+type HomePatchNote = Pick<PatchNote, "version" | "structuredDiff" | "summary"> & {
+  sections: PatchNoteSection[];
+};
 
 export default async function HomePage({
   params,
@@ -47,7 +52,7 @@ export default async function HomePage({
     readChampionsFile<{ champions: ChampionRecord[] }>(),
     readAugmentsFile<{ augments: AugmentRecord[] }>(),
     readMetaFile<{ patch: string; scraped_at: string }>(),
-    readPatchNotesFile<{ patches: Array<{ version: string; sections: PatchNoteSection[] }> }>(),
+    readPatchNotesFile<{ patches: HomePatchNote[] }>(),
     readCombosFile<{ combos: ComboRecord[] }>(),
   ]);
 
@@ -81,7 +86,11 @@ export default async function HomePage({
   const sPlusCount = champions.filter((c) => c.tier === "S+").length;
 
   const augByName = new Map(augments.map((a) => [a.name, a]));
-  const augmentChangeEntries = patchNotesFile.patches[0].sections
+  const currentPatchNote = patchNotesFile.patches[0];
+  // No structural diff for this patch means the changed-augment count is
+  // unknown, not zero: an empty section list is absence of evidence here.
+  const patchDiffMeasured = patchChangeState(currentPatchNote) !== "unavailable";
+  const augmentChangeEntries = currentPatchNote.sections
     .filter((s) => s.id === "augments")
     .flatMap((s) => s.changes);
 
@@ -99,9 +108,18 @@ export default async function HomePage({
   const spotlight = changedPrismatic ?? fallbackPrismatic;
   const isSpotlightChanged = changedPrismatic != null;
 
+  // The public teaser is S-tier only (export_public_catalog.build_combo_teaser),
+  // so every entry carries the same tier and nothing in this payload ranks one
+  // combo above another. The only real ordering evidence is the CHAMPION's
+  // rank, which is what this list is sorted by — and what its heading says.
+  // An augment that is no longer offerable must never be suggested, so the
+  // pairing is re-checked against live availability rather than trusted from
+  // the combo snapshot.
   const champBySlug = new Map(byRank.map((c) => [c.slug, c]));
   const comboByChampion = new Map<string, ComboRecord>();
   for (const combo of combosFile.combos) {
+    const augment = augByName.get(combo.augment);
+    if (augment?.availability?.status !== "confirmed_live") continue;
     if (!comboByChampion.has(combo.champion)) comboByChampion.set(combo.champion, combo);
   }
   const rankedCombos = [...comboByChampion.values()]
@@ -118,7 +136,7 @@ export default async function HomePage({
     <>
       <DashboardIslands />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-6 md:gap-3.5 lg:grid-cols-12 lg:gap-4">
-        <PatchPulseBanner />
+        <PatchPulseBanner changesMeasured={patchDiffMeasured} />
         <RotateHint />
         <HeroMover champion={heroChampion} total={champions.length} patch={patch} />
         <MetaAtAGlance
@@ -126,7 +144,7 @@ export default async function HomePage({
           championCount={champions.length}
           liveAugmentCount={liveAugmentCount}
           knownAugmentCount={augments.length}
-          changedAugmentCount={changedAugments.length}
+          changedAugmentCount={patchDiffMeasured ? changedAugments.length : null}
           structuralPatch={clocks.structuralPatch}
           statisticsPatch={clocks.statisticsPatch}
           updatedAt={scraped_at}

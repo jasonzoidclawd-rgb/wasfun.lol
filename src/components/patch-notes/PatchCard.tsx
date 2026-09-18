@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { formatPatchDate } from "@/lib/patch-notes/chrome";
+import { patchChangeState } from "@/lib/patch-notes/digest";
 import {
   normalizeChangeKind,
   normalizePatchObjectType,
@@ -46,12 +47,15 @@ export async function PatchCard({
   isCurrent = false,
   compact = false,
   linkTitle = true,
+  explainEmpty = true,
 }: {
   patch: PatchNote;
   locale: string;
   isCurrent?: boolean;
   compact?: boolean;
   linkTitle?: boolean;
+  /** Off where a summary card above the list already explains the empty body. */
+  explainEmpty?: boolean;
 }) {
   const t = await getTranslations("patchNotes");
   const chain: DataLocale[] = LOCALE_CHAIN[locale] ?? ["en"];
@@ -98,6 +102,14 @@ export async function PatchCard({
       </header>
 
       <div className={compact ? "space-y-4 px-5 py-5" : "space-y-6 px-5 py-5"}>
+        {explainEmpty && patch.sections.length === 0 ? (
+          <p className="text-sm text-[var(--color-text-muted)]">
+            {/* An empty body means one of two different things. Say which. */}
+            {patchChangeState(patch) === "no-changes"
+              ? t("diffNoChangesBody")
+              : t("diffUnavailableBody")}
+          </p>
+        ) : null}
         {patch.sections.map((section, idx) => (
           <Section
             key={`${section.id}-${idx}`}
