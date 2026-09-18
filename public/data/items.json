@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-17T23:49:55.839217+00:00",
+  "scraped_at": "2026-09-18T14:00:58.214243+00:00",
   "mayhemExclusive": [
     {
       "slug": "atmas-reckoning",
@@ -8551,6 +8551,10 @@
           "text": "Reduce the magic resistance of nearby enemies by 20. 2560 Archangel's Staff Recipe: Tear of the Goddess + Blasting Wand + 1140.Stats: 250 mana, 60 ability power, 10 mana regeneration per 5 seconds."
         },
         {
+          "label": "Unique Passive - Insight:",
+          "text": "Grants ability power equal to 3% maximum mana."
+        },
+        {
           "label": "Unique Passive - Dedication:",
           "text": "8% movement speed."
         },
@@ -8655,6 +8659,10 @@
           "text": "Basic attacks on-hit deal 15 (+ 10% AP) bonus magic damage and remove 4 magic resistance from the target for 8 seconds, stacking up to 7 times for a maximum of 28. 1900 Manamune Recipe: Tear of the Goddess + Long Sword + 1000.Stats: 250 mana, 20 attack damage, 7 mana regeneration per 5 seconds."
         },
         {
+          "label": "Unique Passive - Awe:",
+          "text": "Grants bonus attack damage equal to 2% maximum mana."
+        },
+        {
           "label": "Unique Passive - Feeding Frenzy:",
           "text": "Grant 0 – 35 (based on missing health) bonus attack damage."
         },
@@ -8665,10 +8673,6 @@
         {
           "label": "Unique Passive - Morello's Hatred:",
           "text": "Dealing magic damage to enemy champions below 40% health inflicts 50% Grievous Wounds for 4 seconds. 2200 Muramana Recipe: Manamune + 0.Stats: 1000 mana, 20 attack damage, 7 mana regeneration per 5 seconds."
-        },
-        {
-          "label": "Unique Passive - Awe:",
-          "text": "Grants bonus attack damage equal to 2% maximum mana."
         },
         {
           "label": "Unique Passive - Ghostly Waltz:",
@@ -8693,10 +8697,6 @@
         {
           "label": "Unique Passive - Frost Crystal:",
           "text": "Dealing ability damage slows the target by 35% for 1.5 seconds, reduced to 15% slow for multi-target and damage-over-time abilities. 2900 Seraph's Embrace Recipe: Archangel's Staff + 0.Stats: 1000 mana, 60 ability power, 10 mana regeneration per 5 seconds."
-        },
-        {
-          "label": "Unique Passive - Insight:",
-          "text": "Grants ability power equal to 3% maximum mana."
         },
         {
           "label": "Unique Passive - Mana Infusion:",
