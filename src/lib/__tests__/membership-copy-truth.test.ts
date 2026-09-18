@@ -131,6 +131,58 @@ describe("pool gate copy matches the gate", () => {
     expect(en.poolGateMemberCta.toLowerCase()).toMatch(/code/);
   });
 
+  test("signed-out copy does not tell a returning member to redeem a code", () => {
+    // A signed-out reader may already BE a member, in which case signing in is
+    // the whole flow. Copy that reads "sign in, then redeem" makes redemption
+    // sound mandatory for everyone, which is false for anyone with an active
+    // entitlement — and no code exists for them to redeem.
+    const conditionals: Record<(typeof locales)[number], RegExp> = {
+      en: /if you're already a member/i,
+      "zh-TW": /若你已是會員/,
+      "zh-CN": /若你已是会员/,
+      ja: /すでにメンバーの方/,
+      ko: /이미 멤버라면/,
+    };
+    const mandatorySequence: Record<(typeof locales)[number], RegExp> = {
+      en: /sign in,\s*then redeem/i,
+      "zh-TW": /請先登入，再兌換/,
+      "zh-CN": /请先登录，再兑换/,
+      ja: /サインインしてから招待コード/,
+      ko: /로그인한 뒤 초대 코드/,
+    };
+
+    for (const locale of locales) {
+      const description = readMessages(locale).champion.poolGateDescription;
+
+      expect(description, `${locale} must condition redemption`).toMatch(
+        conditionals[locale],
+      );
+      expect(description, `${locale} must not mandate redemption`).not.toMatch(
+        mandatorySequence[locale],
+      );
+    }
+  });
+
+  test("the signed-in non-member state stays focused on activation", () => {
+    // Only the signed-out state is ambiguous about who the reader is. Once
+    // signed in, the server has already said they are not a member, so the
+    // copy is unconditional on purpose.
+    for (const locale of locales) {
+      const champion = readMessages(locale).champion;
+      const conditionals: Record<(typeof locales)[number], RegExp> = {
+        en: /if you're already a member/i,
+        "zh-TW": /若你已是會員/,
+        "zh-CN": /若你已是会员/,
+        ja: /すでにメンバーの方/,
+        ko: /이미 멤버라면/,
+      };
+
+      expect(champion.poolGateMemberDescription, locale).not.toMatch(
+        conditionals[locale],
+      );
+    }
+  });
+
   test("each of the three reader states renders its own copy", () => {
     const source = readChampionDetailPage();
 

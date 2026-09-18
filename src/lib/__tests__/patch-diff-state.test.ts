@@ -111,7 +111,31 @@ describe("patch diff state: unknown is not zero", () => {
   });
 });
 
-describe("patch diff state: published payload", () => {
+describe("patch diff state: published wire contract", () => {
+  test("the payload declares schema v3", () => {
+    expect(readPublicPatchNotes().schema_version).toBe(3);
+  });
+
+  test("v2 already made summary optional, so v3 breaks no reader", () => {
+    // The bump marks a semantic change (an absent summary is now load-bearing),
+    // not a structural one. Proof that every consumer already tolerated
+    // absence: the type has always had `summary?`, and the only readers of it
+    // outside the renderer use optional access.
+    const types = readFileSync(
+      path.join(process.cwd(), "src/lib/types.ts"),
+      "utf8",
+    );
+    const seo = readFileSync(
+      path.join(process.cwd(), "src/lib/patch-notes/seo.ts"),
+      "utf8",
+    );
+
+    expect(types).toMatch(/\/\*\* Present only when `structuredDiff` is "available"\. \*\/\s*\n\s*summary\?:/);
+    for (const read of seo.match(/\.summary[^\n]*/g) ?? []) {
+      expect(read, read.trim()).toContain("summary?.");
+    }
+  });
+
   test("every published patch declares whether a structural diff covers it", () => {
     for (const patch of readPublicPatchNotes().patches) {
       expect(patch.structuredDiff, patch.version).toMatch(/^(available|unavailable)$/);

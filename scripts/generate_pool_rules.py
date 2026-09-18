@@ -252,6 +252,35 @@ def comparison_is_patch_adjacent(comparison: object) -> bool:
     return False
 
 
+def comparison_crosses_patch_boundary(comparison: object) -> bool:
+    """True only when the diff spans the transition INTO the target patch.
+
+    This answers a strictly different question from
+    `comparison_is_patch_adjacent`, and conflating the two is a live defect:
+
+      adjacency — "can this single observation be attributed to the target
+                  patch?" A same-patch refresh (16.18.a -> 16.18.b) qualifies,
+                  because a hotfix shipped inside 26.18 IS a 26.18 change.
+      boundary  — "was the transition from the previous patch into this one
+                  observed?" A same-patch refresh proves nothing of the kind:
+                  it sees only what moved after the patch already landed.
+
+    Reading adjacency as boundary coverage means that after the historical
+    16.13 -> 16.18 gap, tomorrow's routine 16.18.a -> 16.18.b refresh would
+    "prove" patch 26.18 was fully observed, and its 275 undatable cross-gap
+    changes would be published as a verified zero. Boundary crossing is
+    therefore adjacency MINUS the same-patch case — strictly narrower, so it
+    can never admit a pair adjacency rejects.
+    """
+    if not comparison_is_patch_adjacent(comparison):
+        return False
+    # Adjacency already rejected every non-dict and every unparseable version,
+    # so the only case left to exclude is base and target being the same patch.
+    base = _source_version_key(comparison["base_version"])  # type: ignore[index]
+    target = _source_version_key(comparison["target_version"])  # type: ignore[index]
+    return base != target
+
+
 def lifecycle_from_events(events: list[dict]) -> dict:
     """Only CDragon additions/removals may alter augment lifecycle state.
 

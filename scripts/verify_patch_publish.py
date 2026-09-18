@@ -26,6 +26,7 @@ ALLOWED_KINDS = {
     "hotfix",
 }
 NON_GENERIC_KINDS = {"added", "buffed", "nerfed", "fixed", "removed"}
+PATCH_NOTES_SCHEMA_VERSION = 3
 
 
 class PatchPublishError(Exception):
@@ -139,6 +140,17 @@ def verify_patch_publish(
     source_kind = data.get("sourceKind")
     if source_kind != "cdragon-structured-diff-v1":
         raise PatchPublishError("public patch-notes must be projected from CDragon structured diffs")
+
+    # v3 makes `structuredDiff` required and the ABSENCE of `summary` load-
+    # bearing. `summary` was already optional in v2 and every reader already
+    # used optional access, so this breaks no consumer — the bump exists so a
+    # downstream reader can detect that an omitted summary now means "not
+    # measured" rather than "nothing to report".
+    if data.get("schema_version") != PATCH_NOTES_SCHEMA_VERSION:
+        raise PatchPublishError(
+            f"public patch-notes schema_version must be {PATCH_NOTES_SCHEMA_VERSION}, "
+            f"got {data.get('schema_version')!r}",
+        )
 
     source_status = data.get("status")
     if source_status not in {"fresh", "stale", "unavailable", "not_yet_confirmed"}:

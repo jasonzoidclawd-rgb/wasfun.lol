@@ -4,6 +4,7 @@ import { describe, expect, test } from "vitest";
 import {
   hasPickRateCoverage,
   pickRateCoverage,
+  pickRateCoverageLevel,
 } from "@/lib/champions/pick-rate-coverage";
 import { buildChampionDetailJsonLd } from "@/lib/seo/champion-detail";
 import type { ChampionDetailChampion } from "@/lib/champions/detail-data";
@@ -61,6 +62,34 @@ describe("pick-rate coverage measurement", () => {
 
   test("a zero pick rate is a value, not a missing one", () => {
     expect(hasPickRateCoverage([{ pick_rate: 0 }])).toBe(true);
+    expect(pickRateCoverageLevel([{ pick_rate: 0 }])).toBe("full");
+    expect(pickRateCoverageLevel([{ pick_rate: 0 }, { pick_rate: null }])).toBe(
+      "partial",
+    );
+  });
+
+  test("coverage resolves to exactly one of none / partial / full", () => {
+    expect(pickRateCoverageLevel([])).toBe("none");
+    // 0/N
+    expect(pickRateCoverageLevel(NONE)).toBe("none");
+    // 1/N
+    expect(pickRateCoverageLevel(PARTIAL)).toBe("partial");
+    expect(
+      pickRateCoverageLevel([
+        { pick_rate: 1 },
+        { pick_rate: null },
+        { pick_rate: null },
+      ]),
+    ).toBe("partial");
+    // N/N
+    expect(pickRateCoverageLevel(FULL)).toBe("full");
+  });
+
+  test("partial coverage still shows the values the roster holds", () => {
+    // The level only changes what the page ADVERTISES. Anything that renders a
+    // value stays on `hasPickRateCoverage`, so real numbers are never hidden.
+    expect(pickRateCoverageLevel(PARTIAL)).toBe("partial");
+    expect(hasPickRateCoverage(PARTIAL)).toBe(true);
   });
 
   test("the live roster's coverage decides what the site currently shows", () => {
@@ -96,15 +125,16 @@ describe("pick-rate surfaces are coverage-gated", () => {
     expect(source).not.toMatch(/pick_rate[\s\S]{0,60}"—"/);
   });
 
-  test("the champions index meta description is chosen by coverage", () => {
+  test("the champions index meta description is chosen by coverage level", () => {
     const source = readSource("src/app/[locale]/champions/page.tsx");
 
-    expect(source).toContain("hasPickRateCoverage(champions)");
-    expect(source).toContain('t("metaDescription")');
-    expect(source).toContain('t("metaDescriptionNoPickRate")');
+    expect(source).toContain("pickRateCoverageLevel(champions)");
+    expect(source).toContain('none: t("metaDescriptionNoPickRate")');
+    expect(source).toContain('partial: t("metaDescriptionPartialPickRate")');
+    expect(source).toContain('full: t("metaDescription")');
   });
 
-  test("the zero-coverage meta description claims no pick rates, in every locale", () => {
+  test("each coverage level gets a truthful meta description in every locale", () => {
     const claims: Record<(typeof locales)[number], RegExp> = {
       en: /pick rate/i,
       "zh-TW": /選用率/,
@@ -112,14 +142,40 @@ describe("pick-rate surfaces are coverage-gated", () => {
       ja: /ピック率/,
       ko: /선택률|픽률/,
     };
+    // "where available" and its locale equivalents — the hedge that makes a
+    // partial claim true.
+    const hedges: Record<(typeof locales)[number], RegExp> = {
+      en: /where available/i,
+      "zh-TW": /可取得/,
+      "zh-CN": /可获取/,
+      ja: /取得できる範囲/,
+      ko: /제공되는 범위/,
+    };
 
     for (const locale of locales) {
       const champion = readMessages(locale).champion;
+      const none = champion.metaDescriptionNoPickRate;
+      const partial = champion.metaDescriptionPartialPickRate;
+      const full = champion.metaDescription;
 
-      expect(champion.metaDescriptionNoPickRate, locale).toEqual(expect.any(String));
-      expect(champion.metaDescriptionNoPickRate, locale).not.toMatch(claims[locale]);
-      // The covered variant still advertises it, so the claim returns with the data.
-      expect(champion.metaDescription, locale).toMatch(claims[locale]);
+      for (const [name, value] of [
+        ["none", none],
+        ["partial", partial],
+        ["full", full],
+      ] as const) {
+        expect(value, `${locale}.${name}`).toEqual(expect.any(String));
+        expect(value!.trim(), `${locale}.${name}`).not.toBe("");
+      }
+      // none: no pick-rate claim at all.
+      expect(none, locale).not.toMatch(claims[locale]);
+      // partial: claims pick rates, but hedged.
+      expect(partial, locale).toMatch(claims[locale]);
+      expect(partial, locale).toMatch(hedges[locale]);
+      // full: the plain claim, unhedged.
+      expect(full, locale).toMatch(claims[locale]);
+      expect(full, locale).not.toMatch(hedges[locale]);
+      // All three are distinct sentences.
+      expect(new Set([none, partial, full]).size, locale).toBe(3);
     }
   });
 

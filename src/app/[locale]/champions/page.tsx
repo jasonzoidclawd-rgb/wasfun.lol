@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { ChampionsIndex } from "@/components/champions/ChampionsIndex";
 import type { Locale } from "@/i18n/routing";
-import { hasPickRateCoverage } from "@/lib/champions/pick-rate-coverage";
+import { pickRateCoverageLevel } from "@/lib/champions/pick-rate-coverage";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 
 export type ChampionEntry = {
@@ -61,11 +61,14 @@ export async function generateMetadata({
   // The description advertises which statistics the page carries, so it is
   // chosen from what the roster actually holds. Promising pick rates to search
   // engines and AI crawlers while publishing none is the same false claim the
-  // Pick% column made, with a longer half-life.
+  // Pick% column made, with a longer half-life — and under partial coverage,
+  // denying them would hide values the page really does render.
   const { champions } = await readChampions();
-  const description = hasPickRateCoverage(champions)
-    ? t("metaDescription")
-    : t("metaDescriptionNoPickRate");
+  const description = {
+    none: t("metaDescriptionNoPickRate"),
+    partial: t("metaDescriptionPartialPickRate"),
+    full: t("metaDescription"),
+  }[pickRateCoverageLevel(champions)];
   const url = localizedUrl(route, locale as Locale);
 
   return {

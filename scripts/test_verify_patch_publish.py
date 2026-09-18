@@ -8,6 +8,7 @@ import unittest
 from pathlib import Path
 
 from verify_patch_publish import (
+    PATCH_NOTES_SCHEMA_VERSION,
     PatchPublishError,
     verify_patch_publish,
 )
@@ -64,6 +65,7 @@ def patch_note(
 
 def public_patch_notes(*, patch: str = "26.13", notes: list[dict] | None = None) -> dict:
     return {
+        "schema_version": PATCH_NOTES_SCHEMA_VERSION,
         "patch": patch,
         "source": "CommunityDragon snapshot diffs",
         "sourceKind": "cdragon-structured-diff-v1",
@@ -126,6 +128,34 @@ class VerifyPatchPublishTests(unittest.TestCase):
         self.assertEqual(summary["zhTwText"], 3)
         self.assertEqual(summary["zhTwCoverage"], 1.0)
         self.assertEqual(summary["kinds"], ["added", "buffed", "changed"])
+
+    def test_a_stale_schema_version_is_rejected(self):
+        """v3 makes `structuredDiff` required and an absent `summary` meaningful.
+
+        `summary` was already optional in v2 and every reader already used
+        optional access, so no consumer breaks — but a downstream reader needs
+        a marker to tell "not measured" from "nothing to report".
+        """
+        notes = public_patch_notes()
+        notes["schema_version"] = 2
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self.write_public_data(root, patch_notes=notes)
+
+            with self.assertRaisesRegex(PatchPublishError, "schema_version must be 3"):
+                verify_patch_publish(root=root, changed_paths=["public/data/patch-notes.json"])
+
+    def test_a_missing_schema_version_is_rejected(self):
+        notes = public_patch_notes()
+        del notes["schema_version"]
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            self.write_public_data(root, patch_notes=notes)
+
+            with self.assertRaisesRegex(PatchPublishError, "schema_version must be 3"):
+                verify_patch_publish(root=root, changed_paths=["public/data/patch-notes.json"])
 
     def test_unmeasured_patch_may_not_publish_a_summary_of_zeroes(self):
         """A zeroed summary without a diff presents "unchecked" as "unchanged"."""

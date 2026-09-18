@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "patch": "26.18",
   "source": "CommunityDragon snapshot diffs",
   "sourceKind": "cdragon-structured-diff-v1",

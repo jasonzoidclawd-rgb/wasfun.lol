@@ -207,9 +207,17 @@ export interface PatchSection {
 }
 
 /**
- * Whether a patch-adjacent structural diff was actually computed for a patch.
+ * Whether the transition INTO a patch was observed across every structural
+ * lane (champion, augment, item).
+ *
  * "unavailable" is NOT zero changes: it means nothing was measured, so no
  * count may be rendered. Absent (legacy payloads) is treated as unavailable.
+ *
+ * This is deliberately stricter than the rule that dates an individual change.
+ * A same-patch refresh (16.18.a -> 16.18.b) dates its own hotfix events but
+ * proves nothing about the patch boundary, so it can never flip a patch to
+ * "available" — see `comparison_crosses_patch_boundary` in
+ * scripts/generate_pool_rules.py.
  */
 export type PatchStructuredDiffState = "available" | "unavailable";
 
@@ -234,6 +242,14 @@ export interface PatchNote {
 }
 
 export interface PatchNotesData {
+  /**
+   * 3 — `structuredDiff` is required on every card and `summary` is present
+   * only when it is "available". `summary` was already optional in v2 and
+   * every reader already used optional access, so v3 breaks no consumer; the
+   * bump marks that an ABSENT summary now means "not measured" rather than
+   * "nothing to report". Enforced by scripts/verify_patch_publish.py.
+   */
+  schema_version?: number;
   patch: string;
   scraped_at?: string;
   status?: PatchSourceStatus;

@@ -6,7 +6,17 @@ from __future__ import annotations
 import json
 import unittest
 
-from patch_event_projection import build_patch_notes_projection, build_preview_projection
+from generate_pool_rules import (
+    comparison_crosses_patch_boundary,
+    comparison_is_patch_adjacent,
+)
+from patch_event_projection import (
+    _dated_events,
+    build_patch_notes_projection,
+    build_preview_projection,
+    patch_boundary_lanes,
+    whole_patch_diff_available,
+)
 
 
 ADJACENT = {
@@ -22,6 +32,34 @@ CROSS_GAP = {
     "target_branch": "latest",
     "target_version": "16.18.8159717+branch.releases-16-18.content.release",
 }
+# The real 26.18 boundary: the patch before it, compared against it.
+BOUNDARY_18 = {
+    "base_branch": "latest",
+    "base_version": "16.17.8100000+branch.releases-16-17.content.release",
+    "target_branch": "latest",
+    "target_version": "16.18.8159717+branch.releases-16-18.content.release",
+}
+# A routine refresh WITHIN 26.18. Proves a hotfix; proves nothing about the
+# transition into the patch.
+SAME_PATCH_18 = {
+    "base_branch": "latest",
+    "base_version": "16.18.8159717+branch.releases-16-18.content.release",
+    "target_branch": "latest",
+    "target_version": "16.18.8201044+branch.releases-16-18.content.release",
+}
+STRUCTURAL_LANES = ("augment", "champion", "item")
+
+
+def comparisons(
+    comparison: dict,
+    cycle: str = "26.13",
+    lanes: tuple[str, ...] = STRUCTURAL_LANES,
+) -> list[dict]:
+    """Archive comparison records, one per structural lane."""
+    return [
+        {"entity_type": lane, "source_patch_label": cycle, **comparison}
+        for lane in lanes
+    ]
 
 
 def event(**overrides: object) -> dict:
@@ -51,6 +89,7 @@ class PatchEventProjectionTests(unittest.TestCase):
         patch_events = {
             "current_open_cycle": "26.13",
             "observed_at": "2026-07-11T01:00:00Z",
+            "comparisons": comparisons(ADJACENT, "26.13"),
             "events": [event()],
         }
         metadata = {
@@ -97,6 +136,7 @@ class PatchEventProjectionTests(unittest.TestCase):
             {
                 "current_open_cycle": "26.13",
                 "observed_at": "2026-07-11T01:00:00Z",
+                "comparisons": comparisons(ADJACENT, "26.13"),
                 "events": [event(source_patch_label="26.12"), event(source_patch_label="26.13")],
             },
             {"patches": []},
@@ -109,6 +149,7 @@ class PatchEventProjectionTests(unittest.TestCase):
         projection = build_patch_notes_projection(
             {
                 "current_open_cycle": "26.13",
+                "comparisons": comparisons(ADJACENT, "26.13"),
                 "events": [event(
                     fields_changed=["description"],
                     before={"description": "<mainText>Old @Value@</mainText>"},
@@ -124,7 +165,11 @@ class PatchEventProjectionTests(unittest.TestCase):
     def test_live_projection_marks_a_source_reconciled_preview_as_landed(self):
         live = event()
         projection = build_patch_notes_projection(
-            {"current_open_cycle": "26.13", "events": [live]},
+            {
+                "current_open_cycle": "26.13",
+                "comparisons": comparisons(ADJACENT, "26.13"),
+                "events": [live],
+            },
             {"patches": []},
             pbe_archive={
                 "events": [
@@ -185,14 +230,12 @@ class PatchEventProjectionTests(unittest.TestCase):
         self.assertEqual(current["title"], "Patch 26.18 Notes")
 
     def test_adjacent_event_in_the_same_run_is_still_dated(self):
-        adjacent_18 = {**ADJACENT,
-                       "base_version": "16.17.8100000+branch.releases-16-17.content.release",
-                       "target_version": "16.18.8159717+branch.releases-16-18.content.release"}
         projection = build_patch_notes_projection(
             {
                 "current_open_cycle": "26.18",
+                "comparisons": comparisons(BOUNDARY_18, "26.18"),
                 "events": [
-                    event(slug="brand", source_patch_label="26.18", comparison=adjacent_18),
+                    event(slug="brand", source_patch_label="26.18", comparison=BOUNDARY_18),
                     event(slug="garen", source_patch_label="26.18", comparison=CROSS_GAP),
                 ],
             },
@@ -203,56 +246,11 @@ class PatchEventProjectionTests(unittest.TestCase):
         self.assertEqual(projection["patches"][0]["structuredDiff"], "available")
         self.assertEqual(projection["patches"][0]["summary"]["totalChanges"], 1)
 
-    def test_recorded_adjacent_comparison_makes_zero_changes_a_verified_zero(self):
-        """An adjacent comparison that finds nothing is a fact, not a blank.
-
-        Events alone cannot say this: zero events look identical whether the
-        comparison ran or never happened. The archive's `comparisons` record is
-        what separates "we checked, nothing changed" from "we never checked".
-        """
-        adjacent_18 = {
-            "base_version": "16.17.8100000+branch.releases-16-17.content.release",
-            "target_version": "16.18.8159717+branch.releases-16-18.content.release",
-        }
-        projection = build_patch_notes_projection(
-            {
-                "current_open_cycle": "26.18",
-                "comparisons": [
-                    {"entity_type": "augment", "source_patch_label": "26.18", **adjacent_18},
-                ],
-                "events": [],
-            },
-            {"patches": []},
-        )
-        current = projection["patches"][0]
-
-        self.assertEqual(current["structuredDiff"], "available")
-        self.assertEqual(current["summary"]["totalChanges"], 0)
-        self.assertEqual(current["sections"], [])
-
-    def test_recorded_cross_gap_comparison_is_not_evidence_of_zero(self):
-        projection = build_patch_notes_projection(
-            {
-                "current_open_cycle": "26.18",
-                "comparisons": [
-                    {"entity_type": "augment", "source_patch_label": "26.18", **CROSS_GAP},
-                ],
-                "events": [],
-            },
-            {"patches": []},
-        )
-        current = projection["patches"][0]
-
-        self.assertEqual(current["structuredDiff"], "unavailable")
-        self.assertNotIn("summary", current)
-
     def test_a_comparison_recorded_for_another_cycle_proves_nothing_here(self):
         projection = build_patch_notes_projection(
             {
                 "current_open_cycle": "26.18",
-                "comparisons": [
-                    {"entity_type": "augment", "source_patch_label": "26.13", **ADJACENT},
-                ],
+                "comparisons": comparisons(ADJACENT, "26.13"),
                 "events": [],
             },
             {"patches": []},
@@ -303,3 +301,342 @@ class PatchEventProjectionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class WholePatchBoundaryCoverageTests(unittest.TestCase):
+    """A patch is "measured" only if its own boundary was observed everywhere.
+
+    Two different questions are asked of a comparison, and collapsing them is
+    the defect these probes exist to keep out:
+
+      event-level dating (`comparison_is_patch_adjacent`)
+          "May this individual observation be attributed to the patch?"
+          A same-patch refresh qualifies: a hotfix inside 26.18 IS a 26.18
+          change, and it stays dateable and representable in the archive.
+
+      patch-level coverage (`whole_patch_diff_available`)
+          "Was the transition INTO this patch observed, across every
+          structural lane?" A same-patch refresh NEVER qualifies, because it
+          only sees what moved after the patch already landed.
+
+    Reading the first as the second is what would let a routine
+    16.18.a -> 16.18.b refresh convert the historical 16.13 -> 16.18 gap into
+    a published "verified: 0 changes in 26.18".
+    """
+
+    def project(self, patch_events: dict) -> dict:
+        return build_patch_notes_projection(
+            {"current_open_cycle": "26.18", "observed_at": "2026-09-17T23:58:16Z",
+             "status": "fresh", **patch_events},
+            {"patches": [{"version": "26.18", "articleTitle": "Patch 26.18 Notes"}]},
+        )["patches"][0]
+
+    def assertUnavailable(self, card: dict, why: str) -> None:
+        self.assertEqual(card["structuredDiff"], "unavailable", why)
+        self.assertNotIn("summary", card, why)
+        self.assertEqual(card["sections"], [], why)
+
+    # ── Probe 1 ──────────────────────────────────────────────────────────────
+    def test_historical_gap_then_same_patch_refresh_stays_unavailable(self):
+        """THE BLOCKER. 16.13 -> 16.18, later 16.18.a -> 16.18.b.
+
+        The refresh is adjacent and its events are dateable, but it observed
+        only the inside of 26.18. The five patches of accumulated change hidden
+        by the gap are still unaccounted for, so the patch stays unknown.
+        """
+        card = self.project({
+            "comparisons": [
+                *comparisons(CROSS_GAP, "26.18"),
+                *comparisons(SAME_PATCH_18, "26.18"),
+            ],
+            "events": [
+                event(slug="brand", source_patch_label="26.18", comparison=CROSS_GAP),
+                event(slug="garen", canonical_id="86", source_patch_label="26.18",
+                      comparison=SAME_PATCH_18, is_hotfix=True),
+            ],
+        })
+
+        self.assertUnavailable(card, "a same-patch refresh cannot close a patch gap")
+
+    def test_same_patch_refresh_alone_never_establishes_coverage(self):
+        card = self.project({
+            "comparisons": comparisons(SAME_PATCH_18, "26.18"),
+            "events": [],
+        })
+
+        self.assertUnavailable(card, "an in-patch refresh proves no boundary")
+
+    # ── Probe 2 ──────────────────────────────────────────────────────────────
+    def test_complete_real_boundary_is_available(self):
+        card = self.project({
+            "comparisons": comparisons(BOUNDARY_18, "26.18"),
+            "events": [event(slug="brand", source_patch_label="26.18",
+                             comparison=BOUNDARY_18)],
+        })
+
+        self.assertEqual(card["structuredDiff"], "available")
+        self.assertEqual(card["summary"]["totalChanges"], 1)
+
+    # ── Probe 3 ──────────────────────────────────────────────────────────────
+    def test_partial_boundary_is_unavailable(self):
+        for missing in STRUCTURAL_LANES:
+            present = tuple(lane for lane in STRUCTURAL_LANES if lane != missing)
+            card = self.project({
+                "comparisons": comparisons(BOUNDARY_18, "26.18", present),
+                "events": [],
+            })
+
+            self.assertUnavailable(card, f"missing the {missing} lane")
+
+    def test_a_single_lane_never_establishes_coverage(self):
+        for lane in STRUCTURAL_LANES:
+            card = self.project({
+                "comparisons": comparisons(BOUNDARY_18, "26.18", (lane,)),
+                "events": [],
+            })
+
+            self.assertUnavailable(card, f"{lane} alone")
+
+    # ── Probe 4 ──────────────────────────────────────────────────────────────
+    def test_cross_gap_on_every_lane_is_still_unavailable(self):
+        card = self.project({
+            "comparisons": comparisons(CROSS_GAP, "26.18"),
+            "events": [],
+        })
+
+        self.assertUnavailable(card, "three gapped lanes are still a gap")
+
+    # ── Probe 5 ──────────────────────────────────────────────────────────────
+    def test_complete_boundary_then_same_patch_refresh_stays_available(self):
+        """Coverage is monotonic: a later refresh must not REVOKE it either."""
+        card = self.project({
+            "comparisons": [
+                *comparisons(BOUNDARY_18, "26.18"),
+                *comparisons(SAME_PATCH_18, "26.18"),
+            ],
+            "events": [
+                event(slug="brand", source_patch_label="26.18", comparison=BOUNDARY_18),
+                event(slug="garen", canonical_id="86", source_patch_label="26.18",
+                      comparison=SAME_PATCH_18, is_hotfix=True),
+            ],
+        })
+
+        self.assertEqual(card["structuredDiff"], "available")
+        # The in-patch hotfix is a real 26.18 change and is counted alongside
+        # the boundary change: event-level dating is untouched.
+        self.assertEqual(card["summary"]["totalChanges"], 2)
+
+    # ── Probe 6 ──────────────────────────────────────────────────────────────
+    def test_complete_boundary_with_zero_events_is_a_verified_zero(self):
+        card = self.project({
+            "comparisons": comparisons(BOUNDARY_18, "26.18"),
+            "events": [],
+        })
+
+        self.assertEqual(card["structuredDiff"], "available")
+        self.assertEqual(card["summary"]["totalChanges"], 0)
+        self.assertEqual(card["sections"], [])
+
+    # ── Probe 7 ──────────────────────────────────────────────────────────────
+    def test_no_valid_boundary_with_zero_events_is_unknown(self):
+        self.assertUnavailable(self.project({"events": []}), "no evidence at all")
+        self.assertUnavailable(
+            self.project({"comparisons": [], "events": []}), "an empty record",
+        )
+
+    # ── Probe 8 ──────────────────────────────────────────────────────────────
+    def test_same_patch_hotfix_stays_dateable_while_the_patch_stays_unknown(self):
+        """The two questions, asked of the same event, give different answers."""
+        hotfix = event(slug="brand", source_patch_label="26.18",
+                       comparison=SAME_PATCH_18, is_hotfix=True)
+
+        # Event level: this observation belongs to 26.18 and may be dated.
+        self.assertTrue(comparison_is_patch_adjacent(hotfix["comparison"]))
+        # Patch level: it says nothing about the transition into 26.18.
+        self.assertFalse(comparison_crosses_patch_boundary(hotfix["comparison"]))
+
+        patch_events = {
+            "current_open_cycle": "26.18",
+            "comparisons": comparisons(SAME_PATCH_18, "26.18"),
+            "events": [hotfix],
+        }
+        # The event is still attributable to 26.18 by the unchanged rule...
+        self.assertEqual(
+            [e["slug"] for e in _dated_events(patch_events, "26.18", set())], ["brand"],
+        )
+        # ...and the archive still holds it, unmodified, for any surface that
+        # wants "observations made" rather than "what this patch changed".
+        self.assertEqual(patch_events["events"], [hotfix])
+        # ...but the whole patch remains unknown, so the card counts nothing.
+        self.assertEqual(patch_boundary_lanes(patch_events, "26.18"), set())
+        self.assertUnavailable(self.project(patch_events), "hotfix is not coverage")
+
+    # ── Predicate-level proofs ───────────────────────────────────────────────
+    def test_boundary_crossing_is_strictly_narrower_than_adjacency(self):
+        pairs = [ADJACENT, CROSS_GAP, BOUNDARY_18, SAME_PATCH_18, None, {}, "nonsense"]
+        for comparison in pairs:
+            if comparison_crosses_patch_boundary(comparison):
+                self.assertTrue(
+                    comparison_is_patch_adjacent(comparison),
+                    f"boundary admitted a pair adjacency rejects: {comparison}",
+                )
+
+    def test_boundary_crossing_rejects_every_same_patch_pair(self):
+        for build in ("8159717", "8201044", "9999999"):
+            same = {**SAME_PATCH_18,
+                    "target_version": f"16.18.{build}+branch.releases-16-18.content.release"}
+            self.assertTrue(comparison_is_patch_adjacent(same), build)
+            self.assertFalse(comparison_crosses_patch_boundary(same), build)
+
+    def test_boundary_crossing_accepts_only_the_immediately_previous_patch(self):
+        def pair(base: str, target: str) -> dict:
+            return {"base_version": f"{base}.1+x", "target_version": f"{target}.2+x"}
+
+        self.assertTrue(comparison_crosses_patch_boundary(pair("16.17", "16.18")))
+        self.assertFalse(comparison_crosses_patch_boundary(pair("16.16", "16.18")))
+        self.assertFalse(comparison_crosses_patch_boundary(pair("16.18", "16.18")))
+        # A backwards pair is not a boundary crossing either.
+        self.assertFalse(comparison_crosses_patch_boundary(pair("16.18", "16.17")))
+
+
+class HistoricalPatchEvidenceTests(unittest.TestCase):
+    """History is judged on evidence, not on position in the list.
+
+    A patch does not become unmeasured by scrolling off the top: the archive
+    keeps every comparison and event under its own patch label, so the same
+    boundary rule applies to a historical card as to the current one.
+    """
+
+    BOUNDARY_17 = {
+        "base_branch": "latest",
+        "base_version": "16.16.8050000+branch.releases-16-16.content.release",
+        "target_branch": "latest",
+        "target_version": "16.17.8100000+branch.releases-16-17.content.release",
+    }
+
+    def project(self, patch_events: dict, versions: tuple[str, ...]) -> dict:
+        projection = build_patch_notes_projection(
+            {"observed_at": "2026-09-17T23:58:16Z", "status": "fresh", **patch_events},
+            {"patches": [
+                {"version": version, "articleTitle": f"Patch {version} Notes"}
+                for version in versions
+            ]},
+        )
+        return {card["version"]: card for card in projection["patches"]}
+
+    def test_prose_only_history_stays_unavailable(self):
+        cards = self.project(
+            {"current_open_cycle": "26.18",
+             "comparisons": comparisons(BOUNDARY_18, "26.18"),
+             "events": []},
+            ("26.18", "26.17", "26.16"),
+        )
+
+        self.assertEqual(cards["26.18"]["structuredDiff"], "available")
+        for version in ("26.17", "26.16"):
+            self.assertEqual(cards[version]["structuredDiff"], "unavailable", version)
+            self.assertNotIn("summary", cards[version])
+            self.assertEqual(cards[version]["sections"], [])
+
+    def test_history_with_complete_archived_boundary_stays_measured(self):
+        cards = self.project(
+            {
+                "current_open_cycle": "26.18",
+                "comparisons": [
+                    *comparisons(BOUNDARY_18, "26.18"),
+                    *comparisons(self.BOUNDARY_17, "26.17"),
+                ],
+                "events": [
+                    event(slug="brand", source_patch_label="26.18", comparison=BOUNDARY_18),
+                    event(slug="garen", canonical_id="86", source_patch_label="26.17",
+                          comparison=self.BOUNDARY_17),
+                    event(slug="teemo", canonical_id="17", source_patch_label="26.17",
+                          comparison=self.BOUNDARY_17, change_kind="added"),
+                ],
+            },
+            ("26.18", "26.17"),
+        )
+
+        self.assertEqual(cards["26.17"]["structuredDiff"], "available")
+        # Reconstructed ONLY from events dated to 26.17 — 26.18's change is not
+        # borrowed, and 26.17's are not lent forward.
+        self.assertEqual(cards["26.17"]["summary"]["totalChanges"], 2)
+        self.assertEqual(cards["26.18"]["summary"]["totalChanges"], 1)
+        slugs = [
+            change["targets"][0]["slug"]
+            for section in cards["26.17"]["sections"]
+            for change in section["changes"]
+        ]
+        self.assertEqual(sorted(slugs), ["garen", "teemo"])
+
+    def test_history_with_gapped_evidence_stays_unavailable(self):
+        cards = self.project(
+            {
+                "current_open_cycle": "26.18",
+                "comparisons": [
+                    *comparisons(BOUNDARY_18, "26.18"),
+                    *comparisons(CROSS_GAP, "26.17"),
+                ],
+                "events": [event(slug="brand", source_patch_label="26.17",
+                                 comparison=CROSS_GAP)],
+            },
+            ("26.18", "26.17"),
+        )
+
+        self.assertEqual(cards["26.17"]["structuredDiff"], "unavailable")
+        self.assertNotIn("summary", cards["26.17"])
+
+    def test_history_with_partial_lane_evidence_stays_unavailable(self):
+        cards = self.project(
+            {
+                "current_open_cycle": "26.18",
+                "comparisons": [
+                    *comparisons(BOUNDARY_18, "26.18"),
+                    *comparisons(self.BOUNDARY_17, "26.17", ("champion", "augment")),
+                ],
+                "events": [],
+            },
+            ("26.18", "26.17"),
+        )
+
+        self.assertEqual(cards["26.17"]["structuredDiff"], "unavailable")
+
+    def test_a_measured_patch_stays_measured_across_rollover(self):
+        """The same archive, before and after 26.19 opens."""
+        archive = {
+            "comparisons": comparisons(BOUNDARY_18, "26.18"),
+            "events": [
+                event(slug="brand", source_patch_label="26.18", comparison=BOUNDARY_18),
+                event(slug="garen", canonical_id="86", source_patch_label="26.18",
+                      comparison=BOUNDARY_18, change_kind="added"),
+            ],
+        }
+
+        before = self.project(
+            {"current_open_cycle": "26.18", **archive}, ("26.18",),
+        )["26.18"]
+
+        # 26.19 opens. Nothing about 26.18's evidence changed; a 26.19 refresh
+        # is appended and 26.18 becomes a history card.
+        rolled = {
+            "comparisons": [
+                *archive["comparisons"],
+                *comparisons(SAME_PATCH_18, "26.19"),
+            ],
+            "events": archive["events"],
+        }
+        after = self.project(
+            {"current_open_cycle": "26.19", **rolled}, ("26.19", "26.18"),
+        )
+
+        self.assertEqual(before["structuredDiff"], "available")
+        self.assertEqual(after["26.18"]["structuredDiff"], "available")
+        self.assertEqual(
+            after["26.18"]["summary"], before["summary"],
+            "a measured patch must keep its verified count after rollover",
+        )
+        self.assertEqual(after["26.18"]["sections"], before["sections"])
+        # ...and the newly-open patch, which only has an in-patch refresh,
+        # is correctly unknown rather than a verified zero.
+        self.assertEqual(after["26.19"]["structuredDiff"], "unavailable")
+        self.assertNotIn("summary", after["26.19"])
