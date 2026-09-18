@@ -1,6 +1,6 @@
 {
   "patch": "26.18",
-  "scraped_at": "2026-09-18T13:59:36.854478+00:00",
+  "scraped_at": "2026-09-18T23:46:30.600228+00:00",
   "schemaVersion": "augment-truth-step5",
   "sources": {
     "definition": "data/internal/augment-base-catalog.json",
@@ -1989,7 +1989,7 @@
       "name_zh_TW": "瘋狂科學家",
       "name_ja": "狂気の化学者",
       "name_ko": "미친 과학자",
-      "wikiDescription": "Upon acquiring this augment and each time you respawn, gain either 30% adaptive force, 20% bonus health, and 40% increased size or 70 ability haste, 40% bonus movement speed, and 40% reduced size.",
+      "wikiDescription": "Upon acquiring this augment and each time you respawn, gain either 30% adaptive force, 20% bonus health, and 40% increased size or 70 ability haste, 40% bonus movement speed, and 40% reduced size. The 30% adaptive force gained will always grant 30% ability power and 24% bonus attack damage.(unexpected)",
       "wikiRarity": "prismatic",
       "description_zh_TW": "每次復活時，體型變大(增加適性之力及生命)或變小(增加技能加速及跑速)。",
       "description_zh_CN": "每次重生时，你的体型要么变大(获得适应之力和生命值)，要么变小(获得技能急速和移动速度)。",

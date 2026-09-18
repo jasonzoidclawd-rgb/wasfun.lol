@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-18T14:00:58.214243+00:00",
+  "scraped_at": "2026-09-18T23:47:41.687976+00:00",
   "mayhemExclusive": [
     {
       "slug": "atmas-reckoning",
@@ -1556,7 +1556,9 @@
           "text": "Gain a stack for each second in combat with enemy champions, stacking up to 5 times. At maximum stacks, increase your bonus armor and bonus magic resistance by 30% until the end of combat."
         }
       ],
-      "wikiNotes": [],
+      "wikiNotes": [
+        "Voidborn Resilience stacks additively with Ornn's Living Forge and multiplicatively with Mountainous Vigor."
+      ],
       "recipe": [
         "Giant's Belt",
         "Chain Vest",

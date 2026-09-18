@@ -3,9 +3,9 @@
   "entity_type": "champion",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.19.8192364+branch.releases-16-19.content.release",
-  "source_patch_label": "pbe-cycle-16.19.8192364+branch.releases-16-19.content.release",
-  "observed_at": "2026-09-18T20:14:15.497445Z",
+  "source_version": "16.19.8198988+branch.releases-16-19.content.release",
+  "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+  "observed_at": "2026-09-18T23:57:07.283936Z",
   "source_url": "",
   "entities": [
     {
@@ -32931,7 +32931,7 @@
           "armor": 28.0,
           "armorPerLevel": 4.199999809265137,
           "attackDamage": 60.0,
-          "attackDamagePerLevel": 2.9000000953674316,
+          "attackDamagePerLevel": 2.5,
           "attackRange": 500.0,
           "attackSpeed": 0.6380000114440918,
           "attackSpeedPerLevel": 2.5,
