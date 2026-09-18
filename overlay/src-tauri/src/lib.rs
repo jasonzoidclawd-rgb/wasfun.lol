@@ -515,24 +515,14 @@ fn set_dock_visible(visible: bool) {
     }
 }
 
-/// Toggle mouse event pass-through on the overlay window
+/// Toggle mouse event pass-through on the overlay window.
+/// Uses the Tauri cross-platform API so Windows gets real click-through,
+/// not a silent no-op as the former macOS-only objc block produced.
 #[tauri::command]
 fn set_click_through(app: tauri::AppHandle, ignore: bool) {
-    #[cfg(target_os = "macos")]
-    {
-        use tauri::Manager;
-        if let Some(window) = app.get_webview_window("overlay") {
-            let ns_win_ptr = window.ns_window().unwrap();
-            unsafe {
-                use cocoa::appkit::NSWindow;
-                let ns_win = ns_win_ptr as cocoa::base::id;
-                ns_win.setIgnoresMouseEvents_(if ignore {
-                    cocoa::base::YES
-                } else {
-                    cocoa::base::NO
-                });
-            }
-        }
+    use tauri::Manager;
+    if let Some(window) = app.get_webview_window("overlay") {
+        let _ = window.set_ignore_cursor_events(ignore);
     }
 }
 
@@ -561,7 +551,14 @@ fn is_league_foreground() -> bool {
     }
     #[cfg(not(target_os = "macos"))]
     {
-        true
+        // Without Win32 GetForegroundWindow, approximate with process presence.
+        // sysinfo is already linked for ocr::detect_game_locale; no new dep needed.
+        use sysinfo::System;
+        let sys = System::new_all();
+        sys.processes().values().any(|p| {
+            let name = p.name().to_string_lossy().to_lowercase().replace(' ', "");
+            name.contains("leagueoflegends")
+        })
     }
 }
 
@@ -639,6 +636,16 @@ pub fn run() {
                 tray_builder.build(app)?;
             }
 
+            // Cross-platform: overlay must ignore mouse events at startup so the
+            // game remains clickable. The set_click_through command toggles this
+            // later when the coach panel opens/closes.
+            {
+                use tauri::Manager;
+                if let Some(window) = app.get_webview_window("overlay") {
+                    let _ = window.set_ignore_cursor_events(true);
+                }
+            }
+
             #[cfg(target_os = "macos")]
             {
                 use tauri::Manager;
@@ -673,7 +680,7 @@ pub fn run() {
                             | NSWindowCollectionBehavior::NSWindowCollectionBehaviorFullScreenAuxiliary
                             | NSWindowCollectionBehavior::NSWindowCollectionBehaviorIgnoresCycle,
                     );
-                    ns_win.setIgnoresMouseEvents_(cocoa::base::YES);
+                    // setIgnoresMouseEvents_ is now set via the cross-platform call above.
                     ns_win.setHidesOnDeactivate_(cocoa::base::NO);
                 }
 
