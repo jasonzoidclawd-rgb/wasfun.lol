@@ -24,6 +24,10 @@ from cdragon_snapshot_diff import (
     compare_snapshots,
     snapshot_filename,
 )
+from generate_pool_rules import (
+    comparison_crosses_patch_boundary,
+    comparison_is_patch_adjacent,
+)
 
 
 def entity(entity_id: str, slug: str, **fields: object) -> dict:
@@ -174,11 +178,6 @@ class CDragonPatchPipelineTests(unittest.TestCase):
         comparison and dates its own hotfix events, but `patch_boundary_lanes`
         must be able to see that it never crossed a patch boundary.
         """
-        from generate_pool_rules import (
-            comparison_crosses_patch_boundary,
-            comparison_is_patch_adjacent,
-        )
-
         previous = {kind: snapshot(kind, "latest", "16.18.1", rows) for kind, rows in entities(0).items()}
         update = build_branch_update(
             branch="latest",

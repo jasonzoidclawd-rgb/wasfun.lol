@@ -141,11 +141,10 @@ def verify_patch_publish(
     if source_kind != "cdragon-structured-diff-v1":
         raise PatchPublishError("public patch-notes must be projected from CDragon structured diffs")
 
-    # v3 makes `structuredDiff` required and the ABSENCE of `summary` load-
-    # bearing. `summary` was already optional in v2 and every reader already
-    # used optional access, so this breaks no consumer — the bump exists so a
-    # downstream reader can detect that an omitted summary now means "not
-    # measured" rather than "nothing to report".
+    # v3 was chosen because the semantic contract changed: `structuredDiff` is
+    # required, and an absent `summary` means "not measured" rather than
+    # "nothing to report". Existing v2 readers already tolerated an optional
+    # summary, which makes the bump cheap — not unnecessary.
     if data.get("schema_version") != PATCH_NOTES_SCHEMA_VERSION:
         raise PatchPublishError(
             f"public patch-notes schema_version must be {PATCH_NOTES_SCHEMA_VERSION}, "

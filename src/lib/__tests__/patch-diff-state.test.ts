@@ -113,14 +113,17 @@ describe("patch diff state: unknown is not zero", () => {
 
 describe("patch diff state: published wire contract", () => {
   test("the payload declares schema v3", () => {
+    // v3 is a deliberate choice, not a side effect: `structuredDiff` became
+    // required and an absent `summary` acquired meaning, so consumers get a
+    // marker for the semantic change.
     expect(readPublicPatchNotes().schema_version).toBe(3);
   });
 
-  test("v2 already made summary optional, so v3 breaks no reader", () => {
-    // The bump marks a semantic change (an absent summary is now load-bearing),
-    // not a structural one. Proof that every consumer already tolerated
-    // absence: the type has always had `summary?`, and the only readers of it
-    // outside the renderer use optional access.
+  test("v2 compatibility evidence: the bump costs no migration", () => {
+    // Separate from the reason for the bump. Every consumer already tolerated
+    // an absent summary — the type has always had `summary?`, and the only
+    // readers outside the renderer use optional access — so v3 is cheap to
+    // adopt. Cheapness is not itself the justification.
     const types = readFileSync(
       path.join(process.cwd(), "src/lib/types.ts"),
       "utf8",

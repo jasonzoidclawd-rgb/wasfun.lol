@@ -281,6 +281,40 @@ def comparison_crosses_patch_boundary(comparison: object) -> bool:
     return base != target
 
 
+def comparison_crosses_cycle_boundary(comparison: object, cycle: object) -> bool:
+    """True when the diff crosses the boundary INTO `cycle` specifically.
+
+    `comparison_crosses_patch_boundary` proves a diff crossed SOME patch
+    boundary; it cannot say which patch it arrived at. That gap matters because
+    a record's label and its versions come from different systems: the label is
+    Riot's patch-notes feed (`_latest_patch_label` reads patch-metadata.json)
+    while the versions come from the CDragon lineage. When the two feeds are out
+    of step — Riot publishing the next article before CDragon ships the build —
+    a perfectly valid 16.16 -> 16.17 comparison can be stamped "26.18", and it
+    would otherwise contribute a lane to a patch it never observed.
+
+    A game patch and its CDragon lineage share the patch number WITHIN the
+    season (26.18 <-> 16.18.x, verified across the live archive, snapshots and
+    Riot metadata), which is the whole correspondence needed here. The season
+    majors (26 vs 16) are deliberately NOT compared: their difference is a
+    numbering offset that a season rollover can change, and pinning it would be
+    exactly the hardcoded patch number AGENTS.md forbids. Season-rollover
+    adjacency therefore keeps working unchanged — 16.24 -> 17.0 labelled "27.0"
+    still matches on 0.
+
+    Fails closed on an unparseable cycle ("unknown", "", a PBE cycle tag) and on
+    an unparseable version, so malformed archive evidence can never widen
+    coverage.
+    """
+    if not comparison_crosses_patch_boundary(comparison):
+        return False
+    target = _source_version_key(comparison["target_version"])  # type: ignore[index]
+    claimed = _source_version_key(cycle)
+    if target is None or claimed is None:
+        return False
+    return target[1] == claimed[1]
+
+
 def lifecycle_from_events(events: list[dict]) -> dict:
     """Only CDragon additions/removals may alter augment lifecycle state.
 

@@ -9,7 +9,7 @@ import re
 from typing import Any
 
 from generate_pool_rules import (
-    comparison_crosses_patch_boundary,
+    comparison_crosses_cycle_boundary,
     comparison_is_patch_adjacent,
 )
 
@@ -161,9 +161,11 @@ def _summary(events: list[dict[str, Any]]) -> dict[str, Any]:
 def patch_boundary_lanes(patch_events: dict[str, Any], cycle: str) -> set[str]:
     """Structural lanes whose transition INTO `cycle` was actually observed.
 
-    Only a boundary-crossing comparison counts — see
-    `comparison_crosses_patch_boundary`. A same-patch refresh and a cross-gap
-    diff both contribute nothing here, however recent or however many.
+    Only a comparison that crosses the boundary into THIS cycle counts — see
+    `comparison_crosses_cycle_boundary`. Three things contribute nothing here,
+    however recent or however many: a same-patch refresh, a cross-gap diff, and
+    a valid adjacent boundary whose label disagrees with its versions (a
+    16.16 -> 16.17 diff stamped "26.18" observed 26.17, not 26.18).
 
     Two sources of evidence, unioned, both per-lane:
 
@@ -181,14 +183,14 @@ def patch_boundary_lanes(patch_events: dict[str, Any], cycle: str) -> set[str]:
             continue
         if str(record.get("source_patch_label") or "") != cycle:
             continue
-        if comparison_crosses_patch_boundary(record):
+        if comparison_crosses_cycle_boundary(record, cycle):
             lanes.add(str(record.get("entity_type") or ""))
     for event in patch_events.get("events", []):
         if not isinstance(event, dict):
             continue
         if str(event.get("source_patch_label") or "") != cycle:
             continue
-        if comparison_crosses_patch_boundary(event.get("comparison")):
+        if comparison_crosses_cycle_boundary(event.get("comparison"), cycle):
             lanes.add(str(event.get("entity_type") or ""))
     return lanes
 
@@ -359,12 +361,17 @@ def build_patch_notes_projection(
         if entry.get("version") != current_cycle
     ]
     return {
-        # v3: `structuredDiff` is required on every card, and `summary` is
-        # present only when it is "available". `summary` was already optional in
-        # v2 (see `PatchNote` in src/lib/types.ts and the `summary?.byKind ?? {}`
-        # reads in src/lib/patch-notes/seo.ts), so no consumer breaks — but its
-        # ABSENCE is now load-bearing rather than merely tolerated, and that is
-        # worth a detectable marker.
+        # DECISION: v3, because the SEMANTIC contract changed. `structuredDiff`
+        # is now required on every card, and an absent `summary` means "not
+        # measured" rather than "nothing to report" — a difference a downstream
+        # reader must be able to detect, and cannot infer from the payload
+        # alone.
+        #
+        # Compatibility evidence, separately: `summary` was already optional in
+        # v2 (`PatchNote.summary?` in src/lib/types.ts, and the
+        # `summary?.byKind ?? {}` reads in src/lib/patch-notes/seo.ts), so the
+        # bump costs no migration. That lowers the risk of the marker; it is not
+        # a reason to skip it.
         "schema_version": 3,
         "patch": current_cycle,
         "source": "CommunityDragon snapshot diffs",

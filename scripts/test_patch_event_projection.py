@@ -7,6 +7,7 @@ import json
 import unittest
 
 from generate_pool_rules import (
+    comparison_crosses_cycle_boundary,
     comparison_crosses_patch_boundary,
     comparison_is_patch_adjacent,
 )
@@ -299,9 +300,6 @@ class PatchEventProjectionTests(unittest.TestCase):
         self.assertNotIn("comparison", json.dumps(projection))
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class WholePatchBoundaryCoverageTests(unittest.TestCase):
     """A patch is "measured" only if its own boundary was observed everywhere.
@@ -488,6 +486,136 @@ class WholePatchBoundaryCoverageTests(unittest.TestCase):
             self.assertTrue(comparison_is_patch_adjacent(same), build)
             self.assertFalse(comparison_crosses_patch_boundary(same), build)
 
+    # ── Label/version agreement (TASK 3 matrix A-I) ──────────────────────────
+    def test_cycle_boundary_matrix(self):
+        """A comparison must cross the boundary into the patch it CLAIMS.
+
+        The label and the versions come from different feeds — the label from
+        Riot's patch-notes metadata, the versions from the CDragon lineage — so
+        they can disagree. A valid 16.16 -> 16.17 boundary stamped "26.18" is
+        real evidence about 26.17 and none at all about 26.18.
+        """
+        def pair(base: str, target: str) -> dict:
+            return {
+                "base_branch": "latest",
+                "base_version": f"{base}.8000000+branch.releases.content.release",
+                "target_branch": "latest",
+                "target_version": f"{target}.8100000+branch.releases.content.release",
+            }
+
+        cases = [
+            # (id, cycle, comparison, qualifies)
+            ("A  real boundary into the claimed patch", "26.18", pair("16.17", "16.18"), True),
+            ("B  same-patch refresh", "26.18", pair("16.18", "16.18"), False),
+            ("C  cross-gap", "26.18", pair("16.13", "16.18"), False),
+            ("D  adjacent boundary, WRONG target patch", "26.18", pair("16.16", "16.17"), False),
+            ("E  that same diff, for its own patch", "26.17", pair("16.16", "16.17"), True),
+            ("F  cycle missing", None, pair("16.17", "16.18"), False),
+            ("F  cycle empty", "", pair("16.17", "16.18"), False),
+            ("F  cycle unparseable", "unknown", pair("16.17", "16.18"), False),
+            ("F  cycle is a PBE tag", "pbe-cycle-16.18.1", pair("16.17", "16.18"), False),
+            ("G  target version malformed", "26.18", pair("16.17", "not-a-version"), False),
+            ("G  base version malformed", "26.18", pair("nope", "16.18"), False),
+            ("G  comparison is not a dict", "26.18", "16.17 -> 16.18", False),
+            ("G  comparison missing", "26.18", None, False),
+            # Backwards pairs are rejected by adjacency itself, so they never
+            # reach the label check — a lane cannot regress into coverage.
+            ("   backwards comparison", "26.17", pair("16.18", "16.17"), False),
+            ("   backwards across a gap", "26.13", pair("16.18", "16.13"), False),
+            ("   season rollover keeps working", "27.0", pair("16.24", "17.0"), True),
+            ("   rollover claimed for the wrong patch", "27.1", pair("16.24", "17.0"), False),
+        ]
+        for label, cycle, comparison, expected in cases:
+            self.assertEqual(
+                comparison_crosses_cycle_boundary(comparison, cycle), expected, label,
+            )
+
+    def test_the_label_fallback_path_still_qualifies(self):
+        """`_latest_patch_label` falls back to the source version.
+
+        When Riot's patch-metadata.json is missing, the pipeline labels the
+        lane with the CDragon source version itself rather than a game patch
+        ("16.18.8159717+..." instead of "26.18"). The label then trivially
+        agrees with the versions, and coverage must still be provable — the
+        cycle check must not assume a game-patch-shaped label.
+        """
+        cycle = "16.18.8159717+branch.releases-16-18.content.release"
+        patch_events = {
+            "current_open_cycle": cycle,
+            "comparisons": comparisons(BOUNDARY_18, cycle),
+            "events": [],
+        }
+
+        self.assertEqual(
+            patch_boundary_lanes(patch_events, cycle), {"augment", "champion", "item"},
+        )
+        self.assertTrue(whole_patch_diff_available(patch_events, cycle))
+
+    def test_an_adjacent_boundary_for_the_wrong_patch_adds_no_lane(self):
+        """TASK 3 probe D, at the lane level rather than the predicate level."""
+        wrong_target = {
+            "base_branch": "latest",
+            "base_version": "16.16.8050000+branch.releases-16-16.content.release",
+            "target_branch": "latest",
+            "target_version": "16.17.8100000+branch.releases-16-17.content.release",
+        }
+        # Stamped 26.18 across ALL THREE lanes — the strongest malformed case.
+        patch_events = {
+            "current_open_cycle": "26.18",
+            "comparisons": comparisons(wrong_target, "26.18"),
+            "events": [event(slug="brand", source_patch_label="26.18",
+                             comparison=wrong_target)],
+        }
+
+        self.assertEqual(patch_boundary_lanes(patch_events, "26.18"), set())
+        self.assertFalse(whole_patch_diff_available(patch_events, "26.18"))
+        self.assertUnavailable(
+            self.project(patch_events), "a boundary into 26.17 is not 26.18 coverage",
+        )
+
+    def test_one_mislabelled_lane_disqualifies_the_whole_patch(self):
+        """TASK 3 probe I: two honest lanes plus one contradictory one."""
+        wrong_target = {
+            "base_branch": "latest",
+            "base_version": "16.16.8050000+branch.releases-16-16.content.release",
+            "target_branch": "latest",
+            "target_version": "16.17.8100000+branch.releases-16-17.content.release",
+        }
+        patch_events = {
+            "current_open_cycle": "26.18",
+            "comparisons": [
+                *comparisons(BOUNDARY_18, "26.18", ("champion", "augment")),
+                {"entity_type": "item", "source_patch_label": "26.18", **wrong_target},
+            ],
+            "events": [],
+        }
+
+        self.assertEqual(
+            patch_boundary_lanes(patch_events, "26.18"), {"champion", "augment"},
+        )
+        self.assertUnavailable(self.project(patch_events), "the item lane is unproven")
+
+    def test_a_malformed_record_cannot_widen_real_coverage(self):
+        """Garbage alongside good evidence must neither help nor corrupt it."""
+        good = comparisons(BOUNDARY_18, "26.18")
+        junk = [
+            None,
+            "not a record",
+            {"entity_type": "item", "source_patch_label": "26.18"},
+            {"entity_type": "item", "source_patch_label": "26.18",
+             "base_version": None, "target_version": None},
+        ]
+
+        only_junk = {"current_open_cycle": "26.18", "comparisons": junk, "events": []}
+        self.assertEqual(patch_boundary_lanes(only_junk, "26.18"), set())
+        self.assertUnavailable(self.project(only_junk), "junk is not evidence")
+
+        mixed = {"current_open_cycle": "26.18", "comparisons": [*good, *junk], "events": []}
+        self.assertEqual(
+            patch_boundary_lanes(mixed, "26.18"), {"augment", "champion", "item"},
+        )
+        self.assertEqual(self.project(mixed)["structuredDiff"], "available")
+
     def test_boundary_crossing_accepts_only_the_immediately_previous_patch(self):
         def pair(base: str, target: str) -> dict:
             return {"base_version": f"{base}.1+x", "target_version": f"{target}.2+x"}
@@ -640,3 +768,7 @@ class HistoricalPatchEvidenceTests(unittest.TestCase):
         # is correctly unknown rather than a verified zero.
         self.assertEqual(after["26.19"]["structuredDiff"], "unavailable")
         self.assertNotIn("summary", after["26.19"])
+
+
+if __name__ == "__main__":
+    unittest.main()

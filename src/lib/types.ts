@@ -243,11 +243,15 @@ export interface PatchNote {
 
 export interface PatchNotesData {
   /**
-   * 3 — `structuredDiff` is required on every card and `summary` is present
-   * only when it is "available". `summary` was already optional in v2 and
-   * every reader already used optional access, so v3 breaks no consumer; the
-   * bump marks that an ABSENT summary now means "not measured" rather than
-   * "nothing to report". Enforced by scripts/verify_patch_publish.py.
+   * 3 — chosen because the semantic contract changed: `structuredDiff` is
+   * required on every card, and an ABSENT `summary` means "not measured"
+   * rather than "nothing to report". Readers that must tell those apart need
+   * an explicit marker.
+   *
+   * v2 already declared `summary` optional and every reader already used
+   * optional access, so the bump carries no migration cost — that is why it is
+   * cheap, not a reason to have skipped it. Enforced by
+   * scripts/verify_patch_publish.py.
    */
   schema_version?: number;
   patch: string;
