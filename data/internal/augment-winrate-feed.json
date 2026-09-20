@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "identity_key": "CDragon augmentNameId",
   "source": "arammayhem",
-  "generated_at": "2026-09-20T13:50:03.087263+00:00",
+  "generated_at": "2026-09-20T23:44:25.286675+00:00",
   "counts": {
     "sourceRows": 201,
     "matchedAugmentIds": 118,
@@ -12,124 +12,124 @@
     "sourceRowsWithoutWinRate": 0
   },
   "win_rates": {
-    "ARAM_ADAPt": 55.95,
-    "ARAM_AllForYou": 50.57,
-    "ARAM_ApexInventor": 49.73,
-    "ARAM_Archmage": 53.14,
-    "ARAM_BacktoBasics": 58.06,
-    "ARAM_BigBrain": 52.6,
-    "ARAM_BladeWaltz": 50.02,
-    "ARAM_BluntForce": 58.53,
-    "ARAM_BreadAndButter": 52.81,
-    "ARAM_BreadAndCheese": 51.81,
-    "ARAM_BreadAndJam": 50.15,
-    "ARAM_CantTouchThis": 48.64,
-    "ARAM_CelestialBody": 54.17,
-    "ARAM_CircleofDeath": 52.6,
-    "ARAM_CourageoftheColossus": 50.03,
-    "ARAM_Cruelty": 50.49,
-    "ARAM_Dashing": 50.62,
-    "ARAM_DawnbringersResolve": 51.68,
-    "ARAM_Deft": 55.74,
-    "ARAM_DiveBomber": 52.58,
-    "ARAM_DivineIntervention": 48.99,
-    "ARAM_DontBlink": 52.41,
-    "ARAM_DrawYourSword": 61.19,
-    "ARAM_DropBear": 56.48,
-    "ARAM_Dropkick": 56.73,
-    "ARAM_DualWield": 56.92,
-    "ARAM_EmpoweredByTheFaithful": 49.54,
-    "ARAM_EndlessHunt": 51.55,
-    "ARAM_Erosion": 52.95,
-    "ARAM_EtherealWeapon": 57.48,
-    "ARAM_Eureka": 58.61,
-    "ARAM_FanTheHammer": 52.96,
-    "ARAM_FeyMagic": 49.12,
-    "ARAM_Firebrand": 50.77,
-    "ARAM_Firefox": 50.33,
-    "ARAM_FirstAidKit": 51.34,
-    "ARAM_Flashbang": 48.5,
-    "ARAM_FromBeginningToEnd": 57.08,
-    "ARAM_GetExcited": 52.72,
-    "ARAM_GiantSlayer": 56.87,
-    "ARAM_Goliath": 57.61,
-    "ARAM_Goredrink": 55.85,
-    "ARAM_HeavyHitter": 57.71,
-    "ARAM_Hellbent": 49.62,
-    "ARAM_HighRoller": 65.84,
-    "ARAM_Homeguard": 55.63,
-    "ARAM_IceCold": 52.79,
-    "ARAM_ImTheJuggernaut": 47.43,
-    "ARAM_Impassable": 48.06,
-    "ARAM_InfernalConduit": 57.05,
-    "ARAM_InfernalSoul": 50.22,
-    "ARAM_InfernoTriggered": 48.86,
-    "ARAM_ItsKillingTime": 50.0,
-    "ARAM_Juiced": 46.95,
-    "ARAM_LegDay": 53.32,
-    "ARAM_LightemUp": 50.89,
-    "ARAM_MadScientist": 57.82,
-    "ARAM_MagicMissile": 54.42,
-    "ARAM_Marksmage": 52.84,
-    "ARAM_MasterofDuality": 50.29,
-    "ARAM_MindtoMatter": 52.95,
-    "ARAM_Minionmancer": 49.92,
-    "ARAM_MountainSoul": 48.17,
-    "ARAM_Multishot": 46.04,
-    "ARAM_MysticPunch": 55.53,
-    "ARAM_OceanSoul": 53.35,
-    "ARAM_OkBoomerang": 51.09,
+    "ARAM_ADAPt": 56.04,
+    "ARAM_AllForYou": 50.58,
+    "ARAM_ApexInventor": 49.78,
+    "ARAM_Archmage": 52.63,
+    "ARAM_BacktoBasics": 57.36,
+    "ARAM_BigBrain": 52.69,
+    "ARAM_BladeWaltz": 49.96,
+    "ARAM_BluntForce": 58.55,
+    "ARAM_BreadAndButter": 52.63,
+    "ARAM_BreadAndCheese": 51.92,
+    "ARAM_BreadAndJam": 50.16,
+    "ARAM_CantTouchThis": 48.57,
+    "ARAM_CelestialBody": 54.49,
+    "ARAM_CircleofDeath": 52.81,
+    "ARAM_CourageoftheColossus": 49.98,
+    "ARAM_Cruelty": 50.37,
+    "ARAM_Dashing": 50.04,
+    "ARAM_DawnbringersResolve": 51.75,
+    "ARAM_Deft": 55.79,
+    "ARAM_DiveBomber": 52.65,
+    "ARAM_DivineIntervention": 49.16,
+    "ARAM_DontBlink": 52.53,
+    "ARAM_DrawYourSword": 60.63,
+    "ARAM_DropBear": 56.24,
+    "ARAM_Dropkick": 56.08,
+    "ARAM_DualWield": 56.55,
+    "ARAM_EmpoweredByTheFaithful": 49.45,
+    "ARAM_EndlessHunt": 51.57,
+    "ARAM_Erosion": 53.33,
+    "ARAM_EtherealWeapon": 57.66,
+    "ARAM_Eureka": 58.18,
+    "ARAM_FanTheHammer": 52.53,
+    "ARAM_FeyMagic": 49.04,
+    "ARAM_Firebrand": 50.83,
+    "ARAM_Firefox": 50.41,
+    "ARAM_FirstAidKit": 51.61,
+    "ARAM_Flashbang": 47.64,
+    "ARAM_FromBeginningToEnd": 57.45,
+    "ARAM_GetExcited": 52.64,
+    "ARAM_GiantSlayer": 56.35,
+    "ARAM_Goliath": 57.25,
+    "ARAM_Goredrink": 55.87,
+    "ARAM_HeavyHitter": 57.87,
+    "ARAM_Hellbent": 49.52,
+    "ARAM_HighRoller": 64.74,
+    "ARAM_Homeguard": 55.73,
+    "ARAM_IceCold": 52.94,
+    "ARAM_ImTheJuggernaut": 47.56,
+    "ARAM_Impassable": 48.1,
+    "ARAM_InfernalConduit": 56.79,
+    "ARAM_InfernalSoul": 50.2,
+    "ARAM_InfernoTriggered": 48.59,
+    "ARAM_ItsKillingTime": 50.11,
+    "ARAM_Juiced": 46.92,
+    "ARAM_LegDay": 53.35,
+    "ARAM_LightemUp": 50.68,
+    "ARAM_MadScientist": 57.63,
+    "ARAM_MagicMissile": 54.57,
+    "ARAM_Marksmage": 53.09,
+    "ARAM_MasterofDuality": 50.32,
+    "ARAM_MindtoMatter": 53.14,
+    "ARAM_Minionmancer": 50.29,
+    "ARAM_MountainSoul": 47.88,
+    "ARAM_Multishot": 45.95,
+    "ARAM_MysticPunch": 55.03,
+    "ARAM_OceanSoul": 53.5,
+    "ARAM_OkBoomerang": 51.07,
     "ARAM_OmniSoul": 53.01,
-    "ARAM_OutlawsGrit": 53.86,
+    "ARAM_OutlawsGrit": 53.7,
     "ARAM_Overflow": 51.99,
-    "ARAM_PandorasBox": 49.59,
-    "ARAM_PhenomenalEvil": 57.95,
-    "ARAM_ProteinShake": 50.16,
-    "ARAM_Purist_Caster": 54.0,
-    "ARAM_Quest_SteelYourHeart": 58.96,
-    "ARAM_Quest_UrfsChampion": 53.77,
-    "ARAM_Quest_WoogletsWitchcap": 54.87,
-    "ARAM_Quickstep": 47.84,
-    "ARAM_Recursion": 60.14,
-    "ARAM_ScopedWeapons": 51.32,
-    "ARAM_ScopierWeapons": 55.55,
-    "ARAM_ScopiestWeapons": 53.22,
-    "ARAM_SearingDawn": 48.97,
-    "ARAM_ShadowRunner": 55.3,
-    "ARAM_ShrinkRay": 48.23,
-    "ARAM_SkilledSniper": 52.73,
-    "ARAM_SlapAround": 51.95,
-    "ARAM_Snowday": 47.86,
-    "ARAM_SonicBoom": 51.37,
-    "ARAM_SpinToWin": 54.4,
-    "ARAM_SpiritBomb": 53.53,
-    "ARAM_SpiritualPurification": 48.39,
-    "ARAM_StackosaurusRex": 56.03,
-    "ARAM_Stats": 49.95,
-    "ARAM_StatsOnStats": 54.28,
-    "ARAM_StatsOnStatsOnStats": 51.63,
-    "ARAM_StuckInHereWithMe": 48.0,
-    "ARAM_SymphonyofWar": 51.05,
-    "ARAM_TankEngine": 59.53,
-    "ARAM_TapDancer": 52.58,
-    "ARAM_Terror": 47.02,
-    "ARAM_ThreadtheNeedle": 52.11,
-    "ARAM_TransmuteChaos": 54.6,
-    "ARAM_TransmutePrismatic": 64.88,
-    "ARAM_Typhoon": 51.03,
-    "ARAM_UltimateRevolution": 49.38,
-    "ARAM_UltimateUnstoppable": 48.53,
-    "ARAM_Upgrade_Collector": 53.96,
-    "ARAM_Upgrade_IE": 57.23,
-    "ARAM_Upgrade_Immolate": 54.05,
-    "ARAM_Upgrade_Sheen": 51.81,
-    "ARAM_Upgrade_ZH": 52.72,
-    "ARAM_WeeWooWeeWoo": 55.14,
-    "ARAM_WindspeakersBlessing": 53.81,
+    "ARAM_PandorasBox": 49.9,
+    "ARAM_PhenomenalEvil": 58.23,
+    "ARAM_ProteinShake": 50.17,
+    "ARAM_Purist_Caster": 53.96,
+    "ARAM_Quest_SteelYourHeart": 59.21,
+    "ARAM_Quest_UrfsChampion": 53.07,
+    "ARAM_Quest_WoogletsWitchcap": 54.7,
+    "ARAM_Quickstep": 47.74,
+    "ARAM_Recursion": 60.79,
+    "ARAM_ScopedWeapons": 51.27,
+    "ARAM_ScopierWeapons": 55.68,
+    "ARAM_ScopiestWeapons": 52.74,
+    "ARAM_SearingDawn": 49.16,
+    "ARAM_ShadowRunner": 55.29,
+    "ARAM_ShrinkRay": 48.3,
+    "ARAM_SkilledSniper": 53.0,
+    "ARAM_SlapAround": 52.03,
+    "ARAM_Snowday": 47.69,
+    "ARAM_SonicBoom": 51.53,
+    "ARAM_SpinToWin": 54.22,
+    "ARAM_SpiritBomb": 53.66,
+    "ARAM_SpiritualPurification": 48.35,
+    "ARAM_StackosaurusRex": 56.15,
+    "ARAM_Stats": 49.84,
+    "ARAM_StatsOnStats": 54.15,
+    "ARAM_StatsOnStatsOnStats": 51.28,
+    "ARAM_StuckInHereWithMe": 47.9,
+    "ARAM_SymphonyofWar": 51.06,
+    "ARAM_TankEngine": 59.84,
+    "ARAM_TapDancer": 52.39,
+    "ARAM_Terror": 46.84,
+    "ARAM_ThreadtheNeedle": 52.04,
+    "ARAM_TransmuteChaos": 54.11,
+    "ARAM_TransmutePrismatic": 65.51,
+    "ARAM_Typhoon": 51.04,
+    "ARAM_UltimateRevolution": 49.03,
+    "ARAM_UltimateUnstoppable": 48.51,
+    "ARAM_Upgrade_Collector": 53.93,
+    "ARAM_Upgrade_IE": 57.41,
+    "ARAM_Upgrade_Immolate": 54.38,
+    "ARAM_Upgrade_Sheen": 51.7,
+    "ARAM_Upgrade_ZH": 52.64,
+    "ARAM_WeeWooWeeWoo": 55.34,
+    "ARAM_WindspeakersBlessing": 54.03,
     "ARAM_WitchfulThinking": 52.76,
-    "ARAM_WithHaste": 53.22,
-    "ARAM_YowchMyCoins": 50.36,
-    "ARAM_escAPADe": 54.14
+    "ARAM_WithHaste": 52.9,
+    "ARAM_YowchMyCoins": 50.51,
+    "ARAM_escAPADe": 53.77
   },
   "missingAugmentIds": [
     "ARAM_BuffBuddies",
@@ -274,417 +274,417 @@
   "unmatched": [
     {
       "sourceKey": "shrink-engine",
-      "win_rate": 60.91,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "infinite-recursion",
-      "win_rate": 59.98,
+      "win_rate": 61.38,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "combusting-interest",
-      "win_rate": 59.27,
+      "win_rate": 59.72,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "warlock-juicebox",
-      "win_rate": 59.26,
+      "win_rate": 59.57,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "critical-missile",
-      "win_rate": 59.02,
+      "win_rate": 59.35,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
-      "sourceKey": "jeweled-gauntlet",
-      "win_rate": 58.56,
+      "sourceKey": "infinite-recursion",
+      "win_rate": 59.17,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "soul-siphon",
-      "win_rate": 58.48,
+      "win_rate": 58.7,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "tooth-fairy",
-      "win_rate": 57.96,
+      "win_rate": 58.41,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "vulnerability",
-      "win_rate": 57.49,
+      "win_rate": 57.75,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "jeweled-gauntlet",
+      "win_rate": 57.47,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "escape-plan",
-      "win_rate": 57.04,
+      "win_rate": 57.25,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "donation",
-      "win_rate": 56.2,
+      "win_rate": 56.26,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "clown-college",
-      "win_rate": 56.16,
+      "win_rate": 55.69,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "forged-by-the-master",
-      "win_rate": 55.32,
+      "win_rate": 55.34,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "tank-it-or-leave-it",
-      "win_rate": 55.11,
+      "win_rate": 55.12,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "zealot",
-      "win_rate": 54.96,
+      "win_rate": 55.08,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "void-immolation",
-      "win_rate": 54.87,
+      "win_rate": 54.98,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "twin-fire",
-      "win_rate": 54.43,
+      "win_rate": 54.47,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "critical-rhythm",
-      "win_rate": 54.2,
+      "win_rate": 54.32,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "hand-of-baron",
-      "win_rate": 54.09,
+      "win_rate": 54.17,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "sonata",
-      "win_rate": 53.99,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "final-form",
-      "win_rate": 53.48,
+      "win_rate": 54.0,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "from-downtown",
-      "win_rate": 53.44,
+      "win_rate": 53.54,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "final-form",
+      "win_rate": 53.36,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "swift-and-safe",
-      "win_rate": 53.4,
+      "win_rate": 53.3,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "stay-resolute",
-      "win_rate": 52.94,
+      "win_rate": 53.28,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "endless-decimation",
-      "win_rate": 52.78,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "biggest-snowball-ever",
-      "win_rate": 52.45,
+      "win_rate": 53.0,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "dont-change-the-channel",
-      "win_rate": 52.41,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "king-me",
-      "win_rate": 52.22,
+      "win_rate": 52.6,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "pursuit-of-haste",
-      "win_rate": 52.18,
+      "win_rate": 52.44,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "growth-spurt",
-      "win_rate": 52.16,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "bonk",
-      "win_rate": 52.16,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "its-critical",
-      "win_rate": 52.04,
+      "win_rate": 52.43,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "terraind",
+      "win_rate": 52.31,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "king-me",
+      "win_rate": 52.21,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "bonk",
+      "win_rate": 52.17,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "its-critical",
+      "win_rate": 52.09,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "biggest-snowball-ever",
       "win_rate": 51.99,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
-      "sourceKey": "lil-extra-help",
-      "win_rate": 51.86,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
       "sourceKey": "ravenous-bind",
-      "win_rate": 51.79,
+      "win_rate": 51.87,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
-      "sourceKey": "goldrend",
-      "win_rate": 51.72,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "overextender",
-      "win_rate": 51.57,
+      "sourceKey": "lil-extra-help",
+      "win_rate": 51.83,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "pursuit-of-power",
-      "win_rate": 51.53,
+      "win_rate": 51.67,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
-      "sourceKey": "echo-cast",
+      "sourceKey": "goldrend",
       "win_rate": 51.52,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
-      "sourceKey": "ultimate-awakening",
-      "win_rate": 51.4,
+      "sourceKey": "echo-cast",
+      "win_rate": 51.46,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "overextender",
+      "win_rate": 51.45,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "siphon",
-      "win_rate": 51.23,
+      "win_rate": 51.22,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "ultimate-awakening",
+      "win_rate": 51.01,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "pressure-cooker",
-      "win_rate": 50.92,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "soul-eater",
-      "win_rate": 50.7,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "double-tap",
-      "win_rate": 50.48,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "hextech-soul",
-      "win_rate": 50.3,
+      "win_rate": 50.96,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "empyrean-promise",
-      "win_rate": 50.3,
+      "win_rate": 50.77,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
-      "sourceKey": "ominous-pact",
-      "win_rate": 50.21,
+      "sourceKey": "soul-eater",
+      "win_rate": 50.69,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "critical-healing",
-      "win_rate": 50.12,
+      "win_rate": 50.36,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "hextech-soul",
+      "win_rate": 50.34,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "ominous-pact",
+      "win_rate": 50.32,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "double-tap",
+      "win_rate": 50.09,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "nightstalking",
-      "win_rate": 49.92,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "overloaded",
-      "win_rate": 49.79,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "shark-bait",
-      "win_rate": 49.74,
+      "win_rate": 49.8,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "kill-secured",
-      "win_rate": 49.69,
+      "win_rate": 49.73,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "shark-bait",
+      "win_rate": 49.71,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "overloaded",
+      "win_rate": 49.44,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "its-go-time",
-      "win_rate": 49.66,
+      "win_rate": 49.41,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "tripleshot",
-      "win_rate": 49.45,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "adaptive-ward",
-      "win_rate": 49.33,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "trusty-weapon",
-      "win_rate": 49.25,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "double-defense",
-      "win_rate": 49.13,
+      "win_rate": 49.35,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "mercys-strike",
-      "win_rate": 48.98,
+      "win_rate": 49.29,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "double-defense",
+      "win_rate": 49.2,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "adaptive-ward",
+      "win_rate": 49.08,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "trusty-weapon",
+      "win_rate": 49.05,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "mighty-shield",
-      "win_rate": 48.83,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "spell-split",
-      "win_rate": 48.48,
+      "win_rate": 49.05,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "crit-n-cast",
-      "win_rate": 48.47,
+      "win_rate": 48.64,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "nature-is-healing",
-      "win_rate": 48.41,
+      "win_rate": 48.5,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "spell-split",
+      "win_rate": 48.45,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "rabble-rousing",
-      "win_rate": 48.19,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "pinball",
-      "win_rate": 47.95,
+      "win_rate": 48.35,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "pat-on-the-back",
-      "win_rate": 47.87,
+      "win_rate": 47.99,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "porcupine",
-      "win_rate": 47.84,
+      "win_rate": 47.96,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "pinball",
+      "win_rate": 47.89,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "shark-tempest",
-      "win_rate": 47.84,
+      "win_rate": 47.78,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "poltergeist",
-      "win_rate": 47.46,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "hide-on-bush",
-      "win_rate": 47.37,
+      "win_rate": 47.71,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "prom-queen",
-      "win_rate": 47.11,
+      "win_rate": 47.14,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "rite-of-ascension",
-      "win_rate": 46.97,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "our-healing",
-      "win_rate": 46.93,
+      "win_rate": 47.08,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "squishy-slappy-grab",
-      "win_rate": 46.89,
+      "win_rate": 47.06,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
-      "sourceKey": "flash-2",
-      "win_rate": 46.79,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "holy-snowball",
-      "win_rate": 46.78,
+      "sourceKey": "hide-on-bush",
+      "win_rate": 47.04,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "chain-reaction",
-      "win_rate": 46.75,
+      "win_rate": 46.77,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "our-healing",
+      "win_rate": 46.72,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "pin-cushion",
-      "win_rate": 46.42,
+      "win_rate": 46.53,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "holy-snowball",
+      "win_rate": 46.36,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "flash-2",
+      "win_rate": 46.14,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "snowblast",
-      "win_rate": 46.12,
+      "win_rate": 46.11,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "surge-field",
-      "win_rate": 45.48,
+      "win_rate": 45.8,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "spin-me-right-round",
-      "win_rate": 44.78,
+      "win_rate": 44.74,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "glass-cannon",
-      "win_rate": 44.43,
-      "reason": "no Step 1 arammayhem_win_rate mapping"
-    },
-    {
-      "sourceKey": "dimension-shift",
-      "win_rate": 42.94,
+      "win_rate": 44.55,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     },
     {
       "sourceKey": "poro-stampede",
-      "win_rate": 42.94,
+      "win_rate": 43.07,
+      "reason": "no Step 1 arammayhem_win_rate mapping"
+    },
+    {
+      "sourceKey": "dimension-shift",
+      "win_rate": 42.8,
       "reason": "no Step 1 arammayhem_win_rate mapping"
     }
   ],
