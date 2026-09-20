@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import type { ChampionEntry } from "@/app/[locale]/champions/page";
+import type { ChampionEntry } from "@/app/[locale]/champions/(list)/page";
 import { localizedName } from "@/lib/i18n/localized-name";
 import { hasPickRateCoverage } from "@/lib/champions/pick-rate-coverage";
 
