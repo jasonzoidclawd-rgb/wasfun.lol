@@ -7,9 +7,18 @@ import { readPatchClocks } from "@/lib/data/clocks";
  * structural clock (Riot patch notes). It was previously rendered from the
  * statistics scrape, which is how the site announced a four-patch-old release
  * as live for 59 days.
+ *
+ * "See what changed" is a second claim — that a change list exists. When no
+ * structural diff covers the patch it does not, so the link says where it
+ * goes instead of promising what is there.
  */
-export async function PatchPulseBanner() {
+export async function PatchPulseBanner({
+  changesMeasured = true,
+}: {
+  changesMeasured?: boolean;
+}) {
   const t = await getTranslations("dashboard");
+  const tNav = await getTranslations("nav");
   const clocks = await readPatchClocks();
 
   return (
@@ -29,7 +38,7 @@ export async function PatchPulseBanner() {
         href="/patch-notes"
         className="ml-auto flex min-h-11 items-center text-sm text-[var(--color-neon-primary)] hover:underline"
       >
-        {t("seeWhatChanged")} →
+        {changesMeasured ? t("seeWhatChanged") : tNav("patchNotes")} →
       </Link>
     </div>
   );

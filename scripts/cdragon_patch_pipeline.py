@@ -105,11 +105,43 @@ def _event_key(event: dict[str, Any]) -> str:
     return json.dumps(event, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
+def _comparison_records(
+    snapshots: dict[str, dict[str, Any]],
+    previous_snapshots: dict[str, dict[str, Any]],
+    source_patch_label: str,
+) -> list[dict[str, Any]]:
+    """Record which snapshot pairs this run actually diffed.
+
+    Events alone cannot prove a comparison happened: a run that compared two
+    adjacent snapshots and found nothing produces the same empty event list as
+    a run that never compared anything. Without this record the projection can
+    only ever report "unknown", so "verified no changes" would be a state the
+    generator could never emit — and an unknown diff would keep being published
+    as a wall of zeroes.
+    """
+    records: list[dict[str, Any]] = []
+    for entity_type in sorted(ENTITY_TYPES):
+        previous = previous_snapshots.get(entity_type)
+        current = snapshots.get(entity_type)
+        if not previous or not current:
+            continue
+        records.append({
+            "entity_type": entity_type,
+            "source_patch_label": source_patch_label,
+            "base_branch": previous["branch"],
+            "base_version": previous["source_version"],
+            "target_branch": current["branch"],
+            "target_version": current["source_version"],
+        })
+    return records
+
+
 def _build_latest_archive(
     previous_archive: dict[str, Any] | None,
     new_events: list[dict[str, Any]],
     source_patch_label: str,
     observed_at: str,
+    comparisons: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     previous_events = (previous_archive or {}).get("events", [])
     events = [event for event in previous_events if isinstance(event, dict)]
@@ -125,6 +157,24 @@ def _build_latest_archive(
         str(event.get("slug", "")),
         tuple(event.get("fields_changed", [])),
     ))
+    previous_comparisons = [
+        record
+        for record in (previous_archive or {}).get("comparisons", [])
+        if isinstance(record, dict)
+    ]
+    merged = list(previous_comparisons)
+    seen = {_event_key(record) for record in merged}
+    for record in comparisons or []:
+        key = _event_key(record)
+        if key not in seen:
+            merged.append(record)
+            seen.add(key)
+    merged.sort(key=lambda record: (
+        str(record.get("source_patch_label", "")),
+        str(record.get("entity_type", "")),
+        str(record.get("base_version", "")),
+        str(record.get("target_version", "")),
+    ))
     return {
         "schema_version": 1,
         "branch": "latest",
@@ -132,6 +182,7 @@ def _build_latest_archive(
         "current_open_cycle": source_patch_label,
         "observed_at": observed_at,
         "status": "fresh",
+        "comparisons": merged,
         "events": events,
     }
 
@@ -272,7 +323,13 @@ def build_branch_update(
             previous = previous_snapshots.get(entity_type)
             if previous:
                 events.extend(compare_snapshots(previous, snapshots[entity_type], detected_at=observed_at))
-        archive = _build_latest_archive(previous_archive, events, source_patch_label, observed_at)
+        archive = _build_latest_archive(
+            previous_archive,
+            events,
+            source_patch_label,
+            observed_at,
+            _comparison_records(snapshots, previous_snapshots, source_patch_label),
+        )
     elif branch == "pbe":
         preview_events = []
         has_latest_baseline = latest_baseline_confirmed and all(

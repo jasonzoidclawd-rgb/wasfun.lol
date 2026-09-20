@@ -4,6 +4,11 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type { ScoredAugment } from "@/lib/scoring/oracle-score";
+import {
+  isDisabled,
+  notOfferedRank,
+  partitionByAvailability,
+} from "@/lib/augments/availability";
 import { Tooltip } from "@/components/ui/Tooltip";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -59,25 +64,19 @@ export function AugmentsClient({
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"rarity" | "name">("rarity");
 
-  // Partition on the resolved availability verdict. `flags.lifecycle` maps
-  // four distinct states onto "removed", which is what made a temporarily
-  // disabled augment indistinguishable from one deleted patches ago.
+  // Partition on the resolved availability verdict — see
+  // `@/lib/augments/availability` for why nothing here is written down.
   const currentAugments = useMemo(
-    () => augments.filter((a) => a.availability?.status === "confirmed_live"),
+    () => partitionByAvailability(augments).current,
     [augments],
   );
   const notOfferedAugments = useMemo(
     () =>
-      augments
-        .filter((a) => a.availability?.status && a.availability.status !== "confirmed_live")
-        .sort((a, b) => {
-          // Disabled first: it is a fact about the CURRENT patch, unlike the
-          // historical entries below it.
-          const rank = (x: ScoredAugment) => (x.availability?.status === "disabled" ? 0 : 1);
-          const byRank = rank(a) - rank(b);
-          if (byRank !== 0) return byRank;
-          return localizedName(a, locale).localeCompare(localizedName(b, locale));
-        }),
+      partitionByAvailability(augments).notOffered.sort((a, b) => {
+        const byRank = notOfferedRank(a) - notOfferedRank(b);
+        if (byRank !== 0) return byRank;
+        return localizedName(a, locale).localeCompare(localizedName(b, locale));
+      }),
     [augments, locale],
   );
 
@@ -311,13 +310,9 @@ function GameNotes() {
             </p>
           </NoteBlock>
 
-          {/* Disabled */}
-          <NoteBlock title="Currently Disabled Augments">
-            <p className="text-[var(--color-text-muted)]">
-              <Em>Fetch</Em> (silver), <Em>Quest: Sneakerhead</Em> (prismatic),
-              and <Em>Spin Me Right Round</Em> (silver) are currently disabled and cannot appear in games.
-            </p>
-          </NoteBlock>
+          {/* Which augments are switched off is a per-patch fact, so it is not
+              written here. The "not offered" table below the grid derives it
+              from `availability.status` on every render. */}
 
           <p className="text-[11px] text-[var(--color-text-muted)] pt-2">
             Source: wiki.leagueoflegends.com/en-us/ARAM:_Mayhem/Augments
@@ -500,7 +495,7 @@ function NotOfferedAugmentsTable({
                 </td>
                 <td
                   className={
-                    augment.availability?.status === "disabled"
+                    isDisabled(augment)
                       ? "px-3 py-2 text-amber-300/90"
                       : "px-3 py-2 text-[var(--color-text-muted)]"
                   }

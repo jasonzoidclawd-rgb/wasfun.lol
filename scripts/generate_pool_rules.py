@@ -252,6 +252,69 @@ def comparison_is_patch_adjacent(comparison: object) -> bool:
     return False
 
 
+def comparison_crosses_patch_boundary(comparison: object) -> bool:
+    """True only when the diff spans the transition INTO the target patch.
+
+    This answers a strictly different question from
+    `comparison_is_patch_adjacent`, and conflating the two is a live defect:
+
+      adjacency — "can this single observation be attributed to the target
+                  patch?" A same-patch refresh (16.18.a -> 16.18.b) qualifies,
+                  because a hotfix shipped inside 26.18 IS a 26.18 change.
+      boundary  — "was the transition from the previous patch into this one
+                  observed?" A same-patch refresh proves nothing of the kind:
+                  it sees only what moved after the patch already landed.
+
+    Reading adjacency as boundary coverage means that after the historical
+    16.13 -> 16.18 gap, tomorrow's routine 16.18.a -> 16.18.b refresh would
+    "prove" patch 26.18 was fully observed, and its 275 undatable cross-gap
+    changes would be published as a verified zero. Boundary crossing is
+    therefore adjacency MINUS the same-patch case — strictly narrower, so it
+    can never admit a pair adjacency rejects.
+    """
+    if not comparison_is_patch_adjacent(comparison):
+        return False
+    # Adjacency already rejected every non-dict and every unparseable version,
+    # so the only case left to exclude is base and target being the same patch.
+    base = _source_version_key(comparison["base_version"])  # type: ignore[index]
+    target = _source_version_key(comparison["target_version"])  # type: ignore[index]
+    return base != target
+
+
+def comparison_crosses_cycle_boundary(comparison: object, cycle: object) -> bool:
+    """True when the diff crosses the boundary INTO `cycle` specifically.
+
+    `comparison_crosses_patch_boundary` proves a diff crossed SOME patch
+    boundary; it cannot say which patch it arrived at. That gap matters because
+    a record's label and its versions come from different systems: the label is
+    Riot's patch-notes feed (`_latest_patch_label` reads patch-metadata.json)
+    while the versions come from the CDragon lineage. When the two feeds are out
+    of step — Riot publishing the next article before CDragon ships the build —
+    a perfectly valid 16.16 -> 16.17 comparison can be stamped "26.18", and it
+    would otherwise contribute a lane to a patch it never observed.
+
+    A game patch and its CDragon lineage share the patch number WITHIN the
+    season (26.18 <-> 16.18.x, verified across the live archive, snapshots and
+    Riot metadata), which is the whole correspondence needed here. The season
+    majors (26 vs 16) are deliberately NOT compared: their difference is a
+    numbering offset that a season rollover can change, and pinning it would be
+    exactly the hardcoded patch number AGENTS.md forbids. Season-rollover
+    adjacency therefore keeps working unchanged — 16.24 -> 17.0 labelled "27.0"
+    still matches on 0.
+
+    Fails closed on an unparseable cycle ("unknown", "", a PBE cycle tag) and on
+    an unparseable version, so malformed archive evidence can never widen
+    coverage.
+    """
+    if not comparison_crosses_patch_boundary(comparison):
+        return False
+    target = _source_version_key(comparison["target_version"])  # type: ignore[index]
+    claimed = _source_version_key(cycle)
+    if target is None or claimed is None:
+        return False
+    return target[1] == claimed[1]
+
+
 def lifecycle_from_events(events: list[dict]) -> dict:
     """Only CDragon additions/removals may alter augment lifecycle state.
 

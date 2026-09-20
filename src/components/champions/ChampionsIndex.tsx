@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { ChampionEntry } from "@/app/[locale]/champions/page";
 import { localizedName } from "@/lib/i18n/localized-name";
+import { hasPickRateCoverage } from "@/lib/champions/pick-rate-coverage";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -91,6 +92,10 @@ export function ChampionsIndex({
   const [activeClass, setActiveClass] = useState<string>("all");
   const [sortBy, setSortBy] = useState<SortKey>("winrate");
   const [level, setLevel] = useState(11);
+
+  // A column of 173 em-dashes is not data. Measured from the roster, so the
+  // column returns by itself if the source starts publishing pick rate again.
+  const showPickRate = useMemo(() => hasPickRateCoverage(champions), [champions]);
 
   // Collect unique classes
   const allClasses = useMemo(() => {
@@ -329,7 +334,9 @@ export function ChampionsIndex({
                     { h: "Class", hide: "mobile" as const },
                     { h: "Tier", hide: false },
                     { h: "WR%", hide: false },
-                    { h: "Pick%", hide: "mobile" as const },
+                    ...(showPickRate
+                      ? [{ h: "Pick%", hide: "mobile" as const }]
+                      : []),
                     { h: `HP@${level}`, hide: "mobile" as const },
                     { h: `AD@${level}`, hide: "mobile" as const },
                     { h: "AS", hide: "tablet" as const },
@@ -417,9 +424,11 @@ export function ChampionsIndex({
                       <NumCell className={WR_COLOR(c.win_rate)}>
                         {c.win_rate?.toFixed(1) ?? "—"}
                       </NumCell>
-                      <NumCell className="text-[var(--color-text-muted)] hidden lg:table-cell">
-                        {c.pick_rate?.toFixed(1) ?? "—"}
-                      </NumCell>
+                      {showPickRate ? (
+                        <NumCell className="text-[var(--color-text-muted)] hidden lg:table-cell">
+                          {c.pick_rate?.toFixed(1) ?? "—"}
+                        </NumCell>
+                      ) : null}
                       <NumCell className="hidden lg:table-cell">{hp.toFixed(0)}</NumCell>
                       <NumCell className="hidden lg:table-cell">{ad.toFixed(1)}</NumCell>
                       <NumCell className="hidden xl:table-cell">{bs?.baseAS.toFixed(3) ?? "—"}</NumCell>

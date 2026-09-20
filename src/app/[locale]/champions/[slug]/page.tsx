@@ -12,6 +12,7 @@ import { getChampionAugmentPool } from "@/lib/scoring/pool-orchestrator";
 import { analyzeInteractions, type MechanicalInteraction, type AugmentMechanic } from "@/lib/scoring/augment-interactions";
 import { localizedDescription, localizedName } from "@/lib/i18n/localized-name";
 import { buildComboTierLookup, resolveChampionCombos } from "@/lib/data/combo-lookup";
+import { hasPickRateCoverage } from "@/lib/champions/pick-rate-coverage";
 import { readChampionsFile } from "@/lib/data/read-public-file";
 import { routing, type Locale } from "@/i18n/routing";
 import { ChampionMatrixClient } from "@/components/champions/ChampionMatrixClient";
@@ -163,6 +164,11 @@ export default async function ChampionPage({
   // field we do.
   const hasWinRate = typeof activeChamp.win_rate === "number";
   const hasPickRate = typeof activeChamp.pick_rate === "number";
+  // Naming a missing field only says something when the field exists for
+  // others. With zero coverage the source publishes no pick rate at all, so
+  // "unavailable for this champion" would appear on all 173 pages and describe
+  // the feed, not the champion. It returns the moment coverage is partial.
+  const pickRateTracked = hasPickRateCoverage(champions);
   const hasAnyStatistic = hasWinRate || hasPickRate || champ.tier != null || champ.rank != null;
   const champWr = hasWinRate ? activeChamp.win_rate : null;
   const abilityProfile: AbilityProfile | undefined = abilities[slug];
@@ -490,7 +496,7 @@ export default async function ChampionPage({
             )}
             {/* Name the one missing field, but only when something else is
                 known — otherwise the "no statistics" line below says it. */}
-            {!hasPickRate && hasAnyStatistic && (
+            {!hasPickRate && pickRateTracked && hasAnyStatistic && (
               <span className="text-xs text-[var(--color-text-muted)]">
                 {t("pickRateUnavailable")}
               </span>
@@ -759,10 +765,14 @@ export default async function ChampionPage({
         gated={!isMember}
         signInUrl="/account"
         signInNextPath={!isAuthenticated ? `/champions/${slug}` : undefined}
+        // The server gate is requireActiveEntitlement(), so signing in is a
+        // step toward access, never access itself. Each state says exactly
+        // what stands between the reader and the pool: a signed-in non-member
+        // needs an active membership, not another sign-in.
         gateCopy={!isMember ? (isAuthenticated ? {
-          title: tm("lockedTitle"),
-          description: tm("lockedBody"),
-          signIn: tm("lockedCta"),
+          title: t("poolGateMemberTitle"),
+          description: t("poolGateMemberDescription"),
+          signIn: t("poolGateMemberCta"),
         } : {
           title: t("poolGateTitle"),
           description: t("poolGateDescription"),

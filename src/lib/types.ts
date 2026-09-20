@@ -206,6 +206,21 @@ export interface PatchSection {
   changes: PatchChange[];
 }
 
+/**
+ * Whether the transition INTO a patch was observed across every structural
+ * lane (champion, augment, item).
+ *
+ * "unavailable" is NOT zero changes: it means nothing was measured, so no
+ * count may be rendered. Absent (legacy payloads) is treated as unavailable.
+ *
+ * This is deliberately stricter than the rule that dates an individual change.
+ * A same-patch refresh (16.18.a -> 16.18.b) dates its own hotfix events but
+ * proves nothing about the patch boundary, so it can never flip a patch to
+ * "available" — see `comparison_crosses_patch_boundary` in
+ * scripts/generate_pool_rules.py.
+ */
+export type PatchStructuredDiffState = "available" | "unavailable";
+
 export interface PatchNote {
   version: string;          // "26.8"
   title: string;            // raw card title from source
@@ -214,6 +229,8 @@ export interface PatchNote {
   publishedAt?: string;
   authors?: string[];
   intro?: string;
+  structuredDiff?: PatchStructuredDiffState;
+  /** Present only when `structuredDiff` is "available". */
   summary?: {
     totalChanges: number;
     byKind: Partial<Record<ChangeKind, number>>;
@@ -225,6 +242,18 @@ export interface PatchNote {
 }
 
 export interface PatchNotesData {
+  /**
+   * 3 — chosen because the semantic contract changed: `structuredDiff` is
+   * required on every card, and an ABSENT `summary` means "not measured"
+   * rather than "nothing to report". Readers that must tell those apart need
+   * an explicit marker.
+   *
+   * v2 already declared `summary` optional and every reader already used
+   * optional access, so the bump carries no migration cost — that is why it is
+   * cheap, not a reason to have skipped it. Enforced by
+   * scripts/verify_patch_publish.py.
+   */
+  schema_version?: number;
   patch: string;
   scraped_at?: string;
   status?: PatchSourceStatus;

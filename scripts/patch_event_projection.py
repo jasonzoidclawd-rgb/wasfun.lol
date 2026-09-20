@@ -8,7 +8,10 @@ import html
 import re
 from typing import Any
 
-from generate_pool_rules import comparison_is_patch_adjacent
+from generate_pool_rules import (
+    comparison_crosses_cycle_boundary,
+    comparison_is_patch_adjacent,
+)
 
 
 SECTION_BY_ENTITY = {
@@ -16,6 +19,12 @@ SECTION_BY_ENTITY = {
     "item": "new_items",
     "augment": "augments",
 }
+# A patch's change list is only complete if every structural lane was observed
+# across its boundary. These are exactly `cdragon_snapshot_diff.ENTITY_TYPES`;
+# they are restated rather than imported so that adding a fourth acquisition
+# lane is a deliberate decision about what "fully observed" means, not a
+# silent tightening of every published patch card.
+REQUIRED_STRUCTURAL_LANES = frozenset({"augment", "champion", "item"})
 _TAG_RE = re.compile(r"<[^>]+>")
 _TOKEN_RE = re.compile(r"@[^@]+@|%[^%]+%")
 PUBLIC_EVENT_FIELDS = (
@@ -149,7 +158,70 @@ def _summary(events: list[dict[str, Any]]) -> dict[str, Any]:
     return summary
 
 
+def patch_boundary_lanes(patch_events: dict[str, Any], cycle: str) -> set[str]:
+    """Structural lanes whose transition INTO `cycle` was actually observed.
+
+    Only a comparison that crosses the boundary into THIS cycle counts — see
+    `comparison_crosses_cycle_boundary`. Three things contribute nothing here,
+    however recent or however many: a same-patch refresh, a cross-gap diff, and
+    a valid adjacent boundary whose label disagrees with its versions (a
+    16.16 -> 16.17 diff stamped "26.18" observed 26.17, not 26.18).
+
+    Two sources of evidence, unioned, both per-lane:
+
+      archive `comparisons` — the authority. Written by the pipeline for every
+          snapshot pair it diffed, so a lane that was compared and found
+          unchanged still proves its own coverage.
+      per-event `comparison` — a fallback for archives written before that
+          record existed. An event only exists where something changed, so this
+          systematically UNDER-reports (a quiet lane leaves no trace). It can
+          therefore only ever add real evidence, never manufacture it.
+    """
+    lanes: set[str] = set()
+    for record in patch_events.get("comparisons", []):
+        if not isinstance(record, dict):
+            continue
+        if str(record.get("source_patch_label") or "") != cycle:
+            continue
+        if comparison_crosses_cycle_boundary(record, cycle):
+            lanes.add(str(record.get("entity_type") or ""))
+    for event in patch_events.get("events", []):
+        if not isinstance(event, dict):
+            continue
+        if str(event.get("source_patch_label") or "") != cycle:
+            continue
+        if comparison_crosses_cycle_boundary(event.get("comparison"), cycle):
+            lanes.add(str(event.get("entity_type") or ""))
+    return lanes
+
+
+def whole_patch_diff_available(patch_events: dict[str, Any], cycle: str) -> bool:
+    """True only when EVERY required structural lane crossed `cycle`'s boundary.
+
+    A count of zero means two incompatible things, and publishing them the same
+    way is what let the site render "0 changes" as if it had checked:
+
+      available   — the previous-patch -> this-patch boundary was observed for
+                    champion, augment AND item. The count is then a verified
+                    fact, and zero means "verified: nothing changed".
+      unavailable — anything less. A multi-patch tracking gap (16.13 -> 16.18),
+                    a same-patch refresh (16.18.a -> 16.18.b), coverage of only
+                    one or two lanes, or a history entry we only ever had prose
+                    for. Nothing is known, so nothing may be counted.
+
+    Partial coverage fails closed on purpose: two observed lanes out of three
+    cannot bound what happened in the third, so a summary built from them would
+    understate the patch while looking measured.
+    """
+    return REQUIRED_STRUCTURAL_LANES.issubset(patch_boundary_lanes(patch_events, cycle))
+
+
 def _metadata_patch(metadata: dict[str, Any]) -> dict[str, Any]:
+    """The prose shell of a card, before any structural evidence is applied.
+
+    It starts unavailable with no summary: a card that never reaches the
+    evidence check must not be able to publish a count by omission.
+    """
     return {
         "version": metadata.get("version", "unknown"),
         "title": metadata.get("articleTitle", ""),
@@ -158,9 +230,82 @@ def _metadata_patch(metadata: dict[str, Any]) -> dict[str, Any]:
         "publishedAt": metadata.get("publishedAt", ""),
         "authors": metadata.get("authors", []),
         "intro": metadata.get("intro", ""),
-        "summary": _empty_summary(),
+        "structuredDiff": "unavailable",
         "sections": [],
     }
+
+
+def _dated_events(
+    patch_events: dict[str, Any],
+    cycle: str,
+    landed_preview_keys: set[tuple[Any, ...]],
+) -> list[dict[str, Any]]:
+    """Events attributable to `cycle`, by the UNCHANGED event-dating rule.
+
+    A matching label is not evidence of WHEN a change happened: a diff across a
+    tracking gap (16.13 -> 16.18) is labelled with its target patch but may hold
+    any of the intervening patches' changes. Only an adjacent comparison dates a
+    change, by the same rule the augment lifecycle path applies — and adjacency
+    deliberately still admits a same-patch hotfix, which did happen in this
+    patch. Whether the patch as a WHOLE was observed is a separate question,
+    answered by `whole_patch_diff_available`.
+    """
+    events = [
+        {
+            **event,
+            "landed_from_pbe": (
+                event.get("entity_type"),
+                event.get("canonical_id"),
+                event.get("slug"),
+                event.get("change_kind"),
+                repr(event.get("after", {})),
+            ) in landed_preview_keys,
+        }
+        for event in patch_events.get("events", [])
+        if isinstance(event, dict)
+        and event.get("source_patch_label") == cycle
+        and comparison_is_patch_adjacent(event.get("comparison"))
+    ]
+    events.sort(key=lambda event: (
+        str(event.get("entity_type", "")),
+        str(event.get("slug", "")),
+        tuple(event.get("fields_changed", [])),
+    ))
+    return events
+
+
+def _apply_structural_evidence(
+    card: dict[str, Any],
+    patch_events: dict[str, Any],
+    cycle: str,
+    landed_preview_keys: set[tuple[Any, ...]],
+    known: dict[str, set[str]],
+) -> dict[str, Any]:
+    """Attach sections and a summary to a card, but only with the evidence.
+
+    Without whole-patch coverage the card publishes neither: a partial change
+    list beside an "unavailable" marker still reads as "here is what changed",
+    which is the claim we cannot make. The underlying events stay in the
+    internal archive and stay individually dateable either way.
+    """
+    if not whole_patch_diff_available(patch_events, cycle):
+        card["structuredDiff"] = "unavailable"
+        card["sections"] = []
+        card.pop("summary", None)
+        return card
+
+    events = _dated_events(patch_events, cycle, landed_preview_keys)
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for event in events:
+        section = SECTION_BY_ENTITY.get(event.get("entity_type"), "general")
+        groups.setdefault(section, []).append(_event_to_change(event, known))
+    card["structuredDiff"] = "available"
+    card["sections"] = [
+        {"id": section, "title": section.replace("_", " ").title(), "changes": changes}
+        for section, changes in sorted(groups.items())
+    ]
+    card["summary"] = _summary(events)
+    return card
 
 
 def build_patch_notes_projection(
@@ -186,61 +331,48 @@ def build_patch_notes_projection(
         for event in (pbe_archive or {}).get("events", [])
         if isinstance(event, dict) and event.get("lifecycle") == "landed"
     }
-    # A matching label is not evidence of WHEN a change happened: a diff across a
-    # tracking gap (16.13 -> 16.18) is labelled with its target patch but may hold
-    # any of the intervening patches' changes. Only an adjacent comparison dates
-    # a change, by the same rule the augment lifecycle path applies.
-    current_events = [
-        event for event in patch_events.get("events", [])
-        if isinstance(event, dict)
-        and event.get("source_patch_label") == current_cycle
-        and comparison_is_patch_adjacent(event.get("comparison"))
-    ]
-    current_events = [
-        {
-            **event,
-            "landed_from_pbe": (
-                event.get("entity_type"),
-                event.get("canonical_id"),
-                event.get("slug"),
-                event.get("change_kind"),
-                repr(event.get("after", {})),
-            ) in landed_preview_keys,
-        }
-        for event in current_events
-    ]
-    current_events.sort(key=lambda event: (
-        str(event.get("entity_type", "")),
-        str(event.get("slug", "")),
-        tuple(event.get("fields_changed", [])),
-    ))
     current_metadata = next(
         (entry for entry in metadata.get("patches", []) if entry.get("version") == current_cycle),
         {},
     )
-    groups: dict[str, list[dict[str, Any]]] = {}
-    for event in current_events:
-        section = SECTION_BY_ENTITY.get(event.get("entity_type"), "general")
-        groups.setdefault(section, []).append(_event_to_change(event, known))
     current = _metadata_patch(current_metadata)
     current.update({
         "version": current_cycle,
         "title": current_metadata.get("articleTitle") or f"League of Legends Patch {current_cycle}",
         "released": str(current_metadata.get("publishedAt") or patch_events.get("observed_at") or "")[:10],
         "publishedAt": current_metadata.get("publishedAt") or patch_events.get("observed_at") or "",
-        "sections": [
-            {"id": section, "title": section.replace("_", " ").title(), "changes": changes}
-            for section, changes in sorted(groups.items())
-        ],
-        "summary": _summary(current_events),
     })
+    _apply_structural_evidence(
+        current, patch_events, current_cycle, landed_preview_keys, known,
+    )
+    # A patch does not become unmeasured by scrolling off the top. The archive
+    # keeps every comparison and event under its own patch label, so a patch
+    # whose boundary WAS observed keeps its verified count after rollover, and
+    # one that was only ever prose stays unavailable.
     history = [
-        _metadata_patch(entry)
+        _apply_structural_evidence(
+            _metadata_patch(entry),
+            patch_events,
+            str(entry.get("version") or ""),
+            landed_preview_keys,
+            known,
+        )
         for entry in metadata.get("patches", [])
         if entry.get("version") != current_cycle
     ]
     return {
-        "schema_version": 2,
+        # DECISION: v3, because the SEMANTIC contract changed. `structuredDiff`
+        # is now required on every card, and an absent `summary` means "not
+        # measured" rather than "nothing to report" — a difference a downstream
+        # reader must be able to detect, and cannot infer from the payload
+        # alone.
+        #
+        # Compatibility evidence, separately: `summary` was already optional in
+        # v2 (`PatchNote.summary?` in src/lib/types.ts, and the
+        # `summary?.byKind ?? {}` reads in src/lib/patch-notes/seo.ts), so the
+        # bump costs no migration. That lowers the risk of the marker; it is not
+        # a reason to skip it.
+        "schema_version": 3,
         "patch": current_cycle,
         "source": "CommunityDragon snapshot diffs",
         "sourceKind": "cdragon-structured-diff-v1",

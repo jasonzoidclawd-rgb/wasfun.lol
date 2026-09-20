@@ -26,6 +26,7 @@ ALLOWED_KINDS = {
     "hotfix",
 }
 NON_GENERIC_KINDS = {"added", "buffed", "nerfed", "fixed", "removed"}
+PATCH_NOTES_SCHEMA_VERSION = 3
 
 
 class PatchPublishError(Exception):
@@ -140,9 +141,41 @@ def verify_patch_publish(
     if source_kind != "cdragon-structured-diff-v1":
         raise PatchPublishError("public patch-notes must be projected from CDragon structured diffs")
 
+    # v3 was chosen because the semantic contract changed: `structuredDiff` is
+    # required, and an absent `summary` means "not measured" rather than
+    # "nothing to report". Existing v2 readers already tolerated an optional
+    # summary, which makes the bump cheap — not unnecessary.
+    if data.get("schema_version") != PATCH_NOTES_SCHEMA_VERSION:
+        raise PatchPublishError(
+            f"public patch-notes schema_version must be {PATCH_NOTES_SCHEMA_VERSION}, "
+            f"got {data.get('schema_version')!r}",
+        )
+
     source_status = data.get("status")
     if source_status not in {"fresh", "stale", "unavailable", "not_yet_confirmed"}:
         raise PatchPublishError("public patch-notes source status is missing or invalid")
+
+    # A count is a claim that the diff was computed. Publishing a zeroed summary
+    # for a patch no structured diff covers presents "we never checked" as "we
+    # checked and nothing changed" — the two must stay distinguishable on the
+    # wire, not just in the renderer.
+    for entry in patches:
+        if not isinstance(entry, dict):
+            raise PatchPublishError("each published patch must be a JSON object")
+        version = entry.get("version", "?")
+        diff_state = entry.get("structuredDiff")
+        if diff_state not in {"available", "unavailable"}:
+            raise PatchPublishError(
+                f"patch {version} must declare structuredDiff as available or unavailable",
+            )
+        if diff_state == "unavailable" and entry.get("summary") is not None:
+            raise PatchPublishError(
+                f"patch {version} publishes a summary with no structured diff to back it",
+            )
+        if diff_state == "available" and not isinstance(entry.get("summary"), dict):
+            raise PatchPublishError(
+                f"patch {version} claims a structured diff but publishes no summary",
+            )
 
     changes = all_changes(data)
     total_changes = len(changes)

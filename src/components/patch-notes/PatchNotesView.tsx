@@ -4,7 +4,7 @@ import {
   buildPatchHeroChrome,
   formatPatchDate,
 } from "@/lib/patch-notes/chrome";
-import { buildPatchDigest } from "@/lib/patch-notes/digest";
+import { buildPatchDigest, patchChangeState } from "@/lib/patch-notes/digest";
 import { describeFreshness, type FreshnessDescription } from "@/lib/patch-notes/freshness";
 import type { ChangeKind, PatchNote, PatchNotesData } from "@/lib/types";
 import { PatchCard } from "./PatchCard";
@@ -65,7 +65,8 @@ export async function PatchNotesView({
         freshness={freshness}
       />
       <PatchSummary patch={current} hotfixEventCount={hotfixEventCount} />
-      <PatchCard patch={current} locale={locale} isCurrent />
+      {/* PatchSummary above already names this patch's state. */}
+      <PatchCard patch={current} locale={locale} isCurrent explainEmpty={false} />
       <RemovedAugmentsTable augments={removedAugments} locale={locale} />
 
       {recent.length > 0 ? (
@@ -193,10 +194,36 @@ async function PatchSummary({
   hotfixEventCount: number;
 }) {
   const t = await getTranslations("patchNotes");
-  const summary = patch.summary;
-  if (!summary) return null;
+  const state = patchChangeState(patch);
   const digest = buildPatchDigest(patch, hotfixEventCount);
 
+  // Counting requires evidence that the count was measured. Without it the
+  // card says so instead of printing eight zeroes that read as a verdict.
+  if (state === "unavailable" || !digest || !patch.summary) {
+    return (
+      <section className="glass-card border border-amber-400/25 bg-amber-400/[0.04] p-4">
+        <h2 className="text-sm font-semibold text-amber-200">{t("diffUnavailableTitle")}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+          {t("diffUnavailableBody")}
+        </p>
+      </section>
+    );
+  }
+
+  if (state === "no-changes") {
+    return (
+      <section className="glass-card p-4">
+        <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">
+          {t("diffNoChangesTitle")}
+        </h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+          {t("diffNoChangesBody")}
+        </p>
+      </section>
+    );
+  }
+
+  const summary = patch.summary;
   const cards = [
     ["summaryTotal", summary.totalChanges],
     ["summaryDamage", summary.damageRelevant],

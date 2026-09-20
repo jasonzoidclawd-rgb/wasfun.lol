@@ -4,6 +4,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { ChampionsIndex } from "@/components/champions/ChampionsIndex";
 import type { Locale } from "@/i18n/routing";
+import { pickRateCoverageLevel } from "@/lib/champions/pick-rate-coverage";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 
 export type ChampionEntry = {
@@ -43,6 +44,11 @@ export type ChampionEntry = {
   };
 };
 
+async function readChampions(): Promise<{ champions: ChampionEntry[] }> {
+  const dataPath = path.join(process.cwd(), "public", "data", "champions.json");
+  return JSON.parse(await readFile(dataPath, "utf-8")) as { champions: ChampionEntry[] };
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -52,7 +58,17 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "champion" });
   const route = "/champions";
   const title = t("metaTitle");
-  const description = t("metaDescription");
+  // The description advertises which statistics the page carries, so it is
+  // chosen from what the roster actually holds. Promising pick rates to search
+  // engines and AI crawlers while publishing none is the same false claim the
+  // Pick% column made, with a longer half-life — and under partial coverage,
+  // denying them would hide values the page really does render.
+  const { champions } = await readChampions();
+  const description = {
+    none: t("metaDescriptionNoPickRate"),
+    partial: t("metaDescriptionPartialPickRate"),
+    full: t("metaDescription"),
+  }[pickRateCoverageLevel(champions)];
   const url = localizedUrl(route, locale as Locale);
 
   return {
@@ -76,9 +92,7 @@ export default async function ChampionsIndexPage({
   setRequestLocale(locale);
   const t = await getTranslations("champion");
 
-  const dataPath = path.join(process.cwd(), "public", "data", "champions.json");
-  const raw = await readFile(dataPath, "utf-8");
-  const { champions } = JSON.parse(raw) as { champions: ChampionEntry[] };
+  const { champions } = await readChampions();
 
   return (
     <div className="py-8">
