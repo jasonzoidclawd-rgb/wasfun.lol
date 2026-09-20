@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-19T13:36:26.808964+00:00",
+  "scraped_at": "2026-09-19T23:49:25.656832+00:00",
   "mayhemExclusive": [
     {
       "slug": "atmas-reckoning",
@@ -4589,15 +4589,22 @@
         },
         {
           "label": "Unique - Cleave:",
-          "text": "Damaging basic attacks deal ( 40% AD / 20% AD) physical damage to other enemies in a 350 radius centered around the target."
+          "text": "Damaging basic attacks on-hit deal ( 40% AD / 20% AD) physical damage to other enemies in a 350 radius centered around the target.The same target may be damaged only once per frame. (unexpected)"
         }
       ],
       "wikiNotes": [
         "Cleave deals proc damage and is tagged as area of effect without applying spell effects.",
         "Cleave is not blocked by spell shield.",
         "Cleave does not trigger on attacks against structures.",
-        "Cleave will not trigger if the basic attack does not deal damage, such as if the target was invulnerable.(bug)",
-        "This is unlike Tiamat, Ravenous Hydra, Stridebreaker, and Titanic Hydra, which will trigger Cleave even if the basic attack had dealt no damage."
+        "Cleave will not trigger if the basic attack does not deal damage (e.g when the target is invulnerable or from Guinsoo's Rageblade's Phantom Hit), unlike Tiamat, Ravenous Hydra, Stridebreaker, and Titanic Hydra. (bug)",
+        "A single cast instance can cause a maximum of 10 Cleave splashes.",
+        "Heretical Cleave deals area damage and thus will trigger spell effects.",
+        "Heretical Cleave is blocked by spell shield.",
+        "Heretical Cleave is an auto-targeted effect.",
+        "Heretical Cleave's center is offset by 100 units in the direction the caster is facing.",
+        "Heretical Cleave's cast breaks stealth.",
+        "Heretical Cleave has a cast time equal to the user's attack windup.",
+        "If Profane Hydra's item slot is changed during this cast time, the area of effect spell will not occur.(bug)"
       ],
       "recipe": [
         "Tiamat",
@@ -11893,7 +11900,7 @@
         "Cleave is not blocked by spell shield.",
         "Cleave does not trigger on attacks against structures.",
         "Cleave will trigger even if the basic attack does not deal damage, such as if the target is invulnerable.",
-        "A single attack can cause a maximum of 10 Cleave splashes.",
+        "A single cast instance can cause a maximum of 10 Cleave splashes.",
         "Crescent deals area damage and thus will trigger spell effects.",
         "Crescent is blocked by spell shield.",
         "Crescent is an auto-targeted effect.",
