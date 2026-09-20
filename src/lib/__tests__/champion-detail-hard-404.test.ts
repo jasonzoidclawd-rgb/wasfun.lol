@@ -1,4 +1,4 @@
-import { readdirSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
@@ -20,6 +20,13 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
  */
 
 const ROOT = process.cwd();
+
+// Read the known slug from the published data instead of hardcoding one: the
+// daily scrape regenerates public/data/, and a CI failure here should mean the
+// control flow broke, not that a particular champion left the roster.
+const knownSlug: string = JSON.parse(
+  readFileSync(path.join(ROOT, "public/data/champions.json"), "utf8"),
+).champions[0].slug;
 
 const entitlementCalls = vi.fn();
 
@@ -81,7 +88,7 @@ describe("champion detail resolves existence before request-scoped work", () => 
   });
 
   test("a known slug still renders and still consults the entitlement gate", async () => {
-    const element = await renderChampionPage("locke");
+    const element = await renderChampionPage(knownSlug);
 
     expect(element).toBeTruthy();
     expect(entitlementCalls).toHaveBeenCalledTimes(1);
@@ -96,28 +103,41 @@ describe("no streaming boundary sits above the champion detail route", () => {
    * The champions list keeps its skeleton via the `(list)` route group, which
    * is not on this path.
    */
-  const segmentsAboveDetailPage = [
-    "src/app",
-    "src/app/[locale]",
-    "src/app/[locale]/champions",
-    "src/app/[locale]/champions/[slug]",
-  ];
+  const segmentsAboveChampions = ["src/app", "src/app/[locale]"];
 
-  test.each(segmentsAboveDetailPage)(
-    "%s declares no loading.tsx",
-    (segment) => {
-      const entries = readdirSync(path.join(ROOT, segment));
+  test.each(segmentsAboveChampions)("%s declares no loading file", (segment) => {
+    const entries = readdirSync(path.join(ROOT, segment));
 
-      expect(entries.filter((entry) => entry.startsWith("loading."))).toEqual([]);
-    },
-  );
+    expect(entries.filter((entry) => entry.startsWith("loading."))).toEqual([]);
+  });
 
-  test("the champions list keeps its loading skeleton inside the route group", () => {
+  /**
+   * Walk the whole champions subtree rather than only the segments on the
+   * route. A loading file re-added under any route group that still wraps
+   * [slug] — champions/(detail)/loading.tsx, say — would bring the soft 404
+   * back while a per-segment check stayed green.
+   */
+  test("the only loading file under champions is the list group's", () => {
+    const root = path.join(ROOT, "src/app/[locale]/champions");
+    const found: string[] = [];
+
+    const walk = (dir: string, prefix: string) => {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const relative = prefix ? `${prefix}/${entry.name}` : entry.name;
+        if (entry.isDirectory()) walk(path.join(dir, entry.name), relative);
+        else if (entry.name.startsWith("loading.")) found.push(relative);
+      }
+    };
+    walk(root, "");
+
+    expect(found).toEqual(["(list)/loading.tsx"]);
+  });
+
+  test("the champions list keeps its page beside that skeleton", () => {
     const entries = readdirSync(
       path.join(ROOT, "src/app/[locale]/champions/(list)"),
     );
 
-    expect(entries).toContain("loading.tsx");
     expect(entries).toContain("page.tsx");
   });
 });

@@ -122,9 +122,11 @@ export default async function ChampionPage({
   const tm = await getTranslations("membership");
   const tg = await getTranslations("grades");
 
-  // Existence is decided from static public data BEFORE any request-scoped
-  // work. An unknown slug must 404 without ever reading cookies, so the
-  // not-found path stays independent of session state.
+  // Existence is decided from static public data before any cookie is read, so
+  // an unknown slug 404s without touching the entitlement gate and the
+  // not-found path stays independent of session state. (The next-intl calls
+  // above read the request store, but no cookies, and so do not make the
+  // render depend on the session.)
   const publicData = await loadChampionDetailData("public");
   const { champions, patch } = publicData;
 
