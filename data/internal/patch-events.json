@@ -3,8 +3,34 @@
   "branch": "latest",
   "lane": "live",
   "current_open_cycle": "26.18",
-  "observed_at": "2026-09-19T23:58:31.701654Z",
+  "observed_at": "2026-09-20T13:59:24.358019Z",
   "status": "fresh",
+  "comparisons": [
+    {
+      "entity_type": "augment",
+      "source_patch_label": "26.18",
+      "base_branch": "latest",
+      "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+      "target_branch": "latest",
+      "target_version": "16.18.8175716+branch.releases-16-18.content.release"
+    },
+    {
+      "entity_type": "champion",
+      "source_patch_label": "26.18",
+      "base_branch": "latest",
+      "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+      "target_branch": "latest",
+      "target_version": "16.18.8175716+branch.releases-16-18.content.release"
+    },
+    {
+      "entity_type": "item",
+      "source_patch_label": "26.18",
+      "base_branch": "latest",
+      "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+      "target_branch": "latest",
+      "target_version": "16.18.8175716+branch.releases-16-18.content.release"
+    }
+  ],
   "events": [
     {
       "entity_type": "augment",
