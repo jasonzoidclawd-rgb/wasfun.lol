@@ -126,7 +126,7 @@ describe("pick-rate surfaces are coverage-gated", () => {
   });
 
   test("the champions index meta description is chosen by coverage level", () => {
-    const source = readSource("src/app/[locale]/champions/page.tsx");
+    const source = readSource("src/app/[locale]/champions/(list)/page.tsx");
 
     expect(source).toContain("pickRateCoverageLevel(champions)");
     expect(source).toContain('none: t("metaDescriptionNoPickRate")');

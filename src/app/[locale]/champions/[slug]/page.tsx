@@ -122,6 +122,17 @@ export default async function ChampionPage({
   const tm = await getTranslations("membership");
   const tg = await getTranslations("grades");
 
+  // Existence is decided from static public data before any cookie is read, so
+  // an unknown slug 404s without touching the entitlement gate and the
+  // not-found path stays independent of session state. (The next-intl calls
+  // above read the request store, but no cookies, and so do not make the
+  // render depend on the session.)
+  const publicData = await loadChampionDetailData("public");
+  const { champions, patch } = publicData;
+
+  const champ = champions.find((c) => c.slug === slug);
+  if (!champ) notFound();
+
   // Member decision content (pool construction, scored rankings) is gated on an
   // active entitlement — not merely being signed in. A logged-in non-member
   // must not receive server-rendered scores or breakdowns.
@@ -134,14 +145,10 @@ export default async function ChampionPage({
     return { isAuthenticated: gate.reason !== "unauthenticated", isMember: false };
   })();
 
-  const publicData = await loadChampionDetailData("public");
   const memberData = isMember ? await loadChampionDetailData("member") : null;
   const activeData = memberData ?? publicData;
-  const { champions, patch } = publicData;
   const { augments, combos, poolRules, abilities } = activeData;
 
-  const champ = champions.find((c) => c.slug === slug);
-  if (!champ) notFound();
   const activeChamp = activeData.champions.find((c) => c.slug === slug) ?? champ;
   const champName = localizedName(champ, locale);
   const localizedAugmentDescription = (augment: AugmentData): string =>
