@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-20T23:45:36.848340+00:00",
+  "scraped_at": "2026-09-21T16:07:18.128897+00:00",
   "mayhemExclusive": [
     {
       "slug": "atmas-reckoning",
@@ -5201,11 +5201,11 @@
       ],
       "wikiNotes": [
         "All champion abilities generate stacks of Steadfast when dealing magic damage to the user.",
-        "Lethal Tempo, Scorch, and Shield Bash generate stacks of Steadfast when dealing magic damage to the user, other runes do not.",
+        "Lethal Tempo, Scorch, and Shield Bash generate stacks of Steadfast when dealing magic damage to the user, other runes such as Deathfire Touch do not.",
         "Infernal Dragon Soul generates stacks of Steadfast when dealing magic damage to the user.",
         "Fated Ashes' Inflame grants stacks of Steadfast more than once per second, even if its magic damage concides with another damage instance, independently of cast instance.(bug)",
         "Some item effects do not generate stacks of Steadfast when dealing magic damage to the user.(bug)",
-        "These include: Ardent Censer's Sanctify, Bami's Cinder, Hollow Radiance, and Sunfire Aegis' Immolate, Guinsoo's Rageblade's Wrath, Hollow Radiance's Desolate, Imperial Mandate's Coordinated Fire, Malignance's Hatefog, Statikk Shiv's Electrospark, Stormsurge's Squall, Unending Despair's Anguish, and Zeke's Convergence's Frostfire Tempest.",
+        "These include: Ardent Censer's Sanctify, Bami's Cinder, Hollow Radiance, and Sunfire Aegis' Immolate, Guinsoo's Rageblade's Wrath, Hollow Radiance's Desolate, Malignance's Hatefog, Statikk Shiv's Electrospark, Stormsurge's Squall, Unending Despair's Anguish, and Zeke's Convergence's Frostfire Tempest.",
         "All other item effects will properly generate stacks. Click the Show tab below for a list of them."
       ],
       "recipe": [
@@ -8016,11 +8016,11 @@
       ],
       "wikiNotes": [
         "All champion abilities generate stacks of Steadfast when dealing magic damage to the user.",
-        "Lethal Tempo, Scorch, and Shield Bash generate stacks of Steadfast when dealing magic damage to the user, other runes do not.",
+        "Lethal Tempo, Scorch, and Shield Bash generate stacks of Steadfast when dealing magic damage to the user, other runes such as Deathfire Touch do not.",
         "Infernal Dragon Soul generates stacks of Steadfast when dealing magic damage to the user.",
         "Fated Ashes' Inflame grants stacks of Steadfast more than once per second, even if its magic damage concides with another damage instance, independently of cast instance.(bug)",
         "Some item effects do not generate stacks of Steadfast when dealing magic damage to the user.(bug)",
-        "These include: Ardent Censer's Sanctify, Bami's Cinder, Hollow Radiance, and Sunfire Aegis' Immolate, Guinsoo's Rageblade's Wrath, Hollow Radiance's Desolate, Imperial Mandate's Coordinated Fire, Malignance's Hatefog, Statikk Shiv's Electrospark, Stormsurge's Squall, Unending Despair's Anguish, and Zeke's Convergence's Frostfire Tempest.",
+        "These include: Ardent Censer's Sanctify, Bami's Cinder, Hollow Radiance, and Sunfire Aegis' Immolate, Guinsoo's Rageblade's Wrath, Hollow Radiance's Desolate, Malignance's Hatefog, Statikk Shiv's Electrospark, Stormsurge's Squall, Unending Despair's Anguish, and Zeke's Convergence's Frostfire Tempest.",
         "All other item effects will properly generate stacks. Click the Show tab below for a list of them."
       ],
       "recipe": [
