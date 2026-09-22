@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-09-21T16:07:18.128897+00:00",
+  "scraped_at": "2026-09-22T00:26:49.401431+00:00",
   "mayhemExclusive": [
     {
       "slug": "atmas-reckoning",
@@ -168,6 +168,7 @@
       "wikiNotes": [
         "Colossal Consumption deals proc damage and is tagged as basic damage, and thus will not trigger spell effects.",
         "The damage dealt by Colossal Consumption is not affected by on-hit damage modifiers.",
+        "The amount of health gained from Colossal Consumption is calculated based on its pre-mitigation damage, and is therefore not affected by armor, Plated Steelcaps, or other damage modifiers.",
         "Colossal Consumption is an auto-targeted effect.",
         "Colossal Consumption's stacks linger for 3 seconds after no longer being in range of the target.",
         "Colossal Consumption applies life steal.",
@@ -2865,6 +2866,7 @@
       "wikiNotes": [
         "Colossal Consumption deals proc damage and is tagged as basic damage, and thus will not trigger spell effects.",
         "The damage dealt by Colossal Consumption is not affected by on-hit damage modifiers.",
+        "The amount of health gained from Colossal Consumption is calculated based on its pre-mitigation damage, and is therefore not affected by armor, Plated Steelcaps, or other damage modifiers.",
         "Colossal Consumption is an auto-targeted effect.",
         "Colossal Consumption's stacks linger for 3 seconds after no longer being in range of the target.",
         "Colossal Consumption applies life steal.",
