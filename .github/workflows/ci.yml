@@ -56,7 +56,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install Python test dependencies
-        run: python3 -m pip install pytest
+        run: python3 -m pip install pytest numpy
 
       - name: Run script unit tests
         run: cd scripts && python3 -m unittest discover -p "test_*.py"

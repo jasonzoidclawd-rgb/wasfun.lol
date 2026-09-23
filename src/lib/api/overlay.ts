@@ -1,4 +1,5 @@
 import type { RequireEntitlementResult } from "../entitlements/server";
+import { augmentStatsDisabledResponse, augmentStatsEnabled } from "@/lib/stats/kill-switch";
 
 export interface ModelReleaseRow {
   model_version: string;
@@ -45,6 +46,7 @@ export async function handleOverlayBootstrap(
   request: Request,
   deps: OverlayApiDeps,
 ): Promise<Response> {
+  if (!augmentStatsEnabled()) return augmentStatsDisabledResponse();
   const bearerToken = bearerTokenFrom(request);
   const gate = await deps.requireEntitlement(bearerToken);
   let leased: TrialLease | null = null;

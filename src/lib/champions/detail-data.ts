@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { normalizeAugmentSet } from "@/lib/data/augment-set";
+import { augmentStatsEnabled, stripAugmentStats } from "@/lib/stats/kill-switch";
 import type { ScoredAugment } from "@/lib/scoring/oracle-score";
 import type {
   AbilityProfile,
@@ -90,12 +91,13 @@ export async function loadChampionDetailData(
     // abilities.json is optional during early generation; callers hide ability UI.
   }
 
+  const statsOn = augmentStatsEnabled();
   return {
     champions: championsData.champions,
-    augments: augmentsData.augments.map((augment) => ({
-      ...augment,
-      set: normalizeAugmentSet(augment.set, augment.wikiSet),
-    })),
+    augments: augmentsData.augments.map((augment) => {
+      const row = { ...augment, set: normalizeAugmentSet(augment.set, augment.wikiSet) };
+      return statsOn ? row : stripAugmentStats(row);
+    }),
     combos: combosData.combos,
     poolRules,
     patch: championsData.patch ?? "",

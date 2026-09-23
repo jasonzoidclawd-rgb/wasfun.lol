@@ -17,6 +17,7 @@ import DamageCalculator, { type CalcChampion, type CalcItem } from "@/components
 import type { Locale } from "@/i18n/routing";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 import { localizedDescription, localizedName } from "@/lib/i18n/localized-name";
+import { augmentStatsEnabled, stripAugmentStats } from "@/lib/stats/kill-switch";
 
 // ─── Data loaders ─────────────────────────────────────────────────────────────
 
@@ -29,7 +30,8 @@ async function loadItems(): Promise<Item[]> {
 async function loadAugments(): Promise<Augment[]> {
   const f = path.join(process.cwd(), "public", "data", "augments.json");
   const d = JSON.parse(await readFile(f, "utf-8"));
-  return d.augments ?? [];
+  const augments: Augment[] = d.augments ?? [];
+  return augmentStatsEnabled() ? augments : augments.map((a) => stripAugmentStats(a));
 }
 
 interface RawChampion {

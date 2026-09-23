@@ -1,0 +1,68 @@
+{
+ "schemaVersion": 1,
+ "patches": {
+  "26.19": {
+   "patch": "26.19",
+   "parsedAt": "2026-09-23T19:54:05.160213+00:00",
+   "status": "provisional",
+   "policyWhileProvisional": "treat every augment as changed",
+   "sources": {
+    "patchNotes": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-19-notes",
+    "patchNotesPublishedAt": "2026-09-22T18:00:00.000Z",
+    "patchNotesMayhemSection": true,
+    "cdragonDiffEvents": 0
+   },
+   "changed": [
+    {
+     "augmentId": "ARAM_ClownCollege",
+     "evidence": [
+      "patch-notes:bugfix"
+     ]
+    },
+    {
+     "augmentId": "ARAM_HighRoller",
+     "evidence": [
+      "patch-notes:balance"
+     ]
+    },
+    {
+     "augmentId": "ARAM_MadScientist",
+     "evidence": [
+      "patch-notes:bugfix"
+     ]
+    },
+    {
+     "augmentId": "ARAM_Multishot",
+     "evidence": [
+      "patch-notes:bugfix"
+     ]
+    },
+    {
+     "augmentId": "ARAM_SkilledSniper",
+     "evidence": [
+      "patch-notes:bugfix"
+     ]
+    },
+    {
+     "augmentId": "BurstingTeeth",
+     "evidence": [
+      "patch-notes:bugfix"
+     ]
+    },
+    {
+     "augmentId": "KingMe",
+     "evidence": [
+      "patch-notes:bugfix"
+     ]
+    },
+    {
+     "augmentId": "UltimateAwakening",
+     "evidence": [
+      "patch-notes:bugfix"
+     ]
+    }
+   ],
+   "unmatchedNames": []
+  }
+ }
+}

@@ -1,0 +1,1314 @@
+{
+ "schemaVersion": 1,
+ "profiles": [
+  "ad",
+  "ap",
+  "tank",
+  "neutral"
+ ],
+ "method": "derived from CDragon effect text, then reviewed and confirmed or overridden (see review)",
+ "champSide": "data/internal/abilities.json profiles.*.damageType (Riot tacticalInfo)",
+ "unreviewedPolicy": "an unreviewed tag counts as neutral (k = 0)",
+ "review": {
+  "reviewedAt": "2026-09-24",
+  "reviewedBy": "v3 build agent (Claude), not a human: every live augment's CDragon text read against its derived tag. Human spot-check pending.",
+  "reviewed": 209,
+  "overridden": 40
+ },
+ "tags": {
+  "ARAM_ADAPt": {
+   "profile": "ap",
+   "derived": "neutral",
+   "reviewed": true,
+   "override": "converts bonus AD into AP and amplifies AP",
+   "textHash": "945606270a11"
+  },
+  "ARAM_AllForYou": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "154103e61099"
+  },
+  "ARAM_ApexInventor": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "9f27d57f6c21"
+  },
+  "ARAM_Archmage": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "6cc1cd8ae725"
+  },
+  "ARAM_BacktoBasics": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "c8d1edcb28bc"
+  },
+  "ARAM_BigBrain": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "afef83eeaf45"
+  },
+  "ARAM_BladeWaltz": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "ba93f110232c"
+  },
+  "ARAM_BluntForce": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "535536be4cf7"
+  },
+  "ARAM_BreadAndButter": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "699e7f5bf6e3"
+  },
+  "ARAM_BreadAndCheese": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "2b089ef2bd56"
+  },
+  "ARAM_BreadAndJam": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "a61e51c0b096"
+  },
+  "ARAM_CantTouchThis": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "9c397caf3832"
+  },
+  "ARAM_CelestialBody": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "851628f68002"
+  },
+  "ARAM_CircleofDeath": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "damage scales with healing done, not AP",
+   "textHash": "7737f9b252c0"
+  },
+  "ARAM_ClownCollege": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "346f2ce733ad"
+  },
+  "ARAM_CourageoftheColossus": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "1958442e7b7f"
+  },
+  "ARAM_CriticalHealing": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "17184949ff60"
+  },
+  "ARAM_Cruelty": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "8bcb6ca7803f"
+  },
+  "ARAM_Dashing": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "42be079f4535"
+  },
+  "ARAM_DawnbringersResolve": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "e1416c1cfff9"
+  },
+  "ARAM_Deft": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "3f5784f8f1db"
+  },
+  "ARAM_DiveBomber": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "team death explosion",
+   "textHash": "1c73dbc0a79b"
+  },
+  "ARAM_DivineDomain": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "b87b8b125792"
+  },
+  "ARAM_DivineIntervention": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "84a75e62e98a"
+  },
+  "ARAM_DontBlink": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "97858e35026a"
+  },
+  "ARAM_DoubleTap": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "0601f8d6740d"
+  },
+  "ARAM_DrawYourSword": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "d1061c76bffa"
+  },
+  "ARAM_DropBear": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "on-death summon",
+   "textHash": "3b8aeb6cb340"
+  },
+  "ARAM_Dropkick": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "168c392ab2bf"
+  },
+  "ARAM_DualWield": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "85eb7315cddf"
+  },
+  "ARAM_Earthwake": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "triggers on dash abilities; hybrid",
+   "textHash": "d416b7449100"
+  },
+  "ARAM_EmpoweredByTheFaithful": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "support: triggers on healing or shielding allies",
+   "textHash": "47907d14c767"
+  },
+  "ARAM_EndlessHunt": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "Attacks or Abilities, max-health true damage",
+   "textHash": "12e668b591c1"
+  },
+  "ARAM_Erosion": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "shreds the enemy's armor and magic resist",
+   "textHash": "54ba293ce4d9"
+  },
+  "ARAM_EtherealWeapon": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "422203c4488c"
+  },
+  "ARAM_Eureka": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "9d661b28e1e5"
+  },
+  "ARAM_FanTheHammer": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "2265be27fae6"
+  },
+  "ARAM_FeyMagic": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "07cc4b682140"
+  },
+  "ARAM_Firebrand": {
+   "profile": "ad",
+   "derived": "neutral",
+   "reviewed": true,
+   "override": "burn is applied by Attacks",
+   "textHash": "f4cbcf2512de"
+  },
+  "ARAM_Firefox": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "aa8d11799e30"
+  },
+  "ARAM_FirstAidKit": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "618a67a4a377"
+  },
+  "ARAM_Flashbang": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "35fa65f14b70"
+  },
+  "ARAM_Flashy": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "c6c46d7f82bd"
+  },
+  "ARAM_FromBeginningToEnd": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "97bf628db329"
+  },
+  "ARAM_GetExcited": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "77b4786a2724"
+  },
+  "ARAM_GiantSlayer": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "b7a6cbdcb85b"
+  },
+  "ARAM_Goliath": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "d6f24abfe2c2"
+  },
+  "ARAM_Goredrink": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "a3af657e898e"
+  },
+  "ARAM_GuiltyPleasure": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "b10c92878666"
+  },
+  "ARAM_HeavyHitter": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "67ca1d3939d1"
+  },
+  "ARAM_Hellbent": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "5532098c8aef"
+  },
+  "ARAM_HighRoller": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "13cb90a904b3"
+  },
+  "ARAM_Homeguard": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "f8cfdda44a66"
+  },
+  "ARAM_IceCold": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "5d9896ee1afa"
+  },
+  "ARAM_ImTheJuggernaut": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "47482b312855"
+  },
+  "ARAM_Impassable": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "613990db2afb"
+  },
+  "ARAM_InfernalConduit": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "23bcbf49c60f"
+  },
+  "ARAM_InfernalSoul": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "Abilities or Attacks",
+   "textHash": "662182d147b6"
+  },
+  "ARAM_InfernoTriggered": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "style meter, any damage",
+   "textHash": "962d971e338a"
+  },
+  "ARAM_ItsCritical": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "07c1f5d4f9a6"
+  },
+  "ARAM_ItsKillingTime": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "83ebc90004f9"
+  },
+  "ARAM_JeweledGauntlet": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "3f69b6d6cc0e"
+  },
+  "ARAM_Juiced": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "0a0ba466805d"
+  },
+  "ARAM_LegDay": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "417d0e0941c0"
+  },
+  "ARAM_LightemUp": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "cfbad91f9cdf"
+  },
+  "ARAM_MadScientist": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "00d64f6def45"
+  },
+  "ARAM_MagicMissile": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "fires on Ability damage; 'max Health' is the target's",
+   "textHash": "f75d2f9a7d17"
+  },
+  "ARAM_Marksmage": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "3023f9a5ec09"
+  },
+  "ARAM_MasterofDuality": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "243c00d52c28"
+  },
+  "ARAM_MindtoMatter": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "pays off mana, not tanking",
+   "textHash": "1e68d4c74921"
+  },
+  "ARAM_Minionmancer": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "a6fb7000de6c"
+  },
+  "ARAM_MissingPingAugment": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "adc83b19e793"
+  },
+  "ARAM_MountainSoul": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "27b0160beeb2"
+  },
+  "ARAM_Multishot": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "adc83b19e793"
+  },
+  "ARAM_MysticPunch": {
+   "profile": "ad",
+   "derived": "neutral",
+   "reviewed": true,
+   "override": "on-hit (Attacks) refunds cooldowns",
+   "textHash": "64d731a63a91"
+  },
+  "ARAM_OceanSoul": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "0a2e815429a7"
+  },
+  "ARAM_OkBoomerang": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "f359afb14566"
+  },
+  "ARAM_OmniSoul": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "01d4fe08d703"
+  },
+  "ARAM_OrbitalLaser_Active": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "summoner spell, max-health true damage",
+   "textHash": "01ebd6a71ba9"
+  },
+  "ARAM_OutlawsGrit": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "b94145d351b5"
+  },
+  "ARAM_Overflow": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "f0c48ac76919"
+  },
+  "ARAM_PandorasBox": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "37eede1150d8"
+  },
+  "ARAM_PhenomenalEvil": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "d1567f37a680"
+  },
+  "ARAM_ProteinShake": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "c5360eb1db15"
+  },
+  "ARAM_Purist_Caster": {
+   "profile": "ap",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "converts attack speed into ability haste",
+   "textHash": "239053162591"
+  },
+  "ARAM_Quest_SteelYourHeart": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "0b00ef159ba5"
+  },
+  "ARAM_Quest_UrfsChampion": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "0a2e79efed18"
+  },
+  "ARAM_Quest_VoidImmolation": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "625661f0ec08"
+  },
+  "ARAM_Quest_WoogletsWitchcap": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "44f30c340705"
+  },
+  "ARAM_Quickstep": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "1bee35791414"
+  },
+  "ARAM_RabbleRousing": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "c6b993f07798"
+  },
+  "ARAM_Recursion": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "4f9f7bda953e"
+  },
+  "ARAM_ScopedWeapons": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "5dacde48ff1e"
+  },
+  "ARAM_ScopierWeapons": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "5dacde48ff1e"
+  },
+  "ARAM_ScopiestWeapons": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "5dacde48ff1e"
+  },
+  "ARAM_SearingDawn": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "ca63bf053cd2"
+  },
+  "ARAM_ShadowRunner": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "85932971a352"
+  },
+  "ARAM_ShrinkRay": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "5a6c95f7fc36"
+  },
+  "ARAM_SkilledSniper": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "f498bd4ce426"
+  },
+  "ARAM_SlapAround": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "76fd4f313133"
+  },
+  "ARAM_SlowCooker": {
+   "profile": "tank",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "burn scales with your max Health",
+   "textHash": "2639ff220035"
+  },
+  "ARAM_Snowday": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "Mark (snowball) effect",
+   "textHash": "ff0ab969be21"
+  },
+  "ARAM_SonicBoom": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "f906bb20360a"
+  },
+  "ARAM_SoulSiphon": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "ff4a64866b11"
+  },
+  "ARAM_SpinToWin": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "4ac38a018fdc"
+  },
+  "ARAM_SpiritBomb": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "support: healing and shielding allies",
+   "textHash": "cf331c173faa"
+  },
+  "ARAM_SpiritualPurification": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "damage from the target's health, not yours",
+   "textHash": "31c88c6114a6"
+  },
+  "ARAM_StackosaurusRex": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "b6ee2a4f9f94"
+  },
+  "ARAM_Stats": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "c2f58451a7e5"
+  },
+  "ARAM_StatsOnStats": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "015467c81d71"
+  },
+  "ARAM_StatsOnStatsOnStats": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "90350ceefe18"
+  },
+  "ARAM_StuckInHereWithMe": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "49bdf7fa13c5"
+  },
+  "ARAM_SymphonyofWar": {
+   "profile": "ad",
+   "derived": "neutral",
+   "reviewed": true,
+   "override": "Lethal Tempo is an attack-speed keystone",
+   "textHash": "921d29d3a6f1"
+  },
+  "ARAM_TankEngine": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "8c0ebe26a5ec"
+  },
+  "ARAM_TankItOrLeaveIt": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "c95dd850d908"
+  },
+  "ARAM_TapDancer": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "beebefde9463"
+  },
+  "ARAM_Terror": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "43fb8e13641b"
+  },
+  "ARAM_ThreadtheNeedle": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "armor AND magic penetration",
+   "textHash": "d9f6f18f99c9"
+  },
+  "ARAM_TransmuteChaos": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "563cda514ff9"
+  },
+  "ARAM_TransmuteGold": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "dd278a30ebcc"
+  },
+  "ARAM_TransmutePrismatic": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "a1435bdc310d"
+  },
+  "ARAM_Typhoon": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "d651bac7ff25"
+  },
+  "ARAM_UltimateRevolution": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "fd32ec6aec4d"
+  },
+  "ARAM_UltimateUnstoppable": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "6d7dd03e2306"
+  },
+  "ARAM_Upgrade_Collector": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "1e41af3bc644"
+  },
+  "ARAM_Upgrade_IE": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "150528160bb9"
+  },
+  "ARAM_Upgrade_Immolate": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "673b8bb0d819"
+  },
+  "ARAM_Upgrade_Sheen": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "Spellblade items exist for both AD and AP",
+   "textHash": "1dc19790cd6e"
+  },
+  "ARAM_Upgrade_ZH": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "a0d0f0f84024"
+  },
+  "ARAM_Vulnerability": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "2fface32f3e4"
+  },
+  "ARAM_WeeWooWeeWoo": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "heal/shield support; 'low Health' is the ally's",
+   "textHash": "b172c16893cf"
+  },
+  "ARAM_WindspeakersBlessing": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "support: healing and shielding allies",
+   "textHash": "cf3cedd75cb9"
+  },
+  "ARAM_WitchfulThinking": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "2c4302a8f48d"
+  },
+  "ARAM_WithHaste": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "4535403678f5"
+  },
+  "ARAM_YowchMyCoins": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "d750698db79a"
+  },
+  "ARAM_Zealot": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "354029e60e55"
+  },
+  "ARAM_escAPADe": {
+   "profile": "ad",
+   "derived": "neutral",
+   "reviewed": true,
+   "override": "converts AP into bonus AD and amplifies AD",
+   "textHash": "351c902368f3"
+  },
+  "Ability_SelfAOE_DoubleCast": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "317f31426ad6"
+  },
+  "BiggestSnowballEver": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "snowball effect",
+   "textHash": "98de2be397e6"
+  },
+  "BloodMoneyBurn": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "be2999a9cfd9"
+  },
+  "Bonk": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "empowers Attacks and Abilities",
+   "textHash": "45c2c512e8ac"
+  },
+  "BrushPower": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "0fac90282148"
+  },
+  "BurstingTeeth": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "lethality AND magic penetration",
+   "textHash": "3a38df766478"
+  },
+  "ChainReaction": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "d406a9061b5f"
+  },
+  "CritNCast": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "d3f9ce0bb6a8"
+  },
+  "CriticalMissile": {
+   "profile": "ad",
+   "derived": "neutral",
+   "reviewed": true,
+   "override": "triggers on Critical Strikes",
+   "textHash": "bc4e0e1f9fde"
+  },
+  "CriticalRhythm": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "778ac3727d2b"
+  },
+  "DarkWind": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "f46c38631fe6"
+  },
+  "DimensionShift_Active": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "43b5cf2b97d2"
+  },
+  "DoOrDie": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "39e6430f1eb0"
+  },
+  "Donation": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "5289a68c4606"
+  },
+  "DontStopCleavin": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "69dca0a783a0"
+  },
+  "DoransBiggestFan": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "fa5dd8c8d23e"
+  },
+  "DoubleDefense": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "ability shield scaling with the target's missing Health",
+   "textHash": "03d44c26dbbd"
+  },
+  "DrinkUp": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "ad5ab16102cb"
+  },
+  "DustToDiamonds": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "d24c9f023f86"
+  },
+  "EmpyreanPromise": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "c7989c135a1c"
+  },
+  "EndlessDecimation": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "8213713bccf5"
+  },
+  "Equilibrium": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "25f22a94b63a"
+  },
+  "EscapePlan": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "low-health escape shield",
+   "textHash": "6d5ddb56031e"
+  },
+  "FinalForm": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "ultimate-triggered shield and omnivamp",
+   "textHash": "ca86b4fc7431"
+  },
+  "FishBait": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "e25e5a2b43ed"
+  },
+  "Flash2": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "460175f19bec"
+  },
+  "FullyAutomated": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "18fb4a7a9047"
+  },
+  "FutureSightHeartsteel": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "aa4519b6b3fa"
+  },
+  "GlassCannon": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "max-health trade for true damage; any damage type",
+   "textHash": "5590906adb22"
+  },
+  "GoldenSnowball": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "7f6d4c85c6e4"
+  },
+  "Goldrend": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "c21555f24198"
+  },
+  "GrowthSpurt": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "76f1c1dfac65"
+  },
+  "HandOfBaron": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "78ad474c283b"
+  },
+  "HasteMakesWaste": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "664eaa2d009c"
+  },
+  "HextechSoul": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "Ability or Attack",
+   "textHash": "eba0f8d474cc"
+  },
+  "InfiniteRecursion": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "7c79758fd700"
+  },
+  "KillSecured": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "14899d78b0b2"
+  },
+  "KingMe": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "1e9d41b31d8d"
+  },
+  "LittleExtraHelp": {
+   "profile": "ad",
+   "derived": "ad",
+   "reviewed": true,
+   "textHash": "519af9fb6353"
+  },
+  "MercysStrike": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "33591ff647b1"
+  },
+  "MightyShield": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "3d3fa8178b09"
+  },
+  "Missile_Split": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "36ddf5f347e9"
+  },
+  "NatureIsHealing": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "4e779fd2323b"
+  },
+  "Nightstalking": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "ea135b873b0a"
+  },
+  "OminousPact": {
+   "profile": "ap",
+   "derived": "ap",
+   "reviewed": true,
+   "textHash": "6e7cb832699e"
+  },
+  "Overextender": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "ac30885b8247"
+  },
+  "PinballSnowball": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "42129b560907"
+  },
+  "Poltergeist": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "4e2ccaf9698e"
+  },
+  "PoroCharge_Active": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "quest reward summoner spell",
+   "textHash": "a78099e3046d"
+  },
+  "PressureCooker": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "bcaed71405f4"
+  },
+  "PromQueen": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "da19002be6cb"
+  },
+  "ReEnergize": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "2294478fba1b"
+  },
+  "SharkTempest": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "snowball effect",
+   "textHash": "295a103f13ea"
+  },
+  "ShrinkEngine": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "fa7b5d298ef2"
+  },
+  "SkipTheBasics": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "b095d3d51f69"
+  },
+  "SnapBack": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "647de0136bbe"
+  },
+  "Snowbomb": {
+   "profile": "neutral",
+   "derived": "ap",
+   "reviewed": true,
+   "override": "snowball effect",
+   "textHash": "38d2907772e8"
+  },
+  "Sonata": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "a6d27eec2426"
+  },
+  "SoulEater": {
+   "profile": "tank",
+   "derived": "tank",
+   "reviewed": true,
+   "textHash": "d2ead026fd62"
+  },
+  "SpellVolley": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "9e04f330a99d"
+  },
+  "StabbyStabby": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "ebb97a5ef37f"
+  },
+  "SwiftAndSafe": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "6ba1e61560ed"
+  },
+  "TitansPulse": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "055aea07c946"
+  },
+  "Twinfire": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "49c2986a69c8"
+  },
+  "UltimateAwakening": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "bde242ce46b0"
+  },
+  "Upgrade_DeathFireGrasp": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "49658179d711"
+  },
+  "Upgrade_InnervatingLocket": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "fef0382da72a"
+  },
+  "Upgrade_MikaelsBlessing": {
+   "profile": "neutral",
+   "derived": "tank",
+   "reviewed": true,
+   "override": "support item upgrade",
+   "textHash": "a97f55e28ba1"
+  },
+  "Upgrade_ZzRotPortal": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "fbe0570c94a6"
+  },
+  "VeilOfWarding": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "357948943fa8"
+  },
+  "VirtuousCycle": {
+   "profile": "neutral",
+   "derived": "neutral",
+   "reviewed": true,
+   "textHash": "7934f904f9dd"
+  },
+  "YouSpinMeRightRound": {
+   "profile": "neutral",
+   "derived": "ad",
+   "reviewed": true,
+   "override": "summoner spell mobility",
+   "textHash": "73c2470333ac"
+  }
+ }
+}
