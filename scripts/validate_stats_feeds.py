@@ -86,7 +86,7 @@ def check_augment_stats(rep: Report, doc: dict) -> None:
             live += 1
             resolved += bool(row.get("augmentId"))
             identity = str(row.get("identity", ""))
-            new_unmatched += identity == "unmatched" or identity.startswith(("ambiguous", "slug-candidate"))
+            new_unmatched += identity == "unmatched" or identity.startswith(("ambiguous", "slug-candidate", "alias:rarity"))
     if live and resolved / live < MIN_LIVE_RESOLVED_SHARE:
         rep.err(f"augment-stats-feed: only {resolved}/{live} live augments resolved to a CDragon id")
     if new_unmatched > MAX_NEW_UNMATCHED:

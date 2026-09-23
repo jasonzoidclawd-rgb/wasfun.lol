@@ -12,7 +12,9 @@ patch that changed it. This builds that list once per patch and persists it in
 
 An entry is "provisional" until both signals have had time to land: the patch
 notes' Mayhem section was found, and at least SETTLE_DAYS have passed since the
-patch notes were published (CDragon diffs arrive after release). A provisional
+patch notes were published (CDragon diffs arrive after release). "Complete" is
+decided by elapsed time, not by a CDragon diff count, because a patch can
+legitimately change no augment in client data. A provisional
 entry is re-parsed on every run; consumers must treat EVERY augment as changed
 while it is provisional, so an incomplete list never reads as "unchanged". A
 complete entry is never re-parsed unless --force is passed, so the list a
@@ -176,8 +178,14 @@ def main() -> None:
         article = Path(args.html).read_text(encoding="utf-8")
     elif url:
         req = Request(url, headers={"User-Agent": "Mozilla/5.0 (wasfun.lol data pipeline)"})
-        with urlopen(req, timeout=30) as resp:
-            article = resp.read().decode("utf-8", errors="replace")
+        try:
+            with urlopen(req, timeout=30) as resp:
+                article = resp.read().decode("utf-8", errors="replace")
+        except (OSError, ValueError) as exc:
+            # An outage of the patch-notes site must not fail the statistics lane:
+            # without the article the entry stays provisional (every augment
+            # counts as changed) and the next run tries again.
+            print(f"changed-augments: patch notes unavailable ({exc}); entry stays provisional")
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     events = json.loads(PATCH_EVENTS_PATH.read_text(encoding="utf-8"))
     entry = build_patch_entry(args.patch, article, url, catalog, events, published_at=published_at)

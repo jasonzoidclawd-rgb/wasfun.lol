@@ -47,6 +47,7 @@ class IdentityContext:
     by_name: dict[tuple[str, str], set[str]] = field(default_factory=dict)
     by_slug: dict[tuple[str, str], set[str]] = field(default_factory=dict)
     known_ids: set[str] = field(default_factory=set)
+    rarity_of: dict[str, str] = field(default_factory=dict)
     aliases: dict[str, dict] = field(default_factory=dict)
 
 
@@ -58,6 +59,7 @@ def build_context(catalog: dict, alias_table: dict) -> IdentityContext:
         if not augment_id or not rarity:
             continue
         ctx.known_ids.add(augment_id)
+        ctx.rarity_of[augment_id] = rarity
         names = {aug.get("name"), aug.get("displayName")}
         if isinstance(aug.get("names"), dict):
             names.add(aug["names"].get("en"))
@@ -89,7 +91,13 @@ def resolve_augment(source_slug: str, name: str, rarity: str, ctx: IdentityConte
     """Return (augmentId or None, method)."""
     if source_slug in ctx.aliases:
         entry = ctx.aliases[source_slug]
-        return entry.get("augmentId"), "alias" if entry.get("augmentId") else "alias:unresolved"
+        target = entry.get("augmentId")
+        if not target:
+            return None, "alias:unresolved"
+        # An alias settles identity, not rarity: a rarity disagreement needs its own review.
+        if ctx.rarity_of.get(target) != rarity and not entry.get("rarityReviewed"):
+            return None, "alias:rarity-mismatch"
+        return target, "alias"
     hits = ctx.by_name.get((norm(name), rarity), set())
     if len(hits) == 1:
         return next(iter(hits)), "name"

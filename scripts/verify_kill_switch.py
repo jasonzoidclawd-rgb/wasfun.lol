@@ -34,6 +34,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from decimal import ROUND_HALF_UP, Decimal
 import html as html_module
 import json
 import re
@@ -85,7 +86,10 @@ def load_fingerprints() -> list[tuple[str, list[str]]]:
         if row["availability"] != "live":
             continue
         wr = row["winRate"]
-        values = sorted({f"{wr:.2f}", f"{wr:.1f}"})
+        # Both roundings of a half: Python's format rounds 56.25 to "56.2",
+        # JavaScript's toFixed(1) to "56.3".
+        half_up = str(Decimal(str(wr)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+        values = sorted({f"{wr:.2f}", f"{wr:.1f}", half_up})
         names = {row["name"], row["sourceSlug"]}
         aug = catalog.get(row.get("augmentId")) or {}
         names |= {v for v in (aug.get("names") or {}).values() if isinstance(v, str)}

@@ -137,6 +137,11 @@ class IdentityTests(unittest.TestCase):
         self.assertEqual(resolve_augment("overloaded", "Overloaded", "prismatic", self.ctx),
                          (None, "alias:unresolved"))
 
+    def test_an_alias_does_not_override_a_rarity_disagreement(self):
+        ctx = build_context(CATALOG, {"aliases": [{"sourceSlug": "x", "augmentId": "ARAM_TankEngine", "reason": "r"}]})
+        self.assertEqual(resolve_augment("x", "X", "gold", ctx), ("ARAM_TankEngine", "alias"))
+        self.assertEqual(resolve_augment("x", "X", "silver", ctx), (None, "alias:rarity-mismatch"))
+
     def test_aliases_need_a_reason_and_a_known_target(self):
         with self.assertRaises(ValueError):
             build_context(CATALOG, {"aliases": [{"sourceSlug": "x", "augmentId": "ARAM_TankEngine"}]})

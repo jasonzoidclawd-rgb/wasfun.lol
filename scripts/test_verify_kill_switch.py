@@ -34,6 +34,14 @@ class DetectorTests(unittest.TestCase):
     def test_fingerprint_needs_the_exact_number(self):
         self.assertFalse(detect_fingerprint("tank engine 160.12% 60.15%", FINGERPRINTS))
 
+    def test_both_roundings_of_a_half_are_fingerprinted(self):
+        from verify_kill_switch import load_fingerprints
+        values = dict(load_fingerprints())
+        halves = [v for v in values.values() if any(x.endswith("5") and len(x.split(".")[1]) == 2 for x in v)]
+        for v in halves:
+            two = next(x for x in v if len(x.split(".")[1]) == 2)
+            self.assertIn(f"{float(two) + 0.001:.1f}", v)  # the half-up rounding JavaScript produces
+
     def test_a_bare_number_is_not_a_rate(self):
         # base-stat tables: "Attack Damage 60.1" next to an augment list is not a leak
         self.assertFalse(detect_fingerprint("tank engine</li></ul><td>attack damage</td><td>60.1</td>", FINGERPRINTS))
