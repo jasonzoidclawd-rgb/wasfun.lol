@@ -4,8 +4,8 @@
   "branch": "latest",
   "lane": "live",
   "source_version": "16.18.8175716+branch.releases-16-18.content.release",
-  "source_patch_label": "26.18",
-  "observed_at": "2026-09-22T14:26:23.185046Z",
+  "source_patch_label": "26.19",
+  "observed_at": "2026-09-23T00:04:33.402238Z",
   "source_url": "",
   "entities": [
     {

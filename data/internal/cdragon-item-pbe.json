@@ -3,9 +3,9 @@
   "entity_type": "item",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.19.8198988+branch.releases-16-19.content.release",
-  "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-  "observed_at": "2026-09-22T20:43:26.290409Z",
+  "source_version": "16.20.8209878+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+  "observed_at": "2026-09-23T00:04:41.862475Z",
   "source_url": "",
   "entities": [
     {
@@ -890,7 +890,7 @@
           "Lane"
         ],
         "cost": 0,
-        "description": "<mainText><stats></stats><br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use<br>• Flat bonus experience, more experience from all sources, and an increased level cap</mainText>"
+        "description": "<mainText><stats></stats><br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a  shield for 10s on use and 30s reduced cooldown<br>• Flat bonus experience, more experience from all sources, and an increased level cap</mainText>"
       },
       "id": "1221",
       "names": {
@@ -905,7 +905,7 @@
           "Lane"
         ],
         "cost": 0,
-        "description": "<mainText><stats></stats><br><br>Takedown champions, minions, towers, plates, and epic monsters to complete your quest. Earn points much faster in top lane!<br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use<br>• Flat bonus experience, more experience from all sources, and increased level cap</mainText>"
+        "description": "<mainText><stats></stats><br><br>Takedown champions, minions, towers, plates, and epic monsters to complete your quest. Earn points much faster in top lane!<br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use and reduced cooldown<br>• Flat bonus experience, more experience from all sources, and increased level cap</mainText>"
       },
       "id": "1222",
       "names": {

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-22T14:27:06.238088Z",
+  "generated_at": "2026-09-23T00:05:12.481902Z",
   "overall": "ok",
   "degraded_lanes": [],
   "structural_lane": {
@@ -10,12 +10,12 @@
     "bootstrappedWithoutBaseStats": []
   },
   "structural": {
-    "patch": "26.18",
+    "patch": "26.19",
     "source": "riot_patch_notes"
   },
   "statistics": {
     "patch": "26.18",
-    "observed_at": "2026-09-22T14:15:59.727181+00:00",
+    "observed_at": "2026-09-22T23:55:51.915168+00:00",
     "source": "https://arammayhem.com"
   }
 }

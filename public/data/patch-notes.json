@@ -1,12 +1,27 @@
 {
   "schema_version": 3,
-  "patch": "26.18",
+  "patch": "26.19",
   "source": "CommunityDragon snapshot diffs",
   "sourceKind": "cdragon-structured-diff-v1",
   "status": "fresh",
-  "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-18-notes",
-  "scraped_at": "2026-09-22T14:26:23.185046Z",
+  "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-19-notes",
+  "scraped_at": "2026-09-23T00:04:33.402238Z",
   "patches": [
+    {
+      "version": "26.19",
+      "title": "League of Legends Patch 26.19 Notes",
+      "released": "2026-09-22",
+      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-19-notes",
+      "publishedAt": "2026-09-22T18:00:00.000Z",
+      "authors": [
+        "Riot wroadie",
+        "Riot Cashmiir",
+        "sternest"
+      ],
+      "intro": "We're soon coming up on the Worlds patch (which is the patch after this one), so our first round of pro-focused Summoner's Rift changes are coming up here. We've identified some potential fringe picks for the tournament that could also provide some normal play variety without becoming disruptive with a nudge up in power, and knocking some individual meta outliers as well (and also Nasus). Systemically, the top lane role quest has been quite successful at freeing up top laners to skip Teleport, so we think increasing their map influence through that spell (both if you take it from the start of game or just through the quest) is a fair place to give the role some power. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
+      "structuredDiff": "unavailable",
+      "sections": []
+    },
     {
       "version": "26.18",
       "title": "League of Legends Patch 26.18 Notes",
@@ -65,21 +80,6 @@
         "Riot Yina"
       ],
       "intro": "Welcome to patch 26.15 and Season 3, where Bel’Veth, the Empress of the Void has some changes she’d like to introduce to you, starting with her patchwork update that leans into her evolution fantasy (permanent ult form, anyone?). After that, we’ve got some nerfs to some recent and longer overperforming champions in Locke, Naafiri, Riven, Sylas, and Morde, and then a handful of buffs to some large tanky champions (and Kai’Sa I guess), along with some item and rune adjustments. On the ranked front with the new Season, you can only cash in Aegis of Valor in games you win to remove mixed incentives, and we’re bringing back duoing to Master tier! Continue on for ARAM: Mayhem and Arena changes! Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
-      "structuredDiff": "unavailable",
-      "sections": []
-    },
-    {
-      "version": "26.14",
-      "title": "League of Legends Patch 26.14 Notes",
-      "released": "2026-07-14",
-      "sourceUrl": "https://www.leagueoflegends.com/en-us/news/game-updates/league-of-legends-patch-26-14-notes",
-      "publishedAt": "2026-07-14T18:00:00.000Z",
-      "authors": [
-        "Riot Cashmiir",
-        "sternest",
-        "Riot Yina"
-      ],
-      "intro": "Hail the victorious three-peat champions, and welcome to Patch 26.14! This patch we have an array of changes to champs like locking down Locke, helping our favorite fish who's flopping a little in support, and hitting mute on the songstress in bot lane. Blue buff is getting a little bit of love, and we have some adjustments to a few items. Outside of Summoner's Rift, we've got some Mayhem and Arena adjustments for modes enjoyers, and Summoner's Rift Clash will be taking place this patch! So time to hit up the squad, give yourselves a punny name, and suddenly forget how to do even the most basic tasks in-game, if you're anything like my friend group. Looking for more information on all things League of Legends? Check out our community-run wiki here ! Wrong patch notes? You can find the TFT patch notes here !",
       "structuredDiff": "unavailable",
       "sections": []
     }

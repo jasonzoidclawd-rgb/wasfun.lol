@@ -1,6 +1,6 @@
 {
   "patch": "26.18",
-  "scraped_at": "2026-09-22T14:15:52.988355+00:00",
+  "scraped_at": "2026-09-22T23:55:45.347555+00:00",
   "schemaVersion": "augment-truth-step5",
   "sources": {
     "definition": "data/internal/augment-base-catalog.json",
@@ -112,8 +112,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 59.84,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 60.1,
       "kit_tags": [
         "tank"
       ],
@@ -147,7 +147,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -349,8 +349,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 59.21,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 59.38,
       "kit_tags": [
         "tank"
       ],
@@ -383,7 +383,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -586,8 +586,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 57.87,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 58.01,
       "kit_tags": [
         "attack",
         "on_hit"
@@ -620,7 +620,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -781,7 +781,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 57.41,
       "kit_tags": [
         "attack",
@@ -817,7 +817,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -1077,8 +1077,8 @@
         "This augment is only available for ranged champions.",
         "This augment is not offered if the champion has built Runaan's Hurricane."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 60.63,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 60.62,
       "kit_tags": [
         "attack",
         "movement",
@@ -1116,7 +1116,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -1280,7 +1280,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "haste"
@@ -1315,7 +1315,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -1558,8 +1558,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 56.08,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 56.14,
       "kit_tags": [
         "attack",
         "ability",
@@ -1595,7 +1595,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -1824,8 +1824,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 58.23,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 58.16,
       "kit_tags": [
         "ability"
       ],
@@ -1859,7 +1859,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -2024,7 +2024,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "dot",
@@ -2060,7 +2060,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -2227,7 +2227,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -2263,7 +2263,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -2484,8 +2484,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 57.25,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 57.36,
       "kit_tags": [
         "tank"
       ],
@@ -2517,7 +2517,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -2678,7 +2678,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "dot"
@@ -2711,7 +2711,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -2948,8 +2948,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.57,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.56,
       "kit_tags": [
         "ability",
         "dot"
@@ -2984,7 +2984,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -3178,7 +3178,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 58.18,
       "kit_tags": [
         "ability",
@@ -3212,7 +3212,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -3439,7 +3439,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 56.55,
       "kit_tags": [
         "attack",
@@ -3474,7 +3474,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -3721,8 +3721,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 56.79,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 56.94,
       "kit_tags": [
         "ability",
         "dot"
@@ -3757,7 +3757,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -3922,8 +3922,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.38,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.41,
       "kit_tags": [
         "dot"
       ],
@@ -3957,7 +3957,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -4141,8 +4141,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 55.87,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 56.0,
       "kit_tags": [
         "heal_shield"
       ],
@@ -4174,7 +4174,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -4354,8 +4354,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 55.79,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 55.89,
       "kit_tags": [
         "attack"
       ],
@@ -4387,7 +4387,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -4612,8 +4612,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 56.35,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 56.38,
       "kit_tags": [
         "attack",
         "movement"
@@ -4648,7 +4648,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -4832,8 +4832,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 58.55,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 58.54,
       "kit_tags": [
         "attack"
       ],
@@ -4865,7 +4865,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -5036,7 +5036,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 65.51,
       "kit_tags": [],
       "flags": {
@@ -5067,7 +5067,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -5256,8 +5256,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 57.66,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 57.63,
       "kit_tags": [
         "ability",
         "on_hit"
@@ -5292,7 +5292,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -5485,8 +5485,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.49,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.52,
       "kit_tags": [
         "tank"
       ],
@@ -5518,7 +5518,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -5679,8 +5679,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 55.68,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 55.69,
       "kit_tags": [
         "attack"
       ],
@@ -5712,7 +5712,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -5892,8 +5892,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 56.15,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 56.25,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -5923,7 +5923,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -6085,7 +6085,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -6122,7 +6122,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -6287,8 +6287,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.66,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.48,
       "kit_tags": [
         "heal_shield"
       ],
@@ -6322,7 +6322,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -6498,8 +6498,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.5,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.45,
       "kit_tags": [
         "heal_shield"
       ],
@@ -6532,7 +6532,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -6742,8 +6742,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 56.04,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 56.06,
       "kit_tags": [
         "attack",
         "ability"
@@ -6776,7 +6776,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -7001,8 +7001,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 57.36,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 57.41,
       "kit_tags": [
         "ability",
         "haste",
@@ -7036,7 +7036,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -7197,8 +7197,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.03,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.08,
       "kit_tags": [
         "heal_shield",
         "tank"
@@ -7231,7 +7231,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -7392,8 +7392,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 64.74,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 64.69,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -7425,7 +7425,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -7591,8 +7591,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 55.34,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 55.2,
       "kit_tags": [
         "heal_shield",
         "movement"
@@ -7627,7 +7627,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -7822,8 +7822,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 55.03,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.97,
       "kit_tags": [
         "attack",
         "haste"
@@ -7856,7 +7856,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -8152,8 +8152,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.93,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.03,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -8185,7 +8185,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -8378,8 +8378,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 55.29,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 55.31,
       "kit_tags": [
         "movement"
       ],
@@ -8413,7 +8413,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -8597,8 +8597,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.94,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.96,
       "kit_tags": [
         "cc"
       ],
@@ -8631,7 +8631,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -8794,7 +8794,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -8829,7 +8829,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -9020,8 +9020,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.03,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.05,
       "kit_tags": [
         "attack",
         "ability",
@@ -9057,7 +9057,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -9232,8 +9232,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.7,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.58,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -9263,7 +9263,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -9444,8 +9444,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.76,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.65,
       "kit_tags": [
         "ability"
       ],
@@ -9477,7 +9477,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -9675,8 +9675,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.0,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.06,
       "kit_tags": [
         "ability",
         "haste"
@@ -9711,7 +9711,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -10024,8 +10024,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.53,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.67,
       "kit_tags": [
         "attack",
         "crit",
@@ -10061,7 +10061,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -10226,7 +10226,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -10263,7 +10263,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -10470,8 +10470,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.14,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.04,
       "kit_tags": [
         "tank",
         "mana"
@@ -10504,7 +10504,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -10705,8 +10705,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.39,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.51,
       "kit_tags": [
         "attack",
         "movement",
@@ -10742,7 +10742,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -10907,7 +10907,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "haste",
@@ -10943,7 +10943,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -11108,7 +11108,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -11144,7 +11144,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -11311,7 +11311,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "tank",
@@ -11347,7 +11347,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -11560,8 +11560,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.77,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.74,
       "kit_tags": [
         "attack",
         "ability"
@@ -11594,7 +11594,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -11819,8 +11819,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 57.63,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 57.71,
       "kit_tags": [
         "attack",
         "ability",
@@ -11857,7 +11857,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -12099,8 +12099,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.68,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.88,
       "kit_tags": [
         "attack",
         "ability",
@@ -12136,7 +12136,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -12301,8 +12301,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.63,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.78,
       "kit_tags": [
         "ability",
         "mana"
@@ -12336,7 +12336,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -12500,7 +12500,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack"
@@ -12535,7 +12535,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -12732,7 +12732,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 52.9,
       "kit_tags": [
         "movement",
@@ -12766,7 +12766,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -12971,8 +12971,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.74,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.88,
       "kit_tags": [
         "attack"
       ],
@@ -13004,7 +13004,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -13165,7 +13165,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -13198,7 +13198,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -13564,8 +13564,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.7,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.72,
       "kit_tags": [
         "tank",
         "movement"
@@ -13600,7 +13600,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -13765,8 +13765,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.27,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.29,
       "kit_tags": [
         "attack"
       ],
@@ -13798,7 +13798,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -13959,7 +13959,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "movement",
@@ -13994,7 +13994,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -14157,7 +14157,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "tank",
@@ -14193,7 +14193,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -14386,8 +14386,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 55.73,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 55.72,
       "kit_tags": [
         "movement"
       ],
@@ -14419,7 +14419,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -14609,8 +14609,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.09,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.03,
       "kit_tags": [
         "attack",
         "ability"
@@ -14644,7 +14644,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -14807,7 +14807,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -14844,7 +14844,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -15039,8 +15039,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.04,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.12,
       "kit_tags": [
         "attack",
         "on_hit"
@@ -15075,7 +15075,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -15296,8 +15296,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.69,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.75,
       "kit_tags": [
         "ability",
         "tank"
@@ -15332,7 +15332,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -15497,8 +15497,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.64,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.7,
       "kit_tags": [
         "ability",
         "haste"
@@ -15533,7 +15533,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -15797,8 +15797,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 60.79,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 60.71,
       "kit_tags": [
         "haste"
       ],
@@ -15830,7 +15830,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -16160,8 +16160,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.15,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.13,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -16191,7 +16191,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -16352,8 +16352,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 56.24,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 55.94,
       "kit_tags": [
         "ability"
       ],
@@ -16387,7 +16387,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -16553,8 +16553,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.96,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.09,
       "kit_tags": [
         "ability",
         "haste"
@@ -16589,7 +16589,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -16773,7 +16773,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 51.61,
       "kit_tags": [
         "heal_shield"
@@ -16806,7 +16806,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -16967,7 +16967,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -17003,7 +17003,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -17226,8 +17226,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.53,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.64,
       "kit_tags": [
         "ability",
         "heal_shield",
@@ -17262,7 +17262,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -17482,8 +17482,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.75,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.8,
       "kit_tags": [
         "heal_shield",
         "tank"
@@ -17517,7 +17517,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -17680,7 +17680,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -17716,7 +17716,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -17911,8 +17911,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.35,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.36,
       "kit_tags": [
         "movement"
       ],
@@ -17944,7 +17944,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -18170,8 +18170,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.99,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.89,
       "kit_tags": [
         "ability",
         "mana"
@@ -18204,7 +18204,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -18427,8 +18427,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.33,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.24,
       "kit_tags": [
         "ability",
         "dot"
@@ -18461,7 +18461,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -18779,8 +18779,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.41,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.19,
       "kit_tags": [
         "ability",
         "movement",
@@ -18815,7 +18815,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -18978,7 +18978,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -19013,7 +19013,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -19403,8 +19403,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 57.45,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 57.43,
       "kit_tags": [
         "attack",
         "ability"
@@ -19438,7 +19438,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -19601,8 +19601,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.64,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.68,
       "kit_tags": [
         "movement",
         "attack"
@@ -19637,7 +19637,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -19802,8 +19802,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.7,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.72,
       "kit_tags": [
         "ability",
         "heal_shield"
@@ -19838,7 +19838,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -20003,7 +20003,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -20035,7 +20035,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -20226,8 +20226,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.22,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.25,
       "kit_tags": [
         "ability",
         "haste"
@@ -20262,7 +20262,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -20427,7 +20427,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -20464,7 +20464,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -20648,8 +20648,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.01,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.97,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -20679,7 +20679,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -20859,8 +20859,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.58,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.66,
       "kit_tags": [
         "heal_shield"
       ],
@@ -20892,7 +20892,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -21150,8 +21150,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.53,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.35,
       "kit_tags": [
         "attack",
         "movement"
@@ -21185,7 +21185,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -21350,7 +21350,7 @@
       "wikiAvailabilityNotes": [
         "This augment is only available on the Butcher's Bridge map."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -21388,7 +21388,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -21748,8 +21748,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.29,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.36,
       "kit_tags": [
         "ability"
       ],
@@ -21781,7 +21781,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -21942,7 +21942,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -21979,7 +21979,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -22183,8 +22183,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.04,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.07,
       "kit_tags": [
         "movement",
         "haste"
@@ -22217,7 +22217,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -22433,8 +22433,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 54.11,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 54.15,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -22464,7 +22464,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -22625,8 +22625,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.57,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.5,
       "kit_tags": [
         "attack",
         "ability",
@@ -22663,7 +22663,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -22869,7 +22869,7 @@
         "If a champion acquires all three \"Bread\" augments ( Bread and Butter, Bread and Cheese, Bread and Jam), they gain a buff called Bread Sandwich that grants them 250 ultimate haste and an additional 50 ability haste on each basic ability."
       ],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 51.92,
       "kit_tags": [
         "ability",
@@ -22904,7 +22904,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": true,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -23067,7 +23067,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -23105,7 +23105,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -23325,8 +23325,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.11,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.98,
       "kit_tags": [
         "ability",
         "dot"
@@ -23361,7 +23361,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -23554,8 +23554,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 53.07,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 53.19,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -23587,7 +23587,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -23781,8 +23781,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.78,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.8,
       "kit_tags": [
         "haste"
       ],
@@ -23814,7 +23814,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -23975,8 +23975,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.37,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.33,
       "kit_tags": [
         "ability",
         "cc",
@@ -24012,7 +24012,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -24208,8 +24208,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.32,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.23,
       "kit_tags": [
         "attack",
         "ability",
@@ -24245,7 +24245,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -24410,8 +24410,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.45,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.49,
       "kit_tags": [
         "heal_shield",
         "ability",
@@ -24447,7 +24447,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -24689,8 +24689,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.98,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.07,
       "kit_tags": [
         "tank",
         "cc"
@@ -24723,7 +24723,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -24884,7 +24884,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -24916,7 +24916,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -25079,7 +25079,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 50.51,
       "kit_tags": [],
       "flags": {
@@ -25112,7 +25112,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -25279,7 +25279,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -25316,7 +25316,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -25482,7 +25482,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -25517,7 +25517,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -25866,8 +25866,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.84,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.77,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -25898,7 +25898,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -26100,8 +26100,8 @@
         "If a champion acquires all three \"Bread\" augments ( Bread and Butter, Bread and Cheese, Bread and Jam), they gain a buff called Bread Sandwich that grants them 250 ultimate haste and an additional 50 ability haste on each basic ability."
       ],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.63,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.61,
       "kit_tags": [
         "ability",
         "haste"
@@ -26135,7 +26135,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": true,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -26298,7 +26298,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -26334,7 +26334,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -26507,7 +26507,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": 50.2,
       "kit_tags": [],
       "flags": {
@@ -26538,7 +26538,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -26699,7 +26699,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -26735,7 +26735,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -26930,8 +26930,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.28,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.21,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -26962,7 +26962,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -27219,8 +27219,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.07,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.02,
       "kit_tags": [
         "attack",
         "ability"
@@ -27254,7 +27254,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -27417,7 +27417,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -27453,7 +27453,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -27647,8 +27647,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.81,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.62,
       "kit_tags": [
         "heal_shield",
         "dot"
@@ -27683,7 +27683,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -27887,8 +27887,8 @@
         "If a champion acquires all three \"Bread\" augments ( Bread and Butter, Bread and Cheese, Bread and Jam), they gain a buff called Bread Sandwich that grants them 250 ultimate haste and an additional 50 ability haste on each basic ability."
       ],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.16,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.1,
       "kit_tags": [
         "ability",
         "haste"
@@ -27922,7 +27922,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": true,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -28104,8 +28104,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.04,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.1,
       "kit_tags": [
         "attack",
         "ability"
@@ -28138,7 +28138,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -28338,8 +28338,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.16,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.29,
       "kit_tags": [
         "ability",
         "on_hit"
@@ -28373,7 +28373,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -28536,7 +28536,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "cc",
@@ -28572,7 +28572,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -28812,8 +28812,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.16,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.13,
       "kit_tags": [
         "ability",
         "heal_shield",
@@ -28848,7 +28848,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -29226,8 +29226,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 51.06,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 51.01,
       "kit_tags": [
         "attack",
         "ability",
@@ -29262,7 +29262,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -29435,8 +29435,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.03,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.04,
       "kit_tags": [
         "ability",
         "haste"
@@ -29470,7 +29470,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -29670,8 +29670,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.83,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.92,
       "kit_tags": [
         "attack",
         "dot"
@@ -29705,7 +29705,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -29896,8 +29896,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 48.51,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.49,
       "kit_tags": [
         "ability",
         "cc"
@@ -29930,7 +29930,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -30119,8 +30119,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 52.65,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 52.6,
       "kit_tags": [
         "dot"
       ],
@@ -30154,7 +30154,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -30329,8 +30329,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 47.88,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 47.72,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -30360,7 +30360,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -30558,8 +30558,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.04,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.88,
       "kit_tags": [
         "ability",
         "cc"
@@ -30592,7 +30592,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -30753,7 +30753,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield"
@@ -30788,7 +30788,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -30954,7 +30954,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -30989,7 +30989,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -31152,8 +31152,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 48.35,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.43,
       "kit_tags": [
         "ability",
         "dot",
@@ -31189,7 +31189,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -31593,8 +31593,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 48.1,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.13,
       "kit_tags": [
         "cc"
       ],
@@ -31627,7 +31627,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -31790,7 +31790,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "cc"
@@ -31825,7 +31825,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -32094,8 +32094,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.96,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.89,
       "kit_tags": [
         "attack",
         "ability",
@@ -32132,7 +32132,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -32298,8 +32298,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 46.92,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 46.74,
       "kit_tags": [
         "attack",
         "ability",
@@ -32337,7 +32337,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -32502,7 +32502,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability"
@@ -32537,7 +32537,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -32704,8 +32704,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 50.17,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 50.22,
       "kit_tags": [
         "heal_shield",
         "tank"
@@ -32740,7 +32740,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -32905,8 +32905,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.52,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.57,
       "kit_tags": [
         "attack",
         "ability",
@@ -32942,7 +32942,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -33108,8 +33108,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 47.64,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 47.9,
       "kit_tags": [
         "ability",
         "cc",
@@ -33145,7 +33145,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -33310,7 +33310,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -33346,7 +33346,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -33509,7 +33509,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "movement"
@@ -33544,7 +33544,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -33788,8 +33788,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 47.9,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.22,
       "kit_tags": [
         "ability",
         "cc",
@@ -33825,7 +33825,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -33990,7 +33990,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability"
@@ -34025,7 +34025,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -34192,7 +34192,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability"
@@ -34227,7 +34227,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -34394,7 +34394,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "cc",
@@ -34430,7 +34430,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -34596,7 +34596,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "haste",
@@ -34631,7 +34631,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -34794,8 +34794,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 48.59,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.55,
       "kit_tags": [
         "attack",
         "ability",
@@ -34831,7 +34831,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -34997,7 +34997,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability"
@@ -35032,7 +35032,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -35227,8 +35227,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 48.57,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.43,
       "kit_tags": [
         "ability",
         "tank"
@@ -35261,7 +35261,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -35432,8 +35432,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 49.9,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 49.82,
       "kit_tags": [],
       "flags": {
         "system_breaker": false,
@@ -35463,7 +35463,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -35624,7 +35624,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "movement",
@@ -35660,7 +35660,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -35827,8 +35827,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 47.69,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 47.55,
       "kit_tags": [
         "ability",
         "haste"
@@ -35862,7 +35862,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -36090,8 +36090,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 48.3,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 48.42,
       "kit_tags": [
         "attack",
         "on_hit",
@@ -36126,7 +36126,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -36289,7 +36289,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "movement",
@@ -36324,7 +36324,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -36487,7 +36487,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield"
@@ -36522,7 +36522,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -36689,7 +36689,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -36724,7 +36724,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -36887,8 +36887,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 46.84,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 47.06,
       "kit_tags": [
         "ability",
         "cc"
@@ -36923,7 +36923,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -37176,7 +37176,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -37212,7 +37212,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -37378,8 +37378,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 47.56,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 47.57,
       "kit_tags": [
         "tank"
       ],
@@ -37413,7 +37413,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -37580,8 +37580,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 45.95,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 46.16,
       "kit_tags": [
         "ability"
       ],
@@ -37613,7 +37613,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -37775,7 +37775,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -37811,7 +37811,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -37979,7 +37979,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "movement",
@@ -38014,7 +38014,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -38259,7 +38259,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -38296,7 +38296,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -38462,8 +38462,8 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
-      "win_rate": 47.74,
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
+      "win_rate": 47.98,
       "kit_tags": [
         "movement"
       ],
@@ -38497,7 +38497,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -38664,7 +38664,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -38700,7 +38700,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -38865,7 +38865,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -38901,7 +38901,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -39067,7 +39067,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -39103,7 +39103,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -39270,7 +39270,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -39306,7 +39306,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -39558,7 +39558,7 @@
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "tank",
@@ -39596,7 +39596,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -40865,7 +40865,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -40901,7 +40901,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -41262,7 +41262,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "crit",
@@ -41298,7 +41298,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -41535,7 +41535,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -41570,7 +41570,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -41733,7 +41733,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -41770,7 +41770,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -41935,7 +41935,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -41971,7 +41971,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -42482,7 +42482,7 @@
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -42522,7 +42522,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -42688,7 +42688,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -42726,7 +42726,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -42895,7 +42895,7 @@
         "This augment is only offered to up to 1 player on each team for a given game.",
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -42932,7 +42932,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -43631,7 +43631,7 @@
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability"
@@ -43668,7 +43668,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -44515,7 +44515,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -44550,7 +44550,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -45612,7 +45612,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "crit"
@@ -45645,7 +45645,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -45858,7 +45858,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -45893,7 +45893,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -47317,7 +47317,7 @@
         "This augment is currently disabled.",
         "This augment prevents the user from being offered the Vampirism augment."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -47355,7 +47355,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -48057,7 +48057,7 @@
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -48095,7 +48095,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -48335,7 +48335,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -48376,7 +48376,7 @@
       },
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
     },
     {
       "augmentId": "RedEnvelopes",
@@ -48662,7 +48662,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -48698,7 +48698,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -49843,7 +49843,7 @@
         "When a Burn stack has been inflicted to an enemy, all different Burn sources will stack the 1st source's effect and credit the damage to the 1st source's owner (e.g. Tormentor inflicted 1st will be stacked by Slow Cooker)"
       ],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -49878,7 +49878,7 @@
             "availabilityNotes": [],
             "hasDescription": false,
             "hasNotes": true,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -50235,7 +50235,7 @@
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -50273,7 +50273,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -50468,7 +50468,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "crit",
@@ -50503,7 +50503,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -51004,7 +51004,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "tank",
@@ -51039,7 +51039,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -51473,7 +51473,7 @@
         "When a Burn stack has been inflicted to an enemy, all different Burn sources will stack the 1st source's effect and credit the damage to the 1st source's owner (e.g. Tormentor inflicted 1st will be stacked by Slow Cooker)"
       ],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -51509,7 +51509,7 @@
             "availabilityNotes": [],
             "hasDescription": false,
             "hasNotes": true,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "removed"
@@ -53023,7 +53023,7 @@
         "This augment prevents the user from being offered the Perseverance augment.",
         "This augment is not offered if the champion has built Warmog's Armor."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "heal_shield",
@@ -53062,7 +53062,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -53229,7 +53229,7 @@
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "ability",
@@ -53269,7 +53269,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -53675,7 +53675,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "crit",
@@ -53710,7 +53710,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -54273,7 +54273,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -54310,7 +54310,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -54475,7 +54475,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [
         "attack",
@@ -54512,7 +54512,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -54767,7 +54767,7 @@
       "wikiAvailabilityNotes": [
         "This augment is only offered to up to 2 players on each team for a given game."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -54802,7 +54802,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -55042,7 +55042,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -55074,7 +55074,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -55435,7 +55435,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -55466,7 +55466,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -55818,7 +55818,7 @@
       "wikiAvailabilityNotes": [
         "This augment is currently disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -55853,7 +55853,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -56213,7 +56213,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -56245,7 +56245,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": "live"
@@ -56412,7 +56412,7 @@
       "wikiAvailabilityNotes": [
         "This augment exists in the internal augment data but appears to be disabled."
       ],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -56447,7 +56447,7 @@
             ],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null
@@ -56612,7 +56612,7 @@
       "definitionPlaceholder": false,
       "wikiNotes": [],
       "wikiAvailabilityNotes": [],
-      "wikiFetchedAt": "2026-09-22T14:15:53+00:00",
+      "wikiFetchedAt": "2026-09-22T23:55:45+00:00",
       "win_rate": null,
       "kit_tags": [],
       "flags": {
@@ -56644,7 +56644,7 @@
             "availabilityNotes": [],
             "hasDescription": true,
             "hasNotes": false,
-            "wikiFetchedAt": "2026-09-22T14:15:53+00:00"
+            "wikiFetchedAt": "2026-09-22T23:55:45+00:00"
           },
           "tencent": {
             "status": null

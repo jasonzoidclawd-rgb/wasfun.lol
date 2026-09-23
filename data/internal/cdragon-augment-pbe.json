@@ -3,9 +3,9 @@
   "entity_type": "augment",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.19.8198988+branch.releases-16-19.content.release",
-  "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-  "observed_at": "2026-09-22T20:43:26.290409Z",
+  "source_version": "16.20.8209878+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+  "observed_at": "2026-09-23T00:04:41.862475Z",
   "source_url": "",
   "entities": [
     {

@@ -2,8 +2,8 @@
   "schema_version": 1,
   "branch": "latest",
   "lane": "live",
-  "current_open_cycle": "26.18",
-  "observed_at": "2026-09-22T14:26:23.185046Z",
+  "current_open_cycle": "26.19",
+  "observed_at": "2026-09-23T00:04:33.402238Z",
   "status": "fresh",
   "comparisons": [
     {
@@ -25,6 +25,30 @@
     {
       "entity_type": "item",
       "source_patch_label": "26.18",
+      "base_branch": "latest",
+      "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+      "target_branch": "latest",
+      "target_version": "16.18.8175716+branch.releases-16-18.content.release"
+    },
+    {
+      "entity_type": "augment",
+      "source_patch_label": "26.19",
+      "base_branch": "latest",
+      "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+      "target_branch": "latest",
+      "target_version": "16.18.8175716+branch.releases-16-18.content.release"
+    },
+    {
+      "entity_type": "champion",
+      "source_patch_label": "26.19",
+      "base_branch": "latest",
+      "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+      "target_branch": "latest",
+      "target_version": "16.18.8175716+branch.releases-16-18.content.release"
+    },
+    {
+      "entity_type": "item",
+      "source_patch_label": "26.19",
       "base_branch": "latest",
       "base_version": "16.18.8175716+branch.releases-16-18.content.release",
       "target_branch": "latest",

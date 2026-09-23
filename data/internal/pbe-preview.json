@@ -2,8 +2,8 @@
   "schema_version": 1,
   "branch": "pbe",
   "lane": "preview",
-  "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-  "observed_at": "2026-09-22T20:43:26.290409Z",
+  "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+  "observed_at": "2026-09-23T00:04:41.862475Z",
   "status": "fresh",
   "events": [
     {
@@ -60,9 +60,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -76,12 +76,12 @@
         "zh-TW": "陰魂不散"
       },
       "slug": "hellbent",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
-      "observed_cycles": 7,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 8,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -97,9 +97,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "augment",
       "fields_changed": [
         "tooltip"
@@ -111,12 +111,12 @@
         "en": "Titan's Resolve"
       },
       "slug": "im-the-juggernaut",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
-      "observed_cycles": 5,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 6,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -171,9 +171,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -187,12 +187,12 @@
         "zh-TW": "靈魂炸彈"
       },
       "slug": "spirit-bomb",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8168182+branch.main.content.beta",
-      "observed_cycles": 7,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 8,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -222,9 +222,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.W.cooldown_coefficients"
@@ -236,12 +236,12 @@
         "en": "Aatrox"
       },
       "slug": "aatrox",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -293,9 +293,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "base_stats.attackDamage"
@@ -307,12 +307,12 @@
         "en": "Draven"
       },
       "slug": "draven",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -344,9 +344,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.R.effect_amounts.Effect2Amount"
@@ -358,12 +358,12 @@
         "en": "Elise"
       },
       "slug": "elise",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8192364+branch.releases-16-19.content.release",
-      "observed_cycles": 2,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 3,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -381,9 +381,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.R.coefficients.coefficient1",
@@ -396,12 +396,12 @@
         "en": "Fiora"
       },
       "slug": "fiora",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -451,9 +451,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.W.effect_amounts.Effect4Amount",
@@ -466,12 +466,12 @@
         "en": "Kha'Zix"
       },
       "slug": "khazix",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -487,9 +487,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "base_stats.armor"
@@ -501,12 +501,12 @@
         "en": "Lillia"
       },
       "slug": "lillia",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -571,9 +571,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.R.cooldown_coefficients"
@@ -585,12 +585,12 @@
         "en": "Nocturne"
       },
       "slug": "nocturne",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -622,9 +622,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.E.cost_coefficients",
@@ -637,12 +637,12 @@
         "en": "Ryze"
       },
       "slug": "ryze",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -660,9 +660,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "champion",
       "fields_changed": [
         "base_stats.attackDamage",
@@ -675,12 +675,12 @@
         "en": "Vi"
       },
       "slug": "vi",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -736,9 +736,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -748,12 +748,12 @@
         "en": "Cloak and Dagger"
       },
       "slug": "cloak-and-dagger",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-      "observed_cycles": 8,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 9,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -883,9 +883,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -895,12 +895,12 @@
         "en": "Moonflair Spellblade"
       },
       "slug": "moonflair-spellblade",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-      "observed_cycles": 8,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 9,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -1060,9 +1060,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1074,12 +1074,82 @@
         "en": "Runic Compass"
       },
       "slug": "runic-compass",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
-      "observed_cycles": 3,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 4,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
+    },
+    {
+      "after": {
+        "description": "<mainText><stats></stats><br><br>Takedown champions, minions, towers, plates, and epic monsters to complete your quest. Earn points much faster in top lane!<br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use and reduced cooldown<br>• Flat bonus experience, more experience from all sources, and increased level cap</mainText>"
+      },
+      "before": {
+        "description": "<mainText><stats></stats><br><br>Takedown champions, minions, towers, plates, and epic monsters to complete your quest. Earn points much faster in top lane!<br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use<br>• Flat bonus experience, more experience from all sources, and increased level cap</mainText>"
+      },
+      "branch": "pbe",
+      "canonical_id": "1222",
+      "change_kind": "text",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.20.8209878+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-23T00:04:41.862475Z",
+      "entity_type": "item",
+      "fields_changed": [
+        "description"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Top Lane Quest"
+      },
+      "slug": "top-lane-quest",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
+    },
+    {
+      "after": {
+        "description": "<mainText><stats></stats><br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a  shield for 10s on use and 30s reduced cooldown<br>• Flat bonus experience, more experience from all sources, and an increased level cap</mainText>"
+      },
+      "before": {
+        "description": "<mainText><stats></stats><br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use<br>• Flat bonus experience, more experience from all sources, and an increased level cap</mainText>"
+      },
+      "branch": "pbe",
+      "canonical_id": "1221",
+      "change_kind": "text",
+      "comparison": {
+        "base_branch": "latest",
+        "base_version": "16.18.8175716+branch.releases-16-18.content.release",
+        "target_branch": "pbe",
+        "target_version": "16.20.8209878+branch.main.content.beta"
+      },
+      "detected_at": "2026-09-23T00:04:41.862475Z",
+      "entity_type": "item",
+      "fields_changed": [
+        "description"
+      ],
+      "is_hotfix": false,
+      "landed": false,
+      "lane": "preview",
+      "names": {
+        "en": "Top Lane Quest Reward"
+      },
+      "slug": "top-lane-quest-reward",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "lifecycle": "upcoming",
+      "first_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "observed_cycles": 1,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     },
     {
       "after": {
@@ -1095,9 +1165,9 @@
         "base_branch": "latest",
         "base_version": "16.18.8175716+branch.releases-16-18.content.release",
         "target_branch": "pbe",
-        "target_version": "16.19.8198988+branch.releases-16-19.content.release"
+        "target_version": "16.20.8209878+branch.main.content.beta"
       },
-      "detected_at": "2026-09-22T20:43:26.290409Z",
+      "detected_at": "2026-09-23T00:04:41.862475Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1109,12 +1179,12 @@
         "en": "Zz'Rot Portal"
       },
       "slug": "zz-rot-portal",
-      "source_patch_label": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
+      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "lifecycle": "upcoming",
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
-      "observed_cycles": 8,
-      "last_seen_cycle": "pbe-cycle-16.19.8198988+branch.releases-16-19.content.release",
-      "last_seen_at": "2026-09-22T20:43:26.290409Z"
+      "observed_cycles": 9,
+      "last_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "last_seen_at": "2026-09-23T00:04:41.862475Z"
     }
   ]
 }
