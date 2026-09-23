@@ -3,36 +3,38 @@
   "branch": "pbe",
   "lane": "preview",
   "status": "fresh",
-  "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
-  "observed_at": "2026-09-23T15:53:23.923101Z",
+  "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+  "observed_at": "2026-09-23T20:56:02.699946Z",
   "events": [
     {
       "entity_type": "augment",
-      "canonical_id": "ARAM_Hellbent",
-      "slug": "hellbent",
+      "canonical_id": "ARAM_ClownCollege",
+      "slug": "clown-college",
       "names": {
-        "en": "Hellbent",
-        "ja": "ヘルベント",
-        "ko": "열의",
-        "zh-CN": "濒死悟道",
-        "zh-TW": "陰魂不散"
+        "en": "Clown College",
+        "ja": "ピエロ大学",
+        "ko": "광대 대학",
+        "zh-CN": "小丑学院",
+        "zh-TW": "小丑學院"
       },
       "branch": "pbe",
       "lane": "preview",
-      "change_kind": "removed",
-      "fields_changed": [],
+      "change_kind": "text",
+      "fields_changed": [
+        "tooltip"
+      ],
       "before": {
-        "name": "Hellbent",
-        "rarity": "prismatic",
-        "tooltip": "Striking enemy champions with Attacks or Abilities grants you a stack of <attention>Revivemaxxing</attention> for @Stacks_Duration@ seconds (max: @Stacks_Max@). At max stacks become <danger>Hellbent</danger>.<br><br><danger>Hellbent</danger>: Upon dying, <attention>revive</attention> over the course of @Revive_Duration@ seconds at <scaleHealth>@Calc_Revive_Max_Health@ max Health</scaleHealth>. Afterwards, you gain <attention>@Calc_AdaptiveForce@ Adaptive Force</attention>, <speed>@Calc_MoveSpeed@ Move Speed towards enemy champions</speed>, and <lifeSteal>@Calc_Omnivamp@ Omnivamp</lifeSteal> for @Buff_Duration@ seconds.<br><br>This has a @Cooldown@ second cooldown."
+        "tooltip": "Gain <spellName>Deceive</spellName> Summoner Spell.<br>Gain <spellName>Backstab</spellName> Passive.<br><br>When you die, spawn an exploding box that deals a large amount of <trueDamage>true damage</trueDamage> and <status>Fear</status> nearby enemies."
       },
-      "after": {},
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "after": {
+        "tooltip": "Gain <spellName>Deceive</spellName> Summoner Spell.<br>Gain <spellName>Backstab</spellName> Passive.<br><br>When you die, deal a large amount of <trueDamage>true damage</trueDamage> and <status>Fear</status> nearby enemies."
+      },
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
-      "href": "/augments/hellbent"
+      "href": "/augments/clown-college"
     },
     {
       "entity_type": "augment",
@@ -53,39 +55,67 @@
       "after": {
         "tooltip": "Dealing and receiving champion damage grants you @StacksPerHit@ stack of <keyword>Juggernauting</keyword> for @Stack_Duration@ seconds. For every @Stacks_Max@ stacks of <keyword>Juggernauting</keyword> you gain <attention>@Calc_AF@ Adaptive Force</attention>, <scaleArmor>@Calc_Defenses@ Armor</scaleArmor>, <scaleMR>@Calc_Defenses@ Magic Resist</scaleMR>, <attention>@Calc_Size@ Size</attention>, and <status>@Calc_Tenacity@ Tenacity</status>.<br><br><rules>Stacks fall off faster the more you have.<br>Maximum Juggernauting Level: @f1.0@</rules>"
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
     },
     {
       "entity_type": "augment",
-      "canonical_id": "ARAM_SpiritBomb",
-      "slug": "spirit-bomb",
+      "canonical_id": "Overloaded",
+      "slug": "overloaded",
       "names": {
-        "en": "Spirit Bomb",
-        "ja": "スピリットボム",
-        "ko": "영혼 폭탄",
-        "zh-CN": "灵魄炸弹",
-        "zh-TW": "靈魂炸彈"
+        "en": "Overloaded",
+        "ja": "オーバーロード",
+        "ko": "과충전",
+        "zh-CN": "超负荷",
+        "zh-TW": "輸出超負荷"
       },
       "branch": "pbe",
       "lane": "preview",
-      "change_kind": "removed",
+      "change_kind": "added",
       "fields_changed": [],
-      "before": {
-        "name": "Spirit Bomb",
+      "before": {},
+      "after": {
+        "name": "Overloaded",
         "rarity": "prismatic",
-        "tooltip": "<healing>Healing</healing> and <shield>Shielding</shield> builds up a <keywordMajor>Spirit Bomb</keywordMajor>. At max stacks, toss the <keywordMajor>Spirit Bomb</keywordMajor> at your <scaleHealth>lowest Health ally</scaleHealth>. After reaching the target, it <healing>heals nearby allies for @Calc_Heal@ of their missing Health</healing> and grants them a <shield>@Calc_Shield@ current Health shield</shield> for @Shield_Duration@ seconds.<br><br><rules>Spirit Bombs Tossed: @f1.0@<br>Healing: @f2.0@<br>Shielding: @f3.0@</rules>"
+        "tooltip": ""
       },
-      "after": {},
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
-      "href": "/augments/spirit-bomb"
+      "href": "/augments/overloaded"
+    },
+    {
+      "entity_type": "augment",
+      "canonical_id": "SurgeField",
+      "slug": "surge-field",
+      "names": {
+        "en": "Surge Field",
+        "ja": "サージフィールド",
+        "ko": "방출 역장",
+        "zh-CN": "电涌力场",
+        "zh-TW": "高能量場域"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "added",
+      "fields_changed": [],
+      "before": {},
+      "after": {
+        "name": "Surge Field",
+        "rarity": "prismatic",
+        "tooltip": ""
+      },
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": true,
+      "href": "/augments/surge-field"
     },
     {
       "entity_type": "champion",
@@ -120,8 +150,8 @@
           12.0
         ]
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -146,8 +176,8 @@
       "after": {
         "base_stats.attackDamage": 64.0
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -188,8 +218,8 @@
           0.0
         ]
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -217,8 +247,8 @@
         "abilities.R.coefficients.coefficient1": 0.7,
         "base_stats.healthPerLevel": 105.0
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -278,8 +308,8 @@
           2.25
         ]
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -304,8 +334,8 @@
       "after": {
         "base_stats.armor": 24.0
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -344,8 +374,8 @@
           100.0
         ]
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -387,8 +417,8 @@
         ],
         "base_stats.armorPerLevel": 4.699999809265137
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
@@ -416,12 +446,46 @@
         "base_stats.attackDamage": 61.0,
         "base_stats.attackDamagePerLevel": 3.9000000953674316
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,
       "href": "/champions/vi"
+    },
+    {
+      "entity_type": "item",
+      "canonical_id": "773102",
+      "slug": "banshee-s-veil",
+      "names": {
+        "en": "Banshee's Veil"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "text",
+      "fields_changed": [
+        "categories"
+      ],
+      "before": {
+        "categories": [
+          "SpellBlock",
+          "HealthRegen",
+          "SpellDamage"
+        ]
+      },
+      "after": {
+        "categories": [
+          "Health",
+          "SpellBlock",
+          "HealthRegen"
+        ]
+      },
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": true,
+      "href": "/items/773102"
     },
     {
       "entity_type": "item",
@@ -444,11 +508,37 @@
         "cost": 1330,
         "description": "<mainText><stats><attention> 20%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
+    },
+    {
+      "entity_type": "item",
+      "canonical_id": "773064",
+      "slug": "force-of-nature",
+      "names": {
+        "en": "Force of Nature"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "text",
+      "fields_changed": [
+        "description"
+      ],
+      "before": {
+        "description": "<mainText><stats><attention> 76</attention> Magic Resist<br><attention> 8%</attention> Move Speed<br><attention> 20</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Steadfast</jadeUnique>: Regenerate an additional <scaleHealth> health</scaleHealth> per 5 seconds.</mainText>"
+      },
+      "after": {
+        "description": "<mainText><stats><attention> 76</attention> Magic Resist<br><attention> 8%</attention> Move Speed<br><attention> 40</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Steadfast</jadeUnique>: Regenerate an additional <scaleHealth> health</scaleHealth> per 5 seconds.</mainText>"
+      },
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": true,
+      "href": "/items/773064"
     },
     {
       "entity_type": "item",
@@ -473,8 +563,8 @@
         "cost": 2600,
         "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
@@ -498,11 +588,37 @@
       "after": {
         "description": "<mainText><stats><attention> 60</attention> Health<br><attention> 75%</attention> Base Health Regen<br><attention> 50%</attention> Base Mana Regen<br><attention> 5</attention> Gold Per 10 Seconds</stats><br><br><passive>Support Quest</passive><br>Earn <keywordMajor>0</keywordMajor> gold from this item to transform it into <rarityGeneric>Bounty of Worlds</rarityGeneric>. <br><br><passive>Shared Riches</passive>  (0s, max 0 charges)<br>While near an ally champion, damage enemy champions or kill minions to gain gold. <active>Active</active> (3 charges)<br>Places an <keyword>Invisible</keyword> Stealth Ward that grants vision.</mainText>"
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
+    },
+    {
+      "entity_type": "item",
+      "canonical_id": "773065",
+      "slug": "spirit-visage",
+      "names": {
+        "en": "Spirit Visage"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "text",
+      "fields_changed": [
+        "description"
+      ],
+      "before": {
+        "description": "<mainText><stats><attention> 400</attention> Health<br><attention> 55</attention> Magic Resist<br><attention> 4</attention> Health Regen per 5 seconds<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Lifeforce:</jadeUnique> Increases <healing>self-healing</healing>, <healing>Health Regen</healing>, <lifeSteal>Lifesteal</lifeSteal>, and <lifeSteal>Spell Vamp</lifeSteal> effects by 20%.</mainText>"
+      },
+      "after": {
+        "description": "<mainText><stats><attention> 400</attention> Health<br><attention> 55</attention> Magic Resist<br><attention> 20</attention> Health Regen per 5 seconds<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Lifeforce:</jadeUnique> Increases <healing>self-healing</healing>, <healing>Health Regen</healing>, <lifeSteal>Lifesteal</lifeSteal>, and <lifeSteal>Spell Vamp</lifeSteal> effects by 20%.</mainText>"
+      },
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": true,
+      "href": "/items/773065"
     },
     {
       "entity_type": "item",
@@ -523,8 +639,8 @@
       "after": {
         "description": "<mainText><stats></stats><br><br>Takedown champions, minions, towers, plates, and epic monsters to complete your quest. Earn points much faster in top lane!<br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use and reduced cooldown<br>• Flat bonus experience, more experience from all sources, and increased level cap</mainText>"
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
@@ -548,11 +664,37 @@
       "after": {
         "description": "<mainText><stats></stats><br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a  shield for 10s on use and 30s reduced cooldown<br>• Flat bonus experience, more experience from all sources, and an increased level cap</mainText>"
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": false
+    },
+    {
+      "entity_type": "item",
+      "canonical_id": "773083",
+      "slug": "warmog-s-armor",
+      "names": {
+        "en": "Warmog's Armor"
+      },
+      "branch": "pbe",
+      "lane": "preview",
+      "change_kind": "text",
+      "fields_changed": [
+        "description"
+      ],
+      "before": {
+        "description": "<mainText><stats><attention> 920</attention> Health<br><attention> 10</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Permanently gain <scaleHealth>3.5 Health</scaleHealth> and <healing>0.1 Health Regen</healing> per 5 sec. per stack. 1 stack is gained per minion or monster kill and 10 stacks are gained per Takedown. Maximum bonuses: <scaleHealth> Health</scaleHealth> and <healing> Health Regen</healing> per 5 seconds.</mainText>"
+      },
+      "after": {
+        "description": "<mainText><stats><attention> 920</attention> Health<br><attention> 30</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Permanently gain <scaleHealth>3.5 Health</scaleHealth> and <healing>0.1 Health Regen</healing> per 5 sec. per stack. 1 stack is gained per minion or monster kill and 10 stacks are gained per Takedown. Maximum bonuses: <scaleHealth> Health</scaleHealth> and <healing> Health Regen</healing> per 5 seconds.</mainText>"
+      },
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+      "landed": false,
+      "is_hotfix": false,
+      "known": true,
+      "href": "/items/773083"
     },
     {
       "entity_type": "item",
@@ -573,8 +715,8 @@
       "after": {
         "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
       },
-      "detected_at": "2026-09-23T15:53:23.923101Z",
-      "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
+      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
       "known": true,

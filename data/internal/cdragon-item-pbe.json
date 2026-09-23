@@ -3,9 +3,9 @@
   "entity_type": "item",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.20.8209878+branch.main.content.beta",
-  "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
-  "observed_at": "2026-09-23T15:53:23.923101Z",
+  "source_version": "16.20.8214880+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+  "observed_at": "2026-09-23T20:56:02.699946Z",
   "source_url": "",
   "entities": [
     {
@@ -12542,7 +12542,7 @@
           "NonbootsMovement"
         ],
         "cost": 2610,
-        "description": "<mainText><stats><attention> 76</attention> Magic Resist<br><attention> 8%</attention> Move Speed<br><attention> 20</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Steadfast</jadeUnique>: Regenerate an additional <scaleHealth> health</scaleHealth> per 5 seconds.</mainText>"
+        "description": "<mainText><stats><attention> 76</attention> Magic Resist<br><attention> 8%</attention> Move Speed<br><attention> 40</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Steadfast</jadeUnique>: Regenerate an additional <scaleHealth> health</scaleHealth> per 5 seconds.</mainText>"
       },
       "id": "773064",
       "names": {
@@ -12560,7 +12560,7 @@
           "CooldownReduction"
         ],
         "cost": 2750,
-        "description": "<mainText><stats><attention> 400</attention> Health<br><attention> 55</attention> Magic Resist<br><attention> 4</attention> Health Regen per 5 seconds<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Lifeforce:</jadeUnique> Increases <healing>self-healing</healing>, <healing>Health Regen</healing>, <lifeSteal>Lifesteal</lifeSteal>, and <lifeSteal>Spell Vamp</lifeSteal> effects by 20%.</mainText>"
+        "description": "<mainText><stats><attention> 400</attention> Health<br><attention> 55</attention> Magic Resist<br><attention> 20</attention> Health Regen per 5 seconds<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Lifeforce:</jadeUnique> Increases <healing>self-healing</healing>, <healing>Health Regen</healing>, <lifeSteal>Lifesteal</lifeSteal>, and <lifeSteal>Spell Vamp</lifeSteal> effects by 20%.</mainText>"
       },
       "id": "773065",
       "names": {
@@ -12784,7 +12784,7 @@
           "HealthRegen"
         ],
         "cost": 3000,
-        "description": "<mainText><stats><attention> 920</attention> Health<br><attention> 10</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Permanently gain <scaleHealth>3.5 Health</scaleHealth> and <healing>0.1 Health Regen</healing> per 5 sec. per stack. 1 stack is gained per minion or monster kill and 10 stacks are gained per Takedown. Maximum bonuses: <scaleHealth> Health</scaleHealth> and <healing> Health Regen</healing> per 5 seconds.</mainText>"
+        "description": "<mainText><stats><attention> 920</attention> Health<br><attention> 30</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Permanently gain <scaleHealth>3.5 Health</scaleHealth> and <healing>0.1 Health Regen</healing> per 5 sec. per stack. 1 stack is gained per minion or monster kill and 10 stacks are gained per Takedown. Maximum bonuses: <scaleHealth> Health</scaleHealth> and <healing> Health Regen</healing> per 5 seconds.</mainText>"
       },
       "id": "773083",
       "names": {
@@ -12996,9 +12996,9 @@
       "fields": {
         "active_effects": false,
         "categories": [
+          "Health",
           "SpellBlock",
-          "HealthRegen",
-          "SpellDamage"
+          "HealthRegen"
         ],
         "cost": 2750,
         "description": "<mainText><stats><attention> 450</attention> Health<br><attention> 55</attention> Magic Resist</stats><br><br><jadeUnique>Intangibility:</jadeUnique> Grants a <shield>Spell Shield</shield> that blocks the next enemy ability. This <shield>Shield</shield> refreshes after no damage is taken from enemy champions for 25 seconds.<br><jadeUnique>Shadow Mending:</jadeUnique> Grants <healing>45 Health Regen</healing> per 5 for up to 10 seconds after taking damage from an enemy champion or when the <shield>Spell Shield</shield> breaks.</mainText>"

@@ -3,9 +3,9 @@
   "entity_type": "augment",
   "branch": "pbe",
   "lane": "preview",
-  "source_version": "16.20.8209878+branch.main.content.beta",
-  "source_patch_label": "pbe-cycle-16.20.8209878+branch.main.content.beta",
-  "observed_at": "2026-09-23T15:53:23.923101Z",
+  "source_version": "16.20.8214880+branch.main.content.beta",
+  "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
+  "observed_at": "2026-09-23T20:56:02.699946Z",
   "source_url": "",
   "entities": [
     {
@@ -268,7 +268,7 @@
       "fields": {
         "name": "Clown College",
         "rarity": "prismatic",
-        "tooltip": "Gain <spellName>Deceive</spellName> Summoner Spell.<br>Gain <spellName>Backstab</spellName> Passive.<br><br>When you die, spawn an exploding box that deals a large amount of <trueDamage>true damage</trueDamage> and <status>Fear</status> nearby enemies."
+        "tooltip": "Gain <spellName>Deceive</spellName> Summoner Spell.<br>Gain <spellName>Backstab</spellName> Passive.<br><br>When you die, deal a large amount of <trueDamage>true damage</trueDamage> and <status>Fear</status> nearby enemies."
       },
       "id": "ARAM_ClownCollege",
       "names": {
@@ -911,6 +911,22 @@
         "zh-TW": "重型打手"
       },
       "slug": "heavy-hitter"
+    },
+    {
+      "fields": {
+        "name": "Hellbent",
+        "rarity": "prismatic",
+        "tooltip": "Striking enemy champions with Attacks or Abilities grants you a stack of <attention>Revivemaxxing</attention> for @Stacks_Duration@ seconds (max: @Stacks_Max@). At max stacks become <danger>Hellbent</danger>.<br><br><danger>Hellbent</danger>: Upon dying, <attention>revive</attention> over the course of @Revive_Duration@ seconds at <scaleHealth>@Calc_Revive_Max_Health@ max Health</scaleHealth>. Afterwards, you gain <attention>@Calc_AdaptiveForce@ Adaptive Force</attention>, <speed>@Calc_MoveSpeed@ Move Speed towards enemy champions</speed>, and <lifeSteal>@Calc_Omnivamp@ Omnivamp</lifeSteal> for @Buff_Duration@ seconds.<br><br>This has a @Cooldown@ second cooldown."
+      },
+      "id": "ARAM_Hellbent",
+      "names": {
+        "en": "Hellbent",
+        "ja": "ヘルベント",
+        "ko": "열의",
+        "zh-CN": "濒死悟道",
+        "zh-TW": "陰魂不散"
+      },
+      "slug": "hellbent"
     },
     {
       "fields": {
@@ -1967,6 +1983,22 @@
         "zh-TW": "一轉就贏"
       },
       "slug": "spin-to-win"
+    },
+    {
+      "fields": {
+        "name": "Spirit Bomb",
+        "rarity": "prismatic",
+        "tooltip": "<healing>Healing</healing> and <shield>Shielding</shield> builds up a <keywordMajor>Spirit Bomb</keywordMajor>. At max stacks, toss the <keywordMajor>Spirit Bomb</keywordMajor> at your <scaleHealth>lowest Health ally</scaleHealth>. After reaching the target, it <healing>heals nearby allies for @Calc_Heal@ of their missing Health</healing> and grants them a <shield>@Calc_Shield@ current Health shield</shield> for @Shield_Duration@ seconds.<br><br><rules>Spirit Bombs Tossed: @f1.0@<br>Healing: @f2.0@<br>Shielding: @f3.0@</rules>"
+      },
+      "id": "ARAM_SpiritBomb",
+      "names": {
+        "en": "Spirit Bomb",
+        "ja": "スピリットボム",
+        "ko": "영혼 폭탄",
+        "zh-CN": "灵魄炸弹",
+        "zh-TW": "靈魂炸彈"
+      },
+      "slug": "spirit-bomb"
     },
     {
       "fields": {
@@ -3390,6 +3422,22 @@
     },
     {
       "fields": {
+        "name": "Overloaded",
+        "rarity": "prismatic",
+        "tooltip": ""
+      },
+      "id": "Overloaded",
+      "names": {
+        "en": "Overloaded",
+        "ja": "オーバーロード",
+        "ko": "과충전",
+        "zh-CN": "超负荷",
+        "zh-TW": "輸出超負荷"
+      },
+      "slug": "overloaded"
+    },
+    {
+      "fields": {
         "name": "Pinball",
         "rarity": "gold",
         "tooltip": "Your <spellName>Snowball</spellName> gains @AbilityHaste@ Ability Haste, deals extra @TrueDamage@ <trueDamage>true damage</trueDamage> and bounces off walls. Each bounce increases its size by @SizeAmp*100@%, increases its damage dealt by @DamageAmp*100@% and reduces its Cooldown by @CDRefundOnBounce*100@%.<br><br>Number of Bounces: <statTracking>@f1@</statTracking>"
@@ -3667,6 +3715,22 @@
         "zh-TW": "刺刺"
       },
       "slug": "stabby-stabby"
+    },
+    {
+      "fields": {
+        "name": "Surge Field",
+        "rarity": "prismatic",
+        "tooltip": ""
+      },
+      "id": "SurgeField",
+      "names": {
+        "en": "Surge Field",
+        "ja": "サージフィールド",
+        "ko": "방출 역장",
+        "zh-CN": "电涌力场",
+        "zh-TW": "高能量場域"
+      },
+      "slug": "surge-field"
     },
     {
       "fields": {
