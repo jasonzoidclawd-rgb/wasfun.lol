@@ -266,11 +266,29 @@ def parse_build_items(page: str) -> dict[str, list[dict]]:
     return out
 
 
+def parse_build_history(page: str) -> list[dict]:
+    """The provider's own dated snapshots of this champion's win and pick rate
+    ("Snapshot details"), newest first. Used to estimate the noise scale: how far
+    successive estimates of the same quantity move within a patch."""
+    page = _strip_noise(page)
+    i = page.find("Snapshot details")
+    if i < 0:
+        return []
+    text = re.sub(r"\s+", " ", html_module.unescape(re.sub(r"<[^>]+>", " ", page[i : i + 40000])))
+    rows = []
+    for m in re.finditer(r"(\d{8})_(\d{6}) • Patch: ([0-9]+\.[0-9]+) .*?Win: " + _PCT + r" Pick: " + _PCT, text):
+        date = f"{m.group(1)[:4]}-{m.group(1)[4:6]}-{m.group(1)[6:]}"
+        rows.append({"snapshot": f"{m.group(1)}_{m.group(2)}", "date": date, "patch": m.group(3),
+                     "winRate": _pct(m.group(4), "history win rate"), "pickRate": _pct(m.group(5), "history pick rate")})
+    return rows
+
+
 def parse_build_page(page: str) -> dict:
     return {
         **parse_build_header(page),
         "augments": parse_build_augments(page),
         "items": parse_build_items(page),
+        "history": parse_build_history(page),
     }
 
 
@@ -369,6 +387,7 @@ def build_champion_build_feed(pages: dict[str, dict], failures: list[dict], ctx,
             "champions.*.augments[].winRate": "provider 'Win rate' on the champion's listed row; see semantics",
             "champions.*.augments[].augmentId": "CDragon augmentNameId via scripts/augment_stats_identity.py",
             "champions.*.items": "provider item sections; win rate counts only games that completed the path",
+            "champions.*.history": "provider 'Snapshot details': its own dated snapshots of the champion's win and pick rate",
         },
         "units": {"appearanceRate": UNITS_UNCONFIRMED, "pickRate": CHAMPION_PICK_RATE_CONFIRMED},
         # Downstream must read this before treating augments[].winRate as the champion's own.

@@ -118,6 +118,9 @@ def check_champion_builds(rep: Report, doc: dict) -> None:
             if key in pairs:
                 rep.err(f"{where}: duplicate augment row {key}")
             pairs.add(key)
+        for row in champ.get("history", []):
+            _rate(rep, f"{where} history {row.get('snapshot')}", row.get("winRate"))
+            _rate(rep, f"{where} history {row.get('snapshot')}", row.get("pickRate"))
         for section, rows in champ.get("items", {}).items():
             for row in rows:
                 _rate(rep, f"{where} items.{section}", row.get("pickRate"))
