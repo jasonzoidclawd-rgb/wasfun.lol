@@ -1,4 +1,5 @@
 import type { DecisionContext, DecisionMode, DecisionResult } from "../contracts/decision";
+import { augmentStatsDisabledResponse, augmentStatsEnabled } from "@/lib/stats/kill-switch";
 import { evaluateDecision, type DecisionEngineData } from "../decision/evaluate";
 import { DEFAULT_MODEL_CONFIG } from "../decision/model-config";
 import type { RequireEntitlementResult } from "../entitlements/server";
@@ -46,6 +47,7 @@ export async function handleEvaluate(
   request: Request,
   deps: DecisionApiDeps,
 ): Promise<Response> {
+  if (!augmentStatsEnabled()) return augmentStatsDisabledResponse();
   const gate = await deps.requireEntitlement();
   if (!gate.ok) return jsonError(gate.reason, gate.status);
 
@@ -106,6 +108,7 @@ export async function handleChampionMatrix(
   request: Request,
   deps: DecisionApiDeps,
 ): Promise<Response> {
+  if (!augmentStatsEnabled()) return augmentStatsDisabledResponse();
   const gate = await deps.requireEntitlement();
   if (!gate.ok) return jsonError(gate.reason, gate.status);
 
