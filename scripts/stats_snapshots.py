@@ -5,6 +5,8 @@ Carry-over, set debounce and patch deltas all need yesterday's numbers, which
 the feeds overwrite. This keeps an append-only copy of each statistics feed per
 UTC day under `data/internal/stats-snapshots/<YYYY-MM-DD>/<feed>.json.gz`:
 
+- keyed by the provider's data date, not our fetch date, so a provider that
+  stops updating produces no duplicate "new" days;
 - write-once: a day that already has a snapshot is never overwritten, so the
   history cannot be rewritten by a re-run;
 - the upstream's numbers are patch-to-date (cumulative), so consumers combine
@@ -14,8 +16,8 @@ UTC day under `data/internal/stats-snapshots/<YYYY-MM-DD>/<feed>.json.gz`:
   80 KB a day, because the history lives in git.
 
 Usage:
-    python3 scripts/stats_snapshots.py            # snapshot today, then prune
-    python3 scripts/stats_snapshots.py --date 2026-09-24
+    python3 scripts/stats_snapshots.py            # snapshot the feeds' data date, then prune
+    python3 scripts/stats_snapshots.py --date 2026-09-21
 """
 
 from __future__ import annotations
@@ -24,7 +26,6 @@ import argparse
 import gzip
 import json
 import shutil
-from datetime import datetime, timezone
 from pathlib import Path
 
 from data_paths import INTERNAL_DATA_DIR
@@ -109,8 +110,13 @@ def prune(snap_dir: Path = SNAPSHOT_DIR, keep: int = KEEP_PATCHES) -> list[str]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--date", default=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+    ap.add_argument("--date", help="default: the champion-build feed's dataDate")
     args = ap.parse_args()
+    if not args.date:
+        feed = json.loads((INTERNAL_DATA_DIR / "champion-build-feed.json").read_text(encoding="utf-8"))
+        if not feed.get("dataDate"):
+            raise SystemExit("champion-build-feed has no dataDate; refusing to guess a snapshot date")
+        args.date = feed["dataDate"]
     written = take_snapshot(args.date)
     removed = prune()
     print(f"stats snapshots: wrote {written or 'nothing (already snapshotted)'}; pruned {removed or 'nothing'}")

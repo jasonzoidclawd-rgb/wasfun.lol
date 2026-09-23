@@ -10,7 +10,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from augment_kit_tags import OVERRIDES, TAGS_PATH, derive_profile, kit_mismatch
+from augment_kit_tags import OVERRIDES, TAGS_PATH, derive_profile, kit_mismatch, refresh, text_hash
 from augment_stats_identity import build_context, resolve_augment
 from changed_augments import build_patch_entry, catalog_tokens, parse_mayhem_section
 from scrape_mayhem_stats import (
@@ -102,6 +102,9 @@ class WinRateSemanticsTests(unittest.TestCase):
         glob = [{"sourceSlug": "a", "winRate": 55.0}, {"sourceSlug": "b", "winRate": 51.0}]
         self.assertEqual(win_rate_semantics(self.PAGES, glob)["status"], "global-copy")
 
+    def test_nothing_to_compare_is_unknown_not_champion_specific(self):
+        self.assertEqual(win_rate_semantics(self.PAGES, [])["status"], "unknown")
+
     def test_own_rows_and_mixtures_are_distinguished(self):
         self.assertEqual(win_rate_semantics(self.PAGES, [{"sourceSlug": "a", "winRate": 1.0},
                                                          {"sourceSlug": "b", "winRate": 2.0}])["status"],
@@ -122,6 +125,10 @@ class IdentityTests(unittest.TestCase):
     def test_never_a_substring_match(self):
         self.assertEqual(resolve_augment("siphon", "Siphon", "silver", self.ctx), ("ARAM_Siphon", "name"))
         self.assertEqual(resolve_augment("siphon", "Siphon", "gold", self.ctx), (None, "unmatched"))
+
+    def test_a_slug_alone_is_only_a_candidate(self):
+        self.assertEqual(resolve_augment("tank-engine", "Tank Engine Mk II", "gold", self.ctx),
+                         (None, "slug-candidate:ARAM_TankEngine"))
 
     def test_rarity_must_agree(self):
         self.assertEqual(resolve_augment("tank-engine", "Tank Engine", "silver", self.ctx), (None, "unmatched"))
@@ -150,6 +157,17 @@ class ChangedAugmentTests(unittest.TestCase):
         # is Tooth Fairy's codename. King Me's bullet names other augments after it.
         self.assertTrue({"ARAM_SkilledSniper", "BurstingTeeth", "KingMe"} <= bugfix)
         self.assertNotIn("ARAM_Overloaded", bugfix)
+
+    def test_an_entry_stays_provisional_until_both_signals_can_have_landed(self):
+        from datetime import datetime, timezone
+        page = fixture("patch-notes-26.19-mayhem.html")
+        early = build_patch_entry("26.19", page, "u", CATALOG, {"events": []}, published_at="2026-09-22T18:00:00Z",
+                                  now=datetime(2026, 9, 23, tzinfo=timezone.utc))
+        late = build_patch_entry("26.19", page, "u", CATALOG, {"events": []}, published_at="2026-09-22T18:00:00Z",
+                                 now=datetime(2026, 9, 26, tzinfo=timezone.utc))
+        missing = build_patch_entry("26.19", None, None, CATALOG, {"events": []}, published_at="2026-09-01T00:00:00Z")
+        self.assertEqual((early["status"], late["status"], missing["status"]), ("provisional", "complete", "provisional"))
+        self.assertEqual(early["policyWhileProvisional"], "treat every augment as changed")
 
     def test_cdragon_diffs_merge_with_patch_notes(self):
         events = {"events": [
@@ -194,6 +212,19 @@ class KitTagTests(unittest.TestCase):
         self.assertEqual(derive_profile({"effectText": {"desc": "Gain <scaleHealth>max Health</scaleHealth>."}}), "tank")
         self.assertEqual(derive_profile({"effectText": {"desc": "Gain Adaptive Force and Attack Speed."}}), "neutral")
 
+    def test_a_text_change_reopens_the_review(self):
+        aug = {"augmentId": "X", "availability": {"status": "confirmed_live"}, "effectText": {"desc": "Gain Attack Speed."}}
+        catalog = {"augments": [aug]}
+        reviewed = {"tags": {"X": {"profile": "ad", "derived": "ad", "reviewed": True, "textHash": text_hash(aug, catalog)}}}
+        self.assertTrue(refresh(catalog, reviewed, "d")["tags"]["X"]["reviewed"])
+        aug["effectText"]["desc"] = "Gain Ability Power."
+        tag = refresh(catalog, reviewed, "d")["tags"]["X"]
+        self.assertEqual((tag["reviewed"], tag["profile"]), (False, "ap"))
+
+    def test_new_augments_are_never_marked_reviewed(self):
+        aug = {"augmentId": "Y", "availability": {"status": "confirmed_live"}, "effectText": {"desc": "Gain Armor."}}
+        self.assertFalse(refresh({"augments": [aug]}, {"tags": {}}, "d")["tags"]["Y"]["reviewed"])
+
     def test_mismatch_is_symmetric_and_mixed_kits_never_mismatch(self):
         self.assertEqual(kit_mismatch("ap", "physical"), 1)
         self.assertEqual(kit_mismatch("ad", "magic"), 1)
@@ -215,6 +246,7 @@ class ValidatorTests(unittest.TestCase):
                  "augments": [{"rarity": "gold", "sourceSlug": "a", "appearanceRate": 10.0, "winRate": 55.0}],
                  "items": {"boots": [{"items": [{"sourceSlug": "b"}], "pickRate": 50.0, "winRate": 55.0}]}}
         return {"schemaVersion": 1, "feed": "champion-build-feed", "fetchedAt": "t", "patch": "26.19",
+                "dataDate": "2026-09-21",
                 "provenance": {k: None for k in V.PROVENANCE_KEYS}, "fieldProvenance": {}, "units": {},
                 "semantics": {"augments[].winRate": {"status": "global-copy"}},
                 "champions": {f"c{i}": copy.deepcopy(champ) for i in range(V.MIN_CHAMPIONS)}}
@@ -248,6 +280,20 @@ class ValidatorTests(unittest.TestCase):
         del doc["semantics"]
         self.assertTrue(self._errors(V.check_champion_builds, doc))
 
+    def test_the_confirmed_pick_rate_unit_is_rechecked_every_run(self):
+        doc = self._build()
+        doc["units"] = {"pickRate": {"status": "confirmed", "confirmation": "sums to 1000%"}}
+        for champ in doc["champions"].values():
+            champ["pickRate"] = 1000.0 / len(doc["champions"])
+        self.assertEqual(self._errors(V.check_champion_builds, doc), [])
+        doc["champions"]["c0"]["pickRate"] += 50
+        self.assertTrue(self._errors(V.check_champion_builds, doc))
+
+    def test_unknown_semantics_fail(self):
+        doc = self._build()
+        doc["semantics"] = {"augments[].winRate": {"status": "unknown"}}
+        self.assertTrue(self._errors(V.check_champion_builds, doc))
+
     def test_too_few_champions_fail(self):
         doc = self._build()
         doc["champions"] = dict(list(doc["champions"].items())[:10])
@@ -255,6 +301,7 @@ class ValidatorTests(unittest.TestCase):
 
     def test_feed_built_from_parsed_pages_passes(self):
         page = parse_build_page(fixture("build-yasuo.html"))
+        page["pickRate"] = 1000.0 / V.MIN_CHAMPIONS  # the confirmed unit: champion pick rates sum to 1000%
         glob = [{"sourceSlug": r["sourceSlug"], "winRate": r["winRate"]} for r in page["augments"]]
         ctx = build_context(CATALOG, {})
         feed = build_champion_build_feed({f"c{i}": page for i in range(V.MIN_CHAMPIONS)}, [], ctx,

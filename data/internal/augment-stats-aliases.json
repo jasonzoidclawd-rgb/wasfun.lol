@@ -91,6 +91,24 @@
    "augmentId": null,
    "reviewedAt": "2026-09-24",
    "reason": "Provider lists Terror as prismatic; the catalog's ARAM_Terror is gold (wiki gold, CDragon silver). Three sources disagree on rarity, so the join is not established; left unresolved."
+  },
+  {
+   "sourceSlug": "void-immolation",
+   "augmentId": "ARAM_Quest_VoidImmolation",
+   "reason": "Provider 'Void Immolation' (retired) is the quest augment whose CDragon codename is ARAM_Quest_VoidImmolation and whose reward is the Void Immolation item; CDragon's display name is Icathia's Fall.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "sonic-boom",
+   "augmentId": "ARAM_SonicBoom",
+   "reason": "CDragon codename ARAM_SonicBoom matches; the catalog's display name for it is broken (it holds the tooltip text), so the name match cannot run.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "double-defense",
+   "augmentId": "DoubleDefense",
+   "reason": "CDragon codename DoubleDefense matches the provider's 'Double Defense'; CDragon's current display name is Bolstered (same effect: stronger shields from an ability).",
+   "reviewedAt": "2026-09-24"
   }
  ]
 }

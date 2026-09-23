@@ -85,7 +85,8 @@ def check_augment_stats(rep: Report, doc: dict) -> None:
         if row.get("availability") == "live":
             live += 1
             resolved += bool(row.get("augmentId"))
-            new_unmatched += row.get("identity") in ("unmatched",) or str(row.get("identity", "")).startswith("ambiguous")
+            identity = str(row.get("identity", ""))
+            new_unmatched += identity == "unmatched" or identity.startswith(("ambiguous", "slug-candidate"))
     if live and resolved / live < MIN_LIVE_RESOLVED_SHARE:
         rep.err(f"augment-stats-feed: only {resolved}/{live} live augments resolved to a CDragon id")
     if new_unmatched > MAX_NEW_UNMATCHED:
@@ -125,11 +126,19 @@ def check_champion_builds(rep: Report, doc: dict) -> None:
                     rep.err(f"{where} items.{section}: row with no items")
     semantics = doc.get("semantics", {}).get("augments[].winRate", {})
     if semantics.get("status") not in ("global-copy", "champion-specific", "mixed"):
-        rep.err("champion-build-feed: semantics of augments[].winRate not recorded")
+        rep.err(f"champion-build-feed: semantics of augments[].winRate is {semantics.get('status')!r}, not established")
     elif semantics["status"] != "global-copy":
         rep.warn(f"champion-build-feed: champion augment win rates are now {semantics['status']} "
                  f"({semantics.get('rowsEqualToGlobal')}/{semantics.get('rowsCompared')} equal to global); "
                  "re-run scripts/model/interaction_spread.py and revisit the pooling fallback")
+    # The champion pick rate's unit (share of games) is confirmed only while the
+    # rates keep summing to 10 per game; re-check it on every run.
+    pick_sum = sum(c.get("pickRate") or 0 for c in champions.values())
+    if doc.get("units", {}).get("pickRate", {}).get("status") == "confirmed" and len(champions) >= MIN_CHAMPIONS \
+            and abs(pick_sum - 1000.0) > 10.0:
+        rep.err(f"champion-build-feed: champion pick rates sum to {pick_sum:.1f}%, not 1000%; the confirmed unit no longer holds")
+    if not doc.get("dataDate"):
+        rep.err("champion-build-feed: missing the provider's dataDate")
     failures = doc.get("failures", [])
     if failures:
         rep.warn(f"champion-build-feed: {len(failures)} build pages failed: {[f['slug'] for f in failures][:10]}")
@@ -139,6 +148,8 @@ def check_changed(rep: Report, doc: dict) -> None:
     for patch, entry in doc.get("patches", {}).items():
         if entry.get("patch") != patch:
             rep.err(f"changed-augments {patch}: entry labelled {entry.get('patch')!r}")
+        if entry.get("status") not in ("complete", "provisional"):
+            rep.err(f"changed-augments {patch}: status {entry.get('status')!r}")
         for change in entry.get("changed", []):
             if not change.get("augmentId") or not change.get("evidence"):
                 rep.err(f"changed-augments {patch}: change without augmentId or evidence: {change}")
@@ -150,6 +161,8 @@ def check_kit_tags(rep: Report, doc: dict) -> None:
             rep.err(f"augment-kit-tags {augment_id}: profile {tag.get('profile')!r}")
         if tag.get("profile") != tag.get("derived") and tag.get("reviewed") and not tag.get("override"):
             rep.err(f"augment-kit-tags {augment_id}: overridden without a reason")
+        if not tag.get("textHash"):
+            rep.err(f"augment-kit-tags {augment_id}: no textHash, so a text change could keep a stale review")
     unreviewed = [k for k, t in doc.get("tags", {}).items() if not t.get("reviewed")]
     if unreviewed:
         rep.warn(f"augment-kit-tags: {len(unreviewed)} unreviewed (count as neutral): {unreviewed[:8]}")

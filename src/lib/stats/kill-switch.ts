@@ -8,8 +8,8 @@
  *   WASFUN_AUGMENT_STATS=off   → removed everywhere after the next deploy
  *
  * Fail-safe parsing: only an unset variable or "on" / "1" / "true" leaves the
- * statistics on. Any other value — including typos — turns them off, so a
- * mistyped kill still kills.
+ * statistics on. Any other value — including an empty one or a typo — turns
+ * them off, so a mistyped kill still kills.
  *
  * Every server surface that returns augment statistics must check this, and
  * `scripts/verify_kill_switch.py` crawls a build with the flag off to prove it.
@@ -17,7 +17,7 @@
 
 export const AUGMENT_STATS_ENV = "WASFUN_AUGMENT_STATS";
 
-const ON_VALUES = new Set(["", "on", "1", "true"]);
+const ON_VALUES = new Set(["on", "1", "true"]);
 
 export function augmentStatsEnabled(
   env: Record<string, string | undefined> = process.env,

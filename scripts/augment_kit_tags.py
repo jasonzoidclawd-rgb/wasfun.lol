@@ -3,19 +3,22 @@
 
 The pooled model's covariate k_ca flags a champion taking an augment that pays
 off a stat its kit doesn't use (an ability-power augment on a physical-damage
-champion, or the reverse). That needs one hand-checked tag per augment:
+champion, or the reverse). That needs one reviewed tag per augment:
 
     ad       pays off attacks, attack damage, attack speed or crit
     ap       pays off ability power
     tank     pays off health or resistances
     neutral  anything else (haste, movement, utility, hybrid, gold, snowball ...)
 
-Each profile is first derived from the augment's CDragon text, then every live
-augment was read by hand and the derivation confirmed or overridden (OVERRIDES
-below, with the reason for each). The result is persisted in
-`data/internal/augment-kit-tags.json`; after that only augments a patch adds
-need a new tag. An augment with no reviewed tag counts as neutral (k = 0), so
-an unchecked tag can never move a grade.
+Each profile is first derived from the augment's CDragon text. On 2026-09-24
+the build agent (Claude, not a human) read every live augment's text against
+its derived tag and confirmed or overrode it (OVERRIDES below, each with its
+reason). A human spot-check is still open. The result is persisted in
+`data/internal/augment-kit-tags.json` with a hash of the text each tag was
+reviewed against: when a patch changes that text, or adds an augment, the tag
+is re-derived and marked unreviewed. Nothing here ever marks a tag reviewed on
+its own. An unreviewed tag counts as neutral (k = 0), so an unchecked tag can
+never move a grade.
 
 The champion side is Riot's own `tacticalInfo.damageType`, already persisted in
 `data/internal/abilities.json` (physical / magic / mixed).
@@ -26,8 +29,10 @@ Usage:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
+import sys
 from datetime import date
 
 from data_paths import INTERNAL_DATA_DIR
@@ -42,7 +47,7 @@ _AD = (r"<scalead>", r"attack damage", r"<physicaldamage>", r"attack speed", r"c
        r"\bcrit", r"on-hit", r"\battacks?\b", r"lethality", r"armor pen")
 _TANK = (r"<scalehealth>", r"\bmax(imum)? health", r"\barmor\b", r"magic resist", r"tenacity", r"bonus health")
 
-# Hand review, 2026-09-24: every live augment's text read; these are the rows where
+# Build-agent review, 2026-09-24: every live augment's text read; these are the rows where
 # the derivation was wrong. Keyed by augmentId.
 OVERRIDES: dict[str, tuple[str, str]] = {
     "ARAM_Firebrand": ("ad", "burn is applied by Attacks"),
@@ -106,6 +111,17 @@ def derive_profile(augment: dict) -> str:
     return "neutral"
 
 
+def text_hash(augment: dict, catalog: dict | None = None) -> str:
+    """Hash of the text a tag was reviewed against. The catalog can carry two
+    entries under one augmentId; their texts are hashed together, in order, so
+    the hash does not depend on which entry is read last."""
+    same = [augment]
+    if catalog is not None:
+        same = [a for a in catalog.get("augments", []) if a.get("augmentId") == augment.get("augmentId")]
+    texts = sorted("\n".join((a.get("effectText") or {}).get(k) or "" for k in ("desc", "tooltip")) for a in same)
+    return hashlib.sha1("\n--\n".join(texts).encode("utf-8")).hexdigest()[:12]
+
+
 def kit_mismatch(profile: str | None, champion_damage_type: str | None) -> int:
     """k_ca: 1 when the augment pays off the stat the champion's kit doesn't deal."""
     if profile == "ap" and champion_damage_type == "physical":
@@ -120,14 +136,21 @@ def refresh(catalog: dict, existing: dict, today: str) -> dict:
     for augment in catalog.get("augments", []):
         augment_id = augment.get("augmentId")
         status = (augment.get("availability") or {}).get("status")
-        if not augment_id or status not in LIVE or augment_id in tags:
+        if not augment_id or status not in LIVE:
+            continue
+        if augment_id in tags:
+            if tags[augment_id].get("textHash") != text_hash(augment, catalog):
+                # The text it was reviewed against changed: re-derive, and wait for a new review.
+                derived = derive_profile(augment)
+                tags[augment_id] = {"profile": derived, "derived": derived, "reviewed": False,
+                                    "textHash": text_hash(augment, catalog), "staleReview": tags[augment_id]}
             continue
         derived = derive_profile(augment)
-        tags[augment_id] = {"profile": derived, "derived": derived, "reviewed": False}
+        tags[augment_id] = {"profile": derived, "derived": derived, "reviewed": False, "textHash": text_hash(augment, catalog)}
     return {
         "schemaVersion": 1,
         "profiles": list(PROFILES),
-        "method": "derived from CDragon effect text, then read by hand and confirmed or overridden",
+        "method": "derived from CDragon effect text, then reviewed and confirmed or overridden (see review)",
         "champSide": "data/internal/abilities.json profiles.*.damageType (Riot tacticalInfo)",
         "unreviewedPolicy": "an unreviewed tag counts as neutral (k = 0)",
         "review": existing.get("review", {}),
@@ -144,7 +167,7 @@ def initial_review(catalog: dict, today: str) -> dict:
             continue
         derived = derive_profile(augment)
         profile, note = OVERRIDES.get(augment_id, (derived, None))
-        entry = {"profile": profile, "derived": derived, "reviewed": True}
+        entry = {"profile": profile, "derived": derived, "reviewed": True, "textHash": text_hash(augment, catalog)}
         if note:
             entry["override"] = note
         tags[augment_id] = entry
@@ -154,7 +177,8 @@ def initial_review(catalog: dict, today: str) -> dict:
     return {
         "review": {
             "reviewedAt": today,
-            "reviewedBy": "v3 build agent: every live augment's CDragon text read against its derived tag",
+            "reviewedBy": "v3 build agent (Claude), not a human: every live augment's CDragon text read "
+                          "against its derived tag. Human spot-check pending.",
             "reviewed": len(tags),
             "overridden": sum(1 for t in tags.values() if "override" in t),
         },
@@ -165,7 +189,13 @@ def initial_review(catalog: dict, today: str) -> dict:
 def main() -> None:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     today = date.today().isoformat()
-    existing = json.loads(TAGS_PATH.read_text(encoding="utf-8")) if TAGS_PATH.exists() else initial_review(catalog, today)
+    if TAGS_PATH.exists():
+        existing = json.loads(TAGS_PATH.read_text(encoding="utf-8"))
+    elif "--initial-review" in sys.argv:
+        # Only an explicit, recorded review may mark tags reviewed.
+        existing = initial_review(catalog, today)
+    else:
+        raise SystemExit(f"{TAGS_PATH} is missing; restore it from git (never regenerate reviews silently)")
     doc = refresh(catalog, existing, today)
     TAGS_PATH.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     unreviewed = sum(1 for t in doc["tags"].values() if not t["reviewed"])

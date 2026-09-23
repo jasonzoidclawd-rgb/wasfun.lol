@@ -10,8 +10,11 @@ scraped rows themselves, in order:
    (hand-reviewed; each entry states its reason), which also records rows that
    are deliberately left unresolved;
 2. an exact normalized display-name match to exactly one catalog augment of the
-   same rarity;
-3. an exact normalized slug match, same rule.
+   same rarity.
+
+A slug-only match is NOT accepted: the catalog's slugs partly come from the same
+provider, so a slug agreeing is not independent evidence, and it has hidden
+renamed augments. It is reported as a candidate for the alias table instead.
 
 No substring or fuzzy matching: "siphon" must never resolve to Soul Siphon.
 
@@ -87,12 +90,14 @@ def resolve_augment(source_slug: str, name: str, rarity: str, ctx: IdentityConte
     if source_slug in ctx.aliases:
         entry = ctx.aliases[source_slug]
         return entry.get("augmentId"), "alias" if entry.get("augmentId") else "alias:unresolved"
-    for method, index, key in (("name", ctx.by_name, norm(name)), ("slug", ctx.by_slug, norm(source_slug))):
-        hits = index.get((key, rarity), set())
-        if len(hits) == 1:
-            return next(iter(hits)), method
-        if len(hits) > 1:
-            return None, f"ambiguous:{method}"
+    hits = ctx.by_name.get((norm(name), rarity), set())
+    if len(hits) == 1:
+        return next(iter(hits)), "name"
+    if len(hits) > 1:
+        return None, "ambiguous:name"
+    candidates = ctx.by_slug.get((norm(source_slug), rarity), set())
+    if len(candidates) == 1:
+        return None, f"slug-candidate:{next(iter(candidates))}"
     return None, "unmatched"
 
 

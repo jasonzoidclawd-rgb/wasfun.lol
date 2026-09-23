@@ -14,10 +14,15 @@ and runs three independent detectors on everything it fetches:
 
 1. the `data-augment-stat` attribute every augment-number element carries;
 2. JSON objects that name an augment and carry a numeric statistic;
-3. a fingerprint: an augment's name followed within a short window by that
-   augment's own current win rate, from data/internal/augment-stats-feed.json.
-   It does not depend on markup conventions, so it catches a surface that
-   forgot the marker.
+3. a fingerprint: an augment's name, id or slug followed within a short window
+   by that augment's own current win rate written as a rate: followed by "%",
+   or right after a statistic key (`"win_rate":60.1`, `winRate: 60.1`). It reads
+   the rendered text AND the raw body, so RSC flight payloads and inline JSON are
+   covered. A bare number is not enough: base-stat tables are full of them.
+   It does not depend on markup conventions, so it catches a surface that forgot
+   the marker.
+
+Any 5xx response fails the crawl: a page that crashed proves nothing.
 
 --expect on inverts the verdict: at least one detection is required, which
 proves the detectors see numbers when they are there.
@@ -47,7 +52,9 @@ PUBLIC_DATA = ROOT / "public" / "data"
 STAT_KEYS = {"win_rate", "winRate", "pick_rate", "pickRate", "appearanceRate", "lift", "letter", "grade",
              "score", "oracleScore"}
 AUGMENT_KEYS = {"augmentId", "augmentSlug", "augment_id"}
-WINDOW = 160
+WINDOW = 200
+RATE_KEY = (r"(?:(?:win_?rate|winrate|pick_?rate|pickrate|appearance_?rate|appearancerate)[\\\"']*\s*[:=]\s*[\\\"']*"
+            r"|\\?\"(?:w|wr|p|pr)\\?\"\s*:\s*)")  # quoted short keys; RSC payloads escape the quotes
 STATS_APIS = (
     ("POST", "/api/decision/evaluate"),
     ("POST", "/api/decision/champion-matrix"),
@@ -69,8 +76,8 @@ def fetch(url: str, method: str = "GET") -> tuple[int, str, str]:
 
 
 def load_fingerprints() -> list[tuple[str, list[str]]]:
-    """(lower-cased display name, [win-rate strings]) per live augment with an id.
-    Names in every locale the catalog carries, so localized pages are covered."""
+    """(lower-cased token, [win-rate strings]) per live augment: its display name
+    in every locale the catalog carries, its CDragon id and its slugs."""
     feed = json.loads(STATS_FEED.read_text(encoding="utf-8"))
     catalog = {a.get("augmentId"): a for a in json.loads(CATALOG.read_text(encoding="utf-8"))["augments"]}
     out = []
@@ -79,9 +86,10 @@ def load_fingerprints() -> list[tuple[str, list[str]]]:
             continue
         wr = row["winRate"]
         values = sorted({f"{wr:.2f}", f"{wr:.1f}"})
-        names = {row["name"]}
+        names = {row["name"], row["sourceSlug"]}
         aug = catalog.get(row.get("augmentId")) or {}
         names |= {v for v in (aug.get("names") or {}).values() if isinstance(v, str)}
+        names |= {v for v in (row.get("augmentId"), aug.get("slug")) if v}
         for name in names:
             if len(name) >= 4:
                 out.append((name.lower(), values))
@@ -123,14 +131,17 @@ def page_text(body: str, content_type: str) -> str:
 
 
 def detect_fingerprint(text: str, fingerprints) -> list[str]:
+    """The augment's own win rate, written as a rate, within WINDOW characters
+    after one of its tokens: "60.1%" or "win_rate":60.1 (lower-cased text)."""
     hits = []
     for name, values in fingerprints:
         start = 0
         while (i := text.find(name, start)) >= 0:
-            window = text[i : i + len(name) + WINDOW]
+            window = text[i + len(name) : i + len(name) + WINDOW]
             for value in values:
-                if re.search(re.escape(value) + r"\s*%", window):
-                    hits.append(f"fingerprint {name!r} {value}%")
+                number = re.escape(value) + r"(?![\d])"
+                if re.search(r"(?<![\d.])" + number + r"\s*%", window) or re.search(RATE_KEY + number, window):
+                    hits.append(f"fingerprint {name!r} {value}")
                     break
             start = i + len(name)
     return hits
@@ -164,7 +175,7 @@ def api_urls(base: str) -> list[str]:
             index = json.loads(body)
         except ValueError:
             index = {}
-        resources = index.get("resources") or index.get("available") or []
+        resources = index.get("endpoints") or index.get("resources") or index.get("available") or []
         names = resources.keys() if isinstance(resources, dict) else resources
         urls += [urljoin(base, f"/api/v1/{name}") for name in names if isinstance(name, str)]
     urls += [urljoin(base, f"/data/{p.name}") for p in sorted(PUBLIC_DATA.glob("*.json"))]
@@ -173,7 +184,9 @@ def api_urls(base: str) -> list[str]:
 
 def scan(url: str, fingerprints) -> dict:
     status, ctype, body = fetch(url)
-    hits = detect_marker(body) + detect_json(body) + detect_fingerprint(page_text(body, ctype), fingerprints)
+    raw = re.sub(r"\s+", " ", html_module.unescape(body)).lower()
+    hits = (detect_marker(body) + detect_json(body)
+            + detect_fingerprint(page_text(body, ctype), fingerprints) + detect_fingerprint(raw, fingerprints))
     scripts = re.findall(r'src="(/_next/static/[^"]+\.js)"', body) if "html" in ctype else []
     return {"url": url, "status": status, "hits": hits, "scripts": scripts}
 
@@ -191,7 +204,10 @@ def main(argv=None) -> int:
     pages = sitemap_urls(args.base)
     if args.max:
         pages = pages[: args.max]
-    targets = pages + api_urls(args.base)
+    apis = api_urls(args.base)
+    if not any("/api/v1/" in u for u in apis):
+        raise SystemExit("found no /api/v1 resources to crawl; the index shape may have changed")
+    targets = pages + apis
     with ThreadPoolExecutor(args.workers) as pool:
         results = list(pool.map(lambda u: scan(u, fingerprints), targets))
     scripts = sorted({urljoin(args.base, s) for r in results for s in r["scripts"]})
@@ -213,7 +229,9 @@ def main(argv=None) -> int:
         "serverErrors": [r["url"] for r in failed_fetch],
     }
     ok = True
-    if args.expect == "off":
+    if failed_fetch:
+        ok = False
+    elif args.expect == "off":
         ok = not hits and all(c["status"] == 503 for c in api_checks)
     else:
         ok = bool(hits)

@@ -10,9 +10,14 @@ patch that changed it. This builds that list once per patch and persists it in
 - CDragon diffs already recorded in `data/internal/patch-events.json` for that
   patch label (numeric, text, rarity and added events).
 
-A patch already in the file is never re-parsed unless --force is passed, so the
-list a patch's grades were built on stays fixed. Names that match no catalog
-augment are kept with augmentId null, never dropped.
+An entry is "provisional" until both signals have had time to land: the patch
+notes' Mayhem section was found, and at least SETTLE_DAYS have passed since the
+patch notes were published (CDragon diffs arrive after release). A provisional
+entry is re-parsed on every run; consumers must treat EVERY augment as changed
+while it is provisional, so an incomplete list never reads as "unchanged". A
+complete entry is never re-parsed unless --force is passed, so the list a
+patch's grades were built on stays fixed. Names that match no catalog augment
+are kept with augmentId null, never dropped.
 
 Usage:
     python3 scripts/changed_augments.py --patch 26.19 [--force] [--html FILE]
@@ -36,6 +41,7 @@ CATALOG_PATH = INTERNAL_DATA_DIR / "augments.json"
 PATCH_EVENTS_PATH = INTERNAL_DATA_DIR / "patch-events.json"
 PATCH_METADATA_PATH = INTERNAL_DATA_DIR / "patch-metadata.json"
 CDRAGON_KINDS = {"numeric", "text", "rarity", "added"}
+SETTLE_DAYS = 3
 MIN_TOKEN = 5  # shorter tokens match too much prose
 
 
@@ -105,7 +111,8 @@ def cdragon_changes(patch_events: dict, patch: str) -> list[dict]:
 
 
 def build_patch_entry(patch: str, article_html: str | None, source_url: str | None,
-                      catalog: dict, patch_events: dict) -> dict:
+                      catalog: dict, patch_events: dict, *, published_at: str | None = None,
+                      now: datetime | None = None) -> dict:
     tokens = catalog_tokens(catalog)
     notes = parse_mayhem_section(article_html, tokens) if article_html else []
     diffs = cdragon_changes(patch_events, patch)
@@ -118,12 +125,21 @@ def build_patch_entry(patch: str, article_html: str | None, source_url: str | No
         entry = by_id.setdefault(rec["augmentId"], {"augmentId": rec["augmentId"], "evidence": []})
         if rec["evidence"] not in entry["evidence"]:
             entry["evidence"].append(rec["evidence"])
+    now = now or datetime.now(timezone.utc)
+    section_found = bool(article_html and re.search(r'<h2[^>]*id="patch-aram:?-mayhem"', article_html))
+    settled = False
+    if published_at:
+        published = datetime.fromisoformat(published_at.replace("Z", "+00:00"))
+        settled = (now - published).days >= SETTLE_DAYS
     return {
         "patch": patch,
-        "parsedAt": datetime.now(timezone.utc).isoformat(),
+        "parsedAt": now.isoformat(),
+        "status": "complete" if section_found and settled else "provisional",
+        "policyWhileProvisional": "treat every augment as changed",
         "sources": {
             "patchNotes": source_url if article_html else None,
-            "patchNotesMayhemSection": bool(notes) or bool(article_html and "patch-aram" in article_html),
+            "patchNotesPublishedAt": published_at,
+            "patchNotesMayhemSection": section_found,
             "cdragonDiffEvents": len(diffs),
         },
         "changed": sorted(by_id.values(), key=lambda e: e["augmentId"]),
@@ -131,12 +147,13 @@ def build_patch_entry(patch: str, article_html: str | None, source_url: str | No
     }
 
 
-def _patch_notes_url(patch: str) -> str | None:
+def _patch_notes_meta(patch: str) -> tuple[str | None, str | None]:
     try:
         doc = json.loads(PATCH_METADATA_PATH.read_text(encoding="utf-8"))
     except FileNotFoundError:
-        return None
-    return next((p.get("sourceUrl") for p in doc.get("patches", []) if p.get("version") == patch), None)
+        return None, None
+    meta = next((p for p in doc.get("patches", []) if p.get("version") == patch), {})
+    return meta.get("sourceUrl"), meta.get("publishedAt")
 
 
 def main() -> None:
@@ -149,10 +166,11 @@ def main() -> None:
     if not args.patch:
         args.patch = json.loads(PATCH_METADATA_PATH.read_text(encoding="utf-8"))["patch"]
     doc = json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else {"schemaVersion": 1, "patches": {}}
-    if args.patch in doc["patches"] and not args.force:
-        print(f"changed-augments: {args.patch} already parsed; keeping it")
+    existing = doc["patches"].get(args.patch)
+    if existing and existing.get("status") == "complete" and not args.force:
+        print(f"changed-augments: {args.patch} complete; keeping it")
         return
-    url = _patch_notes_url(args.patch)
+    url, published_at = _patch_notes_meta(args.patch)
     article = None
     if args.html:
         article = Path(args.html).read_text(encoding="utf-8")
@@ -162,7 +180,7 @@ def main() -> None:
             article = resp.read().decode("utf-8", errors="replace")
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     events = json.loads(PATCH_EVENTS_PATH.read_text(encoding="utf-8"))
-    entry = build_patch_entry(args.patch, article, url, catalog, events)
+    entry = build_patch_entry(args.patch, article, url, catalog, events, published_at=published_at)
     doc["patches"][args.patch] = entry
     OUT_PATH.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"changed-augments {args.patch}: {len(entry['changed'])} changed, "

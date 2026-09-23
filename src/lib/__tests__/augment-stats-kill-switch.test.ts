@@ -15,13 +15,13 @@ afterEach(() => {
 describe("augmentStatsEnabled", () => {
   test("statistics are on when the flag is unset or explicitly on", () => {
     expect(augmentStatsEnabled({})).toBe(true);
-    for (const value of ["on", "ON", " true ", "1", ""]) {
+    for (const value of ["on", "ON", " true ", "1"]) {
       expect(augmentStatsEnabled({ [AUGMENT_STATS_ENV]: value })).toBe(true);
     }
   });
 
   test("any other value turns them off, so a mistyped kill still kills", () => {
-    for (const value of ["off", "OFF", "0", "false", "no", "of", "disabled"]) {
+    for (const value of ["off", "OFF", "0", "false", "no", "of", "disabled", "", "  "]) {
       expect(augmentStatsEnabled({ [AUGMENT_STATS_ENV]: value })).toBe(false);
     }
   });

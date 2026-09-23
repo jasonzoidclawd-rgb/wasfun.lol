@@ -46,6 +46,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "internal"
 LISTED_PER_RARITY = 6
+ROUNDING_SD = 0.01  # pp; the rounding of 2-decimal rates leaves ~0.003
+LOG_KAPPA_BOUNDS = (np.log(1e-6), np.log(10.0))
+LOG_TAU2_BOUNDS = (np.log(0.01), np.log(25.0))
 RARITIES = ("prismatic", "gold", "silver")
 
 
@@ -133,6 +136,8 @@ def fit(rows: dict) -> dict:
     while step > 1e-3:
         moved = False
         for dt, dk in ((step, 0), (-step, 0), (0, step), (0, -step)):
+            if not (LOG_TAU2_BOUNDS[0] <= lt + dt <= LOG_TAU2_BOUNDS[1] and LOG_KAPPA_BOUNDS[0] <= lk + dk <= LOG_KAPPA_BOUNDS[1]):
+                continue
             ll = _reml(lift, x, kit, grp, cg, np.exp(lt + dt), np.exp(lk + dk))[0]
             if ll > best[0] + 1e-9:
                 best, lt, lk, moved = (ll, lt + dt, lk + dk), lt + dt, lk + dk, True
@@ -190,7 +195,9 @@ def identifiability(rows: dict) -> dict:
     coef, *_ = np.linalg.lstsq(X, y, rcond=None)
     resid = y - X @ coef
     sd = float(np.sqrt(resid @ resid / max(len(y) - np.linalg.matrix_rank(X), 1)))
-    return {"additiveResidualSd": sd, "identifiable": sd > 1e-6}
+    # Rates are published to 0.01 pp, so rounding alone leaves a residual of about
+    # 0.003 pp. Anything up to ROUNDING_SD is indistinguishable from an exact copy.
+    return {"additiveResidualSd": sd, "identifiable": sd > ROUNDING_SD}
 
 
 def global_copy_share(build: dict, stats: dict) -> tuple[int, int]:
@@ -212,10 +219,17 @@ def correction_curve(rng, real, fitted, reps, taus, herds):
 
 
 def invert(curve, herd, taus, observed):
-    """Linear interpolation of true tau at the observed fitted tau."""
+    """True tau at the observed fitted tau, by linear interpolation. Outside the
+    simulated range the value is reported as a bound, never silently clamped."""
     fitted = np.array([curve[(herd, t)][0] for t in taus])
     order = np.argsort(fitted)
-    return float(np.interp(observed, fitted[order], np.array(taus)[order]))
+    lo, hi = fitted[order][0], fitted[order][-1]
+    value = float(np.interp(observed, fitted[order], np.array(taus)[order]))
+    if observed > hi:
+        return {"atLeast": value}
+    if observed < lo:
+        return {"atMost": value}
+    return {"value": value}
 
 
 def main(argv=None) -> int:

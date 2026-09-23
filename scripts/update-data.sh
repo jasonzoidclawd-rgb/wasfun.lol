@@ -329,19 +329,34 @@ step "17c/19 generate current internal combos  →  combos.json"
 npx --yes tsx scripts/generate_internal_combos.ts
 
 step "18/19 v3 statistics  →  augment-stats/champion-build feeds, changed augments, snapshots"
-# Internal only: nothing here is exported to public/data. Optional: a feed that
-# fails the schema gate is rolled back to the committed version (so a bad scrape
-# is never published or snapshotted) and the run is marked degraded.
+# Internal only: nothing here is exported to public/data. Optional: on any
+# failure the lane restores its previous files (so a bad scrape is never
+# published or snapshotted) and the run is marked degraded.
 run_stats_v3() {
-  python3 scripts/scrape_mayhem_stats.py || return $?
-  python3 scripts/changed_augments.py || return $?
-  python3 scripts/augment_kit_tags.py || return $?
-  if ! python3 scripts/validate_stats_feeds.py; then
-    git checkout --quiet -- "$DATA_DIR/augment-stats-feed.json" "$DATA_DIR/champion-build-feed.json" 2>/dev/null || true
-    echo "✗ v3 statistics feeds failed the schema gate; kept the committed feeds" >&2
-    return 1
+  # Every file this lane can write is backed up first and restored on ANY
+  # failure (scrape, changed list, tags or schema gate), so nothing unchecked
+  # reaches the commit. A file that did not exist before is removed. Works for
+  # MAYHEM_DATA_DIR outside the repo too: no git involved.
+  local backup f
+  backup="$(mktemp -d)"
+  local files=(augment-stats-feed.json champion-build-feed.json changed-augments.json augment-kit-tags.json)
+  for f in "${files[@]}"; do
+    [ -f "$DATA_DIR/$f" ] && cp "$DATA_DIR/$f" "$backup/$f"
+  done
+  if python3 scripts/scrape_mayhem_stats.py \
+      && python3 scripts/changed_augments.py \
+      && python3 scripts/augment_kit_tags.py \
+      && python3 scripts/validate_stats_feeds.py; then
+    rm -rf "$backup"
+    python3 scripts/stats_snapshots.py
+    return $?
   fi
-  python3 scripts/stats_snapshots.py
+  for f in "${files[@]}"; do
+    if [ -f "$backup/$f" ]; then cp "$backup/$f" "$DATA_DIR/$f"; else rm -f "$DATA_DIR/$f"; fi
+  done
+  rm -rf "$backup"
+  echo "✗ v3 statistics lane failed; restored the previous feeds" >&2
+  return 1
 }
 run_lane statistics-v3 optional run_stats_v3
 

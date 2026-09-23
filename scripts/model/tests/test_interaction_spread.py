@@ -41,5 +41,8 @@ def test_additive_rows_are_not_identifiable():
     rows = {"champ": champ, "aug": aug, "lift": level + np.linspace(-3, 3, 6)[aug],
             "x": np.ones(120), "kit": np.zeros(120)}
     assert M.identifiability(rows)["identifiable"] is False
+    # a copy published at 0.01 pp resolution is still a copy
+    rounded = dict(rows, lift=np.round(rows["lift"] + np.random.default_rng(2).uniform(-0.005, 0.005, 120), 2))
+    assert M.identifiability(rounded)["identifiable"] is False
     rows["lift"] = rows["lift"] + np.random.default_rng(1).normal(0, 1, 120)
     assert M.identifiability(rows)["identifiable"] is True

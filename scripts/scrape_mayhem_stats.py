@@ -28,6 +28,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import collections
 import html as html_module
 import json
 import os
@@ -82,9 +83,10 @@ PROVENANCE = {
 UNITS_UNCONFIRMED = {
     "status": "unconfirmed",
     "note": (
-        "The provider does not define 'pick rate' or 'appearance rate'. Global pick rates "
-        "sum to several hundred percent per rarity, so they are not a share of games. "
-        "Keep the unlisted-pair subtraction off (unit guard) until confirmed."
+        "The provider does not define 'pick rate' or 'appearance rate'. Global augment pick "
+        "rates sum to about 3,450% over all live augments, which fits a share of GAMES (10 "
+        "players, about 3.4 augments each) like the champion pick rate, but that is a "
+        "hypothesis. Keep the unlisted-pair subtraction off (unit guard) until confirmed."
     ),
 }
 
@@ -289,7 +291,8 @@ def _resolve(row: dict, ctx) -> dict:
     return {**row, "augmentId": augment_id, "identity": method}
 
 
-def build_augment_stats_feed(rows: list[dict], ctx, *, patch: str | None, fetched_at: str) -> dict:
+def build_augment_stats_feed(rows: list[dict], ctx, *, patch: str | None, fetched_at: str,
+                             data_date: str | None = None) -> dict:
     resolved = [_resolve(r, ctx) for r in rows]
     live = [r for r in resolved if r["availability"] == "live"]
     return {
@@ -297,6 +300,7 @@ def build_augment_stats_feed(rows: list[dict], ctx, *, patch: str | None, fetche
         "feed": "augment-stats-feed",
         "fetchedAt": fetched_at,
         "patch": patch,
+        "dataDate": data_date,
         "provenance": PROVENANCE,
         "fieldProvenance": {
             "rows[].augmentId": "CDragon augmentNameId via scripts/augment_stats_identity.py",
@@ -317,7 +321,8 @@ def build_augment_stats_feed(rows: list[dict], ctx, *, patch: str | None, fetche
 CHAMPION_PICK_RATE_CONFIRMED = {
     "status": "confirmed",
     "meaning": "share of games the champion appears in",
-    "confirmation": "champion pick rates sum to 1000% across all champions (10 players per game), observed 2026-09-24",
+    "confirmation": "champion pick rates sum to 1000% across all champions (10 players per game); "
+                    "scripts/validate_stats_feeds.py re-checks the sum on every run",
 }
 
 
@@ -328,7 +333,10 @@ def win_rate_semantics(pages: dict[str, dict], global_rows: list[dict]) -> dict:
     glob = {r["sourceSlug"]: r["winRate"] for r in global_rows}
     rows = [r for page in pages.values() for r in page["augments"] if r["sourceSlug"] in glob]
     same = sum(1 for r in rows if abs(r["winRate"] - glob[r["sourceSlug"]]) < 0.005)
-    status = "global-copy" if rows and same == len(rows) else "champion-specific" if same == 0 else "mixed"
+    if not rows:
+        status = "unknown"  # nothing to compare: never assume the rows are the champions' own
+    else:
+        status = "global-copy" if same == len(rows) else "champion-specific" if same == 0 else "mixed"
     return {"status": status, "rowsEqualToGlobal": same, "rowsCompared": len(rows)}
 
 
@@ -341,13 +349,17 @@ def build_champion_build_feed(pages: dict[str, dict], failures: list[dict], ctx,
             "augments": [_resolve(r, ctx) for r in page["augments"]],
         }
     rows = [r for c in champions.values() for r in c["augments"]]
-    patches = sorted({c["patch"] for c in champions.values()})
+    patch_counts = collections.Counter(c["patch"] for c in champions.values())
+    dates = sorted(c["dataDate"] for c in champions.values())
     return {
         "schemaVersion": SCHEMA_VERSION,
         "feed": "champion-build-feed",
         "fetchedAt": fetched_at,
-        "patch": patches[-1] if patches else None,
-        "patchesSeen": patches,
+        # The label most champions carry, so one odd page cannot relabel the feed.
+        "patch": patch_counts.most_common(1)[0][0] if patch_counts else None,
+        "patchesSeen": dict(sorted(patch_counts.items())),
+        # The provider's observation date (newest champion page), not our fetch time.
+        "dataDate": dates[-1] if dates else None,
         "provenance": PROVENANCE,
         "fieldProvenance": {
             "champions.*.winRate": "provider build page header, 'Win Rate'",
@@ -421,7 +433,8 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"{len(failures)} build pages failed; existing feeds NOT overwritten")
 
     build_feed = build_champion_build_feed(pages, failures, ctx, fetched_at=fetched_at, global_rows=aug_rows)
-    stats_feed = build_augment_stats_feed(aug_rows, ctx, patch=build_feed["patch"], fetched_at=fetched_at)
+    stats_feed = build_augment_stats_feed(aug_rows, ctx, patch=build_feed["patch"], fetched_at=fetched_at,
+                                          data_date=build_feed["dataDate"])
     atomic_write(AUGMENT_STATS_PATH, stats_feed)
     atomic_write(CHAMPION_BUILD_PATH, build_feed)
     print(f"augment-stats-feed: {stats_feed['counts']}")
