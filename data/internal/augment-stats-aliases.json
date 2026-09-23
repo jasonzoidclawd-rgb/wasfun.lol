@@ -1,0 +1,96 @@
+{
+ "version": 1,
+ "description": "Hand-reviewed identity decisions for provider augment rows that the exact name/slug + rarity match does not settle. augmentId null = deliberately unresolved, with the reason. Every entry needs a reason and a review date.",
+ "aliases": [
+  {
+   "sourceSlug": "warlock-juicebox",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "forged-by-the-master",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "dont-change-the-channel",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "terraind",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "pursuit-of-power",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "its-go-time",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "overloaded",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "trusty-weapon",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "adaptive-ward",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "porcupine",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "pat-on-the-back",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "squishy-slappy-grab",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "pin-cushion",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "surge-field",
+   "augmentId": null,
+   "reason": "No CDragon registry entry under this name in latest or PBE (checked 2026-09-24); the catalog carries it without an augmentId and marks it removed (unverified_legacy), while the provider lists it live with win and pick rates. Left unresolved rather than guessed; the row still counts toward its set's baseline by sourceSlug but can never be shown on a card.",
+   "reviewedAt": "2026-09-24"
+  },
+  {
+   "sourceSlug": "terror",
+   "augmentId": null,
+   "reviewedAt": "2026-09-24",
+   "reason": "Provider lists Terror as prismatic; the catalog's ARAM_Terror is gold (wiki gold, CDragon silver). Three sources disagree on rarity, so the join is not established; left unresolved."
+  }
+ ]
+}

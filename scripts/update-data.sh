@@ -328,6 +328,11 @@ python3 scripts/generate_pool_rules.py
 step "17c/19 generate current internal combos  →  combos.json"
 npx --yes tsx scripts/generate_internal_combos.ts
 
+step "18/19 v3 statistics  →  augment-stats/champion-build feeds, changed augments, snapshots"
+# Internal only: nothing here is exported to public/data. Optional: a failure
+# keeps yesterday's feeds (rolled back inside the lane) and marks the run degraded.
+run_lane statistics-v3 optional ./scripts/run_stats_v3_lane.sh
+
 step "19/19 export bounded public catalogs + patch/PBE presentation projections"
 python3 scripts/export_public_catalog.py
 
