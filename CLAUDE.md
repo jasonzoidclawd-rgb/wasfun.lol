@@ -87,6 +87,19 @@ scraper-owned (live NEW/DELETED badges), `kit_tags` classifier-owned,
 system breakers a curated list enforced in three places (classifier,
 update-data step gate, data-integrity test).
 
+v3 statistics (internal only, optional lane `statistics-v3`,
+`scripts/run_stats_v3_lane.sh`): `augment-stats-feed.json` (global win + pick
+rate), `champion-build-feed.json` (per-champion rows), `changed-augments.json`,
+`augment-kit-tags.json`, `stats-snapshots/`, gated by
+`scripts/validate_stats_feeds.py`. Provider per-champion augment win rates are
+copies of the global rate (`semantics` in the feed); never present them as a
+champion's own. Results: `docs/research/2026-09-24-statistics-feeds-phase0-results.md`.
+
+Kill switch: `WASFUN_AUGMENT_STATS=off` removes every augment statistic from
+pages, payloads and APIs after the next deploy (`src/lib/stats/kill-switch.ts`).
+Every server surface that returns augment statistics must check it; prove it
+with `scripts/verify_kill_switch.py --expect off` against a build.
+
 ## Pointers
 
 - `AGENTS.md` — agent operating rules · `CO_WORKFLOW.md` — Claude/Codex handoffs
