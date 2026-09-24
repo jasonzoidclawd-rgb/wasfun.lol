@@ -22,7 +22,11 @@ function render(slug: string) {
   const pack = loadScorePack()!;
   const payload = buildPickPayload({ pack, slug, locale: "en", championRecord: { name: slug }, icons, items })!;
   const html = renderToStaticMarkup(
-    createElement(NextIntlClientProvider, { locale: "en", messages, children: createElement(PickScreen, { payload }) }),
+    createElement(
+      NextIntlClientProvider as unknown as (props: { locale: string; messages: unknown }) => null,
+      { locale: "en", messages },
+      createElement(PickScreen, { payload }),
+    ),
   );
   return { payload, html };
 }
@@ -30,7 +34,7 @@ function render(slug: string) {
 describe("the Pick screen as rendered", () => {
   test("every card on the grid carries a letter, as text", () => {
     const { payload, html } = render("yasuo");
-    const cards = [...html.matchAll(/<li><button[^>]*aria-pressed[^>]*>([\s\S]*?)<\/button><\/li>/g)];
+    const cards = [...html.matchAll(/<li[^>]*><button[^>]*aria-pressed[^>]*>([\s\S]*?)<\/button><\/li>/g)];
     // the first rarity tab shown: every card in it renders
     const shown = Object.values(payload.rarities).find((set) => set.length === cards.length);
     expect(shown, "a rarity's full card set is on screen").toBeDefined();
