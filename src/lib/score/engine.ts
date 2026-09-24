@@ -77,9 +77,11 @@ export interface EngineOptions {
   /** games behind the provider's snapshot, fitted by estimateVolume */
   volume: number;
   /**
-   * Weight of the unlisted takers of an augment, as a fraction of the upper
-   * bound (a champion's least-picked listed augment of that rarity). The truth
-   * lies between 0 and 1; 0.5 is the midpoint, and the sensitivity is recorded.
+   * Weight of the unlisted takers of an augment, as a fraction of a champion's
+   * least-picked listed augment of that rarity. That is an upper bound only if
+   * the source lists the most-picked augments, which is unverified, so the
+   * grading envelope (UNLISTED_ENVELOPE) runs from 0 to the mass cap; 0.5 is
+   * the central value used for the posterior mean.
    */
   unlistedTakerFraction?: number;
   /** the unlisted-share envelope, as fractions of the bound [low, high] (default UNLISTED_ENVELOPE) */
@@ -136,9 +138,10 @@ export interface GradedOption extends AugmentPosterior {
  * Mean win rate of the champions who take each augment, weighted by how often
  * they take it (section 2, gₐ). The champions' appearance rates are their own
  * (unlike their augment win rates, they are not copies of the global row), but
- * only the six most-picked per rarity are listed. An unlisted augment's share
- * for a champion is below that champion's least-picked listed one; it is set to
- * `unlistedFraction` of that bound, capped so that the champion's unlisted
+ * only a few per rarity are listed. If the source lists each champion's six
+ * most-picked (unverified: some lists are not in descending order), an
+ * unlisted augment's share is below that champion's least-picked listed one.
+ * The share is set to `unlistedFraction` of that bound, capped so that the champion's unlisted
  * augments together take no more than the mass left after its listed ones.
  * That total per rarity is the global pick rates' sum / 10 (share-of-games
  * units, 10 players a game: a hypothesis, see the phase 0 units table).
@@ -192,7 +195,7 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
   };
   const zero = rows.map(() => 0);
   const shift = TAKERS_ADJUSTMENT ? shiftAt(opts.unlistedTakerFraction ?? 0.5, opts.takersTotalScale ?? 1) : zero;
-  // The envelope's four corners and four edge midpoints.
+  // The envelope's four corners, plus f = min(mid, 1× the listed minimum) and the scale midpoints.
   const [lo, hi] = opts.unlistedEnvelope ?? UNLISTED_ENVELOPE;
   const mid = Math.min((lo + hi) / 2, 1);
   const corners = TAKERS_ADJUSTMENT

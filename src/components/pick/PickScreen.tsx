@@ -78,6 +78,9 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
   // page as a document once, so the worker keeps its HTML for the next visit.
   useEffect(() => {
     if (typeof navigator === "undefined" || !navigator.serviceWorker?.controller) return;
+    // a page loaded as a document was cached by that load already
+    const landing = performance.getEntriesByType?.("navigation")[0]?.name;
+    if (landing && new URL(landing).pathname === window.location.pathname) return;
     fetch(window.location.pathname, { credentials: "same-origin", headers: { Accept: "text/html" } }).catch(() => {});
   }, [payload.champion.slug]);
 

@@ -34,7 +34,7 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname.startsWith("/api/decision/")) return;
 
   if (url.pathname.startsWith("/data/")) {
-    event.respondWith(staleWhileRevalidate(request, DATA_CACHE));
+    event.respondWith(staleWhileRevalidate(request, DATA_CACHE, event));
     return;
   }
 
@@ -53,31 +53,35 @@ self.addEventListener("fetch", (event) => {
 
   // Icons keep their URL across patches, so refresh them in the background.
   if (url.pathname.startsWith("/icons/") || url.pathname.startsWith("/assets/icons/")) {
-    event.respondWith(staleWhileRevalidate(request, ICON_CACHE));
+    event.respondWith(staleWhileRevalidate(request, ICON_CACHE, event));
     return;
   }
 });
 
-async function staleWhileRevalidate(request, cacheName) {
+async function staleWhileRevalidate(request, cacheName, event) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
   const network = fetch(request)
     .then((response) => {
-      if (response.ok) cache.put(request, response.clone()).catch(() => {});
+      if (response.ok) return cache.put(request, response.clone()).catch(() => {}).then(() => response);
       return response;
     })
     .catch(() => cached);
+  // keep the worker alive for the background refresh
+  if (event) event.waitUntil(network.catch(() => {}));
   return cached || network;
 }
 
 async function networkFirst(request, cacheName, event) {
   const cache = await caches.open(cacheName);
+  let stored = Promise.resolve();
   const network = fetch(request).then((response) => {
-    if (response.ok) cache.put(request, response.clone()).catch(() => {});
+    if (response.ok) stored = cache.put(request, response.clone()).catch(() => {});
     return response;
   });
-  const settled = network.catch(() => {}); // a late failure after the timeout is handled below or not at all
-  // keep the worker alive until the network copy lands in the cache, even after a timeout
+  // a late failure after the timeout is handled below or not at all; keep the
+  // worker alive until the network copy is in the cache, even after a timeout
+  const settled = network.then(() => stored, () => {});
   if (event) event.waitUntil(settled);
   let timer;
   const timedOut = new Promise((resolve) => (timer = setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS)));

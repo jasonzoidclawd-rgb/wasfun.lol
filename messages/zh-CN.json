@@ -1069,7 +1069,6 @@
     "howWeRank": "我们如何评级",
     "openPick": "打开 {champion} 的选择界面",
     "offlineReady": "已保存为离线可用",
-    "takeLine": "{rarity} · 所有英雄胜率 {win}%",
     "gradeLabelOwn": "评级 {letter}",
     "winShort": "胜率 {win}%",
     "pickShort": "选取 {pick}%",

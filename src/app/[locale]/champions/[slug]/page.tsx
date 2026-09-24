@@ -333,10 +333,9 @@ export default async function ChampionPage({
     },
   ];
 
-  const tailoredHighlights: TailoredHighlight[] = scoredAugments.slice(0, 6).map(({ aug, score, comboTier }) => ({
+  const tailoredHighlights: TailoredHighlight[] = scoredAugments.slice(0, 6).map(({ aug, score }) => ({
     aug: displayAugment(aug),
     score,
-    comboTier,
   }));
 
 

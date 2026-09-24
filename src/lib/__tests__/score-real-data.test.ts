@@ -134,9 +134,10 @@ describe("takers adjustment: the unlisted-share envelope does not assume a top-s
       const narrow = new Map(tierList(feeds, r, { volume: volume!.games, unlistedEnvelope: [0.25, 0.75] }).map((o) => [o.id, o.letter]));
       for (const o of wide) {
         const before = narrow.get(o.id)!;
-        // stronger means further from B than before, in the same direction
-        const further = Math.abs(rank(o.letter) - 2) > Math.abs(rank(before) - 2) && Math.sign(rank(o.letter) - 2) === Math.sign(rank(before) - 2 || rank(o.letter) - 2);
-        expect(further, `${r} ${o.id}: ${before} → ${o.letter}`).toBe(false);
+        // allowed: the same letter, or a step toward B that doesn't cross it
+        const a = rank(o.letter) - 2, b = rank(before) - 2;
+        const ok = a === b || (Math.abs(a) < Math.abs(b) && (a === 0 || Math.sign(a) === Math.sign(b)));
+        expect(ok, `${r} ${o.id}: ${before} → ${o.letter}`).toBe(true);
       }
     }
   }, 120_000);
