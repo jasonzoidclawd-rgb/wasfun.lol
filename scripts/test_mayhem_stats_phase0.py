@@ -90,6 +90,14 @@ class BuildPageTests(unittest.TestCase):
         self.assertEqual((core["pickRate"], core["winRate"]), (6.99, 61.72))
         self.assertEqual(len(self.page["items"]["boots"]), 4)
 
+    def test_the_providers_own_snapshot_history(self):
+        from scrape_mayhem_stats import parse_build_history
+        rows = parse_build_history(fixture("build-yasuo-history.html"))
+        self.assertEqual(len(rows), 11)
+        self.assertEqual(rows[0], {"snapshot": "20260922_081905", "date": "2026-09-22", "patch": "26.19",
+                                   "winRate": 56.98, "pickRate": 10.76})
+        self.assertEqual({r["patch"] for r in rows}, {"26.15", "26.16", "26.17", "26.18", "26.19"})
+
     def test_missing_appearance_label_fails_closed(self):
         with self.assertRaises(ParseError):
             parse_build_page(fixture("build-yasuo.html").replace("Appearance rate:", "Seen:", 1))
