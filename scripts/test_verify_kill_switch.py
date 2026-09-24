@@ -57,13 +57,13 @@ class DetectorTests(unittest.TestCase):
         self.assertFalse(detect_fingerprint(page_text("<p>Tank Engine gives health. Yasuo 56.98%</p>", "text/html"),
                                             FINGERPRINTS))
 
+    def test_grade_letters_count_as_statistics(self):
+        self.assertTrue(detect_marker('<span class="grade-chip is-S" data-grade="S">'))
+        self.assertTrue(detect_marker('self.__next_f.push([1,"{\\"letter\\":\\"A\\",\\"m\\":1}"])'))
+        self.assertTrue(detect_marker('{"letter":"B"}'))
+        self.assertFalse(detect_marker('<p>Letter S is a letter.</p>'))
+        self.assertTrue(detect_marker('{"letter": "C", "m": -2}'))
+
 
 if __name__ == "__main__":
     unittest.main()
-
-
-def test_grade_letters_count_as_statistics():
-    assert detect_marker('<span class="grade-chip is-S" data-grade="S">') != []
-    assert detect_marker('self.__next_f.push([1,"{\\"letter\\":\\"A\\",\\"m\\":1}"])') != []
-    assert detect_marker('{"letter":"B"}') != []
-    assert detect_marker('<p>Letter S is a letter.</p>') == []

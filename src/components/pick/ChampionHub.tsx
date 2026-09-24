@@ -32,9 +32,7 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
   const rate = (c: PickCard) =>
     c.pick !== null
       ? tp("cardLine", { win: c.winRate.toFixed(1), pick: c.pick.toFixed(1), champion })
-      : c.pickUnder !== null
-        ? tp("cardLineUnder", { win: c.winRate.toFixed(1), pick: c.pickUnder.toFixed(1), champion })
-        : tp("winShort", { win: c.winRate.toFixed(1) });
+      : tp("cardLineUnlisted", { win: c.winRate.toFixed(1), champion });
   const label = (c: PickCard) => (c.outlined ? tp("gradeLabelThin", { letter: c.letter }) : tp("gradeLabel", { letter: c.letter }));
 
   const plan = RARITIES.map((r) => {

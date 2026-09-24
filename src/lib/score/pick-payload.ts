@@ -33,8 +33,6 @@ export interface PickCard {
   winRate: number;
   /** this champion's own pick rate for this augment, percent, when listed */
   pick: number | null;
-  /** else: this champion's pick rate is below this (its least-picked listed augment) */
-  pickUnder: number | null;
   gamble: boolean;
 }
 
@@ -100,7 +98,6 @@ export function buildPickPayload(opts: {
           v: round(o.v, 4),
           winRate: Math.round(o.winRate * 10) / 10,
           pick: pick === null ? null : Math.round(pick * 10) / 10,
-          pickUnder: pick === null && champ.pickUnder[rarity] !== null ? Math.round((champ.pickUnder[rarity] as number) * 10) / 10 : null,
           gamble: GAMBLES.has(o.id),
         };
       })

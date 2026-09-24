@@ -73,12 +73,18 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
     }
   }, [payload.champion.slug]);
 
+  // Offline: a champion opened from the chooser arrives by client-side
+  // navigation, which the service worker does not cache as a page. Ask for this
+  // page as a document once, so the worker keeps its HTML for the next visit.
+  useEffect(() => {
+    if (typeof navigator === "undefined" || !navigator.serviceWorker?.controller) return;
+    fetch(window.location.pathname, { credentials: "same-origin", headers: { Accept: "text/html" } }).catch(() => {});
+  }, [payload.champion.slug]);
+
   const rateLine = (c: Card) =>
     c.pick !== null
       ? t("cardLine", { win: c.winRate.toFixed(1), pick: c.pick.toFixed(1), champion })
-      : c.pickUnder !== null
-        ? t("cardLineUnder", { win: c.winRate.toFixed(1), pick: c.pickUnder.toFixed(1), champion })
-        : t("takeLine", { rarity: t(`rarity_${c.rarity}`), win: c.winRate.toFixed(1) });
+      : t("cardLineUnlisted", { win: c.winRate.toFixed(1), champion });
   const chipLabel = (c: Card) => (c.outlined ? t("gradeLabelThin", { letter: c.letter }) : t("gradeLabel", { letter: c.letter }));
   const named = reading?.verdict ?? null;
   const ordered = named ? [...state.slots].sort((a, b) => (a.id === named.pick ? -1 : b.id === named.pick ? 1 : 0)) : state.slots;

@@ -97,6 +97,18 @@ describe("the Pick screen works offline", () => {
     expect(await sw.request("https://wasfun.lol/pick/lux", { "Next-Router-Prefetch": "1" })).toBeNull();
   });
 
+  test("a champion reached by client-side navigation is cached once the screen asks for its page", async () => {
+    const sw = sandbox();
+    // the router's data request for /pick/ahri passes through uncached
+    expect(await sw.request("https://wasfun.lol/pick/ahri", { RSC: "1" })).toBeNull();
+    // the Pick screen then requests its own page as a document (PickScreen's mount effect)
+    await sw.request("https://wasfun.lol/pick/ahri", { Accept: "text/html" });
+    sw.goOffline();
+    expect(await (await sw.request("https://wasfun.lol/pick/ahri"))!.text()).toBe("body of /pick/ahri");
+    const source = readFileSync(path.join(process.cwd(), "src/components/pick/PickScreen.tsx"), "utf-8");
+    expect(source).toContain('fetch(window.location.pathname, { credentials: "same-origin", headers: { Accept: "text/html" } })');
+  });
+
   test("on a slow network the last copy is served after the timeout", async () => {
     vi.useFakeTimers();
     try {

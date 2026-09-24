@@ -42,7 +42,7 @@ self.addEventListener("fetch", (event) => {
   // through, so the cache holds the pages a visitor opened, as HTML.
   if (url.origin === self.location.origin && PICK_PAGE.test(url.pathname)) {
     if (request.headers.get("RSC") || request.headers.get("Next-Router-Prefetch")) return;
-    event.respondWith(networkFirst(request, PICK_CACHE));
+    event.respondWith(networkFirst(request, PICK_CACHE, event));
     return;
   }
 
@@ -63,23 +63,26 @@ async function staleWhileRevalidate(request, cacheName) {
   const cached = await cache.match(request);
   const network = fetch(request)
     .then((response) => {
-      if (response.ok) cache.put(request, response.clone());
+      if (response.ok) cache.put(request, response.clone()).catch(() => {});
       return response;
     })
     .catch(() => cached);
   return cached || network;
 }
 
-async function networkFirst(request, cacheName) {
+async function networkFirst(request, cacheName, event) {
   const cache = await caches.open(cacheName);
   const network = fetch(request).then((response) => {
-    if (response.ok) cache.put(request, response.clone());
+    if (response.ok) cache.put(request, response.clone()).catch(() => {});
     return response;
   });
-  network.catch(() => {}); // a late failure after the timeout is handled below or not at all
-  const timedOut = new Promise((resolve) => setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS));
+  const settled = network.catch(() => {}); // a late failure after the timeout is handled below or not at all
+  // keep the worker alive until the network copy lands in the cache, even after a timeout
+  if (event) event.waitUntil(settled);
+  let timer;
+  const timedOut = new Promise((resolve) => (timer = setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS)));
   try {
-    const first = await Promise.race([network, timedOut]);
+    const first = await Promise.race([network, timedOut]).finally(() => clearTimeout(timer));
     if (first) return first;
     // slow network: the last copy if there is one, else keep waiting
     return (await cache.match(request, { ignoreSearch: true })) || (await network);
@@ -95,7 +98,7 @@ async function cacheFirst(request, cacheName) {
   const cached = await cache.match(request);
   if (cached) return cached;
   const response = await fetch(request);
-  if (response.ok) cache.put(request, response.clone()).then(() => trim(cache, ASSET_LIMIT));
+  if (response.ok) cache.put(request, response.clone()).then(() => trim(cache, ASSET_LIMIT)).catch(() => {});
   return response;
 }
 

@@ -78,8 +78,6 @@ export interface ChampionPack {
   sets: Record<Rarity, GradedOption[]>;
   /** the champion's own appearance rate for the augments the provider lists, by augment id */
   listed: Record<string, number>;
-  /** a listed augment's pick rate bound for unlisted ones: under the least-picked listed, per rarity */
-  pickUnder: Record<Rarity, number | null>;
   boots: GradedRow[] | null;
   builds: { ranked: BuildOrder[]; rare: string[] };
 }
@@ -170,7 +168,6 @@ function buildScorePack(): ScorePack | null {
       observedLive,
     });
     const sets = {} as Record<Rarity, GradedOption[]>;
-    const pickUnder = {} as Record<Rarity, number | null>;
     for (const r of RARITIES) {
       const listedRows = row.augments.filter((a) => a.rarity === r);
       // an augment the provider lists for this champion was offered to it, whatever the rules say
@@ -178,7 +175,6 @@ function buildScorePack(): ScorePack | null {
       for (const a of listedRows) if (a.augmentId) ids.add(a.augmentId);
       // letters are the tier list's (graded across all champions), not re-graded within the pool
       sets[r] = tierLists[r].filter((o) => ids.has(o.id));
-      pickUnder[r] = listedRows.length ? Math.min(...listedRows.map((a) => a.appearanceRate)) : null;
     }
     const listed: Record<string, number> = {};
     for (const a of row.augments) if (a.augmentId) listed[a.augmentId] = a.appearanceRate;
@@ -190,7 +186,6 @@ function buildScorePack(): ScorePack | null {
       letterOutlined: letterOf.get(slug)?.outlined ?? false,
       sets,
       listed,
-      pickUnder,
       boots: bootsSet(row, opts),
       builds: buildOrders(row, opts),
     };

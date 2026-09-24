@@ -15,7 +15,6 @@ const card = (id: string, m: number, rarity: Rarity = "gold"): PickCard & { rari
   v: 0.01,
   winRate: 55.1,
   pick: null,
-  pickUnder: 5,
   gamble: false,
   rarity,
 });

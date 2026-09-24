@@ -22,7 +22,7 @@
  * - The unlisted-pair subtraction is off: its units are unconfirmed (unit guard).
  */
 import { carriedPrior, combineOnce, type Normal } from "./carryover";
-import { TAKERS_ADJUSTMENT } from "./config";
+import { TAKERS_ADJUSTMENT, UNLISTED_ENVELOPE } from "./config";
 import { closeNpmle } from "./close-npmle";
 import { grade, isThin, MARGIN, pairwise, type Letter } from "./grade";
 import { leaveOneOutLifts, type LiftSet } from "./lift";
@@ -82,6 +82,8 @@ export interface EngineOptions {
    * lies between 0 and 1; 0.5 is the midpoint, and the sensitivity is recorded.
    */
   unlistedTakerFraction?: number;
+  /** the unlisted-share envelope, as fractions of the bound [low, high] (default UNLISTED_ENVELOPE) */
+  unlistedEnvelope?: [number, number];
   /** sensitivity only: scales the per-champion total the unlisted shares are capped by */
   takersTotalScale?: number;
   /** carry-over: last patch's final posteriors, keyed by augment id */
@@ -178,7 +180,7 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
   const rows = feeds.augmentRows.filter((r) => r.rarity === rarity && r.availability === "live" && r.pickRate > 0);
   if (rows.length < 2) return [];
   // The takers shift at the central assumptions and at the corners of its
-  // plausible envelope: unlisted share 0.25–0.75 of the bound × the per-champion
+  // plausible envelope: unlisted share from 0 to the mass cap (UNLISTED_ENVELOPE) × the per-champion
   // total ×0.5–×1.5 (the unit hypothesis). CLOSE is fitted on sampling noise
   // only (spec §5: fitted noise only), once per shift. The envelope's spread is
   // added to the posterior variance afterwards, and grading takes the most
@@ -191,10 +193,12 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
   const zero = rows.map(() => 0);
   const shift = TAKERS_ADJUSTMENT ? shiftAt(opts.unlistedTakerFraction ?? 0.5, opts.takersTotalScale ?? 1) : zero;
   // The envelope's four corners and four edge midpoints.
+  const [lo, hi] = opts.unlistedEnvelope ?? UNLISTED_ENVELOPE;
+  const mid = Math.min((lo + hi) / 2, 1);
   const corners = TAKERS_ADJUSTMENT
     ? [
-        [0.25, 0.5], [0.25, 1.5], [0.75, 0.5], [0.75, 1.5],
-        [0.5, 0.5], [0.5, 1.5], [0.25, 1], [0.75, 1],
+        [lo, 0.5], [lo, 1.5], [hi, 0.5], [hi, 1.5],
+        [mid, 0.5], [mid, 1.5], [lo, 1], [hi, 1],
       ].map(([f, scale]) => shiftAt(f, scale))
     : [];
   const systematic = rows.map((_, i) => {

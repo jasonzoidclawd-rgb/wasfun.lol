@@ -97,9 +97,9 @@ export async function generateMetadata({
 
   const name = localizedName(champ, locale);
   const route = `/champions/${champ.slug}`;
-  const tierLabel = champ.tier ?? t("statisticsUnavailableShort");
-  const title = t("metaDetailTitle", { name, tier: tierLabel, patch: data.patch });
-  const description = t("metaDetailDescription", { name, tier: tierLabel, patch: data.patch });
+  // no upstream tier in the title: the page's letter is ours
+  const title = t("metaDetailTitle", { name, patch: data.patch });
+  const description = t("metaDetailDescription", { name, patch: data.patch });
   const url = localizedUrl(route, locale as Locale);
 
   return {
@@ -787,14 +787,13 @@ export default async function ChampionPage({
             </p>
 
             <div className="space-y-1.5">
-              {topAugments.map(({ aug, score, breakdown, comboTier }, i) => (
+              {topAugments.map(({ aug, score, breakdown }, i) => (
                 <AugmentRow
                   key={aug.slug}
                   rank={i + 1}
                   aug={aug}
                   score={score}
                   breakdown={breakdown}
-                  comboTier={comboTier}
                   pillLabels={pillLabels}
                   locale={locale}
                 />
@@ -832,7 +831,6 @@ function AugmentRow({
   aug,
   score,
   breakdown,
-  comboTier,
   pillLabels,
   locale,
 }: {
@@ -840,12 +838,9 @@ function AugmentRow({
   aug: AugmentData;
   score: number;
   breakdown: ReturnType<typeof computeOracleScore>["breakdown"];
-  comboTier?: ComboTier;
   pillLabels: PillLabels;
   locale: string;
 }) {
-  const isStrong = comboTier === "S";
-  const isTrap = comboTier === "C";
   const augName = localizedName(aug, locale);
   const augDescription = localizedDescription(aug, locale);
 
@@ -853,7 +848,7 @@ function AugmentRow({
     <Tooltip content={augDescription}>
       <div
         className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 rounded-lg border transition-colors cursor-default
-          ${isStrong ? "border-green-400/30 bg-green-400/5" : isTrap ? "border-red-400/20 bg-red-400/5" : "border-[var(--color-border-default)]/50"}`}
+          border-[var(--color-border-default)]/50`}
       >
         {/* Rank */}
         <span className="text-[10px] text-[var(--color-text-muted)] w-4 text-right shrink-0">
