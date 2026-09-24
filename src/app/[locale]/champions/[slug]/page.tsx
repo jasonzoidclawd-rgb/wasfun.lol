@@ -11,7 +11,7 @@ import { buildPoolProfile } from "@/lib/scoring/augment-tailoring";
 import { getChampionAugmentPool } from "@/lib/scoring/pool-orchestrator";
 import { analyzeInteractions, type MechanicalInteraction, type AugmentMechanic } from "@/lib/scoring/augment-interactions";
 import { localizedDescription, localizedName } from "@/lib/i18n/localized-name";
-import { buildComboTierLookup, resolveChampionCombos } from "@/lib/data/combo-lookup";
+import { buildComboTierLookup } from "@/lib/data/combo-lookup";
 import { hasPickRateCoverage } from "@/lib/champions/pick-rate-coverage";
 import { readChampionsFile } from "@/lib/data/read-public-file";
 import { routing, type Locale } from "@/i18n/routing";
@@ -194,11 +194,9 @@ export default async function ChampionPage({
   const abilityProfile: AbilityProfile | undefined = abilities[slug];
 
   // Build combo lookup for this champion: augment-slug → tier
-  const champCombos = resolveChampionCombos(slug, combos, augments);
   const comboBySlug = isMember
     ? buildComboTierLookup(slug, combos, augments)
     : new Map<string, ComboTier>();
-  const augmentBySlug = new Map(augments.map((augment) => [augment.slug, augment]));
 
   const poolProfile = buildPoolProfile(slug, abilityProfile, activeChamp.baseStats);
   const pool = isMember
@@ -341,8 +339,6 @@ export default async function ChampionPage({
     comboTier,
   }));
 
-  const strongCombos = champCombos.filter((c) => c.tier === "S");
-  const avoidCombos = champCombos.filter((c) => c.tier === "C");
 
   // ── Mechanical Interaction Analysis ──
   let mechanicalSynergies: MechanicalInteraction[] = [];
@@ -467,7 +463,6 @@ export default async function ChampionPage({
     championsLabel: t("indexTitle"),
     name: champName,
     patch,
-    tierLabel: champ.tier ?? t("statisticsUnavailableShort"),
     tagLabels: champ.tags,
     classLabels: champ.classes,
     kitTagLabels: champ.kit_tags,
@@ -490,14 +485,10 @@ export default async function ChampionPage({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 sm:gap-3">
             <h1 className="text-xl sm:text-3xl font-bold truncate">{champName}</h1>
-            {champ.rank && (
-              <span className="text-sm sm:text-base text-[var(--color-text-muted)] font-medium shrink-0">
-                {champ.rank}/{champions.length}
-              </span>
-            )}
             {hubPayload?.champion.letter ? (
               <LetterChip
                 letter={hubPayload.champion.letter}
+                thin={hubPayload.champion.outlined}
                 size="lg"
                 label={th("championGrade", { champion: champName, letter: hubPayload.champion.letter })}
               />
@@ -570,85 +561,6 @@ export default async function ChampionPage({
       {/* ─── Reference: everything the page showed before v3, collapsed ─── */}
       <details className="mt-6">
         <summary className="min-h-11 cursor-pointer py-2 font-semibold">{th("reference")}</summary>
-
-      {/* ─── Strong combos + Traps ─── */}
-      {(strongCombos.length > 0 || avoidCombos.length > 0) && (
-        <section className="glass-card p-4 mb-3 sm:mb-6">
-          {strongCombos.length > 0 && (
-            <div className={avoidCombos.length > 0 ? "mb-4" : ""}>
-              <h2 className="text-sm font-bold mb-2 text-green-400 border-l-2 border-green-400 pl-2">
-                {t("strongCombos")}
-              </h2>
-              <div className="flex flex-wrap gap-1.5">
-                {strongCombos.map((c) => {
-                  const aug = augmentBySlug.get(c.augmentSlug);
-                  const augName = aug ? localizedName(aug, locale) : c.augment;
-                  const augDescription = aug ? localizedAugmentDescription(aug) : undefined;
-                  return (
-                    <Tooltip key={`${c.champion}-${c.augmentSlug}-${c.tier}`} content={augDescription}>
-                      <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-green-400/30 bg-green-400/5 cursor-default">
-                        {aug && (
-                          <Image
-                            src={aug.icon}
-                            alt={augName}
-                            width={24}
-                            height={24}
-                            className="rounded"
-                            unoptimized
-                          />
-                        )}
-                        <span className="text-xs font-medium text-green-300">
-                          {augName}
-                        </span>
-                        <span className="text-[9px] font-bold px-1 py-0.5 rounded bg-green-400/20 text-green-400">
-                          S
-                        </span>
-                      </div>
-                    </Tooltip>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {avoidCombos.length > 0 && (
-            <div>
-              <h2 className="text-sm font-bold mb-2 text-red-400 border-l-2 border-red-400 pl-2">
-                {t("trapsAvoid")}
-              </h2>
-              <div className="flex flex-wrap gap-1.5">
-                {avoidCombos.map((c) => {
-                  const aug = augmentBySlug.get(c.augmentSlug);
-                  const augName = aug ? localizedName(aug, locale) : c.augment;
-                  const augDescription = aug ? localizedAugmentDescription(aug) : undefined;
-                  return (
-                    <Tooltip key={`${c.champion}-${c.augmentSlug}-${c.tier}`} content={augDescription}>
-                      <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-red-400/30 bg-red-400/5 cursor-default">
-                        {aug && (
-                          <Image
-                            src={aug.icon}
-                            alt={augName}
-                            width={24}
-                            height={24}
-                            className="rounded"
-                            unoptimized
-                          />
-                        )}
-                        <span className="text-xs font-medium text-red-300">
-                          {augName}
-                        </span>
-                        <span className="text-[9px] font-bold px-1 py-0.5 rounded bg-red-400/20 text-red-400">
-                          C
-                        </span>
-                      </div>
-                    </Tooltip>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </section>
-      )}
 
       {/* ─── Base Stats ─── */}
       {champ.baseStats && (
@@ -965,14 +877,6 @@ function AugmentRow({
           <div className="flex items-center gap-1.5">
             <span className="text-xs sm:text-sm font-medium truncate">{augName}</span>
             <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${RARITY_DOT[aug.rarity] ?? ""}`} />
-            {comboTier && (
-              <span
-                className={`text-[9px] font-bold px-1 rounded shrink-0
-                  ${isStrong ? "text-green-400 bg-green-400/20" : "text-red-400 bg-red-400/20"}`}
-              >
-                {comboTier}
-              </span>
-            )}
           </div>
           {/* Score breakdown pills — hidden on mobile for compact view */}
           <div className="hidden sm:flex gap-1.5 mt-0.5 flex-wrap">

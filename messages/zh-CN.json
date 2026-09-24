@@ -1063,7 +1063,7 @@
     "buildCaveat": "只列出至少 1% 对局使用的路线。胜率只计算完成该路线的对局，请比较路线之间，而不是与 {champion} 的整体胜率比较。",
     "noBuilds": "目前没有足够常见的出装顺序可以排名。",
     "noAds": "这个界面对所有人都没有广告和升级提示。",
-    "unavailable": "评级暂时无法提供。格子仍显示所有卡。",
+    "unavailable": "评级暂时无法提供。",
     "gradeLabel": "评级 {letter}，所有英雄合计",
     "gradeLabelThin": "评级 {letter}，所有英雄合计，不确定",
     "freshness": "版本 {patch} · 更新于 {date} · 国服 Mayhem 汇总数据，经由 {provider}",
@@ -1074,7 +1074,8 @@
     "gradeLabelOwn": "评级 {letter}",
     "winShort": "胜率 {win}%",
     "pickShort": "选取 {pick}%",
-    "staleWarning": "数据已超过两天"
+    "staleWarning": "数据已超过两天",
+    "mixedRarities": "这些卡来自不同稀有度。各稀有度只与同稀有度比较评级，因此无法指定单一选择：请比较评级。"
   },
   "hub": {
     "planTitle": "要拿什么？",
@@ -1090,6 +1091,8 @@
     "buildsLead": "只列 {champion} 至少 1% 对局使用的路线，胜率从高到低。不给评级：路线胜率只计算完成它的对局。",
     "reference": "参考：技能、属性、组合和会员工具",
     "championGrade": "{champion}：相对全体英雄评级 {letter}",
-    "unavailable": "评级暂时无法提供。"
+    "unavailable": "评级暂时无法提供。",
+    "planNote": "评级与胜率来自所有英雄的对局，而非只有 {champion}。",
+    "liftColumn": "高于或低于 {rarity} 增幅平均的百分点（所有英雄）"
   }
 }

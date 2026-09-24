@@ -30,8 +30,8 @@ describe("three taps give a verdict", () => {
     expect(readScreen(two, cards, 1.2)).toBeNull();
     const three = pickReducer(two, { type: "tapCard", id: "c" });
     const reading = readScreen(three, cards, 1.2)!;
-    expect(reading.verdict.pick).toBe("a");
-    expect(reading.verdict.runnerUp).toBe("b");
+    expect(reading.verdict!.pick).toBe("a");
+    expect(reading.verdict!.runnerUp).toBe("b");
   });
 
   test("a fourth tap is ignored; tapping an entered card takes it back (a correction, not a reroll)", () => {
@@ -66,11 +66,16 @@ describe("rerolls", () => {
     expect(pickReducer(st, { type: "tapCard", id: "b" }).slots.map((s) => s.id)).toEqual(["a", "d", "c"]);
   });
 
-  test("rarities can mix after a Golden Reroll", () => {
+  test("rarities can mix after a Golden Reroll, and then no pick is named across them", () => {
     let st = run(...["a", "b", "c"].map((id) => ({ type: "tapCard", id }) as PickAction));
     st = pickReducer(st, { type: "tapReroll", slot: 2 });
     st = pickReducer(st, { type: "tapCard", id: "p" });
-    expect(readScreen(st, cards, 1.2)!.verdict.pick).toBe("p");
+    const r = readScreen(st, cards, 1.2)!;
+    expect(st.slots.map((s) => s.id)).toContain("p");
+    expect(r.mixedRarities).toBe(true);
+    expect(r.verdict).toBeNull();
+    // no reroll hints across rarities either; per-card odds stay within each rarity
+    expect(Object.values(r.reroll).every((x) => !x)).toBe(true);
   });
 
   test("hints: every card except the best is suggested for a reroll", () => {

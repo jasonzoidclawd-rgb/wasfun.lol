@@ -133,7 +133,8 @@ export function AnalyticsRuntime() {
 
       const path = isSameOriginPath(anchor.href);
       if (!path) return;
-      if (path === "/companion" || path.startsWith("/api/downloads/overlay")) {
+      // /companion now redirects to /pick; the overlay CTA is the overlay download
+      if (path.startsWith("/api/downloads/overlay")) {
         track("overlay_cta_click");
       } else if (path === "/api/auth/signin") {
         track("signup_start");

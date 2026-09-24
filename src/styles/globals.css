@@ -168,6 +168,8 @@ body {
   --grade-C-fill: #8f3534; --grade-C-ink: #ffffff;
   --grade-D-fill: #e66767; --grade-D-ink: #0e1116;
   --grade-open-ink: #f1f5f9; /* outlined and dashed chips: letter on the card background */
+  /* outlined chips' borders: ≥ 3:1 against the card (WCAG 1.4.11) */
+  --grade-S-edge: #3987e5; --grade-A-edge: #8ab8f0; --grade-B-edge: #9a9a95; --grade-C-edge: #f0a09e; --grade-D-edge: #e66767;
 }
 [data-theme="light"] {
   --grade-S-fill: #1c5cab; --grade-S-ink: #ffffff;
@@ -176,6 +178,7 @@ body {
   --grade-C-fill: #f2a3a0; --grade-C-ink: #0e1116;
   --grade-D-fill: #e34948; --grade-D-ink: #0e1116;
   --grade-open-ink: #0e1116;
+  --grade-S-edge: #1c5cab; --grade-A-edge: #2f6fbf; --grade-B-edge: #6b6b66; --grade-C-edge: #c0413f; --grade-D-edge: #c93a39;
 }
 .grade-chip { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px;
   border-radius: 6px; font-weight: 800; font-size: 15px; line-height: 1; flex: none; border: 2px solid transparent; }
@@ -185,11 +188,11 @@ body {
 .grade-chip.is-C { background: var(--grade-C-fill); color: var(--grade-C-ink); }
 .grade-chip.is-D { background: var(--grade-D-fill); color: var(--grade-D-ink); }
 .grade-chip.is-open { background: transparent; color: var(--grade-open-ink); }
-.grade-chip.is-open.is-S { border-color: var(--grade-S-fill); }
-.grade-chip.is-open.is-A { border-color: var(--grade-A-fill); }
-.grade-chip.is-open.is-B { border-color: var(--color-text-secondary); }
-.grade-chip.is-open.is-C { border-color: var(--grade-C-fill); }
-.grade-chip.is-open.is-D { border-color: var(--grade-D-fill); }
+.grade-chip.is-open.is-S { border-color: var(--grade-S-edge); }
+.grade-chip.is-open.is-A { border-color: var(--grade-A-edge); }
+.grade-chip.is-open.is-B { border-color: var(--grade-B-edge); }
+.grade-chip.is-open.is-C { border-color: var(--grade-C-edge); }
+.grade-chip.is-open.is-D { border-color: var(--grade-D-edge); }
 .grade-chip.is-dashed { border-style: dashed; }
 .grade-chip.is-lg { width: 44px; height: 44px; font-size: 22px; border-radius: 10px; }
 

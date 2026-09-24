@@ -1063,7 +1063,7 @@
     "buildCaveat": "1%以上の試合で使われたルートのみ。勝率はそのルートを完成させた試合だけで計算されるため、{champion} 全体の勝率ではなくルート同士で比べてください。",
     "noBuilds": "ランク付けできるほど一般的なビルド順はまだありません。",
     "noAds": "この画面には、誰に対しても広告やアップグレードの案内は表示されません。",
-    "unavailable": "現在、評価は表示できません。グリッドにはすべてのカードが表示されます。",
+    "unavailable": "現在、評価は表示できません。",
     "gradeLabel": "評価 {letter}、全チャンピオン合計",
     "gradeLabelThin": "評価 {letter}、全チャンピオン合計、不確定",
     "freshness": "パッチ {patch} · {date} 更新 · 中国 Mayhem 集計データ（{provider} 経由）",
@@ -1074,7 +1074,8 @@
     "gradeLabelOwn": "評価 {letter}",
     "winShort": "勝率 {win}%",
     "pickShort": "ピック {pick}%",
-    "staleWarning": "2日以上前のデータ"
+    "staleWarning": "2日以上前のデータ",
+    "mixedRarities": "レアリティの異なるカードです。評価はレアリティごとに付けているため、ひとつを選べません。評価を比べてください。"
   },
   "hub": {
     "planTitle": "何を取る？",
@@ -1090,6 +1091,8 @@
     "buildsLead": "{champion} の試合の1%以上で使われたルートを勝率の高い順に表示。評価はなし：ルートの勝率は完成させた試合だけで計算されます。",
     "reference": "参考：スキル、ステータス、コンボ、メンバー向けツール",
     "championGrade": "{champion}：全チャンピオン中の評価 {letter}",
-    "unavailable": "現在、評価は表示できません。"
+    "unavailable": "現在、評価は表示できません。",
+    "planNote": "評価と勝率は {champion} だけでなく全チャンピオンの試合によるものです。",
+    "liftColumn": "{rarity} オーグメント平均との差（ポイント、全チャンピオン）"
   }
 }

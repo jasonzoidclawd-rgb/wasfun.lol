@@ -100,7 +100,6 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
                 {core.map((b) => (
                   <div key={b.id}>
                     <div className="font-semibold">{b.names.join(" › ")}</div>
-                    <div className="text-xs text-[var(--color-text-secondary)]">{tp("bootsLine", { win: b.winRate.toFixed(1), pick: b.pickRate.toFixed(1) })}</div>
                   </div>
                 ))}
                 {core.length > 1 && <p className="text-xs text-[var(--color-text-secondary)]">{t("buildsCloseCall")}</p>}
@@ -108,6 +107,7 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
             </div>
           )}
         </dl>
+        <p className="mt-3 text-[11px] text-[var(--color-text-muted)]">{t("planNote", { champion })}</p>
       </section>
 
       <section aria-labelledby="hub-augments" className="glass-card p-4">
@@ -116,6 +116,7 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
           <details key={r} open={r === "gold"} className="mt-3">
             <summary className="min-h-11 cursor-pointer py-2 font-semibold">{tp(`rarity_${r}`)}</summary>
             <p className="mb-2 text-xs text-[var(--color-text-muted)]">{t("augmentsLead", { rarity: tp(`rarity_${r}`), champion })}</p>
+            <p className="mb-1 text-right text-[11px] text-[var(--color-text-muted)]">{t("liftColumn", { rarity: tp(`rarity_${r}`) })} ↓</p>
             <ol className="divide-y divide-[var(--color-border-default)]">
               {[...payload.rarities[r]]
                 .sort((a, b) => a.order - b.order)
@@ -126,7 +127,7 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
                       <div className="font-semibold">{c.name}</div>
                       <div className="text-xs text-[var(--color-text-secondary)]">{rate(c)}</div>
                     </div>
-                    <span className="w-8 text-right text-sm tabular-nums text-[var(--color-text-secondary)]">{signedWhole(c.m)}</span>
+                    <span className="w-8 text-right text-sm tabular-nums text-[var(--color-text-secondary)]" title={t("liftColumn", { rarity: tp(`rarity_${r}`) })}>{signedWhole(c.m)}</span>
                     <LetterChip letter={c.letter} thin={c.outlined} label={label(c)} />
                   </li>
                 ))}

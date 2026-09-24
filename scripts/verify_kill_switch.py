@@ -103,8 +103,20 @@ def load_fingerprints() -> list[tuple[str, list[str]]]:
     return out
 
 
+# A grade letter is derived from the statistics, so it is one too: a rendered
+# chip, or a letter prop in the RSC flight data a client component receives.
+LETTER_PROP = re.compile(r'\\*"letter\\*":\\*"[SABCD]\\*"')
+
+
 def detect_marker(body: str) -> list[str]:
-    return ["data-augment-stat attribute"] if "data-augment-stat" in body else []
+    hits = []
+    if "data-augment-stat" in body:
+        hits.append("data-augment-stat attribute")
+    if "data-grade=" in body or "grade-chip " in body:
+        hits.append("grade letter chip")
+    if LETTER_PROP.search(body):
+        hits.append("grade letter in payload")
+    return hits
 
 
 def detect_json(body: str) -> list[str]:

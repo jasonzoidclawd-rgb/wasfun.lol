@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { shouldPromptConsent } from "@/lib/ads/consent";
 import { recordConsent, useAdConsent } from "@/lib/ads/useAdConsent";
 
@@ -16,9 +16,12 @@ const ADS_ENABLED = process.env.NEXT_PUBLIC_ADS_ENABLED;
 
 export function ConsentManager({ copy }: { copy: ConsentCopy }) {
   const consent = useAdConsent();
+  const pathname = usePathname();
 
   // Inert unless ads are enabled for this deployment and no choice was made.
   if (!shouldPromptConsent(ADS_ENABLED, consent)) return null;
+  // The Pick screen is used in game and carries no ads, so nothing to consent to there.
+  if (/^\/pick(\/|$)/.test(pathname)) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-black/90 px-4 py-3 backdrop-blur">

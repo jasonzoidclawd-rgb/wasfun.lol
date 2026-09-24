@@ -67,7 +67,12 @@ export function pickReducer(state: PickState, action: PickAction): PickState {
 }
 
 export interface ScreenReading {
-  verdict: Verdict;
+  /**
+   * null when the screen mixes rarities (a Golden Reroll can): each rarity's
+   * lifts are measured against its own baseline, so no pick is named across them
+   */
+  verdict: Verdict | null;
+  mixedRarities: boolean;
   /** per slot: suggest a reroll? (only for slots that still have one) */
   reroll: Record<string, boolean>;
   /** per slot, members: the chance a reroll beats this card */
@@ -82,7 +87,8 @@ export function readScreen(state: PickState, cards: Map<string, PickCard & { rar
   if (state.slots.length < SCREEN_SIZE) return null;
   const post = (c: PickCard): Posterior => ({ id: c.id, m: c.m, v: c.v + tau * tau });
   const onScreen = state.slots.map((s) => cards.get(s.id)).filter((c): c is PickCard & { rarity: Rarity } => !!c);
-  const v = verdict(onScreen.map(post));
+  const mixedRarities = new Set(onScreen.map((c) => c.rarity)).size > 1;
+  const v = mixedRarities ? null : verdict(onScreen.map(post));
   const reroll: Record<string, boolean> = {};
   const odds: Record<string, number | null> = {};
   const excluded = new Set([...state.slots.map((s) => s.id), ...state.rerolledAway]);
@@ -98,9 +104,9 @@ export function readScreen(state: PickState, cards: Map<string, PickCard & { rar
       excluded,
     });
     const pool = poolIds.map((id) => post(cards.get(id)!));
-    const hints = rerollHints(onScreen.map(post), pool);
-    reroll[slot.id] = hints.reroll.includes(slot.id);
+    // hints compare the cards on screen, so they need a single rarity too
+    reroll[slot.id] = !mixedRarities && rerollHints(onScreen.map(post), pool).reroll.includes(slot.id);
     odds[slot.id] = rerollOdds(post(card), pool);
   }
-  return { verdict: v, reroll, odds };
+  return { verdict: v, mixedRarities, reroll, odds };
 }

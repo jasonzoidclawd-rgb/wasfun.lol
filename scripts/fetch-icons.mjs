@@ -18,6 +18,9 @@ const DATA = path.join(ROOT, "data", "internal");
 const OUT = path.join(ROOT, "public", "assets", "icons");
 const TIMEOUT_MS = 10_000;
 const CONCURRENCY = 12;
+// The whole step stops asking after this long, so a slow CDN cannot hold up a
+// deploy (a kill-switch deploy included); whatever is missing keeps its placeholder.
+const DEADLINE = Date.now() + Number(process.env.ICON_FETCH_DEADLINE_MS ?? 120_000);
 
 const norm = (s) => String(s ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "");
 
@@ -31,9 +34,12 @@ async function exists(file) {
 }
 
 async function download(url, file) {
+  // Vercel builds start without public/assets/icons (git-ignored), so this
+  // skip only saves repeat local builds.
   if (await exists(file)) return true;
+  if (Date.now() > DEADLINE) return false;
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+  const timer = setTimeout(() => ctrl.abort(), Math.max(0, Math.min(TIMEOUT_MS, DEADLINE - Date.now())));
   try {
     const res = await fetch(url, { signal: ctrl.signal, headers: { "User-Agent": "wasfun.lol build (icons)" } });
     if (!res.ok) return false;
@@ -82,9 +88,10 @@ async function main() {
 
   let champTasks = [];
   try {
-    const versions = await (await fetch("https://ddragon.leagueoflegends.com/api/versions.json")).json();
+    const signal = () => AbortSignal.timeout(TIMEOUT_MS);
+    const versions = await (await fetch("https://ddragon.leagueoflegends.com/api/versions.json", { signal: signal() })).json();
     const v = versions[0];
-    const dd = await (await fetch(`https://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion.json`)).json();
+    const dd = await (await fetch(`https://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion.json`, { signal: signal() })).json();
     const byKey = new Map(Object.values(dd.data).map((c) => [String(c.key), c.id]));
     const champions = (await readJson(path.join(DATA, "champions.json"))).champions;
     champTasks = champions

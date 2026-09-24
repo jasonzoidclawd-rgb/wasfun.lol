@@ -35,6 +35,11 @@ describe("letter chip contrast", () => {
         expect(ratio, `${theme} ${L}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
       }
       expect(contrast(tokens["--grade-open-ink"], cardBg)).toBeGreaterThanOrEqual(4.5);
+      // outlined chips: the border is a graphical object, ≥ 3:1 (WCAG 1.4.11)
+      for (const L of ["S", "A", "B", "C", "D"]) {
+        const ratio = contrast(tokens[`--grade-${L}-edge`], cardBg);
+        expect(ratio, `${theme} ${L} edge: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(3);
+      }
     });
   }
 

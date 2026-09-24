@@ -1063,7 +1063,7 @@
     "buildCaveat": "1% 이상의 판에서 쓰인 경로만 표시합니다. 승률은 그 경로를 완성한 판만 계산하므로, {champion}의 전체 승률이 아니라 경로끼리 비교하세요.",
     "noBuilds": "아직 순위를 매길 만큼 흔한 빌드 순서가 없습니다.",
     "noAds": "이 화면에는 누구에게도 광고나 업그레이드 안내가 없습니다.",
-    "unavailable": "지금은 등급을 표시할 수 없습니다. 격자에는 모든 카드가 표시됩니다.",
+    "unavailable": "지금은 등급을 표시할 수 없습니다.",
     "gradeLabel": "등급 {letter}, 전체 챔피언 합계",
     "gradeLabelThin": "등급 {letter}, 전체 챔피언 합계, 불확실",
     "freshness": "패치 {patch} · {date} 업데이트 · 중국 Mayhem 집계 데이터({provider} 경유)",
@@ -1074,7 +1074,8 @@
     "gradeLabelOwn": "등급 {letter}",
     "winShort": "승률 {win}%",
     "pickShort": "선택 {pick}%",
-    "staleWarning": "이틀 넘게 지난 데이터"
+    "staleWarning": "이틀 넘게 지난 데이터",
+    "mixedRarities": "희귀도가 다른 카드입니다. 등급은 희귀도별로 매기므로 하나를 고를 수 없습니다. 등급을 비교하세요."
   },
   "hub": {
     "planTitle": "무엇을 고를까요?",
@@ -1090,6 +1091,8 @@
     "buildsLead": "{champion} 판의 1% 이상에서 쓰인 경로를 승률 높은 순으로 표시합니다. 등급 없음: 경로 승률은 그 경로를 완성한 판만 계산합니다.",
     "reference": "참고: 스킬, 능력치, 조합, 멤버 도구",
     "championGrade": "{champion}: 전체 챔피언 중 등급 {letter}",
-    "unavailable": "지금은 등급을 표시할 수 없습니다."
+    "unavailable": "지금은 등급을 표시할 수 없습니다.",
+    "planNote": "등급과 승률은 {champion}만이 아니라 모든 챔피언의 게임 기준입니다.",
+    "liftColumn": "{rarity} 증강 평균 대비 차이(%p, 전체 챔피언)"
   }
 }

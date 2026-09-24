@@ -1063,7 +1063,7 @@
     "buildCaveat": "Paths built in at least 1% of games. Win rate counts only games that finished the path, so compare paths with each other, not with {champion}'s overall win rate.",
     "noBuilds": "No build order is common enough to rank yet.",
     "noAds": "No ads and no upgrade prompts on this screen, for everyone.",
-    "unavailable": "Grades are unavailable right now. The grid still shows every card.",
+    "unavailable": "Grades are unavailable right now.",
     "gradeLabel": "Grade {letter}, across all champions",
     "gradeLabelThin": "Grade {letter}, across all champions, uncertain",
     "freshness": "Patch {patch} · updated {date} · CN Mayhem aggregate via {provider}",
@@ -1074,7 +1074,8 @@
     "gradeLabelOwn": "Grade {letter}",
     "winShort": "win {win}%",
     "pickShort": "pick {pick}%",
-    "staleWarning": "more than two days old"
+    "staleWarning": "more than two days old",
+    "mixedRarities": "These cards are from different rarities. Each rarity is graded against its own field, so there is no single pick to name: compare the letters."
   },
   "hub": {
     "planTitle": "What will you take?",
@@ -1090,6 +1091,8 @@
     "buildsLead": "Highest win rate first, among paths built in at least 1% of {champion}'s games. No letters: a path's win rate counts only games that finished it.",
     "reference": "Reference: abilities, stats, combos and member tools",
     "championGrade": "{champion}: grade {letter} against the field",
-    "unavailable": "Grades are unavailable right now."
+    "unavailable": "Grades are unavailable right now.",
+    "planNote": "Letters and win rates come from all champions' games, not {champion}'s alone.",
+    "liftColumn": "Points above or below the average {rarity} augment, all champions"
   }
 }

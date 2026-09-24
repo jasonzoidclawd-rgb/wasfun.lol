@@ -80,9 +80,8 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
         ? t("cardLineUnder", { win: c.winRate.toFixed(1), pick: c.pickUnder.toFixed(1), champion })
         : t("takeLine", { rarity: t(`rarity_${c.rarity}`), win: c.winRate.toFixed(1) });
   const chipLabel = (c: Card) => (c.outlined ? t("gradeLabelThin", { letter: c.letter }) : t("gradeLabel", { letter: c.letter }));
-  const ordered = reading
-    ? [...state.slots].sort((a, b) => (a.id === reading.verdict.pick ? -1 : b.id === reading.verdict.pick ? 1 : 0))
-    : state.slots;
+  const named = reading?.verdict ?? null;
+  const ordered = named ? [...state.slots].sort((a, b) => (a.id === named.pick ? -1 : b.id === named.pick ? 1 : 0)) : state.slots;
 
   const takePanel = (
     <section aria-labelledby="pick-take" className="rounded-[var(--radius-card)] border border-[var(--color-border-default)] bg-[var(--color-bg-card)] p-4">
@@ -94,7 +93,8 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
         {ordered.map((slot) => {
           const c = cards.get(slot.id)!;
           const index = state.slots.findIndex((s) => s.id === slot.id);
-          const isPick = reading?.verdict.pick === c.id;
+          // a close call names no winner, so no card is enlarged
+          const isPick = named !== null && !named.closeCall && named.pick === c.id;
           const pending = state.pendingReroll === index;
           return (
             <li key={slot.id} className={`flex items-center gap-3 ${isPick ? "" : "border-t border-[var(--color-border-default)] pt-3"}`}>
@@ -142,10 +142,13 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
       {state.slots.length > 0 && state.slots.length < SCREEN_SIZE && (
         <p className="mt-3 text-sm text-[var(--color-text-secondary)]">{t("moreToTap", { count: SCREEN_SIZE - state.slots.length })}</p>
       )}
-      {reading?.verdict.closeCall && reading.verdict.runnerUp && (
+      {named?.closeCall && named.runnerUp && (
         <p className="mt-3 rounded-lg border border-[var(--color-border-hover)] p-3 text-sm font-semibold">
-          {t("closeCall", { a: cards.get(reading.verdict.pick)!.name, b: cards.get(reading.verdict.runnerUp)!.name })}
+          {t("closeCall", { a: cards.get(named.pick)!.name, b: cards.get(named.runnerUp)!.name })}
         </p>
+      )}
+      {reading?.mixedRarities && (
+        <p className="mt-3 rounded-lg border border-[var(--color-border-hover)] p-3 text-sm">{t("mixedRarities")}</p>
       )}
       <div className="mt-3 flex items-center justify-between gap-3 text-xs text-[var(--color-text-secondary)]">
         <span>{t("rerolledHint")}</span>
@@ -168,6 +171,8 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
             key={r}
             type="button"
             role="tab"
+            id={`pick-tab-${r}`}
+            aria-controls="pick-grid"
             aria-selected={state.rarity === r}
             onClick={() => dispatch({ type: "tab", rarity: r })}
             className={`min-h-11 px-4 font-semibold ${state.rarity === r ? "border-b-2 border-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}
@@ -176,7 +181,12 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
           </button>
         ))}
       </div>
-      <ul className="grid grid-cols-[repeat(4,minmax(0,1fr))] gap-2 sm:grid-cols-[repeat(6,minmax(0,1fr))]" role="list">
+      <ul
+        id="pick-grid"
+        role="tabpanel"
+        aria-labelledby={`pick-tab-${state.rarity}`}
+        className="grid grid-cols-[repeat(4,minmax(0,1fr))] gap-2 sm:grid-cols-[repeat(6,minmax(0,1fr))]"
+      >
         {payload.rarities[state.rarity].map((c) => {
           const card = cards.get(c.id)!;
           const selected = state.slots.some((s) => s.id === c.id);
@@ -267,7 +277,7 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
         <Icon src={payload.champion.icon} size={48} />
         <div>
           <h1 className="text-2xl font-bold">{champion}</h1>
-          <Link href="/pick?change=1" className="text-sm text-[var(--color-text-secondary)] underline">
+          <Link href="/pick?change=1" className="inline-flex min-h-11 items-center text-sm text-[var(--color-text-secondary)] underline">
             {t("notChampion", { champion })}
           </Link>
         </div>

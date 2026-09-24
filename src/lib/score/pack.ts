@@ -16,7 +16,6 @@ import {
   bootsSet,
   buildOrders,
   championLetters,
-  championSet,
   COMPLETION_CAVEAT,
   gradeSet,
   RARITIES,
@@ -72,6 +71,8 @@ export interface ChampionPack {
   winRate: number;
   pickRate: number | null;
   letter: Letter | null;
+  /** the champion's letter is sensitive to the unit assumption: shown outlined */
+  letterOutlined: boolean;
   /** the champion's decision set per rarity: its pool, graded */
   sets: Record<Rarity, GradedOption[]>;
   /** the champion's own appearance rate for the augments the provider lists, by augment id */
@@ -146,7 +147,11 @@ function buildScorePack(): ScorePack | null {
     RARITIES.map((r) => [r, gradeSet(global[r].filter((p) => p.resolved))]),
   ) as Record<Rarity, GradedOption[]>;
   const champions = championLetters(feeds, opts);
-  const letterOf = new Map(champions.map((c) => [c.id, c.letter]));
+  const letterOf = new Map(champions.map((c) => [c.id, { letter: c.letter, outlined: c.outlined }]));
+  // Kit tags are a fit heuristic, not the game's offer rules: tag intersection
+  // would hide augments champions are really offered. Every tag passes, so only
+  // availability and the hard rules (attack type, resource, ability use, items) apply.
+  const allTags = [...new Set(catalogRows.flatMap((a) => a.kit_tags ?? []))];
 
   // Pool construction works on catalog slugs; posteriors are keyed by augment id.
   const idBySlug = new Map(catalogRows.filter((a) => a.augmentId).map((a) => [a.slug, a.augmentId as string]));
@@ -161,15 +166,18 @@ function buildScorePack(): ScorePack | null {
       augments: catalogRows,
       abilityProfile: abilities[slug],
       baseStats: champ.baseStats,
-      championKitTags: champ.kit_tags ?? [],
+      championKitTags: allTags,
       poolRules,
     });
     const sets = {} as Record<Rarity, GradedOption[]>;
     const pickUnder = {} as Record<Rarity, number | null>;
     for (const r of RARITIES) {
-      const ids = pool[r].map((a) => idBySlug.get(a.slug)).filter((id): id is string => !!id);
-      sets[r] = championSet(global[r], ids);
       const listedRows = row.augments.filter((a) => a.rarity === r);
+      // an augment the provider lists for this champion was offered to it, whatever the rules say
+      const ids = new Set(pool[r].map((a) => idBySlug.get(a.slug)).filter((id): id is string => !!id));
+      for (const a of listedRows) if (a.augmentId) ids.add(a.augmentId);
+      // letters are the tier list's (graded across all champions), not re-graded within the pool
+      sets[r] = tierLists[r].filter((o) => ids.has(o.id));
       pickUnder[r] = listedRows.length ? Math.min(...listedRows.map((a) => a.appearanceRate)) : null;
     }
     const listed: Record<string, number> = {};
@@ -178,7 +186,8 @@ function buildScorePack(): ScorePack | null {
       slug,
       winRate: row.winRate,
       pickRate: row.pickRate,
-      letter: letterOf.get(slug) ?? null,
+      letter: letterOf.get(slug)?.letter ?? null,
+      letterOutlined: letterOf.get(slug)?.outlined ?? false,
       sets,
       listed,
       pickUnder,

@@ -47,7 +47,7 @@ export interface PickItemRow {
 }
 
 export interface PickPayload {
-  champion: { slug: string; name: string; icon: string | null; letter: Letter | null; winRate: number };
+  champion: { slug: string; name: string; icon: string | null; letter: Letter | null; outlined: boolean; winRate: number };
   meta: { patch: string; dataDate: string; provider: string; tau: number };
   rarities: Record<Rarity, PickCard[]>;
   boots: (PickItemRow & { letter: Letter; outlined: boolean })[];
@@ -120,6 +120,7 @@ export function buildPickPayload(opts: {
       name: localizedName(opts.championRecord, locale),
       icon: icons.champion(slug),
       letter: champ.letter,
+      outlined: champ.letterOutlined,
       winRate: champ.winRate,
     },
     meta: { patch: pack.meta.patch, dataDate: pack.meta.dataDate, provider: pack.meta.provider, tau: pack.meta.tau },

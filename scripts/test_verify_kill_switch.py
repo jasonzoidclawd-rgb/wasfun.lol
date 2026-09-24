@@ -60,3 +60,10 @@ class DetectorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_grade_letters_count_as_statistics():
+    assert detect_marker('<span class="grade-chip is-S" data-grade="S">') != []
+    assert detect_marker('self.__next_f.push([1,"{\\"letter\\":\\"A\\",\\"m\\":1}"])') != []
+    assert detect_marker('{"letter":"B"}') != []
+    assert detect_marker('<p>Letter S is a letter.</p>') == []

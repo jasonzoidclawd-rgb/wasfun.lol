@@ -1063,7 +1063,7 @@
     "buildCaveat": "只列入至少 1% 對局使用的路線。勝率只計算完成該路線的對局，請比較路線之間，而非與 {champion} 的整體勝率比較。",
     "noBuilds": "目前沒有夠常見的出裝順序可排名。",
     "noAds": "這個畫面對所有人都沒有廣告與升級提示。",
-    "unavailable": "評級暫時無法提供。格子仍顯示所有卡。",
+    "unavailable": "評級暫時無法提供。",
     "gradeLabel": "評級 {letter}，所有英雄合計",
     "gradeLabelThin": "評級 {letter}，所有英雄合計，不確定",
     "freshness": "版本 {patch} · 更新於 {date} · 中國 Mayhem 彙總資料，經由 {provider}",
@@ -1074,7 +1074,8 @@
     "gradeLabelOwn": "評級 {letter}",
     "winShort": "勝率 {win}%",
     "pickShort": "選取 {pick}%",
-    "staleWarning": "資料已超過兩天"
+    "staleWarning": "資料已超過兩天",
+    "mixedRarities": "這些卡來自不同稀有度。各稀有度只與同稀有度比較評級，因此無法指定單一選擇：請比較評級。"
   },
   "hub": {
     "planTitle": "要拿什麼？",
@@ -1090,6 +1091,8 @@
     "buildsLead": "只列 {champion} 至少 1% 對局使用的路線，勝率由高到低。不給評級：路線勝率只計算完成它的對局。",
     "reference": "參考：技能、屬性、組合與會員工具",
     "championGrade": "{champion}：相對全體英雄評級 {letter}",
-    "unavailable": "評級暫時無法提供。"
+    "unavailable": "評級暫時無法提供。",
+    "planNote": "評級與勝率來自所有英雄的對局，而非只有 {champion}。",
+    "liftColumn": "高於或低於 {rarity} 增幅平均的百分點（所有英雄）"
   }
 }
