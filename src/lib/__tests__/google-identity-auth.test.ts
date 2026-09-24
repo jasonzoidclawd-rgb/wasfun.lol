@@ -110,7 +110,6 @@ describe("Google Identity Services auth", () => {
       "src/app/[locale]/membership/page.tsx",
       "src/app/[locale]/champions/[slug]/page.tsx",
       "src/components/champions/PoolConstructionSection.tsx",
-      "src/components/companion/CompanionClient.tsx",
     ];
 
     const sources = await Promise.all(
@@ -130,7 +129,6 @@ describe("Google Identity Services auth", () => {
       "src/app/[locale]/advisor/page.tsx",
       "src/app/[locale]/membership/page.tsx",
       "src/app/[locale]/champions/[slug]/page.tsx",
-      "src/components/companion/CompanionClient.tsx",
     ];
     const combined = (
       await Promise.all(files.map((file) => readFile(path.join(process.cwd(), file), "utf-8")))
@@ -142,7 +140,6 @@ describe("Google Identity Services auth", () => {
     expect(combined).toContain('<GoogleSignInButton next="/account"');
     expect(combined).toContain('<GoogleSignInButton next="/advisor"');
     expect(combined).toContain('<GoogleSignInButton next="/membership"');
-    expect(combined).toContain('next="/companion"');
     expect(combined).toContain('signInNextPath={!isAuthenticated ? `/champions/${slug}` : undefined}');
   });
 

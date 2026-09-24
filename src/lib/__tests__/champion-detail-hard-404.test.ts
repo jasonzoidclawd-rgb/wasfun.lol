@@ -30,6 +30,9 @@ const knownSlug: string = JSON.parse(
 
 const entitlementCalls = vi.fn();
 
+// The v3 hub's score pack is irrelevant to 404 ordering and slow to build.
+vi.mock("@/lib/score/pack", () => ({ loadScorePack: () => null }));
+
 vi.mock("@/lib/entitlements/server", () => ({
   requireActiveEntitlement: async (...args: unknown[]) => {
     entitlementCalls(...args);
