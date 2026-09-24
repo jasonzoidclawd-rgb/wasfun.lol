@@ -24,7 +24,7 @@
 import { carriedPrior, combineOnce, type Normal } from "./carryover";
 import { TAKERS_ADJUSTMENT } from "./config";
 import { closeNpmle } from "./close-npmle";
-import { grade, isThin, MARGIN, pairwise, type Graded, type Letter } from "./grade";
+import { grade, isThin, MARGIN, pairwise, type Letter } from "./grade";
 import { leaveOneOutLifts, type LiftSet } from "./lift";
 
 export type Rarity = "prismatic" | "gold" | "silver";
@@ -108,6 +108,8 @@ export interface AugmentPosterior {
   pickRate: number;
   /** percentage points the takers adjustment moved this augment */
   takersShift: number;
+  /** posterior means at the takers envelope's corners (the unit hypothesis) */
+  cornerM?: number[];
   carried: boolean;
   /** share of the posterior mean that comes from the option's own data */
   ownWeight: number;
@@ -118,6 +120,8 @@ export interface AugmentPosterior {
 
 export interface GradedOption extends AugmentPosterior {
   letter: Letter;
+  /** the letter differs between the takers envelope's corners: shown outlined */
+  unitSensitive?: boolean;
   tier: number;
   order: number;
   outlined: boolean;
@@ -173,11 +177,13 @@ export function takersBaseline(feeds: Feeds, rarity: Rarity, unlistedFraction: n
 export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOptions): AugmentPosterior[] {
   const rows = feeds.augmentRows.filter((r) => r.rarity === rarity && r.availability === "live" && r.pickRate > 0);
   if (rows.length < 2) return [];
-  // The shift at the central assumptions, and its spread over the plausible
-  // envelope: unlisted share 0.25–0.75 of the bound × the per-champion total
-  // ×0.5–×1.5 (the unit hypothesis). Half that range, squared, is the
-  // adjustment's own uncertainty and enters each augment's variance, so grades
-  // and close calls never lean on it more than it deserves.
+  // The takers shift at the central assumptions and at the corners of its
+  // plausible envelope: unlisted share 0.25–0.75 of the bound × the per-champion
+  // total ×0.5–×1.5 (the unit hypothesis). CLOSE is fitted on sampling noise
+  // only (spec §5: fitted noise only), once per shift. The envelope's spread is
+  // added to the posterior variance afterwards, and grading takes the most
+  // conservative letter across the corners (gradeSet), so no letter says more
+  // than the unit hypothesis supports.
   const shiftAt = (f: number, scale: number) => {
     const t = takersBaseline(feeds, rarity, f, scale);
     return rows.map((r) => (t.byAugment.get(r.sourceSlug) ?? t.population) - t.population);
@@ -185,22 +191,26 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
   const zero = rows.map(() => 0);
   const shift = TAKERS_ADJUSTMENT ? shiftAt(opts.unlistedTakerFraction ?? 0.5, opts.takersTotalScale ?? 1) : zero;
   const corners = TAKERS_ADJUSTMENT
-    ? [shiftAt(0.25, 0.5), shiftAt(0.25, 1.5), shiftAt(0.75, 0.5), shiftAt(0.75, 1.5), shift]
-    : [zero];
+    ? [shiftAt(0.25, 0.5), shiftAt(0.25, 1.5), shiftAt(0.75, 0.5), shiftAt(0.75, 1.5)]
+    : [];
   const systematic = rows.map((_, i) => {
-    const xs = corners.map((c) => c[i]);
+    const xs = [shift[i], ...corners.map((c) => c[i])];
     return ((Math.max(...xs) - Math.min(...xs)) / 2) ** 2; // pp²
   });
-  const lifts = leaveOneOutLifts(
-    rows.map((r, i) => ({
-      id: r.augmentId ?? `src:${r.sourceSlug}`,
-      p: r.pickRate,
-      w: (r.winRate - shift[i]) / 100,
-      n: (r.pickRate / 100) * opts.volume,
-    })),
-  );
-  const se2 = rows.map((_, i) => lifts.se2[i] + systematic[i]);
-  const post = closeNpmle(rows.map((r, i) => ({ id: lifts.ids[i], l: lifts.lift[i], se2: se2[i], p: r.pickRate })));
+  const fit = (sh: number[]) => {
+    const lifts = leaveOneOutLifts(
+      rows.map((r, i) => ({
+        id: r.augmentId ?? `src:${r.sourceSlug}`,
+        p: r.pickRate,
+        w: (r.winRate - sh[i]) / 100,
+        n: (r.pickRate / 100) * opts.volume,
+      })),
+    );
+    const post = closeNpmle(rows.map((r, i) => ({ id: lifts.ids[i], l: lifts.lift[i], se2: lifts.se2[i], p: r.pickRate })));
+    return { lifts, post };
+  };
+  const { lifts, post } = fit(shift);
+  const cornerFits = corners.map(fit);
   return rows.map((r, i) => {
     let { m, v } = post[i];
     let ownWeight = post[i].ownWeight;
@@ -208,31 +218,35 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
     const id = lifts.ids[i];
     const last = opts.carryOver?.posteriors[id];
     if (opts.carryOver && last) {
+      // Dormant while CARRY_OVER_ENABLED is false. Note it combines a normal
+      // prior with the raw lift and so drops the CLOSE shape for carried rows.
       const changed = opts.carryOver.changed === "all" || opts.carryOver.changed.has(id);
       const combined = combineOnce(carriedPrior(last, changed), {
         kind: "patch-to-date",
         snapshotDate: "current",
         l: lifts.lift[i],
-        se2: se2[i],
+        se2: lifts.se2[i],
       });
       m = combined.m;
       v = combined.v;
-      ownWeight = combined.v / se2[i];
+      ownWeight = combined.v / lifts.se2[i];
       carried = true;
     }
+    const vTotal = v + systematic[i];
     return {
       id,
       rarity,
       resolved: !!r.augmentId,
       l: lifts.lift[i],
-      se2: se2[i],
+      se2: lifts.se2[i],
       ownSe: lifts.ownSe[i],
       m,
-      v,
+      v: vTotal,
       thin: isThin(lifts.ownSe[i], v),
       winRate: r.winRate,
       pickRate: r.pickRate,
       takersShift: shift[i],
+      cornerM: cornerFits.map((c) => c.post[i].m),
       carried,
       ownWeight,
       lifts,
@@ -248,12 +262,58 @@ export function posteriorCovariance(a: AugmentPosterior, b: AugmentPosterior): n
 }
 
 /** Grade a set of posteriors (a tier list, or one champion's pool). */
+const EXTREMITY: Record<Letter, number> = { S: 2, A: 1, B: 0, C: -1, D: -2 };
+
+/** The most conservative of several letters for one option: toward B, and B when they disagree in sign. */
+export function conservativeLetter(letters: Letter[]): Letter {
+  const e = letters.map((l) => EXTREMITY[l]);
+  if (e.some((x) => x > 0) && e.some((x) => x < 0)) return "B";
+  return letters.reduce((best, l) => (Math.abs(EXTREMITY[l]) < Math.abs(EXTREMITY[best]) ? l : best));
+}
+
+/**
+ * Grade a set of posteriors (a tier list, or one champion's pool), with the
+ * lifts' pairwise covariance. When the set carries takers-envelope corners, it
+ * is graded at each corner too; an option shows the most conservative of its
+ * letters and is outlined if they disagree.
+ */
 export function gradeSet(options: AugmentPosterior[]): GradedOption[] {
-  const graded: Graded[] = grade(
-    options.map((o) => ({ id: o.id, m: o.m, v: o.v, thin: o.thin })),
-    (i, j) => posteriorCovariance(options[i], options[j]),
+  const cov = (i: number, j: number) => posteriorCovariance(options[i], options[j]);
+  const central = grade(options.map((o) => ({ id: o.id, m: o.m, v: o.v, thin: o.thin })), cov);
+  const cornerCount = Math.min(...options.map((o) => o.cornerM?.length ?? 0));
+  const cornerGrades = Array.from({ length: Number.isFinite(cornerCount) ? cornerCount : 0 }, (_, k) =>
+    grade(options.map((o) => ({ id: o.id, m: (o.cornerM as number[])[k], v: o.v, thin: o.thin })), cov),
   );
-  return options.map((o, i) => ({ ...o, ...graded[i], id: o.id }));
+  const chosen = options.map((_, i) => conservativeLetter([central[i].letter, ...cornerGrades.map((g) => g[i].letter)]));
+  // Per-option conservatism can break the order (an option drops to B while
+  // one below it keeps A). Restore it along the central order, moving letters
+  // only toward B: above B, no option outranks the one above it; below B, no
+  // option is worse than the one below it.
+  const byOrder = options.map((_, i) => i).sort((a, b) => central[a].order - central[b].order);
+  const rank = (l: Letter) => EXTREMITY[l];
+  const letterOf = (r: number) => (Object.keys(EXTREMITY) as Letter[]).find((l) => EXTREMITY[l] === r) as Letter;
+  for (let k = 1; k < byOrder.length; k++) {
+    const [above, here] = [byOrder[k - 1], byOrder[k]];
+    if (rank(chosen[here]) > 0 && rank(chosen[here]) > rank(chosen[above])) chosen[here] = letterOf(Math.max(rank(chosen[above]), 0));
+  }
+  for (let k = byOrder.length - 2; k >= 0; k--) {
+    const [here, below] = [byOrder[k], byOrder[k + 1]];
+    if (rank(chosen[here]) < 0 && rank(chosen[here]) < rank(chosen[below])) chosen[here] = letterOf(Math.min(rank(chosen[below]), 0));
+  }
+  return options.map((o, i) => {
+    const letters = [central[i].letter, ...cornerGrades.map((g) => g[i].letter)];
+    const letter = chosen[i];
+    const unitSensitive = new Set(letters).size > 1 || letter !== central[i].letter;
+    return {
+      ...o,
+      ...central[i],
+      id: o.id,
+      letter,
+      unitSensitive,
+      outlined: central[i].outlined || unitSensitive,
+      planEligible: central[i].planEligible && !unitSensitive,
+    };
+  });
 }
 
 /** Tier list for one rarity: every resolved live augment, across all champions. */

@@ -16,7 +16,13 @@
  * an order of magnitude (164k to 1.8M games a day), so the model does not fit
  * well enough to report one value. The engine uses the SMALLEST day-pair rate
  * times the days since the current patch started (at least one day): fewer
- * games means wider uncertainty, the direction that never overstates.
+ * games means wider uncertainty — the direction that never overstates, as far
+ * as the cumulative model holds (the day-pairs' disagreement says it may not).
+ *
+ * Start dates: for the daily RATE a patch starts at the earlier of Riot's date
+ * and the provider's first snapshot (an earlier start lowers the rate); for
+ * DAYS INTO the current patch it starts at the later of the two (a later start
+ * means fewer games). Data dated before its own patch's start is flagged.
  */
 import { median } from "./normal";
 
@@ -46,6 +52,8 @@ export interface VolumeEstimate {
   gamesPerDay: number;
   days: number;
   pairs: DayPairRate[];
+  /** set when the elapsed days had to be floored, and why */
+  note?: string;
 }
 
 const CHI2_1_MEDIAN = 0.45494;
@@ -114,12 +122,20 @@ export function estimateVolume(
   const pairs = dayPairRates(histories, patchStarts);
   if (pairs.length < 2) return null;
   const gamesPerDay = Math.min(...pairs.map((p) => p.gamesPerDay));
-  const starts = histories.flat().filter((r) => r.patch === current.patch).map((r) => day(r.snapshot));
-  const riot = patchStarts[current.patch] ? isoDay(patchStarts[current.patch]) : Infinity;
-  const start = Math.min(riot, ...starts);
-  const elapsed = Number.isFinite(start) ? (isoDay(current.dataDate) - start) / DAY_MS : 1;
-  const days = Math.max(1, elapsed);
-  return { status: "lower-bound", games: gamesPerDay * days, gamesPerDay, days, pairs };
+  const snaps = histories.flat().filter((r) => r.patch === current.patch).map((r) => day(r.snapshot));
+  const candidates = [
+    ...(patchStarts[current.patch] ? [isoDay(patchStarts[current.patch])] : []),
+    ...(snaps.length ? [Math.min(...snaps)] : []),
+  ];
+  const start = candidates.length ? Math.max(...candidates) : NaN;
+  const elapsed = Number.isFinite(start) ? (isoDay(current.dataDate) - start) / DAY_MS : NaN;
+  const days = Math.max(1, Number.isFinite(elapsed) ? elapsed : 1);
+  const note = !Number.isFinite(elapsed)
+    ? "no start date for the current patch: treated as one day"
+    : elapsed < 1
+      ? `data date ${current.dataDate} is ${elapsed < 0 ? "before" : "on"} the start of patch ${current.patch} (rows predate the patch or are mislabelled): treated as one day`
+      : undefined;
+  return { status: "lower-bound", games: gamesPerDay * days, gamesPerDay, days, pairs, ...(note ? { note } : {}) };
 }
 
 export { median };

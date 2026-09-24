@@ -38,8 +38,9 @@ describe("noise scale from the provider's own snapshot history: a lower bound", 
     // Recorded 2026-09-24: 164k to 1.8M games a day across six day-pairs.
     expect(Math.max(...rates) / Math.min(...rates)).toBeGreaterThan(5);
     expect(volume!.gamesPerDay).toBe(Math.min(...rates));
-    // The current patch is at most a day old in this snapshot: one day of games.
+    // This snapshot's data date (09-21) precedes its patch's start (09-22): flagged, floored at one day.
     expect(volume!.days).toBe(1);
+    expect(volume!.note).toMatch(/before the start of patch 26\.19/);
     expect(volume!.games).toBeCloseTo(volume!.gamesPerDay, 6);
   });
 });

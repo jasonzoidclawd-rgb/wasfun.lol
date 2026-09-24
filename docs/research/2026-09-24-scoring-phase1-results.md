@@ -14,7 +14,10 @@ So the engine:
    - The kit covariate is never fitted. On copies, a slope would learn champion baselines, not kit fit. It stays off until real per-champion outcomes exist.
    - The champion-specific effect ι stays at its prior.
    - The synergy flag ("Better on <champion>") is off, and so are "Best on" icons. On copies they would rank champions by their own baselines, not by the augment.
-2. **Grades augments from the global row, takers-adjusted.** The augment's win rate is taken minus the pick-weighted mean win rate of the champions who take it. The weights come from the champions' real appearance rates. That adjustment is uncertain, so its uncertainty is part of the variance (see Sensitivities).
+2. **Grades augments from the global row, takers-adjusted.** The augment's win rate is taken minus the pick-weighted mean win rate of the champions who take it, weighted by the champions' real appearance rates. The adjustment rests on a unit hypothesis, so:
+   - CLOSE is fitted on sampling noise only (§5), once per shift.
+   - The envelope's spread is added to the posterior variance.
+   - Each set is graded at every corner of the envelope. An option shows the most conservative of its letters (toward B), and is **outlined whenever the corners disagree**. A final pass keeps letters in order, moving them only toward B.
 3. **Shrinks with CLOSE-NPMLE.** Location and scale are smooth in log pick rate, fitted by marginal likelihood. The prior shape is an NPMLE mixture fitted by EM. A spread floor applies, and a Morris variance floor stops the discrete-prior posteriors from collapsing.
 4. **Grades with reliable tiers.** KRW dynamic programming with λ = 0.25, the 0.5 pp margin, and the lifts' pairwise covariance, on every surface. Letters are conservative.
 5. **Treats champion decisions as uncertain for one champion.** The Pick verdict, close calls and reroll odds add a champion-specific spread τ = **2.0 pp** to each card's variance. The provider can't reveal that spread, so the promise that "a named pick holds at least 80% of the time" is kept up to a true spread of 2.0 pp.
@@ -32,7 +35,11 @@ The provider publishes dated, cumulative snapshots of every champion's win rate,
 | 09-12 → 09-15 (26.18) | 164k |
 | 09-15 → 09-20 (26.18) | 228k |
 
-The pairs disagree by a factor of 11, so the model doesn't pin the volume down. The engine therefore uses a **lower bound**: the smallest daily rate multiplied by the days since the current patch started (at least one). For this snapshot that's **164k games**. Fewer games means wider uncertainty, which is the direction that never overstates. An earlier draft pooled the pairs into "about 9.5M". The independent review showed that figure was inflated by short, overlapping windows, and it is withdrawn.
+The pairs disagree by a factor of 11, so the model doesn't pin the volume down. The engine uses a **lower bound**: the smallest daily rate multiplied by the days into the current patch.
+- **Start dates.** The rate uses the earlier of Riot's date and the provider's first snapshot. The days-into-patch figure uses the later of the two.
+- **This snapshot's data is dated 09-21, before 26.19 started (09-22).** The rows predate their patch label or are mislabelled. The engine flags that and floors it at one day, so the volume is **164k games, floored, not a measured patch age**.
+- **Direction.** Fewer games means wider uncertainty, the direction that doesn't overstate, provided the cumulative model holds. The day-pairs' disagreement says it may not.
+- **Withdrawn figure.** An earlier draft pooled the pairs into "about 9.5M". The independent review showed short, overlapping windows inflated it.
 
 ## Real-data backtests
 
@@ -87,32 +94,26 @@ This is why the engine uses τ = 2.0: it keeps the promise up to 2.0 pp. Above t
 
 ## Real letters (data date 2026-09-21)
 
-| Set | S | A | B | C | D | Outlined (thin) |
-| --- | --- | --- | --- | --- | --- | --- |
-| Prismatic augments (62) | 8 | 5 | 17 | 19 | 13 | 7 |
-| Gold augments (69) | 7 | 4 | 29 | 0 | 29 | 15 |
-| Silver augments (51) | 3 | 0 | 26 | 12 | 10 | 2 |
-| Champions (173) | 18 | 18 | 86 | 43 | 8 | 10 |
+| Set | S | A | B | C | D | Outlined | of which unit-sensitive |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Prismatic augments (62) | 2 | 11 | 19 | 20 | 10 | 14 | 12 |
+| Gold augments (69) | 7 | 0 | 36 | 13 | 13 | 42 | 42 |
+| Silver augments (51) | 3 | 0 | 26 | 12 | 10 | 10 | 8 |
 
-Letters measure lift against the pick-weighted mean of the other augments of the same rarity. That mean is high, because the most-picked augments are strong.
+Letters measure lift against the pick-weighted mean of the other augments of the same rarity. **Gold is dominated by the unit hypothesis.** 42 of 69 gold letters change across the takers envelope, so they show outlined, at their most conservative value.
 
 ## How often the Pick screen names a pick
 
-The share of random three-card screens that get a named pick rather than "Close call":
-
-| τ | Prismatic | Gold | Silver |
-| --- | --- | --- | --- |
-| 0 (global only) | 75.9% | 75.2% | 76.4% |
-| 1.2 pp | 62.8% | 60.8% | 53.3% |
-| **2.0 pp (used)** | **50.1%** | **50.3%** | **37.6%** |
-| 2.5 pp | 42.6% | 43.6% | 28.8% |
-
-Half the screens get a named pick. The rest say "Close call", because the provider can't tell one champion's value from the global one. First-party data is the only way to narrow that.
+The share of random three-card screens that get a named pick at **τ = 2.0 pp**: **prismatic 50.9%, gold 51.3%, silver 38.1%**. For comparison, at τ = 0 (global only) it's 75–76%, at 1.2 pp 53–63%, and at 2.5 pp 29–44% (measured before the corner grading; verdicts use means and variances, which that grading doesn't change). The rest say "Close call": the provider can't tell one champion's value from the global one, and first-party data is the only way to narrow it.
 
 ## Sensitivities
 
-- **Takers adjustment.** The median shift is 0.12–0.35 pp, and the largest is 1.87 pp.
+- **Takers adjustment.**
+  - The median shift is 0.12–0.35 pp, and the largest is 1.87 pp.
   - Unlisted takers are set to half their bound, capped so a champion's unlisted augments share only the mass its listed ones leave. The per-champion total is the global pick rates' sum ÷ 10, which rests on the unit hypothesis.
-  - Across the envelope (unlisted share 0.25–0.75 × total ×0.5–×1.5), half the range enters the variance: a median sd of 0.21–0.46 pp and a largest of 1.26 pp.
-  - Moving only the central total to ×0.5 still changes 17 prismatic, 40 gold and 3 silver letters, and moving it to ×1.5 changes 0, 0 and 6. So the letters rest on that unit hypothesis, and they would move if the units turn out otherwise.
-- **Volume.** At the lower bound, the median posterior sd is about 0.3 pp.
+  - The envelope (unlisted share 0.25–0.75 × total ×0.5–×1.5) is handled by corner grading, as above.
+  - If the *central* assumption moves to a corner, the letters that still change are: ×0.5 changes 0 prismatic, 21 gold and 4 silver; ×1.5 changes 2, 1 and 0. The gold changes fall on letters already shown outlined as unit-sensitive.
+- **Volume.** At the floored lower bound, the median posterior sd before the systematic term is about 0.3 pp.
+- **Not yet wired, for phase 2:**
+  - Set debounce. When it is wired, the Pick verdict must rank by the published order, so it can never name a lower-lettered card over a higher one while a grouping is held.
+  - The dormant carry-over path. It drops the CLOSE shape for carried rows.
