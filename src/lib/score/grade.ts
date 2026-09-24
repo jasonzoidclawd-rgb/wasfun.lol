@@ -4,11 +4,14 @@
  * Kline, Rose & Walters: minimise (1 - λ)·DP − λ·τ over contiguous tiers of the
  * posterior-mean ordering, λ = 0.25, so a pair is split only above 80% certainty
  * that one exceeds the other by the 0.5 pp margin. Tiers by dynamic programming.
- * The spec caps this at five tiers; with large, precisely measured sets (62
+ * The spec caps this at five tiers. With large, precisely measured sets (62
  * augments of a rarity, 173 champions) five tiers are forced to be wide, each
- * reaching toward zero, so conservative letters could never show S or even A.
- * The DP therefore allows up to MAX_TIERS raw tiers, and adjacent tiers that
- * land on the same letter are merged: at most five letter groups ever show.
+ * reaching toward zero, so conservative letters could never show S or even A,
+ * and any other fixed cap makes the letters a function of that constant. So
+ * the DP is not capped: the λ-objective alone decides every split (a pair is
+ * split only when the data orders it), which in the limit of precise data
+ * gives each option its own band. Adjacent tiers that land on the same letter
+ * are merged for display, so at most five letter groups ever show.
  * Letters are conservative: a tier takes the band of its
  * well-measured member closest to zero (B if those span zero); thin members
  * inherit it outlined; a tier with no well-measured member takes the band of its
@@ -18,7 +21,8 @@ import { Phi } from "./normal";
 
 export const LAMBDA = 0.25;
 export const MARGIN = 0.5; // pp
-export const MAX_TIERS = 12; // raw DP tiers; merged by letter, so at most 5 groups show
+/** Raw DP tiers: no cap beyond the set size (see the module note); merged by letter for display. */
+export const MAX_TIERS = Infinity;
 export const THIN_OWN_SE = 1.5; // pp: an option's own noise at or above this is thin
 export const THIN_POST_SD = 1.0; // pp: posterior sd at or above this is thin
 
@@ -88,10 +92,11 @@ export function grade(set: GradeInput[], cov?: (i: number, j: number) => number,
       S[a][b] = S[a + 1][b] + r;
     }
   }
-  const F = Array.from({ length: MAX_TIERS + 1 }, () => new Float64Array(n + 1).fill(-1e18));
-  const P = Array.from({ length: MAX_TIERS + 1 }, () => new Int32Array(n + 1));
+  const K = Math.min(MAX_TIERS, n);
+  const F = Array.from({ length: K + 1 }, () => new Float64Array(n + 1).fill(-1e18));
+  const P = Array.from({ length: K + 1 }, () => new Int32Array(n + 1));
   F[0][0] = 0;
-  for (let k = 1; k <= MAX_TIERS; k++) {
+  for (let k = 1; k <= K; k++) {
     for (let e = 1; e <= n; e++) {
       for (let s = k - 1; s < e; s++) {
         const val = F[k - 1][s] + S[s][e - 1];
@@ -103,7 +108,7 @@ export function grade(set: GradeInput[], cov?: (i: number, j: number) => number,
     }
   }
   let bestK = 1;
-  for (let k = 1; k <= MAX_TIERS; k++) if (F[k][n] > F[bestK][n] + 1e-12) bestK = k;
+  for (let k = 1; k <= K; k++) if (F[k][n] > F[bestK][n] + 1e-12) bestK = k;
   const segs: Array<[number, number]> = [];
   for (let k = bestK, e = n; k > 0; k--) {
     const s = P[k][e];
@@ -119,6 +124,10 @@ export function grade(set: GradeInput[], cov?: (i: number, j: number) => number,
     const closest = ms.reduce((c, x) => (Math.abs(x) < Math.abs(c) ? x : c), ms[0]);
     return { s, e, letter: spans ? ("B" as Letter) : bandOf(closest), hasFirm: firm.length > 0 };
   });
+  // Plan eligibility is decided per raw tier, before display merging: a tier with
+  // no well-measured member never feeds the Plan card, even when merged.
+  const rawFirm = new Array<boolean>(n);
+  for (const t of tiers) for (let a = t.s; a <= t.e; a++) rawFirm[a] = t.hasFirm;
   // Adjacent tiers that land on the same letter read as one group.
   const merged: typeof tiers = [];
   for (const t of tiers) {
@@ -137,8 +146,8 @@ export function grade(set: GradeInput[], cov?: (i: number, j: number) => number,
         letter: t.letter,
         tier: ti + 1,
         order: a,
-        outlined: set[i].thin || !t.hasFirm,
-        planEligible: t.hasFirm,
+        outlined: set[i].thin || !rawFirm[a],
+        planEligible: rawFirm[a],
       };
     }
   });

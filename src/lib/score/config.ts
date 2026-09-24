@@ -19,10 +19,21 @@ export const CARRY_OVER_ENABLED = false;
  * of champion-specific effects cannot be measured (phase 0). Decisions for one
  * champion (the Pick verdict, close calls, reroll odds) add τ² to each card's
  * variance so they never claim more certainty about that champion than the
- * data holds. 1.2 pp is the spec's simulated typical value; the sensitivity at
- * 0.6 and 2.5 pp is recorded with the phase 1 results.
+ * data holds. 2.0 pp keeps the calibration promise (verdicts without a close
+ * call hold ≥ 80% per certainty bin) up to a true spread of 2.0 pp, where the
+ * spec's typical 1.2 pp would break it. Revisit when the spread is measured.
  */
-export const TAU_ASSUMED = 1.2; // pp
+export const TAU_ASSUMED = 2.0; // pp
+
+/**
+ * The takers adjustment (section 2, gₐ) is ON. It needs how often each
+ * champion takes each augment: the champions' appearance rates are their own
+ * (0 of 3,114 equal the global pick rate; every augment listed on five or more
+ * champions varies across them), unlike their augment win rates. Unlisted
+ * shares are bounded and mass-constrained, and the adjustment's spread
+ * between plausible shares is added to each augment's variance (engine.ts).
+ */
+export const TAKERS_ADJUSTMENT = true;
 
 /** Variance multiplier for the close-call test until calibration says otherwise (see the calibration test). */
 export const VERDICT_INFLATE = 1.0;

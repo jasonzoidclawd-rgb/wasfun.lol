@@ -68,14 +68,17 @@ describe("reliable tiers on the thin, typical and rich simulations", () => {
     ["typical (20,000 games, 18 options)", 20_000, 0.12],
     ["rich (80,000 games, 18 options)", 80_000, 0.08],
   ] as const) {
-    test(`${label}: misordered split pairs ≤ ${limit * 100}%`, { timeout: 120_000 }, () => {
+    test(`${label}: misordered split pairs ≤ ${limit * 100}%`, { timeout: 300_000 }, () => {
       let split = 0;
       let bad = 0;
-      // 300 seeded sets: fewer leave the thin estimate within sampling noise of its limit.
-      for (let s = 0; s < 300; s++) {
-        const r = misorderedSplitPairs(simulateSet(20000 + s, { options: 18, games }));
-        split += r.split;
-        bad += r.misordered;
+      // Pooled over five seed bases × 150 sets: a single batch of 150 varies by
+      // ±2 points (thin: 11.7–16.0%), so the acceptance is on the pooled rate.
+      for (const base of [0, 20000, 50000, 90000, 123457]) {
+        for (let s = 0; s < 150; s++) {
+          const r = misorderedSplitPairs(simulateSet(base + s, { options: 18, games }));
+          split += r.split;
+          bad += r.misordered;
+        }
       }
       expect(split).toBeGreaterThan(0);
       expect(bad / split).toBeLessThanOrEqual(limit);
@@ -89,6 +92,20 @@ describe("reliable tiers on the thin, typical and rich simulations", () => {
     extremity(shown) !== 0 &&
     (Math.sign(extremity(shown)) !== Math.sign(extremity(own)) || Math.abs(extremity(shown)) > Math.abs(extremity(own)));
 
+  test("large, precise sets (60 and 173 options) stay well inside the bounds with uncapped tiers", { timeout: 120_000 }, () => {
+    for (const [options, games] of [[60, 2_000_000], [173, 2_000_000]] as const) {
+      let split = 0;
+      let bad = 0;
+      for (let s = 0; s < 10; s++) {
+        const r = misorderedSplitPairs(simulateSet(700 + s, { options, games }));
+        split += r.split;
+        bad += r.misordered;
+      }
+      expect(bad / split, `${options} options`).toBeLessThan(0.08);
+    }
+  });
+
+  // By construction of conservative letters (toward B), this checks the code, not the statistics.
   test("no well-measured option is shown with a letter stronger than its own estimate (0%)", () => {
     let firm = 0;
     let over = 0;
@@ -145,7 +162,15 @@ describe("close calls and verdict calibration", () => {
    * card truly beats the runner-up) at least 80% of the time in every
    * certainty bin — on a normal day and on patch day.
    */
-  for (const [label, games] of [["typical day", 2_000_000], ["patch day", 60_000]] as const) {
+  // "Holds" = the named card truly beats the runner-up; checked both plainly and
+  // by the 0.5 pp margin the close-call rule uses. The truth's champion-specific
+  // spread is 2.0 pp, the value TAU_ASSUMED is set to (the spec's typical is 1.2).
+  for (const [label, games, margin] of [
+    ["typical day", 2_000_000, 0],
+    ["patch day", 60_000, 0],
+    ["typical day, 0.5 pp margin", 2_000_000, 0.5],
+    ["patch day, 0.5 pp margin", 60_000, 0.5],
+  ] as const) {
     test(`${label}: verdicts without a close call hold ≥ 80% in every certainty bin`, () => {
       const bins = new Map<number, { n: number; held: number }>();
       const rand = rng(77);
@@ -153,7 +178,7 @@ describe("close calls and verdict calibration", () => {
       for (let s = 0; s < 40; s++) {
         const set = simulateSet(9000 + s, { options: 40, games });
         for (let champ = 0; champ < 25; champ++) {
-          const truth = set.options.map((o) => o.theta + TAU_ASSUMED * gauss());
+          const truth = set.options.map((o) => o.theta + 2.0 * gauss());
           for (let offer = 0; offer < 8; offer++) {
             const idx = new Set<number>();
             while (idx.size < 3) idx.add(Math.floor(rand() * set.options.length));
@@ -163,7 +188,7 @@ describe("close calls and verdict calibration", () => {
             const bin = Math.min(Math.floor(v.certainty * 20) / 20, 0.95);
             const b = bins.get(bin) ?? { n: 0, held: 0 };
             b.n++;
-            if (truth[Number(v.pick)] > truth[Number(v.runnerUp)]) b.held++;
+            if (truth[Number(v.pick)] > truth[Number(v.runnerUp)] + margin) b.held++;
             bins.set(bin, b);
           }
         }
@@ -259,8 +284,10 @@ describe("the synergy flag fires on under 1% of pairs when there is no real inte
     expect(fired / pairs).toBeLessThan(0.01);
   });
 
-  test("a pair without champion-specific data never qualifies", () => {
+  test("a pair without champion-specific data never qualifies, nor any pair while rows are copies", () => {
     expect(synergy(5, 1, false)).toBe(false);
+    expect(synergy(5, 1, true, "global-copy")).toBe(false);
+    expect(synergy(5, 1, true, "unknown")).toBe(false);
   });
 });
 

@@ -58,14 +58,25 @@ export function patchDelta(opts: {
 }): number | null {
   if (!opts.patchNamed || !opts.groupingRepeated) return null;
   const d = opts.lNew - opts.lOld;
-  return Math.abs(d) >= 3 * Math.sqrt(opts.se2New + opts.se2Old) ? Math.round(d) : null;
+  if (Math.abs(d) < 3 * Math.sqrt(opts.se2New + opts.se2Old)) return null;
+  const whole = Math.round(d);
+  return whole === 0 ? null : whole; // never a "+0"
 }
 
 /**
  * "Better on <champion>": a shrunk champion-specific effect ι of +2 pp or more
  * with at least half of the estimate from the row's own data (shrink weight ≥ 0.5).
- * A pair with no champion-specific data never qualifies.
+ * A pair with no champion-specific data never qualifies, and neither does any
+ * pair while the provider's champion rows copy the global row: on copies the
+ * "effect" would rank champions by their own baselines, not by the augment.
+ * ("Best on" icons are pulled for the same reason.)
  */
-export function synergy(iotaShrunk: number, ownDataWeight: number, hasOwnData: boolean): boolean {
+export function synergy(
+  iotaShrunk: number,
+  ownDataWeight: number,
+  hasOwnData: boolean,
+  championWinRates: "global-copy" | "champion-specific" | "mixed" | "unknown" = "champion-specific",
+): boolean {
+  if (championWinRates !== "champion-specific") return false;
   return hasOwnData && ownDataWeight >= 0.5 && iotaShrunk >= 2.0;
 }

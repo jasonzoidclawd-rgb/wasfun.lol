@@ -34,8 +34,16 @@ function binomial(n: number, p: number, rand: () => number, gauss: () => number)
   return Math.min(n, Math.max(0, Math.round(n * p + Math.sqrt(n * p * (1 - p)) * gauss())));
 }
 
-/** One decision set: `options` choices, `games` games for the whole set. */
-export function simulateSet(seed: number, opts: { options: number; games: number; herd?: number; spread?: number }): SimSet {
+/**
+ * One decision set: `options` choices, `games` games of the champion. As in the
+ * spec's simulation scripts (edge5.py), a game yields about 1.33 picks of a
+ * rarity (four picks over three rarities), so an option taken with share p is
+ * in p × games × 1.33 games. With this convention the typical and rich regimes
+ * reproduce the spec's reported misordering (7.6% and 3.6%).
+ */
+export const PICKS_PER_GAME = 1.33;
+
+export function simulateSet(seed: number, opts: { options: number; games: number; herd?: number; spread?: number; emSteps?: number }): SimSet {
   const rand = rng(seed);
   const gauss = gaussian(rand);
   const spread = opts.spread ?? 2.0;
@@ -49,7 +57,7 @@ export function simulateSet(seed: number, opts: { options: number; games: number
   const ex = logit.map(Math.exp);
   const total = ex.reduce((a, b) => a + b, 0);
   const p = ex.map((x) => x / total);
-  const n = p.map((pi) => Math.max(1, Math.round(pi * opts.games)));
+  const n = p.map((pi) => Math.max(1, Math.round(pi * opts.games * PICKS_PER_GAME)));
   const w = theta.map((t, i) => binomial(n[i], Math.min(Math.max(mu + t / 100, 0.01), 0.99), rand, gauss) / n[i]);
   const lifts = leaveOneOutLifts(theta.map((_, i) => ({ id: `o${i}`, p: p[i], w: w[i], n: n[i] })));
   // Truth on the estimand's scale: lift vs the pick-weighted mean of the others.
@@ -57,7 +65,7 @@ export function simulateSet(seed: number, opts: { options: number; games: number
     const rest = p.reduce((a, pj, j) => (j === i ? a : a + pj), 0);
     return t - theta.reduce((a, tj, j) => (j === i ? a : a + p[j] * tj), 0) / rest;
   });
-  const post = closeNpmle(lifts.lift.map((l, i) => ({ id: `o${i}`, l, se2: lifts.se2[i], p: p[i] })));
+  const post = closeNpmle(lifts.lift.map((l, i) => ({ id: `o${i}`, l, se2: lifts.se2[i], p: p[i] })), { emSteps: opts.emSteps });
   const options = post.map((q, i) => ({
     id: q.id,
     theta: truth[i],

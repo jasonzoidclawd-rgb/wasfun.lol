@@ -68,7 +68,7 @@ function linfit(x: number[], y: number[], w?: number[]): { a: number; b: number 
   return { a: my - b * mx, b };
 }
 
-export function closeNpmle(rows: CloseInput[]): ClosePosterior[] {
+export function closeNpmle(rows: CloseInput[], opts: { emSteps?: number } = {}): ClosePosterior[] {
   const n = rows.length;
   if (n === 0) return [];
   const x = rows.map((r) => Math.log(Math.max(r.p, 1e-9)));
@@ -128,7 +128,7 @@ export function closeNpmle(rows: CloseInput[]): ClosePosterior[] {
   let w: number[] = grid.map(() => 1 / GRID);
   // Likelihood matrix (unnormalised Gaussian densities).
   const L = z.map((zi, i) => grid.map((u) => Math.exp(-0.5 * ((zi - u) / nu[i]) ** 2) / nu[i]));
-  for (let step = 0; step < EM_STEPS; step++) {
+  for (let step = 0; step < (opts.emSteps ?? EM_STEPS); step++) {
     const next = new Array(GRID).fill(0);
     for (let i = 0; i < n; i++) {
       let den = 0;

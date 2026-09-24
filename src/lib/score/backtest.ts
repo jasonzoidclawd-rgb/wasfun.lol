@@ -27,11 +27,20 @@ function patchKey(p: string): number[] {
 }
 
 /**
- * `drift` is the carried prior's added variance (pp²). The first snapshot's
- * noise assumes it holds a third of the patch's final games (a patch needs at
- * least three snapshots to be used, so the first is an early one).
+ * `drift` is the carried prior's added variance (pp²). Snapshots are
+ * cumulative, so a snapshot t days into a patch holds R·π·t games (R the daily
+ * rate, π the champion's pick rate); the same model the volume estimate uses.
+ * Caveat: the end-of-patch target contains the early snapshot's own games,
+ * which favours the raw early value; a patch needs three or more snapshots.
  */
-export function carryOverBacktest(histories: SnapshotRow[][], volume: number, drift: number): CarryOverResult {
+export function carryOverBacktest(
+  histories: SnapshotRow[][],
+  patchStarts: Record<string, string>,
+  gamesPerDay: number,
+  drift: number,
+): CarryOverResult {
+  const DAY = 86_400_000;
+  const day = (s: string) => Date.UTC(+s.slice(0, 4), +s.slice(4, 6) - 1, +s.slice(6, 8));
   const e: { raw: number; carry: number; last: number }[] = [];
   for (const rows of histories) {
     const byPatch = new Map<string, SnapshotRow[]>();
@@ -46,15 +55,19 @@ export function carryOverBacktest(histories: SnapshotRow[][], volume: number, dr
     for (let i = 1; i < patches.length; i++) {
       const now = byPatch.get(patches[i]) as SnapshotRow[];
       if (now.length < 3) continue;
-      const prev = (byPatch.get(patches[i - 1]) as SnapshotRow[]).at(-1) as SnapshotRow;
+      const prevRows = byPatch.get(patches[i - 1]) as SnapshotRow[];
+      const prev = prevRows.at(-1) as SnapshotRow;
       const first = now[0];
       const end = now[now.length - 1];
+      const startOf = (patch: string, list: SnapshotRow[]) =>
+        Math.min(patchStarts[patch] ? Date.parse(patchStarts[patch].slice(0, 10) + "T00:00:00Z") : Infinity, day(list[0].snapshot));
+      const tFirst = Math.max(1, (day(first.snapshot) - startOf(patches[i], now)) / DAY);
+      const tPrev = Math.max(1, (day(prev.snapshot) - startOf(patches[i - 1], prevRows)) / DAY);
       const mu = first.winRate / 100;
-      const pi = first.pickRate / 100;
-      const noise = (n: number) => ((mu * (1 - mu)) / Math.max(n, 1)) * 1e4;
+      const noise = (pickRate: number, t: number) => ((mu * (1 - mu)) / Math.max((pickRate / 100) * gamesPerDay * t, 1)) * 1e4;
       const carried = combineOnce(
-        { m: prev.winRate, v: noise(pi * volume) + drift },
-        { kind: "patch-to-date", snapshotDate: first.snapshot, l: first.winRate, se2: noise((pi * volume) / 3) },
+        { m: prev.winRate, v: noise(prev.pickRate, tPrev) + drift },
+        { kind: "patch-to-date", snapshotDate: first.snapshot, l: first.winRate, se2: noise(first.pickRate, tFirst) },
       );
       e.push({ raw: first.winRate - end.winRate, carry: carried.m - end.winRate, last: prev.winRate - end.winRate });
     }

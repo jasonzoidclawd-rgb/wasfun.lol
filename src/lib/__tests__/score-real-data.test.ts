@@ -26,26 +26,30 @@ const feeds = {
   championWinRates: fixture.championWinRates,
 } as unknown as Feeds;
 const histories = Object.values(fixture.champions).map((c) => (c as { history: SnapshotRow[] }).history);
-const volume = estimateVolume(histories);
+const patchStarts = (fixture as unknown as { patchStarts: Record<string, string> }).patchStarts;
+const volume = estimateVolume(histories, patchStarts, { patch: fixture.patch, dataDate: fixture.dataDate });
 
-describe("noise scale fitted from the provider's own snapshot history", () => {
-  test("volume estimate from same-patch snapshot pairs", () => {
+describe("noise scale from the provider's own snapshot history: a lower bound", () => {
+  test("day-pairs disagree too much to report one rate, so the smallest is used", () => {
     expect(volume).not.toBeNull();
-    expect(volume!.pairs).toBeGreaterThan(500);
-    // Recorded 2026-09-24: about 9.5M games behind a snapshot.
-    expect(volume!.games).toBeGreaterThan(5e6);
-    expect(volume!.games).toBeLessThan(2e7);
-    expect(volume!.range[0]).toBeLessThan(volume!.games);
-    expect(volume!.range[1]).toBeGreaterThan(volume!.games);
+    expect(volume!.status).toBe("lower-bound");
+    const rates = volume!.pairs.map((p) => p.gamesPerDay);
+    expect(rates.length).toBeGreaterThanOrEqual(5);
+    // Recorded 2026-09-24: 164k to 1.8M games a day across six day-pairs.
+    expect(Math.max(...rates) / Math.min(...rates)).toBeGreaterThan(5);
+    expect(volume!.gamesPerDay).toBe(Math.min(...rates));
+    // The current patch is at most a day old in this snapshot: one day of games.
+    expect(volume!.days).toBe(1);
+    expect(volume!.games).toBeCloseTo(volume!.gamesPerDay, 6);
   });
 });
 
 describe("backtest, carry-over: day-early grades vs end-of-patch rows", () => {
   test("the switch follows the backtest: carry-over ships only if it beats the raw early snapshot", () => {
-    const r = carryOverBacktest(histories, volume!.games, 0.25); // the spec's drift for unchanged entries
+    const r = carryOverBacktest(histories, patchStarts, volume!.gamesPerDay, 0.25); // the spec's drift, unchanged entries
     expect(r.cases).toBeGreaterThan(300);
     expect(CARRY_OVER_ENABLED).toBe(r.rmseCarry < r.rmseRaw);
-    // Recorded 2026-09-24: raw 0.153 pp, carry-over 0.193 pp, last patch alone 1.295 pp.
+    // Recorded 2026-09-24: raw 0.153 pp, carry-over 0.324 pp, last patch alone 1.295 pp.
     expect(r.rmseRaw).toBeCloseTo(0.153, 2);
     expect(r.rmseLastPatch).toBeGreaterThan(1);
   });

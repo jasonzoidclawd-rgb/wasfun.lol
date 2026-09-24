@@ -10,16 +10,22 @@
  *   (β = 0, no synergy flags) and every champion's augment values are the
  *   global posterior. If the feed ever reports champion-specific rows, the
  *   pooled path (pooledPairPosterior) applies instead.
- * - The global lift is takers-adjusted: an augment favoured by strong champions
- *   is not mistaken for a strong augment (The math, section 2, gₐ).
- * - Noise uses the set's baseline rate and the volume fitted from the
- *   provider's own snapshot history, never an assumed game count.
+ * - The global lift is takers-adjusted (section 2, gₐ), from the champions'
+ *   own appearance rates (real, not copies); the adjustment's spread between
+ *   plausible unlisted shares enters each augment's variance.
+ * - The kit covariate is never fitted: the champion rows' win rates are
+ *   copies, so a slope fitted on them would learn champion baselines, not kit
+ *   fit. It stays off until real per-champion outcomes exist.
+ * - Noise uses the set's baseline rate and a LOWER BOUND on the provider's
+ *   volume, fitted from its own snapshot history (volume.ts).
+ * - Grading uses the lifts' pairwise covariance (section 1) on every surface.
  * - The unlisted-pair subtraction is off: its units are unconfirmed (unit guard).
  */
 import { carriedPrior, combineOnce, type Normal } from "./carryover";
+import { TAKERS_ADJUSTMENT } from "./config";
 import { closeNpmle } from "./close-npmle";
 import { grade, isThin, MARGIN, pairwise, type Graded, type Letter } from "./grade";
-import { leaveOneOutLifts } from "./lift";
+import { leaveOneOutLifts, type LiftSet } from "./lift";
 
 export type Rarity = "prismatic" | "gold" | "silver";
 export const RARITIES: Rarity[] = ["prismatic", "gold", "silver"];
@@ -76,6 +82,8 @@ export interface EngineOptions {
    * lies between 0 and 1; 0.5 is the midpoint, and the sensitivity is recorded.
    */
   unlistedTakerFraction?: number;
+  /** sensitivity only: scales the per-champion total the unlisted shares are capped by */
+  takersTotalScale?: number;
   /** carry-over: last patch's final posteriors, keyed by augment id */
   carryOver?: { fromPatch: string; posteriors: Record<string, Normal>; changed: Set<string> | "all" } | null;
 }
@@ -101,6 +109,11 @@ export interface AugmentPosterior {
   /** percentage points the takers adjustment moved this augment */
   takersShift: number;
   carried: boolean;
+  /** share of the posterior mean that comes from the option's own data */
+  ownWeight: number;
+  /** the lift set it belongs to and its index there, for pairwise covariance (not serialized) */
+  lifts?: LiftSet;
+  liftIndex?: number;
 }
 
 export interface GradedOption extends AugmentPosterior {
@@ -113,8 +126,20 @@ export interface GradedOption extends AugmentPosterior {
 
 // ── augments ────────────────────────────────────────────────────────────────
 
-/** Mean win rate of the champions who take each augment, weighted by how often they take it. */
-export function takersBaseline(feeds: Feeds, rarity: Rarity, unlistedFraction: number): {
+/**
+ * Mean win rate of the champions who take each augment, weighted by how often
+ * they take it (section 2, gₐ). The champions' appearance rates are their own
+ * (unlike their augment win rates, they are not copies of the global row), but
+ * only the six most-picked per rarity are listed. An unlisted augment's share
+ * for a champion is below that champion's least-picked listed one; it is set to
+ * `unlistedFraction` of that bound, capped so that the champion's unlisted
+ * augments together take no more than the mass left after its listed ones.
+ * That total per rarity is the global pick rates' sum / 10 (share-of-games
+ * units, 10 players a game: a hypothesis, see the phase 0 units table).
+ * Caveat: the champions' win rates include the augment's own effect, which
+ * slightly attenuates the shift.
+ */
+export function takersBaseline(feeds: Feeds, rarity: Rarity, unlistedFraction: number, totalScale = 1): {
   byAugment: Map<string, number>;
   population: number;
 } {
@@ -123,14 +148,18 @@ export function takersBaseline(feeds: Feeds, rarity: Rarity, unlistedFraction: n
   const population = champs.reduce((t, c) => t + (c.pickRate as number) * c.winRate, 0) / popW;
   const mass = new Map<string, number>();
   const sum = new Map<string, number>();
+  const live = feeds.augmentRows.filter((r) => r.rarity === rarity && r.availability === "live");
+  const perChampionTotal = (totalScale * live.reduce((t, r) => t + r.pickRate, 0)) / 10;
   for (const c of champs) {
     const listed = c.augments.filter((r) => r.rarity === rarity);
     const bound = listed.length ? Math.min(...listed.map((r) => r.appearanceRate)) : 0;
     const listedKeys = new Set(listed.map((r) => r.sourceSlug));
-    for (const row of feeds.augmentRows) {
-      if (row.rarity !== rarity || row.availability !== "live") continue;
+    const unlistedCount = live.filter((r) => !listedKeys.has(r.sourceSlug)).length;
+    const remaining = Math.max(0, perChampionTotal - listed.reduce((t, r) => t + r.appearanceRate, 0));
+    const unlistedShare = unlistedCount ? Math.min(unlistedFraction * bound, remaining / unlistedCount) : 0;
+    for (const row of live) {
       const own = listed.find((r) => r.sourceSlug === row.sourceSlug);
-      const share = own ? own.appearanceRate : listedKeys.size ? unlistedFraction * bound : 0;
+      const share = own ? own.appearanceRate : listedKeys.size ? unlistedShare : 0;
       const w = (c.pickRate as number) * share;
       mass.set(row.sourceSlug, (mass.get(row.sourceSlug) ?? 0) + w);
       sum.set(row.sourceSlug, (sum.get(row.sourceSlug) ?? 0) + w * c.winRate);
@@ -144,8 +173,24 @@ export function takersBaseline(feeds: Feeds, rarity: Rarity, unlistedFraction: n
 export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOptions): AugmentPosterior[] {
   const rows = feeds.augmentRows.filter((r) => r.rarity === rarity && r.availability === "live" && r.pickRate > 0);
   if (rows.length < 2) return [];
-  const takers = takersBaseline(feeds, rarity, opts.unlistedTakerFraction ?? 0.5);
-  const shift = rows.map((r) => (takers.byAugment.get(r.sourceSlug) ?? takers.population) - takers.population);
+  // The shift at the central assumptions, and its spread over the plausible
+  // envelope: unlisted share 0.25–0.75 of the bound × the per-champion total
+  // ×0.5–×1.5 (the unit hypothesis). Half that range, squared, is the
+  // adjustment's own uncertainty and enters each augment's variance, so grades
+  // and close calls never lean on it more than it deserves.
+  const shiftAt = (f: number, scale: number) => {
+    const t = takersBaseline(feeds, rarity, f, scale);
+    return rows.map((r) => (t.byAugment.get(r.sourceSlug) ?? t.population) - t.population);
+  };
+  const zero = rows.map(() => 0);
+  const shift = TAKERS_ADJUSTMENT ? shiftAt(opts.unlistedTakerFraction ?? 0.5, opts.takersTotalScale ?? 1) : zero;
+  const corners = TAKERS_ADJUSTMENT
+    ? [shiftAt(0.25, 0.5), shiftAt(0.25, 1.5), shiftAt(0.75, 0.5), shiftAt(0.75, 1.5), shift]
+    : [zero];
+  const systematic = rows.map((_, i) => {
+    const xs = corners.map((c) => c[i]);
+    return ((Math.max(...xs) - Math.min(...xs)) / 2) ** 2; // pp²
+  });
   const lifts = leaveOneOutLifts(
     rows.map((r, i) => ({
       id: r.augmentId ?? `src:${r.sourceSlug}`,
@@ -154,9 +199,11 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
       n: (r.pickRate / 100) * opts.volume,
     })),
   );
-  const post = closeNpmle(rows.map((r, i) => ({ id: lifts.ids[i], l: lifts.lift[i], se2: lifts.se2[i], p: r.pickRate })));
+  const se2 = rows.map((_, i) => lifts.se2[i] + systematic[i]);
+  const post = closeNpmle(rows.map((r, i) => ({ id: lifts.ids[i], l: lifts.lift[i], se2: se2[i], p: r.pickRate })));
   return rows.map((r, i) => {
     let { m, v } = post[i];
+    let ownWeight = post[i].ownWeight;
     let carried = false;
     const id = lifts.ids[i];
     const last = opts.carryOver?.posteriors[id];
@@ -166,10 +213,11 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
         kind: "patch-to-date",
         snapshotDate: "current",
         l: lifts.lift[i],
-        se2: lifts.se2[i],
+        se2: se2[i],
       });
       m = combined.m;
       v = combined.v;
+      ownWeight = combined.v / se2[i];
       carried = true;
     }
     return {
@@ -177,7 +225,7 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
       rarity,
       resolved: !!r.augmentId,
       l: lifts.lift[i],
-      se2: lifts.se2[i],
+      se2: se2[i],
       ownSe: lifts.ownSe[i],
       m,
       v,
@@ -186,13 +234,25 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
       pickRate: r.pickRate,
       takersShift: shift[i],
       carried,
+      ownWeight,
+      lifts,
+      liftIndex: i,
     };
   });
 }
 
+/** Pairwise covariance of two posteriors from the same lift set (0 across sets). */
+export function posteriorCovariance(a: AugmentPosterior, b: AugmentPosterior): number {
+  if (!a.lifts || a.lifts !== b.lifts || a.liftIndex === undefined || b.liftIndex === undefined) return 0;
+  return a.ownWeight * b.ownWeight * a.lifts.cov(a.liftIndex, b.liftIndex);
+}
+
 /** Grade a set of posteriors (a tier list, or one champion's pool). */
 export function gradeSet(options: AugmentPosterior[]): GradedOption[] {
-  const graded: Graded[] = grade(options.map((o) => ({ id: o.id, m: o.m, v: o.v, thin: o.thin })));
+  const graded: Graded[] = grade(
+    options.map((o) => ({ id: o.id, m: o.m, v: o.v, thin: o.thin })),
+    (i, j) => posteriorCovariance(options[i], options[j]),
+  );
   return options.map((o, i) => ({ ...o, ...graded[i], id: o.id }));
 }
 
@@ -244,7 +304,11 @@ function gradeRows(rows: { id: string; p: number; w: number; n: number }[], shri
   const post = shrink
     ? closeNpmle(rows.map((r, i) => ({ id: r.id, l: lifts.lift[i], se2: lifts.se2[i], p: r.p })))
     : rows.map((r, i) => ({ m: lifts.lift[i], v: lifts.se2[i] }));
-  const g = grade(rows.map((r, i) => ({ id: r.id, m: post[i].m, v: post[i].v, thin: isThin(lifts.ownSe[i], post[i].v) })));
+  const weight = post.map((q) => ("ownWeight" in q ? (q as { ownWeight: number }).ownWeight : 1));
+  const g = grade(
+    rows.map((r, i) => ({ id: r.id, m: post[i].m, v: post[i].v, thin: isThin(lifts.ownSe[i], post[i].v) })),
+    (i, j) => weight[i] * weight[j] * lifts.cov(i, j),
+  );
   return rows.map((r, i) => ({
     id: r.id,
     winRate: r.w * 100,
