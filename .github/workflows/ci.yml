@@ -39,6 +39,9 @@ jobs:
       - name: Verify built public disclosure boundary
         run: python3 scripts/verify_public_bundle_boundary.py
 
+      - name: Rendered-HTML lint (no over-precise or over-certain statistics text)
+        run: python3 scripts/lint_rendered_html.py
+
       - name: Build overlay
         working-directory: overlay
         run: npm run build

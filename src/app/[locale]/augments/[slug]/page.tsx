@@ -313,7 +313,7 @@ export default async function AugmentDetailPage({
             </div>
 
             {augment.wikiDescription && (
-              <p className="mt-3 text-[var(--color-text-secondary)] leading-relaxed">
+              <p data-game-text className="mt-3 text-[var(--color-text-secondary)] leading-relaxed">
                 {augment.wikiDescription}
               </p>
             )}
