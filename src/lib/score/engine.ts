@@ -190,8 +190,12 @@ export function augmentPosteriors(feeds: Feeds, rarity: Rarity, opts: EngineOpti
   };
   const zero = rows.map(() => 0);
   const shift = TAKERS_ADJUSTMENT ? shiftAt(opts.unlistedTakerFraction ?? 0.5, opts.takersTotalScale ?? 1) : zero;
+  // The envelope's four corners and four edge midpoints.
   const corners = TAKERS_ADJUSTMENT
-    ? [shiftAt(0.25, 0.5), shiftAt(0.25, 1.5), shiftAt(0.75, 0.5), shiftAt(0.75, 1.5)]
+    ? [
+        [0.25, 0.5], [0.25, 1.5], [0.75, 0.5], [0.75, 1.5],
+        [0.5, 0.5], [0.5, 1.5], [0.25, 1], [0.75, 1],
+      ].map(([f, scale]) => shiftAt(f, scale))
     : [];
   const systematic = rows.map((_, i) => {
     const xs = [shift[i], ...corners.map((c) => c[i])];

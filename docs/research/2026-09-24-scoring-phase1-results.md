@@ -17,7 +17,7 @@ So the engine:
 2. **Grades augments from the global row, takers-adjusted.** The augment's win rate is taken minus the pick-weighted mean win rate of the champions who take it, weighted by the champions' real appearance rates. The adjustment rests on a unit hypothesis, so:
    - CLOSE is fitted on sampling noise only (§5), once per shift.
    - The envelope's spread is added to the posterior variance.
-   - Each set is graded at every corner of the envelope. An option shows the most conservative of its letters (toward B), and is **outlined whenever the corners disagree**. A final pass keeps letters in order, moving them only toward B.
+   - Each set is graded at nine points of the envelope: the centre, the four corners and the four edge midpoints. An option shows the most conservative of its letters (toward B), and is **outlined whenever the points disagree**. A final pass keeps letters in order along the central ordering, moving them only toward B.
 3. **Shrinks with CLOSE-NPMLE.** Location and scale are smooth in log pick rate, fitted by marginal likelihood. The prior shape is an NPMLE mixture fitted by EM. A spread floor applies, and a Morris variance floor stops the discrete-prior posteriors from collapsing.
 4. **Grades with reliable tiers.** KRW dynamic programming with λ = 0.25, the 0.5 pp margin, and the lifts' pairwise covariance, on every surface. Letters are conservative.
 5. **Treats champion decisions as uncertain for one champion.** The Pick verdict, close calls and reroll odds add a champion-specific spread τ = **2.0 pp** to each card's variance. The provider can't reveal that spread, so the promise that "a named pick holds at least 80% of the time" is kept up to a true spread of 2.0 pp.
@@ -111,8 +111,11 @@ The share of random three-card screens that get a named pick at **τ = 2.0 pp**:
 - **Takers adjustment.**
   - The median shift is 0.12–0.35 pp, and the largest is 1.87 pp.
   - Unlisted takers are set to half their bound, capped so a champion's unlisted augments share only the mass its listed ones leave. The per-champion total is the global pick rates' sum ÷ 10, which rests on the unit hypothesis.
-  - The envelope (unlisted share 0.25–0.75 × total ×0.5–×1.5) is handled by corner grading, as above.
-  - If the *central* assumption moves to a corner, the letters that still change are: ×0.5 changes 0 prismatic, 21 gold and 4 silver; ×1.5 changes 2, 1 and 0. The gold changes fall on letters already shown outlined as unit-sensitive.
+  - The envelope (unlisted share 0.25–0.75 × total ×0.5–×1.5) is handled by grading at nine points, as above. Every letter shown plain is identical at all nine.
+  - Moving the *central* point, which sets the ordering the final pass follows, to the edge of the envelope still changes some letters through that pass.
+    - Total ×0.5 changes 0 prismatic, 21 gold (8 of them shown plain) and 4 silver (4 plain).
+    - Total ×1.5 changes 2 prismatic (2 plain), 1 gold and 0 silver.
+    - So a few plain letters depend on the unit hypothesis through the ordering alone. The owner decision to keep the takers adjustment accepts that. Confirming the units would remove it.
 - **Volume.** At the floored lower bound, the median posterior sd before the systematic term is about 0.3 pp.
 - **Not yet wired, for phase 2:**
   - Set debounce. When it is wired, the Pick verdict must rank by the published order, so it can never name a lower-lettered card over a higher one while a grouping is held.
