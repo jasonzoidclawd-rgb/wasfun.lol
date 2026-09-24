@@ -346,7 +346,7 @@ export default async function AugmentDetailPage({
             </Link>
           </section>
         ) : (
-          <p className="glass-card p-4 text-sm text-[var(--color-text-secondary)]">{tt("detailUngraded")}</p>
+          <p className="glass-card p-4 text-sm text-[var(--color-text-secondary)]">{pack ? tt("detailUngraded") : tt("unavailable")}</p>
         )}
       </div>
     </>

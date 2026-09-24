@@ -48,7 +48,7 @@ export default async function TierListIndex({ params }: { params: Promise<{ loca
           );
         })}
       <p className="mt-3 text-sm">
-        <Link href="/method" className="underline">{t("howWeRank")}</Link>
+        <Link href="/method" className="inline-flex min-h-11 items-center underline">{t("howWeRank")}</Link>
       </p>
     </div>
   );

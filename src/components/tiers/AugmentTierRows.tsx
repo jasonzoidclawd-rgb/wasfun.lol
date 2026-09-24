@@ -19,10 +19,15 @@ export async function AugmentTierRows({ rows }: { rows: TierRow[] }) {
   const t = await getTranslations("tiers");
   const tp = await getTranslations("pick");
   return (
+    <>
+    <div className="flex justify-end gap-3 pb-1 text-[11px] text-[var(--color-text-muted)]" aria-hidden="true">
+      <span>{t("colVsAverage")}</span>
+      <span className="w-7" />
+    </div>
     <ol className="divide-y divide-[var(--color-border-default)]">
       {rows.map((r) => {
         const name = r.slug ? (
-          <Link href={`/augments/${r.slug}`} className="font-semibold hover:underline">
+          <Link href={`/augments/${r.slug}`} className="inline-flex min-h-11 items-center font-semibold hover:underline">
             {r.name}
           </Link>
         ) : (
@@ -42,7 +47,12 @@ export async function AugmentTierRows({ rows }: { rows: TierRow[] }) {
                 {t("rowLine", { win: r.winRate.toFixed(1), pick: r.pickRate.toFixed(1) })}
               </div>
             </div>
-            <span className="w-8 shrink-0 text-right text-sm tabular-nums text-[var(--color-text-secondary)]">{signedWhole(r.m)}</span>
+            <span
+              className="w-8 shrink-0 text-right text-sm tabular-nums text-[var(--color-text-secondary)]"
+              aria-label={`${t("colVsAverage")}: ${signedWhole(r.m)}`}
+            >
+              {signedWhole(r.m)}
+            </span>
             <LetterChip
               letter={r.letter}
               thin={r.outlined}
@@ -52,5 +62,6 @@ export async function AugmentTierRows({ rows }: { rows: TierRow[] }) {
         );
       })}
     </ol>
+    </>
   );
 }

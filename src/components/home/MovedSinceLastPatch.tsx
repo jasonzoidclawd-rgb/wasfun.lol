@@ -16,11 +16,14 @@ export async function MovedSinceLastPatch({
   champions,
   patch,
   fromPatch,
+  predates = false,
 }: {
   movers: Mover[];
   champions: Map<string, HomeChampion>;
   patch: string;
   fromPatch: string | null;
+  /** the current patch's rows predate the patch: nothing to compare yet */
+  predates?: boolean;
 }) {
   const t = await getTranslations("home");
   const tl = await getTranslations("championsIndex");
@@ -29,9 +32,9 @@ export async function MovedSinceLastPatch({
     <section aria-labelledby="home-moved" className="glass-card col-span-full p-4">
       <h2 id="home-moved" className="text-lg font-bold">{t("movedTitle")}</h2>
       <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-        {fromPatch ? t("movedLead", { from: fromPatch, patch }) : t("movedNoPrevious", { patch })}
+        {predates ? t("movedPredates", { patch }) : fromPatch ? t("movedLead", { from: fromPatch, patch }) : t("movedNoPrevious", { patch })}
       </p>
-      {shown.length === 0 ? (
+      {predates ? null : shown.length === 0 ? (
         <p className="mt-3 text-sm text-[var(--color-text-secondary)]">{t("movedNone")}</p>
       ) : (
         <ol className="mt-3 divide-y divide-[var(--color-border-default)]">

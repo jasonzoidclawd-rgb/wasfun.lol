@@ -44,6 +44,7 @@ export function HomeSearch({ champions }: { champions: HomeChampion[] }) {
         aria-label={t("searchPlaceholder")}
         className="mt-3 min-h-12 w-full rounded-lg border border-[var(--color-border-hover)] bg-[var(--color-bg-card)] px-3 text-base"
       />
+      {q && matches.length === 0 && <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{t("noResults")}</p>}
       {matches.length > 0 && (
         <ul className="mt-2 divide-y divide-[var(--color-border-default)] rounded-lg border border-[var(--color-border-default)]" role="list">
           {matches.map((c) => (

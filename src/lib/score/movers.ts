@@ -1,13 +1,19 @@
 /**
  * "Moved since last patch" (Home): a champion's win rate now against its last
- * snapshot on the previous patch, shown only when the change clears a 3σ
- * binomial noise test. Game counts come from the volume LOWER bound times the
- * champion's pick rate, so σ is overstated, never understated: the test can
- * miss a real move but should not show noise as one.
+ * snapshot on the previous patch, shown only when the change clears a noise
+ * test corrected for testing every champion at once.
+ *
+ * Each side's game count is its own patch's volume lower bound times the
+ * champion's pick rate (share of games), so σ is overstated rather than
+ * understated as far as those bounds hold. The bounds come from the source's
+ * own snapshot history and disagree widely, so this is a screen for large
+ * moves, not an exact test.
  */
+import { Phi } from "./normal";
 import type { ChampionRow } from "./engine";
 
-export const MOVE_Z = 3;
+/** Family-wise error for the whole list: the two-sided rate of a single 3σ test. */
+export const MOVE_FAMILY_ALPHA = 2 * (1 - Phi(3));
 
 export interface Mover {
   slug: string;
@@ -19,14 +25,45 @@ export interface Mover {
   z: number;
 }
 
-function comparePatch(a: string, b: string): number {
+export function comparePatch(a: string, b: string): number {
   const [a1, a2] = a.split(".").map(Number);
   const [b1, b2] = b.split(".").map(Number);
   return a1 - b1 || a2 - b2;
 }
 
-export function championMovers(champions: Record<string, ChampionRow>, patch: string, volume: number): Mover[] {
-  const out: Mover[] = [];
+/** The two-sided z a test must clear when `tests` are run together (Bonferroni). */
+export function criticalZ(tests: number, familyAlpha = MOVE_FAMILY_ALPHA): number {
+  const target = 1 - familyAlpha / (2 * Math.max(1, tests));
+  let lo = 0;
+  let hi = 10;
+  for (let i = 0; i < 80; i++) {
+    const mid = (lo + hi) / 2;
+    if (Phi(mid) < target) lo = mid;
+    else hi = mid;
+  }
+  return hi;
+}
+
+/**
+ * Where the current patch's data stands. Rows dated before the patch began are
+ * the previous patch's running totals under a new label: then there is nothing
+ * of the new patch to show yet (undetermined, not "no change").
+ */
+export function patchDataState(dataDate: string, patchStart: string | undefined): { predates: boolean; days: number | null } {
+  if (!patchStart) return { predates: false, days: null };
+  const span = (Date.parse(`${dataDate}T23:59:59Z`) - Date.parse(patchStart)) / 86_400_000;
+  if (!Number.isFinite(span)) return { predates: false, days: null };
+  if (span < 0) return { predates: true, days: null };
+  return { predates: false, days: Math.max(1, Math.ceil(span)) };
+}
+
+export function championMovers(
+  champions: Record<string, ChampionRow>,
+  patch: string,
+  volume: { current: number; previous: (fromPatch: string) => number | null },
+): Mover[] {
+  const candidates: Mover[] = [];
+  let tested = 0;
   for (const [slug, row] of Object.entries(champions)) {
     if (row.patch !== patch || row.pickRate == null || !row.history?.length) continue;
     // the latest snapshot of the most recent earlier patch (cumulative for that patch)
@@ -34,14 +71,17 @@ export function championMovers(champions: Record<string, ChampionRow>, patch: st
     if (!earlier.length) continue;
     const fromPatch = earlier.reduce((p, h) => (comparePatch(h.patch, p) > 0 ? h.patch : p), earlier[0].patch);
     const prev = earlier.filter((h) => h.patch === fromPatch).sort((a, b) => b.snapshot.localeCompare(a.snapshot))[0];
-    const nNow = (volume * row.pickRate) / 100;
-    const nPrev = (volume * (prev.pickRate ?? row.pickRate)) / 100;
+    const prevVolume = volume.previous(fromPatch);
+    if (prevVolume === null) continue; // no game count for that patch: undetermined, not tested
+    const nNow = (volume.current * row.pickRate) / 100;
+    const nPrev = (prevVolume * (prev.pickRate ?? row.pickRate)) / 100;
     if (!(nNow > 0 && nPrev > 0)) continue;
+    tested++;
     const p = (row.winRate + prev.winRate) / 200;
     const sd = 100 * Math.sqrt(p * (1 - p) * (1 / nNow + 1 / nPrev));
     const delta = row.winRate - prev.winRate;
-    const z = delta / sd;
-    if (Math.abs(z) >= MOVE_Z) out.push({ slug, fromPatch, from: prev.winRate, to: row.winRate, delta, z });
+    candidates.push({ slug, fromPatch, from: prev.winRate, to: row.winRate, delta, z: delta / sd });
   }
-  return out.sort((a, b) => Math.abs(b.z) - Math.abs(a.z));
+  const zc = criticalZ(tested);
+  return candidates.filter((m) => Math.abs(m.z) >= zc).sort((a, b) => Math.abs(b.z) - Math.abs(a.z));
 }

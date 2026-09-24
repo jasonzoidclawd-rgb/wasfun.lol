@@ -11,7 +11,7 @@ import { MovedSinceLastPatch } from "@/components/home/MovedSinceLastPatch";
 import { RotateHint } from "@/components/ui/RotateHint";
 import { patchChangeState } from "@/lib/patch-notes/digest";
 import { loadChampionLetters } from "@/lib/score/pack";
-import { championMovers } from "@/lib/score/movers";
+import { championMovers, comparePatch, patchDataState } from "@/lib/score/movers";
 import { estimateVolume } from "@/lib/score/volume";
 import type { ChampionRow } from "@/lib/score/engine";
 import type { PatchNote } from "@/lib/types";
@@ -62,20 +62,30 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const feed = readBuildFeed();
   const starts = patchStarts();
-  const volume = estimateVolume(Object.values(feed.champions).map((c) => c.history ?? []), starts, { patch: feed.patch, dataDate: feed.dataDate });
-  const movers = volume ? championMovers(feed.champions, feed.patch, volume.games) : [];
+  const histories = Object.values(feed.champions).map((c) => c.history ?? []);
+  const volume = estimateVolume(histories, starts, { patch: feed.patch, dataDate: feed.dataDate });
   const fromPatch =
-    Object.values(feed.champions)
-      .flatMap((c) => c.history ?? [])
+    histories
+      .flat()
       .map((h) => h.patch)
-      .filter((p) => p !== feed.patch)
-      .sort((a, b) => {
-        const [a1, a2] = a.split(".").map(Number);
-        const [b1, b2] = b.split(".").map(Number);
-        return b1 - a1 || b2 - a2;
-      })[0] ?? null;
-  const start = starts[feed.patch];
-  const days = start ? Math.max(1, Math.round((Date.parse(`${feed.dataDate}T23:59:59Z`) - Date.parse(start)) / 86_400_000)) : null;
+      .filter((p) => comparePatch(p, feed.patch) < 0)
+      .sort((a, b) => comparePatch(b, a))[0] ?? null;
+  // Rows dated before the patch began are the last patch's totals under a new
+  // label: nothing of the new patch to show yet (undetermined, not "no change").
+  const state = patchDataState(feed.dataDate, starts[feed.patch]);
+  // each side of the comparison uses its own patch's game count
+  const previousVolume = (patch: string): number | null => {
+    const last = histories
+      .flat()
+      .filter((h) => h.patch === patch)
+      .map((h) => h.snapshot)
+      .sort()
+      .at(-1);
+    if (!last) return null;
+    const dataDate = `${last.slice(0, 4)}-${last.slice(4, 6)}-${last.slice(6, 8)}`;
+    return estimateVolume(histories, starts, { patch, dataDate })?.games ?? null;
+  };
+  const movers = volume && !state.predates ? championMovers(feed.champions, feed.patch, { current: volume.games, previous: previousVolume }) : [];
 
   // Augment changes named in the patch notes: facts from the notes, no statistics.
   const augByName = new Map(augmentsFile.augments.map((a) => [a.name, a]));
@@ -94,10 +104,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <PatchPulseBanner changesMeasured={measured} />
         <RotateHint />
         <HomeSearch champions={champions} />
-        {days !== null && days <= PATCH_WEEK_DAYS && (
-          <p className="col-span-full text-sm text-[var(--color-text-secondary)]">{t("patchWeek", { patch: feed.patch, days })}</p>
+        {state.days !== null && state.days <= PATCH_WEEK_DAYS && (
+          <p className="col-span-full text-sm text-[var(--color-text-secondary)]">{t("patchWeek", { patch: feed.patch, days: state.days })}</p>
         )}
-        <MovedSinceLastPatch movers={movers} champions={bySlug} patch={feed.patch} fromPatch={fromPatch} />
+        <MovedSinceLastPatch movers={movers} champions={bySlug} patch={feed.patch} fromPatch={fromPatch} predates={state.predates} />
         <MoversCarousel augments={[...changed.values()]} />
       </div>
     </>

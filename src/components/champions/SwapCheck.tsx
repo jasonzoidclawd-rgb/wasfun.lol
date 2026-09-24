@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { LetterChip } from "@/components/grades/LetterChip";
 import type { Letter } from "@/lib/score/grade";
-import { verdict } from "@/lib/score/verdict";
+import { swapAnswer } from "@/lib/score/swap";
 
 export interface SwapChampion {
   slug: string;
@@ -32,15 +32,17 @@ export function SwapCheck({ champions }: { champions: SwapChampion[] }) {
   const q = query.trim().toLowerCase();
   const matches = q ? champions.filter((c) => !chosen.includes(c.slug) && c.name.toLowerCase().includes(q)).slice(0, 6) : [];
   const entered = chosen.map((s) => bySlug.get(s)!).filter(Boolean);
-  const v = entered.length >= 2 ? verdict(entered.map((c) => ({ id: c.slug, m: c.m, v: c.v }))) : null;
+  // your champion (entered first) against the best of the bench
   const mine = entered[0];
-  const answer = !v
+  const result = mine ? swapAnswer(mine, entered.slice(1)) : null;
+  const answer = !result
     ? null
-    : v.closeCall && v.runnerUp
-      ? t("closeCall", { a: bySlug.get(v.pick)!.name, b: bySlug.get(v.runnerUp)!.name })
-      : v.pick === mine.slug
+    : result.kind === "close"
+      ? t("closeCall", { a: mine.name, b: bySlug.get(result.other.slug)!.name })
+      : result.kind === "keep"
         ? t("keep", { champion: mine.name })
-        : t("swap", { champion: bySlug.get(v.pick)!.name });
+        : t("swap", { champion: bySlug.get(result.other.slug)!.name });
+  const winner = result && result.kind !== "close" ? (result.kind === "keep" ? mine.slug : result.other.slug) : null;
 
   return (
     <section aria-labelledby="swap-check" className="glass-card mb-6 p-4">
@@ -77,11 +79,12 @@ export function SwapCheck({ champions }: { champions: SwapChampion[] }) {
         </div>
       )}
       {entered.length > 0 && (
-        <ol className="mt-3 flex flex-wrap gap-2" aria-live="polite">
-          {entered.map((c) => (
-            <li key={c.slug} className={`flex items-center gap-2 rounded-lg border px-2 ${v?.pick === c.slug && !v.closeCall ? "border-[var(--color-text-primary)]" : "border-[var(--color-border-default)]"}`}>
+        <ol className="mt-3 flex flex-wrap gap-2">
+          {entered.map((c, i) => (
+            <li key={c.slug} className={`flex items-center gap-2 rounded-lg border px-2 ${winner === c.slug ? "border-[var(--color-text-primary)]" : "border-[var(--color-border-default)]"}`}>
               <LetterChip kind="champion" letter={c.grade} thin={c.outlined} label={tl("letterLabel", { letter: c.grade })} />
               <span>{c.name}</span>
+              {i === 0 && <span className="text-[11px] text-[var(--color-text-muted)]">{t("yours")}</span>}
               <button
                 type="button"
                 aria-label={t("remove", { champion: c.name })}
@@ -94,7 +97,9 @@ export function SwapCheck({ champions }: { champions: SwapChampion[] }) {
           ))}
         </ol>
       )}
-      {answer && <p className="mt-3 rounded-lg border border-[var(--color-border-hover)] p-3 font-semibold">{answer}</p>}
+      <p role="status" aria-live="polite" className={answer ? "mt-3 rounded-lg border border-[var(--color-border-hover)] p-3 font-semibold" : "sr-only"}>
+        {answer}
+      </p>
       <p className="mt-2 text-[11px] text-[var(--color-text-muted)]">{t("hint")}</p>
     </section>
   );

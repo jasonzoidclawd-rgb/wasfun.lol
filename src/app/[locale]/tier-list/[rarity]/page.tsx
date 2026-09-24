@@ -63,7 +63,7 @@ export default async function RarityTierList({ params }: { params: Promise<{ loc
         <p className="glass-card mt-4 p-4 text-[var(--color-text-secondary)]">{t("unavailable")}</p>
       )}
       <p className="mt-3 text-sm">
-        <Link href="/method" className="underline">{t("howWeRank")}</Link>
+        <Link href="/method" className="inline-flex min-h-11 items-center underline">{t("howWeRank")}</Link>
       </p>
     </div>
   );

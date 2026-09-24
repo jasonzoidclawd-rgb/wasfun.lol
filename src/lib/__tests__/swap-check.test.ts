@@ -5,6 +5,7 @@
  */
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { loadChampionLetters } from "../score/pack";
+import { swapAnswer } from "../score/swap";
 import { verdict } from "../score/verdict";
 import { AUGMENT_STATS_ENV } from "../stats/kill-switch";
 
@@ -41,4 +42,15 @@ describe("Swap check over the current feeds", () => {
     vi.stubEnv(AUGMENT_STATS_ENV, "off");
     expect(loadChampionLetters()?.size).toBeGreaterThan(150);
   });
+
+  test("keep or swap is decided against your champion, not between two bench champions", () => {
+    const mine = { slug: "mine", m: -2, v: 0.01 };
+    // two bench champions both clearly beat yours and tie with each other: swap, not "close call"
+    const r = swapAnswer(mine, [{ slug: "a", m: 3, v: 0.01 }, { slug: "b", m: 3.05, v: 0.01 }])!;
+    expect(r.kind).toBe("swap");
+    expect(swapAnswer({ slug: "mine", m: 3, v: 0.01 }, [{ slug: "a", m: -2, v: 0.01 }])!.kind).toBe("keep");
+    expect(swapAnswer({ slug: "mine", m: 1, v: 4 }, [{ slug: "a", m: 1.2, v: 4 }])!.kind).toBe("close");
+    expect(swapAnswer(mine, [])).toBeNull();
+  });
 });
+
