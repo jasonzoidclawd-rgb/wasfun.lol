@@ -12,6 +12,8 @@ import { LetterChip } from "@/components/grades/LetterChip";
 import type { Rarity } from "@/lib/score/engine";
 import type { PickCard, PickPayload } from "@/lib/score/pick-payload";
 import { rememberChampion } from "@/lib/recent-champions";
+import { memberPickEnabled } from "@/lib/plans/flags";
+import { usePlan } from "@/lib/plans/usePlan";
 import { initialPickState, pickReducer, readScreen, SCREEN_SIZE } from "@/lib/score/pick-state";
 
 const RARITIES: Rarity[] = ["prismatic", "gold", "silver"];
@@ -42,7 +44,11 @@ function Icon({ src, rarity, size = 40 }: { src: string | null; rarity?: Rarity;
   );
 }
 
-export function PickScreen({ payload, showOdds = false }: { payload: PickPayload; showOdds?: boolean }) {
+export function PickScreen({ payload }: { payload: PickPayload }) {
+  // Member extras stay off unless their flag is on; the plan is only asked for then.
+  const memberExtras = memberPickEnabled();
+  const plan = usePlan(memberExtras);
+  const showOdds = memberExtras && (plan === "member" || plan === "vip");
   const t = useTranslations("pick");
   const champion = payload.champion.name;
   const cards = useMemo(() => {

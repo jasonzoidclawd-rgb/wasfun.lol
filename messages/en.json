@@ -1153,5 +1153,47 @@
     "remove": "Remove {champion}",
     "hint": "Letters grade each champion against the field, from its own win rate.",
     "yours": "Yours"
+  },
+  "plans": {
+    "title": "Plans",
+    "lead": "Every letter and number is free. Paid plans add convenience.",
+    "free": "Free",
+    "perMonth": "{price} a month",
+    "perMonthOrYear": "{month} a month, or {year} a year",
+    "name_free": "Free",
+    "name_member": "Member",
+    "name_vip": "VIP",
+    "notOnSale": "Not on sale yet",
+    "freeParity": "Paid plans never lock a grade or a number, and nothing in game asks you to upgrade.",
+    "homeLine": "Ad-free, with your picks saved:",
+    "seePlans": "see plans",
+    "features": {
+      "everyLetter": "Every letter and number on every page",
+      "pickFull": "The full Pick screen: verdicts, close calls and reroll hints",
+      "overlayBasic": "The basic overlay: a letter on each card",
+      "recent": "Your recent champions",
+      "currentPatch": "The current patch",
+      "everythingFree": "Everything in Free",
+      "noAds": "No ads anywhere",
+      "thisGame": "This game: log each pick and the cards offered",
+      "rerollOdds": "Reroll odds under each reroll button",
+      "offlinePacks": "Offline packs for champions you follow",
+      "following": "Follow champions, with alerts when their letters move",
+      "history": "Patch-over-patch letters and your saved games",
+      "everythingMember": "Everything in Member",
+      "overlayFull": "The full overlay: rates, reroll odds, This game logged by itself, build order, and layout controls"
+    }
+  },
+  "overlay": {
+    "title": "wasfun.lol overlay for Windows",
+    "lead": "Letters on the augment cards in your game, drawn in the overlay's own panels.",
+    "freeHeading": "Free, always",
+    "free_letters": "A letter on each offered card",
+    "free_topOutlined": "The top grade outlined",
+    "free_closeCall": "Close call when the top two can't be separated",
+    "free_hide": "Alt + O hides it",
+    "rules": "The overlay draws only its own panels, shows no ads or upgrade prompts in game, and highlights grades without choosing for you.",
+    "download": "Download for Windows",
+    "notYet": "Not available yet."
   }
 }

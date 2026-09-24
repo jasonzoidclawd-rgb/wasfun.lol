@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { V3AdSlot } from "@/components/ads/V3AdSlot";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { readFile } from "fs/promises";
 import path from "path";
@@ -124,6 +125,7 @@ export default async function ChampionsIndexPage({
         />
       )}
       <ChampionsIndex champions={champions} />
+      <V3AdSlot slot="v3-champions" />
     </div>
   );
 }

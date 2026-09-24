@@ -3,6 +3,7 @@
 import { shouldLoadAds } from "@/lib/ads/consent";
 import { useAdConsent } from "@/lib/ads/useAdConsent";
 import { track } from "@/lib/analytics";
+import { usePlan } from "@/lib/plans/usePlan";
 import { useEffect, useRef } from "react";
 
 const ADS_ENABLED = process.env.NEXT_PUBLIC_ADS_ENABLED;
@@ -19,15 +20,20 @@ declare global {
  * Advisor, account, admin, auth, or member surfaces. The ad script loads
  * lazily and ONLY after consent — never on first paint. A fixed min-height is
  * always reserved so enabling ads later causes no layout shift.
+ *
+ * Members see no ads anywhere: for them the slot renders nothing. An ad loads
+ * only once the plan is known to be free.
  */
 export function AdSlot({ slot, minHeight = 100 }: { slot: string; minHeight?: number }) {
   const consent = useAdConsent();
+  const plan = usePlan();
   const pushed = useRef(false);
   const slotRef = useRef<HTMLDivElement | null>(null);
   const viewable = useRef(false);
   const visibilityRatio = useRef(0);
   const viewableTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const active = shouldLoadAds(ADS_ENABLED, consent) && Boolean(AD_CLIENT);
+  const member = plan === "member" || plan === "vip";
+  const active = shouldLoadAds(ADS_ENABLED, consent) && Boolean(AD_CLIENT) && plan === "free";
 
   useEffect(() => {
     if (!active || pushed.current) return;
@@ -83,6 +89,7 @@ export function AdSlot({ slot, minHeight = 100 }: { slot: string; minHeight?: nu
     };
   }, [active, slot]);
 
+  if (member) return null;
   // Reserve space regardless so the slot never shifts layout.
   return (
     <div ref={slotRef} style={{ minHeight }} aria-hidden={!active} className="my-4 w-full overflow-hidden">

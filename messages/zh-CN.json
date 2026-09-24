@@ -1153,5 +1153,47 @@
     "remove": "移除 {champion}",
     "hint": "评级以各英雄自己的胜率与全体英雄比较。",
     "yours": "你的"
+  },
+  "plans": {
+    "title": "方案",
+    "lead": "所有评级与数字都免费。付费方案提供便利。",
+    "free": "免费",
+    "perMonth": "每月 {price}",
+    "perMonthOrYear": "每月 {month}，或每年 {year}",
+    "name_free": "免费",
+    "name_member": "会员",
+    "name_vip": "VIP",
+    "notOnSale": "尚未开售",
+    "freeParity": "付费方案不会锁住任何评级或数字，游戏中也不会要求你升级。",
+    "homeLine": "无广告，并保存你的选择：",
+    "seePlans": "查看方案",
+    "features": {
+      "everyLetter": "每一页的所有评级与数字",
+      "pickFull": "完整选择界面：建议、难分高下与重掷提示",
+      "overlayBasic": "基础覆盖层：每张卡上的评级",
+      "recent": "最近的英雄",
+      "currentPatch": "当前版本",
+      "everythingFree": "免费版的全部内容",
+      "noAds": "全站无广告",
+      "thisGame": "本局：记录每次选择与出现的卡",
+      "rerollOdds": "每个重掷按钮下的重掷概率",
+      "offlinePacks": "已关注英雄的离线包",
+      "following": "关注英雄，评级变动时提醒",
+      "history": "跨版本评级与已保存的对局",
+      "everythingMember": "会员的全部内容",
+      "overlayFull": "完整覆盖层：比率、重掷概率、自动记录本局、出装顺序与布局设置"
+    }
+  },
+  "overlay": {
+    "title": "wasfun.lol Windows 覆盖层",
+    "lead": "在游戏中的强化卡上显示评级，绘制于覆盖层自己的面板。",
+    "freeHeading": "永远免费",
+    "free_letters": "每张出现的卡都有评级",
+    "free_topOutlined": "最高评级加外框",
+    "free_closeCall": "前两名无法区分时显示难分高下",
+    "free_hide": "Alt + O 隐藏",
+    "rules": "覆盖层只绘制自己的面板，游戏中不显示广告或升级提示，只标示评级、不替你选择。",
+    "download": "下载 Windows 版",
+    "notYet": "尚未提供。"
   }
 }

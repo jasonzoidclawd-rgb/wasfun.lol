@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { V3AdSlot } from "@/components/ads/V3AdSlot";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { requireActiveEntitlement } from "@/lib/entitlements/server";
 import { MembershipGate } from "@/components/membership/MembershipGate";
@@ -561,6 +562,8 @@ export default async function ChampionPage({
       ) : (
         <p className="glass-card p-4 text-[var(--color-text-secondary)]">{th("unavailable")}</p>
       )}
+
+      <V3AdSlot slot="v3-champion" />
 
       {/* ─── Reference: everything the page showed before v3, collapsed ─── */}
       <details className="mt-6">
