@@ -155,3 +155,44 @@ body {
   [data-reveal-ready] .reveal { opacity: 0; }
   [data-reveal-ready] .reveal.in { animation: reveal-up 480ms cubic-bezier(.16,1,.3,1) both; }
 }
+
+/* ─── v3 grade letters ───
+   One diverging scale for every graded thing: blue above the baseline, red
+   below, gray even. Ink chosen for ≥ 4.5:1 on its fill in both themes
+   (src/lib/__tests__/grade-chip-contrast.test.ts). The site is dark today;
+   the light set applies under [data-theme="light"]. */
+:root {
+  --grade-S-fill: #3987e5; --grade-S-ink: #0e1116;
+  --grade-A-fill: #1c5cab; --grade-A-ink: #ffffff;
+  --grade-B-fill: #383835; --grade-B-ink: #ffffff;
+  --grade-C-fill: #8f3534; --grade-C-ink: #ffffff;
+  --grade-D-fill: #e66767; --grade-D-ink: #0e1116;
+  --grade-open-ink: #f1f5f9; /* outlined and dashed chips: letter on the card background */
+}
+[data-theme="light"] {
+  --grade-S-fill: #1c5cab; --grade-S-ink: #ffffff;
+  --grade-A-fill: #86b6ef; --grade-A-ink: #0e1116;
+  --grade-B-fill: #d9d8d3; --grade-B-ink: #0e1116;
+  --grade-C-fill: #f2a3a0; --grade-C-ink: #0e1116;
+  --grade-D-fill: #e34948; --grade-D-ink: #0e1116;
+  --grade-open-ink: #0e1116;
+}
+.grade-chip { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px;
+  border-radius: 6px; font-weight: 800; font-size: 15px; line-height: 1; flex: none; border: 2px solid transparent; }
+.grade-chip.is-S { background: var(--grade-S-fill); color: var(--grade-S-ink); }
+.grade-chip.is-A { background: var(--grade-A-fill); color: var(--grade-A-ink); }
+.grade-chip.is-B { background: var(--grade-B-fill); color: var(--grade-B-ink); }
+.grade-chip.is-C { background: var(--grade-C-fill); color: var(--grade-C-ink); }
+.grade-chip.is-D { background: var(--grade-D-fill); color: var(--grade-D-ink); }
+.grade-chip.is-open { background: transparent; color: var(--grade-open-ink); }
+.grade-chip.is-open.is-S { border-color: var(--grade-S-fill); }
+.grade-chip.is-open.is-A { border-color: var(--grade-A-fill); }
+.grade-chip.is-open.is-B { border-color: var(--color-text-secondary); }
+.grade-chip.is-open.is-C { border-color: var(--grade-C-fill); }
+.grade-chip.is-open.is-D { border-color: var(--grade-D-fill); }
+.grade-chip.is-dashed { border-style: dashed; }
+.grade-chip.is-lg { width: 44px; height: 44px; font-size: 22px; border-radius: 10px; }
+
+/* No ads on the Pick screen, even if an ad script survived a client-side navigation. */
+body:has([data-pick-screen]) ins.adsbygoogle,
+body:has([data-pick-screen]) .google-auto-placed { display: none !important; }
