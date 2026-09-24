@@ -1117,7 +1117,12 @@
     "seeAll": "{rarity}オーグメント全 {count} 件を見る",
     "top": "上位",
     "howWeRank": "評価の方法",
-    "unavailable": "現在、評価は表示できません。"
+    "unavailable": "現在、評価は表示できません。",
+    "detailHeading": "全チャンピオン合計の評価",
+    "detailLift": "{rarity}オーグメント平均との差 {lift} ポイント",
+    "detailNote": "同じレアリティの他のオーグメントと、全チャンピオンの試合で比較。データ元はチャンピオン別のオーグメント結果を公開していません。",
+    "detailSeeList": "{rarity}のティアリストを見る",
+    "detailUngraded": "このオーグメントには現在評価がありません：未実装か、データ元に信頼できる行がありません。"
   },
   "method": {
     "title": "評価の方法",

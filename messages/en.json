@@ -1117,7 +1117,12 @@
     "seeAll": "See all {count} {rarity} augments",
     "top": "Top of the list",
     "howWeRank": "How we rank",
-    "unavailable": "Grades are unavailable right now."
+    "unavailable": "Grades are unavailable right now.",
+    "detailHeading": "Grade across all champions",
+    "detailLift": "{lift} points against the average {rarity} augment",
+    "detailNote": "Graded against the other augments of its rarity, from all champions' games. The source publishes no per-champion results for augments.",
+    "detailSeeList": "See the {rarity} tier list",
+    "detailUngraded": "No grade for this augment right now: it is not live, or the source has no reliable row for it."
   },
   "method": {
     "title": "How we rank",

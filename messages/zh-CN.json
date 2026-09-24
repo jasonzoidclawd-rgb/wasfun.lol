@@ -1117,7 +1117,12 @@
     "seeAll": "查看全部 {count} 个{rarity}增幅",
     "top": "榜首",
     "howWeRank": "我们如何评级",
-    "unavailable": "评级暂时无法提供。"
+    "unavailable": "评级暂时无法提供。",
+    "detailHeading": "所有英雄合计评级",
+    "detailLift": "比 {rarity} 增幅平均 {lift} 个百分点",
+    "detailNote": "与同稀有度的其他增幅比较，依据所有英雄的对局。数据来源没有各英雄的增幅结果。",
+    "detailSeeList": "查看 {rarity} 梯队表",
+    "detailUngraded": "此增幅目前没有评级：未上线，或数据来源没有可靠数据。"
   },
   "method": {
     "title": "我们如何评级",

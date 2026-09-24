@@ -1117,7 +1117,12 @@
     "seeAll": "查看全部 {count} 個{rarity}增幅",
     "top": "榜首",
     "howWeRank": "我們如何評級",
-    "unavailable": "評級暫時無法提供。"
+    "unavailable": "評級暫時無法提供。",
+    "detailHeading": "所有英雄合計評級",
+    "detailLift": "比 {rarity} 增幅平均 {lift} 個百分點",
+    "detailNote": "與同稀有度的其他增幅比較，依據所有英雄的對局。資料來源沒有各英雄的增幅結果。",
+    "detailSeeList": "查看 {rarity} 階級表",
+    "detailUngraded": "此增幅目前沒有評級：未上線，或資料來源沒有可靠資料。"
   },
   "method": {
     "title": "我們如何評級",

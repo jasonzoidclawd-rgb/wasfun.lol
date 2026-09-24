@@ -1117,7 +1117,12 @@
     "seeAll": "{rarity} 증강 {count}개 모두 보기",
     "top": "상위",
     "howWeRank": "등급 산정 방법",
-    "unavailable": "지금은 등급을 표시할 수 없습니다."
+    "unavailable": "지금은 등급을 표시할 수 없습니다.",
+    "detailHeading": "전체 챔피언 합계 등급",
+    "detailLift": "{rarity} 증강 평균 대비 {lift}%p",
+    "detailNote": "같은 희귀도의 다른 증강과 모든 챔피언의 게임으로 비교했습니다. 데이터 출처는 챔피언별 증강 결과를 공개하지 않습니다.",
+    "detailSeeList": "{rarity} 티어 리스트 보기",
+    "detailUngraded": "이 증강은 현재 등급이 없습니다: 라이브가 아니거나 출처에 신뢰할 만한 데이터가 없습니다."
   },
   "method": {
     "title": "등급 산정 방법",
