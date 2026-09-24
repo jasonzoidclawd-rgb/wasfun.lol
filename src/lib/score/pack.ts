@@ -7,7 +7,8 @@
  */
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { getChampionAugmentPool, type PoolAugmentInput } from "@/lib/scoring/pool-orchestrator";
+import type { PoolAugmentInput } from "@/lib/scoring/pool-orchestrator";
+import { offerPool } from "./offer-pool";
 import { augmentStatsEnabled } from "@/lib/stats/kill-switch";
 import type { AbilityProfile, ChampionBaseStats, ChampionTag, PoolRules } from "@/lib/types";
 import { CARRY_OVER_ENABLED, TAU_ASSUMED } from "./config";
@@ -148,12 +149,10 @@ function buildScorePack(): ScorePack | null {
   ) as Record<Rarity, GradedOption[]>;
   const champions = championLetters(feeds, opts);
   const letterOf = new Map(champions.map((c) => [c.id, { letter: c.letter, outlined: c.outlined }]));
-  // Kit tags are a fit heuristic, not the game's offer rules: tag intersection
-  // would hide augments champions are really offered. Every tag passes, so only
-  // availability and the hard rules (attack type, resource, ability use, items) apply.
-  const allTags = [...new Set(catalogRows.flatMap((a) => a.kit_tags ?? []))];
 
   // Pool construction works on catalog slugs; posteriors are keyed by augment id.
+  const liveIds = new Set(statsFeed.rows.filter((r) => r.availability === "live" && r.augmentId).map((r) => r.augmentId as string));
+  const observedLive = new Set(catalogRows.filter((a) => a.augmentId && liveIds.has(a.augmentId)).map((a) => a.slug));
   const idBySlug = new Map(catalogRows.filter((a) => a.augmentId).map((a) => [a.slug, a.augmentId as string]));
   const packs = new Map<string, ChampionPack | null>();
 
@@ -161,20 +160,21 @@ function buildScorePack(): ScorePack | null {
     const row = buildFeed.champions[slug];
     const champ = championCatalog.get(slug);
     if (!row || !champ) return null;
-    const pool = getChampionAugmentPool({
+    // every live augment the game can offer this champion (offer-pool.ts)
+    const { offered } = offerPool({
       championSlug: slug,
       augments: catalogRows,
       abilityProfile: abilities[slug],
       baseStats: champ.baseStats,
-      championKitTags: allTags,
       poolRules,
+      observedLive,
     });
     const sets = {} as Record<Rarity, GradedOption[]>;
     const pickUnder = {} as Record<Rarity, number | null>;
     for (const r of RARITIES) {
       const listedRows = row.augments.filter((a) => a.rarity === r);
       // an augment the provider lists for this champion was offered to it, whatever the rules say
-      const ids = new Set(pool[r].map((a) => idBySlug.get(a.slug)).filter((id): id is string => !!id));
+      const ids = new Set(offered.filter((a) => a.rarity === r).map((a) => idBySlug.get(a.slug)).filter((id): id is string => !!id));
       for (const a of listedRows) if (a.augmentId) ids.add(a.augmentId);
       // letters are the tier list's (graded across all champions), not re-graded within the pool
       sets[r] = tierLists[r].filter((o) => ids.has(o.id));

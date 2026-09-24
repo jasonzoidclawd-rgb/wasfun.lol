@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { loadScorePack, resetScorePack } from "../score/pack";
+import { offerPool } from "../score/offer-pool";
+import type { PoolAugmentInput } from "@/lib/scoring/pool-orchestrator";
 import { AUGMENT_STATS_ENV } from "../stats/kill-switch";
 
 afterEach(() => {
@@ -48,6 +50,41 @@ describe("score pack over the current feeds", () => {
       }
     }
     expect(checked).toBeGreaterThan(2500);
+  }, 120_000);
+
+  test("full pool: every graded augment of a rarity is on every champion's grid, unless the game can't offer it to that champion", () => {
+    const pack = loadScorePack()!;
+    const read = (f: string) => JSON.parse(readFileSync(path.join(process.cwd(), "data/internal", f), "utf-8"));
+    const catalog = read("augments.json").augments as (PoolAugmentInput & { augmentId?: string })[];
+    const abilities = read("abilities.json").profiles;
+    const champs = new Map((read("champions.json").champions as { slug: string; baseStats?: never }[]).map((c) => [c.slug, c]));
+    const poolRules = read("pool-rules.json");
+    const slugOf = new Map(catalog.filter((a) => a.augmentId).map((a) => [a.augmentId as string, a.slug]));
+    const listed = read("champion-build-feed.json").champions;
+    const liveIds = new Set((read("augment-stats-feed.json").rows as { augmentId?: string; availability?: string }[]).filter((r) => r.availability === "live").map((r) => r.augmentId));
+    const observedLive = new Set(catalog.filter((a) => liveIds.has(a.augmentId)).map((a) => a.slug));
+    const reasons: Record<string, number> = {};
+    let missingTotal = 0;
+    for (const champ of pack.champions) {
+      const { excluded } = offerPool({ championSlug: champ.id, augments: catalog, abilityProfile: abilities[champ.id], baseStats: champs.get(champ.id)?.baseStats, poolRules, observedLive });
+      const rule = new Map(excluded.map((e) => [e.slug, e.reason]));
+      const listedIds = new Set((listed[champ.id].augments as { augmentId?: string }[]).map((a) => a.augmentId));
+      const p = pack.pack(champ.id)!;
+      for (const r of ["prismatic", "gold", "silver"] as const) {
+        const onGrid = new Set(p.sets[r].map((o) => o.id));
+        for (const o of pack.tierLists[r]) {
+          if (onGrid.has(o.id)) continue;
+          missingTotal++;
+          // only a game offer rule may keep a graded augment off a grid, and never one the champion was seen taking
+          const why = rule.get(slugOf.get(o.id) ?? "");
+          expect(why, `${champ.id}: ${o.id} missing without an offer rule`).toBeDefined();
+          expect(listedIds.has(o.id), `${champ.id}: ${o.id} is listed for it`).toBe(false);
+          reasons[why!] = (reasons[why!] ?? 0) + 1;
+        }
+      }
+    }
+    // record the exclusions so a change in the rules shows up in review
+    console.info("offer-rule exclusions (champion × augment):", missingTotal, reasons);
   }, 120_000);
 
   test("a card's letter is the tier list's letter: graded across all champions, not within the pool", () => {
