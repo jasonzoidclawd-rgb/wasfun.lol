@@ -65,7 +65,11 @@ describe("moved since last patch", () => {
 
   test("rows dated before the patch began predate it: no patch-week line, no comparison", () => {
     expect(patchDataState("2026-09-21", "2026-09-22T18:00:00Z")).toEqual({ predates: true, days: null });
-    expect(patchDataState("2026-09-23", "2026-09-22T18:00:00Z")).toEqual({ predates: false, days: 2 });
+    // the start day itself holds at most hours of the patch, maybe none: still undetermined
+    expect(patchDataState("2026-09-22", "2026-09-22T18:00:00Z")).toEqual({ predates: true, days: null });
+    expect(patchDataState("2026-09-23", "2026-09-22T18:00:00Z")).toEqual({ predates: false, days: 1 });
+    expect(patchDataState("2026-09-25", "2026-09-22T18:00:00Z")).toEqual({ predates: false, days: 3 });
+    expect(patchDataState("not-a-date", "2026-09-22T18:00:00Z")).toEqual({ predates: true, days: null });
     expect(patchDataState("2026-09-23", undefined)).toEqual({ predates: false, days: null });
     const home = readFileSync(path.join(process.cwd(), "src/app/[locale]/page.tsx"), "utf-8");
     expect(home).toContain("volume && !state.predates ? championMovers(");

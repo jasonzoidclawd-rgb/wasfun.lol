@@ -45,16 +45,22 @@ export function criticalZ(tests: number, familyAlpha = MOVE_FAMILY_ALPHA): numbe
 }
 
 /**
- * Where the current patch's data stands. Rows dated before the patch began are
- * the previous patch's running totals under a new label: then there is nothing
- * of the new patch to show yet (undetermined, not "no change").
+ * Where the current patch's data stands. The source's data date carries no
+ * time or time zone and lags the scrape, so a date on or before the patch's
+ * start day can hold none of the new patch: those rows are the previous
+ * patch's running totals under a new label, and there is nothing of the new
+ * patch to show yet (undetermined, not "no change"). Days are whole days
+ * after the start day, never rounded up.
  */
 export function patchDataState(dataDate: string, patchStart: string | undefined): { predates: boolean; days: number | null } {
   if (!patchStart) return { predates: false, days: null };
-  const span = (Date.parse(`${dataDate}T23:59:59Z`) - Date.parse(patchStart)) / 86_400_000;
-  if (!Number.isFinite(span)) return { predates: false, days: null };
-  if (span < 0) return { predates: true, days: null };
-  return { predates: false, days: Math.max(1, Math.ceil(span)) };
+  const data = Date.parse(`${dataDate}T00:00:00Z`);
+  const startDay = Date.parse(`${patchStart.slice(0, 10)}T00:00:00Z`);
+  // an unreadable date can't show that the new patch has data: undetermined
+  if (!Number.isFinite(data) || !Number.isFinite(startDay)) return { predates: true, days: null };
+  const days = Math.floor((data - startDay) / 86_400_000);
+  if (days < 1) return { predates: true, days: null };
+  return { predates: false, days };
 }
 
 export function championMovers(
