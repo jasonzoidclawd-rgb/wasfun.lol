@@ -4,7 +4,7 @@
   "lane": "preview",
   "status": "fresh",
   "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-  "observed_at": "2026-09-23T20:56:02.699946Z",
+  "observed_at": "2026-09-24T02:33:51.670957Z",
   "events": [
     {
       "entity_type": "augment",
@@ -29,7 +29,7 @@
       "after": {
         "tooltip": "Gain <spellName>Deceive</spellName> Summoner Spell.<br>Gain <spellName>Backstab</spellName> Passive.<br><br>When you die, deal a large amount of <trueDamage>true damage</trueDamage> and <status>Fear</status> nearby enemies."
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -55,7 +55,7 @@
       "after": {
         "tooltip": "Dealing and receiving champion damage grants you @StacksPerHit@ stack of <keyword>Juggernauting</keyword> for @Stack_Duration@ seconds. For every @Stacks_Max@ stacks of <keyword>Juggernauting</keyword> you gain <attention>@Calc_AF@ Adaptive Force</attention>, <scaleArmor>@Calc_Defenses@ Armor</scaleArmor>, <scaleMR>@Calc_Defenses@ Magic Resist</scaleMR>, <attention>@Calc_Size@ Size</attention>, and <status>@Calc_Tenacity@ Tenacity</status>.<br><br><rules>Stacks fall off faster the more you have.<br>Maximum Juggernauting Level: @f1.0@</rules>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -82,7 +82,7 @@
         "rarity": "prismatic",
         "tooltip": ""
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -110,7 +110,7 @@
         "rarity": "prismatic",
         "tooltip": ""
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -150,7 +150,7 @@
           12.0
         ]
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -176,7 +176,7 @@
       "after": {
         "base_stats.attackDamage": 64.0
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -218,7 +218,7 @@
           0.0
         ]
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -247,7 +247,7 @@
         "abilities.R.coefficients.coefficient1": 0.7,
         "base_stats.healthPerLevel": 105.0
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -308,7 +308,7 @@
           2.25
         ]
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -334,7 +334,7 @@
       "after": {
         "base_stats.armor": 24.0
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -374,7 +374,7 @@
           100.0
         ]
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -417,7 +417,7 @@
         ],
         "base_stats.armorPerLevel": 4.699999809265137
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -446,7 +446,7 @@
         "base_stats.attackDamage": 61.0,
         "base_stats.attackDamagePerLevel": 3.9000000953674316
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -480,7 +480,7 @@
           "HealthRegen"
         ]
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -508,7 +508,7 @@
         "cost": 1330,
         "description": "<mainText><stats><attention> 20%</attention> Attack Speed<br><attention> 20%</attention> Critical Strike Chance</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -533,7 +533,7 @@
       "after": {
         "description": "<mainText><stats><attention> 76</attention> Magic Resist<br><attention> 8%</attention> Move Speed<br><attention> 40</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Steadfast</jadeUnique>: Regenerate an additional <scaleHealth> health</scaleHealth> per 5 seconds.</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -563,7 +563,7 @@
         "cost": 2600,
         "description": "<mainText><stats><attention> 50</attention> Ability Power<br><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist</stats><br><br><jadeUnique>Tenacity:</jadeUnique> Reduces the duration of <status>Stuns, Slows, Taunts, Fears, Silences, Blinds,</status> and <status>Immobilizes</status> by <attention>35%</attention>.</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -588,7 +588,7 @@
       "after": {
         "description": "<mainText><stats><attention> 60</attention> Health<br><attention> 75%</attention> Base Health Regen<br><attention> 50%</attention> Base Mana Regen<br><attention> 5</attention> Gold Per 10 Seconds</stats><br><br><passive>Support Quest</passive><br>Earn <keywordMajor>0</keywordMajor> gold from this item to transform it into <rarityGeneric>Bounty of Worlds</rarityGeneric>. <br><br><passive>Shared Riches</passive>  (0s, max 0 charges)<br>While near an ally champion, damage enemy champions or kill minions to gain gold. <active>Active</active> (3 charges)<br>Places an <keyword>Invisible</keyword> Stealth Ward that grants vision.</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -613,7 +613,7 @@
       "after": {
         "description": "<mainText><stats><attention> 400</attention> Health<br><attention> 55</attention> Magic Resist<br><attention> 20</attention> Health Regen per 5 seconds<br><attention> 20%</attention> Cooldown Reduction</stats><br><br><jadeUnique>Lifeforce:</jadeUnique> Increases <healing>self-healing</healing>, <healing>Health Regen</healing>, <lifeSteal>Lifesteal</lifeSteal>, and <lifeSteal>Spell Vamp</lifeSteal> effects by 20%.</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -639,7 +639,7 @@
       "after": {
         "description": "<mainText><stats></stats><br><br>Takedown champions, minions, towers, plates, and epic monsters to complete your quest. Earn points much faster in top lane!<br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a large max-health shield on use and reduced cooldown<br>• Flat bonus experience, more experience from all sources, and increased level cap</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -664,7 +664,7 @@
       "after": {
         "description": "<mainText><stats></stats><br><br><font color = '#00FF00'>Rewards</font><br>• Enhance your Teleport with a  shield for 10s on use and 30s reduced cooldown<br>• Flat bonus experience, more experience from all sources, and an increased level cap</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -689,7 +689,7 @@
       "after": {
         "description": "<mainText><stats><attention> 920</attention> Health<br><attention> 30</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Passive:</jadeUnique> Permanently gain <scaleHealth>3.5 Health</scaleHealth> and <healing>0.1 Health Regen</healing> per 5 sec. per stack. 1 stack is gained per minion or monster kill and 10 stacks are gained per Takedown. Maximum bonuses: <scaleHealth> Health</scaleHealth> and <healing> Health Regen</healing> per 5 seconds.</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,
@@ -715,7 +715,7 @@
       "after": {
         "description": "<mainText><stats><attention> 50</attention> Armor<br><attention> 50</attention> Magic Resist<br><attention> 5</attention> Health Regen per 5 seconds</stats><br><br><jadeUnique>Point Runner:</jadeUnique> Standing near turrets or <keywordMajor>Void Gates</keywordMajor> grants up to <speed>30% Move Speed</speed> that builds up over 2 seconds. <jadeUnique>Active</jadeUnique>  150s<br>Spawn a <keywordMajor>Void Gate</keywordMajor> at the target location for 150 seconds. Every 4 seconds the gate spawns a volatile <keywordMajor>Voidspawn</keywordMajor> that travels down the nearest lane.</mainText>"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "landed": false,
       "is_hotfix": false,

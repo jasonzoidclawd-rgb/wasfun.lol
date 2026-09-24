@@ -3,7 +3,7 @@
   "branch": "pbe",
   "lane": "preview",
   "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-  "observed_at": "2026-09-23T20:56:02.699946Z",
+  "observed_at": "2026-09-24T02:33:51.670957Z",
   "status": "fresh",
   "events": [
     {
@@ -22,7 +22,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "augment",
       "fields_changed": [
         "tooltip"
@@ -43,7 +43,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -138,7 +138,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "augment",
       "fields_changed": [
         "tooltip"
@@ -155,7 +155,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8178499+branch.main.content.beta",
       "observed_cycles": 7,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -212,7 +212,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -231,7 +231,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {},
@@ -286,7 +286,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "augment",
       "fields_changed": [],
       "is_hotfix": false,
@@ -305,7 +305,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -337,7 +337,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.W.cooldown_coefficients"
@@ -354,7 +354,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -408,7 +408,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "base_stats.attackDamage"
@@ -425,7 +425,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -459,7 +459,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.R.effect_amounts.Effect2Amount"
@@ -476,7 +476,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8192364+branch.releases-16-19.content.release",
       "observed_cycles": 4,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -496,7 +496,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.R.coefficients.coefficient1",
@@ -514,7 +514,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -566,7 +566,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.W.effect_amounts.Effect4Amount",
@@ -584,7 +584,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -602,7 +602,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "base_stats.armor"
@@ -619,7 +619,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -686,7 +686,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.R.cooldown_coefficients"
@@ -703,7 +703,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -737,7 +737,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "abilities.E.cost_coefficients",
@@ -755,7 +755,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -775,7 +775,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "champion",
       "fields_changed": [
         "base_stats.attackDamage",
@@ -793,7 +793,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -855,7 +855,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "categories"
@@ -872,7 +872,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -894,7 +894,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -909,7 +909,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 10,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -927,7 +927,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -944,7 +944,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -1076,7 +1076,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [],
       "is_hotfix": false,
@@ -1091,7 +1091,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 10,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -1253,7 +1253,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1270,7 +1270,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8189424+branch.main.content.beta",
       "observed_cycles": 5,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -1288,7 +1288,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1305,7 +1305,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -1323,7 +1323,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1340,7 +1340,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "observed_cycles": 2,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -1358,7 +1358,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1375,7 +1375,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8209878+branch.main.content.beta",
       "observed_cycles": 2,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -1393,7 +1393,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1410,7 +1410,7 @@
       "first_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
       "observed_cycles": 1,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     },
     {
       "after": {
@@ -1428,7 +1428,7 @@
         "target_branch": "pbe",
         "target_version": "16.20.8214880+branch.main.content.beta"
       },
-      "detected_at": "2026-09-23T20:56:02.699946Z",
+      "detected_at": "2026-09-24T02:33:51.670957Z",
       "entity_type": "item",
       "fields_changed": [
         "description"
@@ -1445,7 +1445,7 @@
       "first_seen_cycle": "pbe-cycle-16.19.8163976+branch.main.content.beta",
       "observed_cycles": 10,
       "last_seen_cycle": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-      "last_seen_at": "2026-09-23T20:56:02.699946Z"
+      "last_seen_at": "2026-09-24T02:33:51.670957Z"
     }
   ]
 }
