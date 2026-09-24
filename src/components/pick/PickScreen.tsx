@@ -176,12 +176,12 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
           </button>
         ))}
       </div>
-      <ul className="grid grid-cols-4 gap-2 sm:grid-cols-6" role="list">
+      <ul className="grid grid-cols-[repeat(4,minmax(0,1fr))] gap-2 sm:grid-cols-[repeat(6,minmax(0,1fr))]" role="list">
         {payload.rarities[state.rarity].map((c) => {
           const card = cards.get(c.id)!;
           const selected = state.slots.some((s) => s.id === c.id);
           return (
-            <li key={c.id}>
+            <li key={c.id} className="min-w-0">
               <button
                 type="button"
                 onClick={() => dispatch({ type: "tapCard", id: c.id })}
@@ -242,7 +242,7 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
                 <div className="mt-1 text-sm">{b.names.join(" › ")}</div>
                 {b.mostBuilt && <span className="mt-1 inline-block rounded border border-[var(--color-border-hover)] px-1 text-[11px]">{t("mostBuilt")}</span>}
               </div>
-              <div className="text-right text-sm">
+              <div className="shrink-0 text-right text-sm">
                 <div className="font-bold">{t("winShort", { win: b.winRate.toFixed(1) })}</div>
                 <div className="text-xs text-[var(--color-text-secondary)]">{t("pickShort", { pick: b.pickRate.toFixed(1) })}</div>
               </div>
@@ -272,13 +272,13 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
           </Link>
         </div>
       </header>
-      <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-        <div className="order-2 lg:order-1">{grid}</div>
-        <div className="order-1 space-y-4 lg:order-2">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <div className="order-2 min-w-0 lg:order-1">{grid}</div>
+        <div className="order-1 min-w-0 space-y-4 lg:order-2">
           {takePanel}
           <div className="hidden lg:block">{items}</div>
         </div>
-        <div className="order-3 lg:hidden">{items}</div>
+        <div className="order-3 min-w-0 lg:hidden">{items}</div>
       </div>
       <FreshnessLine patch={payload.meta.patch} dataDate={payload.meta.dataDate} provider={payload.meta.provider} />
       <p className="mt-1 text-xs text-[var(--color-text-muted)]">{t("noAds")}</p>

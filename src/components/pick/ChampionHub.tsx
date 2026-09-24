@@ -56,7 +56,7 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
         </div>
         <dl className="space-y-3">
           {plan.map(({ r, letter, picks }) => (
-            <div key={r} className="flex gap-3">
+            <div key={r} className="flex min-w-0 gap-3">
               <dt className="w-24 shrink-0 text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
                 {tp(`rarity_${r}`)}
                 {picks.length > 0 && letter && (
@@ -65,7 +65,7 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
                   </span>
                 )}
               </dt>
-              <dd className="flex flex-wrap gap-3 text-sm">
+              <dd className="flex min-w-0 flex-1 flex-wrap gap-3 text-sm">
                 {picks.length ? (
                   picks.map((c) => (
                     <span key={c.id} className="flex items-center gap-2">
@@ -80,23 +80,23 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
             </div>
           ))}
           {boots && (
-            <div className="flex gap-3">
+            <div className="flex min-w-0 gap-3">
               <dt className="w-24 shrink-0 text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
                 {t("boots")}
                 <span className="mt-1 block">
                   <LetterChip letter={boots.letter} thin={boots.outlined} label={tp("gradeLabelOwn", { letter: boots.letter })} />
                 </span>
               </dt>
-              <dd className="flex items-center gap-2 text-sm">
+              <dd className="flex min-w-0 flex-1 items-center gap-2 text-sm">
                 <Art src={boots.icons[0]} />
                 {boots.names[0]}
               </dd>
             </div>
           )}
           {core.length > 0 && (
-            <div className="flex gap-3">
+            <div className="flex min-w-0 gap-3">
               <dt className="w-24 shrink-0 text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">{t("core")}</dt>
-              <dd className="space-y-2 text-sm">
+              <dd className="min-w-0 flex-1 space-y-2 text-sm">
                 {core.map((b) => (
                   <div key={b.id}>
                     <div className="font-semibold">{b.names.join(" › ")}</div>
@@ -174,7 +174,7 @@ export async function ChampionHub({ payload }: { payload: PickPayload }) {
                     )}
                   </div>
                 </div>
-                <div className="text-right text-sm">
+                <div className="shrink-0 text-right text-sm">
                   <div className="font-bold">{tp("winShort", { win: b.winRate.toFixed(1) })}</div>
                   <div className="text-xs text-[var(--color-text-secondary)]">{tp("pickShort", { pick: b.pickRate.toFixed(1) })}</div>
                 </div>

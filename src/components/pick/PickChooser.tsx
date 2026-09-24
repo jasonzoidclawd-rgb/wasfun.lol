@@ -36,9 +36,9 @@ export function PickChooser({ champions }: { champions: { slug: string; name: st
         aria-label={t("searchPlaceholder")}
         className="mt-4 min-h-11 w-full rounded-lg border border-[var(--color-border-hover)] bg-[var(--color-bg-card)] px-3"
       />
-      <ul className="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-6 lg:grid-cols-8" role="list">
+      <ul className="mt-4 grid grid-cols-[repeat(4,minmax(0,1fr))] gap-2 sm:grid-cols-[repeat(6,minmax(0,1fr))] lg:grid-cols-[repeat(8,minmax(0,1fr))]" role="list">
         {shown.map((c) => (
-          <li key={c.slug}>
+          <li key={c.slug} className="min-w-0">
             <Link href={`/pick/${c.slug}`} className="flex min-h-[88px] flex-col items-center gap-1 rounded-xl p-1.5 text-center">
               {c.icon ? (
                 // eslint-disable-next-line @next/next/no-img-element -- build-time local asset
