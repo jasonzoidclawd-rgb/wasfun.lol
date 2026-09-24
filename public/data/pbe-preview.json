@@ -2,9 +2,9 @@
   "schema_version": 1,
   "branch": "pbe",
   "lane": "preview",
-  "status": "fresh",
+  "status": "not_yet_confirmed",
   "source_patch_label": "pbe-cycle-16.20.8214880+branch.main.content.beta",
-  "observed_at": "2026-09-24T10:53:05.149020Z",
+  "observed_at": "2026-09-24T16:15:41.001429Z",
   "events": [
     {
       "entity_type": "augment",
