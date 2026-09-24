@@ -118,7 +118,7 @@ export default async function ChampionsIndexPage({
           champions={raw
             .map((c): SwapChampion | null => {
               const l = letters.get(c.slug);
-              return l ? { slug: c.slug, name: localizedName(c, locale), letter: l.letter, outlined: l.outlined, m: l.m, v: l.v } : null;
+              return l ? { slug: c.slug, name: localizedName(c, locale), grade: l.letter, outlined: l.outlined, m: l.m, v: l.v } : null;
             })
             .filter((c): c is SwapChampion => c !== null)}
         />

@@ -55,7 +55,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const champions: HomeChampion[] = championsFile.champions
     .map((c) => {
       const l = letters?.get(c.slug);
-      return { slug: c.slug, name: localizedName(c, locale), letter: l?.letter ?? null, outlined: l?.outlined ?? false };
+      return { slug: c.slug, name: localizedName(c, locale), grade: l?.letter ?? null, outlined: l?.outlined ?? false };
     })
     .sort((a, b) => a.name.localeCompare(b.name, locale));
   const bySlug = new Map(champions.map((c) => [c.slug, c]));

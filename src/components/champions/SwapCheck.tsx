@@ -15,7 +15,7 @@ import { verdict } from "@/lib/score/verdict";
 export interface SwapChampion {
   slug: string;
   name: string;
-  letter: Letter;
+  grade: Letter;
   outlined: boolean;
   m: number;
   v: number;
@@ -80,7 +80,7 @@ export function SwapCheck({ champions }: { champions: SwapChampion[] }) {
         <ol className="mt-3 flex flex-wrap gap-2" aria-live="polite">
           {entered.map((c) => (
             <li key={c.slug} className={`flex items-center gap-2 rounded-lg border px-2 ${v?.pick === c.slug && !v.closeCall ? "border-[var(--color-text-primary)]" : "border-[var(--color-border-default)]"}`}>
-              <LetterChip letter={c.letter} thin={c.outlined} label={tl("letterLabel", { letter: c.letter })} />
+              <LetterChip kind="champion" letter={c.grade} thin={c.outlined} label={tl("letterLabel", { letter: c.grade })} />
               <span>{c.name}</span>
               <button
                 type="button"

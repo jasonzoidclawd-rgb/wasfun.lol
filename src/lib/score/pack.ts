@@ -225,12 +225,11 @@ export interface ChampionLetter {
 let championCache: Map<string, ChampionLetter> | null | undefined;
 
 /**
- * Champion letters against the field (the Swap check, the champions list and
- * Home). They grade the champions' own win rates, but a letter is still a
- * statistic the switch withdraws: off means no letters anywhere.
+ * Champion letters against the field (the Swap check, the champions list, Home
+ * and the champion page header). They grade the champions' own win rates, not
+ * augment statistics, so the augment kill switch leaves them on.
  */
 export function loadChampionLetters(): Map<string, ChampionLetter> | null {
-  if (!augmentStatsEnabled()) return null;
   if (championCache !== undefined) return championCache;
   const buildFeed = read<{ patch: string; dataDate: string; champions: Record<string, ChampionRow> }>("champion-build-feed.json");
   const patchStarts = Object.fromEntries(

@@ -1,7 +1,7 @@
 /**
  * Phase 3 acceptance: the Swap check names a champion only when it clears the
- * 0.5 pp margin with 80% certainty, and calls it close otherwise. With the
- * statistics switch off there are no champion letters, so no Swap check.
+ * 0.5 pp margin with 80% certainty, and calls it close otherwise. It needs the
+ * champions' own win rates only, so it stays on with the augment switch off.
  */
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { loadChampionLetters } from "../score/pack";
@@ -37,8 +37,8 @@ describe("Swap check over the current feeds", () => {
     for (const l of letters!.values()) expect(["S", "A", "B", "C", "D"]).toContain(l.letter);
   });
 
-  test("the switch off withdraws champion letters", () => {
+  test("champion letters stay on with the augment switch off", () => {
     vi.stubEnv(AUGMENT_STATS_ENV, "off");
-    expect(loadChampionLetters()).toBeNull();
+    expect(loadChampionLetters()?.size).toBeGreaterThan(150);
   });
 });

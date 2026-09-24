@@ -10,7 +10,7 @@ import { RECENT_CHAMPIONS_KEY, readRecentChampions } from "@/lib/recent-champion
 export interface HomeChampion {
   slug: string;
   name: string;
-  letter: Letter | null;
+  grade: Letter | null;
   outlined: boolean;
 }
 
@@ -31,7 +31,7 @@ export function HomeSearch({ champions }: { champions: HomeChampion[] }) {
   const q = query.trim().toLowerCase();
   const matches = q ? champions.filter((c) => c.name.toLowerCase().includes(q) || c.slug.includes(q)).slice(0, 8) : [];
   const chip = (c: HomeChampion) =>
-    c.letter ? <LetterChip letter={c.letter} thin={c.outlined} label={tl("letterLabel", { letter: c.letter })} /> : null;
+    c.grade ? <LetterChip kind="champion" letter={c.grade} thin={c.outlined} label={tl("letterLabel", { letter: c.grade })} /> : null;
 
   return (
     <section aria-labelledby="home-search" className="glass-card col-span-full p-4">

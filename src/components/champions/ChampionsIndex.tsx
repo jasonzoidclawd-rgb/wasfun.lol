@@ -21,7 +21,7 @@ const TIER_ORDER = ["S", "A", "B", "C", "D"] as const;
 function Chip({ c, size }: { c: ChampionEntry; size?: "md" | "lg" }) {
   const t = useTranslations("championsIndex");
   if (!c.tier) return null;
-  return <LetterChip letter={c.tier as Letter} thin={c.letterOutlined} size={size} label={t("letterLabel", { letter: c.tier })} />;
+  return <LetterChip kind="champion" letter={c.tier as Letter} thin={c.letterOutlined} size={size} label={t("letterLabel", { letter: c.tier })} />;
 }
 
 const CLASS_COLOR: Record<string, string> = {
@@ -259,7 +259,7 @@ export function ChampionsIndex({
             return (
               <section key={tier}>
                 <div className="flex items-center gap-3 mb-3">
-                  <LetterChip letter={tier} size="lg" label={t("letterLabel", { letter: tier })} />
+                  <LetterChip kind="champion" letter={tier} size="lg" label={t("letterLabel", { letter: tier })} />
                   <span className="text-xs text-[var(--color-text-muted)] tabular-nums">
                     ({champs.length})
                   </span>

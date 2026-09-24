@@ -40,7 +40,7 @@ export async function MovedSinceLastPatch({
             return (
               <li key={m.slug}>
                 <Link href={`/champions/${m.slug}`} className="flex min-h-12 items-center gap-3 py-2">
-                  {c.letter && <LetterChip letter={c.letter} thin={c.outlined} label={tl("letterLabel", { letter: c.letter })} />}
+                  {c.grade && <LetterChip kind="champion" letter={c.grade} thin={c.outlined} label={tl("letterLabel", { letter: c.grade })} />}
                   <span className="min-w-0 flex-1 font-semibold">{c.name}</span>
                   <span className="text-sm tabular-nums text-[var(--color-text-secondary)]">
                     {t("movedLine", { from: m.from.toFixed(1), to: m.to.toFixed(1), delta: `${m.delta > 0 ? "+" : "−"}${Math.abs(m.delta).toFixed(1)}` })}
