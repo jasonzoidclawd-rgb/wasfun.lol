@@ -120,3 +120,17 @@ The share of random three-card screens that get a named pick at **τ = 2.0 pp**:
 - **Not yet wired, for phase 2:**
   - Set debounce. When it is wired, the Pick verdict must rank by the published order, so it can never name a lower-lettered card over a higher one while a grouping is held.
   - The dormant carry-over path. It drops the CLOSE shape for carried rows.
+
+## Addendum (phase 2 review): the takers envelope no longer assumes a top-six listing
+
+The takers adjustment bounded an unlisted augment's share for a champion by that champion's least-picked listed augment. That bound assumes the source lists each champion's six most-picked augments per rarity. It is unverified: 48 of 519 per-champion lists are not in descending pick-rate order. The envelope now runs from 0 to the mass cap (`UNLISTED_ENVELOPE`); its low end moved from 0.25 to 0 of the bound, and its high end is now the mass cap alone. At the ×0.5 and ×1 unit scales the mass cap already sat below 0.75 of the bound for 170–173 of 173 champions in every rarity, so the high end barely moved there; at ×1.5 it moved for 7 prismatic, 2 gold and 43 silver champions. Letters still take the most conservative grade across the envelope.
+
+| Set | S | A | B | C | D | Outlined |
+| --- | --- | --- | --- | --- | --- | --- |
+| Prismatic augments (62) | 2 | 11 | 37 | 7 | 5 | 37 |
+| Gold augments (69) | 7 | 0 | 39 | 22 | 1 | 48 |
+| Silver augments (51) | 3 | 0 | 29 | 15 | 4 | 14 |
+
+47 of 182 letters moved, all toward B; none got stronger (tested in `score-real-data.test.ts`). Named picks at τ = 2.0 pp: **prismatic 49.7%, gold 50.8%, silver 37.5%** of random screens (were 50.9 / 51.3 / 38.1). Pages no longer show a "pick under" bound for unlisted pairs: their pick rate on the champion reads as not published.
+
+The calibration results above that mention "patch day" are simulations at patch-day volume (60,000 games) with no carry-over; they are not carry-over claims.

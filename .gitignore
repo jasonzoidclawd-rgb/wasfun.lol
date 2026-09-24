@@ -54,3 +54,6 @@ graphify-out/
 riot-discovery/
 *.riot-raw.json
 *.riot-timeline-raw.json
+
+# build-time icon downloads (scripts/fetch-icons.mjs)
+public/assets/icons/

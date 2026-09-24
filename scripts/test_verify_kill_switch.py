@@ -42,6 +42,13 @@ class DetectorTests(unittest.TestCase):
             two = next(x for x in v if len(x.split(".")[1]) == 2)
             self.assertIn(f"{float(two) + 0.001:.1f}", v)  # the half-up rounding JavaScript produces
 
+    def test_generic_slugs_are_not_fingerprints(self):
+        from verify_kill_switch import load_fingerprints
+        tokens = {name for name, _ in load_fingerprints()}
+        self.assertNotIn("stats", tokens)   # the slug of "Stats!"
+        self.assertIn("stats!", tokens)      # its display name still is
+        self.assertIn("tank-engine", tokens)
+
     def test_a_bare_number_is_not_a_rate(self):
         # base-stat tables: "Attack Damage 60.1" next to an augment list is not a leak
         self.assertFalse(detect_fingerprint("tank engine</li></ul><td>attack damage</td><td>60.1</td>", FINGERPRINTS))
@@ -49,6 +56,13 @@ class DetectorTests(unittest.TestCase):
     def test_fingerprint_ignores_a_name_without_its_number(self):
         self.assertFalse(detect_fingerprint(page_text("<p>Tank Engine gives health. Yasuo 56.98%</p>", "text/html"),
                                             FINGERPRINTS))
+
+    def test_grade_letters_count_as_statistics(self):
+        self.assertTrue(detect_marker('<span class="grade-chip is-S" data-grade="S">'))
+        self.assertTrue(detect_marker('self.__next_f.push([1,"{\\"letter\\":\\"A\\",\\"m\\":1}"])'))
+        self.assertTrue(detect_marker('{"letter":"B"}'))
+        self.assertFalse(detect_marker('<p>Letter S is a letter.</p>'))
+        self.assertTrue(detect_marker('{"letter": "C", "m": -2}'))
 
 
 if __name__ == "__main__":

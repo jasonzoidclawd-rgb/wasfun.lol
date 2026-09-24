@@ -90,18 +90,33 @@ def load_fingerprints() -> list[tuple[str, list[str]]]:
         # JavaScript's toFixed(1) to "56.3".
         half_up = str(Decimal(str(wr)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
         values = sorted({f"{wr:.2f}", f"{wr:.1f}", half_up})
-        names = {row["name"], row["sourceSlug"]}
         aug = catalog.get(row.get("augmentId")) or {}
-        names |= {v for v in (aug.get("names") or {}).values() if isinstance(v, str)}
-        names |= {v for v in (row.get("augmentId"), aug.get("slug")) if v}
+        # Display names as written (in every locale). Slugs and ids only when
+        # distinctive: a bare word like "stats" (the slug of "Stats!") appears in
+        # ordinary page text next to unrelated numbers.
+        names = {row["name"], *[v for v in (aug.get("names") or {}).values() if isinstance(v, str)]}
+        codes = {row["sourceSlug"], row.get("augmentId"), aug.get("slug")}
+        names |= {c for c in codes if c and (len(c) >= 6 or any(ch in c for ch in "-_"))}
         for name in names:
             if len(name) >= 4:
                 out.append((name.lower(), values))
     return out
 
 
+# A grade letter is derived from the statistics, so it is one too: a rendered
+# chip, or a letter prop in the RSC flight data a client component receives.
+LETTER_PROP = re.compile(r'\\*"letter\\*"\s*:\s*\\*"[SABCD]\\*"')
+
+
 def detect_marker(body: str) -> list[str]:
-    return ["data-augment-stat attribute"] if "data-augment-stat" in body else []
+    hits = []
+    if "data-augment-stat" in body:
+        hits.append("data-augment-stat attribute")
+    if "data-grade=" in body or "grade-chip " in body:
+        hits.append("grade letter chip")
+    if LETTER_PROP.search(body):
+        hits.append("grade letter in payload")
+    return hits
 
 
 def detect_json(body: str) -> list[str]:

@@ -88,8 +88,9 @@ export function MobileTabBar() {
         ))}
 
         <Link
-          href="/companion"
-          aria-label={t("companionCta")}
+          href="/pick"
+          aria-label={t("tabPick")}
+          aria-current={isActive("/pick") ? "page" : undefined}
           className="grid h-14 w-14 -translate-y-3 place-items-center self-center rounded-full text-2xl text-[#06121a]
                      bg-[linear-gradient(135deg,var(--color-neon-secondary),var(--color-neon-primary))]
                      shadow-[0_8px_24px_-6px_rgba(0,212,255,0.55)]"

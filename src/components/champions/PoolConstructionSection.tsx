@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
 import { Link } from "@/i18n/navigation";
-import type { ComboTier } from "@/lib/scoring/oracle-score";
 import { Tooltip } from "@/components/ui/Tooltip";
 
 export type PoolLayer = {
@@ -34,7 +33,6 @@ export type TailoredHighlight = {
     kit_tags?: string[];
   };
   score: number;
-  comboTier?: ComboTier;
 };
 
 type GateCopy = {
@@ -261,7 +259,7 @@ export function PoolConstructionSection({
             {highlightsTitle}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-            {highlights.map(({ aug, score, comboTier }) => (
+            {highlights.map(({ aug, score }) => (
               <Tooltip key={aug.slug} content={aug.wikiDescription ?? aug.description}>
                 <div className="flex items-center gap-2 rounded-lg border border-[var(--color-border-default)]/50 px-2 py-1.5 cursor-default">
                   <div className="relative w-6 h-6 rounded shrink-0">
@@ -278,14 +276,6 @@ export function PoolConstructionSection({
                     <div className="flex items-center gap-1.5">
                       <span className="text-xs font-medium truncate">{aug.name}</span>
                       <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${RARITY_DOT_STYLES[aug.rarity]}`} />
-                      {comboTier && (
-                        <span
-                          className={`text-[9px] font-bold px-1 rounded shrink-0
-                            ${comboTier === "C" ? "text-red-400 bg-red-400/20" : "text-green-400 bg-green-400/20"}`}
-                        >
-                          {comboTier}
-                        </span>
-                      )}
                     </div>
                     {(aug.kit_tags ?? []).length > 0 && (
                       <div className="text-[9px] text-[var(--color-text-muted)] truncate">

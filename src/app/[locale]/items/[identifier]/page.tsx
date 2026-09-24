@@ -413,7 +413,7 @@ export default async function ItemDetailPage({
 
       {/* ─── Stats ─── */}
       {(hasWikiData || hasCleanStats || statLines.length > 0) && (
-        <section className="mb-6">
+        <section data-game-text className="mb-6">
           <SectionHeading>{t("stats")}</SectionHeading>
           <div className="p-4 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-card)]/60 space-y-2">
             {useWikiStats
@@ -435,7 +435,7 @@ export default async function ItemDetailPage({
            Mayhem — hiding wikiPassives prevents showing standard-mode-only passives.
       ─── */}
       {effectBlocks.length > 0 && (
-        <section className="mb-6">
+        <section data-game-text className="mb-6">
           <SectionHeading>{t("effect")}</SectionHeading>
           <div className="space-y-3">
             {item.wikiPassives?.length
@@ -482,7 +482,7 @@ export default async function ItemDetailPage({
 
       {/* ─── Gameplay Notes (from wiki) — only shown when the item has a passive in Mayhem ─── */}
       {item.wikiNotes && item.wikiNotes.length > 0 && (!isModified || effectBlocks.length > 0) && (
-        <section className="mb-6">
+        <section data-game-text className="mb-6">
           <SectionHeading>{t("gameplayNotes")}</SectionHeading>
           <ul className="space-y-2">
             {item.wikiNotes.map((note, i) => (

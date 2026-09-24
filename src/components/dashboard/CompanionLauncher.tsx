@@ -11,7 +11,7 @@ export async function CompanionLauncher() {
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{t("companionBody")}</p>
       </div>
       <Link
-        href="/companion"
+        href="/pick"
         className="flex min-h-11 shrink-0 items-center rounded-lg bg-[var(--color-neon-primary)] px-4 text-sm font-medium text-[var(--color-bg-primary)] transition-opacity hover:opacity-90"
       >
         ⚡ {t("companionCta")}

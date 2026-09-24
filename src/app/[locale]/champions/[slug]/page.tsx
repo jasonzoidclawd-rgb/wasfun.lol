@@ -11,7 +11,7 @@ import { buildPoolProfile } from "@/lib/scoring/augment-tailoring";
 import { getChampionAugmentPool } from "@/lib/scoring/pool-orchestrator";
 import { analyzeInteractions, type MechanicalInteraction, type AugmentMechanic } from "@/lib/scoring/augment-interactions";
 import { localizedDescription, localizedName } from "@/lib/i18n/localized-name";
-import { buildComboTierLookup, resolveChampionCombos } from "@/lib/data/combo-lookup";
+import { buildComboTierLookup } from "@/lib/data/combo-lookup";
 import { hasPickRateCoverage } from "@/lib/champions/pick-rate-coverage";
 import { readChampionsFile } from "@/lib/data/read-public-file";
 import { routing, type Locale } from "@/i18n/routing";
@@ -31,6 +31,11 @@ import {
 } from "@/components/champions/PoolConstructionSection";
 import type { DecisionGrade } from "@/lib/contracts/decision";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ChampionHub } from "@/components/pick/ChampionHub";
+import { LetterChip } from "@/components/grades/LetterChip";
+import { loadIconIndex, loadItemNames } from "@/lib/score/assets";
+import { loadScorePack } from "@/lib/score/pack";
+import { buildPickPayload } from "@/lib/score/pick-payload";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 
 type ChampionData = ChampionDetailChampion;
@@ -92,9 +97,9 @@ export async function generateMetadata({
 
   const name = localizedName(champ, locale);
   const route = `/champions/${champ.slug}`;
-  const tierLabel = champ.tier ?? t("statisticsUnavailableShort");
-  const title = t("metaDetailTitle", { name, tier: tierLabel, patch: data.patch });
-  const description = t("metaDetailDescription", { name, tier: tierLabel, patch: data.patch });
+  // no upstream tier in the title: the page's letter is ours
+  const title = t("metaDetailTitle", { name, patch: data.patch });
+  const description = t("metaDetailDescription", { name, patch: data.patch });
   const url = localizedUrl(route, locale as Locale);
 
   return {
@@ -132,6 +137,14 @@ export default async function ChampionPage({
 
   const champ = champions.find((c) => c.slug === slug);
   if (!champ) notFound();
+
+  // v3 hub: the same payload the Pick screen uses. Null while the augment
+  // statistics kill switch is off, so no grade or augment number renders.
+  const th = await getTranslations("hub");
+  const scorePack = loadScorePack();
+  const hubPayload = scorePack
+    ? buildPickPayload({ pack: scorePack, slug, locale, championRecord: champ, icons: loadIconIndex(), items: loadItemNames() })
+    : null;
 
   // Member decision content (pool construction, scored rankings) is gated on an
   // active entitlement — not merely being signed in. A logged-in non-member
@@ -181,11 +194,9 @@ export default async function ChampionPage({
   const abilityProfile: AbilityProfile | undefined = abilities[slug];
 
   // Build combo lookup for this champion: augment-slug → tier
-  const champCombos = resolveChampionCombos(slug, combos, augments);
   const comboBySlug = isMember
     ? buildComboTierLookup(slug, combos, augments)
     : new Map<string, ComboTier>();
-  const augmentBySlug = new Map(augments.map((augment) => [augment.slug, augment]));
 
   const poolProfile = buildPoolProfile(slug, abilityProfile, activeChamp.baseStats);
   const pool = isMember
@@ -322,14 +333,11 @@ export default async function ChampionPage({
     },
   ];
 
-  const tailoredHighlights: TailoredHighlight[] = scoredAugments.slice(0, 6).map(({ aug, score, comboTier }) => ({
+  const tailoredHighlights: TailoredHighlight[] = scoredAugments.slice(0, 6).map(({ aug, score }) => ({
     aug: displayAugment(aug),
     score,
-    comboTier,
   }));
 
-  const strongCombos = champCombos.filter((c) => c.tier === "S");
-  const avoidCombos = champCombos.filter((c) => c.tier === "C");
 
   // ── Mechanical Interaction Analysis ──
   let mechanicalSynergies: MechanicalInteraction[] = [];
@@ -454,7 +462,6 @@ export default async function ChampionPage({
     championsLabel: t("indexTitle"),
     name: champName,
     patch,
-    tierLabel: champ.tier ?? t("statisticsUnavailableShort"),
     tagLabels: champ.tags,
     classLabels: champ.classes,
     kitTagLabels: champ.kit_tags,
@@ -477,13 +484,13 @@ export default async function ChampionPage({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 sm:gap-3">
             <h1 className="text-xl sm:text-3xl font-bold truncate">{champName}</h1>
-            {champ.rank && (
-              <span className="text-sm sm:text-base text-[var(--color-text-muted)] font-medium shrink-0">
-                {champ.rank}/{champions.length}
-              </span>
-            )}
-            {champ.tier ? (
-              <TierBadge tier={champ.tier} />
+            {hubPayload?.champion.letter ? (
+              <LetterChip
+                letter={hubPayload.champion.letter}
+                thin={hubPayload.champion.outlined}
+                size="lg"
+                label={th("championGrade", { champion: champName, letter: hubPayload.champion.letter })}
+              />
             ) : (
               <span className="text-xs font-semibold text-[var(--color-text-muted)]">
                 {t("statisticsUnavailableShort")}
@@ -543,84 +550,16 @@ export default async function ChampionPage({
       {/* Neon divider */}
       <div className="h-0.5 mb-4 rounded-full bg-gradient-to-r from-[var(--color-neon-primary)] to-[var(--color-neon-secondary)]" />
 
-      {/* ─── Strong combos + Traps ─── */}
-      {(strongCombos.length > 0 || avoidCombos.length > 0) && (
-        <section className="glass-card p-4 mb-3 sm:mb-6">
-          {strongCombos.length > 0 && (
-            <div className={avoidCombos.length > 0 ? "mb-4" : ""}>
-              <h2 className="text-sm font-bold mb-2 text-green-400 border-l-2 border-green-400 pl-2">
-                {t("strongCombos")}
-              </h2>
-              <div className="flex flex-wrap gap-1.5">
-                {strongCombos.map((c) => {
-                  const aug = augmentBySlug.get(c.augmentSlug);
-                  const augName = aug ? localizedName(aug, locale) : c.augment;
-                  const augDescription = aug ? localizedAugmentDescription(aug) : undefined;
-                  return (
-                    <Tooltip key={`${c.champion}-${c.augmentSlug}-${c.tier}`} content={augDescription}>
-                      <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-green-400/30 bg-green-400/5 cursor-default">
-                        {aug && (
-                          <Image
-                            src={aug.icon}
-                            alt={augName}
-                            width={24}
-                            height={24}
-                            className="rounded"
-                            unoptimized
-                          />
-                        )}
-                        <span className="text-xs font-medium text-green-300">
-                          {augName}
-                        </span>
-                        <span className="text-[9px] font-bold px-1 py-0.5 rounded bg-green-400/20 text-green-400">
-                          S
-                        </span>
-                      </div>
-                    </Tooltip>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {avoidCombos.length > 0 && (
-            <div>
-              <h2 className="text-sm font-bold mb-2 text-red-400 border-l-2 border-red-400 pl-2">
-                {t("trapsAvoid")}
-              </h2>
-              <div className="flex flex-wrap gap-1.5">
-                {avoidCombos.map((c) => {
-                  const aug = augmentBySlug.get(c.augmentSlug);
-                  const augName = aug ? localizedName(aug, locale) : c.augment;
-                  const augDescription = aug ? localizedAugmentDescription(aug) : undefined;
-                  return (
-                    <Tooltip key={`${c.champion}-${c.augmentSlug}-${c.tier}`} content={augDescription}>
-                      <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg border border-red-400/30 bg-red-400/5 cursor-default">
-                        {aug && (
-                          <Image
-                            src={aug.icon}
-                            alt={augName}
-                            width={24}
-                            height={24}
-                            className="rounded"
-                            unoptimized
-                          />
-                        )}
-                        <span className="text-xs font-medium text-red-300">
-                          {augName}
-                        </span>
-                        <span className="text-[9px] font-bold px-1 py-0.5 rounded bg-red-400/20 text-red-400">
-                          C
-                        </span>
-                      </div>
-                    </Tooltip>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </section>
+      {/* ─── v3 decision hub: Plan card, graded augments, boots, build orders ─── */}
+      {hubPayload ? (
+        <ChampionHub payload={hubPayload} />
+      ) : (
+        <p className="glass-card p-4 text-[var(--color-text-secondary)]">{th("unavailable")}</p>
       )}
+
+      {/* ─── Reference: everything the page showed before v3, collapsed ─── */}
+      <details className="mt-6">
+        <summary className="min-h-11 cursor-pointer py-2 font-semibold">{th("reference")}</summary>
 
       {/* ─── Base Stats ─── */}
       {champ.baseStats && (
@@ -709,7 +648,7 @@ export default async function ChampionPage({
           </div>
 
           {/* Ability list — compact cards */}
-          <div className="space-y-2">
+          <div data-game-text className="space-y-2">
             {abilityProfile.abilities.map((ability) => {
               const abilityName = localizedName(ability, locale);
               // Prefer a real localized description; for English (or when no
@@ -847,14 +786,13 @@ export default async function ChampionPage({
             </p>
 
             <div className="space-y-1.5">
-              {topAugments.map(({ aug, score, breakdown, comboTier }, i) => (
+              {topAugments.map(({ aug, score, breakdown }, i) => (
                 <AugmentRow
                   key={aug.slug}
                   rank={i + 1}
                   aug={aug}
                   score={score}
                   breakdown={breakdown}
-                  comboTier={comboTier}
                   pillLabels={pillLabels}
                   locale={locale}
                 />
@@ -867,28 +805,12 @@ export default async function ChampionPage({
           </div>
         )}
       </section>
+      </details>
     </div>
   );
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
-
-const TIER_BADGE_STYLES: Record<string, string> = {
-  "S+": "text-amber-300 border-amber-300/50 bg-amber-300/10",
-  S:    "text-yellow-400 border-yellow-400/50 bg-yellow-400/10",
-  A:    "text-green-400 border-green-400/50 bg-green-400/10",
-  B:    "text-blue-400 border-blue-400/50 bg-blue-400/10",
-  C:    "text-slate-400 border-slate-400/50 bg-slate-400/10",
-};
-
-function TierBadge({ tier }: { tier: string }) {
-  const styles = TIER_BADGE_STYLES[tier] ?? TIER_BADGE_STYLES.C;
-  return (
-    <span className={`px-2.5 py-0.5 rounded-md text-sm font-bold border ${styles}`}>
-      {tier}
-    </span>
-  );
-}
 
 const RARITY_DOT: Record<string, string> = {
   prismatic: "bg-purple-400",
@@ -908,7 +830,6 @@ function AugmentRow({
   aug,
   score,
   breakdown,
-  comboTier,
   pillLabels,
   locale,
 }: {
@@ -916,12 +837,9 @@ function AugmentRow({
   aug: AugmentData;
   score: number;
   breakdown: ReturnType<typeof computeOracleScore>["breakdown"];
-  comboTier?: ComboTier;
   pillLabels: PillLabels;
   locale: string;
 }) {
-  const isStrong = comboTier === "S";
-  const isTrap = comboTier === "C";
   const augName = localizedName(aug, locale);
   const augDescription = localizedDescription(aug, locale);
 
@@ -929,7 +847,7 @@ function AugmentRow({
     <Tooltip content={augDescription}>
       <div
         className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 rounded-lg border transition-colors cursor-default
-          ${isStrong ? "border-green-400/30 bg-green-400/5" : isTrap ? "border-red-400/20 bg-red-400/5" : "border-[var(--color-border-default)]/50"}`}
+          border-[var(--color-border-default)]/50`}
       >
         {/* Rank */}
         <span className="text-[10px] text-[var(--color-text-muted)] w-4 text-right shrink-0">
@@ -953,14 +871,6 @@ function AugmentRow({
           <div className="flex items-center gap-1.5">
             <span className="text-xs sm:text-sm font-medium truncate">{augName}</span>
             <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${RARITY_DOT[aug.rarity] ?? ""}`} />
-            {comboTier && (
-              <span
-                className={`text-[9px] font-bold px-1 rounded shrink-0
-                  ${isStrong ? "text-green-400 bg-green-400/20" : "text-red-400 bg-red-400/20"}`}
-              >
-                {comboTier}
-              </span>
-            )}
           </div>
           {/* Score breakdown pills — hidden on mobile for compact view */}
           <div className="hidden sm:flex gap-1.5 mt-0.5 flex-wrap">

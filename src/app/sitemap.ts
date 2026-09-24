@@ -20,7 +20,7 @@ const STATIC_PATHS = [
   "/items",
   "/patch-notes",
   "/advisor",
-  "/companion",
+  "/pick",
   "/damage-sim",
   "/membership",
   "/about",
@@ -124,6 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const paths: string[] = [
     ...STATIC_PATHS,
     ...slugs.map((slug) => `/champions/${slug}`),
+    ...slugs.map((slug) => `/pick/${slug}`),
     ...augmentIds.map((slug) => `/augments/${slug}`),
     ...itemIds.map((identifier) => `/items/${identifier}`),
     ...patchRoutes,

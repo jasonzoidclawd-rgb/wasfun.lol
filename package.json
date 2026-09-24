@@ -16,7 +16,8 @@
     "test:watch": "vitest",
     "update-data": "./scripts/update-data.sh",
     "overlay:dev": "MAYHEM_API_BASE=${MAYHEM_API_BASE:-https://wasfun.lol} npm --prefix overlay run tauri -- dev",
-    "overlay:test": "npm --prefix overlay run test"
+    "overlay:test": "npm --prefix overlay run test",
+    "prebuild": "node scripts/fetch-icons.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

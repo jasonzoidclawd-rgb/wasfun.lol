@@ -35,6 +35,16 @@ export const TAU_ASSUMED = 2.0; // pp
  */
 export const TAKERS_ADJUSTMENT = true;
 
+/**
+ * The envelope of an unlisted augment's share for a champion, as fractions of
+ * the champion's least-picked listed augment of that rarity. That bound
+ * assumes the source lists each champion's six most-picked augments, which is
+ * unverified (48 of 519 lists are not in descending pick-rate order), so the
+ * envelope runs from 0 to the mass cap alone: the high end is never binding
+ * below the cap. Letters take the most conservative grade across it.
+ */
+export const UNLISTED_ENVELOPE: [number, number] = [0, 1e6];
+
 /** Variance multiplier for the close-call test until calibration says otherwise (see the calibration test). */
 export const VERDICT_INFLATE = 1.0;
 

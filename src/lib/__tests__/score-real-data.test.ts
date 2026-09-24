@@ -5,7 +5,7 @@
 import { describe, expect, test } from "vitest";
 import fixture from "./fixtures/score/provider-2026-09-21.json";
 import { carryOverBacktest, type SnapshotRow } from "../score/backtest";
-import { CARRY_OVER_ENABLED } from "../score/config";
+import { CARRY_OVER_ENABLED, UNLISTED_ENVELOPE } from "../score/config";
 import {
   augmentPosteriors,
   BUILD_FLOOR,
@@ -123,4 +123,22 @@ describe("the engine on real rows", () => {
     expect(ranked.filter((b) => b.mostBuilt)).toHaveLength(1);
     expect(ranked[0]).not.toHaveProperty("letter");
   });
+});
+
+describe("takers adjustment: the unlisted-share envelope does not assume a top-six listing", () => {
+  test("the envelope runs from 0 to the mass cap, and no letter is stronger than under the old 0.25–0.75 envelope", () => {
+    expect(UNLISTED_ENVELOPE[0]).toBe(0);
+    const rank = (l: string) => "SABCD".indexOf(l);
+    for (const r of RARITIES) {
+      const wide = tierList(feeds, r, { volume: volume!.games });
+      const narrow = new Map(tierList(feeds, r, { volume: volume!.games, unlistedEnvelope: [0.25, 0.75] }).map((o) => [o.id, o.letter]));
+      for (const o of wide) {
+        const before = narrow.get(o.id)!;
+        // allowed: the same letter, or a step toward B that doesn't cross it
+        const a = rank(o.letter) - 2, b = rank(before) - 2;
+        const ok = a === b || (Math.abs(a) < Math.abs(b) && (a === 0 || Math.sign(a) === Math.sign(b)));
+        expect(ok, `${r} ${o.id}: ${before} → ${o.letter}`).toBe(true);
+      }
+    }
+  }, 120_000);
 });
