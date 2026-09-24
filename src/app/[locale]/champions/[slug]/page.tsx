@@ -32,6 +32,7 @@ import {
 import type { DecisionGrade } from "@/lib/contracts/decision";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ChampionHub } from "@/components/pick/ChampionHub";
+import { RememberChampion } from "@/components/home/RememberChampion";
 import { LetterChip } from "@/components/grades/LetterChip";
 import { loadIconIndex, loadItemNames } from "@/lib/score/assets";
 import { loadScorePack } from "@/lib/score/pack";
@@ -551,6 +552,7 @@ export default async function ChampionPage({
       <div className="h-0.5 mb-4 rounded-full bg-gradient-to-r from-[var(--color-neon-primary)] to-[var(--color-neon-secondary)]" />
 
       {/* ─── v3 decision hub: Plan card, graded augments, boots, build orders ─── */}
+      <RememberChampion slug={slug} />
       {hubPayload ? (
         <ChampionHub payload={hubPayload} />
       ) : (

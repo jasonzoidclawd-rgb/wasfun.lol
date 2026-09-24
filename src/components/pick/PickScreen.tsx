@@ -11,6 +11,7 @@ import { Link } from "@/i18n/navigation";
 import { LetterChip } from "@/components/grades/LetterChip";
 import type { Rarity } from "@/lib/score/engine";
 import type { PickCard, PickPayload } from "@/lib/score/pick-payload";
+import { rememberChampion } from "@/lib/recent-champions";
 import { initialPickState, pickReducer, readScreen, SCREEN_SIZE } from "@/lib/score/pick-state";
 
 const RARITIES: Rarity[] = ["prismatic", "gold", "silver"];
@@ -68,6 +69,7 @@ export function PickScreen({ payload, showOdds = false }: { payload: PickPayload
   useEffect(() => {
     try {
       localStorage.setItem(LAST_CHAMPION_KEY, payload.champion.slug);
+      rememberChampion(payload.champion.slug);
     } catch {
       // private mode: the screen still works, it just won't reopen here
     }

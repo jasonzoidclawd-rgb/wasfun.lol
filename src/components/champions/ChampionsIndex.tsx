@@ -7,42 +7,22 @@ import { Link } from "@/i18n/navigation";
 import type { ChampionEntry } from "@/app/[locale]/champions/(list)/page";
 import { localizedName } from "@/lib/i18n/localized-name";
 import { hasPickRateCoverage } from "@/lib/champions/pick-rate-coverage";
+import { LetterChip } from "@/components/grades/LetterChip";
+import type { Letter } from "@/lib/score/grade";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 type SortKey = "winrate" | "name" | "tier" | "hp" | "ad" | "as" | "range" | "ms";
 type ViewMode = "tier" | "grid" | "table";
 
-// Tier render order for the grouped Tier view.
-const TIER_ORDER = ["S+", "S", "A", "B", "C", "D"] as const;
+// Letter render order for the grouped Tier view (v3 letters against the field).
+const TIER_ORDER = ["S", "A", "B", "C", "D"] as const;
 
-// Maps tier letter → tierList.tiers translation key (reused from the tier-list namespace).
-const TIER_LABEL_KEY: Record<string, string> = {
-  "S+": "god",
-  S: "strong",
-  A: "good",
-  B: "average",
-  C: "weak",
-  D: "weak",
-};
-
-const TIER_COLOR: Record<string, string> = {
-  "S+": "text-red-400",
-  S: "text-orange-400",
-  A: "text-yellow-400",
-  B: "text-green-400",
-  C: "text-blue-400",
-  D: "text-slate-400",
-};
-
-const TIER_BG: Record<string, string> = {
-  "S+": "bg-red-500/15 border-red-400/30",
-  S: "bg-orange-500/15 border-orange-400/30",
-  A: "bg-yellow-500/10 border-yellow-400/30",
-  B: "bg-green-500/10 border-green-400/30",
-  C: "bg-blue-500/10 border-blue-400/30",
-  D: "bg-slate-500/10 border-slate-400/30",
-};
+function Chip({ c, size }: { c: ChampionEntry; size?: "md" | "lg" }) {
+  const t = useTranslations("championsIndex");
+  if (!c.tier) return null;
+  return <LetterChip letter={c.tier as Letter} thin={c.letterOutlined} size={size} label={t("letterLabel", { letter: c.tier })} />;
+}
 
 const CLASS_COLOR: Record<string, string> = {
   Juggernaut: "text-red-300 bg-red-500/10 border-red-400/20",
@@ -279,13 +259,7 @@ export function ChampionsIndex({
             return (
               <section key={tier}>
                 <div className="flex items-center gap-3 mb-3">
-                  <span
-                    className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wide border ${
-                      TIER_BG[tier] ?? ""
-                    } ${TIER_COLOR[tier] ?? "text-slate-400"}`}
-                  >
-                    {tTier(`tiers.${TIER_LABEL_KEY[tier] ?? "weak"}`)}
-                  </span>
+                  <LetterChip letter={tier} size="lg" label={t("letterLabel", { letter: tier })} />
                   <span className="text-xs text-[var(--color-text-muted)] tabular-nums">
                     ({champs.length})
                   </span>
@@ -413,13 +387,7 @@ export function ChampionsIndex({
                         </div>
                       </td>
                       <td className="px-2 py-2 text-right">
-                        <span
-                          className={`text-xs font-bold px-1.5 py-0.5 rounded border ${
-                            TIER_BG[c.tier] ?? ""
-                          } ${TIER_COLOR[c.tier] ?? "text-slate-400"}`}
-                        >
-                          {c.tier}
-                        </span>
+                        <Chip c={c} />
                       </td>
                       <NumCell className={WR_COLOR(c.win_rate)}>
                         {c.win_rate?.toFixed(1) ?? "—"}
@@ -483,12 +451,8 @@ function ChampionCard({
           className="rounded-lg border border-[var(--color-border-default)] group-hover:border-[var(--color-neon-primary)]/50 transition-colors"
           unoptimized
         />
-        <span
-          className={`absolute -top-1.5 -right-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded border ${
-            TIER_BG[c.tier] ?? ""
-          } ${TIER_COLOR[c.tier] ?? ""}`}
-        >
-          {c.tier}
+        <span className="absolute -right-2 -top-2 scale-75">
+          <Chip c={c} />
         </span>
       </div>
 
@@ -575,13 +539,7 @@ function ChampionRowCard({
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold truncate">{name}</span>
-          <span
-            className={`text-[10px] font-bold px-1.5 py-0.5 rounded border shrink-0 ${
-              TIER_BG[c.tier] ?? ""
-            } ${TIER_COLOR[c.tier] ?? "text-slate-400"}`}
-          >
-            {c.tier}
-          </span>
+          <Chip c={c} />
         </div>
         <div className="flex flex-wrap gap-1 mt-0.5">
           {(c.classes ?? c.tags).slice(0, 3).map((cl) => (

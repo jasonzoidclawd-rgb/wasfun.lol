@@ -104,7 +104,16 @@
     "feat4Tag": "Members",
     "ctaBandTitle": "Ready to draft smarter?",
     "ctaBandBody": "The free tools rank the meta. The Advisor scores the offers right in front of you.",
-    "ctaBandButton": "Explore membership"
+    "ctaBandButton": "Explore membership",
+    "searchTitle": "Where's my champion?",
+    "searchPlaceholder": "Search champions",
+    "recent": "Recent",
+    "movedTitle": "Moved since last patch",
+    "movedLead": "Win rates on {patch} against the end of {from}. Only moves larger than three standard errors are shown.",
+    "movedNoPrevious": "No earlier patch to compare {patch} with yet.",
+    "movedNone": "No champion has moved by more than the noise yet. Early in a patch that is expected; it updates daily.",
+    "movedLine": "{from}% → {to}% ({delta})",
+    "patchWeek": "Patch {patch}: letters from {days, plural, one {# day} other {# days}} of data, updating daily."
   },
   "dashboard": {
     "patchLive": "Patch {patch} is live",
@@ -348,7 +357,8 @@
     "sortMs": "Move Speed",
     "levelAbbr": "Lv",
     "allClasses": "All",
-    "statsFooter": "{count} / {total} champions · Stats from wiki.leagueoflegends.com · Level scaling uses the official growth formula"
+    "statsFooter": "{count} / {total} champions · Stats from wiki.leagueoflegends.com · Level scaling uses the official growth formula",
+    "letterLabel": "Grade {letter} against the field"
   },
   "augments": {
     "title": "Augments",
@@ -1093,5 +1103,47 @@
     "unavailable": "Grades are unavailable right now.",
     "planNote": "Letters and win rates come from all champions' games, not {champion}'s alone.",
     "liftColumn": "Points above or below the average {rarity} augment, all champions"
+  },
+  "tiers": {
+    "indexTitle": "ARAM Mayhem augment tier lists",
+    "indexLead": "Reliable letters for every augment, across all champions. Pick a rarity.",
+    "title": "{rarity} augment tier list",
+    "metaDescription": "Every {rarity} augment in ARAM: Mayhem, graded S to D across all champions, with win and pick rates.",
+    "lead": "Letters compare each augment with the other {rarity} augments, across all champions. A letter changes only when the data can order the difference.",
+    "colAugment": "Augment",
+    "colVsAverage": "vs average",
+    "rowLine": "win {win}% · pick {pick}% (as published)",
+    "legend": "Outlined: thin data, or a letter that depends on an unconfirmed unit in the source's data. Lift is in whole points against the pick-weighted average of the other {rarity} augments.",
+    "seeAll": "See all {count} {rarity} augments",
+    "top": "Top of the list",
+    "howWeRank": "How we rank",
+    "unavailable": "Grades are unavailable right now."
+  },
+  "method": {
+    "title": "How we rank",
+    "lead": "What a letter means, where the numbers come from, and what they can't tell you.",
+    "sources_h": "Where the numbers come from",
+    "sources_p": "Win and pick rates come from the CN (Tencent) ARAM: Mayhem aggregate, fetched daily via arammayhem.com. The source publishes rates, not game counts. It publishes augment results for all champions together: its per-champion augment win rates are copies of each augment's overall rate, so we never show them as a champion's own.",
+    "estimand_h": "What is measured",
+    "estimand_p": "The number is the win rate in games where the option was taken. That is an association, not a cause: stronger players and longer games can take some options more often. Each option is compared with the others in the same choice (lift), and its noise uses the set's average win rate, never its own.",
+    "letters_h": "What a letter means",
+    "letters_p": "Options are grouped only where the data can order them, and each group takes the letter of its most modest well-measured member: S +3.5 points or more, A +1.5 or more, B within ±1.5, C −1.5 or less, D −3.5 or less. An outlined letter is thin, or depends on an unconfirmed unit in the source's data. Different letters are not a guarantee about every pair.",
+    "pick_h": "Close calls on the Pick screen",
+    "pick_p": "The Pick screen names a card only when it beats the next one by at least half a point with at least 80% certainty. Because the source has no per-champion augment results, each card also carries 2 points of champion-specific uncertainty, so about half of screens are a close call. That is the honest answer, not a gap in the screen.",
+    "patch_h": "New patches",
+    "patch_p": "Letters follow the current patch's data. We tested carrying the last patch forward on new-patch days, and it did worse than the new data alone, so we don't.",
+    "cannot_h": "What the numbers can't tell you",
+    "cannot_p": "No game counts, no ± intervals, no per-champion augment results, no per-rank or per-stage splits. Build-order win rates count only games that finished the path, so paths are ranked against each other and never graded.",
+    "provenance": "Data: CN Mayhem aggregate via arammayhem.com. Champion and item data: Riot Games (Data Dragon, CommunityDragon)."
+  },
+  "swap": {
+    "title": "Swap check",
+    "lead": "Keep your champion, or swap from the bench? Add your champion and the ones on the bench.",
+    "add": "Add a champion",
+    "keep": "Keep {champion}.",
+    "swap": "Swap to {champion}.",
+    "closeCall": "Close call: {a} and {b} are too close to separate.",
+    "remove": "Remove {champion}",
+    "hint": "Letters grade each champion against the field, from its own win rate."
   }
 }

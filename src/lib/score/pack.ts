@@ -212,3 +212,40 @@ function buildScorePack(): ScorePack | null {
     },
   };
 }
+
+export interface ChampionLetter {
+  letter: Letter;
+  outlined: boolean;
+  /** position in the graded order, 0 = best */
+  order: number;
+  m: number;
+  v: number;
+}
+
+let championCache: Map<string, ChampionLetter> | null | undefined;
+
+/**
+ * Champion letters against the field (the Swap check and the champions list).
+ * They grade the champions' own win rates, not augment statistics, so they do
+ * not depend on the augment kill switch.
+ */
+export function loadChampionLetters(): Map<string, ChampionLetter> | null {
+  if (championCache !== undefined) return championCache;
+  const buildFeed = read<{ patch: string; dataDate: string; champions: Record<string, ChampionRow> }>("champion-build-feed.json");
+  const patchStarts = Object.fromEntries(
+    read<{ patches?: { version: string; publishedAt?: string }[] }>("patch-metadata.json")
+      .patches?.filter((p) => p.publishedAt)
+      .map((p) => [p.version, p.publishedAt as string]) ?? [],
+  );
+  const volume = estimateVolume(
+    Object.values(buildFeed.champions).map((c) => c.history ?? []),
+    patchStarts,
+    { patch: buildFeed.patch, dataDate: buildFeed.dataDate },
+  );
+  if (!volume) return (championCache = null);
+  const feeds = { augmentRows: [], champions: buildFeed.champions, championWinRates: "unknown" as const };
+  championCache = new Map(
+    championLetters(feeds, { volume: volume.games }).map((c) => [c.id, { letter: c.letter, outlined: c.outlined, order: c.order, m: c.m, v: c.v }]),
+  );
+  return championCache;
+}
