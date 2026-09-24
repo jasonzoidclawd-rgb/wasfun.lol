@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { readFile } from "fs/promises";
 import path from "path";
+import { loadChampionLetters } from "@/lib/score/pack";
+import { SwapCheck, type SwapChampion } from "@/components/champions/SwapCheck";
+import { localizedName } from "@/lib/i18n/localized-name";
 import { ChampionsIndex } from "@/components/champions/ChampionsIndex";
 import type { Locale } from "@/i18n/routing";
 import { pickRateCoverageLevel } from "@/lib/champions/pick-rate-coverage";
@@ -17,6 +20,8 @@ export type ChampionEntry = {
   title?: string;
   tier: string;
   rank: number;
+  /** v3: the letter is ours (graded against the field); outlined when thin */
+  letterOutlined?: boolean;
   win_rate: number | null;
   pick_rate: number | null;
   icon: string;
@@ -92,7 +97,13 @@ export default async function ChampionsIndexPage({
   setRequestLocale(locale);
   const t = await getTranslations("champion");
 
-  const { champions } = await readChampions();
+  const { champions: raw } = await readChampions();
+  // v3: letters against the field replace the upstream's tiers.
+  const letters = loadChampionLetters();
+  const champions = raw.map((c) => {
+    const l = letters?.get(c.slug);
+    return l ? { ...c, tier: l.letter, rank: l.order + 1, letterOutlined: l.outlined } : { ...c, tier: "", rank: 999 };
+  });
 
   return (
     <div className="py-8">
@@ -102,6 +113,16 @@ export default async function ChampionsIndexPage({
           {t("indexSubtitle", { count: champions.length })}
         </p>
       </header>
+      {letters && (
+        <SwapCheck
+          champions={raw
+            .map((c): SwapChampion | null => {
+              const l = letters.get(c.slug);
+              return l ? { slug: c.slug, name: localizedName(c, locale), grade: l.letter, outlined: l.outlined, m: l.m, v: l.v } : null;
+            })
+            .filter((c): c is SwapChampion => c !== null)}
+        />
+      )}
       <ChampionsIndex champions={champions} />
     </div>
   );

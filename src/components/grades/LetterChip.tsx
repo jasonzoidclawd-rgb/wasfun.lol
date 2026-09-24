@@ -11,19 +11,26 @@ export function LetterChip({
   thin = false,
   label,
   size = "md",
+  kind = "option",
 }: {
   letter: Letter;
   estimated?: boolean;
   thin?: boolean;
   label: string;
   size?: "md" | "lg";
+  /**
+   * "champion": graded from the champion's own win rate. The augment-statistics
+   * kill switch leaves these on; every other letter comes from augment or item
+   * statistics and goes with the switch (scripts/verify_kill_switch.py).
+   */
+  kind?: "option" | "champion";
 }) {
   const open = estimated || thin;
   const cls = ["grade-chip", `is-${letter}`, open ? "is-open" : "", estimated ? "is-dashed" : "", size === "lg" ? "is-lg" : ""]
     .filter(Boolean)
     .join(" ");
   return (
-    <span className={cls} role="img" aria-label={label} data-grade={letter}>
+    <span className={cls} role="img" aria-label={label} data-grade={letter} data-grade-kind={kind}>
       <span aria-hidden="true">{letter}</span>
     </span>
   );

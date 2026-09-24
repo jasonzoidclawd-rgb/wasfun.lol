@@ -59,14 +59,16 @@ describe("the homepage combo claim matches what it can prove", () => {
     }
   });
 
-  test("the list is ordered by the only real evidence it holds: champion rank", () => {
+  test("the v3 Home carries no combo list, so it makes no combo ordering claim at all", () => {
+    // The old Home ordered S-tier combos by champion rank. v3 Home answers
+    // "where's my champion, and what changed?" and has no combo surface; the
+    // combo teaser must not come back without evidence that can order it.
     const source = readFileSync(
       path.join(process.cwd(), "src/app/[locale]/page.tsx"),
       "utf-8",
     );
 
-    expect(source).toContain("a.champion.rank - b.champion.rank");
-    // No invented score stands in for the missing combo ranking.
+    expect(source).not.toMatch(/ComboHighlights|readCombosFile|combos\.json/);
     expect(source).not.toMatch(/comboScore|scoreCombo|Math\.random/);
   });
 
@@ -91,15 +93,18 @@ describe("withdrawn augments never reach a suggestion surface", () => {
     expect(offending).toEqual([]);
   });
 
-  test("the homepage re-checks availability rather than trusting the snapshot", () => {
-    // Combos are generated before the augment lifecycle is resolved, so a
-    // combo can outlive its augment being switched off between refreshes.
+  test("the homepage suggests no augment: its only augment surface is the patch notes' change list", () => {
+    // Combos are generated before the augment lifecycle is resolved, so the old
+    // Home re-checked availability before suggesting one. v3 Home suggests no
+    // augment; it lists augments the patch notes name, which is a fact about
+    // the patch, and links nothing from the combo snapshot.
     const source = readFileSync(
       path.join(process.cwd(), "src/app/[locale]/page.tsx"),
       "utf-8",
     );
 
-    expect(source).toContain('augment?.availability?.status !== "confirmed_live"');
+    expect(source).toContain('note.sections.filter((s) => s.id === "augments")');
+    expect(source).not.toMatch(/AugmentSpotlight|ComboHighlights|TierMiniGrid|HeroMover/);
   });
 
   test("a disabled augment is dropped from the highlight list", () => {

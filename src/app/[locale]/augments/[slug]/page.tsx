@@ -19,18 +19,10 @@ const AVAILABILITY_SUMMARY_KEYS: Record<string, string> = {
   unverified_legacy: "patchSummaryUnverified",
   candidate_registry_present: "patchSummaryCandidate",
 };
-import {
-  readAugmentsFile,
-  readChampionsFile,
-  readCombosFile,
-} from "@/lib/data/read-public-file";
-import {
-  normalizeLookupKey,
-  resolveAugmentChampions,
-  type ComboLookupEntry,
-} from "@/lib/data/combo-lookup";
+import { readAugmentsFile } from "@/lib/data/read-public-file";
 import type { AugmentRarity, AugmentType } from "@/lib/types";
-import type { ComboTier } from "@/lib/scoring/oracle-score";
+import { LetterChip } from "@/components/grades/LetterChip";
+import { loadScorePack } from "@/lib/score/pack";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -60,15 +52,6 @@ interface AugmentsData {
   augments: AugmentRecord[];
 }
 
-interface ChampionRecord {
-  slug: string;
-  name: string;
-  name_zh_TW?: string;
-  name_zh_CN?: string;
-  name_ja?: string;
-  name_ko?: string;
-}
-
 // ─── Data helpers ─────────────────────────────────────────────────────────────
 
 async function loadAugmentsData(): Promise<AugmentsData> {
@@ -86,13 +69,6 @@ const RARITY_BADGE: Record<AugmentRarity, string> = {
   prismatic: "rarity-prismatic border-current",
   gold: "rarity-gold border-current",
   silver: "rarity-silver border-current",
-};
-
-const TIER_BADGE: Record<ComboTier, string> = {
-  S: "text-rose-300 bg-rose-400/15 border-rose-400/30",
-  A: "text-amber-300 bg-amber-400/15 border-amber-400/30",
-  B: "text-sky-300 bg-sky-400/15 border-sky-400/30",
-  C: "text-slate-300 bg-slate-400/10 border-slate-400/20",
 };
 
 // ─── Static params ────────────────────────────────────────────────────────────
@@ -176,22 +152,13 @@ export default async function AugmentDetailPage({
         : null;
 
 
-  // "Strong on champions": reverse-lookup the public combo teaser, then resolve
-  // each champion slug to a real champions.json record so we only link to pages
-  // that exist.
-  const [combosData, championsData] = await Promise.all([
-    readCombosFile<{ combos: ComboLookupEntry[] }>(),
-    readChampionsFile<{ champions: ChampionRecord[] }>(),
-  ]);
-  const championByKey = new Map(
-    championsData.champions.map((c) => [normalizeLookupKey(c.slug), c]),
-  );
-  const strongOn = resolveAugmentChampions(slug, combosData.combos, augments)
-    .map((combo) => ({
-      ...combo,
-      record: championByKey.get(normalizeLookupKey(combo.champion)),
-    }))
-    .filter((entry) => entry.record);
+  // v3: the tier list's letter (graded across all champions), when statistics are on
+  const pack = loadScorePack();
+  // the public catalog carries no augment id: resolve it through the internal catalog
+  const augmentId = pack ? [...pack.catalog.values()].find((a) => a.slug === augment.slug)?.augmentId : undefined;
+  const graded = augmentId ? (pack!.tierLists[augment.rarity].find((o) => o.id === augmentId) ?? null) : null;
+  const tt = await getTranslations("tiers");
+  const tp = await getTranslations("pick");
 
   const wikiUrl = `https://wiki.leagueoflegends.com/en-us/${encodeURIComponent(
     augment.name.replace(/ /g, "_"),
@@ -353,25 +320,33 @@ export default async function AugmentDetailPage({
           </section>
         )}
 
-        {/* ─── Strong on champions ─── */}
-        {strongOn.length > 0 && (
-          <section className="glass-card p-5">
-            <h2 className="text-lg font-semibold mb-3">{t("detailStrongOn")}</h2>
-            <div className="flex flex-wrap gap-2">
-              {strongOn.map(({ record, tier }) => (
-                <Link
-                  key={record!.slug}
-                  href={`/champions/${record!.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-card)] px-3 py-1 text-sm hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
-                >
-                  <span>{localizedName(record!, locale)}</span>
-                  <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded border ${TIER_BADGE[tier]}`}>
-                    {tier}
-                  </span>
-                </Link>
-              ))}
+        {/* ─── v3: the augment's letter across all champions ─── */}
+        {graded ? (
+          <section className="glass-card p-5" aria-labelledby="augment-grade">
+            <h2 id="augment-grade" className="text-lg font-semibold mb-3">{tt("detailHeading")}</h2>
+            <div className="flex items-center gap-3">
+              <LetterChip
+                letter={graded.letter}
+                thin={graded.outlined}
+                size="lg"
+                label={tp(graded.outlined ? "gradeLabelThin" : "gradeLabel", { letter: graded.letter })}
+              />
+              <div className="text-sm">
+                <div className="font-semibold">
+                  {tt("detailLift", { lift: `${Math.round(graded.m) > 0 ? "+" : Math.round(graded.m) < 0 ? "−" : ""}${Math.abs(Math.round(graded.m))}`, rarity: rarityLabel[augment.rarity] })}
+                </div>
+                <div className="text-[var(--color-text-secondary)]">
+                  {tt("rowLine", { win: graded.winRate.toFixed(1), pick: graded.pickRate.toFixed(1) })}
+                </div>
+              </div>
             </div>
+            <p className="mt-3 text-[11px] text-[var(--color-text-muted)]">{tt("detailNote")}</p>
+            <Link href={`/tier-list/${augment.rarity}`} className="mt-2 inline-flex min-h-11 items-center text-sm underline">
+              {tt("detailSeeList", { rarity: rarityLabel[augment.rarity] })}
+            </Link>
           </section>
+        ) : (
+          <p className="glass-card p-4 text-sm text-[var(--color-text-secondary)]">{pack ? tt("detailUngraded") : tt("unavailable")}</p>
         )}
       </div>
     </>

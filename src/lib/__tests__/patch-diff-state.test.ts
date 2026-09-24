@@ -236,18 +236,16 @@ describe("patch diff state: render paths", () => {
     expect(detail).not.toContain("explainEmpty");
   });
 
-  test("the homepage reports an unmeasured changed-augment count as unknown", () => {
+  test("the homepage shows no changed-augment count, so an unmeasured diff can't read as zero", () => {
+    // The old Home printed a count (unknown when unmeasured). v3 Home drops the
+    // count; the patch notes' own page states which of the two empties it is.
     const home = readFileSync(
       path.join(process.cwd(), "src/app/[locale]/page.tsx"),
       "utf8",
     );
-    const meta = readFileSync(
-      path.join(process.cwd(), "src/components/dashboard/MetaAtAGlance.tsx"),
-      "utf8",
-    );
 
-    expect(home).toContain("patchDiffMeasured ? changedAugments.length : null");
-    expect(meta).toContain('changedAugmentCount ?? t("metaChangedUnknown")');
+    expect(home).toContain('const measured = patchChangeState(note) !== "unavailable";');
+    expect(home).not.toMatch(/MetaAtAGlance|changedAugmentCount/);
   });
 
   test("the homepage banner stops promising a change list it does not have", () => {
@@ -260,7 +258,7 @@ describe("patch diff state: render paths", () => {
       "utf8",
     );
 
-    expect(home).toContain("<PatchPulseBanner changesMeasured={patchDiffMeasured} />");
+    expect(home).toContain("<PatchPulseBanner changesMeasured={measured} />");
     expect(banner).toContain('changesMeasured ? t("seeWhatChanged") : tNav("patchNotes")');
   });
 });

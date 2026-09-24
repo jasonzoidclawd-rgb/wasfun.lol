@@ -64,6 +64,16 @@ class DetectorTests(unittest.TestCase):
         self.assertFalse(detect_marker('<p>Letter S is a letter.</p>'))
         self.assertTrue(detect_marker('{"letter": "C", "m": -2}'))
 
+    def test_champion_letters_are_not_augment_statistics(self):
+        self.assertFalse(detect_marker('<span class="grade-chip is-S" role="img" aria-label="x" data-grade="S" data-grade-kind="champion">'))
+        rsc = 'self.__next_f.push([1,"[\\"$\\",\\"span\\",null,{\\"className\\":\\"grade-chip is-A\\",\\"data-grade\\":\\"A\\",\\"data-grade-kind\\":\\"champion\\"}]"])'
+        self.assertFalse(detect_marker(rsc))
+        self.assertFalse(detect_marker('{"grade":"S","slug":"yasuo"}'))
+        # an augment chip next to a champion chip is still caught
+        both = '<span data-grade="S" data-grade-kind="champion"></span><span data-grade="B" data-grade-kind="option"></span>'
+        self.assertEqual(detect_marker(both), ["grade letter chip"])
+        self.assertEqual(detect_marker(rsc.replace("champion", "option")), ["grade letter chip"])
+
 
 if __name__ == "__main__":
     unittest.main()

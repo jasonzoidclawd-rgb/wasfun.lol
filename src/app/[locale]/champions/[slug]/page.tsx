@@ -32,9 +32,10 @@ import {
 import type { DecisionGrade } from "@/lib/contracts/decision";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ChampionHub } from "@/components/pick/ChampionHub";
+import { RememberChampion } from "@/components/home/RememberChampion";
 import { LetterChip } from "@/components/grades/LetterChip";
 import { loadIconIndex, loadItemNames } from "@/lib/score/assets";
-import { loadScorePack } from "@/lib/score/pack";
+import { loadChampionLetters, loadScorePack } from "@/lib/score/pack";
 import { buildPickPayload } from "@/lib/score/pick-payload";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 
@@ -142,6 +143,8 @@ export default async function ChampionPage({
   // statistics kill switch is off, so no grade or augment number renders.
   const th = await getTranslations("hub");
   const scorePack = loadScorePack();
+  // the champion's own letter: from its win rate, so it stays on with the augment switch off
+  const championLetter = loadChampionLetters()?.get(slug) ?? null;
   const hubPayload = scorePack
     ? buildPickPayload({ pack: scorePack, slug, locale, championRecord: champ, icons: loadIconIndex(), items: loadItemNames() })
     : null;
@@ -484,12 +487,13 @@ export default async function ChampionPage({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 sm:gap-3">
             <h1 className="text-xl sm:text-3xl font-bold truncate">{champName}</h1>
-            {hubPayload?.champion.letter ? (
+            {championLetter ? (
               <LetterChip
-                letter={hubPayload.champion.letter}
-                thin={hubPayload.champion.outlined}
+                kind="champion"
+                letter={championLetter.letter}
+                thin={championLetter.outlined}
                 size="lg"
-                label={th("championGrade", { champion: champName, letter: hubPayload.champion.letter })}
+                label={th("championGrade", { champion: champName, letter: championLetter.letter })}
               />
             ) : (
               <span className="text-xs font-semibold text-[var(--color-text-muted)]">
@@ -551,6 +555,7 @@ export default async function ChampionPage({
       <div className="h-0.5 mb-4 rounded-full bg-gradient-to-r from-[var(--color-neon-primary)] to-[var(--color-neon-secondary)]" />
 
       {/* ─── v3 decision hub: Plan card, graded augments, boots, build orders ─── */}
+      <RememberChampion slug={slug} />
       {hubPayload ? (
         <ChampionHub payload={hubPayload} />
       ) : (

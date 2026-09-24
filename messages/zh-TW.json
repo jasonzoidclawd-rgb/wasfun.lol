@@ -41,7 +41,18 @@
     "feat4Tag": "會員",
     "ctaBandTitle": "準備好做出更聰明的選擇了嗎？",
     "ctaBandBody": "免費工具為當前版本排名；顧問則為你眼前的選項評分。",
-    "ctaBandButton": "了解會員"
+    "ctaBandButton": "了解會員",
+    "searchTitle": "我的英雄在哪？",
+    "searchPlaceholder": "搜尋英雄",
+    "recent": "最近",
+    "movedTitle": "上個版本以來的變動",
+    "movedLead": "{patch} 的勝率與 {from} 結束時比較。只顯示遠超雜訊的變動；因為同時檢查所有英雄，門檻更高。",
+    "movedNoPrevious": "還沒有可與 {patch} 比較的前一版本。",
+    "movedNone": "目前沒有英雄的變動超過雜訊。版本初期這是正常的；每日更新。",
+    "movedLine": "{from}% → {to}%（{delta}）",
+    "patchWeek": "{patch} 版本：評級依據 {days} 天的資料，每日更新。",
+    "movedPredates": "尚未得知：來源的 {patch} 數據日期早於版本開始，無法顯示變動。",
+    "noResults": "沒有符合的英雄。"
   },
   "dashboard": {
     "patchLive": "版本 {patch} 已上線",
@@ -993,7 +1004,8 @@
     "sortMs": "移動速度",
     "levelAbbr": "等級",
     "allClasses": "全部",
-    "statsFooter": "{count} / {total} 位英雄 · 數據來自 wiki.leagueoflegends.com · 等級成長採用官方公式"
+    "statsFooter": "{count} / {total} 位英雄 · 數據來自 wiki.leagueoflegends.com · 等級成長採用官方公式",
+    "letterLabel": "相對全體英雄評級 {letter}"
   },
   "about": {
     "title": "關於大亂鬥神諭",
@@ -1093,5 +1105,53 @@
     "unavailable": "評級暫時無法提供。",
     "planNote": "評級與勝率來自所有英雄的對局，而非只有 {champion}。",
     "liftColumn": "高於或低於 {rarity} 增幅平均的百分點（所有英雄）"
+  },
+  "tiers": {
+    "indexTitle": "ARAM 大混戰增幅強度榜",
+    "indexLead": "已評級增幅的評級，所有英雄合計。外框評級代表資料不足或不確定。選擇稀有度。",
+    "title": "{rarity}增幅強度榜",
+    "metaDescription": "ARAM 大混戰的{rarity}增幅，以所有英雄合計評為 S 到 D，附勝率與選取率。",
+    "lead": "評級把每個增幅與其他{rarity}增幅比較，以所有英雄合計。只有資料能分出差異時，評級才會改變。",
+    "colAugment": "增幅",
+    "colVsAverage": "相對平均",
+    "rowLine": "勝率 {win}% · 選取 {pick}%（依來源公布）",
+    "legend": "外框：資料不足，或評級取決於來源資料中未確認的單位。差值以整數百分點表示，相對於其他{rarity}增幅的選取加權平均。",
+    "seeAll": "查看全部 {count} 個{rarity}增幅",
+    "top": "榜首",
+    "howWeRank": "我們如何評級",
+    "unavailable": "評級暫時無法提供。",
+    "detailHeading": "所有英雄合計評級",
+    "detailLift": "比 {rarity} 增幅平均 {lift} 個百分點",
+    "detailNote": "與同稀有度的其他增幅比較，依據所有英雄的對局。資料來源沒有各英雄的增幅結果。",
+    "detailSeeList": "查看 {rarity} 強度榜",
+    "detailUngraded": "此增幅目前沒有評級：未上線，或資料來源沒有可靠資料。"
+  },
+  "method": {
+    "title": "我們如何評級",
+    "lead": "評級的意義、數字的來源，以及數字無法告訴你的事。",
+    "sources_h": "數字從哪裡來",
+    "sources_p": "勝率與選取率來自 arammayhem.com，每日擷取。該網站沒有說明數據來源；看起來涵蓋中國伺服器的對局，但我們無法證實。它只公布比率、不公布場數，而且增幅結果是所有英雄合計：各英雄的增幅勝率只是每個增幅整體勝率的複本，所以我們從不把它當成英雄自己的勝率。",
+    "estimand_h": "測量的是什麼",
+    "estimand_p": "數字是「選了這個選項的對局勝率」。這是關聯而非因果：較強的玩家與較長的對局可能更常選某些選項。每個選項會與同稀有度的其他選項比較（差值），雜訊以整組的平均勝率計算，而非它自己的勝率。",
+    "letters_h": "評級的意義",
+    "letters_p": "只有資料能分出順序時才拆成不同組，每組取其測量充分成員中最保守者的評級。S：比平均高至少 3.5 個百分點。A：高至少 1.5。B：上下 1.5 以內。C：低至少 1.5。D：低至少 3.5。外框評級代表資料不足，或取決於來源資料中未確認的單位。不同評級並不保證每一對的高下。",
+    "pick_h": "選擇畫面的難分高下",
+    "pick_p": "選擇畫面只在一張卡以至少 80% 的把握領先下一張至少半個百分點時才指名。因為來源沒有各英雄的增幅結果，每張卡還帶有 2 個百分點的英雄特定不確定性，所以約一半的畫面是難分高下，銀色增幅更多。這是誠實的答案，不是畫面的缺陷。",
+    "patch_h": "新版本",
+    "patch_p": "評級依照目前版本的資料。我們測試過在新版本初期沿用上一版的結果，效果比只用新資料差，所以不這麼做。",
+    "cannot_h": "數字無法告訴你的事",
+    "cannot_p": "沒有對局數、沒有誤差範圍、沒有分英雄的增幅結果、沒有分段位或分階段的數據。出裝順序的勝率只計算完成該路線的對局，因此路線只互相排名，從不給評級。",
+    "provenance": "數據：arammayhem.com（未說明來源；地區未證實）。英雄與物品資料：Riot Games（Data Dragon、CommunityDragon）。"
+  },
+  "swap": {
+    "title": "換角檢查",
+    "lead": "留著你的英雄，還是從替補換？加入你的英雄和替補中的英雄。",
+    "add": "加入英雄",
+    "keep": "留著 {champion}。",
+    "swap": "換成 {champion}。",
+    "closeCall": "難分高下：{a} 與 {b} 太接近，無法區分。",
+    "remove": "移除 {champion}",
+    "hint": "評級以各英雄自己的勝率與全體英雄比較。",
+    "yours": "你的"
   }
 }

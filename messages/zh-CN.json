@@ -41,7 +41,18 @@
     "feat4Tag": "会员",
     "ctaBandTitle": "准备好做出更聪明的选择了吗？",
     "ctaBandBody": "免费工具为当前版本排名；顾问则为你眼前的选项评分。",
-    "ctaBandButton": "了解会员"
+    "ctaBandButton": "了解会员",
+    "searchTitle": "我的英雄在哪？",
+    "searchPlaceholder": "搜索英雄",
+    "recent": "最近",
+    "movedTitle": "上个版本以来的变动",
+    "movedLead": "{patch} 的胜率与 {from} 结束时比较。只显示远超噪声的变动；因为同时检查所有英雄，门槛更高。",
+    "movedNoPrevious": "还没有可与 {patch} 比较的上一版本。",
+    "movedNone": "目前没有英雄的变动超过噪声。版本初期这很正常；每日更新。",
+    "movedLine": "{from}% → {to}%（{delta}）",
+    "patchWeek": "{patch} 版本：评级基于 {days} 天的数据，每日更新。",
+    "movedPredates": "尚未得知：来源的 {patch} 数据日期早于版本开始，无法显示变动。",
+    "noResults": "没有匹配的英雄。"
   },
   "dashboard": {
     "patchLive": "版本 {patch} 已上线",
@@ -993,7 +1004,8 @@
     "sortMs": "移动速度",
     "levelAbbr": "等级",
     "allClasses": "全部",
-    "statsFooter": "{count} / {total} 位英雄 · 数据来自 wiki.leagueoflegends.com · 等级成长采用官方公式"
+    "statsFooter": "{count} / {total} 位英雄 · 数据来自 wiki.leagueoflegends.com · 等级成长采用官方公式",
+    "letterLabel": "相对全体英雄评级 {letter}"
   },
   "about": {
     "title": "关于大乱斗神谕",
@@ -1027,8 +1039,8 @@
   },
   "pick": {
     "title": "选择",
-    "metaTitle": "{champion} 选择界面：该拿哪个增幅",
-    "metaDescription": "点选你用 {champion} 拿到的三个增幅，立即得到建议、每张卡的评级、难分高下的提示和重抽建议。离线也能用。",
+    "metaTitle": "{champion} 选择界面：该拿哪个强化",
+    "metaDescription": "点选你用 {champion} 拿到的三个强化，立即得到建议、每张卡的评级、难分高下的提示和重抽建议。离线也能用。",
     "chooseTitle": "选择界面",
     "chooseLead": "选择你的英雄。下次会直接打开。",
     "searchPlaceholder": "搜索英雄",
@@ -1053,7 +1065,7 @@
     "cardLine": "所有英雄胜率 {win}% · {champion} 选取 {pick}%",
     "gamble": "赌注",
     "legendThin": "外框：数据不足，或评级取决于来源数据中未确认的单位",
-    "legendSource": "评级与胜率都是所有英雄合计：数据来源只公布所有英雄合计的增幅结果，不分英雄。选取率是 {champion} 自己的（来源有列出时）；来源每位英雄只列出少数增幅，其余标示为未公布。",
+    "legendSource": "评级与胜率都是所有英雄合计：数据来源只公布所有英雄合计的强化结果，不分英雄。选取率是 {champion} 自己的（来源有列出时）；来源每位英雄只列出少数强化，其余标示为未公布。",
     "items": "装备",
     "bootsLine": "胜率 {win}% · 选取 {pick}%",
     "buildOrderHeading": "出装顺序 · 胜率从高到低",
@@ -1083,8 +1095,8 @@
     "boots": "鞋子",
     "core": "核心",
     "buildsCloseCall": "难分高下：太接近无法区分，两条路线都可以。",
-    "augmentsHeading": "增幅",
-    "augmentsLead": "与其他{rarity}增幅比较评级，所有英雄合计。胜率为所有英雄合计；选取率是 {champion} 自己的（来源有列出时）。",
+    "augmentsHeading": "强化",
+    "augmentsLead": "与其他{rarity}强化比较评级，所有英雄合计。胜率为所有英雄合计；选取率是 {champion} 自己的（来源有列出时）。",
     "bootsLead": "与 {champion} 的其他鞋子比较评级。",
     "buildsHeading": "出装顺序",
     "buildsLead": "只列 {champion} 至少 1% 对局使用的路线，胜率从高到低。不给评级：路线胜率只计算完成它的对局。",
@@ -1092,6 +1104,54 @@
     "championGrade": "{champion}：相对全体英雄评级 {letter}",
     "unavailable": "评级暂时无法提供。",
     "planNote": "评级与胜率来自所有英雄的对局，而非只有 {champion}。",
-    "liftColumn": "高于或低于 {rarity} 增幅平均的百分点（所有英雄）"
+    "liftColumn": "高于或低于 {rarity} 强化平均的百分点（所有英雄）"
+  },
+  "tiers": {
+    "indexTitle": "ARAM 大乱斗强化强度榜",
+    "indexLead": "已评级强化的评级，所有英雄合计。外框评级代表数据不足或不确定。选择稀有度。",
+    "title": "{rarity}强化强度榜",
+    "metaDescription": "ARAM 大乱斗的{rarity}强化，以所有英雄合计评为 S 到 D，附胜率和选取率。",
+    "lead": "评级把每个强化与其他{rarity}强化比较，以所有英雄合计。只有数据能分出差异时，评级才会改变。",
+    "colAugment": "强化",
+    "colVsAverage": "相对平均",
+    "rowLine": "胜率 {win}% · 选取 {pick}%（按来源公布）",
+    "legend": "外框：数据不足，或评级取决于来源数据中未确认的单位。差值以整数百分点表示，相对于其他{rarity}强化的选取加权平均。",
+    "seeAll": "查看全部 {count} 个{rarity}强化",
+    "top": "榜首",
+    "howWeRank": "我们如何评级",
+    "unavailable": "评级暂时无法提供。",
+    "detailHeading": "所有英雄合计评级",
+    "detailLift": "比 {rarity} 强化平均 {lift} 个百分点",
+    "detailNote": "与同稀有度的其他强化比较，依据所有英雄的对局。数据来源没有各英雄的强化结果。",
+    "detailSeeList": "查看 {rarity} 强度榜",
+    "detailUngraded": "此强化目前没有评级：未上线，或数据来源没有可靠数据。"
+  },
+  "method": {
+    "title": "我们如何评级",
+    "lead": "评级的含义、数字的来源，以及数字无法告诉你的事。",
+    "sources_h": "数字从哪里来",
+    "sources_p": "胜率与选取率来自 arammayhem.com，每日抓取。该网站没有说明数据来源；看起来覆盖中国服务器的对局，但我们无法证实。它只公布比率、不公布场数，而且强化结果是所有英雄合计：各英雄的强化胜率只是每个强化整体胜率的副本，所以我们从不把它当成英雄自己的胜率。",
+    "estimand_h": "测量的是什么",
+    "estimand_p": "数字是“选了这个选项的对局胜率”。这是关联而非因果：较强的玩家和较长的对局可能更常选某些选项。每个选项会与同稀有度的其他选项比较（差值），噪声按整组的平均胜率计算，而不是它自己的胜率。",
+    "letters_h": "评级的含义",
+    "letters_p": "只有数据能分出顺序时才拆成不同组，每组取其测量充分成员中最保守者的评级。S：比平均高至少 3.5 个百分点。A：高至少 1.5。B：上下 1.5 以内。C：低至少 1.5。D：低至少 3.5。外框评级代表数据不足，或取决于来源数据中未确认的单位。不同评级并不保证每一对的高下。",
+    "pick_h": "选择界面的难分高下",
+    "pick_p": "选择界面只在一张卡以至少 80% 的把握领先下一张至少半个百分点时才指名。因为来源没有各英雄的强化结果，每张卡还带有 2 个百分点的英雄特定不确定性，所以约一半的界面是难分高下，银色强化更多。这是诚实的答案，不是界面的缺陷。",
+    "patch_h": "新版本",
+    "patch_p": "评级按照当前版本的数据。我们测试过在新版本初期沿用上一版的结果，效果比只用新数据差，所以不这样做。",
+    "cannot_h": "数字无法告诉你的事",
+    "cannot_p": "没有对局数、没有误差范围、没有分英雄的强化结果、没有分段位或分阶段的数据。出装顺序的胜率只计算完成该路线的对局，因此路线只互相排名，从不给评级。",
+    "provenance": "数据：arammayhem.com（未说明来源；地区未证实）。英雄与物品数据：Riot Games（Data Dragon、CommunityDragon）。"
+  },
+  "swap": {
+    "title": "换角检查",
+    "lead": "留着你的英雄，还是从替补换？加入你的英雄和替补里的英雄。",
+    "add": "加入英雄",
+    "keep": "留着 {champion}。",
+    "swap": "换成 {champion}。",
+    "closeCall": "难分高下：{a} 和 {b} 太接近，无法区分。",
+    "remove": "移除 {champion}",
+    "hint": "评级以各英雄自己的胜率与全体英雄比较。",
+    "yours": "你的"
   }
 }

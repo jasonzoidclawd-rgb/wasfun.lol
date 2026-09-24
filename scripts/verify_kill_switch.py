@@ -105,14 +105,19 @@ def load_fingerprints() -> list[tuple[str, list[str]]]:
 
 # A grade letter is derived from the statistics, so it is one too: a rendered
 # chip, or a letter prop in the RSC flight data a client component receives.
+# Champion letters are the exception: they grade champions' own win rates, not
+# augment statistics, so the switch leaves them on. They are marked
+# data-grade-kind="champion" and reach client components as `grade`, not `letter`.
 LETTER_PROP = re.compile(r'\\*"letter\\*"\s*:\s*\\*"[SABCD]\\*"')
+CHIP = re.compile(r'data-grade(?!-kind)\\*"?\s*[=:]\s*\\*"[SABCD]')
+CHAMPION_KIND = re.compile(r'^.{0,40}?data-grade-kind\\*"?\s*[=:]\s*\\*"champion', re.S)
 
 
 def detect_marker(body: str) -> list[str]:
     hits = []
     if "data-augment-stat" in body:
         hits.append("data-augment-stat attribute")
-    if "data-grade=" in body or "grade-chip " in body:
+    if any(not CHAMPION_KIND.match(body[m.end():m.end() + 80]) for m in CHIP.finditer(body)):
         hits.append("grade letter chip")
     if LETTER_PROP.search(body):
         hits.append("grade letter in payload")
@@ -217,6 +222,9 @@ def main(argv=None) -> int:
     ap.add_argument("--max", type=int, default=0, help="cap the number of sitemap pages (0 = all)")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--report", type=Path)
+    ap.add_argument("--old-paths", type=Path,
+                    help="paths published before this build (one per line, e.g. the production sitemap's); "
+                         "each must still resolve, directly or by redirect, never 404")
     args = ap.parse_args(argv)
 
     fingerprints = load_fingerprints()
@@ -238,17 +246,28 @@ def main(argv=None) -> int:
         status, _, body = fetch(urljoin(args.base, path), method)
         api_checks.append({"api": f"{method} {path}", "status": status, "body": body[:120]})
 
+    old = []
+    if args.old_paths:
+        paths = [p.strip() for p in args.old_paths.read_text(encoding="utf-8").splitlines() if p.strip()]
+        with ThreadPoolExecutor(args.workers) as pool:
+            old = list(pool.map(lambda p: (p, fetch(urljoin(args.base, p))[0]), paths))
+
     hits = [r for r in results if r["hits"]]
     failed_fetch = [r for r in results if r["status"] >= 500]
+    # a page the sitemap lists, or one published before, must never 404
+    not_found = [r["url"] for r in results[: len(pages)] if r["status"] in (404, 410)]
+    not_found += [urljoin(args.base, p) for p, status in old if status in (404, 410)]
     report = {
         "base": args.base, "expect": args.expect,
         "fetched": {"pages": len(pages), "apiAndData": len(targets) - len(pages), "scripts": len(scripts)},
         "detections": [{"url": r["url"], "hits": r["hits"][:5]} for r in hits],
         "statsApis": api_checks,
         "serverErrors": [r["url"] for r in failed_fetch],
+        "oldPathsChecked": len(old),
+        "notFound": not_found,
     }
     ok = True
-    if failed_fetch:
+    if failed_fetch or not_found:
         ok = False
     elif args.expect == "off":
         ok = not hits and all(c["status"] == 503 for c in api_checks)
@@ -257,7 +276,9 @@ def main(argv=None) -> int:
     report["verdict"] = "pass" if ok else "fail"
     if args.report:
         args.report.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
-    print(json.dumps({k: report[k] for k in ("fetched", "statsApis", "verdict")}, indent=1))
+    print(json.dumps({k: report[k] for k in ("fetched", "statsApis", "oldPathsChecked", "verdict")}, indent=1))
+    for u in not_found[:20]:
+        print(f"  404: {u}")
     for r in hits[:20]:
         print(f"  hit: {r['url']} {r['hits'][:3]}")
     return 0 if ok else 1

@@ -1,160 +1,114 @@
-import { setRequestLocale } from "next-intl/server";
-import {
-  readChampionsFile,
-  readAugmentsFile,
-  readMetaFile,
-  readPatchNotesFile,
-  readCombosFile,
-} from "@/lib/data/read-public-file";
-import type { LocalizedNameRecord } from "@/lib/i18n/localized-name";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { readAugmentsFile, readChampionsFile, readPatchNotesFile } from "@/lib/data/read-public-file";
+import { localizedName, type LocalizedNameRecord } from "@/lib/i18n/localized-name";
 import { DashboardIslands } from "@/components/dashboard/DashboardIslands";
 import { PatchPulseBanner } from "@/components/dashboard/PatchPulseBanner";
-import { HeroMover, type HeroChampion } from "@/components/dashboard/HeroMover";
-import { MetaAtAGlance } from "@/components/dashboard/MetaAtAGlance";
-import { TierMiniGrid, type TierChampion } from "@/components/dashboard/TierMiniGrid";
 import { MoversCarousel, type ChangedAugment } from "@/components/dashboard/MoversCarousel";
-import { AugmentSpotlight } from "@/components/dashboard/AugmentSpotlight";
-import { ComboHighlights } from "@/components/dashboard/ComboHighlights";
-import { AdvisorTeaser } from "@/components/dashboard/AdvisorTeaser";
-import { CompanionLauncher } from "@/components/dashboard/CompanionLauncher";
+import { HomeSearch, type HomeChampion } from "@/components/home/HomeSearch";
+import { MovedSinceLastPatch } from "@/components/home/MovedSinceLastPatch";
 import { RotateHint } from "@/components/ui/RotateHint";
-import { readPatchClocks } from "@/lib/data/clocks";
 import { patchChangeState } from "@/lib/patch-notes/digest";
+import { loadChampionLetters } from "@/lib/score/pack";
+import { championMovers, comparePatch, patchDataState } from "@/lib/score/movers";
+import { estimateVolume } from "@/lib/score/volume";
+import type { ChampionRow } from "@/lib/score/engine";
 import type { PatchNote } from "@/lib/types";
 
-type ChampionRecord = LocalizedNameRecord &
-  HeroChampion &
-  Pick<TierChampion, "tier" | "rank">;
+type ChampionRecord = LocalizedNameRecord & { slug: string };
+type AugmentRecord = LocalizedNameRecord & ChangedAugment;
+type PatchNoteSection = { id: string; changes: { text: { en: string } }[] };
+type HomePatchNote = Pick<PatchNote, "version" | "structuredDiff" | "summary"> & { sections: PatchNoteSection[] };
 
-type AugmentRecord = LocalizedNameRecord &
-  ChangedAugment & {
-    wikiDescription?: string;
-    availability?: { status?: string };
+const PATCH_WEEK_DAYS = 7;
+
+function readBuildFeed(): { patch: string; dataDate: string; champions: Record<string, ChampionRow> } {
+  return JSON.parse(readFileSync(path.join(process.cwd(), "data", "internal", "champion-build-feed.json"), "utf-8"));
+}
+
+function patchStarts(): Record<string, string> {
+  const meta = JSON.parse(readFileSync(path.join(process.cwd(), "data", "internal", "patch-metadata.json"), "utf-8")) as {
+    patches?: { version: string; publishedAt?: string }[];
   };
+  return Object.fromEntries(meta.patches?.filter((p) => p.publishedAt).map((p) => [p.version, p.publishedAt as string]) ?? []);
+}
 
-type ComboRecord = { champion: string; augment: string; tier: string };
-
-type PatchNoteChange = { text: { en: string } };
-type PatchNoteSection = { id: string; changes: PatchNoteChange[] };
-type HomePatchNote = Pick<PatchNote, "version" | "structuredDiff" | "summary"> & {
-  sections: PatchNoteSection[];
-};
-
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+/**
+ * Home (v3): where's my champion, and what changed? Champion search with the
+ * visitor's recent champions, a patch-week line, and champions whose win rate
+ * moved beyond noise since the previous patch. Champion letters and win rates
+ * are the champions' own, so none of this depends on augment statistics.
+ */
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("home");
 
-  const [championsFile, augmentsFile, metaFile, patchNotesFile, combosFile] = await Promise.all([
+  const [championsFile, augmentsFile, patchNotesFile] = await Promise.all([
     readChampionsFile<{ champions: ChampionRecord[] }>(),
     readAugmentsFile<{ augments: AugmentRecord[] }>(),
-    readMetaFile<{ patch: string; scraped_at: string }>(),
     readPatchNotesFile<{ patches: HomePatchNote[] }>(),
-    readCombosFile<{ combos: ComboRecord[] }>(),
   ]);
 
-  const champions = championsFile.champions;
-  const augments = augmentsFile.augments;
-  const { patch, scraped_at } = metaFile;
-  const clocks = await readPatchClocks();
-  const liveAugmentCount = augments.filter(
-    (augment) => augment.availability?.status === "confirmed_live",
-  ).length;
-
-  // A new champion may be present in the roster before the third-party
-  // statistical feed has a tier/rank/rate row. Keep that identity visible on
-  // its detail page, but reserve ranking surfaces for complete stat records.
-  //
-  // "Complete" is defined by what the source still publishes. As of 2026-09-10
-  // arammayhem.com no longer publishes champion pick rate anywhere (its tier
-  // cards carry tier + win rate only), so requiring it here would leave every
-  // ranking surface permanently empty. Pick rate is rendered when present and
-  // omitted when not, rather than gating the ranking.
-  const byRank = [...champions]
-    .filter(
-      (champion) =>
-        champion.tier != null &&
-        champion.rank != null &&
-        champion.win_rate != null,
-    )
-    .sort((a, b) => a.rank - b.rank);
-  const heroChampion = byRank[0];
-  const tierChampions = byRank.filter((c) => c.tier === "S+" || c.tier === "S");
-  const sPlusCount = champions.filter((c) => c.tier === "S+").length;
-
-  const augByName = new Map(augments.map((a) => [a.name, a]));
-  const currentPatchNote = patchNotesFile.patches[0];
-  // No structural diff for this patch means the changed-augment count is
-  // unknown, not zero: an empty section list is absence of evidence here.
-  const patchDiffMeasured = patchChangeState(currentPatchNote) !== "unavailable";
-  const augmentChangeEntries = currentPatchNote.sections
-    .filter((s) => s.id === "augments")
-    .flatMap((s) => s.changes);
-
-  const changedAugmentsBySlug = new Map<string, AugmentRecord>();
-  for (const change of augmentChangeEntries) {
-    const augment = augByName.get(change.text.en);
-    if (augment && !changedAugmentsBySlug.has(augment.slug)) {
-      changedAugmentsBySlug.set(augment.slug, augment);
-    }
-  }
-  const changedAugments = [...changedAugmentsBySlug.values()];
-
-  const changedPrismatic = changedAugments.find((a) => a.rarity === "prismatic");
-  const fallbackPrismatic = augments.find((a) => a.rarity === "prismatic");
-  const spotlight = changedPrismatic ?? fallbackPrismatic;
-  const isSpotlightChanged = changedPrismatic != null;
-
-  // The public teaser is S-tier only (export_public_catalog.build_combo_teaser),
-  // so every entry carries the same tier and nothing in this payload ranks one
-  // combo above another. The only real ordering evidence is the CHAMPION's
-  // rank, which is what this list is sorted by — and what its heading says.
-  // An augment that is no longer offerable must never be suggested, so the
-  // pairing is re-checked against live availability rather than trusted from
-  // the combo snapshot.
-  const champBySlug = new Map(byRank.map((c) => [c.slug, c]));
-  const comboByChampion = new Map<string, ComboRecord>();
-  for (const combo of combosFile.combos) {
-    const augment = augByName.get(combo.augment);
-    if (augment?.availability?.status !== "confirmed_live") continue;
-    if (!comboByChampion.has(combo.champion)) comboByChampion.set(combo.champion, combo);
-  }
-  const rankedCombos = [...comboByChampion.values()]
-    .map((combo) => {
-      const champion = champBySlug.get(combo.champion);
-      const augment = augByName.get(combo.augment);
-      return champion && augment ? { champion, augment } : null;
+  const letters = loadChampionLetters();
+  const champions: HomeChampion[] = championsFile.champions
+    .map((c) => {
+      const l = letters?.get(c.slug);
+      return { slug: c.slug, name: localizedName(c, locale), grade: l?.letter ?? null, outlined: l?.outlined ?? false };
     })
-    .filter((x): x is NonNullable<typeof x> => x !== null)
-    .sort((a, b) => a.champion.rank - b.champion.rank)
-    .slice(0, 6);
+    .sort((a, b) => a.name.localeCompare(b.name, locale));
+  const bySlug = new Map(champions.map((c) => [c.slug, c]));
+
+  const feed = readBuildFeed();
+  const starts = patchStarts();
+  const histories = Object.values(feed.champions).map((c) => c.history ?? []);
+  const volume = estimateVolume(histories, starts, { patch: feed.patch, dataDate: feed.dataDate });
+  const fromPatch =
+    histories
+      .flat()
+      .map((h) => h.patch)
+      .filter((p) => comparePatch(p, feed.patch) < 0)
+      .sort((a, b) => comparePatch(b, a))[0] ?? null;
+  // Rows dated before the patch began are the last patch's totals under a new
+  // label: nothing of the new patch to show yet (undetermined, not "no change").
+  const state = patchDataState(feed.dataDate, starts[feed.patch]);
+  // each side of the comparison uses its own patch's game count
+  const previousVolume = (patch: string): number | null => {
+    const last = histories
+      .flat()
+      .filter((h) => h.patch === patch)
+      .map((h) => h.snapshot)
+      .sort()
+      .at(-1);
+    if (!last) return null;
+    const dataDate = `${last.slice(0, 4)}-${last.slice(4, 6)}-${last.slice(6, 8)}`;
+    return estimateVolume(histories, starts, { patch, dataDate })?.games ?? null;
+  };
+  const movers = volume && !state.predates ? championMovers(feed.champions, feed.patch, { current: volume.games, previous: previousVolume }) : [];
+
+  // Augment changes named in the patch notes: facts from the notes, no statistics.
+  const augByName = new Map(augmentsFile.augments.map((a) => [a.name, a]));
+  const note = patchNotesFile.patches[0];
+  const measured = patchChangeState(note) !== "unavailable";
+  const changed = new Map<string, AugmentRecord>();
+  for (const change of note.sections.filter((s) => s.id === "augments").flatMap((s) => s.changes)) {
+    const a = augByName.get(change.text.en);
+    if (a && !changed.has(a.slug)) changed.set(a.slug, a);
+  }
 
   return (
     <>
       <DashboardIslands />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-6 md:gap-3.5 lg:grid-cols-12 lg:gap-4">
-        <PatchPulseBanner changesMeasured={patchDiffMeasured} />
+        <PatchPulseBanner changesMeasured={measured} />
         <RotateHint />
-        <HeroMover champion={heroChampion} total={champions.length} patch={patch} />
-        <MetaAtAGlance
-          sPlusCount={sPlusCount}
-          championCount={champions.length}
-          liveAugmentCount={liveAugmentCount}
-          knownAugmentCount={augments.length}
-          changedAugmentCount={patchDiffMeasured ? changedAugments.length : null}
-          structuralPatch={clocks.structuralPatch}
-          statisticsPatch={clocks.statisticsPatch}
-          updatedAt={scraped_at}
-        />
-        <TierMiniGrid champions={tierChampions} />
-        <MoversCarousel augments={changedAugments} />
-        {spotlight && <AugmentSpotlight augment={spotlight} isChangedThisPatch={isSpotlightChanged} />}
-        <ComboHighlights combos={rankedCombos} />
-        <AdvisorTeaser />
-        <CompanionLauncher />
+        <HomeSearch champions={champions} />
+        {state.days !== null && state.days <= PATCH_WEEK_DAYS && (
+          <p className="col-span-full text-sm text-[var(--color-text-secondary)]">{t("patchWeek", { patch: feed.patch, days: state.days })}</p>
+        )}
+        <MovedSinceLastPatch movers={movers} champions={bySlug} patch={feed.patch} fromPatch={fromPatch} predates={state.predates} />
+        <MoversCarousel augments={[...changed.values()]} />
       </div>
     </>
   );
