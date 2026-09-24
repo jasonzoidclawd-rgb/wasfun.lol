@@ -1132,13 +1132,13 @@
     "estimand_h": "What is measured",
     "estimand_p": "The number is the win rate in games where the option was taken. That is an association, not a cause: stronger players and longer games can take some options more often. Each option is compared with the others in the same choice (lift), and its noise uses the set's average win rate, never its own.",
     "letters_h": "What a letter means",
-    "letters_p": "Options are grouped only where the data can order them, and each group takes the letter of its most modest well-measured member: S +3.5 points or more, A +1.5 or more, B within ±1.5, C −1.5 or less, D −3.5 or less. An outlined letter is thin, or depends on an unconfirmed unit in the source's data. Different letters are not a guarantee about every pair.",
+    "letters_p": "Options are grouped only where the data can order them, and each group takes the letter of its most modest well-measured member. S: at least 3.5 points above average. A: at least 1.5 above. B: within 1.5 points either way. C: at least 1.5 below. D: at least 3.5 below. An outlined letter is thin, or depends on an unconfirmed unit in the source's data. Different letters are not a guarantee about every pair.",
     "pick_h": "Close calls on the Pick screen",
     "pick_p": "The Pick screen names a card only when it beats the next one by at least half a point with at least 80% certainty. Because the source has no per-champion augment results, each card also carries 2 points of champion-specific uncertainty, so about half of screens are a close call, and more for silver augments. That is the honest answer, not a gap in the screen.",
     "patch_h": "New patches",
     "patch_p": "Letters follow the current patch's data. We tested carrying the last patch forward on new-patch days, and it did worse than the new data alone, so we don't.",
     "cannot_h": "What the numbers can't tell you",
-    "cannot_p": "No game counts, no ± intervals, no per-champion augment results, no per-rank or per-stage splits. Build-order win rates count only games that finished the path, so paths are ranked against each other and never graded.",
+    "cannot_p": "No game counts, no margins of error, no per-champion augment results, no per-rank or per-stage splits. Build-order win rates count only games that finished the path, so paths are ranked against each other and never graded.",
     "provenance": "Data: arammayhem.com (source unstated; region unverified). Champion and item data: Riot Games (Data Dragon, CommunityDragon)."
   },
   "swap": {
