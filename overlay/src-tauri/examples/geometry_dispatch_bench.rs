@@ -189,7 +189,9 @@ fn closure_work(probe_seq: u64) -> ClosureTimings {
     // pre-capture: the enumeration half of `capture_surface_frame`
     // (`lib.rs:1409-1419`) — presence walk, monitor list, window list.
     let _ = cached_process_presence();
-    let _ = xcap::Window::all().map(|windows| windows.len()).unwrap_or(0);
+    let _ = xcap::Window::all()
+        .map(|windows| windows.len())
+        .unwrap_or(0);
     let monitors = xcap::Monitor::all().ok();
     let pre_capture_ms = start.elapsed().as_millis() as u64;
 
@@ -317,16 +319,28 @@ fn ms_since(base: Instant) -> u64 {
 
 // ─── The probe task — replica of `probe_augment_surface` (`lib.rs:1485-1553`) ─
 
-async fn run_probe(state: Arc<ProbeState>, probe_seq: u64, issued_at: Instant, bench_start: Instant) {
+async fn run_probe(
+    state: Arc<ProbeState>,
+    probe_seq: u64,
+    issued_at: Instant,
+    bench_start: Instant,
+) {
     // First statement of the spawned future: everything before this is the
     // runtime's own pre-first-poll scheduling latency, which in the product
     // lands inside `transportMs` (`lib.rs:1510-1512`).
     let transport_ms = ms_since(issued_at);
     let start = Instant::now();
 
-    let Some(permit) = CapturePermit::try_acquire(&GEOMETRY_CAPTURE_IN_FLIGHT, MAX_CONCURRENT_CAPTURES)
+    let Some(permit) =
+        CapturePermit::try_acquire(&GEOMETRY_CAPTURE_IN_FLIGHT, MAX_CONCURRENT_CAPTURES)
     else {
-        emit_absent(bench_start, probe_seq, ms_since(start), transport_ms, "geometry-capture-busy");
+        emit_absent(
+            bench_start,
+            probe_seq,
+            ms_since(start),
+            transport_ms,
+            "geometry-capture-busy",
+        );
         state.settle(probe_seq);
         return;
     };
@@ -401,7 +415,13 @@ async fn run_probe(state: Arc<ProbeState>, probe_seq: u64, issued_at: Instant, b
 /// path `pre_capture_ms` is a COPY of total elapsed and the sub-phases are
 /// zero. Reproduced exactly, because a reader who knows the product will
 /// otherwise misread these records as a slow enumeration.
-fn emit_absent(bench_start: Instant, probe_seq: u64, elapsed_ms: u64, transport_ms: u64, reason: &str) {
+fn emit_absent(
+    bench_start: Instant,
+    probe_seq: u64,
+    elapsed_ms: u64,
+    transport_ms: u64,
+    reason: &str,
+) {
     println!(
         "[geometry-timing] {{\"benchElapsedMs\":{},\"probeSeq\":{},\"stale\":true,\
          \"preCaptureMs\":{},\"captureMs\":0,\"analysisMs\":0,\"padMs\":0,\
@@ -509,9 +529,9 @@ fn geometry_tick(
         }
     }
 
-    let wedged = state
-        .oldest_native_start()
-        .is_some_and(|oldest| now.duration_since(oldest).as_millis() as u64 >= WEDGED_NATIVE_PROBE_MS);
+    let wedged = state.oldest_native_start().is_some_and(|oldest| {
+        now.duration_since(oldest).as_millis() as u64 >= WEDGED_NATIVE_PROBE_MS
+    });
     let cap = if wedged {
         MAX_OUTSTANDING_WITH_WEDGED_REPLACEMENT
     } else {
