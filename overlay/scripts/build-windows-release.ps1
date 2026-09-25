@@ -436,9 +436,11 @@ $applied = if ($AppliedClaudeCommits.Count -gt 0) {
 
 $verification | Set-Content -Path (Join-Path $artifactRoot "VERIFICATION.txt") -Encoding UTF8
 
+# One command per line and no commas: `Get-Item a, Get-Item b` would parse
+# as a single Get-Item call receiving the rest as positional arguments.
 $binaryArtifacts = @(
-  Get-Item (Join-Path $artifactRoot "mayhem-oracle-overlay.exe"),
-  Get-Item (Join-Path $artifactRoot (Split-Path -Leaf $nsis)),
+  Get-Item (Join-Path $artifactRoot "mayhem-oracle-overlay.exe")
+  Get-Item (Join-Path $artifactRoot (Split-Path -Leaf $nsis))
   Get-Item (Join-Path $artifactRoot $msiCandidates[0].Name)
 )
 $checksumLines = foreach ($artifact in $binaryArtifacts) {
