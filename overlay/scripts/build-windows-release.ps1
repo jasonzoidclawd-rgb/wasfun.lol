@@ -15,7 +15,13 @@ $overlayRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $overlayRoot
 $sourceCommit = (& git.exe -C $repoRoot rev-parse HEAD).Trim()
 $shortCommit = $sourceCommit.Substring(0, 12)
-$sourceBranch = (& git.exe -C $repoRoot branch --show-current).Trim()
+# CI checkouts are detached, where `branch --show-current` prints nothing.
+$sourceBranch = "$(& git.exe -C $repoRoot branch --show-current)".Trim()
+if (-not $sourceBranch) {
+  $sourceBranch = @($env:GITHUB_HEAD_REF, $env:GITHUB_REF_NAME, "(detached)") |
+    Where-Object { $_ } |
+    Select-Object -First 1
+}
 $initialStatus = @(& git.exe -C $repoRoot status --porcelain=v1)
 if ($initialStatus.Count -gt 0) {
   throw "The release build requires a clean worktree before output creation."
@@ -364,11 +370,37 @@ if (-not $?) {
   throw "Dependency license generation failed."
 }
 
-$nodeVersion = (& node.exe --version).Trim()
-$npmVersion = (& npm.cmd --version).Trim()
-$rustVersion = (& rustc.exe --version).Trim()
-$cargoVersion = (& cargo.exe --version).Trim()
-$tauriVersion = (& npx.cmd tauri --version).Trim()
+function Get-ToolVersion {
+  param(
+    [Parameter(Mandatory)][string]$Command,
+    [Parameter(Mandatory)][string[]]$Arguments,
+    [Parameter(Mandatory)][string]$WorkingDirectory
+  )
+  Push-Location $WorkingDirectory
+  $previousErrorActionPreference = $ErrorActionPreference
+  try {
+    # npm/npx may print warnings on stderr; only stdout carries the version.
+    $ErrorActionPreference = "Continue"
+    $output = @(& $Command @Arguments 2>$null)
+    $exitCode = $LASTEXITCODE
+  } finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+    Pop-Location
+  }
+  $first = $output | Where-Object { "$_".Trim() } | Select-Object -First 1
+  if ($exitCode -ne 0 -or -not $first) {
+    throw "$Command $($Arguments -join ' ') did not report a version (exit $exitCode)."
+  }
+  return "$first".Trim()
+}
+
+$nodeVersion = Get-ToolVersion -Command "node.exe" -Arguments @("--version") -WorkingDirectory $repoRoot
+$npmVersion = Get-ToolVersion -Command "npm.cmd" -Arguments @("--version") -WorkingDirectory $repoRoot
+$rustVersion = Get-ToolVersion -Command "rustc.exe" -Arguments @("--version") -WorkingDirectory $tauriRoot
+$cargoVersion = Get-ToolVersion -Command "cargo.exe" -Arguments @("--version") -WorkingDirectory $tauriRoot
+# The Tauri CLI is an overlay devDependency; from the repository root npx
+# would resolve the unrelated public `tauri` package instead.
+$tauriVersion = Get-ToolVersion -Command "npx.cmd" -Arguments @("--no-install", "tauri", "--version") -WorkingDirectory $overlayRoot
 $windowsVersion = [Environment]::OSVersion.VersionString
 $sdkVersion = [string]$env:WindowsSDKVersion
 $msvcVersion = [string]$env:VCToolsVersion
@@ -404,9 +436,11 @@ $applied = if ($AppliedClaudeCommits.Count -gt 0) {
 
 $verification | Set-Content -Path (Join-Path $artifactRoot "VERIFICATION.txt") -Encoding UTF8
 
+# One command per line and no commas: `Get-Item a, Get-Item b` would parse
+# as a single Get-Item call receiving the rest as positional arguments.
 $binaryArtifacts = @(
-  Get-Item (Join-Path $artifactRoot "mayhem-oracle-overlay.exe"),
-  Get-Item (Join-Path $artifactRoot (Split-Path -Leaf $nsis)),
+  Get-Item (Join-Path $artifactRoot "mayhem-oracle-overlay.exe")
+  Get-Item (Join-Path $artifactRoot (Split-Path -Leaf $nsis))
   Get-Item (Join-Path $artifactRoot $msiCandidates[0].Name)
 )
 $checksumLines = foreach ($artifact in $binaryArtifacts) {
@@ -426,6 +460,14 @@ $preliminaryZip = Join-Path $deliveryRoot "mayhem-windows-overlay-x64-$shortComm
 if (Test-Path $preliminaryZip) {
   Remove-Item $preliminaryZip -Force
 }
+# ZIP cannot store timestamps before 1980, and some crates unpack with
+# 1973 mtimes that Copy-Item preserves on the copied license files. Windows
+# PowerShell 5.1's Compress-Archive throws on them (newer versions clamp with
+# a warning), so clamp explicitly; newer files keep their real timestamps.
+$zipEpoch = [datetime]::new(1980, 1, 2, 0, 0, 0, [DateTimeKind]::Local)
+Get-ChildItem $artifactRoot -Recurse -File |
+  Where-Object { $_.LastWriteTime -lt $zipEpoch } |
+  ForEach-Object { $_.LastWriteTime = $zipEpoch }
 Compress-Archive -Path $artifactRoot -DestinationPath $preliminaryZip -CompressionLevel Optimal
 
 Copy-Item (Join-Path $PSScriptRoot "validate-windows-installer.ps1") $deliveryRoot -Force

@@ -1,4 +1,3 @@
-import type { MemberSnapshot } from "../../auth/member";
 import type {
   AugmentRound,
   DecisionCandidateResult,
@@ -9,10 +8,6 @@ import type { TierLetter } from "../../model/tier";
 export function isTierFixtureEnabled(): boolean {
   return false;
 }
-
-export const TIER_FIXTURE_MEMBER: MemberSnapshot = {
-  enabled: false,
-};
 
 export interface AramggFixtureCard {
   slug: string;

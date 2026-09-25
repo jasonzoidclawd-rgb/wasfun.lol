@@ -5,6 +5,11 @@ on:
   push:
     branches:
       - feat/overlay-tier-card-windows-parity
+  pull_request:
+    paths:
+      - ".github/workflows/windows-overlay-delivery.yml"
+      - "overlay/scripts/*windows*.ps1"
+      - "overlay/scripts/project-npm-lock.mjs"
 
 # Private, short-retention build evidence only. This workflow never publishes a
 # release and has no repository write permission.
@@ -20,6 +25,10 @@ jobs:
     steps:
       - name: Check out selected commit
         uses: actions/checkout@v5.0.1
+        with:
+          # On pull requests, build the PR head commit rather than GitHub's
+          # ephemeral merge commit, so the manifest names a real commit.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Node.js 22
         uses: actions/setup-node@v5.0.0
@@ -74,7 +83,7 @@ jobs:
       - name: Upload private preliminary delivery
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: mayhem-windows-overlay-x64-${{ github.sha }}-preliminary
+          name: mayhem-windows-overlay-x64-${{ github.event.pull_request.head.sha || github.sha }}-preliminary
           path: out/windows-x64/**
           if-no-files-found: error
           retention-days: 7

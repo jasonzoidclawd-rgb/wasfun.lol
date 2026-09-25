@@ -1,0 +1,19 @@
+Captured before the first writer of this slice (2026-08-27).
+
+## feat/overlay-tier-card...origin/feat/overlay-tier-card [ahead 1]
+ M overlay/src-tauri/src/lib.rs
+ M overlay/src-tauri/src/surface_probe.rs
+ M overlay/src/App.tsx
+ M overlay/src/surfaceGeometry.ts
+?? .codex/evidence/... (7 entries)
+?? .codex/gates/... (5 entries)
+?? docs/proposals/
+?? docs/reviews/2026-08-20-v08-recovery-and-harness-audit.md
+?? overlay/src-tauri/src/runtime_occupancy.rs
+?? overlay/src-tauri/tests/latency_attribution_fields.rs
+?? overlay/src-tauri/tests/runtime_occupancy_fields.rs
+?? overlay/src/latencyAttribution.test.ts
+
+NOTE: lib.rs, surface_probe.rs, App.tsx and surfaceGeometry.ts already carried
+uncommitted operator/prior-slice work at baseline. This slice adds to lib.rs
+only. Whoever commits is committing both.

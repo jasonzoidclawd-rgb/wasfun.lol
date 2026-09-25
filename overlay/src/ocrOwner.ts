@@ -1,5 +1,3 @@
-import { fingerprintChanged } from "./surfaceGeometry";
-
 /**
  * Phase C policy, measured against the existing 2 s native watchdog and 150 ms
  * geometry cadence. Two visible retries fit inside the old 1.5 s retry window;
@@ -20,6 +18,7 @@ export interface OcrOwnerContext {
   championGeneration: number;
   championId: string | null;
   offerGeneration: number;
+  round: number | null;
   requestedSlots: number[];
   slotGenerations: number[];
   fingerprints: string[];
@@ -31,6 +30,24 @@ export interface OcrOwnerToken extends OcrOwnerContext {
   timeoutDeadline: number;
 }
 
+/**
+ * May this completed run publish?
+ *
+ * Every axis here is SEMANTIC — an epoch, a champion, or a generation counter
+ * that some other authority deliberately advanced. Raw fingerprint drift is
+ * deliberately NOT one of them.
+ *
+ * It used to be. `current.fingerprints` is the accepted baseline, which the
+ * settlement re-latch rewrites without touching anything else, so a run keyed to
+ * the baseline at trigger time could be rejected purely because the baseline
+ * moved underneath it while the card did not. The 2026-07-27 trace has 25 stale
+ * rejects; 24 carried `cause: fingerprint-drift` with
+ * `slotGenerationsAtStart === slotGenerationsNow` on all 25 rows and
+ * `currentOwnerRunId === runId` on all 24 non-null rows — nothing had actually
+ * been superseded, and every one of those discarded reads was correct. A real
+ * replacement still rejects the run, one line up, via `slotGenerations`, because
+ * the confirmed-reroll path bumps that counter when it clears the slot.
+ */
 export function ownerCurrent(
   result: OcrOwnerToken,
   currentOwner: OcrOwnerToken | null,
@@ -42,12 +59,11 @@ export function ownerCurrent(
     result.gameEpoch !== current.gameEpoch ||
     result.championGeneration !== current.championGeneration ||
     result.championId !== current.championId ||
-    result.offerGeneration !== current.offerGeneration
+    result.offerGeneration !== current.offerGeneration ||
+    result.round !== current.round
   ) return false;
   return result.requestedSlots.every((slot) =>
-    result.slotGenerations[slot] === current.slotGenerations[slot] &&
-    !fingerprintChanged(result.fingerprints[slot] ?? "", current.fingerprints[slot] ?? "")
-  );
+    result.slotGenerations[slot] === current.slotGenerations[slot]);
 }
 
 /** The single authority that invalidated a completed-but-unpublishable OCR run. */
@@ -57,8 +73,8 @@ export type StaleRejectCause =
   | "champion-id"
   | "champion-generation"
   | "offer-generation"
+  | "round"
   | "slot-generation"
-  | "fingerprint-drift"
   | "owner-replaced"
   | "capture-seq-only";
 
@@ -79,6 +95,13 @@ export type StaleRejectCause =
  * authority: when it is the only thing that moved, the diagnostic has to say so
  * rather than report a supersede that did not happen.
  *
+ * `fingerprint-drift` is GONE from this chain because it is gone from
+ * `ownerCurrent`. Leaving it would be worse than useless: sitting above
+ * `owner-replaced`, it would relabel rejections it no longer causes and hide the
+ * authority that did. The drift itself is still measured — as bounded per-slot
+ * Hamming integers by `staleRejectSlotDrift`, which is evidence rather than a
+ * verdict.
+ *
  * Diagnostic only — this classifies a rejection the caller has already decided.
  */
 export function classifyStaleReject(
@@ -92,13 +115,9 @@ export function classifyStaleReject(
   if (result.championId !== current.championId) return "champion-id";
   if (result.championGeneration !== current.championGeneration) return "champion-generation";
   if (result.offerGeneration !== current.offerGeneration) return "offer-generation";
+  if (result.round !== current.round) return "round";
   for (const slot of result.requestedSlots) {
     if (result.slotGenerations[slot] !== current.slotGenerations[slot]) return "slot-generation";
-  }
-  for (const slot of result.requestedSlots) {
-    if (fingerprintChanged(result.fingerprints[slot] ?? "", current.fingerprints[slot] ?? "")) {
-      return "fingerprint-drift";
-    }
   }
   if (currentOwner?.runId !== result.runId) return "owner-replaced";
   if (captureSeqStale) return "capture-seq-only";

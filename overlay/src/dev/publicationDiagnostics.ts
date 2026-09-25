@@ -1,4 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
+import type { OfferSurfaceKind } from "../offerSurfaceState";
+import type { GeometryClassification } from "../surfaceGeometry";
 
 export type DiagnosticMarker =
   | "[slot-publication]"
@@ -9,17 +11,20 @@ export type DiagnosticMarker =
   | "[identity-publish]"
   | "[identity-stale-reject]"
   | "[identity-timeout]"
-  | "[identity-watchdog-restart]"
+  | "[identity-watchdog-abandon]"
   | "[identity-retry]"
   | "[offer-state]"
   | "[offer-session]"
+  | "[badge-layer]"
+  | "[round-content-complete]"
   | "[game-poll]"
   | "[geometry-watchdog]"
   | "[identity-native-return]"
   | "[geometry-timing]"
   | "[geometry-stale-hide]"
   | "[geometry-recovery]"
-  | "[foreground-poll]";
+  | "[foreground-poll]"
+  | "[focus-transition]";
 
 /** Bounded, irreversible FNV-1a hash; complete OCR text is never logged. */
 export function boundedDiagnosticHash(value: string | null | undefined): string | null {
@@ -30,6 +35,122 @@ export function boundedDiagnosticHash(value: string | null | undefined): string 
     hash = Math.imul(hash, 0x01000193);
   }
   return `h${(hash >>> 0).toString(16).padStart(8, "0")}`;
+}
+
+type OfferAcquisitionDiagnosticInput = {
+  roundOwner: number | null;
+  offerGeneration: number;
+  geometrySequence: number;
+  stale: boolean;
+  surfaceClassification: GeometryClassification;
+  offerState: OfferSurfaceKind;
+  geometryAction: "publish" | "preserve" | "clear" | null;
+  validCardCount: number;
+  blueControlConfidence: number;
+  fingerprints: readonly [string | null, string | null, string | null];
+  fingerprintChangeCount: number;
+  confirmedRerollCount: number;
+  baselineSettling: boolean;
+  newOfferDetected: boolean;
+  gameEpoch: number;
+  foregroundEpoch: number;
+  timeSinceLastAcceptedOfferMs: number | null;
+};
+
+export function describeOfferAcquisitionDiagnostic(
+  input: OfferAcquisitionDiagnosticInput,
+) {
+  let failureCategory: "stale-result-rejected" | "offer-not-detected" | null = null;
+  let rejectionStage: string | null = null;
+  let rejectionReason: string | null = null;
+
+  if (!input.newOfferDetected) {
+    failureCategory = input.stale ? "stale-result-rejected" : "offer-not-detected";
+    if (input.stale) {
+      rejectionStage = "geometry-currentness";
+      rejectionReason = "superseded-geometry-sequence";
+    } else if (input.offerState === "OCCLUDED") {
+      rejectionStage = "surface-classification";
+      rejectionReason = "current-surface-occluded";
+    } else if (input.surfaceClassification === "absent") {
+      rejectionStage = "surface-classification";
+      rejectionReason = "current-surface-absent";
+    } else if (input.surfaceClassification === "uncertain") {
+      rejectionStage = "surface-classification";
+      rejectionReason = input.geometryAction === "preserve"
+        ? "current-surface-preserved"
+        : input.geometryAction === "clear"
+          ? "current-surface-cleared"
+          : "current-surface-uncertain";
+    } else if (input.offerState === "NO_OFFER") {
+      rejectionStage = "surface-classification";
+      rejectionReason = input.geometryAction === "preserve"
+        ? "current-surface-preserved"
+        : input.geometryAction === "clear"
+          ? "current-surface-cleared"
+          : "current-surface-no-offer";
+    } else if (input.geometryAction === "preserve") {
+      rejectionStage = "surface-classification";
+      rejectionReason = "current-surface-preserved";
+    } else if (input.geometryAction === "clear") {
+      rejectionStage = "surface-classification";
+      rejectionReason = "current-surface-cleared";
+    } else if (input.fingerprintChangeCount === 0) {
+      rejectionStage = "fingerprint-comparison";
+      rejectionReason = "duplicate-observation";
+    } else if (input.fingerprintChangeCount === 1) {
+      rejectionStage = "fingerprint-comparison";
+      rejectionReason = "one-slot-reroll";
+    } else if (input.confirmedRerollCount < 2) {
+      rejectionStage = "fingerprint-confirmation";
+      rejectionReason = "multi-slot-confirmation-pending";
+    } else {
+      rejectionStage = "fingerprint-confirmation";
+      rejectionReason = input.baselineSettling
+        ? "baseline-settling"
+        : "new-offer-not-confirmed";
+    }
+  }
+
+  const { fingerprints, ...bounded } = input;
+  return {
+    ...bounded,
+    fingerprintHashes: [
+      boundedDiagnosticHash(fingerprints[0]),
+      boundedDiagnosticHash(fingerprints[1]),
+      boundedDiagnosticHash(fingerprints[2]),
+    ] as const,
+    failureCategory,
+    rejectionStage,
+    rejectionReason,
+  };
+}
+
+type LiveClientStatus = "ready" | "unavailable" | "error";
+
+type LiveClientStatusTransitionInput = {
+  previousStatus: LiveClientStatus | null;
+  nextStatus: LiveClientStatus;
+  gameEpoch: number;
+  foregroundEpoch: number;
+  monotonicMilliseconds: number;
+};
+
+export function describeLiveClientStatusTransition(
+  input: LiveClientStatusTransitionInput,
+) {
+  if (input.previousStatus == null || input.previousStatus === input.nextStatus) return null;
+  const transition = input.previousStatus === "ready" && input.nextStatus === "unavailable"
+    ? "ready->unavailable"
+    : input.previousStatus === "unavailable" && input.nextStatus === "ready"
+      ? "unavailable->ready"
+      : input.previousStatus === "ready" && input.nextStatus === "error"
+        ? "ready->error"
+        : `${input.previousStatus}->${input.nextStatus}`;
+  return {
+    ...input,
+    transition,
+  };
 }
 
 /**

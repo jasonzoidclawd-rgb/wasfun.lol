@@ -6,14 +6,13 @@
  *   2. the env flag `MAYHEM_OVERLAY_TIER_FIXTURE=1` is set.
  *
  * In a production Tauri build `import.meta.env.DEV` is false, so this is inert
- * regardless of the flag. It bypasses ONLY the member-coach auth/data fetch and
- * drives the REAL overlay render path (badges + CoachPanel) with statistics
- * sourced from ARAMGG (`aramggSource.ts`). Statistics are NEVER synthetic and
- * NEVER fall back to local `augments.json`: only card geometry may be injected
- * when live OCR detection is unavailable. It does not touch OCR, calibration,
- * positioning, collector consent, or any production auth path.
+ * regardless of the flag. It drives the REAL local overlay badge path with
+ * statistics sourced from ARAMGG (`aramggSource.ts`) without changing the
+ * member snapshot or unlocking the authenticated CoachPanel. Statistics are
+ * NEVER synthetic and NEVER fall back to local `augments.json`: only card
+ * geometry may be injected when live OCR detection is unavailable. It does not
+ * touch OCR, calibration, positioning, collector consent, or production auth.
  */
-import type { MemberSnapshot } from "../auth/member";
 import type {
   AugmentRound,
   DecisionCandidateResult,
@@ -43,12 +42,6 @@ export function isTierFixtureEnabled(): boolean {
     flag: env.MAYHEM_OVERLAY_TIER_FIXTURE,
   });
 }
-
-/** A member snapshot that unlocks the coach without any real entitlement. */
-export const TIER_FIXTURE_MEMBER: MemberSnapshot = {
-  enabled: true,
-  accessKind: "member",
-};
 
 /** One offered card resolved to its canonical ARAMGG record. */
 export interface AramggFixtureCard {

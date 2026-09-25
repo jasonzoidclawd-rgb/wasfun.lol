@@ -156,6 +156,26 @@ export function beginBaselineSettlement(
  * candidate is REPLACED and both floors restart. Sub-band sparkle is equivalent,
  * and the baseline keeps the FIRST equivalent fingerprint rather than chasing
  * the glow. An absent card suspends settlement — a partial offer must not latch.
+ *
+ * LATCHING IS TERMINAL FOR THE OFFER. Settling answers one question — "has the
+ * entry animation finished?" — and that question cannot become unanswered while
+ * the same offer is on screen. Re-opening it was the single knot behind the
+ * 2026-07-27 hover regressions, because `drifted` is computed over ALL THREE
+ * cards: one slot oscillating between two poles ~1-2 s apart unlatched the whole
+ * offer, and the caller treats "settling" as a reason to skip
+ * `advanceRerollConfirmation` and wipe both the pending streak and the held set.
+ * With `REROLL_CONFIRM_PROBES = 3` needing three consecutive probes, no streak
+ * ever survived: in that trace the confirmed-reroll authority fired ZERO times
+ * across the whole offer — including for the two GENUINE card replacements
+ * (slot 1 augment 2018 -> 1051 at Hamming 22, slot 2 1170 -> 2016 at Hamming 30).
+ * Each unlatch also re-latched onto whichever pole happened to be quiet, so the
+ * accepted baseline itself kept moving.
+ *
+ * Ending settlement per offer is what makes slot generation safe as the sole
+ * identity authority: a real replacement now accumulates its three probes and
+ * bumps the generation, while pure A/B oscillation still never confirms (the
+ * candidate flips every frame, so `sameCandidate` fails and the count resets).
+ * A genuinely new offer calls `beginBaselineSettlement` and settles again.
  */
 export function advanceBaselineSettlement(params: {
   settlement: BaselineSettlement;
@@ -167,6 +187,7 @@ export function advanceBaselineSettlement(params: {
   const minObservations = params.minObservations ?? BASELINE_STABLE_OBSERVATIONS;
   const minStableMs = params.minStableMs ?? BASELINE_STABLE_MS;
   const { settlement, observation, now } = params;
+  if (settlement.latched) return settlement;
   const present = observation.cards.filter((card) => card.present);
   if (present.length < observation.cards.length) {
     // Incomplete surface: hold the candidate, do not advance either floor.

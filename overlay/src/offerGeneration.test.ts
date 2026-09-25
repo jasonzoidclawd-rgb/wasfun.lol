@@ -82,6 +82,7 @@ describe("R1-R4 offer generations", () => {
       championGeneration: 1,
       championId: "56",
       offerGeneration: first.offerGeneration,
+      round: 1,
       requestedSlots: [0, 1, 2],
       slotGenerations: [1, 1, 1],
       fingerprints: ["10".repeat(72), "1100".repeat(36), "1110".repeat(36)],

@@ -38,8 +38,14 @@ interface CollectorStatusOptions {
   publishRefreshes?: boolean;
 }
 
+// A `() => {}` written inline as the default is re-evaluated on every call,
+// so callers that omit `onStatus` get a new identity per render. That
+// destabilises `applyStatus` and makes both effects below re-run on every
+// commit, re-subscribing the event listener each time.
+const IGNORE_STATUS = () => {};
+
 export function useCollectorStatus(
-  onStatus: (status: CollectorSnapshot) => void = () => {},
+  onStatus: (status: CollectorSnapshot) => void = IGNORE_STATUS,
   {
     poll = true,
     publishRefreshes = false,

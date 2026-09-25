@@ -63,3 +63,35 @@ jobs:
 
       - name: Run model tests
         run: python3 -m pytest scripts/model/tests -q
+
+  validation-skill-tests:
+    # The live-validation skill under .codex/skills/test-league-augment-overlay
+    # produces the pinned evidence every overlay slice reasons from, and its own
+    # test suite ran in no gate. Its scripts are stdlib-only; the recorder tests
+    # build and probe real videos, so ffmpeg/ffprobe and lsof must be present.
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5.0.0
+        with:
+          node-version: "22"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install recorder test tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg lsof
+
+      - name: Verify the documented workflow resolves from the repository root
+        run: bash .codex/skills/test-league-augment-overlay/scripts/verify_workflow_cwd.sh
+
+      - name: Run validation-skill unit tests
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
+            -s .codex/skills/test-league-augment-overlay/scripts -p 'test_*.py'

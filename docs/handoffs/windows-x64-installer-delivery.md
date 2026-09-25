@@ -78,19 +78,37 @@ References:
 - Windows OCR available recognizer languages:
   <https://learn.microsoft.com/en-us/uwp/api/windows.media.ocr.ocrengine.availablerecognizerlanguages>
 
-## Current execution blockers
+## Status (2026-09-25)
 
-The current host is macOS 15.7.4 arm64 and has no UTM, Parallels, VMware,
-VirtualBox, Docker Windows runtime, or other Windows VM. The repository has no
-self-hosted Actions runner and no Windows VM credentials.
+The GitHub-hosted Windows path works end to end. Delivery run
+[36160962400](https://github.com/jasonzoidclawd-rgb/wasfun.lol/actions/runs/36160962400)
+(PR #65, head `ef27ecd`) passed every stage and uploaded
+`mayhem-windows-overlay-x64-*-preliminary` (~890 MB, 7-day retention).
+The workflow also runs on pull requests that touch the delivery pipeline.
 
-GitHub's configured `windows-latest` workflow is not currently usable: run
-`29697618877` was rejected before checkout because recent account payments
-failed or the spending limit must be increased. The local Windows branch has
-no remote ref, and this delivery workflow has not been pushed or dispatched.
+Fixed on the way there, in pipeline order:
 
-Even after GitHub billing is repaired and a temporary private branch is
-authorized, a GitHub-hosted build runner is not a clean end-user machine. Final
-delivery still requires a disposable interactive Windows 10/11 x64 VM with
-WebView2 initially absent so install/launch/uninstall behavior and screenshots
-can be independently verified.
+1. PR checkouts are detached: the branch name now falls back to
+   `GITHUB_HEAD_REF` / `GITHUB_REF_NAME`, and PR runs build the head
+   commit, not GitHub's ephemeral merge commit.
+2. `.gitattributes` keeps `overlay/src/**/*.ts(x)` LF on Windows, so the
+   source-scanning tests match.
+3. `examples/geometry_dispatch_bench.rs` is rustfmt-clean (the fmt gate
+   only allows the pre-existing debt list).
+4. License inventory: Windows PowerShell 5.1's `ConvertFrom-Json` rejects
+   lockfile v3's empty root key, so `project-npm-lock.mjs` flattens it.
+5. Manifest version probes run in the owning directory and tolerate
+   stderr (`npx tauri` from the repo root resolved the wrong package).
+6. Binary collection: no comma-joined `Get-Item` calls inside `@( )`.
+7. ZIP: files older than 1980 (crates unpack with 1973 mtimes) are
+   clamped to 1980-01-02 before `Compress-Archive`.
+
+## Remaining before final delivery
+
+The bundle is deliberately PRELIMINARY. A GitHub-hosted build runner is
+not a clean end-user machine: run `complete-windows-clean-validation.ps1`
+on a disposable Windows 10/11 x64 VM with WebView2 initially absent, which
+adds the four screenshots and produces the final ZIP. League/OCR/capture
+behavior still needs controlled validation on real Windows hardware. No
+signing certificate is configured, so installers are unsigned
+(SmartScreen warning expected).

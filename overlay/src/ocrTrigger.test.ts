@@ -46,17 +46,25 @@ function obs(cards: GeometryCard[], over: Partial<GeometryObservation> = {}): Ge
   };
 }
 
-const rec = (fingerprint: string, resolution: string | null, resolvedAt = 0): IdentityRecord<string> => ({
+const rec = (
+  fingerprint: string,
+  resolution: string | null,
+  resolvedAt = 0,
+  slotGeneration = 0,
+): IdentityRecord<string> => ({
   fingerprint,
   resolution,
   resolvedAt,
+  slotGeneration,
 });
 
 const PRESENT = [card(0, FP0), card(1, FP1), card(2, FP2)];
+/** Steady state: every record was read under the generation still in force. */
+const GEN = [0, 0, 0];
 
 describe("decideOcrTrigger", () => {
   it("triggers all three slots on a freshly appeared offer (no records)", () => {
-    const d = decideOcrTrigger({ observation: obs(PRESENT), identities: [null, null, null], now: 0, retryMs: IDENTITY_RETRY_MS });
+    const d = decideOcrTrigger({ observation: obs(PRESENT), identities: [null, null, null], slotGenerations: GEN, now: 0, retryMs: IDENTITY_RETRY_MS });
     expect(d.trigger).toBe(true);
     expect(d.slots).toEqual([0, 1, 2]);
   });
@@ -65,6 +73,7 @@ describe("decideOcrTrigger", () => {
     const d = decideOcrTrigger({
       observation: obs(PRESENT),
       identities: [rec(FP0, "a"), rec(FP1, "b"), rec(FP2, "c")],
+      slotGenerations: GEN,
       now: 100,
       retryMs: IDENTITY_RETRY_MS,
     });
@@ -74,15 +83,32 @@ describe("decideOcrTrigger", () => {
   });
 
   it("a rerolled slot re-reads ONLY that slot; others keep their identities", () => {
+    // A reroll is the CONFIRMED-REROLL path advancing slot 1's generation. The
+    // new pixels come with it, but they are not what makes it a reroll.
     const rerolled = obs([card(0, FP0), card(1, FP1_REROLL), card(2, FP2)]);
     const d = decideOcrTrigger({
       observation: rerolled,
       identities: [rec(FP0, "a"), rec(FP1, "b"), rec(FP2, "c")],
+      slotGenerations: [0, 1, 0],
       now: 100,
       retryMs: IDENTITY_RETRY_MS,
     });
     expect(d.slots).toEqual([1]);
     expect(d.reason).toContain("reroll:1");
+  });
+
+  it("new pixels WITHOUT a generation advance are hover/animation, not a reroll", () => {
+    // The 2026-07-27 regression in one assertion: 144 bits of movement on slot 1
+    // and the trigger stays silent, because no authority confirmed a change.
+    const d = decideOcrTrigger({
+      observation: obs([card(0, FP0), card(1, FP1_REROLL), card(2, FP2)]),
+      identities: [rec(FP0, "a"), rec(FP1, "b"), rec(FP2, "c")],
+      slotGenerations: GEN,
+      now: 100,
+      retryMs: IDENTITY_RETRY_MS,
+    });
+    expect(d.trigger).toBe(false);
+    expect(d.reason).toBe("up-to-date");
   });
 
   it.each([0, 1, 2])(
@@ -91,9 +117,12 @@ describe("decideOcrTrigger", () => {
       const rerolledCards = [...PRESENT];
       rerolledCards[changedSlot] = card(changedSlot, FP1_REROLL);
       const identities = [rec(FP0, "left"), rec(FP1, "middle"), rec(FP2, "right")];
+      const slotGenerations = [0, 0, 0];
+      slotGenerations[changedSlot] = 1;
       const d = decideOcrTrigger({
         observation: obs(rerolledCards),
         identities,
+        slotGenerations,
         now: 100,
         retryMs: IDENTITY_RETRY_MS,
       });
@@ -107,9 +136,9 @@ describe("decideOcrTrigger", () => {
 
   it("re-triggers an unresolved slot only after the retry deadline", () => {
     const identities = [rec(FP0, null, 0), rec(FP1, "b"), rec(FP2, "c")];
-    const before = decideOcrTrigger({ observation: obs(PRESENT), identities, now: IDENTITY_RETRY_MS - 1, retryMs: IDENTITY_RETRY_MS });
+    const before = decideOcrTrigger({ observation: obs(PRESENT), identities, slotGenerations: GEN, now: IDENTITY_RETRY_MS - 1, retryMs: IDENTITY_RETRY_MS });
     expect(before.trigger).toBe(false);
-    const after = decideOcrTrigger({ observation: obs(PRESENT), identities, now: IDENTITY_RETRY_MS, retryMs: IDENTITY_RETRY_MS });
+    const after = decideOcrTrigger({ observation: obs(PRESENT), identities, slotGenerations: GEN, now: IDENTITY_RETRY_MS, retryMs: IDENTITY_RETRY_MS });
     expect(after.slots).toEqual([0]);
     expect(after.reason).toContain("retry:0");
   });
@@ -118,6 +147,7 @@ describe("decideOcrTrigger", () => {
     const d = decideOcrTrigger({
       observation: obs(PRESENT, { occluded: true }),
       identities: [null, null, null],
+      slotGenerations: GEN,
       now: 0,
       retryMs: IDENTITY_RETRY_MS,
     });
@@ -129,6 +159,7 @@ describe("decideOcrTrigger", () => {
     const d = decideOcrTrigger({
       observation: obs([card(0, "", false), card(1, "", false), card(2, "", false)], { present: false }),
       identities: [null, null, null],
+      slotGenerations: GEN,
       now: 0,
       retryMs: IDENTITY_RETRY_MS,
     });
@@ -140,6 +171,7 @@ describe("decideOcrTrigger", () => {
     const d = decideOcrTrigger({
       observation: obs(PRESENT),
       identities: [rec(FP0, "a"), rec(FP1, "b"), rec(FP2, "c")],
+      slotGenerations: GEN,
       now: 100,
       retryMs: IDENTITY_RETRY_MS,
       forceSlots: [2],

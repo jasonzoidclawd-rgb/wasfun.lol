@@ -298,18 +298,12 @@ fn normalize_identity(value: &str) -> String {
 mod tests {
     use super::{
         classify_foreground, effective_frontmost_pid, is_actual_game_process,
-        is_actual_game_window, is_game_owner, is_league_client_ux_process,
-        is_riot_client_process, select_frontmost_window, ForegroundObservation, WindowCandidate,
+        is_actual_game_window, is_game_owner, is_league_client_ux_process, is_riot_client_process,
+        select_frontmost_window, ForegroundObservation, WindowCandidate,
         LEAGUE_CLIENT_UX_BUNDLE_ID, LEAGUE_GAME_BUNDLE_ID, RIOT_CLIENT_BUNDLE_ID,
     };
 
-    fn candidate(
-        layer: i32,
-        pid: u32,
-        owner: &str,
-        width: f64,
-        height: f64,
-    ) -> WindowCandidate {
+    fn candidate(layer: i32, pid: u32, owner: &str, width: f64, height: f64) -> WindowCandidate {
         WindowCandidate {
             window_number: None,
             layer: Some(layer),
@@ -391,7 +385,9 @@ mod tests {
             bundle_identifier: Some("com.apple.Terminal"),
             owner_name: selected.owner_name.as_deref(),
             window_title: None,
-            executable_path: Some("/System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"),
+            executable_path: Some(
+                "/System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal",
+            ),
             window_handle: None,
             game_running: true,
             game_window_detected: true,
@@ -410,10 +406,7 @@ mod tests {
                 title: Some(String::new()),
                 ..candidate(layer, 1427, "League Of Legends", 1280.0, 720.0)
             };
-            let walk = vec![
-                game,
-                candidate(0, 482, "終端機", 1278.0, 665.0),
-            ];
+            let walk = vec![game, candidate(0, 482, "終端機", 1278.0, 665.0)];
             let selection = select_frontmost_window(&walk);
             assert_eq!(selection.selected_index, Some(0), "layer {layer}");
 
@@ -457,7 +450,11 @@ mod tests {
             is_game_process: true,
             ..candidate(0, 1427, "League Of Legends", 1.0, 2.0)
         };
-        let walk = vec![transparent, degenerate, candidate(0, 482, "終端機", 1278.0, 665.0)];
+        let walk = vec![
+            transparent,
+            degenerate,
+            candidate(0, 482, "終端機", 1278.0, 665.0),
+        ];
         let selection = select_frontmost_window(&walk);
         assert_eq!(selection.verdicts[0], "transparent");
         assert_eq!(selection.verdicts[1], "zero-area");
@@ -598,7 +595,10 @@ mod tests {
         // layer-0 window is the authority whenever one exists.
         let game_pid = Some(4242);
         let terminal_pid = Some(7001);
-        assert_eq!(effective_frontmost_pid(terminal_pid, game_pid), terminal_pid);
+        assert_eq!(
+            effective_frontmost_pid(terminal_pid, game_pid),
+            terminal_pid
+        );
         assert_eq!(effective_frontmost_pid(game_pid, terminal_pid), game_pid);
     }
 

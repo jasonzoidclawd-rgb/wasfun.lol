@@ -152,6 +152,25 @@ describe("champion-only selection — no global fallback exists", () => {
     expect(ds.completeness).toBe("complete");
     expect(ds.loadedCount).toBe(4);
   });
+
+  it("rejects a complete source with zero usable augment rows as an integrity error", () => {
+    expect(() =>
+      parseChampionAugmentDataset({
+        augments: {
+          "not-an-augment-id": { tier: "1", win_rate: "0.5" },
+          "1001": null,
+          "1002": { tier: "1" },
+          "1003": { tier: "1", win_rate: "not-a-rate" },
+          "1004": { tier: "not-a-tier", win_rate: "0.5" },
+        },
+      }, {
+        championId: "56",
+        patch: "16.14",
+        source: "https://aramgg.com/data/champion-augments/56.json",
+        completeness: "complete",
+      }),
+    ).toThrow(/complete.*zero usable/i);
+  });
 });
 
 describe("selectChampionSlotStat — the four badge states, never global", () => {

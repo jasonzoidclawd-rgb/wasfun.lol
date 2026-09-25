@@ -19,6 +19,7 @@
  * (serde camelCase).
  */
 import type { PhysicalRect } from "./calibration";
+import { PROBE_TIMEOUT_MS } from "./surfaceProbeScheduler";
 import {
   emptyVisibleFrame,
   type VisibleOfferFrame,
@@ -98,6 +99,24 @@ export interface GeometryObservation {
   captureMs: number;
   analysisMs: number;
   elapsedMs: number;
+  /**
+   * Command entry → the blocking capture closure actually starting (Rust
+   * `dispatchWaitMs`). This is `spawn_blocking` QUEUE latency, NOT async-runtime
+   * starvation — no *suspension point* precedes the dispatch (the `.await`s on
+   * the way poll their `async fn`s inline; the first thing that can yield comes
+   * after the spawn), so it needs no async worker and reads ~0 even under total
+   * starvation. A large value means the blocking pool is saturated.
+   * OPTIONAL: absent on every observation recorded before the measurement
+   * shipped, and absent on JS-built observations.
+   */
+  dispatchWaitMs?: number;
+  /**
+   * The blocking closure returning → the command returning (Rust
+   * `resumeWaitMs`). This one DOES measure async-runtime scheduling latency:
+   * re-polling the woken timeout requires an async worker.
+   * OPTIONAL for the same reason as `dispatchWaitMs`.
+   */
+  resumeWaitMs?: number;
 }
 
 export type GeometryClassification = "present" | "uncertain" | "absent";
@@ -162,6 +181,166 @@ export function emptyGeometryObservation(
     captureMs: 0,
     analysisMs: 0,
     elapsedMs: 0,
+  };
+}
+
+/**
+ * Honest, elapsed-aware probe label.
+ *
+ * The expression this replaces (`captureValid ? "none" : reasons[0]`) had NO
+ * elapsed-time input, so every one of the 19 round34 probes that took ≥10 s —
+ * up to a 305 s round trip — was labelled `"none"`. Deciding from the deadline
+ * as well as from the pixels makes that impossible.
+ *
+ * LABELLING ONLY. This never reaches a scheduling decision: `nextProbeAction`
+ * keeps deciding from `inFlightSince` / `nativeOutstanding` /
+ * `oldestNativeStartedAt` alone.
+ *
+ * Pure: deterministic, no clock, no I/O, no input mutation.
+ */
+export function classifyProbeTimeout(input: {
+  captureWidth: number;
+  captureHeight: number;
+  rejectionReasons: readonly string[];
+  /** JS invoke round trip (`completedAt - startedAt`). */
+  roundTripMs: number;
+  /** Rust `elapsed_ms` for the whole command body. */
+  nativeElapsedMs: number;
+  /** Watchdog deadline; defaults to the scheduler's own `PROBE_TIMEOUT_MS`. */
+  timeoutMs?: number;
+}): string {
+  // 1. Invalid capture — byte-for-byte today's behavior. A rejection reason names
+  //    a concrete cause and the deadline does not, so it wins even when the probe
+  //    was ALSO starved (real row probeSeq 484).
+  if (input.captureWidth <= 0 || input.captureHeight <= 0) {
+    return input.rejectionReasons[0] ?? "capture-invalid";
+  }
+  // 2. Deadline exceeded. Either leg alone is sufficient: a starved native call
+  //    and a stalled transport are both real, and neither may read as healthy.
+  //    INCLUSIVE (`>=`) to agree with `nextProbeAction`'s own watchdog test
+  //    `now - inFlightSince >= timeoutMs` on the same instant.
+  const timeoutMs = input.timeoutMs ?? PROBE_TIMEOUT_MS;
+  if (Math.max(input.roundTripMs, input.nativeElapsedMs) >= timeoutMs) {
+    return "watchdog-exceeded";
+  }
+  // 3. Rejection reasons on a VALID capture (e.g. `insufficient-cards-0/3`) are a
+  //    capture-validity signal, not a latency signal.
+  return "none";
+}
+
+/** `undefined` / `NaN` / negative all read as 0. */
+function nonNegMs(value: number | undefined): number {
+  return typeof value === "number" && Number.isFinite(value) && value > 0
+    ? value
+    : 0;
+}
+
+/** Every millisecond of one probe, attributed. */
+export interface GeometryTimingDecomposition {
+  /** The whole. Every segment below sums to exactly this. */
+  totalMs: number;
+  /** Segments 7+8+9 — the blocking closure's own work. */
+  closureWorkMs: number;
+  /**
+   * Segment 6 — `spawn_blocking` QUEUE latency. Needs no async worker to cross,
+   * so it reads ~0 even under total async-runtime starvation; a large value
+   * indicts the BLOCKING POOL, not the runtime. 0 when unmeasured.
+   */
+  dispatchWaitMs: number;
+  /**
+   * Segment 10 — the awaiting task polled again after its worker finished.
+   * Crossing this DOES need an async worker, so this is the in-Rust
+   * async-runtime starvation signal. 0 when unmeasured.
+   */
+  resumeWaitMs: number;
+  /**
+   * In-Rust time the named segments do not explain (explicit residual).
+   *
+   * Its MEANING CHANGED with this instrumentation, which matters when comparing
+   * against pre-instrumentation traces. Before, it absorbed dispatch + resume —
+   * that is where Phase 1's 166,522 ms sat. Now that those two bracket the
+   * closure exactly, the residual is in-closure work between the measured
+   * phases (`capture_rect_for_monitor`, the `physical_rect_for_region` calls,
+   * the `DynamicImage` wrap) plus millisecond-truncation slop. It is NOT
+   * async-runtime time.
+   */
+  unattributedNativeMs: number;
+  /**
+   * Segments 3+12 — IPC in and out of the webview, PLUS two delays that are not
+   * IPC at all:
+   * 1. Scheduling before the command future's first poll. Tauri spawns that
+   *    future onto the async runtime and the Rust clock only starts at the first
+   *    poll, so pre-first-poll starvation is invisible to `elapsedMs`.
+   * 2. Main-thread IPC blocking. `get_foreground_state` is a NON-async command,
+   *    so Tauri runs it inline on the IPC/main thread, queueing ahead of every
+   *    other IPC message including this probe — on a 250 ms poll clock.
+   *
+   * So a large `transportMs` is a starvation candidate, but do not jump to
+   * ASYNC-RUNTIME starvation: main-thread blocking is at least as likely and is
+   * the mechanism this repo has already characterised.
+   */
+  transportMs: number;
+  /**
+   * dispatch + resume + unattributed + transport — i.e. everything that is not
+   * the blocking closure's own work.
+   *
+   * NOTE: the name oversells it. TWO of its four parts are not async-runtime
+   * time — `dispatchWaitMs` is blocking-pool queueing, and
+   * `unattributedNativeMs` is in-closure work. Read the parts individually
+   * before attributing this total to the runtime.
+   */
+  asyncRuntimeMs: number;
+}
+
+/**
+ * Attribute a probe's round trip to the closure's own work vs everything else.
+ * The segments have DIFFERENT causes — see each field's doc; only `resumeWaitMs`
+ * and (partly) `transportMs` are async-runtime time.
+ *
+ * The decomposition ACCOUNTS FOR THE WHOLE: `closureWorkMs + dispatchWaitMs +
+ * resumeWaitMs + unattributedNativeMs + transportMs === totalMs` for every
+ * INTEGER-millisecond input — which is all production supplies (`roundTripMs` is
+ * `Math.round`ed, the rest arrive as Rust `u64`). The identity is exact in real
+ * arithmetic for any input, but IEEE-754 rounding can leave a ~1-ULP residue on
+ * fractional inputs, so do not assert bit equality on synthetic fractions.
+ * Silently dropping milliseconds would reproduce the exact blind spot this
+ * exists to remove, so the residual is explicit and the totals never clamp
+ * DOWN — sub-phase time exceeding the reported native total, or native time
+ * exceeding the round trip, is kept rather than discarded.
+ *
+ * DIAGNOSTIC ONLY: arithmetic over numbers a probe already reported. It feeds no
+ * cadence, cap, watchdog, epoch guard, or staleness rule. Pure.
+ */
+export function decomposeGeometryTiming(input: {
+  roundTripMs: number;
+  nativeElapsedMs: number;
+  preCaptureMs: number;
+  captureMs: number;
+  analysisMs: number;
+  dispatchWaitMs?: number;
+  resumeWaitMs?: number;
+}): GeometryTimingDecomposition {
+  const closureWorkMs =
+    nonNegMs(input.preCaptureMs) +
+    nonNegMs(input.captureMs) +
+    nonNegMs(input.analysisMs);
+  const dispatchWaitMs = nonNegMs(input.dispatchWaitMs);
+  const resumeWaitMs = nonNegMs(input.resumeWaitMs);
+  const measuredNativeMs = closureWorkMs + dispatchWaitMs + resumeWaitMs;
+  const nativeElapsedMs = nonNegMs(input.nativeElapsedMs);
+  const unattributedNativeMs = Math.max(0, nativeElapsedMs - measuredNativeMs);
+  const nativeTotalMs = Math.max(nativeElapsedMs, measuredNativeMs);
+  const transportMs = Math.max(0, nonNegMs(input.roundTripMs) - nativeTotalMs);
+  const totalMs = Math.max(nonNegMs(input.roundTripMs), nativeTotalMs);
+  return {
+    totalMs,
+    closureWorkMs,
+    dispatchWaitMs,
+    resumeWaitMs,
+    unattributedNativeMs,
+    transportMs,
+    asyncRuntimeMs:
+      dispatchWaitMs + resumeWaitMs + unattributedNativeMs + transportMs,
   };
 }
 
@@ -533,18 +712,34 @@ export interface IdentityRecord<R> {
 }
 
 /**
- * Resolve a slot's current identity: the stored record ONLY when its fingerprint
- * still matches the live geometry fingerprint. A rerolled slot (fingerprint
- * changed) or an unwritten slot returns null → the chip shows SCANNING. This is
- * the stale-result guard for identity: a late OCR result keyed to an old
- * fingerprint can never paint over the new card.
+ * Resolve a slot's current identity: the stored record ONLY while the slot
+ * generation it was read under is still current. A confirmed reroll (or a new
+ * offer, champion change, or NO_OFFER teardown) advances the generation and
+ * clears the store, so the chip falls to SCANNING; an unwritten slot returns
+ * null for the same reason. This is the stale-result guard for identity: a late
+ * OCR result keyed to a superseded generation can never paint over the new card.
+ *
+ * It used to compare the LIVE fingerprint against `record.fingerprint` instead.
+ * That was a second, competing authority reading a different baseline from the
+ * confirmed-reroll path, and the 2026-07-27 trace shows exactly what it cost.
+ * Slot 1 of offerGeneration 29 oscillated between two fingerprints 17 bits apart
+ * that both OCR'd to the same augment 1051 / 52.0% / S; `record.fingerprint` is
+ * one scalar chasing a bistable signal, so it was wrong roughly half the time —
+ * a successful publication would itself re-arm the mismatch by storing whichever
+ * pole it happened to read. The result was SCANNING on 24 of 72 frames (38% of
+ * the offer's wall time) with the identity store intact and `slotGeneration`
+ * pinned at 28 the entire time.
+ *
+ * Fingerprint evidence is not disabled and no threshold moved: it still feeds
+ * `advanceRerollConfirmation`, which is the one reader with hysteresis. It is
+ * simply no longer consulted raw by the render path.
  */
 export function identityForSlot<R>(
   record: IdentityRecord<R> | null | undefined,
-  currentFingerprint: string,
+  currentSlotGeneration: number,
 ): R | null {
   if (record == null) return null;
-  if (fingerprintChanged(record.fingerprint, currentFingerprint)) return null;
+  if ((record.slotGeneration ?? 0) !== currentSlotGeneration) return null;
   return record.resolution;
 }
 

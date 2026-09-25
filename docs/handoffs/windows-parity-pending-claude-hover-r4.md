@@ -1,5 +1,11 @@
 # Windows parity pending Claude hover/R4 behavior port
 
+> **Ported 2026-09-25.** The canonical fix (`06dce3f`, slot generation as the
+> sole identity authority) reached the Windows line by merging
+> `feat/overlay-tier-card` in `d7ac5fc` (PR #65). Only platform-boundary
+> conflicts in `lib.rs` were resolved; the hover/R4 tests run unchanged and
+> pass on Windows CI. Real-hardware validation is still outstanding.
+
 Date: 2026-07-27
 
 ## Source boundary
