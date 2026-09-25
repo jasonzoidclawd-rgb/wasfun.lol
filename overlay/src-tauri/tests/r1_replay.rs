@@ -82,8 +82,7 @@ fn r1_frame_yields_three_card_resolutions_through_the_production_pipeline() {
 
     for (region_index, region) in CARD_NAME_REGIONS.iter().enumerate() {
         let logical_rect = physical_rect_for_region(region, &calibration.viewport);
-        let rect =
-            capture_rect_for_monitor(&logical_rect, &monitor, frame.width(), frame.height());
+        let rect = capture_rect_for_monitor(&logical_rect, &monitor, frame.width(), frame.height());
 
         assert!(rect.x >= 0 && rect.y >= 0, "crop origin outside monitor");
         assert!(

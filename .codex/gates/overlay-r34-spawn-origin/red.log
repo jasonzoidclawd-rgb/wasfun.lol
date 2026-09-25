@@ -1,0 +1,52 @@
+
+ RUN  v4.1.9 /Users/jason/Desktop/mayhem-oracle/.claude/worktrees/overlay-tier-card/overlay
+
+stderr | src/collector/collectorStatusSubscription.test.tsx > useCollectorStatus event subscription > subscribes once when the status callback is omitted
+react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+
+stderr | src/collector/collectorStatusSubscription.test.tsx > useCollectorStatus event subscription > does not re-invoke the status command on every commit
+react-test-renderer is deprecated. See https://react.dev/warnings/react-test-renderer
+
+ ❯ src/collector/collectorStatusSubscription.test.tsx (2 tests | 2 failed) 10ms
+     × subscribes once when the status callback is omitted 7ms
+     × does not re-invoke the status command on every commit 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/collector/collectorStatusSubscription.test.tsx > useCollectorStatus event subscription > subscribes once when the status callback is omitted
+AssertionError: expected "vi.fn()" to be called 1 times, but got 6 times
+ ❯ src/collector/collectorStatusSubscription.test.tsx:90:26
+     88|     });
+     89|
+     90|     expect(tauri.listen).toHaveBeenCalledTimes(1);
+       |                          ^
+     91|     expect(tauri.unlisten).not.toHaveBeenCalled();
+     92|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/collector/collectorStatusSubscription.test.tsx > useCollectorStatus event subscription > does not re-invoke the status command on every commit
+AssertionError: expected 6 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 6
+
+ ❯ src/collector/collectorStatusSubscription.test.tsx:103:34
+    101|     });
+    102|
+    103|     expect(statusCommandCount()).toBe(1);
+       |                                  ^
+    104|   });
+    105| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  17:31:08
+   Duration  150ms (transform 27ms, setup 0ms, import 44ms, tests 10ms, environment 0ms)
+

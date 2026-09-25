@@ -235,7 +235,11 @@ export function summarizeOcrTrace(events: TraceEvent[]): OcrTraceSummary {
     timeouts: markerCounts["[identity-timeout]"] ?? 0,
     retries: markerCounts["[identity-retry]"] ?? 0,
     staleRejects: markerCounts["[identity-stale-reject]"] ?? 0,
-    watchdogRestarts: markerCounts["[identity-watchdog-restart]"] ?? 0,
+    // The OCR watchdog now only ABANDONS; the legacy restart marker is still
+    // counted so a replay of a pre-fix trace keeps reporting the same number.
+    watchdogRestarts:
+      (markerCounts["[identity-watchdog-abandon]"] ?? 0)
+      + (markerCounts["[identity-watchdog-restart]"] ?? 0),
     capture: {
       samples: nativeSamples,
       captureAttempted,

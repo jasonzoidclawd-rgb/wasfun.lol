@@ -571,6 +571,130 @@ mod bounded_capture_tests {
     }
 }
 
+#[cfg(test)]
+mod bounded_ocr_recognition_tests {
+    use super::*;
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    use std::time::Duration;
+
+    #[tokio::test]
+    async fn timed_out_recognition_recovers_below_cap_and_bounds_physical_workers() {
+        // OCR recognition is a separate blocking stage after capture. Its async
+        // deadline must return without pretending that the blocking worker was
+        // cancelled: the physical worker keeps its permit until it really exits.
+        static RECOGNITION_IN_FLIGHT: AtomicUsize = AtomicUsize::new(0);
+        static ATTEMPTS_STARTED: AtomicUsize = AtomicUsize::new(0);
+        const MAX: usize = 2;
+        let deadline = Duration::from_millis(25);
+        let (release_first, wait_first) = std::sync::mpsc::channel::<()>();
+
+        let first = tokio::spawn(run_bounded_ocr_recognition_with_gate(
+            &RECOGNITION_IN_FLIGHT,
+            MAX,
+            deadline,
+            move || {
+                ATTEMPTS_STARTED.fetch_add(1, Ordering::AcqRel);
+                wait_first.recv().map_err(|error| error.to_string())?;
+                Ok::<_, String>("late-first")
+            },
+        ));
+        while RECOGNITION_IN_FLIGHT.load(Ordering::Acquire) != 1 {
+            tokio::task::yield_now().await;
+        }
+        assert_eq!(
+            first.await.expect("recognition task should join"),
+            Err(BoundedCaptureError::Timeout),
+            "an over-deadline OCR recognition must fail the command-side wait"
+        );
+        assert_eq!(
+            RECOGNITION_IN_FLIGHT.load(Ordering::Acquire),
+            1,
+            "timing out must not release the still-running physical worker's permit"
+        );
+
+        // JavaScript invokes sequentially: after the first invocation returns a
+        // timeout, its next healthy invocation must run beneath the native cap.
+        let healthy =
+            run_bounded_ocr_recognition_with_gate(&RECOGNITION_IN_FLIGHT, MAX, deadline, || {
+                ATTEMPTS_STARTED.fetch_add(1, Ordering::AcqRel);
+                Ok::<_, String>("healthy")
+            })
+            .await;
+        assert_eq!(healthy, Ok("healthy"));
+        assert_eq!(RECOGNITION_IN_FLIGHT.load(Ordering::Acquire), 1);
+
+        // A second stuck physical worker fills the cap. Further sequential
+        // retries must be refused without spawning or running another closure.
+        let (release_second, wait_second) = std::sync::mpsc::channel::<()>();
+        let second = tokio::spawn(run_bounded_ocr_recognition_with_gate(
+            &RECOGNITION_IN_FLIGHT,
+            MAX,
+            deadline,
+            move || {
+                ATTEMPTS_STARTED.fetch_add(1, Ordering::AcqRel);
+                wait_second.recv().map_err(|error| error.to_string())?;
+                Ok::<_, String>("late-second")
+            },
+        ));
+        while RECOGNITION_IN_FLIGHT.load(Ordering::Acquire) != MAX {
+            tokio::task::yield_now().await;
+        }
+        assert_eq!(
+            second.await.expect("recognition task should join"),
+            Err(BoundedCaptureError::Timeout)
+        );
+
+        let refused =
+            run_bounded_ocr_recognition_with_gate(&RECOGNITION_IN_FLIGHT, MAX, deadline, || {
+                ATTEMPTS_STARTED.fetch_add(1, Ordering::AcqRel);
+                Ok::<_, String>("must-not-run")
+            })
+            .await;
+        assert_eq!(refused, Err(BoundedCaptureError::Busy));
+        assert_eq!(
+            ATTEMPTS_STARTED.load(Ordering::Acquire),
+            3,
+            "backpressure must refuse work before a third physical worker starts"
+        );
+
+        release_first.send(()).unwrap();
+        release_second.send(()).unwrap();
+        tokio::time::timeout(Duration::from_secs(1), async {
+            while RECOGNITION_IN_FLIGHT.load(Ordering::Acquire) != 0 {
+                tokio::task::yield_now().await;
+            }
+        })
+        .await
+        .expect("physical OCR workers should eventually release their own permits");
+    }
+
+    #[test]
+    fn detect_command_routes_card_recognition_through_bounded_worker() {
+        let source = include_str!("lib.rs");
+        let command = source
+            .rsplit("async fn detect_augment_names(")
+            .next()
+            .and_then(|rest| rest.split("// ─── Geometry Surface Probe").next())
+            .expect("detect_augment_names source");
+        let recognition = command
+            .split("let ocr_start = std::time::Instant::now();")
+            .nth(1)
+            .and_then(|rest| rest.split("detected.sort_by_key").next())
+            .expect("detect_augment_names recognition slice");
+
+        assert!(
+            recognition.contains("run_bounded_ocr_recognition")
+                && recognition.contains("ocr::read_card_text"),
+            "detect_augment_names must route read_card_text through the bounded recognition worker"
+        );
+        assert!(
+            !recognition.contains("tokio::task::spawn_blocking")
+                && !recognition.contains("handle.await"),
+            "detect_augment_names must not directly spawn and await raw recognition workers"
+        );
+    }
+}
+
 // ─── OCR Types ──────────────────────────────────────────────────────────────
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -668,6 +792,7 @@ fn monitor_snapshots() -> Result<Vec<MonitorSnapshot>, String> {
 }
 
 const NATIVE_CAPTURE_TIMEOUT: Duration = Duration::from_millis(1500);
+const OCR_RECOGNITION_TIMEOUT: Duration = Duration::from_millis(1500);
 /// Max concurrent native captures per channel. A slow/hung capture keeps its
 /// permit until the OS call really returns, so a low cap bounds how many hung
 /// blocking workers can accumulate. It MUST be > 1: at a cap of 1 a single hung
@@ -675,8 +800,13 @@ const NATIVE_CAPTURE_TIMEOUT: Duration = Duration::from_millis(1500);
 /// badges never render at levels 11/15 (they render again once a retry that is
 /// admitted beneath the cap captures a frame).
 const MAX_CONCURRENT_CAPTURES: usize = 4;
+// Each scan recognizes three card regions concurrently. Six permits allow one
+// complete later scan to run after all three workers from a timed-out scan keep
+// running, while still bounding uncancellable native recognition work.
+const MAX_CONCURRENT_OCR_RECOGNITIONS: usize = 6;
 static GEOMETRY_CAPTURE_IN_FLIGHT: AtomicUsize = AtomicUsize::new(0);
 static OCR_CAPTURE_IN_FLIGHT: AtomicUsize = AtomicUsize::new(0);
+static OCR_RECOGNITION_IN_FLIGHT: AtomicUsize = AtomicUsize::new(0);
 
 #[derive(Clone, Copy, Debug)]
 enum CaptureChannel {
@@ -776,6 +906,33 @@ where
         MAX_CONCURRENT_CAPTURES,
         NATIVE_CAPTURE_TIMEOUT,
         capture,
+    )
+    .await
+}
+
+async fn run_bounded_ocr_recognition_with_gate<T, F>(
+    in_flight: &'static AtomicUsize,
+    max_in_flight: usize,
+    timeout: Duration,
+    recognize: F,
+) -> Result<T, BoundedCaptureError>
+where
+    T: Send + 'static,
+    F: FnOnce() -> Result<T, String> + Send + 'static,
+{
+    run_bounded_capture_with_gate(in_flight, max_in_flight, timeout, recognize).await
+}
+
+async fn run_bounded_ocr_recognition<T, F>(recognize: F) -> Result<T, BoundedCaptureError>
+where
+    T: Send + 'static,
+    F: FnOnce() -> Result<T, String> + Send + 'static,
+{
+    run_bounded_ocr_recognition_with_gate(
+        &OCR_RECOGNITION_IN_FLIGHT,
+        MAX_CONCURRENT_OCR_RECOGNITIONS,
+        OCR_RECOGNITION_TIMEOUT,
+        recognize,
     )
     .await
 }
@@ -1079,35 +1236,35 @@ fn bounded_capture_reason(error: &BoundedCaptureError) -> String {
     }
 }
 
+fn bounded_ocr_recognition_reason(error: BoundedCaptureError) -> String {
+    match error {
+        BoundedCaptureError::Busy => "ocr-recognition-busy".to_string(),
+        BoundedCaptureError::Timeout => "ocr-recognition-timeout".to_string(),
+        BoundedCaptureError::Capture(error) => error,
+        BoundedCaptureError::WorkerFailed => "ocr-recognition-worker-failed".to_string(),
+    }
+}
+
 #[tauri::command]
 async fn detect_augment_names(known_names: Option<Vec<String>>) -> Result<OcrScanResult, String> {
     let scan_start = std::time::Instant::now();
-    if !collect_foreground_state().game_window_foreground {
-        let reason = "actual-game-window-not-foreground".to_string();
-        return Ok(OcrScanResult {
-            detected: Vec::new(),
-            diagnostics: (0..calibration::CARD_NAME_REGIONS.len())
-                .map(|region_index| OcrCardDiagnostic {
-                    region_index,
-                    card_rect: None,
-                    crop: None,
-                    capture_succeeded: false,
-                    text_recognized: false,
-                    error: Some(reason.clone()),
-                    capture_width: None,
-                    capture_height: None,
-                })
-                .collect(),
-            capture_attempted: false,
-            crop_count: 0,
-            capture_ms: 0,
-            ocr_ms: 0,
-            total_ms: scan_start.elapsed().as_millis() as u64,
-        });
-    }
-
     let capture_start = std::time::Instant::now();
-    let crop_set = match run_bounded_capture(CaptureChannel::Ocr, capture_card_name_crops).await {
+    let crop_set = match run_bounded_capture(CaptureChannel::Ocr, || {
+        // Foreground gate runs INSIDE the bounded capture (off the async runtime),
+        // exactly as capture_surface_frame does. Its CGWindowList/window-server
+        // walk is an unbounded, uncancellable blocking call; on the async runtime
+        // it starved the executor that also has to poll the geometry command.
+        // Returning the reason as a capture error routes it through the existing
+        // error branch below, which reports `capture_attempted: false` for
+        // BoundedCaptureError::Capture(_) and carries the reason per region —
+        // the same observable outcome as the early return this replaces.
+        if !collect_foreground_state().game_window_foreground {
+            return Err("actual-game-window-not-foreground".to_string());
+        }
+        capture_card_name_crops()
+    })
+    .await
+    {
         Ok(crop_set) => crop_set,
         Err(error) => {
             let reason = bounded_capture_reason(&error);
@@ -1153,22 +1310,23 @@ async fn detect_augment_names(known_names: Option<Vec<String>>) -> Result<OcrSca
     );
 
     let ocr_start = std::time::Instant::now();
-    let mut handles = Vec::with_capacity(crop_set.crops.len());
+    let mut workers = tokio::task::JoinSet::new();
     for crop in crop_set.crops {
         let region_index = crop.region_index;
         let known_names = known_names.clone();
-        handles.push(tokio::task::spawn_blocking(move || {
-            (
-                region_index,
-                ocr::read_card_text(&crop.image, locale, &known_names),
-            )
-        }));
+        workers.spawn(async move {
+            let result = run_bounded_ocr_recognition(move || {
+                ocr::read_card_text(&crop.image, locale, &known_names)
+            })
+            .await;
+            (region_index, result)
+        });
     }
 
     let mut diagnostics = crop_set.diagnostics;
-    let mut detected = Vec::with_capacity(handles.len());
-    for handle in handles {
-        match handle.await {
+    let mut detected = Vec::with_capacity(workers.len());
+    while let Some(worker) = workers.join_next().await {
+        match worker {
             Ok((region_index, Ok(Some(text)))) => {
                 if let Some(diagnostic) = diagnostics
                     .iter_mut()
@@ -1191,11 +1349,11 @@ async fn detect_augment_names(known_names: Option<Vec<String>>) -> Result<OcrSca
                     .iter_mut()
                     .find(|diagnostic| diagnostic.region_index == region_index)
                 {
-                    diagnostic.error = Some(error);
+                    diagnostic.error = Some(bounded_ocr_recognition_reason(error));
                 }
             }
             Err(error) => {
-                let message = format!("OCR worker failed: {}", error);
+                let message = format!("ocr-recognition-worker-failed: {}", error);
                 for diagnostic in &mut diagnostics {
                     if !diagnostic.text_recognized && diagnostic.error.is_none() {
                         diagnostic.error = Some(message.clone());
@@ -1256,6 +1414,11 @@ fn absent_surface_observation(
         capture_ms: 0,
         analysis_ms: 0,
         elapsed_ms,
+        // Nothing measured either async-runtime segment on this path, and 0 keeps
+        // the field a number (never null) so the JS decomposition attributes the
+        // whole command body to the explicit unattributed residual instead.
+        dispatch_wait_ms: 0,
+        resume_wait_ms: 0,
     }
 }
 
@@ -1380,21 +1543,45 @@ async fn probe_augment_surface(
     // so its blocking window-server enumeration cannot starve the async runtime;
     // a not-foreground result surfaces as the same absent observation via the
     // error path (reason "actual-game-window-not-foreground").
-    let observation = match run_bounded_capture(CaptureChannel::Geometry, move || {
-        capture_and_analyze_surface(probe_seq, captured_at)
-    })
-    .await
-    {
-        Ok(observation) => observation,
-        Err(error) => {
-            return Ok(absent_surface_observation(
-                probe_seq,
-                captured_at,
-                &bounded_capture_reason(&error),
-                start.elapsed().as_millis() as u64,
-            ));
-        }
-    };
+    // The two measurements below split the previously opaque in-Rust wait
+    // (`elapsed_ms − (pre_capture + capture + analysis)`) into two segments with
+    // DIFFERENT causes. Read them separately; they are not one "runtime wait":
+    //   dispatch — command entry → this blocking closure's body begins. No
+    //     SUSPENSION POINT separates `start` from the `spawn_blocking` call in
+    //     run_bounded_capture_with_gate. (There ARE two syntactic `.await`s on
+    //     the way — awaiting an `async fn` polls it inline within the same poll,
+    //     so neither can yield; the first construct that can is the
+    //     `timeout(..).await` AFTER the spawn.) Crossing this therefore needs no
+    //     async worker: it is BLOCKING-POOL queue latency and should read ~0
+    //     (tokio defaults to 512 blocking threads) even under total starvation.
+    //   resume   — the closure's body ends → the command is about to return.
+    //     Crossing this DOES require an async worker to re-poll the woken
+    //     `tokio::time::timeout`, so this is the true starvation signal here.
+    // Starvation BEFORE the first poll of this command future is outside
+    // `elapsed_ms` altogether (Tauri spawns the future onto the runtime) and
+    // lands in the JS-side `transportMs` instead.
+    // Both are read off the SAME command-entry clock as `elapsed_ms`, so they are
+    // sub-intervals of it and can never sum past it.
+    let (observation, closure_end_ms) =
+        match run_bounded_capture(CaptureChannel::Geometry, move || {
+            let dispatch_wait_ms = start.elapsed().as_millis() as u64;
+            let mut observation = capture_and_analyze_surface(probe_seq, captured_at)?;
+            observation.dispatch_wait_ms = dispatch_wait_ms;
+            let closure_end_ms = start.elapsed().as_millis() as u64;
+            Ok::<_, String>((observation, closure_end_ms))
+        })
+        .await
+        {
+            Ok(captured) => captured,
+            Err(error) => {
+                return Ok(absent_surface_observation(
+                    probe_seq,
+                    captured_at,
+                    &bounded_capture_reason(&error),
+                    start.elapsed().as_millis() as u64,
+                ));
+            }
+        };
     // `elapsed_ms` MUST measure command entry → return on the success path too,
     // not just the error path. `capture_and_analyze_surface` starts its own
     // timer INSIDE the spawn_blocking closure, so the interval between the
@@ -1402,10 +1589,18 @@ async fn probe_augment_surface(
     // invisible to it. That blind spot is why a trace whose round trips reached
     // 89 s reported a flat, healthy `nativeElapsedMs` of ~600 ms and three
     // separate investigations concluded the native side was fine. With this,
-    // `elapsed_ms − (pre_capture + capture + analysis)` is the in-Rust dispatch
-    // wait and `roundTripMs − elapsed_ms` is the transport wait.
+    // `elapsed_ms − (pre_capture + capture + analysis)` is the in-Rust wait —
+    // but do NOT read that residual as one quantity: `dispatch_wait_ms` and
+    // `resume_wait_ms` above now split it, and they have different causes (see
+    // the block at the top of this function). `roundTripMs − elapsed_ms` is the
+    // transport wait, which includes pre-first-poll scheduling, not just IPC.
     let mut observation = observation;
-    observation.elapsed_ms = start.elapsed().as_millis() as u64;
+    let elapsed_ms = start.elapsed().as_millis() as u64;
+    // Saturating: `closure_end_ms` and `elapsed_ms` are two reads of the same
+    // monotonic clock, but truncation to whole milliseconds must never be able to
+    // produce a negative (wrapped) duration.
+    observation.resume_wait_ms = elapsed_ms.saturating_sub(closure_end_ms);
+    observation.elapsed_ms = elapsed_ms;
     Ok(observation)
 }
 
@@ -1771,9 +1966,7 @@ fn analyze_foreground(consult_workspace: bool) -> ForegroundAnalysis {
 
     // A window owned by the actual game process (any layer, any size) proves
     // the game surface exists on-screen. Titles are useless here (empty).
-    let game_window_detected = candidates
-        .iter()
-        .any(|candidate| candidate.is_game_process);
+    let game_window_detected = candidates.iter().any(|candidate| candidate.is_game_process);
 
     let selection = foreground::select_frontmost_window(&candidates);
     let selected = selection.selected_index.map(|index| &candidates[index]);
@@ -1789,10 +1982,8 @@ fn analyze_foreground(consult_workspace: bool) -> ForegroundAnalysis {
         FrontmostApplication::default()
     };
 
-    let effective_process_id = foreground::effective_frontmost_pid(
-        selected_process_id,
-        workspace_application.process_id,
-    );
+    let effective_process_id =
+        foreground::effective_frontmost_pid(selected_process_id, workspace_application.process_id);
     let decision_reason = if selection.selected_index.is_some() {
         selection.reason
     } else if workspace_application.process_id.is_some() {
@@ -1812,7 +2003,10 @@ fn analyze_foreground(consult_workspace: bool) -> ForegroundAnalysis {
     // Owner/title metadata only ever describes the effective front window.
     let (owner_name, window_title) = match selected {
         Some(candidate) if effective_process_id == selected_process_id => (
-            candidate.owner_name.clone().filter(|value| !value.is_empty()),
+            candidate
+                .owner_name
+                .clone()
+                .filter(|value| !value.is_empty()),
             candidate.title.clone().filter(|value| !value.is_empty()),
         ),
         _ => (None, None),
@@ -2231,6 +2425,72 @@ fn open_screen_recording_settings() {
     }
 }
 
+// ─── Async-Runtime Heartbeat (dev-only instrument) ──────────────────────────
+// Phase 1 proved the geometry probe's lost time sits entirely in the segments
+// that need a TOKIO ASYNC-RUNTIME WORKER TO POLL A TASK, and that the build
+// carries no instrument that can observe the runtime itself. This heartbeat is
+// that instrument: it is an ordinary async task on the SAME runtime the
+// `#[tauri::command] async fn`s run on, so the drift of its fixed tick IS the
+// scheduling latency of that runtime, measured independently of any capture.
+//
+// It must be `tauri::async_runtime::spawn` + `tokio::time::sleep`. A thread with
+// `std::thread::sleep` would stay perfectly on time while the runtime burned and
+// would therefore measure nothing.
+//
+// Emission is throttled to at most once per second and aggregates the ticks in
+// between; the payload is bounded numerics only (privacy-safe, no names, text,
+// paths, or account identifiers). Compiled out of release builds, mirroring
+// `emit_overlay_diagnostic`.
+
+/// Fixed heartbeat tick. Matches the geometry probe cadence so the drift is read
+/// on the same scale as the work it competes with.
+#[cfg(debug_assertions)]
+const HEARTBEAT_TICK_MS: u64 = 250;
+/// Aggregation window — one emission per second, never one line per tick.
+#[cfg(debug_assertions)]
+const HEARTBEAT_REPORT_MS: u64 = 1000;
+
+#[cfg(debug_assertions)]
+fn spawn_async_runtime_heartbeat() {
+    tauri::async_runtime::spawn(async move {
+        let mut window_started = std::time::Instant::now();
+        let mut last_tick = window_started;
+        let mut ticks: u64 = 0;
+        let mut max_drift_ms: u64 = 0;
+        loop {
+            tokio::time::sleep(Duration::from_millis(HEARTBEAT_TICK_MS)).await;
+            let now = std::time::Instant::now();
+            // Saturating throughout: this loop must never panic and never block.
+            let observed_ms = now.duration_since(last_tick).as_millis() as u64;
+            last_tick = now;
+            let last_drift_ms = observed_ms.saturating_sub(HEARTBEAT_TICK_MS);
+            max_drift_ms = max_drift_ms.max(last_drift_ms);
+            ticks = ticks.saturating_add(1);
+
+            let elapsed_ms = now.duration_since(window_started).as_millis() as u64;
+            if elapsed_ms >= HEARTBEAT_REPORT_MS {
+                eprintln!(
+                    "[async-runtime-heartbeat] {{\"intervalMs\":{},\"ticks\":{},\
+                     \"expectedTicks\":{},\"maxDriftMs\":{},\"lastDriftMs\":{},\
+                     \"elapsedMs\":{}}}",
+                    HEARTBEAT_TICK_MS,
+                    ticks,
+                    elapsed_ms / HEARTBEAT_TICK_MS,
+                    max_drift_ms,
+                    last_drift_ms,
+                    elapsed_ms
+                );
+                window_started = now;
+                ticks = 0;
+                max_drift_ms = 0;
+            }
+        }
+    });
+}
+
+#[cfg(not(debug_assertions))]
+fn spawn_async_runtime_heartbeat() {}
+
 // ─── App Entry ──────────────────────────────────────────────────────────────
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -2279,6 +2539,10 @@ pub fn run() {
             let member_state = member::MemberState::new(app.path().app_data_dir()?.join("member-models"))
                 .map_err(std::io::Error::other)?;
             app.manage(member_state);
+
+            // Dev-only async-runtime starvation instrument (see above). No-op in
+            // release builds.
+            spawn_async_runtime_heartbeat();
 
             // ─── System Tray Icon ──────────────────────────────────────
             {

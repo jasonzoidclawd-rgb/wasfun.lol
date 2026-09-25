@@ -1,8 +1,8 @@
+use flate2::{write::GzEncoder, Compression};
 use mayhem_oracle_lib::member::{
     hash_game_id, parse_bootstrap_response, parse_game_session_response, resolve_api_base,
     verify_manifest, verify_model_package, BootstrapManifest, DEFAULT_API_BASE,
 };
-use flate2::{write::GzEncoder, Compression};
 use serde_json::{json, Value};
 use std::io::Write;
 
@@ -37,7 +37,10 @@ fn tar_entry(name: &str, contents: &[u8]) -> Vec<u8> {
 
 fn model_package(config: &Value) -> Vec<u8> {
     let mut archive = Vec::new();
-    archive.extend(tar_entry("model-config.json", serde_json::to_string(config).unwrap().as_bytes()));
+    archive.extend(tar_entry(
+        "model-config.json",
+        serde_json::to_string(config).unwrap().as_bytes(),
+    ));
     archive.extend(tar_entry("manifest.json", MANIFEST.as_bytes()));
     archive.resize(archive.len() + 1024, 0);
     let mut encoder = GzEncoder::new(Vec::new(), Compression::default());
@@ -105,7 +108,10 @@ fn parses_frozen_bootstrap_and_game_session_contracts() {
     assert_eq!(bootstrap.access.kind, "member");
 
     let mut transcript_manifest = serde_json::from_str::<Value>(MANIFEST).unwrap();
-    transcript_manifest.as_object_mut().unwrap().remove("createdAt");
+    transcript_manifest
+        .as_object_mut()
+        .unwrap()
+        .remove("createdAt");
     assert!(parse_bootstrap_response(
         200,
         &json!({

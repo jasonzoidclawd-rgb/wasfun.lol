@@ -1,0 +1,242 @@
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1614:31
+     |
+1614 |         let app: cocoa::base::id = objc::msg_send![objc::class!(NSApplication), sharedApplication];
+     |                               ^^
+     |
+     = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated unit variant `cocoa::appkit::NSApplicationActivationPolicyRegular`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1616:44
+     |
+1616 |             NSApplicationActivationPolicy::NSApplicationActivationPolicyRegular
+     |                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated unit variant `cocoa::appkit::NSApplicationActivationPolicyAccessory`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1618:44
+     |
+1618 |             NSApplicationActivationPolicy::NSApplicationActivationPolicyAccessory
+     |                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated enum `cocoa::appkit::NSApplicationActivationPolicy`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1613:28
+     |
+1613 |         use cocoa::appkit::NSApplicationActivationPolicy;
+     |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1634:57
+     |
+1634 |                 let ns_win = ns_win_ptr as cocoa::base::id;
+     |                                                         ^^
+
+warning: use of deprecated trait `cocoa::appkit::NSWindow`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1633:36
+     |
+1633 |                 use cocoa::appkit::NSWindow;
+     |                                    ^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1671:47
+     |
+1671 | unsafe fn ns_string_value(value: cocoa::base::id) -> Option<String> {
+     |                                               ^^
+
+warning: use of deprecated method `cocoa::foundation::NSString::UTF8String`: use the objc2-foundation crate instead
+    --> src/lib.rs:1677:44
+     |
+1677 |     let ptr = cocoa::foundation::NSString::UTF8String(value);
+     |                                            ^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1688:39
+     |
+1688 |         let application: cocoa::base::id = objc::msg_send![
+     |                                       ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1696:36
+     |
+1696 |         let app_name: cocoa::base::id = objc::msg_send![application, localizedName];
+     |                                    ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1697:45
+     |
+1697 |         let bundle_identifier: cocoa::base::id = objc::msg_send![application, bundleIdentifier];
+     |                                             ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1698:42
+     |
+1698 |         let executable_url: cocoa::base::id = objc::msg_send![application, executableURL];
+     |                                          ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1702:36
+     |
+1702 |             let path: cocoa::base::id = objc::msg_send![executable_url, path];
+     |                                    ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1719:37
+     |
+1719 |         let workspace: cocoa::base::id =
+     |                                     ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1725:39
+     |
+1725 |         let application: cocoa::base::id = objc::msg_send![workspace, frontmostApplication];
+     |                                       ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2526:47
+     |
+2526 |                     let app_ptr: cocoa::base::id = objc::msg_send![objc::class!(NSApplication), sharedApplication];
+     |                                               ^^
+
+warning: use of deprecated unit variant `cocoa::appkit::NSApplicationActivationPolicyAccessory`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2527:110
+     |
+2527 | ...ationPolicy: NSApplicationActivationPolicy::NSApplicationActivationPolicyAccessory];
+     |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2533:61
+     |
+2533 |                     let ns_win = ns_win_ptr as cocoa::base::id;
+     |                                                             ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2536:51
+     |
+2536 |                     let main_screen: cocoa::base::id = msg_send![objc::class!(NSScreen), mainScreen];
+     |                                                   ^^
+
+warning: use of deprecated struct `cocoa::foundation::NSRect`: use the objc2-foundation crate instead
+    --> src/lib.rs:2537:51
+     |
+2537 |                     let frame: cocoa::foundation::NSRect = msg_send![main_screen, frame];
+     |                                                   ^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2544:25
+     |
+2544 |                         NSWindowCollectionBehavior::NSWindowCollectionBehaviorCanJoinAllSpaces
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2545:31
+     |
+2545 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorStationary
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2546:31
+     |
+2546 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorFullScreenAuxiliary
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2547:31
+     |
+2547 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorIgnoresCycle,
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2578:70
+     |
+2578 | ...                   let ns_win = ptr as cocoa::base::id;
+     |                                                        ^^
+
+warning: use of deprecated enum `cocoa::appkit::NSApplicationActivationPolicy`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2525:40
+     |
+2525 |                     use cocoa::appkit::NSApplicationActivationPolicy;
+     |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated trait `cocoa::appkit::NSWindow`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2532:41
+     |
+2532 |                     use cocoa::appkit::{NSWindow, NSWindowCollectionBehavior};
+     |                                         ^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2532:51
+     |
+2532 |                     use cocoa::appkit::{NSWindow, NSWindowCollectionBehavior};
+     |                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated trait `cocoa::appkit::NSWindow`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2577:56
+     |
+2577 | ...                   use cocoa::appkit::NSWindow;
+     |                                          ^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setIgnoresMouseEvents_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1635:24
+     |
+1635 |                 ns_win.setIgnoresMouseEvents_(if ignore {
+     |                        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setFrame_display_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2538:28
+     |
+2538 |                     ns_win.setFrame_display_(frame, cocoa::base::YES);
+     |                            ^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setLevel_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2542:28
+     |
+2542 |                     ns_win.setLevel_(2147483639);
+     |                            ^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setCollectionBehavior_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2543:28
+     |
+2543 |                     ns_win.setCollectionBehavior_(
+     |                            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorCanJoinAllSpaces`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2544:53
+     |
+2544 |                         NSWindowCollectionBehavior::NSWindowCollectionBehaviorCanJoinAllSpaces
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorStationary`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2545:59
+     |
+2545 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorStationary
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorFullScreenAuxiliary`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2546:59
+     |
+2546 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorFullScreenAuxiliary
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorIgnoresCycle`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2547:59
+     |
+2547 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorIgnoresCycle,
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setIgnoresMouseEvents_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2549:28
+     |
+2549 |                     ns_win.setIgnoresMouseEvents_(cocoa::base::YES);
+     |                            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setHidesOnDeactivate_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2550:28
+     |
+2550 |                     ns_win.setHidesOnDeactivate_(cocoa::base::NO);
+     |                            ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setLevel_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2579:44
+     |
+2579 | ...                   ns_win.setLevel_(2147483639);
+     |                              ^^^^^^^^^
+

@@ -1,0 +1,39 @@
+bench: /Users/jason/Desktop/mayhem-oracle/.claude/worktrees/overlay-tier-card/.codex/gates/overlay-r34-shortest/phase2-bench.jsonl
+config: {"minutes":20,"tickIntervalMs":150,"closureTargetMs":703,"workerThreads":10,"nativeCaptureTimeoutMs":1500,"maxConcurrentCaptures":4}
+final:  {"benchElapsedMs":1200000,"probesIssued":1599,"outstandingAtEnd":1}
+
+geometry records 1598 (stale 0) | heartbeat 1190 | game-poll 800 | watchdog-abandons 0
+captured real frames: 1598/1598
+
+geometry inter-arrival ms: median=750 p95=754 max=943
+
+min	n	stale	rustWait_med	rustWait_p95	rustWait_max	disp_med	disp_max	resume_med	resume_max	closure_med	transport_med	hb_drift_max	sysinfo_med	sysinfo_max
+0	80	0	0	1	1	0	0	0	1	702	0	2	3	9
+1	80	0	0	0.0	1	0	1	0	1	702	0	2	2	5
+2	80	0	0	0	1	0	1	0	1	702	0	2	3	5
+3	80	0	0	1	1	0	0	0	1	702	0	2	3	5
+4	80	0	0	1	1	0	0	0	1	702	0	2	3	7
+5	80	0	0	0.0	1	0	0	0	1	702	0	2	3	7
+6	80	0	0	1	1	0	0	0	1	702	0	2	3	4
+7	80	0	0	0.0	1	0	0	0	1	702	0	2	3	5
+8	80	0	0	0	1	0	0	0	1	702	0	2	3	6
+9	80	0	0	1	1	0	0	0	1	702	0	3	3	5
+10	80	0	0	0	1	0	0	0	1	702	0	3	3	4
+11	80	0	0	0.0	1	0	0	0	1	702	0	2	3	7
+12	79	0	0	1	1	0	1	0	1	702	0	5	3	25
+13	80	0	0	0	1	0	0	0	1	702	0	4	2	12
+14	80	0	0	1	1	0	0	0	1	702	0	6	2	35
+15	79	0	0	1	1	0	0	0	1	702	0	2	2	62
+16	80	0	0	0.0	1	0	0	0	1	702	0	2	2	5
+17	80	0	0	1	1	0	0	0	1	702	0	4	3	7
+18	80	0	0	1	1	0	0	0	1	702	0	2	3	4
+19	80	0	0	0	1	0	0	0	1	702	0	4	3	9
+
+whole-run closure median: 702 ms
+whole-run rust_wait: median=0 p95=1 max=1
+whole-run heartbeat drift: max=6 ms | dropped ticks=0/1190
+
+time-correlation: first-half bucket-median rust_wait=0 ms, second-half=0 ms
+criterion: buckets with median rust_wait >= 2000 ms and flat closure work: 0
+
+BENCH: NOT_REPRODUCED

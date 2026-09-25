@@ -1,0 +1,33 @@
+--- HEALTHY_CORE 400-520s [400000..520000] dur=120.0s
+    fg n=316  gap med=274  p95=1029.6  max=1377
+    fg nativeMs med=12.0  p95=237.0  max=1088
+    geo n=108 accepted(stale:false)=108 stale:true=0
+    rust_wait med=1.5  max=126
+    closure work med=717.5  max=1506
+--- HEALTHY (goal def) 504.275-624.275s [504275..624275] dur=120.0s
+    fg n=129  gap med=999.0  p95=1309.3  max=1601
+    fg nativeMs med=13  p95=318.8  max=427
+    geo n=68 accepted(stale:false)=61 stale:true=7
+    rust_wait med=5.5  max=5353
+    closure work med=726.0  max=972
+--- R3_WINDOW 660-672s [660000..672000] dur=12.0s
+    fg n=12  gap med=1001  p95=1249.5  max=1304
+    fg nativeMs med=14.5  p95=305.7  max=309
+    geo n=2 accepted(stale:false)=0 stale:true=2
+    rust_wait med=8157.5  max=9364
+    closure work med=670.5  max=671
+--- R4_WINDOW 952-971s [952000..971000] dur=19.0s
+    fg n=19  gap med=1000.0  p95=1299.0  max=1305
+    fg nativeMs med=12  p95=319.2  max=357
+    geo n=0 accepted(stale:false)=0 stale:true=0
+    rust_wait med=n/a  max=n/a
+    closure work med=n/a  max=n/a
+--- DEEP_TAIL 1000s-end [1000000..1502074] dur=502.1s
+    fg n=710  gap med=829  p95=1303.0  max=1583
+    fg nativeMs med=11.0  p95=299.1  max=465
+    geo n=5 accepted(stale:false)=0 stale:true=5
+    rust_wait med=73690  max=166522
+    closure work med=714  max=1029
+
+5x HEALTHY(goal def) fg median threshold = 4995.0
+fg gaps > 5x median across the ENTIRE run (n=2290): 0

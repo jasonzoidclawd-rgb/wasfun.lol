@@ -14,6 +14,7 @@ import {
   parseChampionAugmentsFile,
   type ChampionOwnershipToken,
 } from "./championDataset";
+import { selectChampionSlotStat, type ChampionAugmentDataset } from "./championStats";
 
 // The complete file is a list of [championId, statsJSONString] pairs, exactly
 // as ARAMGG serves `/data/champion-augments/{id}.json`.
@@ -26,6 +27,10 @@ function fileFor(championId: string, winRate: string): string {
     win_rate: "0.464797",
   });
   return JSON.stringify([[championId, inner]]);
+}
+
+function emptyFileFor(championId: string): string {
+  return JSON.stringify([[championId, JSON.stringify({ augments: {} })]]);
 }
 
 function okFetch(body: string): typeof fetch {
@@ -65,6 +70,20 @@ describe("loadChampionAugmentDataset — fetch + parse the complete file", () =>
   it("throws explicitly when the file carries no matching augments block", async () => {
     const fetchImpl = okFetch("[]");
     await expect(loadChampionAugmentDataset(fetchImpl, "56", "16.14")).rejects.toThrow();
+  });
+
+  it("rejects complete zero-row data before it can publish no-champ-data", async () => {
+    let dataset: ChampionAugmentDataset | null = null;
+    let status: "ready" | "error" = "ready";
+    try {
+      dataset = await loadChampionAugmentDataset(okFetch(emptyFileFor("56")), "56", "16.14");
+    } catch {
+      status = "error";
+    }
+
+    expect(status).toBe("error");
+    expect(dataset).toBeNull();
+    expect(selectChampionSlotStat(status, dataset, "1006").status).toBe("error");
   });
 
   it("throws explicitly on an HTTP error (offline/failure is never silent)", async () => {
@@ -109,6 +128,23 @@ describe("ChampionDatasetCache — one fetch per (championId, patch)", () => {
     const cache = new ChampionDatasetCache(fetchImpl);
     await cache.get("56", "16.14");
     await cache.get("56", "16.15");
+    expect(fetchImpl).toHaveBeenCalledTimes(2);
+  });
+
+  it("does not cache an invalid complete dataset and retries the same key successfully", async () => {
+    const fetchImpl = vi
+      .fn()
+      .mockResolvedValueOnce(new Response(emptyFileFor("56"), { status: 200 }))
+      .mockResolvedValueOnce(new Response(fileFor("56", "0.480096"), { status: 200 })) as unknown as typeof fetch;
+    const cache = new ChampionDatasetCache(fetchImpl);
+
+    await expect(cache.get("56", "16.14")).rejects.toThrow(/complete.*zero usable/i);
+    expect(cache.has("56", "16.14")).toBe(false);
+    expect(cache.peek("56", "16.14")).toBeNull();
+
+    const recovered = await cache.get("56", "16.14");
+    expect(recovered.loadedCount).toBe(1);
+    expect(recovered.statsByAugmentId.get("1006")?.winRatePercent).toBe("48.0096");
     expect(fetchImpl).toHaveBeenCalledTimes(2);
   });
 });

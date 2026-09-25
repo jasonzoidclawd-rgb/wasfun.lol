@@ -9,7 +9,6 @@ import {
   aramggStatScopeLabel,
   isTierFixtureEnabled,
   tierFixtureEnabledFrom,
-  TIER_FIXTURE_MEMBER,
   type AramggFixtureCard,
 } from "../../../overlay/src/dev/tierFixture";
 import {
@@ -32,6 +31,7 @@ import {
   resolveOverlayFixtureMode,
   type FixtureModeInput,
 } from "../../../overlay/src/dev/fixtureMode";
+import { localOverlayAuthorized } from "../../../overlay/src/augmentOverlayGate";
 
 // ─── Fixtures modeling the real ARAMGG shapes ───
 
@@ -144,10 +144,36 @@ describe("overlay ARAMGG tier fixture (dev-only)", () => {
       expect(formatWinRate(50)).toBe("50.0% WR");
       expect(formatWinRate(null)).toBe("WR —");
     });
-    test("real member gating still needs collector + real entitlement", () => {
-      expect(memberRecommendationsVisible(false, TIER_FIXTURE_MEMBER)).toBe(false);
-      expect(memberRecommendationsVisible(true, disabledMember("x"))).toBe(false);
-      expect(memberRecommendationsVisible(true, TIER_FIXTURE_MEMBER)).toBe(true);
+    test("fixture enablement never fabricates a member entitlement", () => {
+      const unauthenticated = disabledMember("unauthenticated");
+
+      expect(tierFixtureEnabledFrom({ dev: true, flag: "1" })).toBe(true);
+      expect(memberRecommendationsVisible(false, unauthenticated)).toBe(false);
+      expect(memberRecommendationsVisible(true, unauthenticated)).toBe(false);
+    });
+    test("only the explicit flag authorizes local overlay content in dev", () => {
+      // A plain `npm run tauri dev` launch (flag unset, member unauthenticated)
+      // must expose no tiers, win rates, scope labels, or fallback data.
+      const unauthenticated = memberRecommendationsVisible(
+        true,
+        disabledMember("unauthenticated"),
+      );
+
+      expect(localOverlayAuthorized({
+        devBuild: true,
+        tierFixtureEnabled: tierFixtureEnabledFrom({ dev: true, flag: undefined }),
+        memberCoachEnabled: unauthenticated,
+      })).toBe(false);
+      expect(localOverlayAuthorized({
+        devBuild: true,
+        tierFixtureEnabled: tierFixtureEnabledFrom({ dev: true, flag: "1" }),
+        memberCoachEnabled: unauthenticated,
+      })).toBe(true);
+      expect(localOverlayAuthorized({
+        devBuild: false,
+        tierFixtureEnabled: tierFixtureEnabledFrom({ dev: false, flag: "1" }),
+        memberCoachEnabled: unauthenticated,
+      })).toBe(false);
     });
   });
 

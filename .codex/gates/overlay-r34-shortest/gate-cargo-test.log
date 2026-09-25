@@ -1,0 +1,445 @@
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1614:31
+     |
+1614 |         let app: cocoa::base::id = objc::msg_send![objc::class!(NSApplication), sharedApplication];
+     |                               ^^
+     |
+     = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated unit variant `cocoa::appkit::NSApplicationActivationPolicyRegular`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1616:44
+     |
+1616 |             NSApplicationActivationPolicy::NSApplicationActivationPolicyRegular
+     |                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated unit variant `cocoa::appkit::NSApplicationActivationPolicyAccessory`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1618:44
+     |
+1618 |             NSApplicationActivationPolicy::NSApplicationActivationPolicyAccessory
+     |                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated enum `cocoa::appkit::NSApplicationActivationPolicy`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1613:28
+     |
+1613 |         use cocoa::appkit::NSApplicationActivationPolicy;
+     |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1634:57
+     |
+1634 |                 let ns_win = ns_win_ptr as cocoa::base::id;
+     |                                                         ^^
+
+warning: use of deprecated trait `cocoa::appkit::NSWindow`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1633:36
+     |
+1633 |                 use cocoa::appkit::NSWindow;
+     |                                    ^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1671:47
+     |
+1671 | unsafe fn ns_string_value(value: cocoa::base::id) -> Option<String> {
+     |                                               ^^
+
+warning: use of deprecated method `cocoa::foundation::NSString::UTF8String`: use the objc2-foundation crate instead
+    --> src/lib.rs:1677:44
+     |
+1677 |     let ptr = cocoa::foundation::NSString::UTF8String(value);
+     |                                            ^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1688:39
+     |
+1688 |         let application: cocoa::base::id = objc::msg_send![
+     |                                       ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1696:36
+     |
+1696 |         let app_name: cocoa::base::id = objc::msg_send![application, localizedName];
+     |                                    ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1697:45
+     |
+1697 |         let bundle_identifier: cocoa::base::id = objc::msg_send![application, bundleIdentifier];
+     |                                             ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1698:42
+     |
+1698 |         let executable_url: cocoa::base::id = objc::msg_send![application, executableURL];
+     |                                          ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1702:36
+     |
+1702 |             let path: cocoa::base::id = objc::msg_send![executable_url, path];
+     |                                    ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1719:37
+     |
+1719 |         let workspace: cocoa::base::id =
+     |                                     ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:1725:39
+     |
+1725 |         let application: cocoa::base::id = objc::msg_send![workspace, frontmostApplication];
+     |                                       ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2526:47
+     |
+2526 |                     let app_ptr: cocoa::base::id = objc::msg_send![objc::class!(NSApplication), sharedApplication];
+     |                                               ^^
+
+warning: use of deprecated unit variant `cocoa::appkit::NSApplicationActivationPolicyAccessory`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2527:110
+     |
+2527 | ...ationPolicy: NSApplicationActivationPolicy::NSApplicationActivationPolicyAccessory];
+     |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2533:61
+     |
+2533 |                     let ns_win = ns_win_ptr as cocoa::base::id;
+     |                                                             ^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2536:51
+     |
+2536 |                     let main_screen: cocoa::base::id = msg_send![objc::class!(NSScreen), mainScreen];
+     |                                                   ^^
+
+warning: use of deprecated struct `cocoa::foundation::NSRect`: use the objc2-foundation crate instead
+    --> src/lib.rs:2537:51
+     |
+2537 |                     let frame: cocoa::foundation::NSRect = msg_send![main_screen, frame];
+     |                                                   ^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2544:25
+     |
+2544 |                         NSWindowCollectionBehavior::NSWindowCollectionBehaviorCanJoinAllSpaces
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2545:31
+     |
+2545 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorStationary
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2546:31
+     |
+2546 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorFullScreenAuxiliary
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2547:31
+     |
+2547 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorIgnoresCycle,
+     |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated type alias `cocoa::base::id`: use the objc2 crate instead
+    --> src/lib.rs:2578:70
+     |
+2578 | ...                   let ns_win = ptr as cocoa::base::id;
+     |                                                        ^^
+
+warning: use of deprecated enum `cocoa::appkit::NSApplicationActivationPolicy`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2525:40
+     |
+2525 |                     use cocoa::appkit::NSApplicationActivationPolicy;
+     |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated trait `cocoa::appkit::NSWindow`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2532:41
+     |
+2532 |                     use cocoa::appkit::{NSWindow, NSWindowCollectionBehavior};
+     |                                         ^^^^^^^^
+
+warning: use of deprecated struct `cocoa::appkit::NSWindowCollectionBehavior`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2532:51
+     |
+2532 |                     use cocoa::appkit::{NSWindow, NSWindowCollectionBehavior};
+     |                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated trait `cocoa::appkit::NSWindow`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2577:56
+     |
+2577 | ...                   use cocoa::appkit::NSWindow;
+     |                                          ^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setIgnoresMouseEvents_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:1635:24
+     |
+1635 |                 ns_win.setIgnoresMouseEvents_(if ignore {
+     |                        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setFrame_display_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2538:28
+     |
+2538 |                     ns_win.setFrame_display_(frame, cocoa::base::YES);
+     |                            ^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setLevel_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2542:28
+     |
+2542 |                     ns_win.setLevel_(2147483639);
+     |                            ^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setCollectionBehavior_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2543:28
+     |
+2543 |                     ns_win.setCollectionBehavior_(
+     |                            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorCanJoinAllSpaces`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2544:53
+     |
+2544 |                         NSWindowCollectionBehavior::NSWindowCollectionBehaviorCanJoinAllSpaces
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorStationary`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2545:59
+     |
+2545 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorStationary
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorFullScreenAuxiliary`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2546:59
+     |
+2546 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorFullScreenAuxiliary
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated associated constant `cocoa::appkit::NSWindowCollectionBehavior::NSWindowCollectionBehaviorIgnoresCycle`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2547:59
+     |
+2547 | ...                   | NSWindowCollectionBehavior::NSWindowCollectionBehaviorIgnoresCycle,
+     |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setIgnoresMouseEvents_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2549:28
+     |
+2549 |                     ns_win.setIgnoresMouseEvents_(cocoa::base::YES);
+     |                            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setHidesOnDeactivate_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2550:28
+     |
+2550 |                     ns_win.setHidesOnDeactivate_(cocoa::base::NO);
+     |                            ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cocoa::appkit::NSWindow::setLevel_`: use the objc2-app-kit crate instead
+    --> src/lib.rs:2579:44
+     |
+2579 | ...                   ns_win.setLevel_(2147483639);
+     |                              ^^^^^^^^^
+
+warning: `mayhem-oracle-overlay` (lib) generated 40 warnings
+warning: `mayhem-oracle-overlay` (lib test) generated 40 warnings (40 duplicates)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.74s
+     Running unittests src/lib.rs (target/debug/deps/mayhem_oracle_lib-e6bab7c32e48386d)
+
+running 114 tests
+test collector::tests::allows_collection_until_the_daily_limit ... ok
+test bounded_capture_tests::geometry_command_bounds_capture_and_analysis_as_one_worker ... ok
+test bounded_ocr_recognition_tests::detect_command_routes_card_recognition_through_bounded_worker ... ok
+test collector::tests::consent_and_manual_pause_are_blocking ... ok
+test collector::tests::classifies_all_active_gameflow_phases_as_blocking ... ok
+test collector::tests::contributor_round_requires_three_distinct_offers ... ok
+test collector::tests::extracts_only_mayhem_matches_and_snowball_participants ... ok
+test collector::tests::dev_match_shape_probe_reports_augment_contract_without_identity_data ... ok
+test collector::tests::confirms_only_a_selection_from_the_captured_offer ... ok
+test collector::tests::numeric_augment_arrays_are_diagnostic_values_not_resolved_slugs ... ok
+test collector::tests::pauses_collection_during_an_active_game ... ok
+test collector::tests::rejects_collection_at_the_daily_limit ... ok
+test collector::tests::resolves_selected_augment_only_when_unambiguous ... ok
+test collector::tests::augment_shape_discovery_recurses_objects_and_arrays_with_bounded_values ... ok
+test collector::tests::shape_probe_is_queue_2400_only_one_shot_and_sanitizes_resolution_failure ... ok
+test collector::tests::shape_probe_emits_nothing_without_explicit_consent ... ok
+test bounded_capture_tests::bounded_capture_work_executes_off_the_async_runtime_thread ... ok
+test foreground::tests::elevated_layer_grants_nothing_to_non_game_processes ... ok
+test foreground::tests::fullscreen_game_bundle_grants_focus_without_a_regular_window ... ok
+test foreground::tests::actual_game_bundle_is_the_only_league_bundle_that_grants_focus ... ok
+test foreground::tests::game_identity_comes_from_process_metadata_never_from_names ... ok
+test foreground::tests::fullscreen_game_window_with_empty_title_is_the_authority_at_any_layer ... ok
+test foreground::tests::known_client_executable_overrides_a_generic_league_app_name ... ok
+test foreground::tests::game_process_detection_does_not_accept_the_client_process ... ok
+test foreground::tests::game_window_title_can_confirm_game_when_bundle_metadata_is_missing ... ok
+test foreground::tests::league_client_ux_is_not_the_game_foreground ... ok
+test foreground::tests::own_overlay_window_is_never_the_foreground_authority ... ok
+test foreground::tests::known_non_game_bundle_overrides_misleading_window_metadata ... ok
+test foreground::tests::riot_client_is_never_game_foreground_even_when_game_is_running ... ok
+test foreground::tests::status_items_and_system_chrome_are_never_the_authority ... ok
+test foreground::tests::stale_game_process_metadata_never_survives_a_desktop_frontmost ... ok
+test foreground::tests::terminal_topmost_with_game_running_behind_selects_terminal ... ok
+test foreground::tests::transparent_and_degenerate_windows_are_excluded ... ok
+test foreground::tests::unrelated_frontmost_apps_are_not_game_foreground ... ok
+test foreground::tests::workspace_never_overrides_fresher_zorder_evidence ... ok
+test foreground::tests::workspace_frontmost_is_only_a_fallback_for_fullscreen_surfaces ... ok
+test foreground::tests::zorder_topmost_window_overrides_a_stale_workspace_frontmost ... ok
+test foreground_poll_cost_tests::cached_process_presence_caches_a_negative_identically ... ok
+test foreground_poll_cost_tests::cached_process_presence_expires_after_the_ttl ... ok
+test foreground_poll_cost_tests::cached_process_presence_is_absent_before_the_first_scan ... ok
+test foreground_poll_cost_tests::cached_process_presence_is_reused_inside_the_ttl ... ok
+test foreground_poll_cost_tests::workspace_read_is_always_performed_for_the_dev_diagnostic ... ok
+test foreground_poll_cost_tests::workspace_read_is_required_when_the_zorder_walk_found_no_candidate ... ok
+test foreground_poll_cost_tests::workspace_read_is_skipped_when_a_zorder_candidate_owns_the_front_window ... ok
+test lcu::tests::allows_only_readonly_gameflow_paths_for_new_phase_client ... ok
+test lcu::tests::normalizes_gameflow_phase_for_capture_and_background_collection ... ok
+test lcu::tests::parses_lcu_lockfile_content ... ok
+test lcu::tests::handles_bad_manual_directory_without_panicking ... ok
+test lcu::tests::parses_log_fallback_credentials ... ok
+test lcu::tests::parses_command_line_token_and_port ... ok
+test lcu::tests::parses_quoted_command_line_values ... ok
+test lcu::tests::process_discovery_prefers_command_line_credentials ... ok
+test lcu::tests::rejects_bad_lockfile_content ... ok
+test live_player_tests::aram_reroll_replaces_the_active_players_champion ... ok
+test live_player_tests::bench_swap_replaces_the_active_players_champion ... ok
+test live_player_tests::initial_in_game_champion_comes_from_the_active_players_raw_champion_name ... ok
+test live_player_tests::overlay_startup_after_game_start_needs_no_prior_champion_state ... ok
+test live_player_tests::reconnect_resolves_the_current_active_player_from_the_fresh_roster ... ok
+test live_player_tests::teammate_champion_swap_does_not_change_the_active_player ... ok
+test live_player_tests::unknown_raw_champion_is_preserved_for_frontend_catalog_fallback ... ok
+test overlay_window::tests::always_on_bits_are_present_regardless_of_click_through ... ok
+test overlay_window::tests::click_through_sets_the_transparent_bit_only_when_enabled ... ok
+test overlay_window::tests::overlay_is_topmost_only_when_league_is_foreground ... ok
+test overlay_window::tests::toggling_click_through_off_clears_a_previously_set_transparent_bit ... ok
+test overlay_window::tests::unrelated_pre_existing_bits_are_preserved ... ok
+test lcu::tests::process_discovery_uses_manual_directory_fallback ... ok
+test sanitize::tests::rejects_non_mayhem_queue ... ok
+test lcu::tests::process_discovery_uses_lockfile_next_to_executable ... ok
+test lcu::tests::process_discovery_uses_log_fallback_near_executable ... ok
+test sanitize::tests::participant_slots_are_random_per_match ... ok
+test sanitize::tests::sanitizer_outputs_only_safe_match_export_fields ... ok
+test surface_probe::tests::bench_analyze_latency ... ignored
+test collector::tests::reserves_at_most_one_hundred_export_slots_per_day ... ok
+test bounded_capture_tests::capture_at_cap_is_refused_until_a_blocking_worker_returns ... ok
+test bounded_ocr_recognition_tests::timed_out_recognition_recovers_below_cap_and_bounds_physical_workers ... ok
+test bounded_capture_tests::stuck_capture_must_not_block_a_same_channel_retry ... ok
+test surface_probe::tests::afk_modal_is_present_but_occluded ... ok
+test surface_probe::tests::combat_cards_carry_no_rects ... ok
+test surface_probe::tests::combat_is_absent ... ok
+test surface_probe::tests::july20_blue_control_is_absent_in_shop_and_combat ... ok
+test surface_probe::tests::july20_blue_control_is_present_on_every_visible_offer ... ok
+test surface_probe::tests::july20_blue_control_survives_two_x_scaling ... ok
+test surface_probe::tests::fingerprints_distinguish_slots_within_one_offer ... ok
+test surface_probe::tests::gold_offer_is_present_not_occluded ... ok
+test surface_probe::tests::fingerprints_are_stable_across_identical_captures ... ok
+test surface_probe::tests::fingerprints_differ_across_different_offers ... ok
+test surface_probe::tests::july20_left_reroll_changes_only_left_fingerprint ... ok
+test surface_probe::tests::july20_shop_and_combat_render_no_surface ... ok
+test surface_probe::tests::july20_unchanged_offer_fingerprints_are_stable ... ok
+test surface_probe::tests::animated_sparkles_keep_each_static_offer_fingerprint_stable ... ok
+test surface_probe::tests::live_blink_105715_and_105716_metrics_are_locked ... ok
+test surface_probe::tests::present_cards_carry_name_band_rects ... ok
+test surface_probe::tests::july20_recovery_sequence_keeps_later_offers_detectable ... ok
+test surface_probe::tests::second_gold_offer_is_present ... ok
+test surface_probe::tests::silver_frame_offer_is_present_color_independent ... ok
+test upload_queue::tests::failed_batches_are_not_due_until_backoff_expires ... ok
+test upload_queue::tests::queues_a_gzip_batch_containing_only_safe_exports ... ok
+test upload_queue::tests::retry_delay_uses_bounded_exponential_backoff ... ok
+test window_locator::tests::ignores_the_launcher_and_overlay_while_selecting_the_game ... ok
+test window_locator::tests::never_selects_the_overlays_own_window ... ok
+test window_locator::tests::picks_the_largest_when_several_game_windows_exist ... ok
+test window_locator::tests::rejects_a_minimized_game_window ... ok
+test window_locator::tests::rejects_a_too_small_window ... ok
+test window_locator::tests::rejects_the_league_launcher_client_window ... ok
+test window_locator::tests::selects_the_actual_game_window ... ok
+test surface_probe::tests::live_blink_frames_are_independently_present_and_unoccluded ... ok
+test bounded_capture_tests::timed_out_ocr_capture_does_not_starve_geometry_capture ... ok
+test bounded_capture_tests::timed_out_geometry_capture_does_not_starve_ocr_capture ... ok
+test surface_probe::tests::silver_fixture_resolves_all_three_titles_and_records_ocr_latency ... ok
+test surface_probe::tests::detection_survives_2x_retina_scaling ... ok
+test surface_probe::tests::occlusion_survives_2x_retina_scaling ... ok
+test surface_probe::tests::silver_pixels_stay_present_and_stable_for_100_probes ... ok
+test surface_probe::tests::round7_live_frames_keep_all_three_slots_structurally_stable ... ok
+test surface_probe::tests::alternating_live_positive_frames_never_hide_for_500_probes ... ok
+
+test result: ok. 113 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 23.55s
+
+     Running unittests src/main.rs (target/debug/deps/mayhem_oracle_overlay-5e0ac332cb697ef8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/calibration.rs (target/debug/deps/calibration-39b9b86a7799fc9a)
+
+running 7 tests
+test converts_physical_pixels_to_logical_css_pixels ... ok
+test scales_logical_card_crop_into_retina_capture_pixels ... ok
+test falls_back_to_monitor_when_league_window_is_missing ... ok
+test overlay_anchor_is_the_monitor_rect_in_every_selection_mode ... ok
+test uses_monitor_bounds_for_borderless_1920x1080 ... ok
+test windows_borderless_scaling_keeps_capture_and_overlay_rects_in_sync ... ok
+test supports_ultrawide_2560x1080_card_regions_without_clipping ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/capture_failure.rs (target/debug/deps/capture_failure-78953732964f19ba)
+
+running 2 tests
+test a_capture_failure_is_not_the_same_shape_as_a_successful_empty_scan ... ok
+test capture_failure_flags_every_region_and_produces_no_crops ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/dpi_coordinates.rs (target/debug/deps/dpi_coordinates-c013dd70d87977c0)
+
+running 4 tests
+test logical_conversion_holds_across_100_to_200_percent_scaling ... ok
+test negative_origin_monitor_still_calibrates_to_its_own_bounds ... ok
+test capture_rect_maps_onto_a_secondary_monitor_offset ... ok
+test capture_rect_handles_a_negative_origin_monitor ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/geometry_timing_fields.rs (target/debug/deps/geometry_timing_fields-c4365af21782f0a5)
+
+running 4 tests
+test observation_carries_the_dispatch_wait ... ok
+test native_timing_segments_fit_inside_the_total_and_are_never_negative ... ok
+test observation_carries_the_resume_wait ... ok
+test timing_fields_keep_their_camel_case_javascript_contract ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/member_contract.rs (target/debug/deps/member_contract-5a2311e301de59d3)
+
+running 7 tests
+test parses_frozen_bootstrap_and_game_session_contracts ... ok
+test hashes_game_ids_before_they_leave_the_device ... ok
+test blank_member_api_base_uses_production_default ... ok
+test defaults_member_api_base_to_production_origin ... ok
+test explicit_member_api_base_override_wins ... ok
+test accepts_the_m4_signature_and_rejects_tampering ... ok
+test verifies_the_complete_signed_model_package_and_rejects_tampered_config ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ocr_corpus.rs (target/debug/deps/ocr_corpus-052e07e58e9583bb)
+
+running 1 test
+test vision_reads_corpus_card_names ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.97s
+
+     Running tests/r1_replay.rs (target/debug/deps/r1_replay-e47a6caddba6e7e3)
+
+running 1 test
+test r1_frame_yields_three_card_resolutions_through_the_production_pipeline ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.90s
+
+   Doc-tests mayhem_oracle_lib
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

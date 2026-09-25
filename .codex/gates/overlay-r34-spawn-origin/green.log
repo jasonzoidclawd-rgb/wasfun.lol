@@ -1,0 +1,9 @@
+
+ RUN  v4.1.9 /Users/jason/Desktop/mayhem-oracle/.claude/worktrees/overlay-tier-card/overlay
+
+
+ Test Files  62 passed (62)
+      Tests  736 passed (736)
+   Start at  17:31:30
+   Duration  1.55s (transform 1.26s, setup 0ms, import 2.60s, tests 836ms, environment 4ms)
+

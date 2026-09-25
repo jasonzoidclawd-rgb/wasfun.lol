@@ -1,0 +1,89 @@
+
+##### HEALTHY fg first 4 (504275-624275)
+504495 [foreground-poll] {"action":"settle","nativeMs":11,"epochMoved":false,"epoch":1}
+505485 [foreground-poll] {"action":"settle","nativeMs":14,"epochMoved":false,"epoch":1}
+506781 [foreground-poll] {"action":"settle","nativeMs":248,"epochMoved":false,"epoch":1}
+507468 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":1}
+
+##### HEALTHY fg last 4
+620759 [foreground-poll] {"action":"settle","nativeMs":232,"epochMoved":false,"epoch":1}
+621543 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":1}
+622517 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":1}
+623502 [foreground-poll] {"action":"settle","nativeMs":9,"epochMoved":false,"epoch":1}
+
+##### R3 fg ALL
+660491 [foreground-poll] {"action":"settle","nativeMs":17,"epochMoved":false,"epoch":1}
+661491 [foreground-poll] {"action":"settle","nativeMs":14,"epochMoved":false,"epoch":1}
+662795 [foreground-poll] {"action":"settle","nativeMs":303,"epochMoved":false,"epoch":1}
+663594 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":1}
+664598 [foreground-poll] {"action":"settle","nativeMs":9,"epochMoved":false,"epoch":1}
+665606 [foreground-poll] {"action":"settle","nativeMs":13,"epochMoved":false,"epoch":1}
+666607 [foreground-poll] {"action":"settle","nativeMs":26,"epochMoved":false,"epoch":1}
+667622 [foreground-poll] {"action":"settle","nativeMs":12,"epochMoved":false,"epoch":1}
+668817 [foreground-poll] {"action":"settle","nativeMs":309,"epochMoved":false,"epoch":1}
+669704 [foreground-poll] {"action":"settle","nativeMs":15,"epochMoved":false,"epoch":1}
+670534 [foreground-poll] {"action":"settle","nativeMs":16,"epochMoved":false,"epoch":1}
+671533 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":1}
+
+##### R4 fg ALL
+952509 [foreground-poll] {"action":"settle","nativeMs":11,"epochMoved":false,"epoch":1}
+953510 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":1}
+954517 [foreground-poll] {"action":"settle","nativeMs":12,"epochMoved":false,"epoch":1}
+955521 [foreground-poll] {"action":"settle","nativeMs":12,"epochMoved":false,"epoch":1}
+956819 [foreground-poll] {"action":"settle","nativeMs":315,"epochMoved":false,"epoch":1}
+957712 [foreground-poll] {"action":"settle","nativeMs":11,"epochMoved":false,"epoch":1}
+958697 [foreground-poll] {"action":"settle","nativeMs":13,"epochMoved":false,"epoch":1}
+959531 [foreground-poll] {"action":"settle","nativeMs":28,"epochMoved":false,"epoch":1}
+960530 [foreground-poll] {"action":"settle","nativeMs":13,"epochMoved":false,"epoch":1}
+961522 [foreground-poll] {"action":"settle","nativeMs":13,"epochMoved":false,"epoch":1}
+962827 [foreground-poll] {"action":"settle","nativeMs":357,"epochMoved":false,"epoch":1}
+963512 [foreground-poll] {"action":"settle","nativeMs":9,"epochMoved":false,"epoch":1}
+964502 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":1}
+965501 [foreground-poll] {"action":"settle","nativeMs":11,"epochMoved":false,"epoch":1}
+966520 [foreground-poll] {"action":"settle","nativeMs":13,"epochMoved":false,"epoch":1}
+967523 [foreground-poll] {"action":"settle","nativeMs":11,"epochMoved":false,"epoch":1}
+968724 [foreground-poll] {"action":"settle","nativeMs":253,"epochMoved":false,"epoch":1}
+969505 [foreground-poll] {"action":"settle","nativeMs":7,"epochMoved":false,"epoch":1}
+970593 [foreground-poll] {"action":"settle","nativeMs":15,"epochMoved":false,"epoch":1}
+
+##### R3 geometry-timing ALL
+661491 [geometry-timing] {"probeSeq":463,"stale":true,"preCaptureMs":318,"captureMs":195,"analysisMs":157,"nativeElapsedMs":10034,"roundTripMs":20896,"timeoutClassification":"none","attemptGeneration":463,"continuousUnhealthyAgeMs":77874,"acceptedGeometryAgeMs":79124}
+662213 [geometry-timing] {"probeSeq":464,"stale":true,"preCaptureMs":341,"captureMs":179,"analysisMs":151,"nativeElapsedMs":7622,"roundTripMs":12725,"timeoutClassification":"none","attemptGeneration":464,"continuousUnhealthyAgeMs":78703,"acceptedGeometryAgeMs":79953}
+
+##### R4 window: ANY non-foreground-poll record
+
+##### R4 bracket: last 2 geometry-timing BEFORE 952000
+907663 [geometry-timing] {"probeSeq":476,"stale":true,"preCaptureMs":459,"captureMs":190,"analysisMs":200,"nativeElapsedMs":37247,"roundTripMs":64968,"timeoutClassification":"none","attemptGeneration":476,"continuousUnhealthyAgeMs":323946.0000000001,"acceptedGeometryAgeMs":325196.0000000001}
+928024 [geometry-timing] {"probeSeq":477,"stale":true,"preCaptureMs":353,"captureMs":175,"analysisMs":155,"nativeElapsedMs":35574,"roundTripMs":68543,"timeoutClassification":"none","attemptGeneration":477,"continuousUnhealthyAgeMs":344521,"acceptedGeometryAgeMs":345771}
+
+##### R4 bracket: first 2 geometry-timing AFTER 971000
+996659 [geometry-timing] {"probeSeq":478,"stale":true,"preCaptureMs":702,"captureMs":188,"analysisMs":156,"nativeElapsedMs":47047,"roundTripMs":89160,"timeoutClassification":"none","attemptGeneration":478,"continuousUnhealthyAgeMs":413138,"acceptedGeometryAgeMs":414388}
+1025148 [geometry-timing] {"probeSeq":479,"stale":true,"preCaptureMs":328,"captureMs":176,"analysisMs":180,"nativeElapsedMs":52153,"roundTripMs":96631,"timeoutClassification":"none","attemptGeneration":479,"continuousUnhealthyAgeMs":441609,"acceptedGeometryAgeMs":442859}
+
+##### DEEP_TAIL geometry-timing ALL (>=1000000)
+1025148 [geometry-timing] {"probeSeq":479,"stale":true,"preCaptureMs":328,"captureMs":176,"analysisMs":180,"nativeElapsedMs":52153,"roundTripMs":96631,"timeoutClassification":"none","attemptGeneration":479,"continuousUnhealthyAgeMs":441609,"acceptedGeometryAgeMs":442859}
+1115161 [geometry-timing] {"probeSeq":480,"stale":true,"preCaptureMs":344,"captureMs":183,"analysisMs":173,"nativeElapsedMs":65786,"roundTripMs":117720,"timeoutClassification":"none","attemptGeneration":480,"continuousUnhealthyAgeMs":531698.0000000002,"acceptedGeometryAgeMs":532948.0000000002}
+1162509 [geometry-timing] {"probeSeq":481,"stale":true,"preCaptureMs":353,"captureMs":188,"analysisMs":195,"nativeElapsedMs":74426,"roundTripMs":137063,"timeoutClassification":"none","attemptGeneration":481,"continuousUnhealthyAgeMs":579040,"acceptedGeometryAgeMs":580290}
+1377505 [geometry-timing] {"probeSeq":482,"stale":true,"preCaptureMs":298,"captureMs":208,"analysisMs":208,"nativeElapsedMs":165349,"roundTripMs":261977,"timeoutClassification":"none","attemptGeneration":482,"continuousUnhealthyAgeMs":793955,"acceptedGeometryAgeMs":795205}
+1468593 [geometry-timing] {"probeSeq":483,"stale":true,"preCaptureMs":674,"captureMs":182,"analysisMs":173,"nativeElapsedMs":167551,"roundTripMs":305028,"timeoutClassification":"none","attemptGeneration":483,"continuousUnhealthyAgeMs":34910.00000000023,"acceptedGeometryAgeMs":null}
+
+##### HEALTHY geometry-timing first 3
+504287 [geometry-timing] {"probeSeq":391,"stale":false,"preCaptureMs":396,"captureMs":178,"analysisMs":167,"nativeElapsedMs":743,"roundTripMs":768,"timeoutClassification":"none","attemptGeneration":391,"continuousUnhealthyAgeMs":null,"acceptedGeometryAgeMs":0}
+505170 [geometry-timing] {"probeSeq":392,"stale":false,"preCaptureMs":351,"captureMs":154,"analysisMs":160,"nativeElapsedMs":677,"roundTripMs":691,"timeoutClassification":"none","attemptGeneration":392,"continuousUnhealthyAgeMs":null,"acceptedGeometryAgeMs":0}
+506268 [geometry-timing] {"probeSeq":393,"stale":false,"preCaptureMs":447,"captureMs":163,"analysisMs":157,"nativeElapsedMs":770,"roundTripMs":829,"timeoutClassification":"none","attemptGeneration":393,"continuousUnhealthyAgeMs":null,"acceptedGeometryAgeMs":0}
+
+##### HEALTHY_CORE geometry-timing first 2 (400-520s)
+400562 [geometry-timing] {"probeSeq":286,"stale":false,"preCaptureMs":342,"captureMs":168,"analysisMs":159,"nativeElapsedMs":670,"roundTripMs":684,"timeoutClassification":"none","attemptGeneration":286,"continuousUnhealthyAgeMs":null,"acceptedGeometryAgeMs":0}
+401241 [geometry-timing] {"probeSeq":287,"stale":false,"preCaptureMs":304,"captureMs":182,"analysisMs":157,"nativeElapsedMs":645,"roundTripMs":654,"timeoutClassification":"none","attemptGeneration":287,"continuousUnhealthyAgeMs":null,"acceptedGeometryAgeMs":0}
+
+##### DEEP_TAIL fg sample (first 4 >=1000000)
+1000480 [foreground-poll] {"action":"settle","nativeMs":14,"epochMoved":false,"epoch":1}
+1001472 [foreground-poll] {"action":"settle","nativeMs":12,"epochMoved":false,"epoch":1}
+1002476 [foreground-poll] {"action":"settle","nativeMs":11,"epochMoved":false,"epoch":1}
+1003475 [foreground-poll] {"action":"settle","nativeMs":24,"epochMoved":false,"epoch":1}
+
+##### DEEP_TAIL fg sample (last 4)
+1501356 [foreground-poll] {"action":"settle","nativeMs":10,"epochMoved":false,"epoch":2}
+1501563 [foreground-poll] {"action":"settle","nativeMs":3,"epochMoved":false,"epoch":2}
+1501874 [foreground-poll] {"action":"settle","nativeMs":3,"epochMoved":false,"epoch":2}
+1502074 [foreground-poll] {"action":"settle","nativeMs":3,"epochMoved":false,"epoch":2}

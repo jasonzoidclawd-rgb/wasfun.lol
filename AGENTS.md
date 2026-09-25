@@ -32,6 +32,16 @@ Report every skipped or blocked gate. Rust changes: release build + binary
 timestamp (see CLAUDE.md). Verification evidence: use `/usr/bin/diff`,
 `/usr/bin/grep`, `/usr/bin/wc` (rtk hook caveat).
 
+Changes under `.codex/skills/` must pass that skill's own suite — the CI job
+`validation-skill-tests` runs it, so a skill edit that breaks its tests now
+fails CI like any other regression:
+
+```bash
+bash .codex/skills/test-league-augment-overlay/scripts/verify_workflow_cwd.sh
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
+  -s .codex/skills/test-league-augment-overlay/scripts -p 'test_*.py'
+```
+
 ## Repository Safety
 
 - Check `git status --short --branch` before editing; preserve unrelated
@@ -44,6 +54,9 @@ timestamp (see CLAUDE.md). Verification evidence: use `/usr/bin/diff`,
 - Never hand-edit `public/data/` (generated; curated fields are pipeline-owned).
 - New user-facing copy goes through all five `messages/*.json` in one commit.
 - Tag before risky overlay work; the overlay's working state is sacred.
+- Snapshot before risky work: `bash scripts/checkpoint.sh` writes head,
+  status, both diffs, and every untracked file to `~/Desktop/wt-snapshots/`.
+  It never pushes, resets, or cleans; `--help` documents the opt-in commit.
 - The daily data cron commits to `main` at 22:00 UTC — rebase before pushing;
   resolve data-file conflicts by regenerating, never by hand-merging JSON.
 
@@ -138,6 +151,19 @@ Public pages build trust; they do not hand over member depth.
   owner; risky or cross-cutting changes → independent second-model review
   (read-only prompt) before merge.
 
+## Bounded Slices
+
+Work the operator scopes as a slice — a stated goal, pinned evidence, and a
+hard file cap — runs under `.claude/skills/slice-contract/SKILL.md`. That skill
+is the contract, not a suggestion: evidence pinned to
+`.codex/evidence/<slice>/` before work starts; every inherited claim, including
+the prompt's own, re-verified against those pins before anything is built on
+it; each phase report written to `.codex/gates/<slice>/` before the next phase
+begins; red tests at the true seam, frozen by SHA-256 before implementation;
+and exactly one of its four terminal states. Caps are hard — exceeding one, or
+needing an unauthorized change category, is a PAUSED report with zero code
+changes, never a self-granted scope.
+
 ## Multi-Agent Workflow
 
 The orchestrator decomposes; subagents do focused work with exact context,
@@ -159,3 +185,16 @@ is explicitly assigned. Avoid recursive agent nesting.
 
 Do not proceed past a failed gate without fixing it or explicitly documenting
 the deferral.
+
+### ARAM Mayhem augment cardinality invariant
+
+Do not equate four augment offer rounds with four final owned augments.
+
+- There are exactly four offer-round owners.
+- One round may produce multiple final augment results.
+- Final ownership representations must support at least five entries.
+- Transformation chains remain within their originating round.
+- Never derive round progression from final augment inventory length.
+
+Canonical contract:
+`docs/specs/overlay-v1-product-contract.md`

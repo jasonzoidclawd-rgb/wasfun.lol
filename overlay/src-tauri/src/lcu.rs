@@ -538,6 +538,8 @@ mod tests {
         assert!(is_allowed_gameflow_path("/lol-gameflow/v1/gameflow-phase"));
         assert!(is_allowed_gameflow_path("/lol-gameflow/v1/session"));
         assert!(is_allowed_gameflow_path("/lol-champ-select/v1/session"));
-        assert!(!is_allowed_gameflow_path("/lol-champ-select/v1/session/choice/1"));
+        assert!(!is_allowed_gameflow_path(
+            "/lol-champ-select/v1/session/choice/1"
+        ));
     }
 }

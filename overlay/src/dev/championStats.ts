@@ -134,11 +134,15 @@ export function parseChampionAugmentDataset(
     const stat = parseRow(opts.championId, augmentId, value as Record<string, unknown>, opts.patch);
     if (stat) statsByAugmentId.set(augmentId, stat);
   }
+  const completeness = opts.completeness ?? "complete";
+  if (completeness === "complete" && statsByAugmentId.size === 0) {
+    throw new Error("parseChampionAugmentDataset: complete dataset has zero usable augment rows");
+  }
   return {
     championId: opts.championId,
     patch: opts.patch,
     source: opts.source,
-    completeness: opts.completeness ?? "complete",
+    completeness,
     loadedCount: statsByAugmentId.size,
     statsByAugmentId,
   };

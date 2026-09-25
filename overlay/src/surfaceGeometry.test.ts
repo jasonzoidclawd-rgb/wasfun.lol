@@ -352,8 +352,8 @@ describe("geometry confidence hysteresis", () => {
     const cleared = advanceGeometrySurface(entered.state, zeroStrong());
     expect(cleared.state.visualObservation).toBeNull();
     const lateIdentity = identityForSlot(
-      { fingerprint: FP_A, resolution: "late", resolvedAt: 2000 },
-      FP_A,
+      { fingerprint: FP_A, resolution: "late", resolvedAt: 2000, slotGeneration: 0 },
+      0,
     );
     expect(lateIdentity).toBe("late");
     expect(cleared.state.visualObservation).toBeNull();
@@ -565,51 +565,60 @@ describe("geometry/OCR capability separation", () => {
 });
 
 describe("identityForSlot — stale-result guard for identity", () => {
-  const rec = (fingerprint: string, resolution: string | null, resolvedAt = 0): IdentityRecord<string> => ({
+  const rec = (
+    fingerprint: string,
+    resolution: string | null,
+    resolvedAt = 0,
+    slotGeneration = 0,
+  ): IdentityRecord<string> => ({
     fingerprint,
     resolution,
     resolvedAt,
+    slotGeneration,
   });
 
-  it("returns the identity while the fingerprint still matches (identical pixels)", () => {
-    expect(identityForSlot(rec(FP_A, "abc"), FP_A)).toBe("abc");
-    expect(identityForSlot(rec(FP_A, "abc"), FP_A_NUDGE)).toBe("abc"); // within tolerance
+  it("returns the identity while the slot generation still matches", () => {
+    // Pixel movement of any magnitude is irrelevant here — the guard is the
+    // generation counter the confirmed-reroll path owns. FP_A and FP_A_NUDGE
+    // are both stored under generation 0 and both publish.
+    expect(identityForSlot(rec(FP_A, "abc"), 0)).toBe("abc");
+    expect(identityForSlot(rec(FP_A_NUDGE, "abc"), 0)).toBe("abc");
   });
 
-  it("drops to SCANNING when the slot was rerolled (fingerprint changed)", () => {
-    expect(identityForSlot(rec(FP_A, "abc"), FP_B)).toBeNull();
+  it("drops to SCANNING when the slot was rerolled (generation advanced)", () => {
+    expect(identityForSlot(rec(FP_A, "abc"), 1)).toBeNull();
   });
 
-  it("a late OCR result keyed to an old fingerprint cannot paint the new card", () => {
-    // Card rerolled A→B; the still-in-flight OCR from generation A resolves and
-    // writes a record keyed to FP_A. The live card is FP_B, so identityForSlot
-    // returns null — the stale identity never shows.
-    const staleRecord = rec(FP_A, "old-augment");
-    expect(identityForSlot(staleRecord, FP_B)).toBeNull();
+  it("a late OCR result keyed to an old generation cannot paint the new card", () => {
+    // Card rerolled A→B, so Phase B cleared the slot and advanced it to
+    // generation 1. The still-in-flight OCR from generation 0 resolves and
+    // writes a record stamped 0, which can never publish against 1.
+    const staleRecord = rec(FP_A, "old-augment", 0, 0);
+    expect(identityForSlot(staleRecord, 1)).toBeNull();
   });
 
   it.each([0, 1, 2])(
     "invalidates only rerolled slot %d and rejects its late old result",
     (changedSlot) => {
-      const liveFingerprints = [FP_A, FP_B, FP_A_NUDGE];
-      const records = liveFingerprints.map((fingerprint, slot) =>
+      const records = [FP_A, FP_B, FP_A_NUDGE].map((fingerprint, slot) =>
         rec(fingerprint, `identity-${slot}`),
       );
-      const changedFingerprint = changedSlot === 1 ? FP_A : FP_B;
-      liveFingerprints[changedSlot] = changedFingerprint;
+      const liveGenerations = [0, 0, 0];
+      liveGenerations[changedSlot] = 1;
 
       expect(
-        records.map((record, slot) => identityForSlot(record, liveFingerprints[slot])),
+        records.map((record, slot) => identityForSlot(record, liveGenerations[slot])),
       ).toEqual(
         [0, 1, 2].map((slot) => slot === changedSlot ? null : `identity-${slot}`),
       );
-      expect(identityForSlot(records[changedSlot], changedFingerprint)).toBeNull();
+      // The replacement read lands and stamps the CURRENT generation.
+      expect(identityForSlot(rec(FP_B, "replacement", 0, 1), 1)).toBe("replacement");
     },
   );
 
   it("returns null for a never-resolved slot", () => {
-    expect(identityForSlot(null, FP_A)).toBeNull();
-    expect(identityForSlot(rec(FP_A, null), FP_A)).toBeNull();
+    expect(identityForSlot(null, 0)).toBeNull();
+    expect(identityForSlot(rec(FP_A, null), 0)).toBeNull();
   });
 });
 

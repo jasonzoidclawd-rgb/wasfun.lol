@@ -14,12 +14,22 @@ import {
   resolveGameflowCaptureAllowed,
   shouldClearOcrStateForGameflow,
 } from "./augmentSelection";
-import { resolveLiveDataPoll } from "./liveGamePoll";
+import {
+  applyGameOwnershipObservation,
+  isBackwardGameTime,
+  resolveLiveDataPoll,
+  shouldAnnounceLiveActivation,
+} from "./liveGamePoll";
 import {
   resolveRoundDelivery,
   TOTAL_AUGMENT_ROUNDS,
   type RoundDeliveryDecision,
 } from "./roundDelivery";
+import {
+  createOfferRoundOwnership,
+  reduceOfferRoundOwnership,
+  type OfferRoundOwnership,
+} from "./offerRoundOwnership";
 import {
   applyScanToOffer,
   emptyOfferState,
@@ -51,16 +61,20 @@ import type { DecisionEngineData } from "./decision/evaluate";
 import {
   bootstrapMember,
   disabledMember,
+  IDLE_MEMBER_VERIFICATION_STATE,
   memberRecommendationsVisible,
+  runMemberVerification,
+  shouldStartMemberVerification,
   shouldVerifyGameStart,
   verifyMemberGameStart,
   type MemberSnapshot,
+  type MemberVerificationRequest,
+  type MemberVerificationState,
 } from "./auth/member";
 import { CoachPanel } from "./components/CoachPanel";
-import { TierBadgeLabel } from "./TierBadgeLabel";
 import { runLocalInference } from "./model/inference";
 import { confirmPickedAugment } from "./model/presentation";
-import { tierClassName, tierForGrade, type TierLetter } from "./model/tier";
+import { tierForGrade } from "./model/tier";
 import {
   compactWinRateFromFraction,
   compactWinRateFromPercent,
@@ -68,7 +82,6 @@ import {
 import {
   buildAramggDecisionResult,
   isTierFixtureEnabled,
-  TIER_FIXTURE_MEMBER,
   type AramggFixtureCard,
 } from "./dev/tierFixture";
 import {
@@ -76,10 +89,27 @@ import {
   type SlotAramggResolution,
 } from "./dev/useAramggTierFixture";
 import { isGeometryPreviewEnabled, resolveOverlayFixtureMode } from "./dev/fixtureMode";
+import {
+  realAugmentOverlayRenderable,
+  type RealAugmentOverlayGate,
+} from "./augmentOverlayGate";
+import {
+  badgeLayerSignature,
+  describeBadgeLayerDecision,
+  evaluateRoundContentCompletion,
+  parseRoundContentAcknowledgements,
+  reduceRoundContentEmission,
+  reportBadgeLayerDecision,
+  type RoundContentFailureCategory,
+  type RoundContentOwner,
+  type SemanticPublication,
+} from "./badgeLayerDiagnostic";
 import { DevOverlayDiagnostics } from "./dev/DevOverlayDiagnostics";
 import { devPanelsVisible } from "./dev/productionSurfaces";
 import {
   boundedDiagnosticHash,
+  describeLiveClientStatusTransition,
+  describeOfferAcquisitionDiagnostic,
   emitNativeDiagnostic,
   logOverlayDiagnostic,
 } from "./dev/publicationDiagnostics";
@@ -99,7 +129,9 @@ import { isPlausibleTitle } from "./surfacePresence";
 import {
   DEFAULT_PROBE_CONFIG,
   PROBE_TIMEOUT_MS,
+  WEDGED_NATIVE_PROBE_MS,
   nextProbeAction,
+  oldestNativeStart,
   type ProbeSchedulerConfig,
 } from "./surfaceProbeScheduler";
 import {
@@ -115,9 +147,11 @@ import {
   advanceGeometrySurface,
   buildGeometryVisibleFrame,
   classifyGeometryObservation,
+  classifyProbeTimeout,
   completeGeometryAttempt,
   createGeometryHealthClocks,
   createGeometrySurfaceState,
+  decomposeGeometryTiming,
   emptyGeometryObservation,
   fingerprintChanged,
   geometrySchedulerHealthy,
@@ -149,6 +183,7 @@ import {
   reconcileSlotIdentity,
   type SlotIdentity,
 } from "./publicationOwnership";
+import { refreshSameOfferData } from "./sameOfferDataRefresh";
 import { decideOcrTrigger } from "./ocrTrigger";
 import {
   OcrOwnerRegistry,
@@ -182,16 +217,9 @@ import {
   ocrAvailabilityFromError,
   type OcrAvailability,
 } from "./ocrAvailability";
-import {
-  cssRectFromCalibratedRect,
-  type OverlayCalibration,
-  type PhysicalRect,
-} from "./calibration";
-import {
-  cardFrameFromNameRect,
-  overlayAvoidRectsCss,
-  placeBadgeAboveCard,
-} from "./badgeLayout";
+import { type OverlayCalibration } from "./calibration";
+import { positionBadgeChips } from "./positionedBadgeChips";
+import { BadgeChipLayer, type SlotChip } from "./BadgeChipLayer";
 import "./App.css";
 
 // The geometry track runs the SAME self-healing scheduler as OCR (start / skip /
@@ -201,6 +229,7 @@ import "./App.css";
 const GEOMETRY_PROBE_CONFIG: ProbeSchedulerConfig = {
   intervalMs: GEOMETRY_INTERVAL_MS,
   timeoutMs: PROBE_TIMEOUT_MS,
+  wedgedNativeMs: WEDGED_NATIVE_PROBE_MS,
 };
 
 type GeometryDiagnosticHideReason = GeometryHideReason
@@ -283,23 +312,6 @@ interface MatchedCard {
   augment: PoolAugment;
   regionIndex: number;
   ocrText: string;
-}
-
-/**
- * One per-slot badge chip: a real recommendation (`tier`) or an explicit slot
- * state — SCANNING (reroll/unreadable), UNMATCHED (Riot identity unresolved),
- * NO CHAMP DATA (complete champion dataset has no row), LOADING DATA (champion
- * dataset still loading), DATA ERROR (champion dataset fetch failed). This
- * overlay is champion-only: no global-sourced statistic ever reaches a chip.
- */
-interface SlotChip {
-  regionIndex: number;
-  key: string;
-  state: "tier" | "scanning" | "unmatched" | "ocr-error" | "no-data" | "loading-data" | "data-error";
-  tier: TierLetter | null;
-  winRateText: string | null;
-  isNew: boolean;
-  statScope: "champion" | null;
 }
 
 /**
@@ -466,9 +478,22 @@ function App() {
   // Active-game epoch changes on every capture-allowed game transition or
   // reconnect. Async work from a previous game can never publish into the next.
   const gameEpochRef = useRef(0);
+  const confirmedGameOwnershipRef = useRef({ ownsGame: false, gameEpoch: 0 });
+  // P2 fix (focus-loss-before-clear ordering): the offer generation whose
+  // badges the final gate certifies visible RIGHT NOW, or null. Read
+  // synchronously by publishForeground's foreground-loss branch so the
+  // deterministic [focus-transition] record can name the correct generation
+  // before stopOcr() runs.
+  const visibleBadgeGenerationRef = useRef<number | null>(null);
   // Self-healing surface-probe scheduler bookkeeping (a single probe at a time).
   const probeInFlightRef = useRef(false);
   const probeInFlightSinceRef = useRef<number | null>(null);
+  // Native `detect_augment_names` calls issued but not yet settled, INCLUDING
+  // ones whose logical ownership the watchdog already released. The OCR run
+  // races a JS timeout, and a JS deadline cannot cancel an OS capture, so the
+  // logical guard going free says nothing about whether the native call still
+  // holds one of the four Rust capture permits.
+  const ocrNativeOutstandingRef = useRef(0);
   // Ownership token: the captureSeq of the probe that currently holds the
   // in-flight guard. Only that probe may release the guard in its finally, so a
   // watchdog-superseded probe returning late can never free the guard held by
@@ -496,6 +521,10 @@ function App() {
   const lastGeometryTimingEpochRef = useRef(0);
   /** Native geometry invokes issued but not yet settled (abandonment ≠ cancel). */
   const geometryNativeOutstandingRef = useRef(0);
+  /** Per-request native call start times, keyed by captureSeq — each settling
+   *  request deletes only its own entry (see runGeometryProbe / the settle
+   *  `finally` below); `oldestNativeStart` reduces this to the true minimum. */
+  const geometryNativeStartsRef = useRef<Map<number, number>>(new Map());
   const geometrySeqRef = useRef(0);
   const lastGeometryStartedAtRef = useRef<number | null>(null);
   const geometryRestartCountRef = useRef(0);
@@ -555,12 +584,27 @@ function App() {
   const geometryProbeCountRef = useRef(0);
   // Whether the last poll saw an active, capture-allowed game (coarse gate).
   const activeGameRef = useRef(false);
+  // DEV-only: whether this live-ownership span already emitted its one
+  // confirmed [game-poll] activation record. Reset when ownership is released.
+  const liveOwnershipAnnouncedRef = useRef(false);
+  const lastAcceptedOfferRef = useRef<{
+    gameEpoch: number;
+    monotonicMilliseconds: number;
+  } | null>(null);
+  const priorLiveClientStatusRef = useRef<{
+    gameEpoch: number;
+    status: "ready" | "unavailable" | "error";
+  } | null>(null);
   const phaseRef = useRef<Phase>("idle");
   // Rounds completed on STRONG evidence only (confirmed pick / queued-offer
   // replacement) — can only undercount, which keeps probing alive and never
   // suppresses a real offer. See roundDelivery.ts.
   const completedRoundsRef = useRef(0);
   const roundDeliveryRef = useRef<RoundDeliveryDecision | null>(null);
+  const offerRoundOwnershipRef = useRef<OfferRoundOwnership>(
+    createOfferRoundOwnership(),
+  );
+  const [semanticOwner, setSemanticOwner] = useState<RoundContentOwner | null>(null);
   const [roundDelivery, setRoundDelivery] = useState<RoundDeliveryDecision | null>(null);
   const ocrSelectionCompletedRef = useRef(false);
   const gameflowCaptureAllowedRef = useRef(false);
@@ -644,18 +688,34 @@ function App() {
   const [debugCollapsed, setDebugCollapsed] = useState(true);
   const activeGameHashRef = useRef<string | null>(null);
   const memberBootstrapCompleteRef = useRef(false);
+  // Monotonic token for the in-poll member-verification request: bumped by
+  // beginNewGameEpoch (any confirmed epoch boundary — new hash, backward
+  // game_time, or a confirmed close) so an in-flight verification for a
+  // superseded game can never publish, and bumped again on every new
+  // verification kickoff so an older overlapping request within the SAME
+  // epoch is superseded by a newer one. See the verifyGameHash branch in
+  // poll() for the capture/compare.
+  const memberVerificationTokenRef = useRef(0);
+  // Explicit per-game member-verification lifecycle (idle/pending/verified/
+  // retryable), separate from activeGameHashRef. Reset to idle only by
+  // beginNewGameEpoch — an inconclusive recheck marks the SAME hash
+  // retryable here without touching activeGameHashRef, so a later poll can
+  // start another verification attempt for the same game.
+  const memberVerificationStateRef = useRef<MemberVerificationState>(
+    IDLE_MEMBER_VERIFICATION_STATE,
+  );
   const gameWindowForeground = foregroundState.gameWindowForeground;
   const collectorEnabled = collectorStatus?.consent === "accepted";
   const collectorCaptureEnabled = collectorEnabled && !collectorStatus?.paused;
-  // Dev-only: bypass ONLY the member-coach auth/data. Everything else (OCR,
-  // calibration, positioning, collector consent, focus, phase) stays on the
-  // real path. Geometry preview is a SEPARATE, independently-gated flag.
+  // Development fixtures never alter the real member snapshot. The optional
+  // member coach stays authenticated; the local geometry/OCR badge pipeline
+  // gets its render allowance at realFrameRenderable ONLY under this explicit
+  // fixture flag — a plain dev launch authorizes nothing.
   const tierFixtureOn = isTierFixtureEnabled();
   const geometryPreviewOn = isGeometryPreviewEnabled();
-  const effectiveMember = tierFixtureOn ? TIER_FIXTURE_MEMBER : memberSnapshot;
-  const memberEnabled = memberRecommendationsVisible(
+  const memberCoachEnabled = memberRecommendationsVisible(
     collectorEnabled,
-    effectiveMember,
+    memberSnapshot,
   );
 
   const updatePhase = useCallback((nextPhase: Phase) => {
@@ -664,8 +724,15 @@ function App() {
     setOcrLifecycle((previous) => ({ ...previous, phase: nextPhase }));
   }, []);
 
+  // The coarse "is a game currently active" render/capture gate. This is
+  // NEVER a source of epoch or activation-latch changes on its own — a
+  // telemetry outage fails this closed (see
+  // suspendGameRuntimeForUnavailableTelemetry) without proving the match
+  // ended, so toggling it here must not look like a new game to the
+  // analyzer. Epoch/latch resets happen only through beginNewGameEpoch,
+  // defined below, called exclusively from a CONFIRMED game-identity
+  // boundary.
   const setActiveGame = useCallback((active: boolean) => {
-    if (activeGameRef.current !== active) gameEpochRef.current += 1;
     activeGameRef.current = active;
   }, []);
 
@@ -723,7 +790,23 @@ function App() {
       captureSeq,
       observation,
       generation: geometryGenerationRef.current,
-      resolveIdentity: (regionIndex, fingerprint) => {
+      // SLOT GENERATION IS THE ONLY IDENTITY AUTHORITY HERE.
+      //
+      // These two closures used to compare the live frame's fingerprint against
+      // the stored record's — a scalar chasing a signal that is bistable while a
+      // card animates or the cursor sits on it. In the 2026-07-27 trace slot 1
+      // oscillated 17 bits between two poles that BOTH read augment 1051 / S /
+      // 52.0%, and the chip fell back to SCANNING on 24 of the offer's 72 frames
+      // (38% of its wall time) while the card never changed. Worse, publishing
+      // re-armed the mismatch: the record was stamped with whichever pole the
+      // ~1-2 s OCR read landed on, so the next frame at the other pole blanked
+      // it again. Phase B's confirmed-reroll path already owns replacement
+      // detection and already bumps the generation; comparing raw fingerprints
+      // here was a second, noisier authority racing it.
+      //
+      // Fingerprint evidence is NOT disabled and no threshold moved — it still
+      // drives `advanceRerollConfirmation`, which is where the hysteresis lives.
+      resolveIdentity: (regionIndex) => {
         const record = identityStoreRef.current[regionIndex];
         // Sustained-confirmation hold: a resolved slot whose fingerprint drift
         // is not yet a CONFIRMED reroll keeps its tier instead of flashing
@@ -732,11 +815,17 @@ function App() {
         if (record?.resolution != null && heldRerollSlotsRef.current.includes(regionIndex)) {
           return record.resolution;
         }
-        return identityForSlot(record, fingerprint);
+        return identityForSlot(record, slotGenerationsRef.current[regionIndex] ?? 0);
       },
-      resolveUnresolvedState: (regionIndex, fingerprint) => {
+      resolveUnresolvedState: (regionIndex) => {
         const record = identityStoreRef.current[regionIndex];
-        if (!record || record.fingerprint !== fingerprint || record.resolution !== null) return "scanning";
+        if (
+          !record
+          || (record.slotGeneration ?? 0) !== (slotGenerationsRef.current[regionIndex] ?? 0)
+          || record.resolution !== null
+        ) {
+          return "scanning";
+        }
         return record.unresolvedState ?? "scanning";
       },
     });
@@ -755,23 +844,26 @@ function App() {
     }));
   }, []);
 
-  // STRONG completion evidence arrived (confirmed pick or a queued offer
-  // replacing the current one): advance the round model immediately so
-  // recording and labels carry the true round without waiting for a poll tick.
-  const recordRoundCompleted = useCallback(() => {
-    completedRoundsRef.current = Math.min(
-      completedRoundsRef.current + 1,
-      TOTAL_AUGMENT_ROUNDS,
-    );
+  const updateOfferRoundOwnership = useCallback((next: OfferRoundOwnership) => {
+    offerRoundOwnershipRef.current = next;
+    setSemanticOwner(next.activeOwner == null ? null : {
+      gameEpoch: gameEpochRef.current,
+      round: next.activeOwner.round,
+      offerGeneration: next.activeOwner.offerGeneration,
+    });
+    completedRoundsRef.current = next.completedOwners.length;
     const current = roundDeliveryRef.current;
     if (!current) return;
-    const next: RoundDeliveryDecision = {
+    const nextDelivery: RoundDeliveryDecision = {
       ...current,
       pendingRounds: Math.max(0, current.eligibleRounds - completedRoundsRef.current),
-      activeOfferRound: Math.min(completedRoundsRef.current + 1, TOTAL_AUGMENT_ROUNDS),
+      activeOfferRound: next.activeOwner?.round ?? Math.min(
+        completedRoundsRef.current + 1,
+        TOTAL_AUGMENT_ROUNDS,
+      ),
     };
-    roundDeliveryRef.current = next;
-    setRoundDelivery(next);
+    roundDeliveryRef.current = nextDelivery;
+    setRoundDelivery(nextDelivery);
   }, []);
 
   // Slots whose title resolved to a local-catalog augment — the decision-engine
@@ -824,12 +916,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Dev tier-fixture: skip the real auth fetch entirely; the effective member
-    // snapshot is overridden above. Nothing else in the member path runs.
-    if (tierFixtureOn) {
-      memberBootstrapCompleteRef.current = true;
-      return;
-    }
     let cancelled = false;
     void bootstrapMember()
       .then((snapshot) => {
@@ -847,7 +933,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [tierFixtureOn]);
+  }, []);
 
   useEffect(() => {
     if (!championSlug || abilityProfiles[championSlug] !== undefined) return;
@@ -1054,7 +1140,7 @@ function App() {
 
   const decisionResult = useMemo((): DecisionResult | null => {
     if (
-      !memberEnabled ||
+      !memberCoachEnabled ||
       !memberSnapshot?.modelConfig ||
       !decisionData ||
       !roundDelivery ||
@@ -1082,7 +1168,7 @@ function App() {
   }, [
     decisionData,
     matchedCards,
-    memberEnabled,
+    memberCoachEnabled,
     memberSnapshot,
     mode,
     pickedAugments,
@@ -1220,9 +1306,6 @@ function App() {
     return null;
   }, [fixtureMode.kind, offerState, previewCards, aramgg.resolvedBySlug, roundDelivery]);
 
-  // Dev flag unlocks the member gate ONLY (no collector/entitlement) — it never
-  // relaxes the focus/phase/complete-offer gates below.
-  const effectiveMemberEnabled = tierFixtureOn ? effectiveMember?.enabled === true : memberEnabled;
   const isFixtureBacked = fixturePayload != null; // ARAMGG-backed → no fake P:50%
 
   const badgeDecisionResult = fixturePayload?.result ?? decisionResult;
@@ -1235,14 +1318,20 @@ function App() {
   // capture that does not validate the surface yields an empty frame, so no
   // chip or placeholder can linger over combat, respawn, the scoreboard, or a
   // new map. Preview chips: only in preview mode.
-  const realFrameRenderable =
-    !isPreviewMode &&
-    effectiveMemberEnabled &&
-    visibleFrameRenderable(visibleFrame, gameWindowForeground) &&
-    offerSurface.render &&
+  const augmentOverlayGate: RealAugmentOverlayGate = {
+    devBuild: import.meta.env.DEV,
+    // The development bypass needs the EXPLICIT fixture flag; a plain dev
+    // launch is not authorization. See localOverlayAuthorized.
+    tierFixtureEnabled: tierFixtureOn,
+    memberCoachEnabled,
+    previewMode: isPreviewMode,
+    visibleFrameRenderable: visibleFrameRenderable(visibleFrame, gameWindowForeground),
+    offerSurfaceRenderable: offerSurface.render,
     // Only a recent accepted authoritative geometry result certifies rendering.
     // Attempt starts/watchdog replacements never refresh this gate.
-    geometrySchedulerIsHealthy;
+    geometrySchedulerHealthy: geometrySchedulerIsHealthy,
+  };
+  const realFrameRenderable = realAugmentOverlayRenderable(augmentOverlayGate);
   const previewBadgesReady =
     isPreviewMode && fixturePayload != null && previewCards.length === 3;
   const showBadgeLayer = realFrameRenderable || previewBadgesReady;
@@ -1272,6 +1361,9 @@ function App() {
       });
     }
     if (!realFrameRenderable || !visibleFrame) return [];
+    const publicationOwner = semanticOwner?.offerGeneration === offerSurface.offerGeneration
+      ? semanticOwner
+      : null;
     return visibleFrame.slots.flatMap((slot): SlotChip[] => {
       // A slot with no fresh rect from THIS capture is never rendered — the
       // rectangle must belong to the current frame's generation, not history.
@@ -1279,6 +1371,18 @@ function App() {
       const base = {
         regionIndex: slot.regionIndex,
         key: `slot-${slot.regionIndex}-g${visibleFrame.generation}`,
+      };
+      const semanticPublication = (
+        terminalState: SemanticPublication["terminalState"],
+        noDataVerified: boolean,
+        failureCategory: RoundContentFailureCategory,
+      ): SemanticPublication | undefined => publicationOwner == null ? undefined : {
+        ...publicationOwner,
+        slot: slot.regionIndex,
+        publicationGeneration: visibleFrame.generation,
+        terminalState,
+        noDataVerified,
+        failureCategory,
       };
       if (slot.resolution === null) {
         // Geometry confirms a card here, but its identity is pending (fresh
@@ -1291,6 +1395,15 @@ function App() {
           winRateText: null,
           isNew: false,
           statScope: null,
+          semanticPublication: semanticPublication(
+            slot.unresolvedState === "scanning" || slot.unresolvedState == null
+              ? "loading-data"
+              : "error",
+            false,
+            slot.unresolvedState === "scanning" || slot.unresolvedState == null
+              ? null
+              : "FAIL_IDENTITY",
+          ),
         }];
       }
       const staged = slot.resolution?.aramgg;
@@ -1306,26 +1419,27 @@ function App() {
             isNew: slot.resolution?.pool?.lifecycle === "added",
             // Champion-only: a matched stat is always champion-specific.
             statScope: staged.stat.provenance === "champion" ? "champion" : null,
+            semanticPublication: semanticPublication("resolved", false, null),
           }];
         }
         if (staged.kind === "no-data") {
           // Identity resolved; the COMPLETE champion dataset has no row → NO CHAMP DATA.
-          return [{ ...base, state: "no-data", tier: null, winRateText: null, isNew: false, statScope: null }];
+          return [{ ...base, state: "no-data", tier: null, winRateText: null, isNew: false, statScope: null, semanticPublication: semanticPublication("no-data", true, null) }];
         }
         if (staged.kind === "loading") {
           // Champion dataset still loading (or partial): absence is unproven.
-          return [{ ...base, state: "loading-data", tier: null, winRateText: null, isNew: false, statScope: null }];
+          return [{ ...base, state: "loading-data", tier: null, winRateText: null, isNew: false, statScope: null, semanticPublication: semanticPublication("loading-data", false, null) }];
         }
         if (staged.kind === "error") {
           // Champion dataset fetch failed — never fall back to a global value.
-          return [{ ...base, state: "data-error", tier: null, winRateText: null, isNew: false, statScope: null }];
+          return [{ ...base, state: "data-error", tier: null, winRateText: null, isNew: false, statScope: null, semanticPublication: semanticPublication("error", false, "FAIL_DATA") }];
         }
-        return [{ ...base, state: "unmatched", tier: null, winRateText: null, isNew: false, statScope: null }];
+        return [{ ...base, state: "unmatched", tier: null, winRateText: null, isNew: false, statScope: null, semanticPublication: semanticPublication("error", false, "FAIL_IDENTITY") }];
       }
       // Engine path (no dev fixture): the local-catalog match backs the chip.
       const pool = slot.resolution?.pool ?? null;
       if (!pool) {
-        return [{ ...base, state: "unmatched", tier: null, winRateText: null, isNew: false, statScope: null }];
+        return [{ ...base, state: "unmatched", tier: null, winRateText: null, isNew: false, statScope: null, semanticPublication: semanticPublication("error", false, "FAIL_IDENTITY") }];
       }
       const candidate = decisionResult?.candidates.find(
         (entry) => entry.augmentSlug === pool.slug,
@@ -1337,9 +1451,126 @@ function App() {
         winRateText: compactWinRateFromPercent(pool.win_rate),
         isNew: pool.lifecycle === "added",
         statScope: null,
+        semanticPublication: semanticPublication("resolved", false, null),
       }];
     });
-  }, [previewBadgesReady, fixturePayload, previewCards, realFrameRenderable, visibleFrame, decisionResult, aramgg.resolvedBySlug]);
+  }, [previewBadgesReady, fixturePayload, previewCards, realFrameRenderable, visibleFrame, semanticOwner, offerSurface.offerGeneration, decisionResult, aramgg.resolvedBySlug]);
+
+  // THE render-ready badge collection. A chip only appears here once it has a
+  // real screen position, so this — not `slotChips` — is what the JSX maps and
+  // what the diagnostic counts. Missing calibration, a slot the current capture
+  // supplied no rect for, and a placement helper that finds nowhere to put the
+  // chip all drop it from BOTH at once, which is the only way the reported
+  // count can equal the number of badge elements actually on screen.
+  const positionedChips = useMemo(
+    () =>
+      positionBadgeChips({
+        chips: slotChips,
+        calibration,
+        slots: visibleFrame?.slots ?? null,
+        cssWindow,
+      }),
+    [slotChips, calibration, visibleFrame, cssWindow],
+  );
+
+  // DEV-only: the FINAL badge-layer gate — the ONE decision that knows whether
+  // augment badges actually reached the screen. `[offer-session].render` is an
+  // intermediate offer-surface decision taken before authorization, preview
+  // mode, the visible frame, and geometry-scheduler health are consulted, so it
+  // can never certify a visible badge; only this record can. Bounded booleans /
+  // enums / small counts only — no augment names, OCR text, identifiers, or raw
+  // geometry. One record per logical decision change, so a steady overlay does
+  // not flood the trace. The leading `import.meta.env.DEV` lets the production
+  // build fold the tag, the reason strings, and the helpers out of the bundle.
+  const badgeLayerVisibleFrame = augmentOverlayGate.visibleFrameRenderable;
+  const badgeLayerOfferSurface = augmentOverlayGate.offerSurfaceRenderable;
+  const badgeLayerOfferGeneration = offerSurface.offerGeneration;
+  // Counted from the positioned collection, never from `slotChips`: a chip with
+  // no DOM position paints nothing, so counting it would let the analyzer
+  // certify `rendered` for a badge layer that was never drawn.
+  const badgeLayerRealCount = realFrameRenderable ? positionedChips.length : 0;
+  const badgeLayerPreviewCount = previewBadgesReady ? positionedChips.length : 0;
+  const lastBadgeLayerSignatureRef = useRef<string | null>(null);
+  const emittedRoundContentOwnerKeyRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    const decision = describeBadgeLayerDecision({
+      devBuild: import.meta.env.DEV,
+      tierFixtureEnabled: tierFixtureOn,
+      memberCoachEnabled,
+      previewMode: isPreviewMode,
+      visibleFrameRenderable: badgeLayerVisibleFrame,
+      offerSurfaceRenderable: badgeLayerOfferSurface,
+      geometrySchedulerHealthy: geometrySchedulerIsHealthy,
+      offerGeneration: badgeLayerOfferGeneration,
+      renderedBadgeCount: badgeLayerRealCount,
+      previewBadgeCount: badgeLayerPreviewCount,
+    });
+    // Mirrors the analyzer's own `visibleBadgeGeneration`: the offer
+    // generation whose badges are certified visible RIGHT NOW, or null.
+    // publishForeground reads this synchronously (P2 fix) to name the
+    // generation a foreground-loss transition applies to, before stopOcr()
+    // tears anything down.
+    visibleBadgeGenerationRef.current = decision.badgeLayerVisible
+      ? decision.offerGeneration
+      : null;
+    const signature = badgeLayerSignature(decision, gameEpochRef.current);
+    if (lastBadgeLayerSignatureRef.current === signature) return;
+    lastBadgeLayerSignatureRef.current = signature;
+    reportBadgeLayerDecision(decision, gameEpochRef.current);
+  }, [
+    tierFixtureOn,
+    memberCoachEnabled,
+    isPreviewMode,
+    badgeLayerVisibleFrame,
+    badgeLayerOfferSurface,
+    geometrySchedulerIsHealthy,
+    badgeLayerOfferGeneration,
+    badgeLayerRealCount,
+    badgeLayerPreviewCount,
+  ]);
+
+  useEffect(() => {
+    if (!import.meta.env.DEV || isPreviewMode) return;
+    if (semanticOwner?.offerGeneration !== offerSurface.offerGeneration) return;
+    const root = document.querySelector<HTMLElement>(".overlay-root");
+    if (!root) return;
+    const expectedPublications = positionedChips.flatMap(({ chip }) =>
+      chip.semanticPublication ? [chip.semanticPublication] : []
+    );
+    const domAcknowledgements = parseRoundContentAcknowledgements(root);
+    const renderedContainerCount = root.querySelectorAll(".badge-chip").length;
+    const decision = evaluateRoundContentCompletion({
+      owner: {
+        gameEpoch: semanticOwner.gameEpoch,
+        round: semanticOwner.round,
+        offerGeneration: semanticOwner.offerGeneration,
+      },
+      expectedPublications,
+      domAcknowledgements,
+      renderedContainerCount,
+      schedulerHealthy: geometrySchedulerIsHealthy,
+    });
+    const emission = reduceRoundContentEmission(
+      emittedRoundContentOwnerKeyRef.current,
+      semanticOwner,
+      decision,
+    );
+    emittedRoundContentOwnerKeyRef.current = emission.emittedOwnerKey;
+    if (!emission.emit) return;
+    emitNativeDiagnostic("[round-content-complete]", {
+      gameEpoch: semanticOwner.gameEpoch,
+      round: semanticOwner.round,
+      offerGeneration: semanticOwner.offerGeneration,
+      result: decision.result,
+    });
+  }, [
+    isPreviewMode,
+    semanticOwner,
+    offerSurface.offerGeneration,
+    positionedChips,
+    geometrySchedulerIsHealthy,
+  ]);
 
   // Staged diagnostics counters (never conflate injected with detected).
   const diag = {
@@ -1355,10 +1586,11 @@ function App() {
     previewInjected: isPreviewMode ? previewCards.length : 0,
     offeredMatched: matchedCards.length,
     catalogResolved: aramgg.resolvedBySlug.size,
+    // Positioned, not merely intended: the dev banner reports what is painted.
     renderedRealBadges: realFrameRenderable
-      ? slotChips.filter((chip) => chip.state === "tier").length
+      ? positionedChips.filter(({ chip }) => chip.state === "tier").length
       : 0,
-    renderedPreviewBadges: previewBadgesReady ? slotChips.length : 0,
+    renderedPreviewBadges: previewBadgesReady ? positionedChips.length : 0,
   };
 
   // FIX 2 — the render-authoritative publication snapshot. The dev banner reads
@@ -1384,6 +1616,13 @@ function App() {
   // identity latch (game exit / focus loss); otherwise the latch stays as
   // nonvisual grace for brief restoration.
   const clearSurface = useCallback((clearLatch: boolean) => {
+    updateOfferRoundOwnership(reduceOfferRoundOwnership(
+      offerRoundOwnershipRef.current,
+      {
+        type: "presentation-cleared",
+        offerGeneration: offerSurfaceRef.current.offerGeneration,
+      },
+    ));
     const closedSurface: OfferSurfaceState = {
       ...createOfferSurfaceState(),
       offerGeneration: offerSurfaceRef.current.offerGeneration + 1,
@@ -1430,7 +1669,7 @@ function App() {
       cropCount: 0,
       noCropReason: "surface-cleared",
     }));
-  }, [bumpScanSeq, publishEmptyVisibleFrame, resetOffer]);
+  }, [bumpScanSeq, publishEmptyVisibleFrame, resetOffer, updateOfferRoundOwnership]);
 
   const stopOcr = useCallback(() => {
     clearSurface(true);
@@ -1492,6 +1731,21 @@ function App() {
         .catch(() => {});
     }
     if (!nextForeground.gameWindowForeground && previousForeground.gameWindowForeground) {
+      // P2 fix (focus-loss-before-clear ordering): record the deterministic
+      // foreground-loss transition BEFORE stopOcr() tears anything down, so
+      // the analyzer has an unambiguous, generation-bound trigger to open
+      // focus loss even when this is the ONLY trace evidence of the alt-tab
+      // (OCR stopping immediately means no later offer-session foreground:false
+      // record, and the scheduler halting means native geometry may never
+      // accumulate a qualifying not-foreground streak). Only fires when
+      // badges were actually certified visible — nothing to lose otherwise.
+      if (visibleBadgeGenerationRef.current !== null) {
+        emitNativeDiagnostic("[focus-transition]", {
+          transition: "foreground-loss",
+          offerGeneration: visibleBadgeGenerationRef.current,
+          gameEpoch: gameEpochRef.current,
+        });
+      }
       // Focus left the game: hide the surface immediately (the probe would
       // skip anyway, but we must not wait for the health clock on a blur).
       stopOcr();
@@ -1534,7 +1788,31 @@ function App() {
     [foregroundPollHost],
   );
 
-  const clearGameOnlyState = useCallback((nextPhase: Phase) => {
+  // The single place that advances gameEpochRef and resets every per-game
+  // latch that must not cross a CONFIRMED game boundary: a changed
+  // authoritative game/session hash, backward valid game_time, or a
+  // confirmed non-live close. Callers are responsible for also calling
+  // stopOcr() to fail closed the offer/badge/publication/scheduler surface
+  // at the same boundary (closeConfirmedGame already does, via
+  // clearGameRenderState). An unconfirmed telemetry outage must never reach
+  // this function — see suspendGameRuntimeForUnavailableTelemetry.
+  const beginNewGameEpoch = useCallback(() => {
+    gameEpochRef.current += 1;
+    liveOwnershipAnnouncedRef.current = false;
+    ocrSelectionCompletedRef.current = true;
+    completedRoundsRef.current = 0;
+    offerRoundOwnershipRef.current = createOfferRoundOwnership();
+    setPickedAugments([]);
+    lastRecordedRoundRef.current = "";
+    memberVerificationTokenRef.current += 1;
+    memberVerificationStateRef.current = IDLE_MEMBER_VERIFICATION_STATE;
+  }, []);
+
+  // Clears rendered/runtime UI and the OCR/geometry pipeline only. Never
+  // touches game identity (lastGameTimeRef/activeGameHashRef) or the
+  // activation latch by itself — callers decide whether this is a confirmed
+  // close or a fail-closed suspend of an unconfirmed outage.
+  const clearGameRenderState = useCallback((nextPhase: Phase) => {
     ocrSelectionCompletedRef.current = true;
     setActiveGame(false);
     setPlayerData(null);
@@ -1543,13 +1821,31 @@ function App() {
     roundDeliveryRef.current = null;
     setRoundDelivery(null);
     setPickedAugments([]);
-    lastGameTimeRef.current = null;
-    lastRecordedRoundRef.current = "";
-    activeGameHashRef.current = null;
     setCoachOpen(false);
     stopOcr();
     updatePhase(nextPhase);
   }, [setActiveGame, stopOcr, updatePhase]);
+
+  // CONFIRMED non-live gameflow: the match actually ended. Close game
+  // identity ownership and reset the activation latch, so a later confirmed
+  // game announces a fresh live-active.
+  const closeConfirmedGame = useCallback((nextPhase: Phase) => {
+    clearGameRenderState(nextPhase);
+    lastGameTimeRef.current = null;
+    lastRecordedRoundRef.current = "";
+    activeGameHashRef.current = null;
+    beginNewGameEpoch();
+  }, [clearGameRenderState, beginNewGameEpoch]);
+
+  // UNCONFIRMED telemetry outage past the fail-closed grace window: LCU
+  // and/or Live Client Data are unavailable, so rendering/capture fail
+  // closed operationally — but this alone is never proof the match ended.
+  // Game identity ownership and the activation latch are preserved, so
+  // recovery of the SAME match resumes instead of announcing a second
+  // live-active or opening a new analyzer epoch.
+  const suspendGameRuntimeForUnavailableTelemetry = useCallback((nextPhase: Phase) => {
+    clearGameRenderState(nextPhase);
+  }, [clearGameRenderState]);
 
   // Stage 2 per-slot identity resolution: maps a plausible title to its catalog
   // (Riot/ARAMGG) identity for chip content. Presence (Stage 1) never depends on
@@ -1573,38 +1869,32 @@ function App() {
   // without invoking OCR again.
   useEffect(() => {
     if (!aramgg.resolveSlotTitle) return;
-    let changed = false;
-    const nextStore = identityStoreRef.current.map((record, regionIndex) => {
-      if (!record?.resolution || !record.ocrTitle) return record;
-      const resolution = resolveSlotTitle(record.ocrTitle);
-      const incoming: IdentityRecord<SlotResolution> = {
-        ...record,
-        resolution,
-        resolvedAt: performance.now(),
+    const refreshedAt = performance.now();
+    const refreshed = refreshSameOfferData({
+      identityRecords: identityStoreRef.current,
+      offer: offerStateRef.current,
+      resolveByCanonicalId: (canonicalAugmentId, regionIndex) => {
+        const record = identityStoreRef.current[regionIndex];
+        if (!record?.ocrTitle) return null;
+        const resolution = resolveSlotTitle(record.ocrTitle);
+        return {
+          canonicalAugmentId: slotResolutionAugmentId(resolution),
+          resolution,
+        };
+      },
+      recordMetadata: () => ({
+        resolvedAt: refreshedAt,
         championGeneration: championGenerationRef.current,
         championRequestId: aramgg.championRequestId,
         championPatch: aramgg.championPatch,
-        augmentId: slotResolutionAugmentId(resolution),
         foregroundEpoch: foregroundEpochRef.current,
         gameEpoch: gameEpochRef.current,
-        offerGeneration: geometryGenerationRef.current,
-        slotGeneration: slotGenerationsRef.current[regionIndex] ?? 0,
-      };
-      const reconciled = reconcileIdentityRecord(record, incoming);
-      if (reconciled.resolution !== record.resolution) changed = true;
-      return reconciled;
+      }),
     });
-    if (!changed) return;
-    identityStoreRef.current = nextStore;
-    const currentOffer = offerStateRef.current;
-    publishOffer({
-      ...currentOffer,
-      slots: currentOffer.slots.map((slot) => ({
-        ...slot,
-        resolution: nextStore[slot.regionIndex]?.resolution ?? slot.resolution,
-      })),
-    });
-    republishGeometryFrame(geometrySeqRef.current);
+    if (!refreshed.changed) return;
+    identityStoreRef.current = refreshed.identityRecords;
+    publishOffer(refreshed.offer);
+    if (refreshed.republish) republishGeometryFrame(geometrySeqRef.current);
   }, [
     aramgg.championPatch,
     aramgg.championRequestId,
@@ -1630,6 +1920,16 @@ function App() {
     geometryInFlightSinceRef.current = startedAt;
     lastGeometryStartedAtRef.current = startedAt;
     const captureSeq = (geometrySeqRef.current += 1);
+    // Record THIS request's own start time, keyed by its capture sequence —
+    // per-request ownership, not a single "oldest so far" scalar. A scalar
+    // that is only set-if-null and only cleared once nativeOutstanding hits
+    // zero cannot represent two concurrent native calls: if probe A settles
+    // first while a wedge-recovery replacement B is still outstanding,
+    // outstanding drops 2 -> 1 (never 0), so the scalar would keep reporting
+    // A's stale start forever and silently keep the wedge discount
+    // permanently active. Deleting only this request's own entry on settle
+    // (below) makes that failure structurally impossible.
+    geometryNativeStartsRef.current.set(captureSeq, startedAt);
     geometryInFlightTokenRef.current = captureSeq;
     geometryHealthRef.current = startGeometryAttempt(
       geometryHealthRef.current,
@@ -1637,6 +1937,7 @@ function App() {
       startedAt,
     );
     const foregroundEpoch = foregroundEpochRef.current;
+    const gameEpoch = gameEpochRef.current;
     const capturedAt = performance.now();
     try {
       let observation: GeometryObservation;
@@ -1650,15 +1951,64 @@ function App() {
         observation = emptyGeometryObservation(captureSeq, performance.now(), reason);
       }
       const completedAt = performance.now();
-      // Stale-result rejection: apply only while this probe's seq is still newest
-      // AND the foreground epoch it captured under is unchanged.
+      // Stale-result rejection: apply only while this probe's seq is still newest,
+      // the foreground epoch it captured under is unchanged, AND the game epoch it
+      // captured under is unchanged. The seq bump in clearSurface()/stopOcr() is
+      // paired synchronously with every confirmed epoch change today, but that
+      // pairing is an implementation detail elsewhere in this file, not a contract
+      // this function should depend on — the explicit check makes the guarantee
+      // self-evident, matching runIdentityProbe's proven pattern.
       const stale =
         captureSeq !== geometrySeqRef.current ||
-        foregroundEpoch !== foregroundEpochRef.current;
+        foregroundEpoch !== foregroundEpochRef.current ||
+        gameEpoch !== gameEpochRef.current;
       const captureValid =
         observation.captureWidth > 0 && observation.captureHeight > 0;
       const classification = classifyGeometryObservation(observation);
       const previousSurface = geometrySurfaceStateRef.current;
+      if (stale && import.meta.env.DEV) {
+        const priorPositive = previousSurface.lastPositiveObservation;
+        let fingerprintChangeCount = 0;
+        if (priorPositive != null) {
+          for (let i = 0; i < observation.cards.length; i += 1) {
+            if (observation.cards[i]?.present && fingerprintChanged(
+              priorPositive.cards[i]?.fingerprint ?? "",
+              observation.cards[i]?.fingerprint ?? "",
+            )) fingerprintChangeCount += 1;
+          }
+        }
+        const staleResult = { stale: true } as const;
+        emitNativeDiagnostic("[offer-session]", describeOfferAcquisitionDiagnostic({
+          roundOwner: offerRoundOwnershipRef.current.activeOwner?.round ?? null,
+          offerGeneration: offerSurfaceRef.current.offerGeneration,
+          geometrySequence: captureSeq,
+          stale: staleResult.stale,
+          surfaceClassification: classification,
+          offerState: offerSurfaceRef.current.state,
+          geometryAction: null,
+          validCardCount: observation.cards.filter((card) => card.present).length,
+          blueControlConfidence: observation.blueControl?.confidence ?? 0,
+          fingerprints: observation.cards.map((card) => card.fingerprint || null) as [
+            string | null,
+            string | null,
+            string | null,
+          ],
+          fingerprintChangeCount,
+          confirmedRerollCount: 0,
+          baselineSettling: baselineSettlementRef.current != null &&
+            !baselineSettlementRef.current.latched,
+          newOfferDetected: false,
+          gameEpoch,
+          foregroundEpoch,
+          timeSinceLastAcceptedOfferMs: lastAcceptedOfferRef.current == null ||
+            lastAcceptedOfferRef.current.gameEpoch !== gameEpoch
+            ? null
+            : Math.round(Math.max(
+              0,
+              completedAt - lastAcceptedOfferRef.current.monotonicMilliseconds,
+            )),
+        }));
+      }
       const transition = stale
         ? null
         : advanceGeometrySurface(previousSurface, observation);
@@ -1698,6 +2048,19 @@ function App() {
       const timingEpoch = Math.floor(completedAt / 1000);
       if (!captureValid || timingEpoch !== lastGeometryTimingEpochRef.current) {
         lastGeometryTimingEpochRef.current = timingEpoch;
+        const roundTripMs = Math.round(completedAt - startedAt);
+        // Attribution, not a decision: the split between the closure's own work
+        // and the segments only a tokio async-runtime worker can advance is what
+        // turns the next controlled game into a decisive experiment.
+        const timing = decomposeGeometryTiming({
+          roundTripMs,
+          nativeElapsedMs: observation.elapsedMs,
+          preCaptureMs: observation.preCaptureMs,
+          captureMs: observation.captureMs,
+          analysisMs: observation.analysisMs,
+          dispatchWaitMs: observation.dispatchWaitMs,
+          resumeWaitMs: observation.resumeWaitMs,
+        });
         logOverlayDiagnostic("[geometry-timing]", {
           probeSeq: captureSeq,
           stale,
@@ -1705,14 +2068,23 @@ function App() {
           captureMs: observation.captureMs,
           analysisMs: observation.analysisMs,
           nativeElapsedMs: observation.elapsedMs,
-          roundTripMs: Math.round(completedAt - startedAt),
-          timeoutClassification:
-            captureValid
-              ? "none"
-              : observation.rejectionReasons[0] ?? "capture-invalid",
+          roundTripMs,
+          timeoutClassification: classifyProbeTimeout({
+            captureWidth: observation.captureWidth,
+            captureHeight: observation.captureHeight,
+            rejectionReasons: observation.rejectionReasons,
+            roundTripMs,
+            nativeElapsedMs: observation.elapsedMs,
+          }),
           attemptGeneration: captureSeq,
           continuousUnhealthyAgeMs,
           acceptedGeometryAgeMs,
+          dispatchWaitMs: timing.dispatchWaitMs,
+          resumeWaitMs: timing.resumeWaitMs,
+          closureWorkMs: timing.closureWorkMs,
+          unattributedNativeMs: timing.unattributedNativeMs,
+          transportMs: timing.transportMs,
+          asyncRuntimeMs: timing.asyncRuntimeMs,
         });
       }
 
@@ -1873,15 +2245,28 @@ function App() {
           offerGeneration: nextOfferSurface.offerGeneration,
         });
       }
-      const roundBefore = roundDeliveryRef.current?.activeOfferRound ?? null;
-      if (detectedNewOffer && previousSurface.lastPositiveObservation != null) {
-        recordRoundCompleted();
+      const roundBefore = offerRoundOwnershipRef.current.activeOwner?.round ?? null;
+      if (nextOfferSurface.state === "OFFER_VISIBLE") {
+        updateOfferRoundOwnership(reduceOfferRoundOwnership(
+          offerRoundOwnershipRef.current,
+          {
+            type: "accepted-offer",
+            offerGeneration: nextOfferSurface.offerGeneration,
+          },
+        ));
       }
       let invalidatedSlots: number[] = [];
       if (
         nextOfferSurface.state === "NO_OFFER" &&
         priorOfferSurface.state !== "NO_OFFER"
       ) {
+        updateOfferRoundOwnership(reduceOfferRoundOwnership(
+          offerRoundOwnershipRef.current,
+          {
+            type: "offer-closed",
+            offerGeneration: priorOfferSurface.offerGeneration,
+          },
+        ));
         identityStoreRef.current = [null, null, null];
         acceptedSlotFingerprintsRef.current = ["", "", ""];
         slotGenerationsRef.current = slotGenerationsRef.current.map((generation) => generation + 1);
@@ -1975,6 +2360,38 @@ function App() {
       republishGeometryFrame(captureSeq);
       const publishedAt = performance.now();
 
+      const acquisitionDiagnostic = import.meta.env.DEV
+        ? describeOfferAcquisitionDiagnostic({
+          roundOwner: offerRoundOwnershipRef.current.activeOwner?.round ?? null,
+          offerGeneration: nextOfferSurface.offerGeneration,
+          geometrySequence: captureSeq,
+          stale: false,
+          surfaceClassification: classification,
+          offerState: nextOfferSurface.state,
+          geometryAction: transition.action,
+          validCardCount: effectiveObservation.cards.filter((card) => card.present).length,
+          blueControlConfidence: effectiveObservation.blueControl?.confidence ?? 0,
+          fingerprints: effectiveObservation.cards.map((card) => card.fingerprint || null) as [
+            string | null,
+            string | null,
+            string | null,
+          ],
+          fingerprintChangeCount: changedFingerprintCount,
+          confirmedRerollCount: confirmedRerollSlots.length,
+          baselineSettling: settling,
+          newOfferDetected: detectedNewOffer,
+          gameEpoch,
+          foregroundEpoch,
+          timeSinceLastAcceptedOfferMs: lastAcceptedOfferRef.current == null ||
+            lastAcceptedOfferRef.current.gameEpoch !== gameEpoch
+            ? null
+            : Math.round(Math.max(
+              0,
+              completedAt - lastAcceptedOfferRef.current.monotonicMilliseconds,
+            )),
+        })
+        : null;
+
       // [offer-session] — native-visible (terminal stderr) diagnostic for the
       // controlled Level 11/15 retest. Every field is a bounded count / boolean /
       // enum; no OCR text, names, or identifiers are emitted. This is the single
@@ -1997,22 +2414,28 @@ function App() {
                   : nextOfferSurface.validCardCount < 2
                     ? `insufficient-valid-cards:${nextOfferSurface.validCardCount}`
                     : `render-suppressed:${nextOfferSurface.state}`;
-      emitNativeDiagnostic("[offer-session]", {
-        geometrySequence: captureSeq,
-        consecutiveWeakNegatives: previousSurface.consecutiveWeakNegatives,
-        precededByNegative: previousSurface.consecutiveWeakNegatives > 0,
-        changedFingerprintCount,
-        newOfferDetected: detectedNewOffer,
-        offerGenerationBefore: priorOfferSurface.offerGeneration,
-        offerGenerationAfter: nextOfferSurface.offerGeneration,
-        roundBefore,
-        roundAfter: roundDeliveryRef.current?.activeOfferRound ?? null,
-        invalidatedSlots,
-        offerState: nextOfferSurface.state,
-        render: nextOfferSurface.render,
-        foreground,
-        zeroRenderReason,
-      });
+      if (import.meta.env.DEV && acquisitionDiagnostic != null) {
+        emitNativeDiagnostic("[offer-session]", {
+          ...acquisitionDiagnostic,
+          consecutiveWeakNegatives: previousSurface.consecutiveWeakNegatives,
+          precededByNegative: previousSurface.consecutiveWeakNegatives > 0,
+          changedFingerprintCount,
+          offerGenerationBefore: priorOfferSurface.offerGeneration,
+          offerGenerationAfter: nextOfferSurface.offerGeneration,
+          roundBefore,
+          roundAfter: offerRoundOwnershipRef.current.activeOwner?.round ?? null,
+          invalidatedSlots,
+          render: nextOfferSurface.render,
+          foreground,
+          zeroRenderReason,
+        });
+        if (detectedNewOffer) {
+          lastAcceptedOfferRef.current = {
+            gameEpoch,
+            monotonicMilliseconds: completedAt,
+          };
+        }
+      }
 
       // Phase follows the visible SURFACE: a present, unoccluded offer opens
       // selection; confirmed absence returns to in-game. Occlusion is transient
@@ -2037,6 +2460,9 @@ function App() {
         const decision = decideOcrTrigger<SlotResolution>({
           observation: publishedObservation,
           identities: identityStoreRef.current,
+          // Read AFTER Phase B has applied this frame's confirmed rerolls, so a
+          // slot cleared this tick is already sitting at its new generation.
+          slotGenerations: slotGenerationsRef.current,
           now: performance.now(),
           retryMs: IDENTITY_RETRY_MS,
           forceSlots: forceOcrSlotsRef.current,
@@ -2160,15 +2586,33 @@ function App() {
         0,
         geometryNativeOutstandingRef.current - 1,
       );
-      // Release the guard ONLY if this probe still owns it (a watchdog restart
-      // hands ownership to the replacement — its late return must not free it).
+      // Remove ONLY this request's own start-time entry — per-request
+      // ownership, not a count-gated scalar clear. A sibling request (e.g. a
+      // wedge-recovery replacement still outstanding) keeps its own entry
+      // untouched, so `oldestNativeStart` always reflects the true minimum
+      // across whatever is still actually unsettled. This is what makes the
+      // old failure mode structurally impossible: a stale oldest-start
+      // silently keeping the wedge discount permanently active and doubling
+      // native capture load for the rest of the game (see runGeometryProbe
+      // above) — there is no shared scalar left to go stale.
+      geometryNativeStartsRef.current.delete(captureSeq);
+      // Release the guard ONLY if this probe still owns it — the watchdog may
+      // already have released ownership on its behalf, in which case there is
+      // nothing here to free.
+      //
+      // Under bounded overlap (the wedge-recovery discount above), a
+      // replacement CAN now start before this probe settles, bumping
+      // `geometrySeqRef` ahead of `captureSeq`. When that happens this probe's
+      // late result correctly fails `frameResultIsCurrent` in the result
+      // handler and is discarded rather than overwriting newer state — that is
+      // the intended fail-safe for a wedged call, not a regression.
       if (geometryInFlightTokenRef.current === captureSeq) {
         geometryInFlightSinceRef.current = null;
         geometryInFlightRef.current = false;
         geometryInFlightTokenRef.current = null;
       }
     }
-  }, [aramgg.championRequestId, bumpScanSeq, datasetCaptureOn, recordRoundCompleted, republishGeometryFrame, resetOffer, updatePhase]);
+  }, [aramgg.championRequestId, bumpScanSeq, datasetCaptureOn, republishGeometryFrame, resetOffer, updateOfferRoundOwnership, updatePhase]);
 
   // ─── TRACK 2: OCR/identity probe — TRIGGERED by the geometry track ───────────
   // Supplies per-slot identity ONLY: never presence, occlusion, or visual freshness. It
@@ -2190,6 +2634,7 @@ function App() {
     const championGenerationAtStart = championGenerationRef.current;
     const championIdAtStart = championIdRef.current;
     const offerGenerationAtStart = geometryGenerationRef.current;
+    const acceptedRoundAtStart = offerRoundOwnershipRef.current.activeOwner?.round ?? null;
     const championRequestIdAtStart = aramgg.championRequestId;
     const championPatchAtStart = aramgg.championPatch;
     const owner = ocrOwnersRef.current.start({
@@ -2198,6 +2643,7 @@ function App() {
       championGeneration: championGenerationAtStart,
       championId: championIdAtStart,
       offerGeneration: offerGenerationAtStart,
+      round: acceptedRoundAtStart,
       requestedSlots: slots,
       slotGenerations: triggerSlotGenerations,
       fingerprints: triggerFingerprints,
@@ -2210,6 +2656,7 @@ function App() {
         championId: owner.championId,
         championGeneration: owner.championGeneration,
         offerGeneration: owner.offerGeneration,
+        round: owner.round,
         requestedSlots: owner.requestedSlots,
         slotGenerations: owner.requestedSlots.map((slot) => owner.slotGenerations[slot]),
         fingerprints: owner.requestedSlots.map((slot) =>
@@ -2224,6 +2671,7 @@ function App() {
       championGeneration: championGenerationRef.current,
       championId: championIdRef.current,
       offerGeneration: geometryGenerationRef.current,
+      round: offerRoundOwnershipRef.current.activeOwner?.round ?? null,
       requestedSlots: slots,
       slotGenerations: slotGenerationsRef.current,
       fingerprints: acceptedSlotFingerprintsRef.current,
@@ -2265,6 +2713,8 @@ function App() {
           (s) => identityStoreRef.current[s]?.resolution != null),
         offerGenerationAtStart: rejected.offerGeneration,
         offerGenerationNow: context.offerGeneration,
+        roundAtStart: rejected.round,
+        roundNow: context.round,
         foregroundEpochAtStart: rejected.foregroundEpoch,
         foregroundEpochNow: context.foregroundEpoch,
         gameEpochAtStart: rejected.gameEpoch,
@@ -2280,7 +2730,7 @@ function App() {
     setOcrLifecycle((previous) => ({
       ...previous,
       phase: phaseRef.current,
-      currentRound: roundDeliveryRef.current?.activeOfferRound ?? null,
+      currentRound: owner.round,
       active: true,
       lastScanStart: scanStart,
       lastScanEnd: null,
@@ -2303,6 +2753,7 @@ function App() {
           // has already timed out and abandoned this promise — that is exactly
           // the case we need to see (how long the native OCR really ran).
           const nativeStartedAt = performance.now();
+          ocrNativeOutstandingRef.current += 1;
           return invoke<OcrScanResult>("detect_augment_names", {
             knownNames: ocrKnownNames,
           }).then((scan) => {
@@ -2315,6 +2766,14 @@ function App() {
               nativeTotalMs: scan.totalMs,
             });
             return scan;
+          }).finally(() => {
+            // Chained on the INVOKE, not on the outer race, so the count falls
+            // when the native call truly returns its capture permit rather than
+            // when the 2 s JS deadline gives up on it.
+            ocrNativeOutstandingRef.current = Math.max(
+              0,
+              ocrNativeOutstandingRef.current - 1,
+            );
           });
         },
         (scan) => scan,
@@ -2599,7 +3058,7 @@ function App() {
         isCompleteThreeCardOffer(matched) &&
         playerData
       ) {
-        const round = roundDeliveryRef.current?.activeOfferRound ?? 0;
+        const round = owner.round ?? 0;
         const offeredAugmentSlugs = matched
           .map((card) => card.augment.slug)
           .sort();
@@ -2642,11 +3101,20 @@ function App() {
       // Identity-only failure: mark the triggered slots unresolved (retry after
       // the deadline). Presence/freshness are unaffected — the geometry track
       // keeps publishing, so a readable offer still shows SCANNING chips.
+      //
+      // Routed through `reconcileIdentityRecord`, whose first rule is that an
+      // unresolved incoming record never displaces a resolved one. This block
+      // used to assign the store slot directly, so ANY failed read — including
+      // one the operator never asked for — downgraded an already-published
+      // augment to SCANNING with no generation bump and no card change. During
+      // the R4 duplicate-OCR storm (runIds 36-42, all timing out on saturated
+      // capture permits) that is what made already-painted badges vanish.
       const failedAt = performance.now();
       for (const regionIndex of slots) {
-        const priorFailures = identityStoreRef.current[regionIndex]?.failureCount ?? 0;
+        const previous = identityStoreRef.current[regionIndex];
+        const priorFailures = previous?.failureCount ?? 0;
         const failure = failurePublication(priorFailures + 1, failedAt);
-        identityStoreRef.current[regionIndex] = {
+        identityStoreRef.current[regionIndex] = reconcileIdentityRecord(previous, {
           fingerprint: triggerFingerprints[regionIndex] ?? "",
           resolution: null,
           resolvedAt: failedAt,
@@ -2661,7 +3129,7 @@ function App() {
           unresolvedState: failure.state,
           failureCount: failure.failureCount,
           retryAt: failure.retryAt,
-        };
+        });
       }
       ocrPendingSlotsRef.current = [];
       republishGeometryFrame(geometrySeqRef.current);
@@ -2746,12 +3214,13 @@ function App() {
         inFlightSince: geometryInFlightSinceRef.current,
         lastProbeStartedAt: lastGeometryStartedAtRef.current,
         nativeOutstanding: geometryNativeOutstandingRef.current,
+        oldestNativeStartedAt: oldestNativeStart(geometryNativeStartsRef.current),
       },
       GEOMETRY_PROBE_CONFIG,
       scheduledAt,
     );
     if (action.kind === "skip") return;
-    if (action.kind === "restart" || action.kind === "abandon") {
+    if (action.kind === "abandon") {
       const attemptGeneration =
         geometryHealthRef.current.currentAttemptGeneration ??
         geometrySeqRef.current;
@@ -2784,15 +3253,31 @@ function App() {
         nativeOutstanding: geometryNativeOutstandingRef.current,
         action: action.kind,
       });
-      geometrySeqRef.current += 1;
+      // NOTE: `geometrySeqRef` is deliberately NOT advanced here.
+      //
+      // The sequence exists so a REPLACEMENT probe's result beats the one it
+      // replaced. Abandonment issues no replacement, so bumping it had exactly
+      // one effect: the still-running probe's own result failed
+      // `frameResultIsCurrent` and returned at the top of the result handler —
+      // above the surface commit, the offer FSM, the slot publications and
+      // decideOcrTrigger. In the 2026-07-27 R4 window all 6 geometry results
+      // that landed were `stale:true`, the FSM froze at NO_OFFER for 32.657 s
+      // with three cards on screen, and the overlay painted neither a badge nor
+      // SCANNING. The watchdog was invalidating the very work it was waiting
+      // for: goodput zero at 100% utilization.
+      //
+      // Releasing ownership alone is enough to stop a late result from
+      // publishing under a new offer, because every publication is additionally
+      // gated on offerGeneration / slotGeneration / foregroundEpoch.
       geometryInFlightRef.current = false;
       geometryInFlightSinceRef.current = null;
       geometryInFlightTokenRef.current = null;
       geometryRestartCountRef.current += 1;
-      // Ownership released so no late result can publish — but with the native
-      // backlog at the cap we must NOT add another invoke. Issuing one is what
-      // grew roundTripMs to 47–63 s while the native side stayed healthy.
-      if (action.kind === "abandon") return;
+      // Ownership released so a slow probe cannot wedge the logical track — but
+      // the native call is still running and still holding its Rust capture
+      // permit, so we must NOT add another invoke. Issuing one is what grew
+      // roundTripMs to 47–63 s while the native side stayed healthy at ~650 ms.
+      return;
     }
     // Geometry owns presence even when the OS OCR backend is unavailable. The
     // native probe reports screen-capture failures explicitly (as uncertain,
@@ -2813,11 +3298,16 @@ function App() {
         inFlight: probeInFlightRef.current,
         inFlightSince: probeInFlightSinceRef.current,
         lastProbeStartedAt: lastProbeStartedAtRef.current,
-        // OCR is TRIGGERED, never on a fixed cadence, so it cannot accumulate
-        // the timer-driven invoke backlog the geometry cap exists to bound
-        // (this trace: 0 OCR watchdog restarts vs 52 geometry). Held at 0 to
-        // leave OCR scheduling behaviour exactly unchanged.
-        nativeOutstanding: 0,
+        // OCR is TRIGGERED rather than timed, which was the argument for pinning
+        // this at 0 — but the trigger fires off the geometry cadence, so it is
+        // timed by proxy. In the 2026-07-27 R4 collapse that produced SEVEN
+        // copies of one identical job (runIds 36-42, same requestedSlots [1,2],
+        // same fingerprints, 2109 ms apart — exactly the watchdog quantum) until
+        // they saturated the Rust MAX_CONCURRENT_CAPTURES = 4 gate and starved
+        // geometry. Counting the real outstanding natives caps the OCR track at
+        // one in flight — deliberately stricter than the geometry track, which
+        // now permits one presumed-wedged zombie plus one replacement.
+        nativeOutstanding: ocrNativeOutstandingRef.current,
       },
       DEFAULT_PROBE_CONFIG,
       performance.now(),
@@ -2826,21 +3316,33 @@ function App() {
       lastProbeSkipReasonRef.current = action.reason;
       return;
     }
-    if (action.kind === "restart") {
-      const expiredOwner = ocrOwnersRef.current.current;
+    if (action.kind === "abandon") {
+      // Release the LOGICAL guard only, and issue nothing. The previous branch
+      // bumped the scan sequence, invalidated the owner token and then fell
+      // through to `runIdentityProbe` — a replacement it could not cancel and
+      // whose predecessor it had just made unpublishable. At the 2109 ms
+      // watchdog quantum that emitted runIds 36-42: seven identical reads of
+      // slots [1,2] against four Rust capture permits.
+      //
+      // Neither `bumpScanSeq()` nor `invalidate()` happens now, so the
+      // outstanding read may still publish when it lands — it is the newest
+      // evidence there is, and offerGeneration / slotGeneration /
+      // foregroundEpoch / championGeneration all still gate it. The
+      // native-outstanding cap keeps a second read from starting underneath it,
+      // and this run's own `finally` releases the owner when it truly settles.
       if (import.meta.env.DEV) {
-        logOverlayDiagnostic("[identity-watchdog-restart]", {
-          runId: expiredOwner?.runId ?? null,
+        logOverlayDiagnostic("[identity-watchdog-abandon]", {
+          runId: ocrOwnersRef.current.current?.runId ?? null,
           inFlightSince: probeInFlightSinceRef.current,
+          nativeOutstanding: ocrNativeOutstandingRef.current,
           reason: action.reason,
         });
       }
-      bumpScanSeq();
       probeInFlightRef.current = false;
       probeInFlightSinceRef.current = null;
-      ocrOwnersRef.current.invalidate();
       probeRestartCountRef.current += 1;
       lastProbeFailureReasonRef.current = action.reason;
+      return;
     }
     if (!canRunOcr(ocrAvailability)) {
       lastProbeSkipReasonRef.current = "ocr-unavailable";
@@ -2852,13 +3354,13 @@ function App() {
     }
     const slots = ocrPendingSlotsRef.current;
     if (slots.length === 0) return;
-    lastProbeSkipReasonRef.current = action.kind === "restart" ? "watchdog-restart" : "due";
+    lastProbeSkipReasonRef.current = "due";
     void runIdentityProbe(
       slots,
       ocrTriggerFingerprintsRef.current,
       slotGenerationsRef.current.slice(),
     );
-  }, [bumpScanSeq, nameLookup, ocrAvailability, runIdentityProbe]);
+  }, [nameLookup, ocrAvailability, runIdentityProbe]);
 
   // The single tick drives BOTH tracks: geometry (fast, authoritative) first so a
   // fresh trigger decision is in place before the identity track reads it.
@@ -3023,6 +3525,40 @@ function App() {
     };
   }, [datasetCaptureOn]);
 
+  // P1 fix (member verification must not block game-boundary invalidation):
+  // detached, non-blocking member verification. poll() fires this with
+  // `void startMemberVerification(request)` and never awaits it, so
+  // pollInFlightRef releases immediately and every later poll stays free to
+  // detect a confirmed non-live gameflow, a changed game hash, or backward
+  // game_time while this request is still in flight. Any of those bump
+  // gameEpochRef/activeGameHashRef/memberVerificationTokenRef via
+  // beginNewGameEpoch (or the token alone, for a superseding verification
+  // request) — so the post-await checks below discard a stale success or
+  // failure rather than publish it into a game this request no longer owns.
+  const startMemberVerification = useCallback(
+    (request: MemberVerificationRequest) =>
+      runMemberVerification(
+        request,
+        {
+          epoch: () => gameEpochRef.current,
+          gameHash: () => activeGameHashRef.current,
+          token: () => memberVerificationTokenRef.current,
+          gameActive: () => activeGameRef.current,
+          verificationState: () => memberVerificationStateRef.current,
+          now: () => performance.now(),
+        },
+        {
+          setMemberSnapshot,
+          verifyMemberGameStart,
+          recheckGameHash: () => invoke<string | null>("get_game_hash").catch(() => null),
+          setVerificationState: (state) => {
+            memberVerificationStateRef.current = state;
+          },
+        },
+      ),
+    [],
+  );
+
   // Main polling loop
   const poll = useCallback(async () => {
     if (pollInFlightRef.current) {
@@ -3065,7 +3601,13 @@ function App() {
           failureAgeMs: 0,
         });
         const clientFound = await invoke<boolean>("detect_league_client").catch(() => false);
-        clearGameOnlyState(clientFound ? "client_found" : "idle");
+        // On the first owned close, the boundary invokes
+        // closeConfirmedGame(clientFound ? "client_found" : "idle");
+        applyGameOwnershipObservation({
+          ownershipRef: confirmedGameOwnershipRef,
+          observation: "confirmed-non-live",
+          closeOwnedGame: () => closeConfirmedGame(clientFound ? "client_found" : "idle"),
+        });
         return;
       }
 
@@ -3081,7 +3623,39 @@ function App() {
         );
         data = liveDataResult.data;
         liveDataStatus = liveDataResult.status;
+        if (import.meta.env.DEV) {
+          const statusTransition = describeLiveClientStatusTransition({
+            previousStatus: priorLiveClientStatusRef.current?.gameEpoch === gameEpochRef.current
+              ? priorLiveClientStatusRef.current.status
+              : null,
+            nextStatus: liveDataStatus,
+            gameEpoch: gameEpochRef.current,
+            foregroundEpoch: foregroundEpochRef.current,
+            monotonicMilliseconds: performance.now(),
+          });
+          priorLiveClientStatusRef.current = {
+            gameEpoch: gameEpochRef.current,
+            status: liveDataStatus,
+          };
+          if (statusTransition != null) {
+            emitNativeDiagnostic("[game-poll]", {
+              gameflowPhase: gameflow?.phase ?? "unavailable",
+              gameflowConfirmed: gameflow != null,
+              captureAllowed: gameflowCaptureAllowedRef.current,
+              liveDataStatus,
+              action: "live-data-status-transition",
+              ...statusTransition,
+            });
+          }
+        }
         if (data && gameflowCaptureAllowedRef.current) {
+          if (gameflow != null) {
+            applyGameOwnershipObservation({
+              ownershipRef: confirmedGameOwnershipRef,
+              observation: "confirmed-live",
+              closeOwnedGame: () => closeConfirmedGame("idle"),
+            });
+          }
           const priorFailureStartedAt = liveDataFailureStartedAtRef.current;
           liveDataFailureStartedAtRef.current = null;
           setActiveGame(true);
@@ -3095,32 +3669,109 @@ function App() {
               failureAgeMs: Math.round(Math.max(0, performance.now() - priorFailureStartedAt)),
             });
           }
+          // Detect every confirmed new-game boundary — a changed authoritative
+          // game/session hash, or backward valid game_time — BEFORE the
+          // activation check below and before any downstream game-two offer,
+          // member-verification, geometry, or badge diagnostic is scheduled.
+          // Otherwise a boundary detected mid-poll doesn't get beginNewGameEpoch
+          // (and its fresh live-active) until the NEXT poll, by which time
+          // game-two evidence has already published under the still-open
+          // game-one epoch.
           const gameHash = await invoke<string | null>("get_game_hash").catch(() => null);
+          let verifyGameHash: string | null = null;
+          let newGameBoundaryDetected = false;
           if (!gameHash) {
             setMemberSnapshot(disabledMember("game-hash-unavailable"));
           } else if (
             memberBootstrapCompleteRef.current &&
             shouldVerifyGameStart(activeGameHashRef.current, gameHash)
           ) {
+            // A changed game hash while ownership never released is an
+            // explicit game/session identity change — its own epoch boundary,
+            // independent of the backward-game_time signal below. Member
+            // verification is deferred until after the activation emission —
+            // it is downstream game-two work, not part of boundary detection.
+            if (activeGameHashRef.current !== null) {
+              newGameBoundaryDetected = true;
+            }
             activeGameHashRef.current = gameHash;
-            setMemberSnapshot(disabledMember("game-session-verification-pending"));
-            const snapshot = await verifyMemberGameStart(gameHash).catch((error) =>
-              disabledMember(
-                error instanceof Error ? error.message : "game-session-verification-failed",
-              ),
-            );
-            setMemberSnapshot(snapshot);
+            verifyGameHash = gameHash;
+          } else if (
+            memberBootstrapCompleteRef.current &&
+            shouldStartMemberVerification({
+              currentGameHash: gameHash,
+              verificationState: memberVerificationStateRef.current,
+              nowMs: performance.now(),
+              gameEpoch: gameEpochRef.current,
+              runtimeEligible: gameflowCaptureAllowedRef.current,
+            })
+          ) {
+            // Same authoritative hash as before, but a prior verification for
+            // it went inconclusive (null/throwing recheck) and its retry
+            // deadline has elapsed. activeGameHashRef is already this hash —
+            // it must NOT be reassigned or cleared here, since that would
+            // read as a new game boundary rather than a retry of this one.
+            verifyGameHash = gameHash;
           }
           const lastGameTime = lastGameTimeRef.current;
-          if (lastGameTime !== null && data.game_time + 5 < lastGameTime) {
-            ocrSelectionCompletedRef.current = true;
-            completedRoundsRef.current = 0;
-            setPickedAugments([]);
-            lastRecordedRoundRef.current = "";
-            gameEpochRef.current += 1;
-            stopOcr();
+          if (isBackwardGameTime({ lastGameTime, gameTime: data.game_time })) {
+            newGameBoundaryDetected = true;
           }
           lastGameTimeRef.current = data.game_time;
+          if (newGameBoundaryDetected) {
+            beginNewGameEpoch();
+            stopOcr();
+          }
+          if (newGameBoundaryDetected) {
+            confirmedGameOwnershipRef.current.gameEpoch = gameEpochRef.current;
+          }
+
+          // [game-poll] — the ONLY authoritative proof that a healthy live game
+          // activated. This success branch returns early, so a session with no
+          // Live Client Data outage otherwise emits no in-progress record at all
+          // and a correct run reads as incomplete coverage. See
+          // shouldAnnounceLiveActivation for the authority rules. Positioned
+          // AFTER both boundary checks above, so a boundary crossed THIS poll
+          // announces in THIS poll — before any game-two offer/member/geometry/
+          // badge diagnostic is scheduled or emitted. Bounded
+          // enums/booleans/numbers only; DEV-only via emitNativeDiagnostic.
+          if (
+            shouldAnnounceLiveActivation({
+              devBuild: import.meta.env.DEV,
+              liveDataReady: liveDataStatus === "ready",
+              gameflowConfirmed: gameflow != null,
+              captureAllowed: gameflowCaptureAllowedRef.current,
+              alreadyAnnounced: liveOwnershipAnnouncedRef.current,
+            })
+          ) {
+            liveOwnershipAnnouncedRef.current = true;
+            emitNativeDiagnostic("[game-poll]", {
+              gameflowPhase: gameflow?.phase ?? "unavailable",
+              gameflowConfirmed: true,
+              captureAllowed: true,
+              liveDataStatus,
+              action: "live-active",
+              failureAgeMs: 0,
+            });
+          }
+
+          if (verifyGameHash) {
+            // Capture the owning context here, synchronously, at the exact
+            // boundary that determined verification is needed — then hand it
+            // to the DETACHED startMemberVerification helper via `void`. This
+            // poll never awaits it: pollInFlightRef releases as soon as the
+            // rest of THIS poll finishes, so a later poll can still detect a
+            // confirmed non-live close, a changed hash, or backward
+            // game_time while this request is in flight (see
+            // startMemberVerification for the stale-rejection checks).
+            const verificationRequest: MemberVerificationRequest = {
+              epoch: gameEpochRef.current,
+              gameHash: verifyGameHash,
+              token: ++memberVerificationTokenRef.current,
+            };
+            void startMemberVerification(verificationRequest);
+          }
+
           setPlayerData(data);
           const slug = champNameToSlug(data.champion);
           if (slug !== championSlug) {
@@ -3190,11 +3841,17 @@ function App() {
       });
       if (liveDataDecision.action === "preserve") return;
 
+      // This "clear" is an UNCONFIRMED telemetry outage past the fail-closed
+      // grace window (or a carried-forward capture gate), not a confirmed
+      // non-live gameflow phase — that already returned early above via
+      // shouldClearOcrStateForGameflow. Fail rendering/capture closed without
+      // touching game identity or the activation latch, so recovery of the
+      // SAME match resumes instead of opening a new analyzer epoch.
       try {
         const clientFound = await invoke<boolean>("detect_league_client");
-        clearGameOnlyState(clientFound ? "client_found" : "idle");
+        suspendGameRuntimeForUnavailableTelemetry(clientFound ? "client_found" : "idle");
       } catch {
-        clearGameOnlyState("idle");
+        suspendGameRuntimeForUnavailableTelemetry("idle");
       }
     } finally {
       pollInFlightRef.current = false;
@@ -3204,21 +3861,24 @@ function App() {
       }
     }
   }, [
+    beginNewGameEpoch,
     champNameToSlug,
     championSlug,
-    clearGameOnlyState,
+    closeConfirmedGame,
     collectorEnabled,
     finishOcr,
     refreshForeground,
     setActiveGame,
+    startMemberVerification,
     stopOcr,
+    suspendGameRuntimeForUnavailableTelemetry,
     updatePhase,
   ]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.repeat) return;
-      if (event.key.toLowerCase() === "c" && memberEnabled) {
+      if (event.key.toLowerCase() === "c" && memberCoachEnabled) {
         setCoachOpen((open) => !open);
         return;
       }
@@ -3228,7 +3888,7 @@ function App() {
       }
       const regionIndex = Number(event.key) - 1;
       if (
-        !memberEnabled ||
+        !memberCoachEnabled ||
         phase !== "augment_selection" ||
         !isCompleteThreeCardOffer(matchedCards) ||
         !Number.isInteger(regionIndex) ||
@@ -3244,7 +3904,8 @@ function App() {
         confirmPickedAugment(current, offered, regionIndex),
       );
       const selectedAugmentSlug = offered[regionIndex];
-      const confirmRound = roundDeliveryRef.current?.activeOfferRound ?? null;
+      const confirmedOfferGeneration = offerSurfaceRef.current.offerGeneration;
+      const confirmRound = offerRoundOwnershipRef.current.activeOwner?.round ?? null;
       if (selectedAugmentSlug && confirmRound) {
         void invoke("confirm_contributor_round_selection", {
           round: confirmRound,
@@ -3254,14 +3915,20 @@ function App() {
       // A confirmed choice is STRONG completion evidence and ends the offer:
       // count the round, clear the latched state, and return to in-game
       // immediately instead of waiting for surface absence.
-      recordRoundCompleted();
+      updateOfferRoundOwnership(reduceOfferRoundOwnership(
+        offerRoundOwnershipRef.current,
+        {
+          type: "pick-confirmed",
+          offerGeneration: confirmedOfferGeneration,
+        },
+      ));
       ocrSelectionCompletedRef.current = true;
       stopOcr();
       updatePhase("in_game");
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [matchedCards, memberEnabled, phase, recordRoundCompleted, stopOcr, updatePhase]);
+  }, [matchedCards, memberCoachEnabled, phase, stopOcr, updateOfferRoundOwnership, updatePhase]);
 
   useEffect(() => {
     // The only demand signal for foreground polling. Ticks that land during an
@@ -3302,7 +3969,9 @@ function App() {
   // Component teardown: invalidate any in-flight probe (its late return will be
   // stale-rejected) and release the scheduler guard so a remount starts clean.
   // Clearing the token also no-ops the wedged probe's finally (no setState on an
-  // unmounted component).
+  // unmounted component). Also bumps memberVerificationTokenRef so a detached
+  // startMemberVerification request in flight at teardown is stale-rejected
+  // the same way, instead of calling setState after unmount.
   useEffect(() => {
     const ocrOwners = ocrOwnersRef.current;
     return () => {
@@ -3314,6 +3983,7 @@ function App() {
       geometryInFlightRef.current = false;
       geometryInFlightSinceRef.current = null;
       geometryInFlightTokenRef.current = null;
+      memberVerificationTokenRef.current += 1;
     };
   }, [bumpScanSeq]);
 
@@ -3325,51 +3995,6 @@ function App() {
   }, []);
 
   // ─── Render ───
-  const badgePositions = useMemo(() => {
-    const positions = new Map<number, { left: string; top: string }>();
-    if (!calibration || !visibleFrame) return positions;
-
-    // Chip geometry comes ONLY from the current frame's fresh per-slot rects.
-    // A slot without a rect from THIS capture is never positioned — no
-    // historical or calibrated fallback geometry can anchor a stale chip.
-    const regionRects = new Map<number, PhysicalRect>();
-    for (const slot of visibleFrame.slots) {
-      if (slot.cardRect) regionRects.set(slot.regionIndex, slot.cardRect);
-    }
-
-    // THE coordinate boundary: every calibrated rect converts to
-    // overlay-window CSS exactly once, as a pure ratio against the overlay
-    // anchor. scaleFactor never re-enters, so a flapping monitor scale or a
-    // detected-window↔monitor-fallback switch cannot move the chips.
-    const toCss = (rect: PhysicalRect) =>
-      cssRectFromCalibratedRect(rect, calibration.overlayAnchor, cssWindow);
-    const cssGameRect = toCss(calibration.viewport);
-    const cssRegionRects = new Map(
-      [...regionRects.entries()].map(([regionIndex, rect]) => [regionIndex, toCss(rect)]),
-    );
-    const avoidRects = overlayAvoidRectsCss(cssWindow, cssGameRect);
-
-    for (const chip of slotChips) {
-      const cardRect = cssRegionRects.get(chip.regionIndex);
-      if (!cardRect) continue;
-      // A chip must never cover a NEIGHBORING card either — the other card
-      // frames are additional keep-out rects.
-      const otherFrames = [...cssRegionRects.entries()]
-        .filter(([regionIndex]) => regionIndex !== chip.regionIndex)
-        .map(([, rect]) => cardFrameFromNameRect(rect, cssGameRect));
-      const placement = placeBadgeAboveCard({
-        cardRect,
-        gameRect: cssGameRect,
-        avoidRects: [...avoidRects, ...otherFrames],
-      });
-      if (placement) {
-        positions.set(chip.regionIndex, placement);
-      }
-    }
-
-    return positions;
-  }, [calibration, cssWindow, visibleFrame, slotChips]);
-
   return (
     <div className="overlay-root">
       {/* Status dot */}
@@ -3391,60 +4016,14 @@ function App() {
           preview (previewBadgesReady). Each chip reflects its slot's own
           pipeline state — never stale, never invented. See fixtureMode.ts. */}
       {showBadgeLayer && (
-        <>
-          {slotChips.map((chip) => {
-            const pos = badgePositions.get(chip.regionIndex);
-            if (!pos) return null;
-            if (chip.state !== "tier") {
-              const label =
-                chip.state === "scanning"
-                  ? "SCANNING"
-                  : chip.state === "ocr-error"
-                    ? "OCR ERROR"
-                    : chip.state === "no-data"
-                      ? "NO CHAMP DATA"
-                      : chip.state === "loading-data"
-                        ? "LOADING DATA"
-                        : chip.state === "data-error"
-                          ? "DATA ERROR"
-                          : "UNMATCHED";
-              return (
-                <div
-                  className={`badge-chip badge-chip-${chip.state}`}
-                  key={chip.key}
-                  style={{ left: pos.left, top: pos.top }}
-                >
-                  <span className="badge-chip-state">{label}</span>
-                </div>
-              );
-            }
-            return (
-              <div
-                className={`badge-chip ${chip.tier ? tierClassName(chip.tier) : ""}${
-                  isPreviewMode ? " badge-preview" : ""
-                }`}
-                key={chip.key}
-                style={{ left: pos.left, top: pos.top }}
-              >
-                {isPreviewMode && (
-                  <span className="preview-watermark">PREVIEW</span>
-                )}
-                {chip.isNew && <span className="badge-new">NEW</span>}
-                {chip.tier && (
-                  <TierBadgeLabel
-                    tier={chip.tier}
-                    winRateText={chip.winRateText}
-                    statScope={chip.statScope}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </>
+        <BadgeChipLayer
+          positionedChips={positionedChips}
+          isPreviewMode={isPreviewMode}
+        />
       )}
 
       {/* Minimal HUD when in-game but not selecting */}
-      {memberEnabled && phase === "in_game" && championSlug && gameOverlayIsVisible && (
+      {memberCoachEnabled && phase === "in_game" && championSlug && gameOverlayIsVisible && (
         <div className="hud">
           <span className="champion-tag">
             {playerData?.champion ?? championSlug}
@@ -3467,8 +4046,8 @@ function App() {
       {collectorEnabled && gameOverlayIsVisible && dataError && (
         <div className="idle-panel">Overlay data failed to load: {dataError}</div>
       )}
-      {collectorEnabled && gameOverlayIsVisible && effectiveMember?.error && (
-        <div className="member-error">Member coach unavailable: {effectiveMember.error}</div>
+      {collectorEnabled && gameOverlayIsVisible && memberSnapshot?.error && (
+        <div className="member-error">Member coach unavailable: {memberSnapshot.error}</div>
       )}
       {devPanelsVisible({ devBuild: import.meta.env.DEV, gameOverlayIsVisible }) && (
         <DevOverlayDiagnostics
@@ -3503,7 +4082,7 @@ function App() {
         </div>
       )}
       <CoachPanel
-        open={effectiveMemberEnabled && coachOpen && gameOverlayIsVisible}
+        open={memberCoachEnabled && coachOpen && gameOverlayIsVisible}
         result={badgeDecisionResult}
         mode={mode}
         onModeChange={setMode}

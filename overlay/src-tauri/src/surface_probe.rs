@@ -186,6 +186,29 @@ pub struct SurfaceObservation {
     pub analysis_ms: u64,
     /// Complete native probe latency, retained as the existing API field.
     pub elapsed_ms: u64,
+    /// Command entry (the first poll of this command's future) → the blocking
+    /// capture closure's body actually beginning.
+    ///
+    /// This is `spawn_blocking` QUEUE LATENCY, **not** async-runtime starvation.
+    /// No SUSPENSION POINT separates the command-entry clock from the
+    /// `spawn_blocking` call. (There are two syntactic `.await`s on the way, but
+    /// awaiting an `async fn` polls it inline within the same poll — the first
+    /// construct that can actually yield is the `timeout(..).await` *after* the
+    /// spawn.) Crossing this interval therefore needs no async worker. Against
+    /// tokio's default 512 blocking threads it should read ~0 even while the
+    /// async runtime is fully starved; a large value means the BLOCKING POOL is
+    /// saturated. Async-runtime starvation surfaces in `resume_wait_ms`, and —
+    /// for the segment before the first poll, which is outside `elapsed_ms`
+    /// entirely — in the JS-side `transportMs`.
+    /// Always a number; 0 when the segment was not measured.
+    pub dispatch_wait_ms: u64,
+    /// The blocking closure returning → the command being about to return.
+    ///
+    /// This one DOES measure async-runtime scheduling latency: the worker's
+    /// completion wakes `tokio::time::timeout(..)`, and crossing this interval
+    /// requires an async worker to poll that task again.
+    /// Always a number; 0 when the segment was not measured.
+    pub resume_wait_ms: u64,
 }
 
 fn normalized_region_px(
@@ -327,7 +350,11 @@ impl LumaImage {
             let [r, g, b] = px.0;
             data.push(0.299 * r as f32 + 0.587 * g as f32 + 0.114 * b as f32);
         }
-        LumaImage { width: w, height: h, data }
+        LumaImage {
+            width: w,
+            height: h,
+            data,
+        }
     }
 
     #[inline]
@@ -337,7 +364,14 @@ impl LumaImage {
 
     /// Convert a normalized region (relative to `viewport`, in capture pixels)
     /// into a clamped pixel rect [x0,x1) × [y0,y1).
-    fn region_px(&self, viewport: &Rect, nx0: f64, ny0: f64, nx1: f64, ny1: f64) -> (usize, usize, usize, usize) {
+    fn region_px(
+        &self,
+        viewport: &Rect,
+        nx0: f64,
+        ny0: f64,
+        nx1: f64,
+        ny1: f64,
+    ) -> (usize, usize, usize, usize) {
         let vx = viewport.x as f64;
         let vy = viewport.y as f64;
         let vw = viewport.width as f64;
@@ -386,19 +420,18 @@ impl LumaImage {
                 n += 1;
             }
         }
-        if n == 0 { 0.0 } else { (sum / n as f64) as f32 }
+        if n == 0 {
+            0.0
+        } else {
+            (sum / n as f64) as f32
+        }
     }
 
     /// 144-bit average hash of the icon+name window: FP_GRID×FP_GRID cell means,
     /// each bit set when its cell exceeds the window median.
     fn fingerprint(&self, viewport: &Rect, cx: f64) -> String {
-        let (x0, y0, x1, y1) = self.region_px(
-            viewport,
-            cx - FP_HALF_W,
-            FP_TOP,
-            cx + FP_HALF_W,
-            FP_BOTTOM,
-        );
+        let (x0, y0, x1, y1) =
+            self.region_px(viewport, cx - FP_HALF_W, FP_TOP, cx + FP_HALF_W, FP_BOTTOM);
         let w = x1.saturating_sub(x0);
         let h = y1.saturating_sub(y0);
         if w == 0 || h == 0 {
@@ -411,7 +444,12 @@ impl LumaImage {
                 let cx1 = x0 + (gx + 1) * w / FP_GRID;
                 let cy0 = y0 + gy * h / FP_GRID;
                 let cy1 = y0 + (gy + 1) * h / FP_GRID;
-                let (m, _) = self.mean_std((cx0, cy0, cx1.max(cx0 + 1).min(self.width), cy1.max(cy0 + 1).min(self.height)));
+                let (m, _) = self.mean_std((
+                    cx0,
+                    cy0,
+                    cx1.max(cx0 + 1).min(self.width),
+                    cy1.max(cy0 + 1).min(self.height),
+                ));
                 cells[gy * FP_GRID + gx] = m;
             }
         }
@@ -420,7 +458,10 @@ impl LumaImage {
         // median of an even-length array: average of the two middle samples
         let mid = sorted.len() / 2;
         let median = (sorted[mid - 1] + sorted[mid]) * 0.5;
-        cells.iter().map(|&c| if c > median { '1' } else { '0' }).collect()
+        cells
+            .iter()
+            .map(|&c| if c > median { '1' } else { '0' })
+            .collect()
     }
 }
 
@@ -446,21 +487,52 @@ pub fn analyze_surface(
     for (i, &cx) in CARD_CENTERS_X.iter().enumerate() {
         let x0n = cx - CARD_HALF_W;
         let x1n = cx + CARD_HALF_W;
-        let (interior_luma, interior_std) =
-            luma.mean_std(luma.region_px(viewport_px, cx - INTERIOR_HALF_W, INTERIOR_TOP, cx + INTERIOR_HALF_W, INTERIOR_BOTTOM));
-        let (frame_l, _) =
-            luma.mean_std(luma.region_px(viewport_px, x0n, CARD_TOP + FRAME_STRIP_INSET_Y, x0n + FRAME_STRIP_W, CARD_BOTTOM - FRAME_STRIP_INSET_Y));
-        let (frame_r, _) =
-            luma.mean_std(luma.region_px(viewport_px, x1n - FRAME_STRIP_W, CARD_TOP + FRAME_STRIP_INSET_Y, x1n, CARD_BOTTOM - FRAME_STRIP_INSET_Y));
+        let (interior_luma, interior_std) = luma.mean_std(luma.region_px(
+            viewport_px,
+            cx - INTERIOR_HALF_W,
+            INTERIOR_TOP,
+            cx + INTERIOR_HALF_W,
+            INTERIOR_BOTTOM,
+        ));
+        let (frame_l, _) = luma.mean_std(luma.region_px(
+            viewport_px,
+            x0n,
+            CARD_TOP + FRAME_STRIP_INSET_Y,
+            x0n + FRAME_STRIP_W,
+            CARD_BOTTOM - FRAME_STRIP_INSET_Y,
+        ));
+        let (frame_r, _) = luma.mean_std(luma.region_px(
+            viewport_px,
+            x1n - FRAME_STRIP_W,
+            CARD_TOP + FRAME_STRIP_INSET_Y,
+            x1n,
+            CARD_BOTTOM - FRAME_STRIP_INSET_Y,
+        ));
         let frame_contrast = (frame_l + frame_r) * 0.5 - interior_luma;
-        let edge_top = luma.edge_energy(luma.region_px(viewport_px, x0n, CARD_TOP, x1n, CARD_TOP + BORDER_BAND_H));
-        let edge_bot = luma.edge_energy(luma.region_px(viewport_px, x0n, CARD_BOTTOM - BORDER_BAND_H, x1n, CARD_BOTTOM));
+        let edge_top = luma.edge_energy(luma.region_px(
+            viewport_px,
+            x0n,
+            CARD_TOP,
+            x1n,
+            CARD_TOP + BORDER_BAND_H,
+        ));
+        let edge_bot = luma.edge_energy(luma.region_px(
+            viewport_px,
+            x0n,
+            CARD_BOTTOM - BORDER_BAND_H,
+            x1n,
+            CARD_BOTTOM,
+        ));
         let edge_energy = (edge_top + edge_bot) * 0.5;
 
         let interior_ok = interior_luma < T_INTERIOR_LUMA && interior_std < T_INTERIOR_STD;
         let frame_ok = frame_contrast > T_FRAME_CONTRAST;
         let present = interior_ok && frame_ok;
-        let structural_score = if present { (frame_contrast / 120.0).min(1.0) } else { 0.0 };
+        let structural_score = if present {
+            (frame_contrast / 120.0).min(1.0)
+        } else {
+            0.0
+        };
         let fingerprint = luma.fingerprint(viewport_px, cx);
 
         if present {
@@ -475,7 +547,11 @@ pub fn analyze_surface(
         cards.push(CardObservation {
             region_index: i,
             present,
-            card_rect: if present { Some(name_band_rects[i].clone()) } else { None },
+            card_rect: if present {
+                Some(name_band_rects[i].clone())
+            } else {
+                None
+            },
             interior_luma,
             interior_std,
             frame_contrast,
@@ -490,8 +566,10 @@ pub fn analyze_surface(
     // Occlusion: a large opaque panel (modal/scoreboard) crossing the card
     // interiors fills BOTH inter-card gaps with a dark, smooth rectangle. Only
     // meaningful when cards exist behind it.
-    let (gap1_l, gap1_std) = luma.mean_std(luma.region_px(viewport_px, GAP1_X0, GAP_TOP, GAP1_X1, GAP_BOTTOM));
-    let (gap2_l, gap2_std) = luma.mean_std(luma.region_px(viewport_px, GAP2_X0, GAP_TOP, GAP2_X1, GAP_BOTTOM));
+    let (gap1_l, gap1_std) =
+        luma.mean_std(luma.region_px(viewport_px, GAP1_X0, GAP_TOP, GAP1_X1, GAP_BOTTOM));
+    let (gap2_l, gap2_std) =
+        luma.mean_std(luma.region_px(viewport_px, GAP2_X0, GAP_TOP, GAP2_X1, GAP_BOTTOM));
     let gap1_paneled = gap1_l < T_GAP_PANEL_LUMA && gap1_std < T_GAP_PANEL_STD;
     let gap2_paneled = gap2_l < T_GAP_PANEL_LUMA && gap2_std < T_GAP_PANEL_STD;
     let opaque_surface = gap1_l < T_GAP_PANEL_LUMA
@@ -535,6 +613,10 @@ pub fn analyze_surface(
         capture_ms: 0,
         analysis_ms: 0,
         elapsed_ms,
+        // The async-runtime waits are measured by the command that dispatched
+        // this analysis, never by the pure analyzer. 0 until it fills them in.
+        dispatch_wait_ms: 0,
+        resume_wait_ms: 0,
     }
 }
 
@@ -544,7 +626,12 @@ mod tests {
     use crate::calibration::{physical_card_rects, Rect};
 
     fn full_viewport() -> Rect {
-        Rect { x: 0, y: 0, width: 1280, height: 720 }
+        Rect {
+            x: 0,
+            y: 0,
+            width: 1280,
+            height: 720,
+        }
     }
 
     fn name_bands(viewport: &Rect) -> [Rect; 3] {
@@ -553,7 +640,11 @@ mod tests {
     }
 
     fn load(name: &str) -> image::DynamicImage {
-        let path = format!("{}/tests/fixtures/surface/{}", env!("CARGO_MANIFEST_DIR"), name);
+        let path = format!(
+            "{}/tests/fixtures/surface/{}",
+            env!("CARGO_MANIFEST_DIR"),
+            name
+        );
         image::open(&path).unwrap_or_else(|e| panic!("load {}: {}", path, e))
     }
 
@@ -602,7 +693,11 @@ mod tests {
     #[test]
     fn gold_offer_is_present_not_occluded() {
         let o = analyze("offer-gold-a.png");
-        assert!(o.present, "gold offer should be present: {:?}", o.rejection_reasons);
+        assert!(
+            o.present,
+            "gold offer should be present: {:?}",
+            o.rejection_reasons
+        );
         assert!(!o.occluded, "gold offer is not occluded");
         assert_eq!(o.cards.iter().filter(|c| c.present).count(), 3);
     }
@@ -618,7 +713,11 @@ mod tests {
         // Silver-frame cards must pass exactly like gold — the gate is luminance
         // contrast, never frame color.
         let o = analyze("offer-silver.png");
-        assert!(o.present && !o.occluded, "silver offer present: {:?}", o.rejection_reasons);
+        assert!(
+            o.present && !o.occluded,
+            "silver offer present: {:?}",
+            o.rejection_reasons
+        );
         assert_eq!(o.cards.iter().filter(|c| c.present).count(), 3);
     }
 
@@ -875,18 +974,26 @@ mod tests {
                 observation.present,
                 observation.occluded,
                 observation.confidence,
-                observation.cards.iter().map(|card| (
-                    card.interior_luma,
-                    card.interior_std,
-                    card.frame_contrast,
-                    card.structural_score,
-                    card.present,
-                )).collect::<Vec<_>>(),
+                observation
+                    .cards
+                    .iter()
+                    .map(|card| (
+                        card.interior_luma,
+                        card.interior_std,
+                        card.frame_contrast,
+                        card.structural_score,
+                        card.present,
+                    ))
+                    .collect::<Vec<_>>(),
             );
             observation
         });
         for (frame, observation) in frames.iter().zip(&observations) {
-            assert!(observation.present, "{}: {:?}", frame, observation.rejection_reasons);
+            assert!(
+                observation.present,
+                "{}: {:?}",
+                frame, observation.rejection_reasons
+            );
             assert!(!observation.occluded, "{}", frame);
             assert_eq!(
                 observation.cards.iter().filter(|card| card.present).count(),
@@ -1005,7 +1112,10 @@ mod tests {
         let o = analyze("offer-occluded-modal.png");
         assert!(o.present, "cards still exist behind the modal");
         assert!(o.occluded, "AFK modal must classify as occluded");
-        assert!(o.rejection_reasons.iter().any(|r| r == "occluded-modal-panel"));
+        assert!(o
+            .rejection_reasons
+            .iter()
+            .any(|r| r == "occluded-modal-panel"));
     }
 
     #[test]
@@ -1060,7 +1170,8 @@ mod tests {
         for i in 0..3 {
             assert_eq!(
                 a.cards[i].fingerprint, b.cards[i].fingerprint,
-                "card{} fingerprint drifted on identical pixels", i
+                "card{} fingerprint drifted on identical pixels",
+                i
             );
         }
     }
@@ -1092,11 +1203,20 @@ mod tests {
             base.height() * 2,
             image::imageops::FilterType::Triangle,
         );
-        let vp = Rect { x: 0, y: 0, width: 2560, height: 1440 };
+        let vp = Rect {
+            x: 0,
+            y: 0,
+            width: 2560,
+            height: 1440,
+        };
         // name-band rects are logical (unchanged by capture resolution)
         let bands = name_bands(&full_viewport());
         let o = analyze_surface(&scaled, &vp, &bands, 1, 0.0, 0);
-        assert!(o.present && !o.occluded, "2x retina lost the offer: {:?}", o.rejection_reasons);
+        assert!(
+            o.present && !o.occluded,
+            "2x retina lost the offer: {:?}",
+            o.rejection_reasons
+        );
         assert_eq!(o.capture_width, 2560);
     }
 
@@ -1108,10 +1228,19 @@ mod tests {
             base.height() * 2,
             image::imageops::FilterType::Triangle,
         );
-        let vp = Rect { x: 0, y: 0, width: 2560, height: 1440 };
+        let vp = Rect {
+            x: 0,
+            y: 0,
+            width: 2560,
+            height: 1440,
+        };
         let bands = name_bands(&full_viewport());
         let o = analyze_surface(&scaled, &vp, &bands, 1, 0.0, 0);
-        assert!(o.present && o.occluded, "2x retina lost occlusion: {:?}", o.rejection_reasons);
+        assert!(
+            o.present && o.occluded,
+            "2x retina lost occlusion: {:?}",
+            o.rejection_reasons
+        );
     }
 
     // ── present cards carry a render rect; absent/occluded surfaces do not ──

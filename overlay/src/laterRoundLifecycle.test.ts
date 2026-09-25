@@ -188,8 +188,8 @@ class PublicationHarness {
         captureSeq: obs.probeSeq,
         observation: geometryObservation,
         generation: this.geometryGeneration,
-        resolveIdentity: (region, fingerprint) =>
-          identityForSlot(this.identityStore[region], fingerprint),
+        resolveIdentity: (region) =>
+          identityForSlot(this.identityStore[region], this.slotGenerations[region] ?? 0),
       });
     } else {
       this.visibleFrame = null;
@@ -204,6 +204,8 @@ class PublicationHarness {
             fingerprint: card.fingerprint,
             resolution: `badge:${card.fingerprint.indexOf("1")}`,
             resolvedAt: now,
+            // A publication is stamped with the generation it was read under.
+            slotGeneration: this.slotGenerations[i] ?? 0,
           }
         : this.identityStore[i],
     );
