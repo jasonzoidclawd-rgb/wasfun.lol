@@ -460,6 +460,14 @@ $preliminaryZip = Join-Path $deliveryRoot "mayhem-windows-overlay-x64-$shortComm
 if (Test-Path $preliminaryZip) {
   Remove-Item $preliminaryZip -Force
 }
+# ZIP cannot store timestamps before 1980, and some crates unpack with
+# 1973 mtimes that Copy-Item preserves on the copied license files. Windows
+# PowerShell 5.1's Compress-Archive throws on them (newer versions clamp with
+# a warning), so clamp explicitly; newer files keep their real timestamps.
+$zipEpoch = [datetime]::new(1980, 1, 2, 0, 0, 0, [DateTimeKind]::Local)
+Get-ChildItem $artifactRoot -Recurse -File |
+  Where-Object { $_.LastWriteTime -lt $zipEpoch } |
+  ForEach-Object { $_.LastWriteTime = $zipEpoch }
 Compress-Archive -Path $artifactRoot -DestinationPath $preliminaryZip -CompressionLevel Optimal
 
 Copy-Item (Join-Path $PSScriptRoot "validate-windows-installer.ps1") $deliveryRoot -Force
