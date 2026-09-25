@@ -5,6 +5,11 @@ on:
   push:
     branches:
       - feat/overlay-tier-card-windows-parity
+  pull_request:
+    paths:
+      - ".github/workflows/windows-overlay-delivery.yml"
+      - "overlay/scripts/*windows*.ps1"
+      - "overlay/scripts/project-npm-lock.mjs"
 
 # Private, short-retention build evidence only. This workflow never publishes a
 # release and has no repository write permission.

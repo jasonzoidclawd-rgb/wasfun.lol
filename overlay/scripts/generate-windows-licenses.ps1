@@ -55,15 +55,21 @@ foreach ($package in ($cargo.packages | Sort-Object name, version)) {
 $lines.Add("")
 $lines.Add("[Overlay npm packages]")
 $lockPath = Join-Path $overlay "package-lock.json"
-$lock = Get-Content $lockPath -Raw | ConvertFrom-Json
-foreach ($entry in ($lock.packages.PSObject.Properties | Sort-Object Name)) {
-  $packageVersion = Get-PropertyValue -Object $entry.Value -Name "version"
-  if (-not $entry.Name -or -not $packageVersion) {
+# Windows PowerShell 5.1's ConvertFrom-Json rejects lockfile v3's empty root
+# key (""), so Node flattens the packages map first.
+$lockProjection = & node (Join-Path $PSScriptRoot "project-npm-lock.mjs") $lockPath
+if ($LASTEXITCODE -ne 0) {
+  throw "package-lock.json projection failed"
+}
+$lockEntries = $lockProjection | ConvertFrom-Json
+foreach ($entry in ($lockEntries | Sort-Object path)) {
+  $packageVersion = Get-PropertyValue -Object $entry -Name "version"
+  if (-not $entry.path -or -not $packageVersion) {
     continue
   }
-  $packagePath = $entry.Name
-  $declaredName = Get-PropertyValue -Object $entry.Value -Name "name"
-  $declaredLicense = Get-PropertyValue -Object $entry.Value -Name "license"
+  $packagePath = $entry.path
+  $declaredName = Get-PropertyValue -Object $entry -Name "name"
+  $declaredLicense = Get-PropertyValue -Object $entry -Name "license"
   $packageName = if ($declaredName) {
     $declaredName
   } else {

@@ -364,11 +364,37 @@ if (-not $?) {
   throw "Dependency license generation failed."
 }
 
-$nodeVersion = (& node.exe --version).Trim()
-$npmVersion = (& npm.cmd --version).Trim()
-$rustVersion = (& rustc.exe --version).Trim()
-$cargoVersion = (& cargo.exe --version).Trim()
-$tauriVersion = (& npx.cmd tauri --version).Trim()
+function Get-ToolVersion {
+  param(
+    [Parameter(Mandatory)][string]$Command,
+    [Parameter(Mandatory)][string[]]$Arguments,
+    [Parameter(Mandatory)][string]$WorkingDirectory
+  )
+  Push-Location $WorkingDirectory
+  $previousErrorActionPreference = $ErrorActionPreference
+  try {
+    # npm/npx may print warnings on stderr; only stdout carries the version.
+    $ErrorActionPreference = "Continue"
+    $output = @(& $Command @Arguments 2>$null)
+    $exitCode = $LASTEXITCODE
+  } finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+    Pop-Location
+  }
+  $first = $output | Where-Object { "$_".Trim() } | Select-Object -First 1
+  if ($exitCode -ne 0 -or -not $first) {
+    throw "$Command $($Arguments -join ' ') did not report a version (exit $exitCode)."
+  }
+  return "$first".Trim()
+}
+
+$nodeVersion = Get-ToolVersion -Command "node.exe" -Arguments @("--version") -WorkingDirectory $repoRoot
+$npmVersion = Get-ToolVersion -Command "npm.cmd" -Arguments @("--version") -WorkingDirectory $repoRoot
+$rustVersion = Get-ToolVersion -Command "rustc.exe" -Arguments @("--version") -WorkingDirectory $tauriRoot
+$cargoVersion = Get-ToolVersion -Command "cargo.exe" -Arguments @("--version") -WorkingDirectory $tauriRoot
+# The Tauri CLI is an overlay devDependency; from the repository root npx
+# would resolve the unrelated public `tauri` package instead.
+$tauriVersion = Get-ToolVersion -Command "npx.cmd" -Arguments @("--no-install", "tauri", "--version") -WorkingDirectory $overlayRoot
 $windowsVersion = [Environment]::OSVersion.VersionString
 $sdkVersion = [string]$env:WindowsSDKVersion
 $msvcVersion = [string]$env:VCToolsVersion
