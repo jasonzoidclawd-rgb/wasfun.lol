@@ -2400,8 +2400,12 @@ class ContinuityCheckpointTest(unittest.TestCase):
         self.assertEqual(self.source.stat().st_ino, original_inode)
         self.assertFalse(thread.is_alive())
         self.assertTrue(self.stats["sourceReplaced"])
-        self.assertEqual(
-            self.stats["sourceReplacedReason"], "trace-checkpoint-unreadable"
+        # As in test_same_inode_copytruncate_fails_closed, truncate() and
+        # write() are two syscalls: a poll inside the 0-byte gap trips the
+        # size check before the checkpoint is read. Both fail closed.
+        self.assertIn(
+            self.stats["sourceReplacedReason"],
+            ("trace-checkpoint-unreadable", "size-decreased"),
         )
         # Records before the failure are kept; nothing from the replacement
         # is ever combined into the same session's evidence.
