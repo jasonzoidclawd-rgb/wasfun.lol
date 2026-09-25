@@ -1,0 +1,4 @@
+# Overlay tests read their own source (App.tsx and friends) and match
+# multi-line patterns; keep those files LF on Windows checkouts too.
+overlay/src/**/*.ts text eol=lf
+overlay/src/**/*.tsx text eol=lf
