@@ -83,7 +83,7 @@ jobs:
       - name: Upload private preliminary delivery
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: mayhem-windows-overlay-x64-${{ github.sha }}-preliminary
+          name: mayhem-windows-overlay-x64-${{ github.event.pull_request.head.sha || github.sha }}-preliminary
           path: out/windows-x64/**
           if-no-files-found: error
           retention-days: 7
