@@ -25,6 +25,10 @@ jobs:
     steps:
       - name: Check out selected commit
         uses: actions/checkout@v5.0.1
+        with:
+          # On pull requests, build the PR head commit rather than GitHub's
+          # ephemeral merge commit, so the manifest names a real commit.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Node.js 22
         uses: actions/setup-node@v5.0.0

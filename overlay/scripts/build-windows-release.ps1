@@ -15,7 +15,13 @@ $overlayRoot = Split-Path -Parent $PSScriptRoot
 $repoRoot = Split-Path -Parent $overlayRoot
 $sourceCommit = (& git.exe -C $repoRoot rev-parse HEAD).Trim()
 $shortCommit = $sourceCommit.Substring(0, 12)
-$sourceBranch = (& git.exe -C $repoRoot branch --show-current).Trim()
+# CI checkouts are detached, where `branch --show-current` prints nothing.
+$sourceBranch = "$(& git.exe -C $repoRoot branch --show-current)".Trim()
+if (-not $sourceBranch) {
+  $sourceBranch = @($env:GITHUB_HEAD_REF, $env:GITHUB_REF_NAME, "(detached)") |
+    Where-Object { $_ } |
+    Select-Object -First 1
+}
 $initialStatus = @(& git.exe -C $repoRoot status --porcelain=v1)
 if ($initialStatus.Count -gt 0) {
   throw "The release build requires a clean worktree before output creation."
