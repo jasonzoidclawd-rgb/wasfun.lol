@@ -133,6 +133,11 @@ describe("rank ranges", () => {
     expect(rankRanges([{ id: "a", m: 0, v: 1 }, { id: "b", m: 0.2, v: 1 }])).toEqual(rankRanges([{ id: "a", m: 0, v: 1 }, { id: "b", m: 0.2, v: 1 }]));
   });
 
+  test("a covariance that can't be factored shows no ranges, and never breaks the page", () => {
+    const r = rankRanges([{ id: "a", m: 0, v: 1 }, { id: "b", m: 1, v: 1 }], { cov: () => 50 });
+    expect(r.size).toBe(0);
+  });
+
   test("draws are joint: negative covariance (shared baselines) widens the ranges, never narrows them", () => {
     const opts = [
       { id: "a", m: 1.0, v: 0.25 },

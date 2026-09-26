@@ -59,7 +59,13 @@ export function rankRanges(
     for (let j = 0; j < n; j++) row[j] = inflate * (i === j ? o.v : cov(i, j));
     return row;
   });
-  const l = cholesky(sigma, n);
+  let l: Float64Array[];
+  try {
+    l = cholesky(sigma, n);
+  } catch {
+    // No ranges rather than independent draws, which would be too narrow.
+    return new Map();
+  }
   const ranks: Int32Array[] = options.map(() => new Int32Array(draws));
   const z = new Float64Array(n);
   const values = new Float64Array(n);
