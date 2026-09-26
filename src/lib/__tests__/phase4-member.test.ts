@@ -173,6 +173,12 @@ describe("Following: a patch alert needs a letter change AND a move past the noi
     expect(b.alert).toBe(false);
   });
 
+  test("champion letters reach the Home payload as `grade`, never `letter` (the kill-switch crawl counts a `letter` prop as a leak)", () => {
+    const payload = JSON.stringify(followedChampions(champs, history, [up("a")], false));
+    expect(payload).not.toMatch(/"letter"\s*:/);
+    expect(payload).toMatch(/"grade":"S"/);
+  });
+
   test("the letter and the win rate must move the same way", () => {
     const [a] = followedChampions(champs, history, [{ slug: "a", delta: -1.2 }], false);
     expect(a.alert).toBe(false);

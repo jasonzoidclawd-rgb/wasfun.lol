@@ -24,7 +24,7 @@ export function followedChampions(
     return {
       slug: c.slug,
       name: c.name,
-      letter: c.grade,
+      grade: c.grade,
       outlined: c.outlined,
       previous,
       // the letter and the win rate must move the same way

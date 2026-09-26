@@ -10,7 +10,8 @@ import { MemberOnly } from "./MemberOnly";
 export interface FollowedChampion {
   slug: string;
   name: string;
-  letter: Letter | null;
+  /** the champion's letter; named `grade` like every champion letter the page payload carries (the kill-switch crawl keys on it) */
+  grade: Letter | null;
   outlined: boolean;
   /** last patch's letter, when it can be shown (see ChampionHistoryLine) */
   previous: Letter | null;
@@ -54,7 +55,7 @@ function Inner({ champions, fromPatch }: { champions: FollowedChampion[]; fromPa
                   {t("alertMoved", { patch: fromPatch, from: c.previous })}
                 </span>
               )}
-              {c.letter && <LetterChip kind="champion" letter={c.letter} thin={c.outlined} label={t("letterLabel", { champion: c.name, letter: c.letter })} />}
+              {c.grade && <LetterChip kind="champion" letter={c.grade} thin={c.outlined} label={t("letterLabel", { champion: c.name, letter: c.grade })} />}
             </li>
           ))}
         </ul>
