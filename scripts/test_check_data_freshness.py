@@ -131,6 +131,8 @@ class DataFreshnessTests(unittest.TestCase):
             "check",
             "--published-patch", "26.17", "--upstream-patch", "26.17",
             "--published-structural-patch", "26.18", "--upstream-structural-patch", "26.18",
+            "--published-observed-at", "2026-09-10T22:00:00Z",
+            "--now", "2026-09-11T00:00:00Z",
             "--json",
         ]):
             with patch("sys.stdout", out):
