@@ -11,6 +11,7 @@
 import type { Rarity } from "./engine";
 import { rerollHints, rerollOdds, rerollPool, verdict, type Posterior, type Verdict } from "./verdict";
 import type { PickCard } from "./pick-payload";
+import { PANDORAS_BOX, pandorasBoxForGame } from "./this-game";
 
 export const SCREEN_SIZE = 3;
 
@@ -77,21 +78,48 @@ export interface ScreenReading {
   reroll: Record<string, boolean>;
   /** per slot, members: the chance a reroll beats this card */
   odds: Record<string, number | null>;
+  /** members with This game: Pandora's Box's posterior for what they hold, when it is on screen */
+  pandorasBox: Posterior | null;
+}
+
+/** Members' This game log, as the screen needs it. */
+export interface GameContext {
+  /** offered on an earlier screen: never offered again this game */
+  seen: string[];
+  /** taken on an earlier screen */
+  held: string[];
 }
 
 /**
  * Read a full screen. Each card's variance includes the champion-specific
  * spread τ² (the provider publishes no champion-specific outcomes).
  */
-export function readScreen(state: PickState, cards: Map<string, PickCard & { rarity: Rarity }>, tau: number): ScreenReading | null {
+export function readScreen(
+  state: PickState,
+  cards: Map<string, PickCard & { rarity: Rarity }>,
+  tau: number,
+  game: GameContext | null = null,
+): ScreenReading | null {
   if (state.slots.length < SCREEN_SIZE) return null;
-  const post = (c: PickCard): Posterior => ({ id: c.id, m: c.m, v: c.v + tau * tau });
+  const base = (c: PickCard): Posterior => ({ id: c.id, m: c.m, v: c.v + tau * tau });
+  // Pandora's Box for this game: every held augment turns into a random Prismatic
+  const held = (game?.held ?? []).map((id) => cards.get(id)).filter((c): c is PickCard & { rarity: Rarity } => !!c);
+  const box = cards.get(PANDORAS_BOX);
+  const pandorasBox =
+    box && held.length > 0 && state.slots.some((s) => s.id === PANDORAS_BOX)
+      ? pandorasBoxForGame(
+          base(box),
+          held.map(base),
+          [...cards.values()].filter((c) => c.rarity === "prismatic" && c.id !== PANDORAS_BOX).map(base),
+        )
+      : null;
+  const post = (c: PickCard): Posterior => (pandorasBox && c.id === PANDORAS_BOX ? pandorasBox : base(c));
   const onScreen = state.slots.map((s) => cards.get(s.id)).filter((c): c is PickCard & { rarity: Rarity } => !!c);
   const mixedRarities = new Set(onScreen.map((c) => c.rarity)).size > 1;
   const v = mixedRarities ? null : verdict(onScreen.map(post));
   const reroll: Record<string, boolean> = {};
   const odds: Record<string, number | null> = {};
-  const excluded = new Set([...state.slots.map((s) => s.id), ...state.rerolledAway]);
+  const excluded = new Set([...state.slots.map((s) => s.id), ...state.rerolledAway, ...(game?.seen ?? []), ...(game?.held ?? [])]);
   for (const slot of state.slots) {
     const card = cards.get(slot.id);
     if (!card || slot.rerolled) {
@@ -108,5 +136,5 @@ export function readScreen(state: PickState, cards: Map<string, PickCard & { rar
     reroll[slot.id] = !mixedRarities && rerollHints(onScreen.map(post), pool).reroll.includes(slot.id);
     odds[slot.id] = rerollOdds(post(card), pool);
   }
-  return { verdict: v, mixedRarities, reroll, odds };
+  return { verdict: v, mixedRarities, reroll, odds, pandorasBox };
 }

@@ -1086,7 +1086,19 @@
     "pickShort": "選取 {pick}%",
     "staleWarning": "資料已超過兩天",
     "mixedRarities": "這些卡來自不同稀有度。各稀有度只與同稀有度比較評級，因此無法指定單一選擇：請比較評級。",
-    "cardLineUnlisted": "所有英雄勝率 {win}% · 未公布 {champion} 選取率"
+    "cardLineUnlisted": "所有英雄勝率 {win}% · 未公布 {champion} 選取率",
+    "tookThis": "選了這張",
+    "thisGame": "本場",
+    "thisGameDone": "四次選擇都已記錄",
+    "thisGameNext": "下一次：{level} 級",
+    "thisGameEmpty": "在你選的卡片下點「選了這張」。卡片會清空，準備下一個畫面。",
+    "level": "{level} 級",
+    "thisGameLine": "全英雄勝率 {win}% · 出現過 {offered} 張卡",
+    "undoLast": "復原上一筆",
+    "newGame": "新的一局",
+    "pandoraForGame": "依你手上的強化",
+    "pandoraForGameLabel": "依你手上的強化評為 {letter}",
+    "pandoraDepends": "它的價值取決於你手上的強化。"
   },
   "hub": {
     "planTitle": "要拿什麼？",
@@ -1179,9 +1191,10 @@
       "rerollOdds": "每個重骰按鈕下的重骰機率",
       "offlinePacks": "已追蹤英雄的離線包",
       "following": "追蹤英雄，評級變動時提醒",
-      "history": "跨版本評級與已保存的對局",
+      "history": "上個版本的英雄評級、名次範圍，以及你儲存的對局",
       "everythingMember": "會員的全部內容",
-      "overlayFull": "完整覆蓋層：比率、重骰機率、自動記錄本場、出裝順序與版面設定"
+      "overlayFull": "完整覆蓋層：比率、重骰機率、自動記錄本場、出裝順序與版面設定",
+      "pandora": "依你手上的強化評分潘朵拉魔盒"
     }
   },
   "overlay": {
@@ -1195,5 +1208,23 @@
     "rules": "覆蓋層只繪製自己的面板，遊戲中不顯示廣告或升級提示，只標示評級、不替你選擇。",
     "download": "下載 Windows 版",
     "notYet": "尚未提供。"
+  },
+  "member": {
+    "seePlans": "查看方案",
+    "followFree": "追蹤{champion}並在評級變動時收到提醒，屬於 Member 方案：",
+    "follow": "追蹤{champion}",
+    "following": "已追蹤{champion}",
+    "lastPatch": "{patch} 版本：",
+    "lastPatchLabel": "{patch} 版本評級 {letter}",
+    "rankRange": "通常在 {total} 名中的第 {low}–{high} 名",
+    "followingTitle": "追蹤中",
+    "followingEmpty": "在英雄頁面追蹤英雄，就會在這裡看到它的評級。",
+    "alertMoved": "自 {patch} 起有變動（原為 {from}）",
+    "letterLabel": "{champion}：評級 {letter}",
+    "savedTitle": "已儲存的對局",
+    "savedEmpty": "在 Pick 畫面用「本場」記錄的對局會出現在這裡，只保存在這個瀏覽器。",
+    "savedGame": "{champion} · {patch} 版本",
+    "currentGame": "{champion} · 本場",
+    "savedPick": "{level} 級：{augment}"
   }
 }

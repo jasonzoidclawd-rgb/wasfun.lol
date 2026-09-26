@@ -2,11 +2,15 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { LetterChip } from "@/components/grades/LetterChip";
 import type { GradedOption } from "@/lib/score/engine";
+import type { RankRange } from "@/lib/score/rank-range";
+import { MemberOnly } from "@/components/member/MemberOnly";
 
 export interface TierRow extends Pick<GradedOption, "id" | "letter" | "outlined" | "m" | "winRate" | "pickRate" | "order"> {
   name: string;
   slug: string | null;
   icon: string | null;
+  /** members: rank range within the rarity (only present when member extras are on) */
+  rank?: RankRange | null;
 }
 
 function signedWhole(x: number): string {
@@ -18,6 +22,7 @@ function signedWhole(x: number): string {
 export async function AugmentTierRows({ rows }: { rows: TierRow[] }) {
   const t = await getTranslations("tiers");
   const tp = await getTranslations("pick");
+  const tm = await getTranslations("member");
   return (
     <>
     <div className="flex justify-end gap-3 pb-1 text-[11px] text-[var(--color-text-muted)]" aria-hidden="true">
@@ -45,6 +50,12 @@ export async function AugmentTierRows({ rows }: { rows: TierRow[] }) {
               {name}
               <div className="text-xs text-[var(--color-text-secondary)]">
                 {t("rowLine", { win: r.winRate.toFixed(1), pick: r.pickRate.toFixed(1) })}
+                {r.rank && (
+                  <MemberOnly>
+                    {" · "}
+                    {tm("rankRange", { low: r.rank.low, high: r.rank.high, total: rows.length })}
+                  </MemberOnly>
+                )}
               </div>
             </div>
             <span

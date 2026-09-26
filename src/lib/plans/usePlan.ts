@@ -8,29 +8,36 @@ let current: PlanId | null = null;
 let started = false;
 const listeners = new Set<() => void>();
 
+/** The cached plan worth acting on before the server answers: a paid plan only. */
+export function trustedCachedPlan(cached: string | null): PlanId | null {
+  return cached === "member" || cached === "vip" ? cached : null;
+}
+
 function load(): void {
   if (started || typeof window === "undefined") return;
   started = true;
   try {
-    const cached = sessionStorage.getItem(KEY);
-    if (cached === "free" || cached === "member" || cached === "vip") current = cached;
+    // A cached paid plan hides ads sooner. A cached "free" is never trusted:
+    // the visitor may have signed in since, and an ad must wait for the server.
+    current = trustedCachedPlan(sessionStorage.getItem(KEY));
   } catch {
     // storage blocked: ask the server
   }
   fetch("/api/me/plan", { credentials: "same-origin" })
-    .then((r) => (r.ok ? r.json() : { plan: "free" }))
-    .then((body: { plan?: string }) => {
-      const plan: PlanId = body.plan === "member" || body.plan === "vip" ? body.plan : "free";
-      current = plan;
+    .then((r) => (r.ok ? r.json() : { plan: null }))
+    .then((body: { plan?: string | null }) => {
+      // an unknown plan (failed lookup) stays null: no ads, nothing unlocked
+      const plan = trustedCachedPlan(body.plan ?? null) ?? (body.plan === "free" ? "free" : null);
+      current = plan ?? current;
       try {
-        sessionStorage.setItem(KEY, plan);
+        if (plan) sessionStorage.setItem(KEY, plan);
       } catch {
         // fine: asked again next page
       }
       listeners.forEach((l) => l());
     })
     .catch(() => {
-      if (current === null) current = "free";
+      // offline or failed: the plan stays unknown (or the cached paid plan)
       listeners.forEach((l) => l());
     });
 }

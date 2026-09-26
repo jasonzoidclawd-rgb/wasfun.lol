@@ -15,5 +15,8 @@ export const v3AdsEnabled = (): boolean => on(process.env.NEXT_PUBLIC_WASFUN_V3_
 /** The overlay download link on /overlay. */
 export const overlayDownloadEnabled = (): boolean => on(process.env.NEXT_PUBLIC_WASFUN_OVERLAY_DOWNLOAD);
 
-/** Member extras on the Pick screen (reroll odds); This game, Following and history are not built yet. */
+/** Member extras on the Pick screen: This game, reroll odds, and Pandora's Box graded for your game. */
 export const memberPickEnabled = (): boolean => on(process.env.NEXT_PUBLIC_WASFUN_MEMBER_PICK);
+
+/** Member extras off the clock: Following with patch alerts, saved games, last patch's letters and rank ranges. */
+export const memberExtrasEnabled = (): boolean => on(process.env.NEXT_PUBLIC_WASFUN_MEMBER_EXTRAS);

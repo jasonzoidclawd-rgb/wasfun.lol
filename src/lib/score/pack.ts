@@ -30,6 +30,8 @@ import {
 } from "./engine";
 import type { Letter } from "./grade";
 import { estimateVolume } from "./volume";
+import { comparePatch, patchDataState } from "./movers";
+import { rankRanges, type RankRange } from "./rank-range";
 
 const DATA = path.join(process.cwd(), "data", "internal");
 
@@ -248,4 +250,75 @@ export function loadChampionLetters(): Map<string, ChampionLetter> | null {
     championLetters(feeds, { volume: volume.games }).map((c) => [c.id, { letter: c.letter, outlined: c.outlined, order: c.order, m: c.m, v: c.v }]),
   );
   return championCache;
+}
+
+export interface ChampionHistory {
+  /** the previous patch's letter, from its last daily snapshot; null when it can't be graded */
+  previous: { patch: string; letter: Letter; outlined: boolean } | null;
+  /** 1-based rank range among champions, 10th to 90th percentile (rank-range.ts) */
+  rank: RankRange | null;
+}
+
+let historyCache: Map<string, ChampionHistory> | null | undefined;
+
+/**
+ * Members' history for champions: last patch's letter (graded the same way,
+ * from the previous patch's last snapshot and its own volume lower bound) and
+ * a rank range among champions. Champion letters grade champions' own win
+ * rates, so like them this stays on when the augment kill switch is off.
+ */
+export function loadChampionHistory(): Map<string, ChampionHistory> | null {
+  if (historyCache !== undefined) return historyCache;
+  const current = loadChampionLetters();
+  if (!current) return (historyCache = null);
+  const buildFeed = read<{ patch: string; champions: Record<string, ChampionRow> }>("champion-build-feed.json");
+  const patchStarts = Object.fromEntries(
+    read<{ patches?: { version: string; publishedAt?: string }[] }>("patch-metadata.json")
+      .patches?.filter((p) => p.publishedAt)
+      .map((p) => [p.version, p.publishedAt as string]) ?? [],
+  );
+  const histories = Object.values(buildFeed.champions).map((c) => c.history ?? []);
+  const previousPatch =
+    histories
+      .flat()
+      .map((h) => h.patch)
+      .filter((p) => comparePatch(p, buildFeed.patch) < 0)
+      .sort((a, b) => comparePatch(b, a))[0] ?? null;
+
+  let previous: Map<string, { letter: Letter; outlined: boolean }> | null = null;
+  if (previousPatch) {
+    const lastSnapshot = histories.flat().filter((h) => h.patch === previousPatch).map((h) => h.snapshot).sort().at(-1)!;
+    const dataDate = `${lastSnapshot.slice(0, 4)}-${lastSnapshot.slice(4, 6)}-${lastSnapshot.slice(6, 8)}`;
+    const volume = estimateVolume(histories, patchStarts, { patch: previousPatch, dataDate });
+    if (volume) {
+      const champions: Record<string, ChampionRow> = {};
+      for (const [slug, c] of Object.entries(buildFeed.champions)) {
+        // each champion's own last row of that patch, only if it is that final snapshot
+        const row = (c.history ?? []).filter((h) => h.patch === previousPatch && h.snapshot === lastSnapshot)[0];
+        if (row) champions[slug] = { ...c, winRate: row.winRate, pickRate: row.pickRate };
+      }
+      const feeds = { augmentRows: [], champions, championWinRates: "unknown" as const };
+      previous = new Map(championLetters(feeds, { volume: volume.games }).map((c) => [c.id, { letter: c.letter, outlined: c.outlined }]));
+    }
+  }
+
+  const ranks = rankRanges([...current.entries()].map(([id, c]) => ({ id, m: c.m, v: c.v })));
+  historyCache = new Map(
+    [...current.keys()].map((slug) => {
+      const p = previous?.get(slug);
+      return [slug, { previous: p && previousPatch ? { patch: previousPatch, ...p } : null, rank: ranks.get(slug) ?? null }];
+    }),
+  );
+  return historyCache;
+}
+
+/** Whether this patch's rows predate the patch (then they are last patch's totals under a new label; movers.ts). */
+export function loadPatchState(): { predates: boolean; days: number | null } {
+  const buildFeed = read<{ patch: string; dataDate: string }>("champion-build-feed.json");
+  const patchStarts = Object.fromEntries(
+    read<{ patches?: { version: string; publishedAt?: string }[] }>("patch-metadata.json")
+      .patches?.filter((p) => p.publishedAt)
+      .map((p) => [p.version, p.publishedAt as string]) ?? [],
+  );
+  return patchDataState(buildFeed.dataDate, patchStarts[buildFeed.patch]);
 }

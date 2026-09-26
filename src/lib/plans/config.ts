@@ -41,6 +41,6 @@ export function planCatalog(env: Record<string, string | undefined> = process.en
 /** What each tier gets, as message keys under `plans.features` (the copy lives in messages/*.json). */
 export const PLAN_FEATURES: Record<PlanId, string[]> = {
   free: ["everyLetter", "pickFull", "overlayBasic", "recent", "currentPatch"],
-  member: ["everythingFree", "noAds", "thisGame", "rerollOdds", "offlinePacks", "following", "history"],
+  member: ["everythingFree", "noAds", "thisGame", "rerollOdds", "pandora", "offlinePacks", "following", "history"],
   vip: ["everythingMember", "overlayFull"],
 };

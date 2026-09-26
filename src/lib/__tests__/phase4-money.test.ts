@@ -129,7 +129,7 @@ describe("the visitor's plan", () => {
     expect(planFromEntitlement(null)).toBe("free");
   });
 
-  test("/api/me/plan answers free on any failure and is never cached", async () => {
+  test("/api/me/plan: free when signed out or not a member, unknown when the lookup fails, never cached", async () => {
     const guard = vi.mocked(requireActiveEntitlement);
     guard.mockResolvedValueOnce({ ok: true, user: { id: "u" }, entitlement: { kind: "member" } });
     const res = await planApi();
@@ -137,7 +137,12 @@ describe("the visitor's plan", () => {
     expect(res.headers.get("Cache-Control")).toBe("private, no-store");
     guard.mockResolvedValueOnce({ ok: false, status: 401, reason: "unauthenticated" });
     expect(await (await planApi()).json()).toEqual({ plan: "free" });
-    guard.mockRejectedValueOnce(new Error("no supabase"));
+    guard.mockResolvedValueOnce({ ok: false, status: 403, reason: "none" });
     expect(await (await planApi()).json()).toEqual({ plan: "free" });
+    // a failed lookup must not read as free: a member would then see ads
+    guard.mockResolvedValueOnce({ ok: false, status: 403, reason: "lookup-failed" });
+    expect(await (await planApi()).json()).toEqual({ plan: null });
+    guard.mockRejectedValueOnce(new Error("no supabase"));
+    expect(await (await planApi()).json()).toEqual({ plan: null });
   });
 });

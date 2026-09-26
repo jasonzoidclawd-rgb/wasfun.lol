@@ -21,6 +21,8 @@ const ALLOWED = [
   "src/components/champions/SwapCheck.tsx",
   "src/components/home/HomeSearch.tsx",
   "src/components/home/MovedSinceLastPatch.tsx",
+  "src/components/member/ChampionHistoryLine.tsx",
+  "src/components/member/FollowingCard.tsx",
 ];
 
 describe("champion-kind letter chips", () => {
@@ -38,5 +40,15 @@ describe("champion-kind letter chips", () => {
     }
     const header = readFileSync(path.join(process.cwd(), "src/app/[locale]/champions/[slug]/page.tsx"), "utf-8");
     expect(header).toMatch(/kind="champion"\s+letter=\{championLetter\.letter\}/);
+  });
+
+  test("members' champion history grades champions' own win rates, never the augment pack", () => {
+    const pack = readFileSync(path.join(process.cwd(), "src/lib/score/pack.ts"), "utf-8");
+    const body = pack.slice(pack.indexOf("export function loadChampionHistory"));
+    const fn = body.slice(0, body.indexOf("\n}\n") + 3);
+    expect(fn).toContain("loadChampionLetters()");
+    expect(fn).toContain("championLetters(");
+    expect(fn).not.toContain("loadScorePack");
+    expect(fn).not.toContain("augment-stats-feed");
   });
 });

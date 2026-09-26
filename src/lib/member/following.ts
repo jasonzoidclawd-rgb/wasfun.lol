@@ -1,0 +1,32 @@
+import type { FollowedChampion } from "@/components/member/FollowingCard";
+import type { Letter } from "@/lib/score/grade";
+import type { ChampionHistory } from "@/lib/score/pack";
+
+/**
+ * Members' followed champions: letter, last patch's letter, and the patch
+ * alert. The alert needs both a letter change and a win-rate move that passes
+ * the movers' noise test (movers.ts): on real data, 38 of 173 champion letters
+ * differed between the last 26.18 snapshot and the next day's rows, which
+ * cover nearly the same games, so a letter change alone is mostly noise.
+ * While this patch's rows predate the patch there is no last-patch letter and
+ * no alert.
+ */
+export function followedChampions(
+  champions: { slug: string; name: string; grade: Letter | null; outlined: boolean }[],
+  history: Map<string, ChampionHistory> | null,
+  movers: { slug: string }[],
+  predates: boolean,
+): FollowedChampion[] {
+  const moved = new Set(movers.map((m) => m.slug));
+  return champions.map((c) => {
+    const previous = predates ? null : (history?.get(c.slug)?.previous?.letter ?? null);
+    return {
+      slug: c.slug,
+      name: c.name,
+      letter: c.grade,
+      outlined: c.outlined,
+      previous,
+      alert: previous !== null && c.grade !== null && previous !== c.grade && moved.has(c.slug),
+    };
+  });
+}

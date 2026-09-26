@@ -15,6 +15,9 @@ import { rememberChampion } from "@/lib/recent-champions";
 import { memberPickEnabled } from "@/lib/plans/flags";
 import { usePlan } from "@/lib/plans/usePlan";
 import { initialPickState, pickReducer, readScreen, SCREEN_SIZE } from "@/lib/score/pick-state";
+import { bandOf } from "@/lib/score/grade";
+import { heldIds, logScreen, newGame, nextLevel, PANDORAS_BOX, seenIds, undoLast } from "@/lib/score/this-game";
+import { saveGame, setThisGame, useThisGame } from "@/lib/member/local-store";
 
 const RARITIES: Rarity[] = ["prismatic", "gold", "silver"];
 const RARITY_RING: Record<Rarity, string> = {
@@ -48,7 +51,8 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
   // Member extras stay off unless their flag is on; the plan is only asked for then.
   const memberExtras = memberPickEnabled();
   const plan = usePlan(memberExtras);
-  const showOdds = memberExtras && (plan === "member" || plan === "vip");
+  const member = memberExtras && (plan === "member" || plan === "vip");
+  const showOdds = member;
   const t = useTranslations("pick");
   const champion = payload.champion.name;
   const cards = useMemo(() => {
@@ -58,7 +62,29 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
   }, [payload]);
   const firstRarity = RARITIES.find((r) => payload.rarities[r].length) ?? "gold";
   const [state, dispatch] = useReducer(pickReducer, initialPickState(firstRarity === "prismatic" ? "gold" : firstRarity));
-  const reading = readScreen(state, cards, payload.meta.tau);
+  // This game (members): the log lives in this browser; another champion's log is not this game.
+  const stored = useThisGame();
+  const game = member && stored?.champion === payload.champion.slug ? stored : null;
+  const reading = readScreen(state, cards, payload.meta.tau, game ? { seen: seenIds(game), held: heldIds(game) } : null);
+  const takeCard = (id: string) => {
+    const current = game ?? newGame(payload.champion.slug);
+    // a finished game, or another champion's, is saved before a new one starts
+    if (stored && stored !== game) saveGame(stored, payload.meta.patch);
+    const logged = logScreen(current, {
+      rarity: cards.get(id)!.rarity,
+      onScreen: state.slots.map((s) => s.id),
+      rerolledAway: state.rerolledAway,
+      taken: id,
+    });
+    if (logged === current) return;
+    setThisGame(logged);
+    dispatch({ type: "clear" });
+  };
+  const startNewGame = () => {
+    if (game) saveGame(game, payload.meta.patch);
+    setThisGame(null);
+    dispatch({ type: "clear" });
+  };
 
   // No ads on the Pick screen, for anyone. The page renders no ad slot, but the
   // AdSense script can survive a client-side navigation from a page that had
@@ -123,6 +149,28 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
                   <span className="text-xs text-[var(--color-text-secondary)]">{rateLine(c)}</span>
                 </div>
                 {c.gamble && <span className="mt-1 inline-block text-[11px] uppercase text-[var(--color-text-muted)]">{t("gamble")}</span>}
+                {c.id === PANDORAS_BOX &&
+                  (reading?.pandorasBox ? (
+                    <div className="mt-1 flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
+                      <LetterChip
+                        letter={bandOf(reading.pandorasBox.m)}
+                        thin
+                        label={t("pandoraForGameLabel", { letter: bandOf(reading.pandorasBox.m) })}
+                      />
+                      <span>{t("pandoraForGame")}</span>
+                    </div>
+                  ) : (
+                    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">{t("pandoraDepends")}</p>
+                  ))}
+                {member && state.slots.length === SCREEN_SIZE && nextLevel(game ?? newGame(payload.champion.slug)) !== null && (
+                  <button
+                    type="button"
+                    onClick={() => takeCard(c.id)}
+                    className="mt-1 min-h-11 rounded-lg border border-[var(--color-border-hover)] px-3 text-sm font-semibold"
+                  >
+                    {t("tookThis")}
+                  </button>
+                )}
               </div>
               <div className="flex shrink-0 flex-col items-center gap-1 text-right">
                 {pending && <span className="text-[11px] text-[var(--color-neon-primary)]">{t("rerollPending")}</span>}
@@ -175,6 +223,49 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
       </div>
     </section>
   );
+
+  const thisGame = member ? (
+    <section aria-labelledby="pick-this-game" className="rounded-[var(--radius-card)] border border-[var(--color-border-default)] bg-[var(--color-bg-card)] p-4">
+      <div className="mb-2 flex items-baseline justify-between gap-2">
+        <h2 id="pick-this-game" className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
+          {t("thisGame")}
+        </h2>
+        <span className="text-xs text-[var(--color-text-muted)]">
+          {game && nextLevel(game) === null ? t("thisGameDone") : t("thisGameNext", { level: nextLevel(game ?? newGame("")) as number })}
+        </span>
+      </div>
+      {!game || game.screens.length === 0 ? (
+        <p className="text-sm text-[var(--color-text-secondary)]">{t("thisGameEmpty")}</p>
+      ) : (
+        <ol className="space-y-2">
+          {game.screens.map((screen) => {
+            const c = cards.get(screen.taken);
+            return (
+              <li key={screen.level} className="flex items-center gap-3">
+                <span className="w-10 shrink-0 text-xs text-[var(--color-text-muted)]">{t("level", { level: screen.level })}</span>
+                <Icon src={c?.icon ?? null} rarity={screen.rarity} size={28} />
+                <div className="min-w-0 flex-1">
+                  <div className="text-sm font-semibold">{c?.name ?? screen.taken}</div>
+                  {c && <div className="text-xs text-[var(--color-text-secondary)]">{t("thisGameLine", { win: c.winRate.toFixed(1), offered: screen.offered.length })}</div>}
+                </div>
+                {c && <LetterChip letter={c.letter} thin={c.outlined} label={chipLabel(c)} />}
+              </li>
+            );
+          })}
+        </ol>
+      )}
+      <div className="mt-3 flex justify-end gap-3 text-xs">
+        {game && game.screens.length > 0 && (
+          <button type="button" onClick={() => setThisGame(undoLast(game))} className="min-h-11 px-2 underline">
+            {t("undoLast")}
+          </button>
+        )}
+        <button type="button" onClick={startNewGame} className="min-h-11 px-2 underline">
+          {t("newGame")}
+        </button>
+      </div>
+    </section>
+  ) : null;
 
   const grid = (
     <section aria-labelledby="pick-grid" className="rounded-[var(--radius-card)] border border-[var(--color-border-default)] bg-[var(--color-bg-card)] p-4">
@@ -303,6 +394,7 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
         <div className="order-2 min-w-0 lg:order-1">{grid}</div>
         <div className="order-1 min-w-0 space-y-4 lg:order-2">
           {takePanel}
+          {thisGame}
           <div className="hidden lg:block">{items}</div>
         </div>
         <div className="order-3 min-w-0 lg:hidden">{items}</div>
