@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { V3AdSlot } from "@/components/ads/V3AdSlot";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -348,6 +349,7 @@ export default async function AugmentDetailPage({
         ) : (
           <p className="glass-card p-4 text-sm text-[var(--color-text-secondary)]">{pack ? tt("detailUngraded") : tt("unavailable")}</p>
         )}
+        <V3AdSlot slot="v3-augment" />
       </div>
     </>
   );

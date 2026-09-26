@@ -1,4 +1,10 @@
 import { readFileSync } from "node:fs";
+import { PlanLine } from "@/components/plans/PlanLine";
+import { memberExtrasEnabled, plansEnabled } from "@/lib/plans/flags";
+import { FollowingCard } from "@/components/member/FollowingCard";
+import { loadChampionHistory } from "@/lib/score/pack";
+import { followedChampions } from "@/lib/member/following";
+import { V3AdSlot } from "@/components/ads/V3AdSlot";
 import path from "node:path";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { readAugmentsFile, readChampionsFile, readPatchNotesFile } from "@/lib/data/read-public-file";
@@ -108,8 +114,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <p className="col-span-full text-sm text-[var(--color-text-secondary)]">{t("patchWeek", { patch: feed.patch, days: state.days })}</p>
         )}
         <MovedSinceLastPatch movers={movers} champions={bySlug} patch={feed.patch} fromPatch={fromPatch} predates={state.predates} />
+        {memberExtrasEnabled() && <FollowingCard champions={followedChampions(champions, loadChampionHistory(), movers, state.predates)} fromPatch={fromPatch} />}
+        <div className="col-span-full">
+          <V3AdSlot slot="v3-home" />
+        </div>
+        {plansEnabled() && <PlanLine />}
         <MoversCarousel augments={[...changed.values()]} />
       </div>
     </>
   );
 }
+

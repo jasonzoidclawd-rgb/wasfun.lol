@@ -70,7 +70,7 @@ describe("moved since last patch", () => {
     expect(patchDataState("2026-09-23", "2026-09-22T18:00:00Z")).toEqual({ predates: false, days: 1 });
     expect(patchDataState("2026-09-25", "2026-09-22T18:00:00Z")).toEqual({ predates: false, days: 3 });
     expect(patchDataState("not-a-date", "2026-09-22T18:00:00Z")).toEqual({ predates: true, days: null });
-    expect(patchDataState("2026-09-23", undefined)).toEqual({ predates: false, days: null });
+    expect(patchDataState("2026-09-23", undefined)).toEqual({ predates: true, days: null });
     const home = readFileSync(path.join(process.cwd(), "src/app/[locale]/page.tsx"), "utf-8");
     expect(home).toContain("volume && !state.predates ? championMovers(");
     expect(home).toContain("state.days !== null && state.days <= PATCH_WEEK_DAYS");

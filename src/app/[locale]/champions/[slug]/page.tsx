@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { V3AdSlot } from "@/components/ads/V3AdSlot";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { requireActiveEntitlement } from "@/lib/entitlements/server";
 import { MembershipGate } from "@/components/membership/MembershipGate";
@@ -35,7 +36,10 @@ import { ChampionHub } from "@/components/pick/ChampionHub";
 import { RememberChampion } from "@/components/home/RememberChampion";
 import { LetterChip } from "@/components/grades/LetterChip";
 import { loadIconIndex, loadItemNames } from "@/lib/score/assets";
-import { loadChampionLetters, loadScorePack } from "@/lib/score/pack";
+import { loadChampionHistory, loadChampionLetters, loadPatchState, loadScorePack } from "@/lib/score/pack";
+import { ChampionHistoryLine } from "@/components/member/ChampionHistoryLine";
+import { FollowButton } from "@/components/member/FollowButton";
+import { memberExtrasEnabled } from "@/lib/plans/flags";
 import { buildPickPayload } from "@/lib/score/pick-payload";
 import { languageAlternates, localizedUrl } from "@/lib/site";
 
@@ -501,6 +505,13 @@ export default async function ChampionPage({
               </span>
             )}
           </div>
+          {memberExtrasEnabled() && (
+            <ChampionHistoryLine
+              history={loadChampionHistory()?.get(slug) ?? null}
+              total={loadChampionLetters()?.size ?? 0}
+              predates={loadPatchState().predates}
+            />
+          )}
           <div className="flex items-center gap-3 mt-1 text-sm text-[var(--color-text-secondary)]">
             {hasWinRate && (
               <span className="font-bold text-[var(--color-wr-high)]">
@@ -561,6 +572,9 @@ export default async function ChampionPage({
       ) : (
         <p className="glass-card p-4 text-[var(--color-text-secondary)]">{th("unavailable")}</p>
       )}
+
+      <FollowButton slug={slug} champion={champName} />
+      <V3AdSlot slot="v3-champion" />
 
       {/* ─── Reference: everything the page showed before v3, collapsed ─── */}
       <details className="mt-6">

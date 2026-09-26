@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { memberExtrasEnabled } from "@/lib/plans/flags";
+import { V3AdSlot } from "@/components/ads/V3AdSlot";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AugmentTierRows } from "@/components/tiers/AugmentTierRows";
@@ -56,7 +58,8 @@ export default async function RarityTierList({ params }: { params: Promise<{ loc
       </nav>
       {pack ? (
         <section className="glass-card mt-4 p-4">
-          <AugmentTierRows rows={tierRows(pack, rarity as Rarity, locale, loadIconIndex())} />
+          <AugmentTierRows rows={tierRows(pack, rarity as Rarity, locale, loadIconIndex(), { ranks: memberExtrasEnabled() })} />
+          <V3AdSlot slot="v3-tier-list" />
           <p className="mt-3 text-[11px] text-[var(--color-text-muted)]">{t("legend", { rarity: name })}</p>
         </section>
       ) : (

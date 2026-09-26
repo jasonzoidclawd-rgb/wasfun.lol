@@ -53,7 +53,8 @@ export function criticalZ(tests: number, familyAlpha = MOVE_FAMILY_ALPHA): numbe
  * after the start day, never rounded up.
  */
 export function patchDataState(dataDate: string, patchStart: string | undefined): { predates: boolean; days: number | null } {
-  if (!patchStart) return { predates: false, days: null };
+  // no start date: whether these rows hold any of the new patch is unknown
+  if (!patchStart) return { predates: true, days: null };
   const data = Date.parse(`${dataDate}T00:00:00Z`);
   const startDay = Date.parse(`${patchStart.slice(0, 10)}T00:00:00Z`);
   // an unreadable date can't show that the new patch has data: undetermined

@@ -9,6 +9,22 @@ import {
 } from "@/lib/entitlements/core";
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { SavedGames } from "@/components/member/SavedGames";
+import { memberExtrasEnabled } from "@/lib/plans/flags";
+import { readAugmentsFile, readChampionsFile } from "@/lib/data/read-public-file";
+import { localizedName, type LocalizedNameRecord } from "@/lib/i18n/localized-name";
+
+/** Champion and augment names for saved games: names only, no statistics. */
+async function savedGameNames(locale: string): Promise<Record<string, string>> {
+  const [{ augments }, { champions }] = await Promise.all([
+    readAugmentsFile<{ augments: (LocalizedNameRecord & { augmentId?: string })[] }>(),
+    readChampionsFile<{ champions: (LocalizedNameRecord & { slug: string })[] }>(),
+  ]);
+  const names: Record<string, string> = {};
+  for (const a of augments) if (a.augmentId) names[a.augmentId] = localizedName(a, locale);
+  for (const c of champions) names[c.slug] = localizedName(c, locale);
+  return names;
+}
 
 interface SessionRow {
   id: string;
@@ -214,6 +230,7 @@ export default async function AccountPage({
           {t("lockedCta")} →
         </Link>
       ) : null}
+      {memberExtrasEnabled() && <SavedGames names={await savedGameNames(locale)} />}
     </main>
   );
 }
