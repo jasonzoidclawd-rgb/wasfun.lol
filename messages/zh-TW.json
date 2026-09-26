@@ -1096,9 +1096,9 @@
     "thisGameLine": "全英雄勝率 {win}% · 出現過 {offered} 張卡",
     "undoLast": "復原上一筆",
     "newGame": "新的一局",
-    "pandoraForGame": "依你手上的強化",
-    "pandoraForGameLabel": "依你手上的強化評為 {letter}",
-    "pandoraDepends": "它的價值取決於你手上的強化。"
+    "pandoraForGame": "依你手上的增幅",
+    "pandoraForGameLabel": "依你手上的增幅評為 {letter}",
+    "pandoraDepends": "它的價值取決於你手上的增幅。"
   },
   "hub": {
     "planTitle": "要拿什麼？",
@@ -1194,7 +1194,7 @@
       "history": "上個版本的英雄評級、名次範圍，以及你儲存的對局",
       "everythingMember": "會員的全部內容",
       "overlayFull": "完整覆蓋層：比率、重骰機率、自動記錄本場、出裝順序與版面設定",
-      "pandora": "依你手上的強化評分潘朵拉魔盒"
+      "pandora": "依你手上的增幅評分潘朵拉魔盒"
     }
   },
   "overlay": {

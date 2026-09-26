@@ -32,11 +32,34 @@ export interface LoggedScreen {
 
 export interface ThisGame {
   champion: string;
+  /** the patch the game was played on */
+  patch?: string;
+  /** when the last screen was logged, ms since epoch */
+  updatedAt?: number;
   screens: LoggedScreen[];
 }
 
-export function newGame(champion: string): ThisGame {
-  return { champion, screens: [] };
+/** A game with no screen logged for this long is over. */
+export const GAME_IDLE_MS = 60 * 60 * 1000;
+
+export function newGame(champion: string, patch?: string, now = Date.now()): ThisGame {
+  return { champion, patch, updatedAt: now, screens: [] };
+}
+
+/**
+ * Whether a stored game is the one being played: same champion and patch, a
+ * screen still to come, and not idle. Only a live game's log may change the
+ * reroll pool or Pandora's Box; an old one is saved, never applied.
+ */
+export function isLive(game: ThisGame | null, champion: string, patch: string, now = Date.now()): game is ThisGame {
+  return (
+    !!game &&
+    game.champion === champion &&
+    game.patch === patch &&
+    nextLevel(game) !== null &&
+    typeof game.updatedAt === "number" &&
+    now - game.updatedAt < GAME_IDLE_MS
+  );
 }
 
 /** The level the next screen is at, or null once all four are logged. */
@@ -51,12 +74,13 @@ export function nextLevel(game: ThisGame): OfferLevel | null {
 export function logScreen(
   game: ThisGame,
   screen: { rarity: Rarity; onScreen: string[]; rerolledAway: string[]; taken: string },
+  now = Date.now(),
 ): ThisGame {
   const level = nextLevel(game);
   if (level === null || !screen.onScreen.includes(screen.taken)) return game;
   if (heldIds(game).includes(screen.taken)) return game;
   const offered = [...new Set([...screen.onScreen, ...screen.rerolledAway])];
-  return { ...game, screens: [...game.screens, { level, rarity: screen.rarity, taken: screen.taken, offered }] };
+  return { ...game, updatedAt: now, screens: [...game.screens, { level, rarity: screen.rarity, taken: screen.taken, offered }] };
 }
 
 /** Remove the last logged screen (a mis-tap). */

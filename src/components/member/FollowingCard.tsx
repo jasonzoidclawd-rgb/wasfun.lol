@@ -46,7 +46,7 @@ function Inner({ champions, fromPatch }: { champions: FollowedChampion[]; fromPa
         <ul className="divide-y divide-[var(--color-border-default)]">
           {shown.map((c) => (
             <li key={c.slug} className="flex min-h-12 items-center gap-3 py-2">
-              <Link href={`/champions/${c.slug}`} className="min-w-0 flex-1 font-semibold hover:underline">
+              <Link href={`/champions/${c.slug}`} className="inline-flex min-h-11 min-w-0 flex-1 items-center font-semibold hover:underline">
                 {c.name}
               </Link>
               {c.alert && c.previous && fromPatch && (

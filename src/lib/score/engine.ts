@@ -368,6 +368,8 @@ export interface GradedRow {
   tier: number;
   order: number;
   outlined: boolean;
+  /** posterior covariance with another row of the same set, by position (not serialized) */
+  cov?: (i: number, j: number) => number;
 }
 
 function gradeRows(rows: { id: string; p: number; w: number; n: number }[], shrink = true): GradedRow[] {
@@ -376,9 +378,10 @@ function gradeRows(rows: { id: string; p: number; w: number; n: number }[], shri
     ? closeNpmle(rows.map((r, i) => ({ id: r.id, l: lifts.lift[i], se2: lifts.se2[i], p: r.p })))
     : rows.map((r, i) => ({ m: lifts.lift[i], v: lifts.se2[i] }));
   const weight = post.map((q) => ("ownWeight" in q ? (q as { ownWeight: number }).ownWeight : 1));
+  const cov = (i: number, j: number) => weight[i] * weight[j] * lifts.cov(i, j);
   const g = grade(
     rows.map((r, i) => ({ id: r.id, m: post[i].m, v: post[i].v, thin: isThin(lifts.ownSe[i], post[i].v) })),
-    (i, j) => weight[i] * weight[j] * lifts.cov(i, j),
+    cov,
   );
   return rows.map((r, i) => ({
     id: r.id,
@@ -393,6 +396,7 @@ function gradeRows(rows: { id: string; p: number; w: number; n: number }[], shri
     tier: g[i].tier,
     order: g[i].order,
     outlined: g[i].outlined,
+    cov,
   }));
 }
 

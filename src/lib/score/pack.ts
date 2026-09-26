@@ -271,7 +271,7 @@ export function loadChampionHistory(): Map<string, ChampionHistory> | null {
   if (historyCache !== undefined) return historyCache;
   const current = loadChampionLetters();
   if (!current) return (historyCache = null);
-  const buildFeed = read<{ patch: string; champions: Record<string, ChampionRow> }>("champion-build-feed.json");
+  const buildFeed = read<{ patch: string; dataDate: string; champions: Record<string, ChampionRow> }>("champion-build-feed.json");
   const patchStarts = Object.fromEntries(
     read<{ patches?: { version: string; publishedAt?: string }[] }>("patch-metadata.json")
       .patches?.filter((p) => p.publishedAt)
@@ -302,7 +302,12 @@ export function loadChampionHistory(): Map<string, ChampionHistory> | null {
     }
   }
 
-  const ranks = rankRanges([...current.entries()].map(([id, c]) => ({ id, m: c.m, v: c.v })));
+  // the current set again, for its covariance (the cached letters keep m and v only)
+  const volumeNow = estimateVolume(histories, patchStarts, { patch: buildFeed.patch, dataDate: buildFeed.dataDate });
+  const rows = volumeNow
+    ? championLetters({ augmentRows: [], champions: buildFeed.champions, championWinRates: "unknown" }, { volume: volumeNow.games })
+    : [];
+  const ranks = rankRanges(rows.map((r) => ({ id: r.id, m: r.m, v: r.v })), { cov: rows[0]?.cov });
   historyCache = new Map(
     [...current.keys()].map((slug) => {
       const p = previous?.get(slug);

@@ -28,7 +28,7 @@ import { loadChampionHistory, loadScorePack } from "@/lib/score/pack";
 import { buildPickPayload, type PickCard } from "@/lib/score/pick-payload";
 import { initialPickState, pickReducer, readScreen, type PickState } from "@/lib/score/pick-state";
 import { rankRanges } from "@/lib/score/rank-range";
-import { heldIds, logScreen, newGame, nextLevel, PANDORAS_BOX, seenIds, undoLast, type ThisGame } from "@/lib/score/this-game";
+import { GAME_IDLE_MS, heldIds, isLive, logScreen, newGame, nextLevel, PANDORAS_BOX, seenIds, undoLast, type ThisGame } from "@/lib/score/this-game";
 import type { Rarity } from "@/lib/score/engine";
 
 afterEach(() => {
@@ -57,6 +57,20 @@ describe("This game: the log", () => {
     expect(heldIds(g)).toEqual(["a", "d", "g", "j"]);
     expect(seenIds(g)).toContain("z");
     expect(undoLast(g).screens).toHaveLength(3);
+  });
+
+  test("only a live game's log applies: same champion and patch, a screen to come, not idle", () => {
+    const t0 = 1_000_000;
+    const g = logScreen(newGame("yasuo", "26.19", t0), { rarity: "gold", onScreen: ["a", "b", "c"], rerolledAway: [], taken: "a" }, t0);
+    expect(isLive(g, "yasuo", "26.19", t0 + 5 * 60_000)).toBe(true);
+    expect(isLive(g, "lux", "26.19", t0)).toBe(false);
+    expect(isLive(g, "yasuo", "26.20", t0)).toBe(false);
+    expect(isLive(g, "yasuo", "26.19", t0 + GAME_IDLE_MS)).toBe(false);
+    // a game stored before this rule (no patch or time) is never applied
+    expect(isLive({ champion: "yasuo", screens: [] }, "yasuo", "26.19", t0)).toBe(false);
+    let done = g;
+    for (const t of ["d", "e", "f"]) done = logScreen(done, { rarity: "gold", onScreen: [t, `${t}1`, `${t}2`], rerolledAway: [], taken: t }, t0);
+    expect(isLive(done, "yasuo", "26.19", t0)).toBe(false);
   });
 
   test("refuses a card that is not on screen, or one already held", () => {
@@ -119,6 +133,19 @@ describe("rank ranges", () => {
     expect(rankRanges([{ id: "a", m: 0, v: 1 }, { id: "b", m: 0.2, v: 1 }])).toEqual(rankRanges([{ id: "a", m: 0, v: 1 }, { id: "b", m: 0.2, v: 1 }]));
   });
 
+  test("draws are joint: negative covariance (shared baselines) widens the ranges, never narrows them", () => {
+    const opts = [
+      { id: "a", m: 1.0, v: 0.25 },
+      { id: "b", m: 0.0, v: 0.25 },
+      { id: "c", m: -1.0, v: 0.25 },
+    ];
+    const width = (r: Map<string, { low: number; high: number }>) => [...r.values()].reduce((t, x) => t + x.high - x.low, 0);
+    const independent = rankRanges(opts);
+    const joint = rankRanges(opts, { cov: (i, j) => (i === j ? 0 : -0.1) });
+    expect(width(joint)).toBeGreaterThanOrEqual(width(independent));
+    expect(width(joint)).toBeGreaterThan(0);
+  });
+
   test("on real data every champion's range contains its graded position", () => {
     const history = loadChampionHistory()!;
     expect(history.size).toBeGreaterThan(150);
@@ -134,19 +161,25 @@ describe("Following: a patch alert needs a letter change AND a move past the noi
     ["a", { previous: { patch: "26.18", letter: "B" as const, outlined: false }, rank: null }],
     ["b", { previous: { patch: "26.18", letter: "B" as const, outlined: false }, rank: null }],
   ]);
+  const up = (slug: string) => ({ slug, delta: 1.2 });
   const champs = [
     { slug: "a", name: "A", grade: "S" as const, outlined: false },
     { slug: "b", name: "B", grade: "S" as const, outlined: false },
   ];
 
   test("a letter change alone does not alert", () => {
-    const [a, b] = followedChampions(champs, history, [{ slug: "a" }], false);
+    const [a, b] = followedChampions(champs, history, [up("a")], false);
     expect(a.alert).toBe(true);
     expect(b.alert).toBe(false);
   });
 
+  test("the letter and the win rate must move the same way", () => {
+    const [a] = followedChampions(champs, history, [{ slug: "a", delta: -1.2 }], false);
+    expect(a.alert).toBe(false);
+  });
+
   test("while this patch's rows predate the patch there is no last-patch letter and no alert", () => {
-    for (const c of followedChampions(champs, history, [{ slug: "a" }, { slug: "b" }], true)) {
+    for (const c of followedChampions(champs, history, [up("a"), up("b")], true)) {
       expect(c.previous).toBeNull();
       expect(c.alert).toBe(false);
     }

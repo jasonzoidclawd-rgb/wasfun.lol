@@ -31,8 +31,19 @@ const EMPTY: Shape = { game: null, saved: [], following: [] };
 const memory: Partial<Shape> = {};
 const listeners = new Set<() => void>();
 
+function isScreen(x: unknown): boolean {
+  const s = x as ThisGame["screens"][number];
+  return !!s && typeof s === "object" && typeof s.level === "number" && typeof s.taken === "string" && Array.isArray(s.offered);
+}
+
 function isGame(x: unknown): x is ThisGame {
-  return !!x && typeof x === "object" && typeof (x as ThisGame).champion === "string" && Array.isArray((x as ThisGame).screens);
+  return (
+    !!x &&
+    typeof x === "object" &&
+    typeof (x as ThisGame).champion === "string" &&
+    Array.isArray((x as ThisGame).screens) &&
+    (x as ThisGame).screens.every(isScreen)
+  );
 }
 
 function parse<K extends Key>(key: K, raw: string | null): Shape[K] {

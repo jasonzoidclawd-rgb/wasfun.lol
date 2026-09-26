@@ -16,7 +16,7 @@ import { memberPickEnabled } from "@/lib/plans/flags";
 import { usePlan } from "@/lib/plans/usePlan";
 import { initialPickState, pickReducer, readScreen, SCREEN_SIZE } from "@/lib/score/pick-state";
 import { bandOf } from "@/lib/score/grade";
-import { heldIds, logScreen, newGame, nextLevel, PANDORAS_BOX, seenIds, undoLast } from "@/lib/score/this-game";
+import { heldIds, isLive, logScreen, newGame, nextLevel, PANDORAS_BOX, seenIds, undoLast } from "@/lib/score/this-game";
 import { saveGame, setThisGame, useThisGame } from "@/lib/member/local-store";
 
 const RARITIES: Rarity[] = ["prismatic", "gold", "silver"];
@@ -62,14 +62,19 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
   }, [payload]);
   const firstRarity = RARITIES.find((r) => payload.rarities[r].length) ?? "gold";
   const [state, dispatch] = useReducer(pickReducer, initialPickState(firstRarity === "prismatic" ? "gold" : firstRarity));
-  // This game (members): the log lives in this browser; another champion's log is not this game.
+  // This game (members): the log lives in this browser. Another champion's,
+  // another patch's, a finished or an idle log is not this game: it is saved
+  // when the next one starts, and never applied to this screen.
   const stored = useThisGame();
-  const game = member && stored?.champion === payload.champion.slug ? stored : null;
+  const now = useSyncExternalStore(noSubscribe, minuteNow, () => 0);
+  const game = member && isLive(stored, payload.champion.slug, payload.meta.patch, now) ? stored : null;
+  // a just-finished game stays on show until the next one starts
+  const shown = game ?? (member && stored && stored.champion === payload.champion.slug && stored.patch === payload.meta.patch && nextLevel(stored) === null ? stored : null);
   const reading = readScreen(state, cards, payload.meta.tau, game ? { seen: seenIds(game), held: heldIds(game) } : null);
   const takeCard = (id: string) => {
-    const current = game ?? newGame(payload.champion.slug);
+    const current = game ?? newGame(payload.champion.slug, payload.meta.patch);
     // a finished game, or another champion's, is saved before a new one starts
-    if (stored && stored !== game) saveGame(stored, payload.meta.patch);
+    if (stored && stored !== game) saveGame(stored, stored.patch ?? payload.meta.patch);
     const logged = logScreen(current, {
       rarity: cards.get(id)!.rarity,
       onScreen: state.slots.map((s) => s.id),
@@ -81,7 +86,7 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
     dispatch({ type: "clear" });
   };
   const startNewGame = () => {
-    if (game) saveGame(game, payload.meta.patch);
+    if (stored) saveGame(stored, stored.patch ?? payload.meta.patch);
     setThisGame(null);
     dispatch({ type: "clear" });
   };
@@ -162,7 +167,7 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
                   ) : (
                     <p className="mt-1 text-xs text-[var(--color-text-secondary)]">{t("pandoraDepends")}</p>
                   ))}
-                {member && state.slots.length === SCREEN_SIZE && nextLevel(game ?? newGame(payload.champion.slug)) !== null && (
+                {member && state.slots.length === SCREEN_SIZE && (
                   <button
                     type="button"
                     onClick={() => takeCard(c.id)}
@@ -231,14 +236,14 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
           {t("thisGame")}
         </h2>
         <span className="text-xs text-[var(--color-text-muted)]">
-          {game && nextLevel(game) === null ? t("thisGameDone") : t("thisGameNext", { level: nextLevel(game ?? newGame("")) as number })}
+          {shown && nextLevel(shown) === null ? t("thisGameDone") : t("thisGameNext", { level: nextLevel(game ?? newGame("")) as number })}
         </span>
       </div>
-      {!game || game.screens.length === 0 ? (
+      {!shown || shown.screens.length === 0 ? (
         <p className="text-sm text-[var(--color-text-secondary)]">{t("thisGameEmpty")}</p>
       ) : (
         <ol className="space-y-2">
-          {game.screens.map((screen) => {
+          {shown.screens.map((screen) => {
             const c = cards.get(screen.taken);
             return (
               <li key={screen.level} className="flex items-center gap-3">
@@ -255,8 +260,8 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
         </ol>
       )}
       <div className="mt-3 flex justify-end gap-3 text-xs">
-        {game && game.screens.length > 0 && (
-          <button type="button" onClick={() => setThisGame(undoLast(game))} className="min-h-11 px-2 underline">
+        {shown && shown.screens.length > 0 && (
+          <button type="button" onClick={() => setThisGame(undoLast(shown))} className="min-h-11 px-2 underline">
             {t("undoLast")}
           </button>
         )}
@@ -407,6 +412,8 @@ export function PickScreen({ payload }: { payload: PickPayload }) {
 
 const STALE_MS = 48 * 60 * 60 * 1000;
 const noSubscribe = () => () => {};
+// a stable snapshot for useSyncExternalStore: the current minute
+const minuteNow = () => Math.floor(Date.now() / 60_000) * 60_000;
 
 /** "Patch 26.19 · updated Sep 21 · CN Mayhem aggregate via …"; a warning past 48 hours. */
 function FreshnessLine({ patch, dataDate, provider }: { patch: string; dataDate: string; provider: string }) {
